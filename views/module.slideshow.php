@@ -52,7 +52,7 @@ $slides = Slideshow::getSlideshow_by(1);
 
 if (!empty($slides)) {
     $imgSlider .= '
-        <div class="ltn__image-slider-mine">
+        <div class="container ltn__image-slider-mine">
     ';
     foreach ($slides as $slide) {
         $file_path = SITE_ROOT . 'images/slideshow/' . $slide->image;

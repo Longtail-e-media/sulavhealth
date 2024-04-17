@@ -4,7 +4,7 @@ $header = '';
 
 $current_url = pathinfo($_SERVER["PHP_SELF"]);
 $fileName = $current_url['filename'];
-$headerClass = ($fileName == 'index') ? 'ltn__header-area ltn__header-5 ltn__header-transparent gradient-color-2' : 'ltn__header-area ltn__header-5 ltn__sticky-bg-white';
+$headerClass = ($fileName == 'indexxxx') ? 'ltn__header-area ltn__header-5 ltn__header-transparent gradient-color-2' : 'ltn__header-area ltn__header-5 ltn__sticky-bg-white';
 
 $header .= '
     <header class="' . $headerClass . '">

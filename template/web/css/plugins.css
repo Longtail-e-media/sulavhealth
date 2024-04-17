@@ -85,7 +85,7 @@ body {
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-color: #fff
+    background-color: #F4F4F4;
 }
 
 [tabindex="-1"]:focus {
@@ -590,14 +590,6 @@ pre code {
 .pre-scrollable {
     max-height: 340px;
     overflow-y: scroll
-}
-
-.container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto
 }
 
 @media (min-width:576px) {
@@ -11242,7 +11234,7 @@ a.text-dark:hover {
 
 .slick-slide img {
     display: block;
-    height: 400px;
+    height: 434px;
     width: 100%;
     object-fit: cover;
 }

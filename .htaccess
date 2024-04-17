@@ -7,8 +7,10 @@ RewriteRule ^sitemap\.xml$ sitemap.php [L]
 #AddType 'text/html; charset=UTF-8' html
 
 #For home page. i.e. index.php
-RewriteRule ^home$ shop.php [L]
-ErrorDocument 404 /indexx.php
+RewriteRule ^home$ index.php [L]
+ErrorDocument 404 /index.php
+
+RewriteRule ^dhome$ dindex.php [L]
 
 #For package pages.
 #RewriteRule ^about-us/?$ about.php [L]

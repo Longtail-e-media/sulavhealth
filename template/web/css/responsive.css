@@ -2,14 +2,23 @@
     Responsive
 ==================================================== */
 /* Desktop 1200 - up */
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto
+}
+
 @media (min-width: 1200px) {
     .container {
-        max-width: 1200px;
+        max-width: 1426px;
     }
 }
 
 /* Normal desktop :992px. (Laptop 14") */
 @media (min-width: 992px) and (max-width: 1199px) {
+
     /* Global */
     h1 {
         font-size: 30px;
@@ -39,6 +48,7 @@
 
 /* Tablet device :768px. */
 @media (min-width: 768px) and (max-width: 991px) {
+
     /* Global */
     body {
         font-size: 14px;
@@ -76,6 +86,7 @@
 
 /* small mobile :320px. */
 @media (max-width: 767px) {
+
     /* Global */
     body {
         font-size: 14px;
