@@ -16934,24 +16934,47 @@ input.cart-plus-minus-box {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 
 .ltn__image-slider-mine a {
     position: absolute;
     color: #fff !important;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    font-size: 1.25rem;
-    border-radius: 10px;
+    padding: 50px;
+    font-size: 2rem;
+    /* border-radius: 10px; */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ltn__image-slider-mine i {
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.ltn__image-slider-mine:hover i {
+    opacity: 1;
 }
 
 .slick-prev {
     left: 15px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
 }
 
 .slick-next {
+    background: linear-gradient(-90deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
     right: 15px;
+}
+
+.slick-next i {
+    transform: translateX(30px);
+}
+
+.slick-prev i {
+    transform: translateX(-30px);
 }
 
 .nav.row {
