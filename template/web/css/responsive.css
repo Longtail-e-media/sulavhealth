@@ -4,10 +4,8 @@
 /* Desktop 1200 - up */
 .container {
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto
+    padding: 0 0.85rem;
+    margin: 0 auto;
 }
 
 @media (min-width: 1200px) {
@@ -16,131 +14,126 @@
     }
 }
 
-/* Normal desktop :992px. (Laptop 14") */
-@media (min-width: 992px) and (max-width: 1199px) {
+/* Normal desktop :62rem. (Laptop 14") */
+@media (min-width: 992px) and (max-width: 1200px) {
 
     /* Global */
     h1 {
-        font-size: 30px;
+        font-size: 1.875rem;
     }
 
     h2 {
-        font-size: 26px;
+        font-size: 1.625rem;
     }
 
     h3 {
-        font-size: 22px;
+        font-size: 1.375rem;
     }
 
     h4 {
-        font-size: 20px;
+        font-size: 1.25rem;
     }
 
     h5 {
-        font-size: 18px;
+        font-size: 1.125rem;
     }
 
     h6 {
-        font-size: 16px;
+        font-size: 1rem;
+    }
+}
+
+/* Tablet device :48rem. */
+@media (min-width: 768px) and (max-width: 992px) {
+
+    /* Global */
+    body {
+        font-size: 0.875rem;
+    }
+
+    h1 {
+        font-size: 1.625rem;
+    }
+
+    h2 {
+        font-size: 1.375rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    h4 {
+        font-size: 1.125rem;
+    }
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    h6 {
+        font-size: 0.9375rem;
+    }
+
+    p {
+        font-size: 0.875rem;
     }
 
 }
 
-/* Tablet device :768px. */
-@media (min-width: 768px) and (max-width: 991px) {
+/* small mobile :20rem. */
+@media (max-width: 768rem) {
 
     /* Global */
     body {
-        font-size: 14px;
+        font-size: 0.875rem;
     }
 
     h1 {
-        font-size: 26px;
+        font-size: 1.75rem;
     }
 
     h2 {
-        font-size: 22px;
+        font-size: 1.5rem;
     }
 
     h3 {
-        font-size: 20px;
+        font-size: 1.4rem;
     }
 
     h4 {
-        font-size: 18px;
+        font-size: 1.3rem;
     }
 
     h5 {
-        font-size: 16px;
+        font-size: 1.2rem;
     }
 
     h6 {
-        font-size: 15px;
+        font-size: 0.875rem;
     }
 
     p {
-        font-size: 14px;
-    }
-
-}
-
-/* small mobile :320px. */
-@media (max-width: 767px) {
-
-    /* Global */
-    body {
-        font-size: 14px;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-
-    h2 {
-        font-size: 20px;
-    }
-
-    h3 {
-        font-size: 18px;
-    }
-
-    h4 {
-        font-size: 17px;
-    }
-
-    h5 {
-        font-size: 16px;
-    }
-
-    h6 {
-        font-size: 14px;
-    }
-
-    p {
-        font-size: 14px;
+        font-size: 0.875rem;
     }
 
     .language12 .ltn__currency-menu ul li ul {
         position: relative;
-        margin-top: 10px;
+        margin-top: 0.625rem;
     }
 }
 
 @media (max-width: 1300px) {
     .site-logo img {
-        margin-top: 5px;
-        width: 155px;
+        margin-top: 0.3125rem;
+        width: 9.6875rem;
     }
 }
-
-.product-list {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(2, 1fr);
-}
-
-@media screen and (min-width: 769px) {
+@media (min-width:768px){
     .product-list {
-        grid-template-columns: repeat(4, 1fr);
+        /* grid-template-columns: repeat(4, 1fr); */
+          
     }
+
 }
+
