@@ -6,7 +6,7 @@ class SubProduct extends DatabaseObject
     protected static $db_fields = array(
         'id', 'slug', 'title', 'title_greek', 'tag', 'currency', 'banner_image',
         'netqnt1', 'qnt1', 'price1', 'discount1', 'netqnt2', 'qnt2', 'price2', 'discount2', 'netqnt3', 'qnt3', 'price3', 'discount3',
-        'netqnt4', 'qnt4', 'price4', 'discount4', 'brief', 'brief_greek', 'content', 'content_greek', 'status', 'sortorder', 'added_date', 'modified_date',
+        'netqnt4', 'qnt4', 'price4', 'discount4', 'brief', 'brief_greek', 'content', 'content_greek', 'status', 'sortorder', 'added_date', 'modified_date','brand','Subcategory','Category','homepage',
         'meta_title', 'meta_keywords', 'meta_description', 'meta_title_greek', 'meta_keywords_greek', 'meta_description_greek', 'type');
 
     // Netqnt is the net weight shown to the customer
@@ -16,7 +16,7 @@ class SubProduct extends DatabaseObject
         $id, $slug, $title, $title_greek, $tag, $currency, $banner_image,
         $netqnt1, $qnt1, $price1, $discount1, $netqnt2, $qnt2, $price2, $discount2, $netqnt3, $qnt3, $price3, $discount3,
         $netqnt4, $qnt4, $price4, $discount4, $brief, $brief_greek, $content, $content_greek, $status, $sortorder, $added_date, $modified_date,
-        $meta_title, $meta_keywords, $meta_description, $meta_title_greek, $meta_keywords_greek, $meta_description_greek, $type;
+        $meta_title, $Category, $Subcategory, $brand, $homepage, $meta_keywords, $meta_description, $meta_title_greek, $meta_keywords_greek, $meta_description_greek, $type;
 
 
     //Get Facility Ttle
@@ -53,6 +53,7 @@ class SubProduct extends DatabaseObject
         $sql = "SELECT * FROM " . self::$table_name . " WHERE type='$type' $cond2 AND status='1' ORDER BY sortorder DESC $cond ";
         return self::find_by_sql($sql);
     }
+    
 
     public static function getTotalSub($type = '')
     {

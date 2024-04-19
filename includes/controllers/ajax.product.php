@@ -178,10 +178,14 @@ switch ($action) {
         $record->type 			    = $_REQUEST['type'];
         $record->slug 			    = create_slug($_REQUEST['title']);
         $record->title 			    = $_REQUEST['title'];
+        $record->Category 			    = $_REQUEST['Category'];
+        $record->Subcategory 			    = $_REQUEST['Subcategory'];
+        $record->brand 			    = $_REQUEST['brand'];
         $record->title_greek        = (!empty($_REQUEST['title_greek'])) ? $_REQUEST['title_greek'] : '';
         $record->tag                = (!empty($_REQUEST['tag'])) ? $_REQUEST['tag'] : '';
         $record->currency 			= $_REQUEST['currency'];
         $record->netqnt1 			= $_REQUEST['netqnt1'];
+        $record->homepage	            = $_REQUEST['homepage'];
         // $record->qnt1 			    = $_REQUEST['qnt1'];
         $record->price1 			= $_REQUEST['price1'];
         $record->discount1 		    = !empty($_REQUEST['discount1'])?$_REQUEST['discount1']:'';
@@ -245,11 +249,15 @@ switch ($action) {
 
         $record->type 			    = $_REQUEST['type'];
         $record->slug 			    = create_slug($_REQUEST['title']);
+        $record->Category 			    = $_REQUEST['Category'];
+        $record->Subcategory 			    = $_REQUEST['Subcategory'];
+        $record->brand 			    = $_REQUEST['brand'];
         $record->title 			    = $_REQUEST['title'];
         $record->title_greek        = (!empty($_REQUEST['title_greek'])) ? $_REQUEST['title_greek'] : '';
         $record->tag                = (!empty($_REQUEST['tag'])) ? $_REQUEST['tag'] : '';
         $record->currency 			= $_REQUEST['currency'];
         $record->netqnt1 			= $_REQUEST['netqnt1'];
+        $record->homepage	            = $_REQUEST['homepage'];
         // $record->qnt1 			    = $_REQUEST['qnt1'];
         $record->price1 			= $_REQUEST['price1'];
         $record->discount1 		    = !empty($_REQUEST['discount1'])?$_REQUEST['discount1']:'';
@@ -450,4 +458,12 @@ switch ($action) {
         reOrder('tbl_subproduct_images', "sortorder");
         echo json_encode(array("action" => "success", "message" => $GLOBALS['basic']['sorted']));
     break;
+
+    case "filteractivity":
+        $desId = addslashes($_REQUEST['destid']);
+        $selId = addslashes($_REQUEST['selct']);
+        // $selcId = addslashes($_REQUEST['selcct']);
+        $rec = category::get_all_selcate($desId,$selId);
+        echo json_encode(array("action" => "success", "result" => $rec));
+        break;
 }

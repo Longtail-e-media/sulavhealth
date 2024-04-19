@@ -7,7 +7,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
     ?>
     <h3>
         List Sub Product Images ["<?php echo $glRec->title; ?>"]
-        <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);" onClick="viewProductList();">
+        <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);" onClick="viewSubProductList(<?php echo $pkgId; ?>);">
             <span class="glyph-icon icon-separator"><i class="glyph-icon icon-arrow-circle-left"></i></span>
             <span class="button-content"> Back </span>
         </a>
