@@ -1,19 +1,87 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Sedan:ital@0;1&display=swap');
+/*
+    Template Name: Broccoli
+    Description: Organic Food HTML Template
+    Version: 1.0.0
+*/
+/* Single side border-radius  */
+/* BORDER RADIUS */
+/* user select */
+/* box sizing  */
+/* placeholder */
+/* transition  */
+/* transform */
+/* rotate */
+/* scale */
+/* translate */
+/* translate rotate */
+/* skew */
+/* ============================================================
+>>> TABLE OF CONTENTS:
+===============================================================
+# Google fonts
+# Gutter Code 
+# Normalize
+# Typography
+# Custom Class
+# input and button type focus outline disable
+# Form input box
+# Text meant only for screen readers.
+# Transition
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+# Accessibility
+# Globals
 
+# Alignments
+# Clearings
+# Posts and pages
+# Captions
+# Galleries
+# Unit test
+# ScrollUp
+# Owl Carousel 
+# Slick Slider
+# Background Overlay
+# Scrollbar
+# Padding Top
+# Padding Bottom
+# Margin Top
+# Margin Bottom
+# Custom margin Padding
+
+============================================================= */
+/* -------------------------------------
+    Google fonts
+------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&amp;family=Rajdhani:wght@400;500;600;700&amp;display=swap");
+
+/*
+font-family: 'Open Sans', sans-serif;
+font-family: 'Rajdhani', sans-serif;
+*/
+/*
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,700;1,600&family=Roboto:wght@400;500;700&display=swap');
+/*
+font-family: 'Nunito Sans', sans-serif;
+font-family: 'Roboto', sans-serif;
+*/
+/* ====================================================
+    Gutter Code
+==================================================== */
 .ltn__no-gutter>[class*='col-'] {
+    /* No padding only for child columns */
     padding-right: 0;
     padding-left: 0;
 }
 
 .ltn__no-gutter-all [class*='col-'] {
+    /* No padding for every columns */
     padding-right: 0;
     padding-left: 0;
 }
 
 @media (min-width: 992px) {
 
+    /* Modify this based on column def */
     .ltn__custom-gutter {
         margin-left: -0px;
         margin-right: -0px;
@@ -27,6 +95,7 @@
 
 @media (max-width: 991px) {
 
+    /* Modify this based on column def */
     .ltn__custom-gutter {
         margin-left: -15px;
         margin-right: -15px;
@@ -40,6 +109,7 @@
 
 @media (max-width: 576px) {
 
+    /* Modify this based on column def */
     .ltn__product-gutter .row {
         margin-left: -8px;
         margin-right: -8px;
@@ -57,43 +127,78 @@
 :root {
     --ltn__primary-color: #071c1f;
     --ltn__primary-color-2: #041113;
+    /* Darken */
     --ltn__primary-color-3: #133236;
+    /* Lighten */
     --ltn__secondary-color: #80B500;
+    /* --ltn__secondary-color: #e53e29; */
     --ltn__secondary-color-2: #699403;
+    /* Darken */
     --ltn__secondary-color-3: #a2da1c;
+    /* Lighten */
     --ltn__heading-color: #071c1f;
     --ltn__paragraph-color: #071c1f;
-
+    --ltn__heading-font: 'Rajdhani', sans-serif;
+    --ltn__body-font: 'Open Sans', sans-serif;
+    /*
+    --ltn__heading-font: 'Roboto', sans-serif;
+    --ltn__body-font: 'Nunito Sans', sans-serif;
+    */
+    /* Footer ACD2D8 8CB2B2  */
     --ltn__color-1: #8cb2b2;
     --ltn__color-2: #ACD2D8;
     --ltn__color-3: #A3BCC0;
     --ltn__color-4: #84A2A6;
+    /* Gradient Colors */
     --gradient-color-1: linear-gradient(90deg, rgba(242, 139, 194, 1) 0%, rgba(216, 177, 242, 1) 50%);
     --gradient-color-2: linear-gradient(to top, rgba(7, 28, 31, 0) 0%, rgba(7, 28, 31, 1) 90%);
     --gradient-color-3: linear-gradient(to bottom, rgba(7, 28, 31, 0) 0%, rgba(7, 28, 31, 1) 90%);
     --gradient-color-4: linear-gradient(to top, rgba(242, 246, 247, 0) 0%, rgba(242, 246, 247, 1) 90%);
+    /* Background Colors */
     --section-bg-1: #F7F5EB;
+    /* White */
+    /* --section-bg-1: #F2F6F7; /* White */
     --section-bg-2: #071c1f;
+    /* Black */
     --section-bg-5: #272829;
+    /* Black */
     --section-bg-6: #FDFDFD;
+    /* White */
+    /* Border Colors */
     --border-color-1: #e5eaee;
+    /* White */
     --border-color-2: #1e2021;
+    /* Black */
     --border-color-3: #576466;
+    /* Black */
     --border-color-4: #eb6954;
+    /* Red */
     --border-color-5: #bc3928;
+    /* Red */
     --border-color-6: #103034;
+    /* Black */
     --border-color-7: #d1dae0;
+    /* White */
     --border-color-8: #f6f6f6;
+    /* White */
     --border-color-9: #e4ecf2;
+    /* White */
     --border-color-10: #ebeeee;
+    /* White */
     --border-color-11: #ededed;
+    /* White */
     --border-color-12: #e1e6ff;
+    /* White */
+    /* Box Shadow Colors */
     --ltn__box-shadow-1: 0 16px 32px 0 rgba(7, 28, 31, 0.1);
     --ltn__box-shadow-2: 0 0 4px rgba(0, 0, 0, 0.1);
+    /* like border */
     --ltn__box-shadow-3: 0 1px 6px 0 rgba(54, 56, 61, 0.15);
+    /* like border GGL */
     --ltn__box-shadow-4: 0 5px 20px 0 rgba(23, 44, 82, 0.1);
     --ltn__box-shadow-5: 0 8px 16px 0 rgba(93, 93, 93, 0.1);
     --ltn__box-shadow-6: 0 0 25px 2px rgba(93, 93, 93, 0.2);
+    /* Common Colors */
     --black: #000000;
     --black-2: #22355B;
     --white: #fff;
@@ -125,6 +230,7 @@
     --nude: #ebc8b2;
     --orange: #ffa500;
     --ratings: #FFB800;
+    /* social media colors */
     --facebook: #365493;
     --twitter: #3CF;
     --linkedin: #0077B5;
@@ -145,8 +251,7 @@
 html {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
-    font-family: 'Nunito', sans-serif !important;
-    font-weight: 600;
+    font-family: 'Oswald', sans-serif;
     width: 100vw;
     overflow-x: hidden;
 }
@@ -166,9 +271,9 @@ body {
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
+    font-family: 'Oswald', sans-serif;
     line-height: 1.8;
     margin: 0 auto;
-    font-family: 'Nunito', sans-serif !important;
 }
 
 h1,
@@ -216,6 +321,7 @@ h6,
 .h6 {
     color: var(--ltn__heading-color);
     clear: both;
+    /*font-family: var(--ltn__heading-font);*/
     font-weight: 700;
     line-height: 1.3;
     margin-bottom: 15px;
@@ -228,7 +334,7 @@ p {
     -moz-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
-
+    font-family: 'Open Sans', sans-serif;
 }
 
 a {
@@ -258,8 +364,7 @@ input,
 optgroup,
 select,
 textarea {
-    font-family: 'Nunito', sans-serif !important;
-
+    font-family: 'Oswald', sans-serif;
 }
 
 pre,
@@ -268,8 +373,7 @@ kbd,
 tt,
 var,
 samp {
-    font-family: 'Nunito', sans-serif !important;
-
+    font-family: 'Oswald', sans-serif;
 }
 
 pre {
@@ -5027,7 +5131,6 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 
 .ltn__main-menu li>a {
     position: relative;
-    font-weight: 700;
 }
 
 .ltn__main-menu>ul>li {
@@ -5050,7 +5153,8 @@ ul.wp-block-latest-posts.is-grid.alignwide {
     display: block;
     white-space: nowrap;
     color: var(--ltn__heading-color);
-    font-weight: 800;
+    font-weight: 200;
+    /* font-family: var(--ltn__heading-font); */
     letter-spacing: 0.25px;
 }
 
@@ -5075,12 +5179,11 @@ ul.wp-block-latest-posts.is-grid.alignwide {
     visibility: hidden;
     text-align: left;
     z-index: 999;
-    border-top: 5px solid #0E75BA;
+    border-top: 5px solid #c0ac71;
 }
 
 .ltn__main-menu li ul li,
 .ltn__main-menu .sub-menu li {
-    font-family: 700 !important;
     line-height: 1.3;
     padding: 8px 16px;
     font-size: 0.85em;
@@ -5588,7 +5691,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 .ltn__header-options-2 .header-search-1:hover,
 .ltn__header-options-2 .ltn__drop-menu>ul>li:hover>a,
 .ltn__header-options-2 .mini-cart-icon a:hover {
-    background: #0E75BA;
+    background: #d5c2af;
     color: var(--white);
 }
 
@@ -11274,6 +11377,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 .ltn__blog-item-5 .ltn__blog-btn {
     font-size: 14px;
     font-weight: 700;
+    font-family: 'Oswald', sans-serif;
 }
 
 /* blog-item-quote */
@@ -11914,6 +12018,7 @@ blockquote::before {
     float: right;
     text-transform: capitalize;
     font-weight: 400;
+    font-family: 'Oswald', sans-serif;
 }
 
 @media (max-width: 767px) {
@@ -12619,7 +12724,9 @@ blockquote::before {
     font-size: 30px;
 }
 
-.ltn__counterup-item-3 h6 {}
+.ltn__counterup-item-3 h6 {
+    font-family: 'Oswald', sans-serif;
+}
 
 @media (max-width: 1199px) {
     .ltn__counterup-item-3 h1 {
@@ -15751,7 +15858,9 @@ input.cart-plus-minus-box {
 }
 
 .ltn__contact-feature-info .h6,
-.ltn__contact-feature-info .h2 {}
+.ltn__contact-feature-info .h2 {
+    font-family: 'Oswald', sans-serif;
+}
 
 .ltn__contact-feature-info .h6 {
     color: var(--ltn__color-3);
@@ -16290,6 +16399,7 @@ input.cart-plus-minus-box {
 .ltn__copyright-design h6,
 .ltn__copyright-design h4 {
     font-size: 14px;
+    font-family: 'Oswald', sans-serif;
     font-weight: 700;
 }
 
@@ -16897,7 +17007,6 @@ input.cart-plus-minus-box {
     background: linear-gradient(#f7f7f7, #f7f7f7) padding-box, linear-gradient(to right, #909AF2, #7DD7EA) border-box;
     border-radius: 6px;
     border: 2px solid transparent;
-    font-weight: 800;
 }
 
 .down-nav {
@@ -17011,6 +17120,7 @@ footer>*,
 footer h4,
 footer p {
     color: rgba(255, 255, 255, 0.8) !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 footer a {
@@ -17057,6 +17167,10 @@ footer a:hover {
 .tab-content {
     margin-top: 40px;
 
+}
+
+#product_lab-services {
+    font-family: inter;
 }
 
 .product-action .add-wishlist {
@@ -17154,9 +17268,4 @@ footer a:hover {
     width: 32px;
     height: 32px;
     object-fit: contain;
-    cursor: pointer;
-}
-
-.dropdown-item {
-    font-weight: 700;
 }
