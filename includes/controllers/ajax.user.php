@@ -252,11 +252,11 @@
 
             $db->begin();
             if ($record->save()): $db->commit();
-                $message = ($lang == "gr") ? "Η εγγραφή σας ήταν επιτυχής, θα ανακατευθυνθείτε στη σελίδα σύνδεσης!" : "Your registration is successful, you will be redirected to Login page!";
+                $message = ($lang == "gr") ? "Your registration is successful, you will be redirected to Login page!" : "Your registration is successful, you will be redirected to Login page!";
                 echo json_encode(array('action' => 'success', 'message' => $message ));
                 log_action("User [" . $record->first_name . " " . $record->last_name . "] login Created " . $GLOBALS['basic']['addedSuccess'], 1, 3);
             else:
-                $message = ($lang == "gr") ? "Λάθος συστήματος!" : "Internal error!";
+                $message = ($lang == "gr") ? "Internal error!" : "Internal error!";
                 echo json_encode(array('action' => 'unsuccess', 'message' => $message));
             endif;
         break;
@@ -391,7 +391,7 @@
                 $uprec = User::find_by_mail($email);
 
                 if ($uprec->status == 0) {
-                    $message = (($lang == "gr") ? "Ο λογαριασμός σας δεν εγκρίθηκε!" : "Your account has not been approved!");
+                    $message = (($lang == "gr") ? "Your account has not been approved!" : "Your account has not been approved!");
                     echo json_encode(array("action" => "error", "message" => $message));
                 } else {
                     $session->set('email_logged', $email);
@@ -405,11 +405,11 @@
                         setcookie("remem_email", '', time() - (60 * 60), "/", NULL);
                         setcookie("remem_pass", '', time() - (60 * 60), "/", NULL);
                     }
-                    $message = (($lang == "gr") ? "Καλωσόρισες " . $uprec->first_name . "! Σύντομα θα μεταφερθείς στον λογαριασμό σου!" : "Welcome " . $uprec->first_name . "! You will be redirected to Dashboard shortly!");
+                    $message = (($lang == "gr") ? "Welcome " . $uprec->first_name . "! You will be redirected to Dashboard shortly!" : "Welcome " . $uprec->first_name . "! You will be redirected to Dashboard shortly!");
                     echo json_encode(array("action" => "success", "message" => $message));
                 }
             } else {
-                $message = (($lang == "gr") ? "Το email ή ο κωδικός σας είναι λάθος !" : "Email or Password doesn't match !");
+                $message = (($lang == "gr") ? "Email or Password doesn't match !" : "Email or Password doesn't match !");
                 echo json_encode(array("action" => "error", "message" => $message));
             }
             break;
