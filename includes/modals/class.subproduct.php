@@ -45,6 +45,15 @@ class SubProduct extends DatabaseObject
         return self::find_by_sql($sql);
     }
 
+    // Homepage Display
+    public static function getHomepageProducts($limit = '')
+    {
+        global $db;
+        $lmt = !empty($limit) ? ' LIMIT ' . $limit : '';
+        $sql = "SELECT * FROM " . self::$table_name . " WHERE status='1' AND homepage='1' ORDER BY sortorder DESC $lmt";
+        return self::find_by_sql($sql);
+    }
+
     public static function getPackage_limits($type = 0, $limit = '', $id = 0)
     {
         global $db;
