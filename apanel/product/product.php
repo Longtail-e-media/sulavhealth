@@ -174,8 +174,8 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         
                     <?php  $selid = !empty($subproductInfo->Subcategory) ? $subproductInfo->Subcategory : 0; ?>
                         <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Subcategory" id="Subcategory" name="Subcategory" selId="<?php echo $selid; ?>">
-                        <option value="all"></option>
-                          
+                            <?php $pId = !empty($subproductInfo->Category) ? $subproductInfo->Category : 0;
+                            echo Category::get_all_filterdata($pId, $selid); ?>
                         </select>
                     </div>
                 </div>

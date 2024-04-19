@@ -128,6 +128,24 @@ class category extends DatabaseObject
 		return $result;
 	}
 
+    public static function get_all_filterdata($pId = 0, $selid = '')
+    {
+        global $db;
+        $sql = "SELECT id,title FROM " . self::$table_name . " WHERE parentId='$pId' ORDER BY sortorder DESC";
+        $record = self::find_by_sql($sql);
+        $result = '';
+        if ($record) {
+            $result .= '<option value="0">None</option>';
+            foreach ($record as $row) {
+                $sel = ($selid == $row->id) ? 'selected' : '';
+                $result .= '<option value="' . $row->id . '" ' . $sel . '>' . $row->title . '</option>';
+            }
+        } else {
+            $result .= '<option value="0">None</option>';
+        }
+        return $result;
+    }
+
     //FIND THE HIGHEST MAX NUMBER BY PARENT ID.
     static function find_maximum_byparent($field = "sortorder", $pid = "")
     {
