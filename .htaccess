@@ -11,6 +11,7 @@ RewriteRule ^home$ index.php [L]
 ErrorDocument 404 /index.php
 
 RewriteRule ^dhome$ dindex.php [L]
+RewriteRule ^dproduct$ dproduct.php [L]
 
 #For package pages.
 #RewriteRule ^about-us/?$ about.php [L]
