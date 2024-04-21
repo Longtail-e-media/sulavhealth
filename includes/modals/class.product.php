@@ -24,7 +24,7 @@ class Product extends DatabaseObject
         $result_array = self::find_by_sql($sql);
         return !empty($result_array) ? array_shift($result_array) : false;
     }
-
+   
     // view package Front.
     static function getPackage($limit = '')
     {

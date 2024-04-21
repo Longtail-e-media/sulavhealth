@@ -26,6 +26,42 @@ class SubProduct extends DatabaseObject
         $sql = "SELECT facility_title FROM " . self::$table_name . " WHERE status=1 ORDER BY sortorder ASC";
         return self::find_by_sql($sql);
     }
+    public static function get_total_category_product($id = '')
+    {
+        global $db;
+        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Category=$id ORDER BY sortorder DESC ";
+        $tot = $db->num_rows($db->query($sql));
+        return $tot;
+    }
+
+    public static function get_total_subcategory_product($id = '')
+    {
+        global $db;
+        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Subcategory=$id ORDER BY sortorder DESC ";
+        $tot = $db->num_rows($db->query($sql));
+        return $tot;
+    }
+    public static function get_total_brand_product($id = '')
+    {
+        global $db;
+        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$id ORDER BY sortorder DESC ";
+        $tot = $db->num_rows($db->query($sql));
+        return $tot;
+    }
+    public static function get_type()
+    {
+        global $db;
+        $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1 ORDER BY sortorder DESC ";
+        return self::find_by_sql($sql);
+    }
+
+    public static function get_total_type_product($id = '')
+    {
+        global $db;
+        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND type=$id ORDER BY sortorder DESC ";
+        $tot = $db->num_rows($db->query($sql));
+        return $tot;
+    }
 
     //Find a single row in the database where slug is provided.
     public static function find_by_slug($slug = 0)

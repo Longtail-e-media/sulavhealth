@@ -19,7 +19,12 @@ class Brand extends DatabaseObject
             return true;
         }
     }
-
+    public static function get_brand()
+    {
+        global $db;
+        $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1  ORDER BY sortorder DESC ";
+        return self::find_by_sql($sql);
+    }
     public static function get_by_type($type = "1")
     {
         global $db;

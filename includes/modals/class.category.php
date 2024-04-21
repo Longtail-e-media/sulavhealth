@@ -25,6 +25,19 @@ class category extends DatabaseObject
         return self::find_by_sql($sql);
     }
 
+    public static function get_category()
+    {
+        global $db;
+        $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1 AND parentId=0 ORDER BY sortorder DESC ";
+        return self::find_by_sql($sql);
+    }
+    public static function get_subcategory()
+    {
+        global $db;
+        $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1 AND parentId!=0 ORDER BY sortorder DESC ";
+        return self::find_by_sql($sql);
+    }
+
     // Get total Child no.
     public static function getTotalChild($pid = '')
     {

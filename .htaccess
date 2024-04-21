@@ -55,6 +55,12 @@ RewriteRule ^offer-list/?$              offers.php [L]
 #For facilities pages.
 RewriteRule ^facilities/?$              facilities.php [L]
 
+#For search list page
+RewriteRule ^searchlist/?$                      search.php [L]
+RewriteRule ^searchlist/page/([0-9]+)$          search.php?pageno=$1 [L]
+RewriteRule ^destination/([a-zA-Z0-9-]+)$       search.php?gdestination_slug=$1 [L]
+RewriteRule ^activity/([a-zA-Z0-9-]+)$          search.php?gactivity_slug=$1 [L]
+
 #For user login and register pages.
 RewriteRule ^register/?$                        register.php [L]
 RewriteRule ^login/?$                           login.php [L]
