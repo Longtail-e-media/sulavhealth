@@ -17195,3 +17195,8 @@ footer a:hover {
     padding: 0.3125rem 0.9375rem;
     border-radius: 1.25rem;
 }
+
+.product-filter .product-card {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
