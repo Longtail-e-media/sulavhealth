@@ -1,0 +1,17 @@
+<?php
+
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+
+define('PRODUCT_PAGE', 1);  // Track page.
+define('JCMSTYPE', 0);      // Track Current site language.
+
+require_once("includes/initialize.php");
+
+$currentTemplate    = Config::getCurrentTemplate('template');
+$jVars              = array();
+$template           = "template/{$currentTemplate}/dproduct.html";
+
+require_once('views/modules.php');
+
+template($template, $jVars, $currentTemplate);
