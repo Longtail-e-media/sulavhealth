@@ -1,0 +1,338 @@
+<!doctype html>
+<html class="no-js" lang="el-GR">
+
+<head>
+    <jcms:site:seotitle />
+
+    <jcms:site:fevicon />
+
+    <!-- font language -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <!-- Font Icons css -->
+    <link rel="stylesheet" href="css/font-icons.css">
+    <!-- plugins css -->
+    <link rel="stylesheet" href="css/plugins.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+</style>
+
+<body class="<jcms:site:language-class/>">
+
+    <div class="container mx-auto product-filter">
+        <div class="row">
+            <div class="product-filter-side col-md-2">
+                <h2>Filters</h2>
+                <div class="form-group">
+                    <label>Brands:</label><br>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="brand1" value="Brand 1">
+                        <div class="product-number-title">
+                            <label class="custom-control-label" for="brand1">Brand</label>
+                            <span>1</span>
+                        </div>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="brand2" value="Brand 2">
+                        <label class="custom-control-label" for="brand2">Brand 2</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="brand3" value="Brand 3">
+                        <label class="custom-control-label" for="brand3">Brand 3</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Date Added:</label><br>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="dateToday" value="today">
+                        <label class="custom-control-label" for="dateToday">Today</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="dateThisWeek" value="this_week">
+                        <label class="custom-control-label" for="dateThisWeek">This Week</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Colors:</label><br>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="colorRed" value="Red">
+                        <label class="custom-control-label" for="colorRed">Red</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="colorBlue" value="Blue">
+                        <label class="custom-control-label" for="colorBlue">Blue</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="colorGreen" value="Green">
+                        <label class="custom-control-label" for="colorGreen">Green</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Price Range:</label><br>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="price0-50" value="0-50">
+                        <label class="custom-control-label" for="price0-50">$0 - $50</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="price50-100" value="50-100">
+                        <label class="custom-control-label" for="price50-100">$50 - $100</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="price100-200" value="100-200">
+                        <label class="custom-control-label" for="price100-200">$100 - $200</label>
+                    </div>
+                </div>
+                <!-- <button type="button" class="btn btn-primary">Apply Filter</button> -->
+            </div>
+            <div class="col-md-10 product-filter-right">
+                <h2>Product List</h2>
+                <div id="productContainer" class="row">
+                    <div class="col-xl-3 col-sm-6 col-6">
+                        <div class="ltn__product-item ltn__product-item-3 text-center">
+                            <div class="product-img product_hove"
+                                data-href="http://localhost/sulavhealth/product/lab-service-1">
+                                <img src='https://s3-alpha-sig.figma.com/img/c96b/1756/24011e309c70d99014e223611c750fb2?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=o4k6TR4XMxy4MGvuuALpowZ3ELuTvOTFF-YCtHHjq18AxhjM6jgHuH9B3UtuafX6RXuYCSZtAaqAB4QQJy4PDiEfn-wCMc0irkBR-XvonhK4uSZ9QinF3ztck1AfqEjQTh4bPzOsrPA~Zd~FSb9Em11nLFCMGg2HNU3hQB7cCt5XHcgcH--iODjkHYKAkTeTDtEc1d4fUzZ1cCfiUTdg3EwK68a6uiwYMEvK76Z-3XHXay507LiFdUzm3YFX7y~bttjr5BhQifiS82XNp9zwX-VDOSar~ojOdA-WmhO15rvISUojRWO2pPt8t-cwUv-gKYDWY9X~sORDbm5a~ta7Iw__'
+                                    alt="lab service 1">
+                            </div>
+                            <div class="product-info">
+                                <h4 class="product-title">Mamaearth</h4>
+                                <a href="http://localhost/sulavhealth/product/lab-service-1"
+                                    class="product-link">Mamaearth Mineral Based Sunscreen
+                                    50ml</a>
+                                <div class="product-price">
+                                    <span>NPR 250.00</span>
+                                    <del>NPR 290.00</del>
+                                </div>
+                                <div class="product-action">
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="add-wishlist" title="Add to Wishlist"
+                                                data-cartid="lab-service-1">
+                                                <i class="far fa-heart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal"
+                                                data-target="#quick_view_modal_product_lab-service-1">
+                                                Add to Cart
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-sm-6 col-6">
+                        <div class="ltn__product-item ltn__product-item-3 text-center">
+                            <div class="product-img product_hove"
+                                data-href="http://localhost/sulavhealth/product/lab-service-1">
+                                <img src='https://s3-alpha-sig.figma.com/img/0eda/e88a/49104b860350df80df2ab72244e6bb00?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=dhCBQBGHVCDZdvWKTCU8kMH9Pw08ag8zbdgVDFFqCVapAu~vacOrKAiQ2RAnbooQbew3Q5yEmJT500G0DgAUZH5bRQvvXvlVuWn-jOqcO4YaD0FbB5sh2hmhYJ53V4yLwXwwDiKmI3kzIeOg7w4Zxv5fusn4y3DMQNAckDDjl98Ffusv4ja7JVX4J65ZJ7AdOPd8eSjAeEyTEIQwER3VMlP4GNL~bojkD-SjJ8JRh~3JrtAMPMELrww9yNKPLequfXUkMWan3BOEz0qsslP83xm23rxYb47Z~LSn5epn2QHtG57APicIl~cPWZtoHrHxjxW486J1aneNMQRgTA~9Tw__'
+                                    alt="lab service 1">
+                            </div>
+                            <div class="product-info">
+                                <h4 class="product-title">Mamaearth</h4>
+                                <a href="http://localhost/sulavhealth/product/lab-service-1"
+                                    class="product-link">Mamaearth Mineral Based Sunscreen
+                                    50ml</a>
+                                <div class="product-price">
+                                    <span>NPR 250.00</span>
+                                    <del>NPR 290.00</del>
+                                </div>
+                                <div class="product-action">
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="add-wishlist" title="Add to Wishlist"
+                                                data-cartid="lab-service-1">
+                                                <i class="far fa-heart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal"
+                                                data-target="#quick_view_modal_product_lab-service-1">
+                                                Add to Cart
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-sm-6 col-6">
+                        <div class="ltn__product-item ltn__product-item-3 text-center">
+                            <div class="product-img product_hove"
+                                data-href="http://localhost/sulavhealth/product/lab-service-1">
+                                <img src='https://s3-alpha-sig.figma.com/img/3155/d70c/bcd6c980c5a79272ebaffdd1a0df33ff?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=lqIMxSvoUkOulRaqwA95QKIYgU5Kyvwdg6~LjC4fHnDL0JX41CHhwF~fSV0NdBEaCe0bMjgQlgoH1Usrl2MKtCU-SsITTj-5z0Aara4VqBdkdmh0D1LBDirBK5ew3A5BluxtIk~KZCHiRh6RIywGSv-PqTmc8KXt9n11wgUzBa3EVM4fXX6~BuQn-Q19il2L3Z~8wcytUXXsve4dlpB8j9wV3mhE2d7fuZN5rL9s8Smon0RrXpX6hwyLv8YxO8pBcm1IhkvhWAvMK2mOLqTMdjdOmw~-yvCvNNljnUCmdnBSBuWXJkSX7m1zWJw6iTTu5J7QUgj~EDD14gOqsYj7BQ__'
+                                    alt="lab service 1">
+                            </div>
+                            <div class="product-info">
+                                <h4 class="product-title">Mamaearth</h4>
+                                <a href="http://localhost/sulavhealth/product/lab-service-1"
+                                    class="product-link">Mamaearth
+                                    Mineral Based Sunscreen 50ml</a>
+                                <div class="product-price">
+                                    <span>NPR 250.00</span>
+                                    <del>NPR 290.00</del>
+                                </div>
+                                <div class="product-action">
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="add-wishlist" title="Add to Wishlist"
+                                                data-cartid="lab-service-1">
+                                                <i class="far fa-heart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal"
+                                                data-target="#quick_view_modal_product_lab-service-1">
+                                                Add to Cart
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-sm-6 col-6">
+                        <div class="ltn__product-item ltn__product-item-3 text-center">
+                            <div class="product-img product_hove"
+                                data-href="http://localhost/sulavhealth/product/lab-service-1">
+                                <img src='https://s3-alpha-sig.figma.com/img/257b/d0dc/958bf10eef425a555b2f0d7bd61412a5?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SX-tfGnq-iiXkOiRm1JjU9ZNPdmO~rq3TPyOcCSAm8gRUmwQatRvE2EIoAITKDE0~g8vJIudrCtW-y~v1wVjm-99hHu68MVX5slLkDmAWJIRZhiJdBold~SrNDTa1y1C-i7CnKSHVJqeW~dsHj8DeB9FRcuU5CkVftebFg64C0EZkjI2ozWvTsy0DTnSICvFPQKanpszw8NELwFx3xMt~5~qMYe8g8bT0nxtclVwVsdEGc5Ok33D--Qb0aLG-vU0vKreFrAGZGzOCAYNDxeu78jbvQEH8ZdsTM~tXIINBOjuf9EOKd2MrDP02SsbqmlIbKG7BN4TFry0rCy~bGsieg__'
+                                    alt="lab service 1">
+                            </div>
+                            <div class="product-info">
+                                <h4 class="product-title">Mamaearth</h4>
+                                <a href="http://localhost/sulavhealth/product/lab-service-1"
+                                    class="product-link">Mamaearth
+                                    Mineral Based Sunscreen 50ml</a>
+                                <div class="product-price">
+                                    <span>NPR 250.00</span>
+                                    <del>NPR 290.00</del>
+                                </div>
+                                <div class="product-action">
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="add-wishlist" title="Add to Wishlist"
+                                                data-cartid="lab-service-1">
+                                                <i class="far fa-heart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal"
+                                                data-target="#quick_view_modal_product_lab-service-1">
+                                                Add to Cart
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let page = 1;
+        let loading = false;
+
+        function fetchMoreProducts() {
+            loading = true;
+            setTimeout(() => {
+                const productContainer = document.getElementById('productContainer');
+                for (let i = 0; i < 1; i++) {
+                    const productCardHTML = `
+                    <div class="col-xl-3 col-sm-6 col-6 product-card"> <!-- Add the "product-card" class here -->
+                        <div class="ltn__product-item ltn__product-item-3 text-center">
+                            <div class="product-img product_hove"
+                                data-href="http://localhost/sulavhealth/product/lab-service-1">
+                                <img src='https://s3-alpha-sig.figma.com/img/257b/d0dc/958bf10eef425a555b2f0d7bd61412a5?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SX-tfGnq-iiXkOiRm1JjU9ZNPdmO~rq3TPyOcCSAm8gRUmwQatRvE2EIoAITKDE0~g8vJIudrCtW-y~v1wVjm-99hHu68MVX5slLkDmAWJIRZhiJdBold~SrNDTa1y1C-i7CnKSHVJqeW~dsHj8DeB9FRcuU5CkVftebFg64C0EZkjI2ozWvTsy0DTnSICvFPQKanpszw8NELwFx3xMt~5~qMYe8g8bT0nxtclVwVsdEGc5Ok33D--Qb0aLG-vU0vKreFrAGZGzOCAYNDxeu78jbvQEH8ZdsTM~tXIINBOjuf9EOKd2MrDP02SsbqmlIbKG7BN4TFry0rCy~bGsieg__'
+                                    alt="lab service 1">
+                            </div>
+                            <div class="product-info">
+                                <h4 class="product-title">Mamaearth</h4>
+                                <a href="http://localhost/sulavhealth/product/lab-service-1"
+                                    class="product-link">Mamaearth
+                                    Mineral Based Sunscreen 50ml</a>
+                                <div class="product-price">
+                                    <span>NPR 250.00</span>
+                                    <del>NPR 290.00</del>
+                                </div>
+                                <div class="product-action">
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="add-wishlist" title="Add to Wishlist"
+                                                data-cartid="lab-service-1">
+                                                <i class="far fa-heart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal"
+                                                data-target="#quick_view_modal_product_lab-service-1">
+                                                Add to Cart
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    productContainer.innerHTML += productCardHTML;
+                }
+                setTimeout(() => {
+                    const productCards = document.querySelectorAll('.product-card');
+                    productCards.forEach(card => {
+                        card.style.opacity = 1;
+                    });
+                }, 500);
+                page++;
+                loading = false;
+            }, 500);
+        }
+
+        function handleScroll() {
+            if (loading) return;
+            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+            const halfwayPoint = scrollHeight / 2;
+            if (scrollTop + clientHeight >= halfwayPoint) {
+                fetchMoreProducts();
+            }
+        }
+
+        fetchMoreProducts();
+
+        window.addEventListener('scroll', handleScroll);
+    </script>
+
+
+
+    <!-- All JS Plugins -->
+    <script src="js/plugins.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/custom.js"></script>
+
+</body>
+
+</html>

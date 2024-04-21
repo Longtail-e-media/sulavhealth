@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
+
+
 </head>
 </style>
 
@@ -240,80 +242,64 @@
             <div class="product-filter-side col-md-2">
                 <h2>Filters</h2>
                 <div class="form-group">
+                    <label>Category:</label><br>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="category1" value="Category 1">
+                        <label class="custom-control-label" for="category1">Category</label>
+                        <span>1</span>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="category2" value="Category 2">
+                        <label class="custom-control-label" for="category2">Category</label>
+                        <span>2</span>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label>Brands:</label><br>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="brand1" value="Brand 1">
-                        <label class="custom-control-label" for="brand1">Brand 1</label>
+                        <label class="custom-control-label" for="brand1">Brand</label>
+                        <span>1</span>
                     </div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="brand2" value="Brand 2">
-                        <label class="custom-control-label" for="brand2">Brand 2</label>
+                        <label class="custom-control-label" for="brand2">Brand</label>
+                        <span>2</span>
                     </div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="brand3" value="Brand 3">
-                        <label class="custom-control-label" for="brand3">Brand 3</label>
+                        <label class="custom-control-label" for="brand3">Brand</label>
+                        <span>6</span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Ratings:</label><br>
+                    <label>Type:</label><br>
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="rating1" value="5">
-                        <label class="custom-control-label" for="rating1">5 Stars</label>
+                        <input type="checkbox" class="custom-control-input" id="package" value="Package 1">
+                        <label class="custom-control-label" for="package">Package</label>
+                        <span>1</span>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="rating2" value="4">
-                        <label class="custom-control-label" for="rating2">4 Stars</label>
-                    </div>
-                    <!-- Add more checkboxes for other rating options -->
-                </div>
-
-                <div class="form-group">
-                    <label>Date Added:</label><br>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="dateToday" value="today">
-                        <label class="custom-control-label" for="dateToday">Today</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="dateThisWeek" value="this_week">
-                        <label class="custom-control-label" for="dateThisWeek">This Week</label>
+                        <input type="checkbox" class="custom-control-input" id="product" value="Product 2">
+                        <label class="custom-control-label" for="product">Product</label>
+                        <span>2</span>
                     </div>
                 </div>
 
+
                 <div class="form-group">
-                    <label>Colors:</label><br>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="colorRed" value="Red">
-                        <label class="custom-control-label" for="colorRed">Red</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="colorBlue" value="Blue">
-                        <label class="custom-control-label" for="colorBlue">Blue</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="colorGreen" value="Green">
-                        <label class="custom-control-label" for="colorGreen">Green</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Price Range:</label><br>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="price0-50" value="0-50">
-                        <label class="custom-control-label" for="price0-50">$0 - $50</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="price50-100" value="50-100">
-                        <label class="custom-control-label" for="price50-100">$50 - $100</label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="price100-200" value="100-200">
-                        <label class="custom-control-label" for="price100-200">$100 - $200</label>
+                    <label for="price-range">Price Range:</label><br>
+                    <div class="price-container">
+                        <input type="text" id="price-start" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        <div id="price-slider" style="flex: 2;"></div>
+                        <input type="text" id="price-end" readonly style="border:0; color:#f6931f; font-weight:bold;">
                     </div>
                 </div>
                 <!-- <button type="button" class="btn btn-primary">Apply Filter</button> -->
             </div>
             <div class="col-md-10 product-filter-right">
-                <h2>Product List</h2>
+                <h2>Dietary Supplements</h2>
                 <div id="productContainer" class="row">
                     <div class="col-xl-3 col-sm-6 col-6">
                         <div class="ltn__product-item ltn__product-item-3 text-center">
@@ -597,10 +583,32 @@
         </div> -->
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $(function () {
+
+            $("#price-slider").slider({
+                range: true,
+                min: 0,
+                max: 200,
+                values: [0, 200],
+                slide: function (event, ui) {
+                    $("#price-start").val("Rs." + ui.values[0]);
+                    $("#price-end").val("Rs." + ui.values[1]);
+                }
+            });
+
+            $("#price-start").val("Rs." + $("#price-slider").slider("values", 0));
+            $("#price-end").val("Rs." + $("#price-slider").slider("values", 1));
+        });
+    </script>
+
     <script>
         let page = 1;
         let loading = false;
-    
+
         function fetchMoreProducts() {
             loading = true;
             setTimeout(() => {
@@ -656,7 +664,7 @@
                 loading = false;
             }, 500);
         }
-    
+
         function handleScroll() {
             if (loading) return;
             const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
@@ -665,12 +673,12 @@
                 fetchMoreProducts();
             }
         }
-    
+
         fetchMoreProducts();
-    
+
         window.addEventListener('scroll', handleScroll);
     </script>
-    
+
 
 
     <!-- All JS Plugins -->
