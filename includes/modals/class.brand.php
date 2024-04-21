@@ -50,11 +50,11 @@ class Brand extends DatabaseObject
     }
 
     // Homepage Display
-    public static function homepageArticle($limit = '')
+    public static function getHomepageBrands($limit = '')
     {
         global $db;
         $lmt = !empty($limit) ? ' LIMIT ' . $limit : '';
-        $sql = "SELECT * FROM " . self::$table_name . " WHERE status='1' AND homepage='1' ORDER BY sortorder ASC $lmt";
+        $sql = "SELECT * FROM " . self::$table_name . " WHERE status='1' AND homepage='1' ORDER BY sortorder DESC $lmt";
         return self::find_by_sql($sql);
     }
 
