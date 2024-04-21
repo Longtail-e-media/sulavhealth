@@ -24863,6 +24863,31 @@
                     $('input[name="packageId"]').val(ui.item.id);
                 }
             });
+            $("#searchform").validate({
+                errorElement: 'span',
+                errorClass: 'validate-has-error',
+                rules: {
+                    searchkey: {required: true,}
+                },
+                messages: {
+                    searchkey: {required: "Please enter a destination to start searching.",}
+                },
+                submitHandler: function (form) {
+                    var Frmval = $("#searchform").serialize();
+                    $("#btn-search").attr("disabled", "true").html('Loading...');
+                    $.ajax({
+                        type: "POST",
+                        dataType: "JSON",
+                        url: base_url + "hotelcomplete.php",
+                        data: "action=getlink&" + Frmval,
+                        success: function (data) {
+                            var msg = eval(data);
+                            window.location.href = base_url + "searchlist/" + data.url;
+                        }
+                    });
+                    return false;
+                }
+            });
         }
         // Might be needed to keep open tab open even when page has been reloaded
         $(document).ready(function () {

@@ -61,6 +61,7 @@ RewriteRule ^searchlist/?$                      search.php [L]
 RewriteRule ^searchlist/page/([0-9]+)$          search.php?pageno=$1 [L]
 RewriteRule ^destination/([a-zA-Z0-9-]+)$       search.php?gdestination_slug=$1 [L]
 RewriteRule ^activity/([a-zA-Z0-9-]+)$          search.php?gactivity_slug=$1 [L]
+RewriteRule ^searchlist/([a-zA-Z0-9-=]+)/?$     search.php?code=$1 [L]
 
 #For user login and register pages.
 RewriteRule ^register/?$                        register.php [L]

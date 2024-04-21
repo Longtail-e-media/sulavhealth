@@ -99,12 +99,8 @@ if(!empty($_REQUEST['term'])) {
 if(!empty($_POST['action']) and ($_POST['action']=='getlink')) {
     foreach($_POST as $key=>$val) { $$key = $val;}
     $data = serialize(array(
-        'searchkey'=>$searchkey,
-        'packageId'=>$packageId,
-        'checkin'=>$checkin,
-        'checkout'=>$checkout,
-        'adults'=>$adults ,
-        'child'=>$child ));
+        'searchkey'=>$searchkey )
+    );
     echo json_encode(array('url'=>strtr(base64_encode($data), '+/', '-_')));
 }
 
