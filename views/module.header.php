@@ -1,5 +1,6 @@
 <?php
 
+$headera = '';
 $header = '';
 
 $current_url = pathinfo($_SERVER["PHP_SELF"]);
@@ -7,7 +8,7 @@ $fileName = $current_url['filename'];
 $headerClass = ($fileName == 'indexxxx') ? 'ltn__header-area ltn__header-5 ltn__header-transparent gradient-color-2' : 'ltn__header-area ltn__header-5 ltn__sticky-bg-white';
 
 $header .= '
-    <header class="' . $headerClass . '">
+<header class="ltn__header-area ltn__header-5 ltn__sticky-bg-white">
         <!-- ltn__header-middle-area start -->
         <div class="ltn__header-middle-area ltn__header-sticky ltn__sticky-bg-black plr--9---">
             <div class="container">
@@ -15,7 +16,9 @@ $header .= '
                     <div class="col">
                         <div class="site-logo-wrap">
                             <div class="site-logo">
-                                <a href="' . BASE_URL . 'home"><img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="' . $siteRegulars->sitetitle . '"></a>
+                                <a href=""' . BASE_URL . 'home">
+                                    <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="' . $siteRegulars->sitetitle . '">
+                                </a>
                             </div>
                             <ul class="language12 hidden hide d-none">
                                 <li class="language12-inner">
@@ -24,7 +27,12 @@ $header .= '
 ';
 if ($lang != 'gr') {
     $header .= '
-                                        <ul>
+    <ul>
+                                            <li>
+                                                <a href="#" class="dropdown-toggle"><span
+                                                        class="active-currency">English</span></a>
+                                                <ul>
+                                     <!--   <ul>
                                             <li>
                                                 <a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
                                                 <ul>
@@ -33,11 +41,18 @@ if ($lang != 'gr') {
                                                     </li>
                                                 </ul>
                                             </li>
-                                        </ul>
+                                        </ul>-->
 ';
 } else {
     $header .= '
-                                        <ul>
+    <li>
+    <a href="javascript:;" class="language-change"
+        data-lang="gr">Greek</a>
+</li>
+</ul>
+</li>
+</ul>
+    <!--   <ul>
                                             <li>
                                                 <a href="#" class="dropdown-toggle"><span class="active-currency">Greek</span></a>
                                                 <ul>
@@ -46,7 +61,7 @@ if ($lang != 'gr') {
                                                     </li>
                                                 </ul>
                                             </li>
-                                        </ul>
+                                        </ul>-->
 ';
 }
 //$crtot = isset($_SESSION['cart_detail']) ? count($_SESSION['cart_detail']) : 0;
@@ -64,37 +79,63 @@ if (!empty($sesRec)) {
     }
 }
 $header .= '
+
+
+
+                                        
+                                             
+
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col header-menu-column menu-color-white">
-                        <div class="header-menu d-none d-xl-block">
-                            <nav>
-                                <div class="ltn__main-menu">
-                                    ' . $jVars['module:menu:main-menu'] . '
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
+
                     <div class="ltn__header-options ltn__header-options-2">
                         <div class="ltn__drop-menu user-menu">
+                            <form id="searchform">
+                            <div class="search-container">
+                                <input type="search" placeholder="Search for products and medicines..." class="search" id="searchkey" name="searchkey">
+                                <i class="fas fa-search search-icon"></i>
+                            </div>
+                        </form>
                         </div>
+
+
                         <!-- user-menu -->
                         <div class="ltn__drop-menu user-menu">
                             <ul>
                                 <li>
-                                    <a href="#"><i class="icon-user"></i></a>
-                                    ' . $jVars['module:menu:top-menu'] . '
+                                    <!-- <i class="icon-user"></i> -->
+                                    <img src=\'https://s3-alpha-sig.figma.com/img/394e/8c83/fae8707eee905756e1bd5fe16b21d16a?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwCGjHcpOvB2PLWdnJUVS8Imesl7BtnErPjdLIPoCgtEkk51ly3tVQZgVZydpe1JcSNLXjXUT8T1VwaRtQpwMBdYYoXUNN8YaCojXzdhj1RkiLtTpLEONCfWlEsPJUQrmFr4xquASUEfZnrzCV3p3E-SBbakXlslM85SQN~1k-SjBBkrpmmEZuwFUQ-PdkashE4qjzC1TWjtwmgaPYGV0XigepLPwVrQ1vkcLOtQ3T3dcwt3uPOkSNyEeaUsz-IrX7pf8ZDK4I9K-SZp4DH4RHYAp3s3C3Z-lnsTJtTUBMYvk3DjPziAFvmpvZFRnEKSsjqKWqoRma7qFhCxc-u-Uw__\'
+                                        alt="" class="user-icon">
+                                    <ul>
+                                        <!-- <li><a href="login" id="id_sign_in">Sign in</a>
+                                        </li> -->
+                                        <li><a href="register"
+                                                id="id_register">Register</a></li>
+                                        <!-- <li><a href="dashboard" id="id_my_account">My
+                                                Account</a></li> -->
+                                    </ul>
                                 </li>
+
                             </ul>
+                            <div class="user-details">
+                                <h4>Hello, Guest !</h4>
+
+                                <a href="login" id="id_sign_in">Log In</a>
+                            </div>
+
                         </div>
                         <!-- mini-cart -->
                         <div class="mini-cart-icon">
                             <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
-                                <i class="icon-shopping-cart"></i>
-                                <sup class="cart-total">' . $crtot . '</sup>
+                                <!-- <i class="icon-shopping-cart"></i> -->
+
+                                <img class="user-cart"
+                                    src=\'https://s3-alpha-sig.figma.com/img/c361/18d1/72c572f3ba37b1c66353beb70ba9ab29?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GXQ~o3b6CSqjbJ1vyOZARvZQFMhGQ4r~QwuDb1urO8P0xZ~7ynbzdK0FngppL4YlTjRKeBBEXXTjZT9absRyD~gZzpAfIkWO-3OJFXiODrPg7tQQjgcshLgbWlm9cuo1y9DlHBf94udgdLH84HpTqz26uk6pQknl9l5TNmN6HMhkY0DXljFBPjSXNxrFB~eU3K9Z3tOnbiANK34aZ9iUlhQuHyh6VDZCZjdXfcJuuiW7IJzfszJ0yP1G9U1b92WaKYDBaU462q9fH8aKdXiCcKl8iT6kR~Jlg5Xcb736x8cvGV~-AVj4meH4Y0-cgg0M1ANa1RZ~ubp5Dz6jwpNjHw__\'
+                                    alt="">
+                                <sup class="cart-total">0</sup>
                             </a>
                         </div>
                         <!-- mini-cart -->
@@ -102,18 +143,51 @@ $header .= '
                         <div class="mobile-menu-toggle d-xl-none">
                             <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
                                 <svg viewBox="0 0 800 600">
-                                    <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200" id="top"></path>
+                                    <path
+                                        d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
+                                        id="top"></path>
                                     <path d="M300,320 L540,320" id="middle"></path>
-                                    <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
+                                    <path
+                                        d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
+                                        id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) ">
+                                    </path>
                                 </svg>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+            <nav class="down-nav">
+                <div class="container col header-menu-column menu-color-white">
+                    <div class="header-menu d-none d-xl-block">
+                        <div class="ltn__main-menu"
+                            style="display: flex; align-items: center; justify-content: flex-start; gap: 40px;">
+                            <div class="dropdown">
+                                <button class="brands dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Brands &nbsp; &nbsp;
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Mama Earth</a>
+                                    <a class="dropdown-item" href="#">True Derma</a>
+                                    <a class="dropdown-item" href="#">Cetaphil</a>
+                                    <a class="dropdown-item" href="#">Aliceblue</a>
+                                </div>
+                            </div>
+                            ' . $jVars['module:menu:main-menu'] . '
+                            
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </div>
         <!-- ltn__header-middle-area end -->
+
+
     </header>
+
 ';
 
 $jVars['module:header'] = $header;

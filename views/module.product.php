@@ -83,23 +83,31 @@ $jVars['module:product:cart-menu'] = $cart_menu;
  *      Home page Gift Sets
  */
 $home_gift_sets = $home_gift_sets_modal = $home_gift_sets_script = '';
+$brand='';
 
 if (defined('HOME_PAGE')) {
-    $giftSets = SubProduct::get_relatedpkg(5);
+    $giftSets = SubProduct::getHomepageProducts();
+    // pr($giftSets);
     $giftSetTitle = ($lang == 'gr') ? Product::field_by_id(5, 'title_greek') : Product::field_by_id(5, 'title');
 
     if (!empty($giftSets)) {
         $home_gift_sets .= '
-            <div class="ltn__product-slider-area ltn__product-gutter pb-100 pt-100">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="section-title-area ltn__section-title-2 text-center">
-                                <h1 class="section-title">' . $giftSetTitle . '<span>.</span></h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row ltn__related-product-slider-one-active slick-arrow-1">
+        <div class="ltn__product-tab-area ltn__product-gutter pt-115">
+        <div class="">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ltn__tab-menu ltn__tab-menu-2 ltn__tab-menu-top-right--">
+
+                        <div class="container">
+
+                            <h3>New Products</h3>
+
+                            <div class="">
+                                <div class="tab-content tab-list3">
+
+                                    <div class="tab-pane fade active show" id="product_lab-services">
+                                        <div class="ltn__product-tab-content-inner ltn__product-grid-view">
+                                            <div class="row">
         ';
         foreach ($giftSets as $giftSet) {
             // getting only one image to display
@@ -113,53 +121,55 @@ if (defined('HOME_PAGE')) {
                     }
                 }
             }
+            $prodbrand= Brand::find_by_id($giftSet->brand);
+        
 
             $home_gift_sets .= '
-                        <div class="col-lg-12">
-                            <div class="ltn__product-item ltn__product-item-3 text-center">
-                                <div class="product-img">
-                                    <img src="' . $img . '" alt="' . (($lang == "gr") ? $giftSet->title_greek : $giftSet->title) . '">
-                                    <div class="product-badge">
-                                        <ul>
+            <div class="col-xl-3 col-sm-6 col-6">
+            <div class="ltn__product-item ltn__product-item-3 text-center">
+                <div class="product-img product_hove"
+                    data-href="' . BASE_URL . 'product/' . $giftSet->slug . '">
+                    <img src="' . $img . '"
+                        alt="lab service 1">
+                </div>
+                <div class="product-info">
+                    <h4 class="product-title">'.$prodbrand->title.'</h4>
+                    <a href="' . BASE_URL . 'product/' . $giftSet->slug . '"
+                        class="product-link">' . $giftSet->title . '</a>
+                    <div class="product-price">
+                        <span>' . $giftSet->currency . ' ' . $giftSet->discount1.'</span>
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . ' price1</del>
+                    </div>
+                    <div class="product-action">
+                        
+                  
+
             ';
             if (!empty($giftSet->tag)) {
                 $home_gift_sets .= '<li class="sale-badge">' . $giftSet->tag . '</li>';
             }
             $home_gift_sets .= '
-                                        </ul>
-                                    </div>
-                                    <div class="product-hover-action">
-                                        <ul>
-                                            <li>
-                                                <a href="#" title="Add to Cart" data-toggle="modal" data-target="#quick_view_modal_product_' . $giftSet->slug . '">
-                                                    <i class="fas fa-shopping-cart"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="add-wishlist" title="Wishlist" data-cartid="' . $giftSet->slug . '">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <h2 class="product-title">
-                                        <a href="' . BASE_URL . 'product/' . $giftSet->slug . '">' . (($lang == "gr") ? $giftSet->title_greek : $giftSet->title) . '</a>
-                                    </h2>
-                                    <div class="product-price">
-            ';
-            if (!empty($giftSet->discount1) or $giftSet->discount1 > 0) {
-                $home_gift_sets .= '<span>' . $giftSet->currency . ' ' . sprintf('%.2f', $giftSet->discount1) . '</span>
-                                    <del>' . $giftSet->currency . ' ' . sprintf('%.2f', $giftSet->price1) . '</del>';
-            } else {
-                $home_gift_sets .= '<span>' . $giftSet->currency . ' ' . sprintf('%.2f', $giftSet->price1) . '</span>';
-            }
-            $home_gift_sets .= '
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                    <ul>
+                                    <li>
+                                        <a href="#" class="add-wishlist"
+                                            title="Add to Wishlist"
+                                            data-cartid="' . $giftSet->slug . '">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="ADD TO CART"
+                                            class="add-to-cart" data-toggle="modal"
+                                            data-target="#quick_view_modal_product_' . $giftSet->slug . '">
+                                            Add to Cart
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                      </div>
+                </div>
+            </div>
+        </div>
             ';
 
             $home_gift_sets_script .= '
@@ -409,14 +419,49 @@ if (defined('HOME_PAGE')) {
             ';
         }
         $home_gift_sets .= '
-                    </div>
-                </div>
-            </div>
+        </div>
+        </div>
+    </div>
+
+
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
         ';
     }
+    $branddatas= Brand::getHomepageBrands(10) ;
+    //  pr($branddatas);
+
+    if($branddatas){
+        foreach($branddatas as $branddata){
+                $imgSrc = BASE_URL . 'template/web/img/services/personal.jpg';
+                $imgs = unserialize($branddata->image);
+                if (!empty($imgs)) {
+                    $file_path = SITE_ROOT . 'images/brand/' . $imgs[0];
+                    if (file_exists($file_path)) {
+                        $imgSrc = IMAGE_PATH . 'brand/' . $imgs[0];
+                    }
+                }
+
+            $brand .= '<img src="'.$imgSrc.'"
+            alt="" class="brand-images">';
+        }
+
+    }
+
+    
+
 }
 
 $jVars['module:product:home-gift-sets'] = $home_gift_sets;
+$jVars['module:product:home-brand'] = $brand;
 $jVars['module:product:home-gift-sets-modal'] = $home_gift_sets_modal;
 $jVars['module:product:home-gift-sets-script'] = $home_gift_sets_script;
 

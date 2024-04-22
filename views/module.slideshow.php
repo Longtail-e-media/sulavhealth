@@ -52,20 +52,20 @@ $slides = Slideshow::getSlideshow_by(1);
 
 if (!empty($slides)) {
     $imgSlider .= '
-        <div class="container ltn__image-slider-mine">
+        
     ';
     foreach ($slides as $slide) {
         $file_path = SITE_ROOT . 'images/slideshow/' . $slide->image;
         if (file_exists($file_path)) {
             $imgSlider .= '
-                <div class="">
-                    <img src="' . IMAGE_PATH . 'slideshow/' . $slide->image . '" alt="'.$slide->title.'">
+            
+                <div class="" >
+                    <img style="object-position: top -50px right 0;" src="' . IMAGE_PATH . 'slideshow/' . $slide->image . '" alt="'.$slide->title.'">
                 </div>
             ';
         }
     }
     $imgSlider .= '
-        </div>
     ';
 }
 $jVars['module:slideshow:images'] = $imgSlider;
