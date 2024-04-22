@@ -2,6 +2,8 @@
 <html class="no-js" lang="el-GR">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <jcms:site:seotitle />
 
     <jcms:site:fevicon />
@@ -66,64 +68,70 @@
 
                     <div class="ltn__header-options ltn__header-options-2">
                         <div class="ltn__drop-menu user-menu">
-                            <div class="search-container">
-                                <input type="search" placeholder="Search for products and medicines..." class="search">
-                                <i class="fas fa-search search-icon"></i>
+                            <form id="searchform">
+                                <div class="search-container">
+                                    <input type="search" placeholder="Search for products and medicines..."
+                                        class="search" id="searchkey" name="searchkey">
+                                    <i class="fas fa-search search-icon"></i>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <div style="display: flex; gap: 40px;">
+                            <!-- user-menu -->
+                            <div class="ltn__drop-menu user-menu">
+                                <ul>
+                                    <li>
+                                        <!-- <i class="icon-user"></i> -->
+                                        <img src='https://s3-alpha-sig.figma.com/img/394e/8c83/fae8707eee905756e1bd5fe16b21d16a?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwCGjHcpOvB2PLWdnJUVS8Imesl7BtnErPjdLIPoCgtEkk51ly3tVQZgVZydpe1JcSNLXjXUT8T1VwaRtQpwMBdYYoXUNN8YaCojXzdhj1RkiLtTpLEONCfWlEsPJUQrmFr4xquASUEfZnrzCV3p3E-SBbakXlslM85SQN~1k-SjBBkrpmmEZuwFUQ-PdkashE4qjzC1TWjtwmgaPYGV0XigepLPwVrQ1vkcLOtQ3T3dcwt3uPOkSNyEeaUsz-IrX7pf8ZDK4I9K-SZp4DH4RHYAp3s3C3Z-lnsTJtTUBMYvk3DjPziAFvmpvZFRnEKSsjqKWqoRma7qFhCxc-u-Uw__'
+                                            alt="" class="user-icon">
+                                        <ul>
+                                            <!-- <li><a href="http://localhost/sulavhealth/login" id="id_sign_in">Sign in</a>
+                                    </li> -->
+                                            <li><a href="http://localhost/sulavhealth/register"
+                                                    id="id_register">Register</a></li>
+                                            <!-- <li><a href="http://localhost/sulavhealth/dashboard" id="id_my_account">My
+                                            Account</a></li> -->
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                                <div class="user-details">
+                                    <h4>Hello, Guest !</h4>
+
+                                    <a href="http://localhost/sulavhealth/login" id="id_sign_in">Log In</a>
+                                </div>
+
                             </div>
-                        </div>
+                            <!-- mini-cart -->
+                            <div class="mini-cart-icon">
+                                <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+                                    <!-- <i class="icon-shopping-cart"></i> -->
 
-
-                        <!-- user-menu -->
-                        <div class="ltn__drop-menu user-menu">
-                            <ul>
-                                <li>
-                                    <!-- <i class="icon-user"></i> -->
-                                    <img src='https://s3-alpha-sig.figma.com/img/394e/8c83/fae8707eee905756e1bd5fe16b21d16a?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwCGjHcpOvB2PLWdnJUVS8Imesl7BtnErPjdLIPoCgtEkk51ly3tVQZgVZydpe1JcSNLXjXUT8T1VwaRtQpwMBdYYoXUNN8YaCojXzdhj1RkiLtTpLEONCfWlEsPJUQrmFr4xquASUEfZnrzCV3p3E-SBbakXlslM85SQN~1k-SjBBkrpmmEZuwFUQ-PdkashE4qjzC1TWjtwmgaPYGV0XigepLPwVrQ1vkcLOtQ3T3dcwt3uPOkSNyEeaUsz-IrX7pf8ZDK4I9K-SZp4DH4RHYAp3s3C3Z-lnsTJtTUBMYvk3DjPziAFvmpvZFRnEKSsjqKWqoRma7qFhCxc-u-Uw__'
-                                        alt="" class="user-icon">
-                                    <ul>
-                                        <!-- <li><a href="http://localhost/sulavhealth/login" id="id_sign_in">Sign in</a>
-                                        </li> -->
-                                        <li><a href="http://localhost/sulavhealth/register"
-                                                id="id_register">Register</a></li>
-                                        <!-- <li><a href="http://localhost/sulavhealth/dashboard" id="id_my_account">My
-                                                Account</a></li> -->
-                                    </ul>
-                                </li>
-
-                            </ul>
-                            <div class="user-details">
-                                <h4>Hello, Guest !</h4>
-
-                                <a href="http://localhost/sulavhealth/login" id="id_sign_in">Log In</a>
+                                    <img class="user-cart"
+                                        src='https://s3-alpha-sig.figma.com/img/c361/18d1/72c572f3ba37b1c66353beb70ba9ab29?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GXQ~o3b6CSqjbJ1vyOZARvZQFMhGQ4r~QwuDb1urO8P0xZ~7ynbzdK0FngppL4YlTjRKeBBEXXTjZT9absRyD~gZzpAfIkWO-3OJFXiODrPg7tQQjgcshLgbWlm9cuo1y9DlHBf94udgdLH84HpTqz26uk6pQknl9l5TNmN6HMhkY0DXljFBPjSXNxrFB~eU3K9Z3tOnbiANK34aZ9iUlhQuHyh6VDZCZjdXfcJuuiW7IJzfszJ0yP1G9U1b92WaKYDBaU462q9fH8aKdXiCcKl8iT6kR~Jlg5Xcb736x8cvGV~-AVj4meH4Y0-cgg0M1ANa1RZ~ubp5Dz6jwpNjHw__'
+                                        alt="">
+                                    <sup class="cart-total">0</sup>
+                                </a>
                             </div>
-
-                        </div>
-                        <!-- mini-cart -->
-                        <div class="mini-cart-icon">
-                            <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
-                                <!-- <i class="icon-shopping-cart"></i> -->
-
-                                <img class="user-cart"
-                                    src='https://s3-alpha-sig.figma.com/img/c361/18d1/72c572f3ba37b1c66353beb70ba9ab29?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GXQ~o3b6CSqjbJ1vyOZARvZQFMhGQ4r~QwuDb1urO8P0xZ~7ynbzdK0FngppL4YlTjRKeBBEXXTjZT9absRyD~gZzpAfIkWO-3OJFXiODrPg7tQQjgcshLgbWlm9cuo1y9DlHBf94udgdLH84HpTqz26uk6pQknl9l5TNmN6HMhkY0DXljFBPjSXNxrFB~eU3K9Z3tOnbiANK34aZ9iUlhQuHyh6VDZCZjdXfcJuuiW7IJzfszJ0yP1G9U1b92WaKYDBaU462q9fH8aKdXiCcKl8iT6kR~Jlg5Xcb736x8cvGV~-AVj4meH4Y0-cgg0M1ANa1RZ~ubp5Dz6jwpNjHw__'
-                                    alt="">
-                                <sup class="cart-total">0</sup>
-                            </a>
-                        </div>
-                        <!-- mini-cart -->
-                        <!-- Mobile Menu Button -->
-                        <div class="mobile-menu-toggle d-xl-none">
-                            <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
-                                <svg viewBox="0 0 800 600">
-                                    <path
-                                        d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
-                                        id="top"></path>
-                                    <path d="M300,320 L540,320" id="middle"></path>
-                                    <path
-                                        d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
-                                        id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) ">
-                                    </path>
-                                </svg>
-                            </a>
+                            <!-- mini-cart -->
+                            <!-- Mobile Menu Button -->
+                            <div class="mobile-menu-toggle d-xl-none">
+                                <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
+                                    <svg viewBox="0 0 800 600">
+                                        <path
+                                            d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
+                                            id="top"></path>
+                                        <path d="M300,320 L540,320" id="middle"></path>
+                                        <path
+                                            d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
+                                            id="bottom"
+                                            transform="translate(480, 320) scale(1, -1) translate(-480, -318) ">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -291,10 +299,14 @@
                 <div class="form-group">
                     <label for="price-range">Price Range:</label><br>
                     <div class="price-container">
-                        <input type="text" id="price-start" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                        <div id="price-slider" style="flex: 2;"></div>
-                        <input type="text" id="price-end" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                        <div class="price-input">
+                            <input type="text" id="price-start" readonly>
+                            <input type="text" id="price-end" readonly>
+                        </div>
+
+                        <div id="price-slider"></div>
                     </div>
+
                 </div>
                 <!-- <button type="button" class="btn btn-primary">Apply Filter</button> -->
             </div>
@@ -558,7 +570,7 @@
                     </div>
                 </div>
 
-                <p style="font-size: 0.8em; padding: 5px 0;">
+                <p style="font-size: 0.8em; padding: 60px 0;">
                     Disclaimer : Sulavhealth.com is only a service platform to provide concierge and logistic service to
                     our valued subscribers. We do not endorse or are associated with any Medical institutions,
                     Hospitals, Clinics; however our platform could be leveraged to sell health packages or services or
@@ -592,8 +604,8 @@
             $("#price-slider").slider({
                 range: true,
                 min: 0,
-                max: 200,
-                values: [0, 200],
+                max: 5000,
+                values: [0, 5000],
                 slide: function (event, ui) {
                     $("#price-start").val("Rs." + ui.values[0]);
                     $("#price-end").val("Rs." + ui.values[1]);

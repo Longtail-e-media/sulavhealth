@@ -6865,7 +6865,11 @@ ul.wp-block-latest-posts.is-grid.alignwide {
     }
 }
 
-@media (max-width: 47.9375rem) {
+@media (max-width: 768px) {
+    .search {
+        width: 100% !important;
+    }
+
     .ltn__header-top-area {
         padding: 0.3125rem 0;
         text-align: center;
@@ -6932,7 +6936,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
-        margin: 0.625rem 0 1.875rem;
+        /* margin: 0.625rem 0 1.875rem; */
     }
 
     .ltn__header-4 .ltn__header-options,
@@ -6944,6 +6948,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
+        flex-direction: column;
     }
 
     .ltn__header-3 .top-bar-right {
@@ -8370,7 +8375,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 
 .product-img img {
     width: 100%;
-    height: 21.875rem;
+    height: 20rem;
     background-color: #fff;
     object-fit: contain;
     position: relative;
@@ -16992,16 +16997,23 @@ input.cart-plus-minus-box {
 }
 
 .popular-brands {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    width: 100%;
+    padding: 10px 0;
     background-color: #fff;
     border-radius: 0.625rem;
 }
 
 .popular-brands h3 {
     margin-top: 2.5rem;
+    text-align: center;
+}
+
+.brand-images-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .brand-images-wrapper .brand-images {
@@ -17207,12 +17219,37 @@ footer a:hover {
     justify-content: space-between;
 }
 
-/*
+
 .price-container {
     display: flex;
     align-items: center;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .price-container input {
-    flex: 1;
-    */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    background: none;
+    background-color: white;
+    text-align: center;
+}
+
+.price-container div {
+    width: 100%;
+}
+
+.price-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+html {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
