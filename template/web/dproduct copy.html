@@ -20,137 +20,80 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
-
-
 </head>
 </style>
 
 <body class="<jcms:site:language-class/>">
-
-    <jcms:module:header/>
-
-    <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
-        <div class="ltn__utilize-menu-inner ltn__scrollbar">
-            <div class="ltn__utilize-menu-head">
-                <span class="ltn__utilize-menu-title">Cart</span>
-                <button class="ltn__utilize-close">&times;</button>
-            </div>
-            <div class="mini-cart-product-area ltn__scrollbar">
-
-                <div class="mini-cart-item clearfix">
-                    <h6>No Items in Cart</h6>
-                </div>
-
-            </div>
-            <div class="mini-cart-footer">
-                <div class="mini-cart-sub-total">
-                    <h5>Subtotal: <span class="sub-total-mini-cart">$ 0.00</span></h5>
-                </div>
-                <div class="btn-wrapper">
-                    <a href="http://localhost/sulavhealth/cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                    <a href="http://localhost/sulavhealth/checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
-        <div class="ltn__utilize-menu-inner ltn__scrollbar">
-            <div class="ltn__utilize-menu-head">
-                <div class="site-logo">
-                    <a href="http://localhost/sulavhealth/home"><img
-                            src='https://sulavhealth.com/images/preference/qOKdD-sulav.jpg'
-                            alt="Welcome To Sulav Health - ghar bata, ghar mai, ghar sammai"></a>
-                </div>
-                <button class="ltn__utilize-close">&times;</button>
-            </div>
-            <div class="ltn__utilize-menu">
-                <ul>
-                    <li class=""><a href="http://localhost/sulavhealth/dietary-supplement"
-                            id="id_dietary_supplements">DIETARY SUPPLEMENTS</a></li>
-                    <li class=""><a href="http://localhost/sulavhealth/#" id="id_lab_service">LAB SERVICE</a></li>
-                    <li class="menu-icon"><a href="http://localhost/sulavhealth/#" id="id_travel_medicines">TRAVEL
-                            MEDICINES</a>
-                        <ul>
-                            <li><a href="http://localhost/sulavhealth/#" id="id_trekking_package">TREKKING
-                                    PACKAGE</a></li>
-                            <li><a href="http://localhost/sulavhealth/#" id="id_foreign_tour_package">FOREIGN TOUR
-                                    PACKAGE</a></li>
-                        </ul>
-                    </li>
-                    <li class=""><a href="http://localhost/sulavhealth/#" id="id_skin_care">SKIN CARE</a></li>
-                    <li class=""><a href="http://localhost/sulavhealth/#" id="id_hygiene">HYGIENE</a></li>
-                    <li class=""><a href="http://localhost/sulavhealth/#" id="id_baby_care">BABY CARE</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="ltn__utilize-overlay"></div>
 
     <div class="container mx-auto product-filter">
         <div class="row">
             <div class="product-filter-side col-md-2">
                 <h2>Filters</h2>
                 <div class="form-group">
-                    <label>Category:</label><br>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="category1" value="Category 1">
-                        <label class="custom-control-label" for="category1">Category</label>
-                        <span>1</span>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="category2" value="Category 2">
-                        <label class="custom-control-label" for="category2">Category</label>
-                        <span>2</span>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label>Brands:</label><br>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="brand1" value="Brand 1">
-                        <label class="custom-control-label" for="brand1">Brand</label>
-                        <span>1</span>
+                        <div class="product-number-title">
+                            <label class="custom-control-label" for="brand1">Brand</label>
+                            <span>1</span>
+                        </div>
                     </div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="brand2" value="Brand 2">
-                        <label class="custom-control-label" for="brand2">Brand</label>
-                        <span>2</span>
+                        <label class="custom-control-label" for="brand2">Brand 2</label>
                     </div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="brand3" value="Brand 3">
-                        <label class="custom-control-label" for="brand3">Brand</label>
-                        <span>6</span>
+                        <label class="custom-control-label" for="brand3">Brand 3</label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Type:</label><br>
+                    <label>Date Added:</label><br>
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="package" value="Package 1">
-                        <label class="custom-control-label" for="package">Package</label>
-                        <span>1</span>
+                        <input type="checkbox" class="custom-control-input" id="dateToday" value="today">
+                        <label class="custom-control-label" for="dateToday">Today</label>
                     </div>
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="product" value="Product 2">
-                        <label class="custom-control-label" for="product">Product</label>
-                        <span>2</span>
+                        <input type="checkbox" class="custom-control-input" id="dateThisWeek" value="this_week">
+                        <label class="custom-control-label" for="dateThisWeek">This Week</label>
                     </div>
                 </div>
 
-
                 <div class="form-group">
-                    <label for="price-range">Price Range:</label><br>
-                    <div class="price-container">
-                        <input type="text" id="price-start" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                        <div id="price-slider" style="flex: 2;"></div>
-                        <input type="text" id="price-end" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                    <label>Colors:</label><br>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="colorRed" value="Red">
+                        <label class="custom-control-label" for="colorRed">Red</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="colorBlue" value="Blue">
+                        <label class="custom-control-label" for="colorBlue">Blue</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="colorGreen" value="Green">
+                        <label class="custom-control-label" for="colorGreen">Green</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Price Range:</label><br>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="price0-50" value="0-50">
+                        <label class="custom-control-label" for="price0-50">$0 - $50</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="price50-100" value="50-100">
+                        <label class="custom-control-label" for="price50-100">$50 - $100</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="price100-200" value="100-200">
+                        <label class="custom-control-label" for="price100-200">$100 - $200</label>
                     </div>
                 </div>
                 <!-- <button type="button" class="btn btn-primary">Apply Filter</button> -->
             </div>
             <div class="col-md-10 product-filter-right">
-                <h2>Dietary Supplements</h2>
+                <h2>Product List</h2>
                 <div id="productContainer" class="row">
                     <div class="col-xl-3 col-sm-6 col-6">
                         <div class="ltn__product-item ltn__product-item-3 text-center">
@@ -304,157 +247,6 @@
         </div>
     </div>
 
-    <footer class="ltn__footer-area  ">
-        <div class="footer-top-area  section-bg-1 plr--5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-about-widget">
-                            <h4 class="footer-title">Address</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="https://maps.app.goo.gl/et94HGPQiVLYvHLaA" target="_blank">Lazimpat,
-                                            Kathmandu, Nepal</a>
-                                    </li>
-                                    <li><a href="https://maps.app.goo.gl/et94HGPQiVLYvHLaA" target="_blank"><i
-                                                class="fas fa-map-marker-alt mr-2"></i>View google
-                                            map</a>
-                                    </li>
-                                    <!-- <li><a href="tel:+9779849426187" target="_blank">+977-9849426187</a> -->
-                                    </li>
-                                    <!-- <li><a href="mailto: info&#64;sulavhealth&#46;com"
-                                            target="_blank">info&#64;sulavhealth&#46;com</a>
-                                    </li> -->
-                                </ul>
-
-
-                            </div>
-                            <ul
-                                style="list-style: none; margin-top: 20px; display: flex; align-items:start; justify-content: start; gap: 20px; font-size: 1.25rem; transform: translateX(-20px);">
-                                <li><a href="https://www.facebook.com/xenopharmacy" target="_blank"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                </li>
-                                <li><a href="https://www.instagram.com/xenopharmacy/" target="_blank"><i
-                                            class="fab fa-instagram"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Customer Policies</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="http://localhost/sulavhealth/terms-conditions"
-                                            id="id_terms___conditions">Terms & Conditions</a></li>
-                                    <li><a href="http://localhost/sulavhealth/quality-policy"
-                                            id="id_quality_policy">Quality Policy</a></li>
-                                    <li><a href="http://localhost/sulavhealth/gdpr" id="id_privacy_policy">Privacy
-                                            Policy</a></li>
-                                    <li><a href="http://localhost/sulavhealth/domestic-delivery-info"
-                                            id="id_domestic_delivery">Domestic Delivery</a></li>
-                                    <li><a href="http://localhost/sulavhealth/international-delivery"
-                                            id="id_international_delivery">International Delivery</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Products</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="#"> Baby Care</a></li>
-                                    <li><a href="#"> Lab Service</a></li>
-                                    <li><a href="#"> Derma Products</a></li>
-                                    <li><a href="#"> Skin Care</a></li>
-                                    <li><a href="#"> Dietary Supplements Care</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Follow Us</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="https://www.facebook.com/xenopharmacy" target="_blank">Facebook</a>
-                                    </li>
-                                    <li><a href="https://www.instagram.com/xenopharmacy/" target="_blank">Instagram</a>
-                                    </li>
-                                    <li><a href="https://www.linkedin.com" target="_blank">Linkedin </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="footer-contact col-xl-3 col-md-6 col-sm-12 col-12 contact-us">
-                        <p style="font-weight: 700;">For any kinds of help you can call us at</p>
-                        <ul>
-                            </li>
-                            <li><a href="tel:+9779849426187" target="_blank">+977-9849426187 <i
-                                        class="fab fa-whatsapp"></i> <i class="fab fa-viber"></i></a>
-                        </ul>
-                        <p style="font-weight: 700;">Or mail us at</p>
-                        <ul>
-                            <li><a href="mailto: info&#64;sulavhealth&#46;com"
-                                    target="_blank">info&#64;sulavhealth&#46;com</a>
-                            </li>
-                        </ul>
-
-                        <img style="height:30px; object-fit: contain;"
-                            src='https://s3-alpha-sig.figma.com/img/5070/586c/c585ea14d42071c8e8a6499d919515bd?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Atj2nhvfWL9iXQYRraWpImixg~nRtFxxmeRmSHYyv~TTSTEWM8rF44fo6WbXtu3w~FEVjpdPx28-GczuRSeSSNHDAFB48o7UYLsc69Q1DC9YfGjh-7BdPKtgX12N-44440UD-VLnd4Tfi~jpv3q~sTaaUtvsmIXcLWTX3FJc0DivGCkPzzRcHxDcpOWNzg8BuWCyQKmy6EJcsG5stqqj2IdrIKYkztZpmls3CG3vA8GreXETnVgT7yEQo8j4~LT83JqXD8DjnzmQnYjxwlJQNMVvcKjxbyrlSsjszRWlFMMYvMOpW~75uaEardcMjJJHaDymi78C8X6h1cls0yU5oQ__'
-                            alt="Payment Image">
-                    </div>
-                </div>
-
-                <p style="font-size: 0.8em; padding: 5px 0;">
-                    Disclaimer : Sulavhealth.com is only a service platform to provide concierge and logistic service to
-                    our valued subscribers. We do not endorse or are associated with any Medical institutions,
-                    Hospitals, Clinics; however our platform could be leveraged to sell health packages or services or
-                    wellness products using us as a marketing platform. The list of doctors/hospitals and their
-                    availability displayed in the platform are as provided by the hospital or as listed in the hospitals
-                    website and can change or removed without prior notice. We do not take any responsibility for the
-                    medical investigations carried out by the hospitals or any doctors. This service is NOT intended to
-                    be a substitute for any medical care or emergency healthcare. If you are an END-USER facing a
-                    medical emergency, please contact an ambulance services or hospital directly.
-                </p>
-                <p style="font-size: 0.8em;">&copy; 2024. Sulav Health. All rights reserved | Website
-                    by <a style="font-size: 1em;" href="https://longtail.info/">Longtail e-media</a></p>
-            </div>
-        </div>
-        <!-- <div class="ltn__copyright-area ltn__copyright-2 section-bg-2  ltn__border-top-2--- plr--5">
-            <div class="container">
-                <div class="ltn__copyright-design text-center">
-                    <p>&copy; 2024. Sulav Health. All rights reserved | Website by <a href="https://longtail.info/"
-                            style="font-size: 0.85rem;" target="_blank">Longtail e-media</a></p>
-                </div>
-            </div>
-        </div> -->
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script>
-        $(function () {
-
-            $("#price-slider").slider({
-                range: true,
-                min: 0,
-                max: 200,
-                values: [0, 200],
-                slide: function (event, ui) {
-                    $("#price-start").val("Rs." + ui.values[0]);
-                    $("#price-end").val("Rs." + ui.values[1]);
-                }
-            });
-
-            $("#price-start").val("Rs." + $("#price-slider").slider("values", 0));
-            $("#price-end").val("Rs." + $("#price-slider").slider("values", 1));
-        });
-    </script>
 
     <script>
         let page = 1;

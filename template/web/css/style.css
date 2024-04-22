@@ -17170,8 +17170,8 @@ footer a:hover {
 }
 
 .product-filter-side .form-group>label {
-    font-size: 1.5em;
-    font-weight: 500;
+    /* font-size: 1.5em; */
+    font-weight: 800;
 }
 
 .product-filter-right .product-title {
@@ -17195,3 +17195,24 @@ footer a:hover {
     padding: 0.3125rem 0.9375rem;
     border-radius: 1.25rem;
 }
+
+.product-filter .product-card {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.product-number-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/*
+.price-container {
+    display: flex;
+    align-items: center;
+}
+
+.price-container input {
+    flex: 1;
+    */
