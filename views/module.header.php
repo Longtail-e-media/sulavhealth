@@ -98,10 +98,10 @@ $header .= '
                                 <input type="search" placeholder="Search for products and medicines..." class="search" id="searchkey" name="searchkey">
                                 <i class="fas fa-search search-icon"></i>
                             </div>
-                        </form>
+                            </form>
                         </div>
 
-
+                        <div style="display: flex; gap: 40px;">
                         <!-- user-menu -->
                         <div class="ltn__drop-menu user-menu">
                             <ul>
@@ -156,6 +156,7 @@ $header .= '
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
 
 
