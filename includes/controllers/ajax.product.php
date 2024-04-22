@@ -178,6 +178,7 @@ switch ($action) {
         $record->type 			    = $_REQUEST['type'];
         $record->slug 			    = create_slug($_REQUEST['title']);
         $record->title 			    = $_REQUEST['title'];
+        $record->service_id         = (!empty($_REQUEST['service_id'])) ? $_REQUEST['service_id'] : '0';
         $record->Category 			    = $_REQUEST['Category'];
         $record->Subcategory 			    = $_REQUEST['Subcategory'];
         $record->brand 			    = $_REQUEST['brand'];
@@ -249,6 +250,7 @@ switch ($action) {
 
         $record->type 			    = $_REQUEST['type'];
         $record->slug 			    = create_slug($_REQUEST['title']);
+        $record->service_id         = (!empty($_REQUEST['service_id'])) ? $_REQUEST['service_id'] : '0';
         $record->Category 			    = $_REQUEST['Category'];
         $record->Subcategory 			    = $_REQUEST['Subcategory'];
         $record->brand 			    = $_REQUEST['brand'];

@@ -26,7 +26,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
             echo $select_html;
         }
         ?>
-        List 
+        List
 
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);" onClick="addNewSubProduct(<?php echo $typeid; ?>);">
             <span class="glyph-icon icon-separator"><i class="glyph-icon icon-plus-square"></i></span>
@@ -118,7 +118,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
     if (isset($_GET['subid']) and !empty($_GET['subid'])):
         $subproductId = addslashes($_REQUEST['subid']);
         $subproductInfo = SubProduct::find_by_id($subproductId);
-        $moduleTablename = "tbl_product"; 
+        $moduleTablename = "tbl_product";
         $homepage = ($subproductInfo->homepage == 1) ? "checked" : " ";
         $nothomepage = ($subproductInfo->homepage == 0) ? "checked" : " ";
         $status = ($subproductInfo->status == 1) ? "checked" : " ";
@@ -141,6 +141,20 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
             <form action="" class="col-md-12 center-margin" id="subproduct_frm">
 
                 <input type="hidden" name="type" id="type" value="<?php echo $typeid; ?>"/>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Service :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-4">
+                        <?php  $selid = !empty($subproductInfo->service_id) ? $subproductInfo->service_id : 0; ?>
+                        <select data-placeholder="Choose" class="chosen-selec validate[required,length[0,500]]" id="service_id" name="service_id">
+                            <?php echo Services::get_internal_link($selid); ?>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="form-row">
                     <div class="form-label col-md-2">
@@ -171,7 +185,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         </label>
                     </div>
                     <div class="form-input col-md-4">
-                        
+
                     <?php  $selid = !empty($subproductInfo->Subcategory) ? $subproductInfo->Subcategory : 0; ?>
                         <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Subcategory" id="Subcategory" name="Subcategory" selId="<?php echo $selid; ?>">
                             <?php $pId = !empty($subproductInfo->Category) ? $subproductInfo->Category : 0;
@@ -477,7 +491,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                     </div>
 
                 </div>
-                
+
 
                 <button btn-action='0' type="submit" name="submit"
                         class="btn-submit btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4"

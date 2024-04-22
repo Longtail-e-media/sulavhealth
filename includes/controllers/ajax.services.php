@@ -17,10 +17,10 @@
 			
 			$record->slug 			= create_slug($_REQUEST['title']);
 			$record->title 			= $_REQUEST['title'];
-			$record->title_greek 	= $_REQUEST['title_greek'];
-			$record->icon		= $_REQUEST['icon'];			
-			$record->content		= $_REQUEST['content'];			
-			$record->content_greek 	= $_REQUEST['content_greek'];
+            $record->title_greek    = (!empty($_REQUEST['title_greek'])) ? $_REQUEST['title_greek'] : '';
+			$record->icon		    = (!empty($_REQUEST['icon']))? $_REQUEST['icon'] : '';
+			$record->content		= (!empty($_REQUEST['content'])) ? $_REQUEST['content'] : '';
+			$record->content_greek 	= (!empty($_REQUEST['content_greek'])) ? $_REQUEST['content_greek'] : '';
 			$record->status			= $_REQUEST['status'];
 			
 			$record->sortorder		= Services::find_maximum();
@@ -54,10 +54,10 @@
 
 			$record->slug 			= create_slug($_REQUEST['title']);
 			$record->title 			= $_REQUEST['title'];
-			$record->title_greek 	= $_REQUEST['title_greek'];
-			$record->icon		= $_REQUEST['icon'];			
-			$record->content		= $_REQUEST['content'];			
-			$record->content_greek 	= $_REQUEST['content_greek'];
+            $record->title_greek    = (!empty($_REQUEST['title_greek'])) ? $_REQUEST['title_greek'] : '';
+            $record->icon		    = (!empty($_REQUEST['icon']))? $_REQUEST['icon'] : '';
+            $record->content		= (!empty($_REQUEST['content'])) ? $_REQUEST['content'] : '';
+            $record->content_greek 	= (!empty($_REQUEST['content_greek'])) ? $_REQUEST['content_greek'] : '';
 			$record->status			= $_REQUEST['status'];
 			$db->begin();
 			if($record->save()): $db->commit();
@@ -127,8 +127,8 @@
 		case "sort":			
 			$id 	 = $_REQUEST['id']; 	// IS a line containing ids starting with : sortIds
 			$sortIds = $_REQUEST['sortIds'];
-			$posId   = Services::field_by_id($id,'type');
-			datatableReordering('tbl_services', $sortIds, "sortorder", "type",$posId,1);
+			// $posId   = Services::field_by_id($id,'type');
+            datatableReordering('tbl_services', $sortIds, "sortorder", "", "", 1);
 			$message  = sprintf($GLOBALS['basic']['sorted_'], "Services"); 
 			echo json_encode(array("action"=>"success","message"=>$message));
 		break;

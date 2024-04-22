@@ -31,31 +31,6 @@ ALTER TABLE tbl_category ADD PRIMARY KEY (id);
 ALTER TABLE tbl_category MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 -- 2024-04-22
-
--- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Apr 22, 2024 at 12:15 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.3
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
---
--- Database: `sulavhealth`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_location`
---
-
 CREATE TABLE `tbl_location` (
   `id` int(11) NOT NULL,
   `slug` varchar(255) NOT NULL,
@@ -67,31 +42,12 @@ CREATE TABLE `tbl_location` (
   `modified_date` varchar(50) NOT NULL,
   `homepage` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tbl_location`
---
-ALTER TABLE `tbl_location`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tbl_location`
---
-ALTER TABLE `tbl_location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
+ALTER TABLE `tbl_location` ADD PRIMARY KEY (`id`);
+ALTER TABLE `tbl_location` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --add location modules in modules table 22/04/2024
+INSERT INTO `tbl_modules` (`id`, `parent_id`, `name`, `link`, `mode`, `icon_link`, `status`, `sortorder`, `added_date`, `properties`)
+VALUES (NULL, '0', 'Location Mgmt', 'Locationn/list', 'Locationn', 'icon-list', '1', '13', '2020-09-17', '')
 
-INSERT INTO `tbl_modules` (`id`, `parent_id`, `name`, `link`, `mode`, `icon_link`, `status`, `sortorder`, `added_date`, `properties`) VALUES (NULL, '0', 'Location Mgmt', 'Locationn/list', 'Locationn', 'icon-list', '1', '13', '2020-09-17', '')
-
-
+UPDATE `tbl_modules` SET `status` = '1' WHERE `tbl_modules`.`id` = 14;
+ALTER TABLE `tbl_product_sub` ADD `service_id` INT NOT NULL AFTER `homepage`;

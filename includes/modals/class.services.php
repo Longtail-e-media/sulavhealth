@@ -54,6 +54,24 @@ class Services extends DatabaseObject {
 		return !empty($result_array) ? array_shift($result_array) : false;
 	}
 
+    public static function get_internal_link($selid = '')
+    {
+        global $db;
+        $sql = "SELECT id,title FROM " . self::$table_name . " WHERE status='1' ORDER BY sortorder DESC";
+        $record = self::find_by_sql($sql);
+        $result = '';
+        if ($record) {
+            $result .= '<option value="">Select Service</option>';
+            foreach ($record as $row) {
+                $sel = ($selid == $row->id) ? 'selected' : '';
+                $result .= '<option value="' . $row->id . '" ' . $sel . '>' . $row->title . '</option>';
+            }
+        } else {
+            $result .= '<option value="0">None</option>';
+        }
+        return $result;
+    }
+
 	//Get sortorder by id
 	public static function field_by_id($id=0,$fields=""){
 		global $db;
