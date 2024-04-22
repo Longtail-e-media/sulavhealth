@@ -122,7 +122,7 @@ if (defined('HOME_PAGE')) {
                 }
             }
             $prodbrand= Brand::find_by_id($giftSet->brand);
-        
+            // pr($prodbrand);
 
             $home_gift_sets .= '
             <div class="col-xl-3 col-sm-6 col-6">

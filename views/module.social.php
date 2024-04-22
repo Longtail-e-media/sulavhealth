@@ -32,9 +32,11 @@ $jVars['module:social:top'] = $resocl;
 * Home social link
 */
 $ressl = '';
+// pr($socialRec);
 if (!empty($socialRec)) {
     foreach ($socialRec as $socialRow) {
-        $ressl .= '<li><a href="' . $socialRow->linksrc . '" target="_blank">' . $socialRow->title . '</a></li>';
+        $ressl .= '<li><a href="' . $socialRow->linksrc . '" target="_blank"><img
+        src="' . IMAGE_PATH . 'social/' . $socialRow->image . '"></img></a></li>';
     }
 }
 
