@@ -59,8 +59,8 @@ RewriteRule ^facilities/?$              facilities.php [L]
 #For search list page
 RewriteRule ^searchlist/?$                      search.php [L]
 RewriteRule ^searchlist/page/([0-9]+)$          search.php?pageno=$1 [L]
-RewriteRule ^destination/([a-zA-Z0-9-]+)$       search.php?gdestination_slug=$1 [L]
-RewriteRule ^activity/([a-zA-Z0-9-]+)$          search.php?gactivity_slug=$1 [L]
+RewriteRule ^search/([a-zA-Z0-9-]+)$            search.php?brand_slug=$1 [L]
+RewriteRule ^product/([a-zA-Z0-9-]+)$           search.php?service_slug=$1 [L]
 RewriteRule ^searchlist/([a-zA-Z0-9-=]+)/?$     search.php?code=$1 [L]
 
 #For user login and register pages.
@@ -73,7 +73,7 @@ RewriteRule ^dashboard/?$                       dashboard.php [L]
 RewriteRule ^pay/?$ pay/ [L]
 
 # For Product Page
-RewriteRule ^product/([a-zA-Z0-9-]+)?$          product.php?slug=$1 [L]
+RewriteRule ^product/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)?$  product.php?sslug=$1&slug=$2 [L]
 RewriteRule ^shop/?$                            shop.php [L]
 RewriteRule ^cart/?$                            cart.php [L]
 RewriteRule ^cart/order/([a-zA-Z0-9-]+)??$      cart.php?code=$1 [L]
