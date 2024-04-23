@@ -119,67 +119,19 @@ if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode'])
                     </div>
                 </div>
 
-
-                <!-- <div class="form-row add-image">
+                <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Logo :
+                            Delivery Charge :
                         </label>
                     </div>
-                    <div class="form-input col-md-10 uploader">
-                        <input type="file" name="gallery_upload" id="gallery_upload" class="transparent no-shadow">
-                        <label>
-                            <small>Image Dimensions (250 px X 250 px)</small>
-                        </label>
-                    </div> -->
-                    <!-- Upload user image preview -->
-                    <!-- <div id="preview_Image"><input type="hidden" name="imageArrayname[]"/></div>
-                    <?php
-                    if (!empty($locationnInfo->image)) {
-                        $imgRec = unserialize($locationnInfo->image);
-                        if (is_array($imgRec)) {
-                            foreach ($imgRec as $key => $recimg) {
-                                $deleteid = rand(0, 99999);
-                                $imagePath = SITE_ROOT . 'images/locationn/' . $recimg;
-                                if (file_exists($imagePath)) { ?>
-                                    <div class="col-md-3" id="removeSavedimg<?php echo $deleteid; ?>">
-                                        <div class="infobox info-bg">
-                                            <div class="button-group" data-toggle="buttons">
-                                                <span class="float-left">
-                                                    <?php
-                                                    if (file_exists(SITE_ROOT . "images/locationn/" . $recimg)):
-                                                        $filesize = filesize(SITE_ROOT . "images/locationn/" . $recimg);
-                                                        echo 'Size : ' . getFileFormattedSize($filesize);
-                                                    endif;
-                                                    ?>
-                                                </span>
-                                                <a class="btn small float-right" href="javascript:void(0);"
-                                                   onclick="deleteSavedImage(<?php echo $deleteid; ?>);">
-                                                    <i class="glyph-icon icon-trash-o"></i>
-                                                </a>
-                                            </div>
-                                            <img src="<?php echo IMAGE_PATH . 'locationn/thumbnails/' . $recimg; ?>"
-                                                 style="width:100%"/>
-                                            <input type="hidden" name="imageArrayname[]" value="<?php echo $recimg; ?>"
-                                                   class="validate[required,length[0,250]]"/>
-                                        </div>
-                                    </div>
-                                <?php }
-                            }
-                        }
-                    } ?>
-                </div> -->
+                    <div class="form-input col-md-20">
+                        <input placeholder="Delivery Charge" class="col-md-6 validate[required,length[0,200]]" type="number"
+                               name="delivery_charge" id="delivery_charge" min="0" step="1"
+                               value="<?php echo !empty($locationnInfo->delivery_charge) ? $locationnInfo->delivery_charge : ""; ?>">
+                    </div>
+                </div>
 
-                <!-- <div class="form-row">
-                    <div class="form-checkbox-radio col-md-9">
-                        <input type="radio" class="custom-radio" name="homepage" id="homepage1"
-                               value="1" <?php echo !empty($homepage) ? $homepage : ""; ?>>
-                        <label for="">Popular</label>
-                        <input type="radio" class="custom-radio" name="homepage" id="homepage0"
-                               value="0" <?php echo !empty($nothomepage) ? $nothomepage : "checked"; ?>>
-                        <label for="">Not Popular</label>
-                    </div>
-                </div> -->
 
                 <div class="form-row">
                     <div class="form-checkbox-radio col-md-9">

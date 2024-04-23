@@ -51,3 +51,7 @@ VALUES (NULL, '0', 'Location Mgmt', 'Locationn/list', 'Locationn', 'icon-list', 
 
 UPDATE `tbl_modules` SET `status` = '1' WHERE `tbl_modules`.`id` = 14;
 ALTER TABLE `tbl_product_sub` ADD `service_id` INT NOT NULL AFTER `homepage`;
+
+
+-- 2024-04-23
+ALTER TABLE `tbl_location` ADD `delivery_charge` FLOAT NOT NULL AFTER `homepage`;
