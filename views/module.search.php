@@ -49,8 +49,8 @@ if (defined('SEARCH_PAGE')) {
         $tot = SubProduct::get_total_type_product($typeRow->id);
         $type_filter .= '
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input qtype" name="qtype[]" ' . $sel . ' id="dest-' . $typeRow->id . '" value="' . $typeRow->id . '">
-                    <label class="custom-control-label" for="dest-' . $typeRow->id . '">' . $typeRow->title . ' <span>' . $tot . '</span></label>
+                    <input type="checkbox" class="custom-control-input qtype" name="qtype[]" ' . $sel . ' id="type-' . $typeRow->id . '" value="' . $typeRow->id . '">
+                    <label class="custom-control-label" for="type-' . $typeRow->id . '">' . $typeRow->title . ' <span>' . $tot . '</span></label>
                 </div>
         ';
     }
@@ -65,11 +65,12 @@ if (defined('SEARCH_PAGE')) {
         } else {
             $sel = @in_array($categoryRow->id, @$qcategory) ? 'checked' : '';
         }
-        $tot = SubProduct::get_total_category_product($categoryRow->id);
+        $tot = 0;
+        $tot += SubProduct::get_total_category_product($categoryRow->id);
         $category_filter .= '
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="dest-' . $categoryRow->id . '" value="' . $categoryRow->id . '">
-                    <label class="custom-control-label d-flex justify-content-between" for="dest-' . $categoryRow->id . '">' . $categoryRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                    <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="cat-' . $categoryRow->id . '" value="' . $categoryRow->id . '">
+                    <label class="custom-control-label d-flex justify-content-between" for="cat-' . $categoryRow->id . '">' . $categoryRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
         ';
     }
@@ -83,12 +84,12 @@ if (defined('SEARCH_PAGE')) {
         } else {
             $sel = (@$qsubcategory[0] == $subcategoryRow->id) ? 'checked' : '';
         }
-        // $tot = 0;
-        $tot = SubProduct::get_total_subcategory_product($subcategoryRow->id);
+        $tot = 0;
+        $tot += SubProduct::get_total_subcategory_product($subcategoryRow->id);
         $subcategory_filter .= '
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input qsubcategory" name="qsubcategory[]" ' . $sel . ' id="acti-' . $subcategoryRow->id . '" value="' . $subcategoryRow->id . '">
-                    <label class="custom-control-label d-flex justify-content-between" for="acti-' . $subcategoryRow->id . '">' . $subcategoryRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                    <input type="checkbox" class="custom-control-input qsubcategory" name="qsubcategory[]" ' . $sel . ' id="subcat-' . $subcategoryRow->id . '" value="' . $subcategoryRow->id . '">
+                    <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $subcategoryRow->id . '">' . $subcategoryRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
         ';
     }
@@ -103,11 +104,12 @@ if (defined('SEARCH_PAGE')) {
         } else {
             $sel = @in_array($brandRow->id, @$qbrand) ? 'checked' : '';
         }
-        $tot = SubProduct::get_total_brand_product($brandRow->id);
+        $tot = 0;
+        $tot += SubProduct::get_total_brand_product($brandRow->id);
         $brand_filter .= '
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input qbrand" name="qbrand[]" ' . $sel . ' id="dest-' . $brandRow->id . '" value="' . $brandRow->id . '">
-                    <label class="custom-control-label d-flex justify-content-between" for="dest-' . $brandRow->id . '">' . $brandRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                    <input type="checkbox" class="custom-control-input qbrand" name="qbrand[]" ' . $sel . ' id="bran-' . $brandRow->id . '" value="' . $brandRow->id . '">
+                    <label class="custom-control-label d-flex justify-content-between" for="bran-' . $brandRow->id . '">' . $brandRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
         ';
     }
@@ -164,7 +166,7 @@ if (defined('SEARCH_PAGE')) {
                 <h2>Filters</h2>
                 <form action="' . BASE_URL . 'searchlist" method="post" id="search_form">
                 <div class="form-group">
-                <label>Category:</label><br>
+                <label>Type:</label><br>
                      '.$type_filter.'
                 </div>                
                 <div class="form-group">
@@ -212,7 +214,7 @@ if (defined('SEARCH_PAGE')) {
             WHERE pkg.status=1 AND ( pkg.title LIKE '%" . $search_term . "%' OR dst.title LIKE '%" . $search_term . "%' OR act.title LIKE '%" . $search_term . "%' ) ";
     } else {
         $sql = "SELECT * 
-        FROM tbl_product_sub  
+        FROM tbl_product_sub as prod  
         WHERE status=1 ";
         // $sql = "SELECT prod.id, prod.title, prod.slug, prod.brief, prod.qnt1, prod.banner_image, prod.price1, prod.discount1, prod.content, prod.netqnt1,prod.tag, prod.currency,
         //     cat.title as category, cat.title as category_slug
@@ -231,6 +233,47 @@ if (defined('SEARCH_PAGE')) {
             INNER JOIN tbl_activities act 
             ON pkg.activityId = act.id 
             WHERE pkg.status=1 ";*/
+            
+            
+            if (@$qtype[0] != 'all' and !empty($qtype)) {
+                foreach ($qtype as $qty) {
+                    if (sizeof($qtype) > 1) {
+                        if (array_values($qtype)[0] == $qty) {
+                            $sql .= " AND ( prod.type = $qty ";
+                        } elseif (end($qtype) == $qty) {
+                            $sql .= " OR prod.type = $qty )";
+                        } else {
+                            $sql .= " OR prod.type = $qty ";
+                        }
+                    } else {
+                        $sql .= " AND prod.type = $qty ";
+                    }
+                }
+            }
+            // if (@$gcategory_slug) {
+            //     $cate = Destination::find_by_slug($gcategory_slug);
+            //     $sql .= " AND prod.Category = $cate->id ";
+            // }
+
+            if (@$qcategory[0] != 'all' and !empty($qcategory)) {
+                foreach ($qcategory as $qcat) {
+                    if (sizeof($qcategory) > 1) {
+                        if (array_values($qcategory)[0] == $qcat) {
+                            $sql .= " AND ( prod.Category = $qcat ";
+                        } elseif (end($qcategory) == $qcat) {
+                            $sql .= " OR prod.Category = $qcat )";
+                        } else {
+                            $sql .= " OR prod.Category = $qcat ";
+                        }
+                    } else {
+                        $sql .= " AND prod.Category = $qcat ";
+                    }
+                }
+            }
+            if (@$gcategory_slug) {
+                $cate = Destination::find_by_slug($gcategory_slug);
+                $sql .= " AND prod.Category = $cate->id ";
+            }
 
     if (@$qsubcategory[0] != 'all' and !empty($qsubcategory)) {
         foreach ($qsubcategory as $qsubcat) {
@@ -269,21 +312,6 @@ if (defined('SEARCH_PAGE')) {
     if (@$gbrand_slug) {
         $bran = Activities::find_by_slug($gbrand_slug);
         $sql .= " AND prod.brand = $bran->id ";
-    }
-    if (@$qregions[0] != 'all' and !empty($qregions)) {
-        foreach ($qregions as $qact) {
-            if (sizeof($qregions) > 1) {
-                if (array_values($qregions)[0] == $qact) {
-                    $sql .= " AND ( pkg.regionId = '$qact' ";
-                } elseif (end($qregions) == $qact) {
-                    $sql .= " OR pkg.regionId = '$qact' )";
-                } else {
-                    $sql .= " OR pkg.regionId = '$qact' ";
-                }
-            } else {
-                $sql .= " AND pkg.regionId = '$qact' ";
-            }
-        }
     }
    
     // if (!empty($days)) {
@@ -515,6 +543,15 @@ if (defined('SEARCH_PAGE')) {
                         }
                     }
                 }
+                $prodbrand= Brand::find_by_id($rows['brand']);
+                if(!empty($prodbrand)){
+                    $title= $prodbrand->title;
+
+                }
+                else{
+                    $title= '';
+                }
+                // pr($prodbrand);
                 $respkglist .= '
                 
                 <div class="col-xl-3 col-sm-6 col-6">
@@ -525,7 +562,7 @@ if (defined('SEARCH_PAGE')) {
                         alt="lab service 1">
                 </div>
                 <div class="product-info">
-                    <h4 class="product-title">' . $rows['title'] . '</h4>
+                    <h4 class="product-title">' . $title. '</h4>
                     <a href="' . BASE_URL . 'product/' . $rows['slug'] . '"
                         class="product-link">' . $rows['title'] . '</a>
                     <div class="product-price">

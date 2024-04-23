@@ -196,6 +196,7 @@
             onValidationComplete: function (form, status) {
                 if (status == true) {
                     var Re = $("#type").val();
+                    var Reid = $("#idValue").val();
                     $('.btn-submit').attr('disabled', 'true');
                     var action = ($('#idValue').val() == 0) ? "action=addSubProduct&" : "action=editSubProduct&";
                     for (instance in CKEDITOR.instances)
@@ -221,15 +222,15 @@
                                 var actionId = $('#idValue').attr('myaction');
                                 if (actionId == 2)
                                     setTimeout(function () {
-                                        window.location.href = "<?php echo ADMIN_URL?>product/subProductList/" + Re;
+                                        window.location.href = "<?php echo ADMIN_URL?>product/list/" ;
                                     }, 3000);
                                 if (actionId == 1)
                                     setTimeout(function () {
-                                        window.location.href = "<?php echo ADMIN_URL?>product/addEditSubProduct/" + Re;
+                                        window.location.href = "<?php echo ADMIN_URL?>product/addEditSubProduct/" + Re + "/" + Reid;
                                     }, 3000);
                                 if (actionId == 0)
                                     setTimeout(function () {
-                                        window.location.href = "<?php echo ADMIN_URL?>product/subProductList/" + Re;
+                                        window.location.href = "<?php echo ADMIN_URL?>product/addEditSubProduct/" + Re + "/" + Reid;
                                     }, 3000);
                             }
                             if (msg.action == 'notice') {

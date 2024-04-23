@@ -211,6 +211,7 @@
     <!-- Custom JS -->
     <script src="js/custom.js"></script>
     <script>
+        var base_url = $('base').attr('url');
     // form filtering data
     $('.qtype, .qcategory .qactivities, .qsubcategory, .qbrand, .gprice').on('click', function () {
         var form = $("#search_form");
@@ -221,10 +222,10 @@
             data: "action=filter_data&" + form.serialize(), // serializes the form's elements.
             success: function (data) {
                 var msg = eval(data);
-                jQuery('div#filter-data').html(msg.result);
+                jQuery('div#productContainer').html(msg.result);
                 jQuery('div#filter-nav').html(msg.nav);
                 //showing rating
-                jQuery('input.rating').rating();
+                // jQuery('input.rating').rating();
                 //adding functionality to navigation
                 $('.gnav').on('click', function () {
                     $(this).navFunction();

@@ -19,11 +19,11 @@ if(!empty($mRec)) {
 
 		default:
 			// require_once ('index.php');
-			redirect_to(BASE_URL.'shop');
+			redirect_to(BASE_URL.'dhome');
 			break;
 	}
 }
 else {
 	// require_once ('index.php');
-	redirect_to(BASE_URL.'shop');
+	redirect_to(BASE_URL.'dhome');
 }

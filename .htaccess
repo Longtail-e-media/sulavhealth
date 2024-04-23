@@ -58,6 +58,7 @@ RewriteRule ^offer-list/?$              offers.php [L]
 RewriteRule ^facilities/?$              facilities.php [L]
 
 #For search list page
+RewriteRule ^search/?$                      search.php [L]
 RewriteRule ^searchlist/?$                      search.php [L]
 RewriteRule ^searchlist/page/([0-9]+)$          search.php?pageno=$1 [L]
 RewriteRule ^search/([a-zA-Z0-9-]+)$            search.php?brand_slug=$1 [L]
