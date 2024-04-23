@@ -5,10 +5,10 @@ class locationn extends DatabaseObject
 
     protected static $table_name = "tbl_location";
     protected static $db_fields = array(
-        'id', 'slug', 'title', 'image', 'status', 'sortorder', 'added_date', 'modified_date', 'homepage'
+        'id', 'slug', 'title', 'delivery_charge', 'image', 'status', 'sortorder', 'added_date', 'modified_date', 'homepage'
     );
 
-    public $id, $slug, $title, $image, $status, $sortorder, $added_date, $modified_date, $homepage;
+    public $id, $slug, $title, $delivery_charge, $image, $status, $sortorder, $added_date, $modified_date, $homepage;
 
     public static function checkDupliName($title = '')
     {

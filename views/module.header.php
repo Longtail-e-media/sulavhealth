@@ -124,12 +124,12 @@ $header .= '
                                     <img src=\'https://s3-alpha-sig.figma.com/img/394e/8c83/fae8707eee905756e1bd5fe16b21d16a?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwCGjHcpOvB2PLWdnJUVS8Imesl7BtnErPjdLIPoCgtEkk51ly3tVQZgVZydpe1JcSNLXjXUT8T1VwaRtQpwMBdYYoXUNN8YaCojXzdhj1RkiLtTpLEONCfWlEsPJUQrmFr4xquASUEfZnrzCV3p3E-SBbakXlslM85SQN~1k-SjBBkrpmmEZuwFUQ-PdkashE4qjzC1TWjtwmgaPYGV0XigepLPwVrQ1vkcLOtQ3T3dcwt3uPOkSNyEeaUsz-IrX7pf8ZDK4I9K-SZp4DH4RHYAp3s3C3Z-lnsTJtTUBMYvk3DjPziAFvmpvZFRnEKSsjqKWqoRma7qFhCxc-u-Uw__\'
                                         alt="" class="user-icon">
                                     <ul>
-                                        <!-- <li><a href="login" id="id_sign_in">Sign in</a>
-                                        </li> -->
+                                        <li><a href="login" id="id_sign_in">Log in</a>
+                                        </li>
                                         <li><a href="register"
                                                 id="id_register">Register</a></li>
-                                        <!-- <li><a href="dashboard" id="id_my_account">My
-                                                Account</a></li> -->
+                                      <li><a href="dashboard" id="id_my_account">My
+                                                Account</a></li>
                                     </ul>
                                 </li>
 
@@ -137,7 +137,7 @@ $header .= '
                             <div class="user-details">
                                 <h4>Hello, '.$username.'</h4>
 
-                                '.$logbutton.'
+                              <!--  '.$logbutton.' -->
                             </div>
 
                         </div>

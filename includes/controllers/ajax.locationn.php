@@ -18,6 +18,7 @@
 			
 			// $record->slug 		            = create_slug($_REQUEST['title']);
 			$record->title 		            = $_REQUEST['title'];
+            $record->delivery_charge        = $_REQUEST['delivery_charge'];
 //			$record->sub_title 		        = $_REQUEST['sub_title'];
 			// $record->image		            = serialize(array_values(array_filter($_REQUEST['imageArrayname'])));
 			$record->status		            = $_REQUEST['status'];
@@ -54,6 +55,7 @@
 			
 			// $record->slug 		            = create_slug($_REQUEST['title']);
 			$record->title 		            = $_REQUEST['title'];
+            $record->delivery_charge        = $_REQUEST['delivery_charge'];
 			// $record->image		            = serialize(array_values(array_filter($_REQUEST['imageArrayname'])));
 			$record->status		            = $_REQUEST['status'];
 			// $record->homepage	            = $_REQUEST['homepage'];
