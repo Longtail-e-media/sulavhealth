@@ -93,7 +93,7 @@ $header .= '
 
                     <div class="ltn__header-options ltn__header-options-2">
                         <div class="ltn__drop-menu user-menu">
-                            <form id="searchform">
+                            <form id="searchform" method="POST" action="'.BASE_URL.'search">
                             <div class="search-container">
                                 <input type="search" placeholder="Search for products and medicines..." class="search" id="searchkey" name="searchkey">
                                 <i class="fas fa-search search-icon"></i>

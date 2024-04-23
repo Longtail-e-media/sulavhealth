@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <jcms:site:seotitle />
+    <jcms:site:seotitle/>
 
-    <jcms:site:fevicon />
+    <jcms:site:fevicon/>
 
     <!-- font language -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -232,7 +232,7 @@
                 // minLength: 2,
                 showHintOnFocus: true,
                 select: function (event, ui) {
-                    $('input[name="packageId"]').val(ui.item.id);
+                    $('input[name="searchkey"]').val(ui.item.id);
                 }
             });
             $("#searchform").validate({
@@ -247,16 +247,17 @@
                 submitHandler: function (form) {
                     var Frmval = $("#searchform").serialize();
                     $("#btn-search").attr("disabled", "true").html('Loading...');
-                    $.ajax({
-                        type: "POST",
-                        dataType: "JSON",
-                        url: base_url + "hotelcomplete.php",
-                        data: "action=getlink&" + Frmval,
-                        success: function (data) {
-                            var msg = eval(data);
-                            window.location.href = base_url + "searchlist/" + data.url;
-                        }
-                    });
+                    $("#searchform").submit();
+                    // $.ajax({
+                    //     type: "POST",
+                    //     dataType: "JSON",
+                    //     url: base_url + "hotelcomplete.php",
+                    //     data: "action=getlink&" + Frmval,
+                    //     success: function (data) {
+                    //         var msg = eval(data);
+                    //         window.location.href = base_url + "searchlist/" + data.url;
+                    //     }
+                    // });
                     return false;
                 }
             });

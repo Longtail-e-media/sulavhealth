@@ -97,7 +97,7 @@ $footer .= '
                 </div>
 
                 <p style="font-size: 0.8em; padding: 5px 0;">
-                    '.$configRec->breif.'
+                    '.strip_tags($configRec->breif).'
                 </p>
                 <p style="font-size: 0.8em;">&copy; ' . str_replace('{year}', date('Y'), $configRec->copyright) . '| Website
                 by <a style="font-size: 1em;" href="https://longtail.info/">Longtail e-media</a></p>
