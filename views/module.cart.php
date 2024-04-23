@@ -103,7 +103,7 @@ if (defined('CART_PAGE')) {
 
         $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
         $tot = 0.00;
-        $subtotal = '&euro; 0.00';
+        $subtotal = 'NPR 0.00';
         if (!empty($sesRec)) {
             foreach ($sesRec as $k => $sesRow) {
                 $product = SubProduct::find_by_slug($sesRow['slug']);
@@ -162,7 +162,7 @@ if (defined('CART_PAGE')) {
 
         $vat = $shipping = 0;
         $total = (float)$tot + (float)$vat + (float)$shipping;
-        $totalValue = '&euro; ' . sprintf('%.2f', $total);
+        $totalValue = 'NPR ' . sprintf('%.2f', $total);
         $cart_detail .= '
                     </tbody>
                 </table>
@@ -295,10 +295,24 @@ if (defined('CHECKOUT_PAGE')) {
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 mb-30">
+                                        <h6>' . (($lang == "gr") ? "Χώρα" : "District") . '</h6>
+                                        <div class="input-item">
+                                            <select class="nice-selec col-12" name="region" id="region">
+                                                <option value="">' . (($lang == "gr") ? "Επιλέξτε Χώρα" : "Select District") . '</option>
+    ';
+    $districts = Locationn::find_all();
+    foreach ($districts as $country) {
+        $checkout_form .= '<option value="' . $country->name . '">' . $country->name . '</option>';
+    }
+    $checkout_form .= '
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-lg-3 col-md-3 mb-30">
                                         <div class="input-item">
                                             <input type="text" name="region" value="" placeholder="' . CHECKOUT_REGION . '">
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="col-lg-3 col-md-3 mb-30">
                                         <div class="input-item">
                                             <input type="text" name="city" value="" placeholder="' . CHECKOUT_CITY . '">
@@ -452,7 +466,7 @@ if (defined('CHECKOUT_PAGE')) {
     ';
     $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
     $tot = 0.00;
-    $subtotal = '&euro; 0.00';
+    $subtotal = 'NPR 0.00';
     if (!empty($sesRec)) {
         foreach ($sesRec as $k => $sesRow) {
             $product = SubProduct::find_by_slug($sesRow['slug']);
