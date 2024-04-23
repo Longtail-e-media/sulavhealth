@@ -56,23 +56,23 @@ if(!empty($_REQUEST['term'])) {
     */
 
     $newArrc = array();
-    $sql = "
-            SELECT id, title FROM tbl_category
-            WHERE status='1' AND (
-				title like '%".$term."%'
-            )
-            ORDER BY title ASC
-            ";
-    $query = $db->query($sql);
-    $totRec = $db->num_rows($query);
-    if ($totRec > 0) {
-        while ($row = $db->fetch_object($query)) {
-            $address = $row->title;
-			$link = '#';
-			// $categoryid=  $row->id;
-            $newArrc[] = array('value' => $address, 'link' =>$link, 'id' => $row->id);
-        }
-    }
+    // $sql = "
+    //         SELECT id, title FROM tbl_category
+    //         WHERE status='1' AND (
+	// 			title like '%".$term."%'
+    //         )
+    //         ORDER BY title ASC
+    //         ";
+    // $query = $db->query($sql);
+    // $totRec = $db->num_rows($query);
+    // if ($totRec > 0) {
+    //     while ($row = $db->fetch_object($query)) {
+    //         $address = $row->title;
+	// 		$link = '#';
+	// 		// $categoryid=  $row->id;
+    //         $newArrc[] = array('value' => $address, 'link' =>$link, 'id' => $row->id);
+    //     }
+    // }
 
     $sql2 = "
             SELECT id, slug, title, Category , Subcategory, brand, type FROM tbl_product_sub 
@@ -86,7 +86,7 @@ if(!empty($_REQUEST['term'])) {
     if ($totRec2 > 0) {
         while ($row = $db->fetch_object($query2)) {
 //            $hotel = $row->pkg_title . ', ' . $row->dest_title . ', ' . $row->region_title;
-            $hotel = $row->title ;
+            $hotel = '<i class="fas fa-search search-icon">'.$row->title.'</i>' ;
             $link = $row->slug;
             $newArrc[] = array('value' => $hotel,'link' => $link, 'id' => $row->id);
         }

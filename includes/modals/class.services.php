@@ -57,14 +57,14 @@ class Services extends DatabaseObject {
     public static function get_internal_link($selid = '')
     {
         global $db;
-        $sql = "SELECT id,title FROM " . self::$table_name . " WHERE status='1' ORDER BY sortorder DESC";
+        $sql = "SELECT id,title,slug FROM " . self::$table_name . " WHERE status='1' ORDER BY sortorder DESC";
         $record = self::find_by_sql($sql);
         $result = '';
         if ($record) {
             $result .= '<option value="">Select Service</option>';
             foreach ($record as $row) {
-                $sel = ($selid == $row->id) ? 'selected' : '';
-                $result .= '<option value="' . $row->id . '" ' . $sel . '>' . $row->title . '</option>';
+                $sel = ($selid == 'product/'.$row->slug) ? 'selected' : '';
+                $result .= '<option value="product/' . $row->slug . '" ' . $sel . '>' . $row->title . '</option>';
             }
         } else {
             $result .= '<option value="0">None</option>';
