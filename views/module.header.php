@@ -78,6 +78,20 @@ if (!empty($sesRec)) {
         }
     }
 }
+$userId = $session->get("user_id");
+if(!empty($userId)){
+$userRec = User::find_by_id($userId);
+// pr($userRec);
+
+$username= 	$userRec->first_name;
+$logbutton='<a href="'.BASE_URL.'dashboard" id="id_sign_in">Log In</a> |
+    <a href="'.BASE_URL.'logout" id="id_sign_in">logout</a>';
+}
+else{
+    $username= 	'Guest !';
+    $logbutton='<a href="'.BASE_URL.'login" id="id_sign_in">Log In</a> |
+    <a href="'.BASE_URL.'register" id="id_sign_in">Register</a>';
+}
 $header .= '
 
 
@@ -121,10 +135,9 @@ $header .= '
 
                             </ul>
                             <div class="user-details">
-                                <h4>Hello, Guest !</h4>
+                                <h4>Hello, '.$username.'</h4>
 
-                                <a href="login" id="id_sign_in">Log In</a> |
-                                <a href="register" id="id_sign_in">Register</a>
+                                '.$logbutton.'
                             </div>
 
                         </div>
@@ -136,7 +149,7 @@ $header .= '
                                 <img class="user-cart"
                                     src=\'https://s3-alpha-sig.figma.com/img/c361/18d1/72c572f3ba37b1c66353beb70ba9ab29?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GXQ~o3b6CSqjbJ1vyOZARvZQFMhGQ4r~QwuDb1urO8P0xZ~7ynbzdK0FngppL4YlTjRKeBBEXXTjZT9absRyD~gZzpAfIkWO-3OJFXiODrPg7tQQjgcshLgbWlm9cuo1y9DlHBf94udgdLH84HpTqz26uk6pQknl9l5TNmN6HMhkY0DXljFBPjSXNxrFB~eU3K9Z3tOnbiANK34aZ9iUlhQuHyh6VDZCZjdXfcJuuiW7IJzfszJ0yP1G9U1b92WaKYDBaU462q9fH8aKdXiCcKl8iT6kR~Jlg5Xcb736x8cvGV~-AVj4meH4Y0-cgg0M1ANa1RZ~ubp5Dz6jwpNjHw__\'
                                     alt="">
-                                <sup class="cart-total">0</sup>
+                                <sup class="cart-total">' . $crtot . '</sup>
                             </a>
                         </div>
                         <!-- mini-cart -->
