@@ -8,23 +8,50 @@ $register_form = '';
 if (defined('REGISTER_PAGE')) {
     $consent = ($lang == "gr") ? "Επιλέγοντας \"Δημιουργία Λογαριασμού\", συναινώ με την Πολιτική Απορρήτου" : "By clicking \"create account\", I consent to the privacy policy.";
     $register_form .= '
-        <form action="#" id="registerForm" class="ltn__form-box contact-form-box">
-            <div class="mb-30"><input type="text" name="fname" placeholder="' . CONTACT_FORM_FIRST_NAME . '"></div>
-            <div class="mb-30"><input type="text" name="lname" placeholder="' . CONTACT_FORM_LAST_NAME . '"></div>
-            <div class="mb-30"><input type="text" name="email" placeholder="' . REGISTER_EMAIL_ADDRESS . '"></div>
-            <div class="mb-30"><input type="text" name="address" placeholder="' . FOOTER_ADDRESS . '"></div>
-            <div class="mb-30"><input type="text" name="phone" placeholder="' . REGISTER_PHONE_NUMBER . '"></div>
-            <div class="mb-30"><input type="password" name="password" id="password" placeholder="' . LOGIN_PASSWORD . '"></div>
-            <div class="mb-30"><input type="password" name="confirm_password" placeholder="' . REGISTER_CONFIRM_PASSWORD . '"></div>
-            <label class="checkbox-inline">
-                <input type="checkbox" value="consent" name="consent">
-                ' . $consent . '
-            </label>
-            <div class="btn-wrapper">
-                <button class="theme-btn-1 btn btn-block" type="submit" id="submitRegister">' . LOGIN_CREATE_ACCOUNT . '</button>
-            </div>
-            <p id="registerMsg" class="mt-20" style="display: none;"></p>
-        </form>
+    <form action="#" id="registerForm" class="ltn__form-box contact-form-box">
+   <div class="row">
+      <div class="col-md-6 mb-30">
+         <input type="text" name="fname" placeholder="Full Name">
+      </div>
+      <div class="col-md-6 mb-30">
+         <input type="email" name="email" class="form-control" placeholder="' . REGISTER_EMAIL_ADDRESS . '"/>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-6 mb-30">
+         <input type="text" name="address" class="form-control" placeholder="' . FOOTER_ADDRESS .'">
+      </div>
+      <div class="col-md-6 mb-30">
+         <input type="text" name="number" class="form-control" placeholder="' . REGISTER_PHONE_NUMBER . '"/>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-6 mb-30">
+         <input type="password" name="password" id="password" class="form-control" placeholder="' . LOGIN_PASSWORD . '">
+      </div>
+      <div class="col-md-6 mb-30">
+         <input type="password" name="confirm_password" class="form-control" placeholder="' . REGISTER_CONFIRM_PASSWORD . '">
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-12 mb-30">
+         <label class="checkbox-inline">
+         <input type="checkbox" value="consent" name="consent">
+         ' . $consent . '
+         </label>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-12">
+         <button class="theme-btn-1 btn btn-block w-auto" type="submit" id="submitRegister">' . LOGIN_CREATE_ACCOUNT . '</button>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-12">
+         <p id="registerMsg" class="mt-20" style="display: none;"></p>
+      </div>
+   </div>
+</form>
         <div class="by-agree text-center">
     ';
     $register_form .= ($lang == "gr")
@@ -36,10 +63,9 @@ if (defined('REGISTER_PAGE')) {
             </div>
         '
         : '
-            <p>By creating an account, you agree to our:</p>
-            <p><a href="' . BASE_URL . 'terms-conditions" target="_blank">TERMS & CONDITIONS</a> &nbsp; &nbsp; | &nbsp; &nbsp; <a href="' . BASE_URL . 'gdpr" target="_blank">PRIVACY POLICY</a></p>
-            <div class="go-to-btn mt-50">
-                <a href="' . BASE_URL . 'login">ALREADY HAVE AN ACCOUNT ?</a>
+            <p>By creating an account, you agree to our: &nbsp; &nbsp; <a href="' . BASE_URL . 'terms-conditions" target="_blank" class="text-primary" style="text-decoration: underline;">TERMS & CONDITIONS</a> &nbsp; &nbsp; | &nbsp; &nbsp; <a href="' . BASE_URL . 'gdpr" target="_blank" class="text-primary" style="text-decoration: underline;">PRIVACY POLICY</a></p>
+            <div class="go-to-btn mt-20">
+                <a href="' . BASE_URL . 'login" class="text-primary" style="text-decoration: underline;">ALREADY HAVE AN ACCOUNT ?</a>
             </div>
         ';
     $register_form .= '
@@ -69,7 +95,7 @@ if (defined('LOGIN_PAGE')) {
             </div>
             <p id="loginMsg" class="mt-20" style="display: none;"></p>
             <div class="go-to-btn mt-20">
-                <a href="#" data-toggle="modal" data-target="#quick_view_modal">
+                <a href="#" data-toggle="modal" data-target="#quick_view_modal" class="text-primary" style="text-decoration: underline;">
                     <small>' . LOGIN_FORGOT_YOUR_PASSWORD . '</small>
                 </a>
             </div>

@@ -144,11 +144,11 @@ define("LOGIN_FORM_ERROR_EMAIL_VALID", ($lang == "gr") ? "Εισάγετε μι�
 define("LOGIN_PASSWORD", ($lang == "gr") ? "Κωδικός" : "Password");
 define("LOGIN_FORM_ERROR_PASSWORD", ($lang == "gr") ? "Συμπληρώστε τον κωδικό σας" : "Enter your password");
 define("LOGIN_SIGN_IN", ($lang == "gr") ? "Σύνδεση" : "SIGN IN");
-define("LOGIN_FORGOT_YOUR_PASSWORD", ($lang == "gr") ? "Ξεχάσατε τον κωδικό σας;" : "FORGOTTEN YOUR PASSWORD?");
+define("LOGIN_FORGOT_YOUR_PASSWORD", ($lang == "gr") ? "Ξεχάσατε τον κωδικό σας;" : "Forgot Your Password?");
 define("LOGIN_RECOVER_PASSWORD", ($lang == "gr") ? "Ανάκτηση Κωδικού" : "Recover Password");
 define("LOGIN_SUBMIT", ($lang == "gr") ? "Υποβολή" : "SUBMIT");
 define("LOGIN_LOGIN", ($lang == "gr") ? "Σύνδεση" : "Login");
-define("LOGIN_SIGN_IN_TO_YOUR_ACCOUNT", ($lang == "gr") ? "Συνδεθείτε <br> στον λογαριασμό σας" : "Sign In <br>To Your Account");
+define("LOGIN_SIGN_IN_TO_YOUR_ACCOUNT", ($lang == "gr") ? "Συνδεθείτε <br> στον λογαριασμό σας" : "Log In <br>To Your Account");
 define("LOGIN_CONTENT",
     ($lang == "gr")
         ? '

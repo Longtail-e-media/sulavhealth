@@ -123,7 +123,8 @@ $header .= '
                             <div class="user-details">
                                 <h4>Hello, Guest !</h4>
 
-                                <a href="login" id="id_sign_in">Log In</a>
+                                <a href="login" id="id_sign_in">Log In</a> |
+                                <a href="register" id="id_sign_in">Register</a>
                             </div>
 
                         </div>
