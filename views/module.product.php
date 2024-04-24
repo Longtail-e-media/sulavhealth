@@ -743,7 +743,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
         ';
 
     } else {
-        redirect_to(BASE_URL . 'shop');
+        redirect_to(BASE_URL . 'dproduct');
     }
 }
 

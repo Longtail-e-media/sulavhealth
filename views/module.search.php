@@ -574,7 +574,7 @@ if (defined('SEARCH_PAGE')) {
                 // $days = ($rows['days'] == 1) ? 'day' : 'days';
                 
                 $price_text = '';
-                if (!empty($rows['price']) and (empty($rows['offer_price']))) {
+                if (!empty($rows['price1']) and (empty($rows['offer_price']))) {
                     $price_text = '<span>' . $rows['currency'] . '' . $rows['price1'] . '</span>';
                 }
                 if (!empty($rows['discount1'])) {
