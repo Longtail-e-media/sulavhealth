@@ -3630,7 +3630,8 @@ input[type=submit].btn-block {
     text-align: inherit;
     white-space: nowrap;
     background-color: transparent;
-    border: 0
+    border: 0;
+    padding: 10px 15px;
 }
 
 .dropdown-item:focus,
@@ -3640,6 +3641,7 @@ input[type=submit].btn-block {
     background-color: #f8f9fa
 }
 
+.dropdown-item:hover,
 .dropdown-item.active,
 .dropdown-item:active {
     color: #fff;

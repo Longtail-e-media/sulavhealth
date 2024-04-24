@@ -190,24 +190,25 @@
 <script>
     var base_url = $('base').attr('url');
     // form filtering data
-    var base_url = $('base').attr('url');
-        $('.qcategory').on('change', function () {
-            var destId = $(this).val();
-            $('.subfilter').html('<option>Loading...</option>');
-            $.ajax({
-                type: "POST",
-                dataType: "JSON",
-                url: base_url + "quicksearch.php",
-                data: "action=filteractivity&destid=" + destId,
-                success: function (data) {
-                    var msg = eval(data);
-                    if (msg.action == 'success') {
-                        $('.subfilter').html(msg.result);
-                    }
+    $('input[name="qcategory[]"]').on('change', function () {
+        var checkedValues = $("input[name='qcategory[]']:checked").map(function () {
+            return $(this).val();
+        }).get();
+        $('.subfilter').html('<option>Loading...</option>');
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: base_url + "quicksearch.php",
+            data: "action=filteractivity&selectedIds=" + checkedValues,
+            success: function (data) {
+                var msg = eval(data);
+                if (msg.action == 'success') {
+                    $('.subfilter').html(msg.result);
                 }
-            });
-            return !1
+            }
         });
+        return !1
+    });
     $('.qtype, .qcategory, .qactivities, .qsubcategory, .qservice, .qbrand, .gprice').on('click', function () {
         var form = $("#search_form");
         $.ajax({

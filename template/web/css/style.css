@@ -17266,7 +17266,7 @@ footer a:hover {
 
 .search-icon {
   position: absolute;
-  left: 0.75rem;
+  left: 1rem;
   top: 50%;
   transform: translateY(-50%);
   color: #adadad;
@@ -17453,3 +17453,7 @@ html {
 ::-webkit-scrollbar {
   width: 0;
 } */
+
+.brand-filter .search {
+  width: auto;
+}
