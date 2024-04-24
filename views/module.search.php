@@ -45,8 +45,8 @@ if (defined('SEARCH_PAGE')) {
         // $typeRec = (object) $destinat; 
         // pr($typeRec); 
     foreach ($typeRec as $typeRow) {
-        if (@$gtype_slug) {
-            $sel = (@$gtype_slug == $typeRow->slug) ? 'checked' : '';
+        if (@$type_slug) {
+            $sel = (@$type_slug == $typeRow->slug) ? 'checked' : '';
         } else {
             $sel = @in_array($typeRow->id, @$qtype) ? 'checked' : '';
         }
@@ -64,8 +64,8 @@ if (defined('SEARCH_PAGE')) {
     $service_filter = '';
     $serviceRec = Services::get_services();
     foreach ($serviceRec as $serviceRow) {
-        if (@$gservice_slug) {
-            $sel = (@$gservice_slug == $serviceRow->slug) ? 'checked' : '';
+        if (@$service_slug) {
+            $sel = (@$service_slug == $serviceRow->slug) ? 'checked' : '';
         } else {
             $sel = @in_array($serviceRow->id, @$qservice) ? 'checked' : '';
         }
@@ -83,8 +83,8 @@ if (defined('SEARCH_PAGE')) {
     $category_filter = '';
     $categoryRec = category::get_category();
     foreach ($categoryRec as $categoryRow) {
-        if (@$gcategory_slug) {
-            $sel = (@$gcategory_slug == $categoryRow->slug) ? 'checked' : '';
+        if (@$category_slug) {
+            $sel = (@$category_slug == $categoryRow->slug) ? 'checked' : '';
         } else {
             $sel = @in_array($categoryRow->id, @$qcategory) ? 'checked' : '';
         }
@@ -102,8 +102,8 @@ if (defined('SEARCH_PAGE')) {
     $subcategory_filter = '';
     $subcategoryRec = category::get_subcategory();
     foreach ($subcategoryRec as $subcategoryRow) {
-        if (@$gsubcategory_slug) {
-            $sel = (@$gsubcategory_slug == $subcategoryRow->slug) ? 'checked' : '';
+        if (@$subcategory_slug) {
+            $sel = (@$subcategory_slug == $subcategoryRow->slug) ? 'checked' : '';
         } else {
             $sel = (@$qsubcategory[0] == $subcategoryRow->id) ? 'checked' : '';
         }
@@ -122,8 +122,8 @@ if (defined('SEARCH_PAGE')) {
     $brand_filter = '';
     $brandRec = Brand::get_brand();
     foreach ($brandRec as $brandRow) {
-        if (@$gbrand_slug) {
-            $sel = (@$gbrand_slug == $brandRow->slug) ? 'checked' : '';
+        if (@$brand_slug) {
+            $sel = (@$brand_slug == $brandRow->slug) ? 'checked' : '';
         } else {
             $sel = @in_array($brandRow->id, @$qbrand) ? 'checked' : '';
         }
@@ -201,7 +201,7 @@ if (defined('SEARCH_PAGE')) {
                                '.$category_filter.'
                         </div>
         
-                        <div class="form-group">
+                        <div class="form-group"> 
                     <label>Sub-category:</label><br>
                                '.$subcategory_filter.'
                         </div>
@@ -281,8 +281,8 @@ if (defined('SEARCH_PAGE')) {
                     }
                 }
             }
-            // if (@$gcategory_slug) {
-            //     $cate = Destination::find_by_slug($gcategory_slug);
+            // if (@$category_slug) {
+            //     $cate = Destination::find_by_slug($category_slug);
             //     $sql .= " AND prod.Category = $cate->id ";
             // }
 
@@ -301,8 +301,8 @@ if (defined('SEARCH_PAGE')) {
                     }
                 }
             }
-            if (@$gcategory_slug) {
-                $cate = Destination::find_by_slug($gcategory_slug);
+            if (@$category_slug) {
+                $cate = Destination::find_by_slug($category_slug);
                 $sql .= " AND prod.Category = $cate->id ";
             }
 
@@ -321,8 +321,8 @@ if (defined('SEARCH_PAGE')) {
                     }
                 }
             }
-            if (@$gservice_slug) {
-                $ser = Services::find_by_slug($gservice_slug);
+            if (@$service_slug) {
+                $ser = Services::find_by_slug($service_slug);
                 $sql .= " AND prod.service_id = $ser->id ";
             }
 
@@ -341,8 +341,8 @@ if (defined('SEARCH_PAGE')) {
             }
         }
     }
-    if (@$gsubcategory_slug) {
-        $subcate = Destination::find_by_slug($gsubcategory_slug);
+    if (@$subcategory_slug) {
+        $subcate = Destination::find_by_slug($subcategory_slug);
         $sql .= " AND prod.Subcategory = $subcate->id ";
     }
     if (@$qbrand[0] != 'all' and !empty($qbrand)) {
@@ -360,8 +360,8 @@ if (defined('SEARCH_PAGE')) {
             }
         }
     }
-    if (@$gbrand_slug) {
-        $bran = Brand::find_by_slug($gbrand_slug);
+    if (@$brand_slug) {
+        $bran = Brand::find_by_slug($brand_slug);
         $sql .= " AND prod.brand = $bran->id ";
     }
    
