@@ -459,10 +459,7 @@ if (defined('HOME_PAGE')) {
             $brand .= '<img src="'.$imgSrc.'"
             alt="" class="brand-images">';
         }
-
     }
-
-    
 
 }
 

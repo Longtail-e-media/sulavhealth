@@ -17410,3 +17410,19 @@ html {
   justify-content: center;
   gap: 20px;
 }
+
+.brand-images-wrapper.owl-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.brand-images-wrapper.owl-carousel img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+.brand-images-wrapper.owl-carousel .owl-nav,
+.brand-images-wrapper.owl-carousel .owl-dots {
+  display: none;
+}
