@@ -144,7 +144,7 @@ if (defined('HOME_PAGE')) {
                         class="product-link">' . $giftSet->title . '</a>
                     <div class="product-price">
                         <span>' . $giftSet->currency . ' ' . $giftSet->discount1.'</span>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . ' price1</del>
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . ' </del>
                     </div>
                     <div class="product-action">
                         
@@ -385,15 +385,12 @@ if (defined('HOME_PAGE')) {
                                                                     </a>
                                                                 </li>
                                                                 <li>
+                                                                <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1">' . HOME_CHECKOUT . '</a>
+                                                                </li>
+                                                                <li>
                                                                     <a href="#" class="add-wishlist" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $giftSet->slug . '">
                                                                         <i class="far fa-heart"></i>
                                                                         <span>' . SHOP_ADD_TO_WISHLIST . '</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" class="" title="' . SHOP_CLOSE . '"  data-dismiss="modal" data-cartid="#quick_view_modal_product_' . $giftSet->slug . '">
-                                                                        <i class="fas fa-times"></i>
-                                                                        <span>' . SHOP_CLOSE . '</span>
                                                                     </a>
                                                                 </li>
                                                             </ul>
