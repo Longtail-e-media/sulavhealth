@@ -49,8 +49,9 @@
 </div>
 </div>
 
-
+<div id="productpopup">
 <jcms:module:modal-popup-search/>
+</div>
 <jcms:module:footer/>
 
 <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
@@ -85,7 +86,7 @@
                 success: function (data) {
                     var msg = eval(data);
                     jQuery('div#productContainer').html(msg.result);
-                    jQuery('div#productpopup').html(msg.poup);
+                    jQuery('div#productpopup').html(msg.popup);
                     jQuery('script#productscript').html(msg.popscript);
                     jQuery('div#filter-nav').html(msg.nav);
                     //showing rating
@@ -219,7 +220,7 @@
             success: function (data) {
                 var msg = eval(data);
                 jQuery('div#productContainer').html(msg.result);
-                jQuery('div#productpopup').html(msg.poup);
+                jQuery('div#productpopup').html(msg.popup);
                 jQuery('script#productscript').html(msg.popscript);
                 jQuery('div#filter-nav').html(msg.nav);
                 //showing rating
@@ -276,7 +277,7 @@
         }
     
 </script>
-
+<script id="productscript"></script>
 <jcms:module:modal-popup-script/>
 
 </body>
