@@ -78,8 +78,7 @@ $(function () {
 
         if ($button.text() == "+") {
             newVal = parseFloat(oldValue) + 1;
-        }
-        else {
+        } else {
             if (oldValue > 1) {
                 newVal = parseFloat(oldValue) - 1;
             }
@@ -160,7 +159,7 @@ $(function () {
                 if (res.action === 'success') {
                     $(".wishlist_modal_content").html(res.content);
                     $("#liton_wishlist_modal").modal();
-                    
+
                 }
             }
         });
@@ -234,8 +233,7 @@ $(function () {
 
         if ($button.text() == "+") {
             newVal = parseFloat(oldValue) + 1;
-        }
-        else {
+        } else {
             if (oldValue > 1) {
                 newVal = parseFloat(oldValue) - 1;
             } else {
@@ -306,10 +304,51 @@ $(function () {
         return false;
     });
 
-    $(document).on("keyup", "#brandFilterMenuSection", function() {
+    $(document).on("keyup", "#brandFilterMenuSection", function () {
         var value = $(this).val().toLowerCase();
-        $(".brand-filter-menu").filter(function() {
+        $(".brand-filter-menu").filter(function () {
             $(this).toggle($(this).attr('item').toLowerCase().indexOf(value) > -1)
         });
     });
+
+    if ($('#searchform')[0]) {
+        $("#searchkey").autocomplete({
+            source: base_url + "hotelcomplete.php",
+            // minLength: 2,
+            showHintOnFocus: true,
+            select: function (event, ui) {
+                // console.log(ui);
+                $('input[name="searchkey"]').val(ui.item.id);
+                $('input[name="hotelslug"]').val(ui.item.link);
+                var targetUrl = base_url + "product/product-detail/" + ui.item.link;
+                window.location.href = targetUrl;
+            }
+        });
+        $("#searchform").validate({
+            errorElement: 'span',
+            errorClass: 'validate-has-error',
+            rules: {
+                searchkey: {required: true,}
+            },
+            messages: {
+                searchkey: {required: "Please enter product name to start searching.",}
+            },
+            submitHandler: function (form) {
+                var Frmval = $("#searchform").serialize();
+                $("#btn-search").attr("disabled", "true").html('Loading...');
+                $("#searchform").submit();
+                // $.ajax({
+                //     type: "POST",
+                //     dataType: "JSON",
+                //     url: base_url + "hotelcomplete.php",
+                //     data: "action=getlink&" + Frmval,
+                //     success: function (data) {
+                //         var msg = eval(data);
+                //         window.location.href = base_url + "searchlist/" + data.url;
+                //     }
+                // });
+                return false;
+            }
+        });
+    }
 });
