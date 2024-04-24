@@ -442,15 +442,12 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                                                     </a>
                                                                 </li>
                                                                 <li>
+                                                                <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> Checkout</a>
+                                                                </li>
+                                                                <li>
                                                                     <a href="#" class="add-wishlist" title=" Add to Wishlist " data-cartid="' . $rows['slug'] . ' ">
                                                                         <i class="far fa-heart"></i>
                                                                         <span> Add to Wishlist </span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" class="" title=" Close "  data-dismiss="modal" data-cartid="#quick_view_modal_product_' . $rows['slug'] . '">
-                                                                        <i class="fas fa-times"></i>
-                                                                        <span> Close </span>
                                                                     </a>
                                                                 </li>
                                                             </ul>

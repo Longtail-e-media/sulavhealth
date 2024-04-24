@@ -36,7 +36,7 @@ if (!empty($sesRec)) {
                 <div class="mini-cart-item clearfix cart-remove">
                     <div class="mini-cart-img">
                         <img src="' . $img . '" alt="' . (($lang == "gr") ? $product->title_greek : $product->title) . '">
-                        <!--<span class="mini-cart-item-delete remove-cart" data-id="' . $product->id . '"><i class="icon-cancel"></i></span>-->
+                        <span class="mini-cart-item-delete remove-cart" data-id="' . $product->id . '"><i class="icon-cancel"></i></span>
                     </div>
                     <div class="mini-cart-info">
                         <h6><a href="' . BASE_URL . 'product/' . $product->slug . '">' . (($lang == "gr") ? $product->title_greek : $product->title) . '</a></h6>
