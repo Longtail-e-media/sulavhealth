@@ -121,8 +121,8 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                                 <tr class="trip-info">
                                     <th>Product Name</th>
                                     <th>Qty</th>
-                                    <th>Price(&euro;)</th>
-                                    <th>Total Price(&euro;)</th>
+                                    <th>Price(NPR)</th>
+                                    <th>Total Price(NPR)</th>
                                 </tr>
                                 <?php
                                 while ($row = $db->fetch_object($query)) {

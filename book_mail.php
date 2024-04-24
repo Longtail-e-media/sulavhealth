@@ -171,7 +171,7 @@ if (!empty($bookingRec)) {
                                     <td>' . (($lang == "gr") ? 'Προϊόν' : 'Product') . '</td>
                                     <td>' . (($lang == "gr") ? 'Ποσότητα' : 'Quantity') . '</td>
                                     <td>' . (($lang == "gr") ? 'Τιμή' : 'Price') . '</td>
-                                    <td>' . (($lang == "gr") ? 'Σύνολο' : 'Total') . '(&euro;)</td>
+                                    <td>' . (($lang == "gr") ? 'Σύνολο' : 'Total') . '(NPR)</td>
                                 </tr>
     ';
 

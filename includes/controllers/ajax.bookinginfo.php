@@ -128,6 +128,11 @@
             $bookRec->person_phone          = $phone;
             $bookRec->person_comment        = (!empty($message)) ? $message : '';
 
+            $bookRec->shipping_country      = $shipping_country;
+            $bookRec->shipping_district     = $shipping_district;
+            $bookRec->shipping_city         = $shipping_city;
+            $bookRec->shipping_post_code    = $shipping_post_code;
+
             $bookRec->ip_address        = $_SERVER['REMOTE_ADDR'];
             $bookRec->pay_type          = $payment_method;
 //            $bookRec->shipping_amt      = $shipping_amt;

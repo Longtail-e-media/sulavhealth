@@ -141,7 +141,7 @@ switch ($_POST['action']) {
 
         $res = '';
         $tot = 0.00;
-        $total = '&euro; 0.00';
+        $total = 'NPR 0.00';
         $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
 
         if (!empty($sesRec)) {
@@ -205,7 +205,7 @@ switch ($_POST['action']) {
 
         $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
         $tot = 0.00;
-        $sub_total = '&euro; 0.00';
+        $sub_total = 'NPR 0.00';
 
         if (!empty($sesRec)) {
             foreach ($sesRec as $k => $sesRow) {
@@ -517,7 +517,7 @@ switch ($_POST['action']) {
 
         $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
         $tot = 0.00;
-        $sub_total = '&euro; 0.00';
+        $sub_total = 'NPR 0.00';
 
         if (!empty($sesRec)) {
             foreach ($sesRec as $k => $sesRow) {
