@@ -17,7 +17,7 @@ $cart_menu .= '
 
 $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
 $tot = 0.00;
-$total = '$ 0.00';
+$total = 'NPR 0.00';
 if (!empty($sesRec)) {
     foreach ($sesRec as $k => $sesRow) {
         $product = SubProduct::find_by_slug($sesRow['slug']);
