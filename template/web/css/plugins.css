@@ -3449,6 +3449,7 @@ input[type=submit].btn-block {
     display: none;
     min-width: 10rem;
     padding: 0.85em 0;
+    padding-top: 0;
     color: #212529;
     text-align: left;
     list-style: none;

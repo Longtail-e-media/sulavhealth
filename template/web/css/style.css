@@ -17256,8 +17256,10 @@ footer a:hover {
 }
 
 .search-container {
-  position: relative;
   display: inline-block;
+  position: sticky;
+  top: 0;
+  background: #fff;
 }
 
 .search {
@@ -17428,7 +17430,7 @@ html {
 }
 
 .product-filter.container {
-  max-width: 120rem!important;
+  max-width: 120rem !important;
 }
 .product-filter-side {
   position: sticky;
