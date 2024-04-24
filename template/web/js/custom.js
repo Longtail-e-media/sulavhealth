@@ -328,10 +328,10 @@ $(function () {
             errorElement: 'span',
             errorClass: 'validate-has-error',
             rules: {
-                searchkey: {required: true,}
+                // searchkey: {required: true,}
             },
             messages: {
-                searchkey: {required: "Please enter product name to start searching.",}
+                // searchkey: {required: "Please enter product name to start searching.",}
             },
             submitHandler: function (form) {
                 var Frmval = $("#searchform").serialize();
