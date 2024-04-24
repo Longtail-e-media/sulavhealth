@@ -16,6 +16,7 @@
     <!-- plugins css -->
     <link rel="stylesheet" href="css/plugins.css">
     <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
@@ -62,12 +63,54 @@
 
 <!-- All JS Plugins -->
 <script src="js/plugins.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 <!-- Main JS -->
 <script src="js/main.js"></script>
 
 <!-- Custom JS -->
 <script src="js/custom.js"></script>
+<script>
+    var base_url = $('base').attr('url');
+    if ($('#searchform')[0]) {
+            $("#searchkey").autocomplete({
+                source: base_url + "hotelcomplete.php",
+                // minLength: 2,
+                showHintOnFocus: true,
+                select: function (event, ui) {
+                    // console.log(ui);
+                    $('input[name="searchkey"]').val(ui.item.id);
+                    $('input[name="hotelslug"]').val(ui.item.link);
+                }
+            });
+            $("#searchform").validate({
+                errorElement: 'span',
+                errorClass: 'validate-has-error',
+                rules: {
+                    searchkey: { required: true, }
+                },
+                messages: {
+                    searchkey: {required: "Please enter product name to start searching.",}
+                },
+                submitHandler: function (form) {
+                    var Frmval = $("#searchform").serialize();
+                    $("#btn-search").attr("disabled", "true").html('Loading...');
+                    $("#searchform").submit();
+                    // $.ajax({
+                    //     type: "POST",
+                    //     dataType: "JSON",
+                    //     url: base_url + "hotelcomplete.php",
+                    //     data: "action=getlink&" + Frmval,
+                    //     success: function (data) {
+                    //         var msg = eval(data);
+                    //         window.location.href = base_url + "searchlist/" + data.url;
+                    //     }
+                    // });
+                    return false;
+                }
+            });
+        }
+</script>
 
 </body>
 </html>
