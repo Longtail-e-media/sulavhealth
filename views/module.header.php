@@ -2,6 +2,7 @@
 
 $headera = '';
 $header = '';
+$brandmenu='';
 
 $current_url = pathinfo($_SERVER["PHP_SELF"]);
 $fileName = $current_url['filename'];
@@ -93,6 +94,11 @@ else{
     <li><a href="'.BASE_URL.'login" id="id_sign_in">Log in</a></li>
     <li><a href="'.BASE_URL.'register" id="id_register">Register</a></li>';
 }
+$brands= Brand:: get_brand();
+// pr($brands);
+foreach($brands as $brand){
+    $brandmenu .='<a class="dropdown-item" href="'.BASE_URL.'search/'.$brand->slug.'">'.$brand->title.'</a>';
+}
 // pr($_POST);
 $header .= '
 
@@ -183,10 +189,7 @@ $header .= '
                                     Brands &nbsp; &nbsp;
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Mama Earth</a>
-                                    <a class="dropdown-item" href="#">True Derma</a>
-                                    <a class="dropdown-item" href="#">Cetaphil</a>
-                                    <a class="dropdown-item" href="#">Aliceblue</a>
+                                    '.$brandmenu.'
                                 </div>
                             </div>
                             ' . $jVars['module:menu:main-menu'] . '
