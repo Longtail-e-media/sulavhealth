@@ -188,7 +188,7 @@ if (defined('DASHBOARD_PAGE')) {
                 <p>Από τον πίνακα ελέγχου του λογαριασμού σας μπορείτε να δείτε τις πρόσφατες <span>παραγγελίες σας</span>, να αλλάξετε την <span>διεύθυνσή σας</span>, και <span>να επεξεργαστείτε τον κωδικό πρόσβασης και τα στοιχεία του λογαριασμού σας</span>.</p>
             '
             : '
-                <p>Hello <strong>' . $userRec->first_name . ' ' . $userRec->last_name . '</strong> (not <strong>' . $userRec->first_name . ' ' . $userRec->last_name . '</strong>? <small><a href="' . BASE_URL . 'logout">Log out</a></small>)</p>
+                <p>Hello <strong>' . $userRec->first_name . ' ' . $userRec->last_name . '</strong> ( <small><a href="' . BASE_URL . 'logout">Log out</a></small>)</p>
                 <p>From your account dashboard you can view your <span>recent orders</span>, manage your <span>address</span>, and <span>edit your password and account details</span>.</p>
             ';
 

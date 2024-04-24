@@ -55,6 +55,25 @@ if (defined('SEARCH_PAGE')) {
         ';
     }
     /* type filter end*/
+
+    /* category filter start*/
+    $service_filter = '';
+    $serviceRec = Services::get_services();
+    foreach ($serviceRec as $serviceRow) {
+        if (@$gservice_slug) {
+            $sel = (@$gservice_slug == $serviceRow->slug) ? 'checked' : '';
+        } else {
+            $sel = @in_array($serviceRow->id, @$qservice) ? 'checked' : '';
+        }
+        $tot = 0;
+        $tot += SubProduct::get_total_service_product($serviceRow->id);
+        $service_filter .= '
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input qservice" name="qservice[]" ' . $sel . ' id="ser-' . $serviceRow->id . '" value="' . $serviceRow->id . '">
+                    <label class="custom-control-label d-flex justify-content-between" for="ser-' . $serviceRow->id . '">' . $serviceRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                </div>
+        ';
+    }
     
     /* category filter start*/
     $category_filter = '';
@@ -168,7 +187,11 @@ if (defined('SEARCH_PAGE')) {
                 <div class="form-group">
                 <label>Type:</label><br>
                      '.$type_filter.'
-                </div>                
+                </div>   
+                <div class="form-group">
+                    <label>Services:</label><br>
+                               '.$service_filter.'
+                        </div>             
                 <div class="form-group">
                 <label>Category:</label><br>
                                '.$category_filter.'
@@ -178,6 +201,10 @@ if (defined('SEARCH_PAGE')) {
                     <label>Sub-category:</label><br>
                                '.$subcategory_filter.'
                         </div>
+
+                        
+
+                        
                         
                        
                         
@@ -275,6 +302,26 @@ if (defined('SEARCH_PAGE')) {
                 $sql .= " AND prod.Category = $cate->id ";
             }
 
+            if (@$qservice[0] != 'all' and !empty($qservice)) {
+                foreach ($qservice as $qserv) {
+                    if (sizeof($qservice) > 1) {
+                        if (array_values($qservice)[0] == $qserv) {
+                            $sql .= " AND ( prod.service_id = $qserv ";
+                        } elseif (end($qservice) == $qcat) {
+                            $sql .= " OR prod.service_id = $serv )";
+                        } else {
+                            $sql .= " OR prod.service_id = $qserv ";
+                        }
+                    } else {
+                        $sql .= " AND prod.service_id = $qserv ";
+                    }
+                }
+            }
+            if (@$gservice_slug) {
+                $ser = Services::find_by_slug($gservice_slug);
+                $sql .= " AND prod.service_id = $ser->id ";
+            }
+
     if (@$qsubcategory[0] != 'all' and !empty($qsubcategory)) {
         foreach ($qsubcategory as $qsubcat) {
             if (sizeof($qsubcategory) > 1) {
@@ -310,7 +357,7 @@ if (defined('SEARCH_PAGE')) {
         }
     }
     if (@$gbrand_slug) {
-        $bran = Activities::find_by_slug($gbrand_slug);
+        $bran = Brand::find_by_slug($gbrand_slug);
         $sql .= " AND prod.brand = $bran->id ";
     }
    
@@ -544,12 +591,18 @@ if (defined('SEARCH_PAGE')) {
                     }
                 }
                 $prodbrand= Brand::find_by_id($rows['brand']);
+                $prodservice= Services::find_by_id($rows['service_id']);
                 if(!empty($prodbrand)){
                     $title= $prodbrand->title;
-
                 }
                 else{
                     $title= '';
+                }
+                if(!empty($prodservice)){
+                    $slugs= '' . BASE_URL . 'product/'.$prodservice->slug.'/' . $rows['slug'] . '';
+                }
+                else{
+                    $slugs= '' . BASE_URL . 'product/product-detail/' . $rows['slug'] . '';;
                 }
                 // pr($prodbrand);
                 $respkglist .= '
@@ -557,13 +610,13 @@ if (defined('SEARCH_PAGE')) {
                 <div class="col-xl-3 col-sm-6 col-6">
             <div class="ltn__product-item ltn__product-item-3 text-center">
                 <div class="product-img product_hove"
-                    data-href="' . BASE_URL . 'product/' . $rows['slug'] . '">
+                    data-href="' . $slugs. '">
                     <img src="' . $img . '"
                         alt="lab service 1">
                 </div>
                 <div class="product-info">
                     <h4 class="product-title">' . $title. '</h4>
-                    <a href="' . BASE_URL . 'product/' . $rows['slug'] . '"
+                    <a href="' . $slugs . '"
                         class="product-link">' . $rows['title'] . '</a>
                     <div class="product-price">
                     ' . $price_text . '
@@ -597,14 +650,14 @@ if (defined('SEARCH_PAGE')) {
                 
             ';
             $home_gift_sets_script .= '
-                <script>
+                <script id="productscript">
                     $("#quick_view_modal_product_' . $rows['slug'] . '").on("shown.bs.modal", function () {
                       $(".ltn__blog-slider-one-active1").slick("setPosition");
                     })
                 </script>
             ';
             $home_gift_sets_modal .= '
-                <div class="ltn__modal-area ltn__quick-view-modal-area">
+                <div class="ltn__modal-area ltn__quick-view-modal-area productpopup">
                     <div class="modal fade" id="quick_view_modal_product_' . $rows['slug'] . '" tabindex="-1">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -795,7 +848,7 @@ if (defined('SEARCH_PAGE')) {
                                                                     </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="' . BASE_URL . 'product/' . $rows['slug'] . ' " class="theme-btn-1 btn btn-effect-1">
+                                                                    <a href="' . $slugs . ' " class="theme-btn-1 btn btn-effect-1">
                                                                         <span>' . SHOP_VIEW_MORE . '</span>
                                                                     </a>
                                                                 </li>

@@ -16,7 +16,7 @@ $header .= '
                     <div class="col">
                         <div class="site-logo-wrap">
                             <div class="site-logo">
-                                <a href=""' . BASE_URL . 'home">
+                                <a href="' . BASE_URL . 'home">
                                     <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="' . $siteRegulars->sitetitle . '">
                                 </a>
                             </div>
@@ -84,13 +84,14 @@ $userRec = User::find_by_id($userId);
 // pr($userRec);
 
 $username= 	$userRec->first_name;
-$logbutton='<a href="'.BASE_URL.'dashboard" id="id_sign_in">Log In</a> |
-    <a href="'.BASE_URL.'logout" id="id_sign_in">logout</a>';
+$logbutton=' <li><a href="'.BASE_URL.'dashboard" id="id_my_account">MyAccount</a></li>
+            <li><a href="'.BASE_URL.'logout" id="id_my_account">logout</a></li>';
 }
 else{
     $username= 	'Guest !';
-    $logbutton='<a href="'.BASE_URL.'login" id="id_sign_in">Log In</a> |
-    <a href="'.BASE_URL.'register" id="id_sign_in">Register</a>';
+    $logbutton='
+    <li><a href="'.BASE_URL.'login" id="id_sign_in">Log in</a></li>
+    <li><a href="'.BASE_URL.'register" id="id_register">Register</a></li>';
 }
 $header .= '
 
@@ -124,12 +125,7 @@ $header .= '
                                     <img src=\'https://s3-alpha-sig.figma.com/img/394e/8c83/fae8707eee905756e1bd5fe16b21d16a?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwCGjHcpOvB2PLWdnJUVS8Imesl7BtnErPjdLIPoCgtEkk51ly3tVQZgVZydpe1JcSNLXjXUT8T1VwaRtQpwMBdYYoXUNN8YaCojXzdhj1RkiLtTpLEONCfWlEsPJUQrmFr4xquASUEfZnrzCV3p3E-SBbakXlslM85SQN~1k-SjBBkrpmmEZuwFUQ-PdkashE4qjzC1TWjtwmgaPYGV0XigepLPwVrQ1vkcLOtQ3T3dcwt3uPOkSNyEeaUsz-IrX7pf8ZDK4I9K-SZp4DH4RHYAp3s3C3Z-lnsTJtTUBMYvk3DjPziAFvmpvZFRnEKSsjqKWqoRma7qFhCxc-u-Uw__\'
                                         alt="" class="user-icon">
                                     <ul>
-                                        <li><a href="login" id="id_sign_in">Log in</a>
-                                        </li>
-                                        <li><a href="register"
-                                                id="id_register">Register</a></li>
-                                      <li><a href="dashboard" id="id_my_account">My
-                                                Account</a></li>
+                                        '.$logbutton.'
                                     </ul>
                                 </li>
 
@@ -212,19 +208,40 @@ $jVars['module:header'] = $header;
 $mob_header = '';
 
 $mob_header .= '
-    <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
+<div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
         <div class="ltn__utilize-menu-inner ltn__scrollbar">
             <div class="ltn__utilize-menu-head">
                 <div class="site-logo">
-                    <a href="' . BASE_URL . 'home"><img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="' . $siteRegulars->sitetitle . '"></a>
+                    <a href="' . BASE_URL . 'home"><img
+                            src=' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '
+                            alt="' . $siteRegulars->sitetitle . '"></a>
                 </div>
-                <button class="ltn__utilize-close">×</button>
+                <button class="ltn__utilize-close">&times;</button>
             </div>
             <div class="ltn__utilize-menu">
-                ' . $jVars['module:menu:main-menu'] . '
+            ' . $jVars['module:menu:main-menu'] . '
+               <!-- <ul>
+                    <li class=""><a href=""
+                            id="id_dietary_supplements">DIETARY SUPPLEMENTS</a></li>
+                    <li class=""><a href="http://localhost/sulavhealth/#" id="id_lab_service">LAB SERVICE</a></li>
+                    <li class="menu-icon"><a href="http://localhost/sulavhealth/#" id="id_travel_medicines">TRAVEL
+                            MEDICINES</a>
+                        <ul>
+                            <li><a href="http://localhost/sulavhealth/#" id="id_trekking_package">TREKKING
+                                    PACKAGE</a></li>
+                            <li><a href="http://localhost/sulavhealth/#" id="id_foreign_tour_package">FOREIGN TOUR
+                                    PACKAGE</a></li>
+                        </ul>
+                    </li>
+                    <li class=""><a href="http://localhost/sulavhealth/#" id="id_skin_care">SKIN CARE</a></li>
+                    <li class=""><a href="http://localhost/sulavhealth/#" id="id_hygiene">HYGIENE</a></li>
+                    <li class=""><a href="http://localhost/sulavhealth/#" id="id_baby_care">BABY CARE</a></li>
+                </ul>-->
             </div>
         </div>
     </div>
+
+
 ';
 
 $jVars['module:menu:mob-menu'] = $mob_header;

@@ -52,6 +52,14 @@ class SubProduct extends DatabaseObject
         return $tot;
     }
 
+    public static function get_total_service_product($id = '')
+    {
+        global $db;
+        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND service_id=$id ORDER BY sortorder DESC ";
+        $tot = $db->num_rows($db->query($sql));
+        return $tot;
+    }
+
     public static function get_type()
     {
         global $db;

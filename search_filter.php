@@ -1,9 +1,10 @@
 <?php
 require_once("includes/initialize.php");
+// require_once("views/common_language.php");
 
-$result = $navigation = '';
+$result = $navigation = $home_gift_sets_modal= $home_gift_sets_script= '';
 if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
-
+    $lang = !empty($session->get('lang_type')) ? $session->get('lang_type') : 'gr';
     foreach ($_POST as $key => $val) {
         $$key = $val;
     }
@@ -45,6 +46,25 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 $sql .= " AND prod.type = $qty ";
             }
         }
+    }
+    if (@$qservice[0] != 'all' and !empty($qservice)) {
+        foreach ($qservice as $qserv) {
+            if (sizeof($qservice) > 1) {
+                if (array_values($qservice)[0] == $qserv) {
+                    $sql .= " AND ( prod.service_id = $qserv ";
+                } elseif (end($qservice) == $qcat) {
+                    $sql .= " OR prod.service_id = $serv )";
+                } else {
+                    $sql .= " OR prod.service_id = $qserv ";
+                }
+            } else {
+                $sql .= " AND prod.service_id = $qserv ";
+            }
+        }
+    }
+    if (@$gservice_slug) {
+        $ser = Services::find_by_slug($gservice_slug);
+        $sql .= " AND prod.service_id = $ser->id ";
     }
    
     if (@$qcategory[0] != 'all' and !empty($qcategory)) {
@@ -156,6 +176,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                         }
                     }
                 }
+                // pr($rows);
                 
                 $result .= '<div class="col-xl-3 col-sm-6 col-6">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
@@ -203,7 +224,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                     </div>
                 ';
             // }
-        }
+        
         // $navigation .= '
         //             <div class="pager-innner">
         //                 <div class="row align-items-center text-center text-lg-left">
@@ -217,250 +238,251 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
         //                 </div>
         //             </div>
         // ';
-//         $home_gift_sets_script .= '
-//                 <script>
-//                     $("#quick_view_modal_product_' . $rows['slug'] . '").on("shown.bs.modal", function () {
-//                       $(".ltn__blog-slider-one-active1").slick("setPosition");
-//                     })
-//                 </script>
-//             ';
-//             $home_gift_sets_modal .= '
-//                 <div class="ltn__modal-area ltn__quick-view-modal-area">
-//                     <div class="modal fade" id="quick_view_modal_product_' . $rows['slug'] . '" tabindex="-1">
-//                         <div class="modal-dialog modal-lg" role="document">
-//                             <div class="modal-content">
-//                                 <div class="modal-header">
-//                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//                                         <span aria-hidden="true">&times;</span>
-//                                     </button>
-//                                 </div>
-//                                 <div class="modal-body">
-//                                     <div class="ltn__quick-view-modal-inner">
-//                                         <div class="modal-product-item">
-//                                             <div class="row">
-//                                                 <div class="col-lg-5 col-12">
-//                                                     <div class="modal-product-img">
-//                                                         <div class="row  ltn__blog-slider-one-active1 slick-arrow-1 ltn__blog-item-3-normal">
-//             ';
-//             $sliderImages = SubProductImage::getImagelist_by($rows['id']);
-//             // pr($sliderImages);
-//             if (!empty($sliderImages)) {
-//                 foreach ($sliderImages as $sliderImage) {
-//                     $file_path = SITE_ROOT . 'images/product/galleryimages/' . $sliderImage->image;
-//                     if (file_exists($file_path)) {
-//                         $home_gift_sets_modal .= '
-//                             <div class="col-lg-12">
-//                                 <div class="ltn__blog-item ltn__blog-item-3">
-//                                     <div class="ltn__blog-img">
-//                                         <img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '"></a>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         ';
-//                     }
-//                 }
-//             }
-//             $home_gift_sets_modal .= '
-//                                                         </div>
-//                                                     </div>
-//                                                 </div>
-//                                                 <div class="col-lg-7 col-12">
-//                                                     <div class="modal-product-info">
-//                                                     <h3>' . (($lang == "gr") ? $rows['title_greek']  : $rows['title'] ) . '</h3>
-//                                                         ' . (($lang == "gr") ? $rows['brief_greek']  : $rows['brief'] ) . '
-//                 <div class="shoping-cart-table table-responsive">
-//                     <form id="add-cart-product-' . $rows['slug']. '">
-//                     <table class="table">
-//                         <tbody>
+        $home_gift_sets_script .= '
+                <script id="productscript">
+                    $("#quick_view_modal_product_' . $rows['slug'] . '").on("shown.bs.modal", function () {
+                      $(".ltn__blog-slider-one-active1").slick("setPosition");
+                    })
+                </script>
+            ';
+            $home_gift_sets_modal .= '
+                <div class="ltn__modal-area ltn__quick-view-modal-area">
+                    <div class="modal fade" id="quick_view_modal_product_' . $rows['slug'] . '" tabindex="-1">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ltn__quick-view-modal-inner">
+                                        <div class="modal-product-item">
+                                            <div class="row">
+                                                <div class="col-lg-5 col-12">
+                                                    <div class="modal-product-img">
+                                                        <div class="row  ltn__blog-slider-one-active1 slick-arrow-1 ltn__blog-item-3-normal">
+            ';
+            $sliderImages = SubProductImage::getImagelist_by($rows['id']);
+            // pr($sliderImages);
+            if (!empty($sliderImages)) {
+                foreach ($sliderImages as $sliderImage) {
+                    $file_path = SITE_ROOT . 'images/product/galleryimages/' . $sliderImage->image;
+                    if (file_exists($file_path)) {
+                        $home_gift_sets_modal .= '
+                            <div class="col-lg-12">
+                                <div class="ltn__blog-item ltn__blog-item-3">
+                                    <div class="ltn__blog-img">
+                                        <img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        ';
+                    }
+                }
+            }
+            $home_gift_sets_modal .= '
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7 col-12">
+                                                    <div class="modal-product-info">
+                                                    <h3>' . (($lang == "gr") ? $rows['title_greek']  : $rows['title'] ) . '</h3>
+                                                        ' . (($lang == "gr") ? $rows['brief_greek']  : $rows['brief'] ) . '
+                <div class="shoping-cart-table table-responsive">
+                    <form id="add-cart-product-' . $rows['slug']. '">
+                    <table class="table">
+                        <tbody>
                         
-//                             <tr>
-//                                 <td class="cart-product-info">
-//                                     <div class="form-check form-check-inline">
-//             ';
-//             if (!empty($giftSet->qnt2)) {
-//                 $home_gift_sets_modal .= '<input class="form-check-input" type="checkbox" name="product_check[]" value="1">';
-//             } else {
-//                 $home_gift_sets_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
-//             }
-//             $prodPrice = (!empty($rows['discount1']) and $rows['discount1'] > 0) ? $rows['discount1'] : $rows['price1'];
-//             $home_gift_sets_modal .= '
-//                                         <input type="hidden" name="product_qnt_1" value="' . $rows['qnt1']  . '">
-//                                         <input type="hidden" name="product_net_qnt_1" value="' . $rows['netqnt1']  . '">
-//                                         <label class="form-check-label">' . $rows['netqnt1'] . '</label>
-//                                     </div>
-//                                 </td>
-//                                 <td class="cart-product-price">
-//                                     <input type="hidden" name="product_price_1" value="' . $prodPrice . '">
-//                                     ' . $rows['currency']  . ' ' . sprintf("%.2f", $prodPrice) . '
-//                                 </td>
-//                                 <td class="cart-product-quantity">
-//                                     <div class="cart-plus-minus">
-//                                         <div class="dec qtybutton">-</div>
-//                                         <input type="text" value="1" min="1" step="1" name="product_qty_1" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $rows['currency']  . ' " readonly>
-//                                         <div class="inc qtybutton">+</div>
-//                                     </div>
-//                                 </td>
-//                                 <td class="cart-product-subtotal">
-//                                     <input type="hidden" name="product_total_1" class="product_total" value="0">
-//                                     <h6 class="product-sub-total">' . $rows['currency']  . ' ' . $prodPrice . '</h6>
-//                                 </td>
-//                             </tr>
+                            <tr>
+                                <td class="cart-product-info">
+                                    <div class="form-check form-check-inline">
+            ';
+            if (!empty($giftSet->qnt2)) {
+                $home_gift_sets_modal .= '<input class="form-check-input" type="checkbox" name="product_check[]" value="1">';
+            } else {
+                $home_gift_sets_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
+            }
+            $prodPrice = (!empty($rows['discount1']) and $rows['discount1'] > 0) ? $rows['discount1'] : $rows['price1'];
+            $home_gift_sets_modal .= '
+                                        <input type="hidden" name="product_qnt_1" value="' . $rows['qnt1']  . '">
+                                        <input type="hidden" name="product_net_qnt_1" value="' . $rows['netqnt1']  . '">
+                                        <label class="form-check-label">' . $rows['netqnt1'] . '</label>
+                                    </div>
+                                </td>
+                                <td class="cart-product-price">
+                                    <input type="hidden" name="product_price_1" value="' . $prodPrice . '">
+                                    ' . $rows['currency']  . ' ' . sprintf("%.2f", $prodPrice) . '
+                                </td>
+                                <td class="cart-product-quantity">
+                                    <div class="cart-plus-minus">
+                                        <div class="dec qtybutton">-</div>
+                                        <input type="text" value="1" min="1" step="1" name="product_qty_1" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $rows['currency']  . ' " readonly>
+                                        <div class="inc qtybutton">+</div>
+                                    </div>
+                                </td>
+                                <td class="cart-product-subtotal">
+                                    <input type="hidden" name="product_total_1" class="product_total" value="0">
+                                    <h6 class="product-sub-total">' . $rows['currency']  . ' ' . $prodPrice . '</h6>
+                                </td>
+                            </tr>
                             
-//             ';
+            ';
 
-//             if (!empty($rows['qnt2'])) {
-//                 $prodPrice = (!empty( $rows['discount2'] ) and $rows['discount2'] > 0) ? $rows['discount2'] : $rows['price2'] ;
-//                 $home_gift_sets_modal .= '
-//                             <tr>
-//                                 <td class="cart-product-info">
-//                                     <div class="form-check form-check-inline">
-//                                         <input class="form-check-input" type="checkbox" name="product_check[]" value="2">
-//                                         <input type="hidden" name="product_qnt_2" value="' . $rows['price2']  . '">
-//                                         <input type="hidden" name="product_net_qnt_2" value="' . $rows['netqnt2']  . '">
-//                                         <label class="form-check-label">' . $rows['netqnt2'] . '</label>
-//                                     </div>
-//                                 </td>
-//                                 <td class="cart-product-price">
-//                                     <input type="hidden" name="product_price_2" value="' . $prodPrice . '">
-//                                     ' . $rows['currency']  . ' ' . sprintf("%.2f", $prodPrice) . '
-//                                 </td>
-//                                 <td class="cart-product-quantity">
-//                                     <div class="cart-plus-minus">
-//                                         <div class="dec qtybutton">-</div>
-//                                         <input type="text" value="0" min="0" step="1" name="product_qty_2" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
-//                                         <div class="inc qtybutton">+</div>
-//                                     </div>
-//                                 </td>
-//                                 <td class="cart-product-subtotal">
-//                                     <input type="hidden" name="product_total_2" class="product_total" value="0">
-//                                     <h6 class="product-sub-total">' . $rows['currency']  . ' 0.00</h6>
-//                                 </td>
-//                             </tr>
-//                 ';
-//             }
+            if (!empty($rows['qnt2'])) {
+                $prodPrice = (!empty( $rows['discount2'] ) and $rows['discount2'] > 0) ? $rows['discount2'] : $rows['price2'] ;
+                $home_gift_sets_modal .= '
+                            <tr>
+                                <td class="cart-product-info">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="product_check[]" value="2">
+                                        <input type="hidden" name="product_qnt_2" value="' . $rows['price2']  . '">
+                                        <input type="hidden" name="product_net_qnt_2" value="' . $rows['netqnt2']  . '">
+                                        <label class="form-check-label">' . $rows['netqnt2'] . '</label>
+                                    </div>
+                                </td>
+                                <td class="cart-product-price">
+                                    <input type="hidden" name="product_price_2" value="' . $prodPrice . '">
+                                    ' . $rows['currency']  . ' ' . sprintf("%.2f", $prodPrice) . '
+                                </td>
+                                <td class="cart-product-quantity">
+                                    <div class="cart-plus-minus">
+                                        <div class="dec qtybutton">-</div>
+                                        <input type="text" value="0" min="0" step="1" name="product_qty_2" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
+                                        <div class="inc qtybutton">+</div>
+                                    </div>
+                                </td>
+                                <td class="cart-product-subtotal">
+                                    <input type="hidden" name="product_total_2" class="product_total" value="0">
+                                    <h6 class="product-sub-total">' . $rows['currency']  . ' 0.00</h6>
+                                </td>
+                            </tr>
+                ';
+            }
 
-//             if (!empty( $rows['qnt3'])) {
-//                 $prodPrice = (!empty( $rows['discount3']) and $rows['discount3'] > 0) ? $rows['discount3'] :  $rows['price3'] ;
-//                 $home_gift_sets_modal .= '
-//                             <tr>
-//                                 <td class="cart-product-info">
-//                                     <div class="form-check form-check-inline">
-//                                         <input class="form-check-input" type="checkbox" name="product_check[]" value="3">
-//                                         <input type="hidden" name="product_qnt_3" value="' . $rows['qnt3'] . '">
-//                                         <input type="hidden" name="product_net_qnt_3" value="' .  $rows['netqnt3']  . '">
-//                                         <label class="form-check-label">' . $rows['netqnt3']  . '</label>
-//                                     </div>
-//                                 </td>
-//                                 <td class="cart-product-price">
-//                                     <input type="hidden" name="product_price_3" value="' . $prodPrice . '">
-//                                     ' . $rows['discount3'] . ' ' . sprintf("%.2f", $prodPrice) . '
-//                                 </td>
-//                                 <td class="cart-product-quantity">
-//                                     <div class="cart-plus-minus">
-//                                         <div class="dec qtybutton">-</div>
-//                                         <input type="text" value="0" min="0" step="1" name="product_qty_3" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
-//                                         <div class="inc qtybutton">+</div>
-//                                     </div>
-//                                 </td>
-//                                 <td class="cart-product-subtotal">
-//                                     <input type="hidden" name="product_total_3" class="product_total" value="0">
-//                                     <h6 class="product-sub-total">' . $rows['discount3'] . ' 0.00</h6>
-//                                 </td>
-//                             </tr>
-//                 ';
-//             }
+            if (!empty( $rows['qnt3'])) {
+                $prodPrice = (!empty( $rows['discount3']) and $rows['discount3'] > 0) ? $rows['discount3'] :  $rows['price3'] ;
+                $home_gift_sets_modal .= '
+                            <tr>
+                                <td class="cart-product-info">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="product_check[]" value="3">
+                                        <input type="hidden" name="product_qnt_3" value="' . $rows['qnt3'] . '">
+                                        <input type="hidden" name="product_net_qnt_3" value="' .  $rows['netqnt3']  . '">
+                                        <label class="form-check-label">' . $rows['netqnt3']  . '</label>
+                                    </div>
+                                </td>
+                                <td class="cart-product-price">
+                                    <input type="hidden" name="product_price_3" value="' . $prodPrice . '">
+                                    ' . $rows['discount3'] . ' ' . sprintf("%.2f", $prodPrice) . '
+                                </td>
+                                <td class="cart-product-quantity">
+                                    <div class="cart-plus-minus">
+                                        <div class="dec qtybutton">-</div>
+                                        <input type="text" value="0" min="0" step="1" name="product_qty_3" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
+                                        <div class="inc qtybutton">+</div>
+                                    </div>
+                                </td>
+                                <td class="cart-product-subtotal">
+                                    <input type="hidden" name="product_total_3" class="product_total" value="0">
+                                    <h6 class="product-sub-total">' . $rows['discount3'] . ' 0.00</h6>
+                                </td>
+                            </tr>
+                ';
+            }
 
-//             if (!empty($giftSet->qnt4)) {
-//                 $prodPrice = (!empty($rows['discount4']) and $rows['discount4'] > 0) ? $rows['discount4'] : $rows['price4'] ;
-//                 $home_gift_sets_modal .= '
-//                             <tr>
-//                                 <td class="cart-product-info">
-//                                     <div class="form-check form-check-inline">
-//                                         <input class="form-check-input" type="checkbox" name="product_check[]" value="4">
-//                                         <input type="hidden" name="product_qnt_4" value="' . $rows['qnt4']  . '">
-//                                         <input type="hidden" name="product_net_qnt_4" value="' . $rows['netqnt4']  . '">
-//                                         <label class="form-check-label">' . $rows['netqnt4'] . '</label>
-//                                     </div>
-//                                 </td>
-//                                 <td class="cart-product-price">
-//                                     <input type="hidden" name="product_price_4" value="' . $prodPrice . '">
-//                                     ' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '
-//                                 </td>
-//                                 <td class="cart-product-quantity">
-//                                     <div class="cart-plus-minus">
-//                                         <div class="dec qtybutton">-</div>
-//                                         <input type="text" value="0" min="0" step="1" name="product_qty_4" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
-//                                         <div class="inc qtybutton">+</div>
-//                                     </div>
-//                                 </td>
-//                                 <td class="cart-product-subtotal">
-//                                     <input type="hidden" name="product_total_4" class="product_total" value="0">
-//                                     <h6 class="product-sub-total">' . $rows['currency'] . ' 0.00</h6>
-//                                 </td>
-//                             </tr>
-//                 ';
-//             }
+            if (!empty($giftSet->qnt4)) {
+                $prodPrice = (!empty($rows['discount4']) and $rows['discount4'] > 0) ? $rows['discount4'] : $rows['price4'] ;
+                $home_gift_sets_modal .= '
+                            <tr>
+                                <td class="cart-product-info">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="product_check[]" value="4">
+                                        <input type="hidden" name="product_qnt_4" value="' . $rows['qnt4']  . '">
+                                        <input type="hidden" name="product_net_qnt_4" value="' . $rows['netqnt4']  . '">
+                                        <label class="form-check-label">' . $rows['netqnt4'] . '</label>
+                                    </div>
+                                </td>
+                                <td class="cart-product-price">
+                                    <input type="hidden" name="product_price_4" value="' . $prodPrice . '">
+                                    ' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '
+                                </td>
+                                <td class="cart-product-quantity">
+                                    <div class="cart-plus-minus">
+                                        <div class="dec qtybutton">-</div>
+                                        <input type="text" value="0" min="0" step="1" name="product_qty_4" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
+                                        <div class="inc qtybutton">+</div>
+                                    </div>
+                                </td>
+                                <td class="cart-product-subtotal">
+                                    <input type="hidden" name="product_total_4" class="product_total" value="0">
+                                    <h6 class="product-sub-total">' . $rows['currency'] . ' 0.00</h6>
+                                </td>
+                            </tr>
+                ';
+            }
 
-//             $home_gift_sets_modal .= '
+            $home_gift_sets_modal .= '
                             
-//                         </tbody>
-//                     </table>
-//                     </form>
-//                 </div>
-//                                                         <div class="ltn__product-details-menu-2">
-//                                                             <ul>
-//                                                                 <li>
-//                                                                     <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $rows['slug'] . ' " form-id="add-cart-product-' . $rows['slug'] . '">
-//                                                                         <i class="fas fa-shopping-cart"></i>
-//                                                                         <span>' . SHOP_ADD_TO_CART . '</span>
-//                                                                     </a>
-//                                                                 </li>
-//                                                                 <li>
-//                                                                     <a href="' . BASE_URL . 'product/' . $rows['slug'] . ' " class="theme-btn-1 btn btn-effect-1">
-//                                                                         <span>' . SHOP_VIEW_MORE . '</span>
-//                                                                     </a>
-//                                                                 </li>
-//                                                                 <li>
-//                                                                     <a href="#" class="add-wishlist" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $rows['slug'] . ' ">
-//                                                                         <i class="far fa-heart"></i>
-//                                                                         <span>' . SHOP_ADD_TO_WISHLIST . '</span>
-//                                                                     </a>
-//                                                                 </li>
-//                                                                 <li>
-//                                                                     <a href="#" class="" title="' . SHOP_CLOSE . '"  data-dismiss="modal" data-cartid="#quick_view_modal_product_' . $rows['slug'] . '">
-//                                                                         <i class="fas fa-times"></i>
-//                                                                         <span>' . SHOP_CLOSE . '</span>
-//                                                                     </a>
-//                                                                 </li>
-//                                                             </ul>
-//                                                         </div>
-//                                                         <hr>
-//                                                         <div class="ltn__social-media">
-//                                                             <ul>
-//                                                                 <li>' . SHOP_SHARE . ':</li>
-//                                                                 <li>
-// <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-//                                                                 </li>
-//                                                                 <li>
-// <a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $rows['slug'] . '&text=' . (($lang == 'gr') ? $rows['title_greek'] : $rows['title']) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-//                                                                 </li>
-//                                                                 <li>
-// <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
-//                                                                 </li>
-//                                                             </ul>
-//                                                         </div>
-//                                                     </div>
-//                                                 </div>
-//                                             </div>
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//                 </form>
-//             ';
+                        </tbody>
+                    </table>
+                    </form>
+                </div>
+                                                        <div class="ltn__product-details-menu-2">
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="ADD TO CART " data-cartid="' . $rows['slug'] . ' " form-id="add-cart-product-' . $rows['slug'] . '">
+                                                                        <i class="fas fa-shopping-cart"></i>
+                                                                        <span> ADD TO CART</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="' . BASE_URL . 'product/' . $rows['slug'] . ' " class="theme-btn-1 btn btn-effect-1">
+                                                                        <span>VIEW MORE</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" class="add-wishlist" title=" Add to Wishlist " data-cartid="' . $rows['slug'] . ' ">
+                                                                        <i class="far fa-heart"></i>
+                                                                        <span> Add to Wishlist </span>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" class="" title=" Close "  data-dismiss="modal" data-cartid="#quick_view_modal_product_' . $rows['slug'] . '">
+                                                                        <i class="fas fa-times"></i>
+                                                                        <span> Close </span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="ltn__social-media">
+                                                            <ul>
+                                                                <li>Share :</li>
+                                                                <li>
+<a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                                                </li>
+                                                                <li>
+<a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $rows['slug'] . '&text=' . (($lang == 'gr') ? $rows['title_greek'] : $rows['title']) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                                                </li>
+                                                                <li>
+<a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            ';
+        }
     } else {
         $result .= '
             <figure class="tour-long-item-01">
@@ -468,7 +490,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
              </figure>';
     }
 
-    echo json_encode(array("action" => "success", "result" => $result, "nav" => $navigation));
+    echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" =>$home_gift_sets_script, "nav" => $navigation));
 }
 
 ?>

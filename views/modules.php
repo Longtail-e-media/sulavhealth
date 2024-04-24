@@ -106,7 +106,7 @@ $jVars['site:webAccessibility'] = '
 
 // view modules
 require_once("views/common_language.php");
-require_once('module.search.php');
+require_once('views/module.search.php');
 
 // SITE MODULES
 $modulesList = Module::getAllmode();

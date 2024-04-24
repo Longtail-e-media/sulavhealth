@@ -122,19 +122,25 @@ if (defined('HOME_PAGE')) {
                 }
             }
             $prodbrand= Brand::find_by_id($giftSet->brand);
+            $prodservice= Services::find_by_id($giftSet->service_id);
             // pr($prodbrand);
-
+            if(!empty($prodservice)){
+                $slugs= '' . BASE_URL . 'product/'.$prodservice->slug.'/' . $giftSet->slug . '';
+            }
+            else{
+                $slugs= '' . BASE_URL . 'product/product-detail/' . $giftSet->slug . '';;
+            }
             $home_gift_sets .= '
             <div class="col-xl-3 col-sm-6 col-6">
             <div class="ltn__product-item ltn__product-item-3 text-center">
                 <div class="product-img product_hove"
-                    data-href="' . BASE_URL . 'product/' . $giftSet->slug . '">
+                    data-href="' . $slugs . '">
                     <img src="' . $img . '"
                         alt="lab service 1">
                 </div>
                 <div class="product-info">
                     <h4 class="product-title">'.$prodbrand->title.'</h4>
-                    <a href="' . BASE_URL . 'product/' . $giftSet->slug . '"
+                    <a href="' . $slugs . '"
                         class="product-link">' . $giftSet->title . '</a>
                     <div class="product-price">
                         <span>' . $giftSet->currency . ' ' . $giftSet->discount1.'</span>
@@ -373,7 +379,7 @@ if (defined('HOME_PAGE')) {
                                                                     </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="' . BASE_URL . 'product/' . $giftSet->slug . '" class="theme-btn-1 btn btn-effect-1">
+                                                                    <a href="' . $slugs . '" class="theme-btn-1 btn btn-effect-1">
                                                                         <span>' . SHOP_VIEW_MORE . '</span>
                                                                     </a>
                                                                 </li>
@@ -495,7 +501,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                             <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
                                 <div class="section-title-area ltn__section-title-2">
                                     <!--<h1 class="section-title white-color"><strong>' . (($lang == "gr") ? "Λεπτομέρειες Προϊόντος" : "Product Details") . '</strong></h1>-->
-                                    <h1 class="section-title white-color"><strong>' . (($lang == "gr") ? $parentProd->title_greek : $parentProd->title) . '</strong></h1>
+                                    <h1 class="section-title white-color"><strong>' . (($lang == "gr") ? $prodRec->title_greek : $prodRec->title) . '</strong></h1>
                                 </div>
                             </div>
                         </div>
