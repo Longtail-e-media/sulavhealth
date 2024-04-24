@@ -830,7 +830,6 @@ if (defined('SEARCH_PAGE')) {
                     </form>
                 </div>
                                                         <div class="ltn__product-details-menu-2 ">
-                                                        <span id="addedmessage"></span> 
                                                             <ul>
                                                                 <li>
                                                                     <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $rows['slug'] . ' " form-id="add-cart-product-' . $rows['slug'] . '">
