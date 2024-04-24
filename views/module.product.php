@@ -456,9 +456,8 @@ if (defined('HOME_PAGE')) {
                         $imgSrc = IMAGE_PATH . 'brand/' . $imgs[0];
                     }
                 }
-
-            $brand .= '<img src="'.$imgSrc.'"
-            alt="" class="brand-images">';
+            $brand .= '<div class="item"><img src="'.$imgSrc.'"
+            alt="" class="brand-images"></div>';
         }
     }
 
