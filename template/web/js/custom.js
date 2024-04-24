@@ -117,6 +117,7 @@ $(function () {
                         var res = eval(data);
                         $("div.mini-cart-product-area").html(res.result);
                         $("span.sub-total-mini-cart").html(res.sub_total);
+                        $("span#addedmessage").html(res.message).css('display', 'block').fadeOut(8000);
                     }
                 })
             }
@@ -159,6 +160,7 @@ $(function () {
                 if (res.action === 'success') {
                     $(".wishlist_modal_content").html(res.content);
                     $("#liton_wishlist_modal").modal();
+                    
                 }
             }
         });
@@ -191,6 +193,7 @@ $(function () {
                         var res = eval(data);
                         $("div.mini-cart-product-area").html(res.result);
                         $("span.sub-total-mini-cart").html(res.sub_total);
+                        $("span.addedmessage").html(res.message);
                     }
                 })
             }

@@ -178,6 +178,7 @@ switch ($_POST['action']) {
                             </div>
                         </div>
                     ';
+                    $message = (($lang == "gr") ? $product->title_greek : $product->title) . ' product added !';
                 }
             }
         } else {
@@ -188,7 +189,7 @@ switch ($_POST['action']) {
 			';
         }
 
-        echo json_encode(array('result' => $res, 'sub_total' => $total));
+        echo json_encode(array('result' => $res, 'sub_total' => $total, 'message' =>$message));
 
         break;
 

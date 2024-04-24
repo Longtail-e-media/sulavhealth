@@ -78,7 +78,7 @@ if (defined('SEARCH_PAGE')) {
                 </div>
         ';
     }
-    
+    // pr($_POST);
     /* category filter start*/
     $category_filter = '';
     $categoryRec = category::get_category();
@@ -365,22 +365,6 @@ if (defined('SEARCH_PAGE')) {
         $sql .= " AND prod.brand = $bran->id ";
     }
    
-    // if (!empty($days)) {
-    //     switch ($days) {
-    //         case '5':
-    //             $sql .= " AND pkg.days <= $days ";
-    //             break;
-    //         case '10':
-    //             $sql .= " AND ( pkg.days > 5 AND pkg.days <= $days ) ";
-    //             break;
-    //         case '15':
-    //             $sql .= " AND ( pkg.days > 10 AND pkg.days <= $days ) ";
-    //             break;
-    //         case 'morethan15':
-    //             $sql .= " AND pkg.days >= 16 ";
-    //             break;
-    //     }
-    // }
     if (!empty($gprice)) {
         switch ($gprice) {
             case '1000':
@@ -843,11 +827,13 @@ if (defined('SEARCH_PAGE')) {
                     </table>
                     </form>
                 </div>
-                                                        <div class="ltn__product-details-menu-2">
+                                                        <div class="ltn__product-details-menu-2 ">
+                                                        <span id="addedmessage"></span> 
                                                             <ul>
                                                                 <li>
                                                                     <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $rows['slug'] . ' " form-id="add-cart-product-' . $rows['slug'] . '">
-                                                                        <i class="fas fa-shopping-cart"></i>
+                                                                       
+                                                                    <i class="fas fa-shopping-cart"></i>
                                                                         <span>' . SHOP_ADD_TO_CART . '</span>
                                                                     </a>
                                                                 </li>

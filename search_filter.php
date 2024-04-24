@@ -429,6 +429,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                     </form>
                 </div>
                                                         <div class="ltn__product-details-menu-2">
+                                                        <span id="addedmessage"></span> 
                                                             <ul>
                                                                 <li>
                                                                     <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="ADD TO CART " data-cartid="' . $rows['slug'] . ' " form-id="add-cart-product-' . $rows['slug'] . '">
