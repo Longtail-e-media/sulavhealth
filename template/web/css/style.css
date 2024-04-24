@@ -17300,7 +17300,7 @@ footer a:hover {
 }
 
 .product-filter {
-  padding: 5rem 1.25rem !important;
+  padding: 1.25rem !important;
 }
 
 .product-filter-side .form-group > label {
@@ -17426,3 +17426,30 @@ html {
 .brand-images-wrapper.owl-carousel .owl-dots {
   display: none;
 }
+
+.product-filter.container {
+  max-width: 120rem!important;
+}
+.product-filter-side {
+  position: sticky;
+  top: 60px;
+  height: 100vh;
+  padding: 20px;
+  padding-top: 0;
+  padding-bottom: 80px;
+  overflow-y: auto;
+}
+
+.ltn__header-sticky.sticky-active {
+  width: 100%;
+  padding-left: 60px;
+  max-width: 200rem;
+}
+
+/* .product-filter-side::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+} */
