@@ -25,140 +25,167 @@
 
 <body class="<jcms:site:language-class/>">
 
-    <jcms:module:header/>
+<jcms:module:header/>
 
-    <jcms:module:product:cart-menu/>
+<jcms:module:product:cart-menu/>
 
-    <jcms:module:menu:mob-menu/>
+<jcms:module:menu:mob-menu/>
 
-    <div class="ltn__utilize-overlay"></div>
+<div class="ltn__utilize-overlay"></div>
 
-    <div class="container mx-auto product-filter">
-        <div class="row">
-            <jcms:module:search-searchform/>
-            <div class="col-md-10 product-filter-right">
-                <h2>Dietary Supplements</h2>
-                <div id="productContainer" class="row">
-                    <jcms:module:package-searchlist/>
-                </div>
+<div class="container mx-auto product-filter">
+    <div class="row">
+        <jcms:module:search-searchform/>
+        <div class="col-md-10 product-filter-right">
+            <!--<h2>Dietary Supplements</h2>-->
+            <div id="productContainer" class="row">
+                <jcms:module:package-searchlist/>
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    
+</div>
+</div>
+</div>
 
-    <jcms:module:modal-popup-search/>
-    <jcms:module:footer/>
 
-    <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
-    <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+<jcms:module:modal-popup-search/>
+<jcms:module:footer/>
 
-    <script>
-        $(function () {
+<script src='https://code.jquery.com/jquery-3.5.1.js'></script>
+<script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
 
-            $("#price-slider").slider({
-                range: true,
-                min: 0,
-                max: 5000,
-                values: [0, 5000],
-                slide: function (event, ui) {
-                    $("#price-start").val("Rs." + ui.values[0]);
-                    $("#price-end").val("Rs." + ui.values[1]);
+<script>
+    $(function () {
+
+        $("#price-slider").slider({
+            range: true,
+            min: 0,
+            max: 5000,
+            values: [0, 5000],
+            slide: function (event, ui) {
+                $("#price-start").val("Rs." + ui.values[0]);
+                $("#price-end").val("Rs." + ui.values[1]);
+
+                handlePriceChange(ui.values[0], ui.values[1]);
+            }
+        });
+
+        $("#price-start").val("Rs." + $("#price-slider").slider("values", 0));
+        $("#price-end").val("Rs." + $("#price-slider").slider("values", 1));
+
+        function handlePriceChange(lowPrice, highPrice) {
+            var form = $("#search_form");
+            $.ajax({
+                type: "POST",
+                url: base_url + "search_filter.php",
+                dataType: "JSON",
+                data: "action=filter_data&" + form.serialize() + "&glprice=" + lowPrice + "&ghprice=" + highPrice, // serializes the form's elements.
+                success: function (data) {
+                    var msg = eval(data);
+                    jQuery('div#productContainer').html(msg.result);
+                    jQuery('div#productpopup').html(msg.poup);
+                    jQuery('script#productscript').html(msg.popscript);
+                    jQuery('div#filter-nav').html(msg.nav);
+                    //showing rating
+                    // jQuery('input.rating').rating();
+                    //adding functionality to navigation
+                    $('.gnav').on('click', function () {
+                        $(this).navFunction();
+                    });
+                    $('html, body').animate({
+                        scrollTop: eval($("#scrolll").offset().top - 70)
+                    }, 500);
                 }
             });
+        }
+    });
+</script>
 
-            $("#price-start").val("Rs." + $("#price-slider").slider("values", 0));
-            $("#price-end").val("Rs." + $("#price-slider").slider("values", 1));
-        });
-    </script>
+<script>
+    // let page = 1;
+    // let loading = false;
 
-    <script>
-        // let page = 1;
-        // let loading = false;
+    // function fetchMoreProducts() {
+    //     loading = true;
+    //     setTimeout(() => {
+    //         const productContainer = document.getElementById('productContainer');
+    //         for (let i = 0; i < 1; i++) {
+    //             const productCardHTML = `
+    //             <div class="col-xl-3 col-sm-6 col-6 product-card"> <!-- Add the "product-card" class here -->
+    //                 <div class="ltn__product-item ltn__product-item-3 text-center">
+    //                     <div class="product-img product_hove"
+    //                         data-href="http://localhost/sulavhealth/product/lab-service-1">
+    //                         <img src='https://s3-alpha-sig.figma.com/img/257b/d0dc/958bf10eef425a555b2f0d7bd61412a5?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SX-tfGnq-iiXkOiRm1JjU9ZNPdmO~rq3TPyOcCSAm8gRUmwQatRvE2EIoAITKDE0~g8vJIudrCtW-y~v1wVjm-99hHu68MVX5slLkDmAWJIRZhiJdBold~SrNDTa1y1C-i7CnKSHVJqeW~dsHj8DeB9FRcuU5CkVftebFg64C0EZkjI2ozWvTsy0DTnSICvFPQKanpszw8NELwFx3xMt~5~qMYe8g8bT0nxtclVwVsdEGc5Ok33D--Qb0aLG-vU0vKreFrAGZGzOCAYNDxeu78jbvQEH8ZdsTM~tXIINBOjuf9EOKd2MrDP02SsbqmlIbKG7BN4TFry0rCy~bGsieg__'
+    //                             alt="lab service 1">
+    //                     </div>
+    //                     <div class="product-info">
+    //                         <h4 class="product-title">Mamaearth</h4>
+    //                         <a href="http://localhost/sulavhealth/product/lab-service-1"
+    //                             class="product-link">Mamaearth
+    //                             Mineral Based Sunscreen 50ml</a>
+    //                         <div class="product-price">
+    //                             <span>NPR 250.00</span>
+    //                             <del>NPR 290.00</del>
+    //                         </div>
+    //                         <div class="product-action">
+    //                             <ul>
+    //                                 <li>
+    //                                     <a href="#" class="add-wishlist" title="Add to Wishlist"
+    //                                         data-cartid="lab-service-1">
+    //                                         <i class="far fa-heart"></i>
+    //                                     </a>
+    //                                 </li>
+    //                                 <li>
+    //                                     <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal"
+    //                                         data-target="#quick_view_modal_product_lab-service-1">
+    //                                         Add to Cart
+    //                                         <i class="fas fa-shopping-cart"></i>
+    //                                     </a>
+    //                                 </li>
+    //                             </ul>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //             `;
+    //             productContainer.innerHTML += productCardHTML;
+    //         }
+    //         setTimeout(() => {
+    //             const productCards = document.querySelectorAll('.product-card');
+    //             productCards.forEach(card => {
+    //                 card.style.opacity = 1;
+    //             });
+    //         }, 500);
+    //         page++;
+    //         loading = false;
+    //     }, 500);
+    // }
 
-        // function fetchMoreProducts() {
-        //     loading = true;
-        //     setTimeout(() => {
-        //         const productContainer = document.getElementById('productContainer');
-        //         for (let i = 0; i < 1; i++) {
-        //             const productCardHTML = `
-        //             <div class="col-xl-3 col-sm-6 col-6 product-card"> <!-- Add the "product-card" class here -->
-        //                 <div class="ltn__product-item ltn__product-item-3 text-center">
-        //                     <div class="product-img product_hove"
-        //                         data-href="http://localhost/sulavhealth/product/lab-service-1">
-        //                         <img src='https://s3-alpha-sig.figma.com/img/257b/d0dc/958bf10eef425a555b2f0d7bd61412a5?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SX-tfGnq-iiXkOiRm1JjU9ZNPdmO~rq3TPyOcCSAm8gRUmwQatRvE2EIoAITKDE0~g8vJIudrCtW-y~v1wVjm-99hHu68MVX5slLkDmAWJIRZhiJdBold~SrNDTa1y1C-i7CnKSHVJqeW~dsHj8DeB9FRcuU5CkVftebFg64C0EZkjI2ozWvTsy0DTnSICvFPQKanpszw8NELwFx3xMt~5~qMYe8g8bT0nxtclVwVsdEGc5Ok33D--Qb0aLG-vU0vKreFrAGZGzOCAYNDxeu78jbvQEH8ZdsTM~tXIINBOjuf9EOKd2MrDP02SsbqmlIbKG7BN4TFry0rCy~bGsieg__'
-        //                             alt="lab service 1">
-        //                     </div>
-        //                     <div class="product-info">
-        //                         <h4 class="product-title">Mamaearth</h4>
-        //                         <a href="http://localhost/sulavhealth/product/lab-service-1"
-        //                             class="product-link">Mamaearth
-        //                             Mineral Based Sunscreen 50ml</a>
-        //                         <div class="product-price">
-        //                             <span>NPR 250.00</span>
-        //                             <del>NPR 290.00</del>
-        //                         </div>
-        //                         <div class="product-action">
-        //                             <ul>
-        //                                 <li>
-        //                                     <a href="#" class="add-wishlist" title="Add to Wishlist"
-        //                                         data-cartid="lab-service-1">
-        //                                         <i class="far fa-heart"></i>
-        //                                     </a>
-        //                                 </li>
-        //                                 <li>
-        //                                     <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal"
-        //                                         data-target="#quick_view_modal_product_lab-service-1">
-        //                                         Add to Cart
-        //                                         <i class="fas fa-shopping-cart"></i>
-        //                                     </a>
-        //                                 </li>
-        //                             </ul>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //             `;
-        //             productContainer.innerHTML += productCardHTML;
-        //         }
-        //         setTimeout(() => {
-        //             const productCards = document.querySelectorAll('.product-card');
-        //             productCards.forEach(card => {
-        //                 card.style.opacity = 1;
-        //             });
-        //         }, 500);
-        //         page++;
-        //         loading = false;
-        //     }, 500);
-        // }
+    // function handleScroll() {
+    //     if (loading) return;
+    //     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    //     const halfwayPoint = scrollHeight / 2;
+    //     if (scrollTop + clientHeight >= halfwayPoint) {
+    //         fetchMoreProducts();
+    //     }
+    // }
 
-        // function handleScroll() {
-        //     if (loading) return;
-        //     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-        //     const halfwayPoint = scrollHeight / 2;
-        //     if (scrollTop + clientHeight >= halfwayPoint) {
-        //         fetchMoreProducts();
-        //     }
-        // }
+    // fetchMoreProducts();
 
-        // fetchMoreProducts();
-
-        // window.addEventListener('scroll', handleScroll);
-    </script>
+    // window.addEventListener('scroll', handleScroll);
+</script>
 
 
+<!-- All JS Plugins -->
+<script src="js/plugins.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<!-- Main JS -->
+<script src="js/main.js"></script>
 
-    <!-- All JS Plugins -->
-    <script src="js/plugins.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <!-- Main JS -->
-    <script src="js/main.js"></script>
-
-    <!-- Custom JS -->
-    <script src="js/custom.js"></script>
-    <script>
-        var base_url = $('base').attr('url');
+<!-- Custom JS -->
+<script src="js/custom.js"></script>
+<script>
+    var base_url = $('base').attr('url');
     // form filtering data
     $('.qtype, .qcategory, .qactivities, .qsubcategory, .qservice, .qbrand, .gprice').on('click', function () {
         var form = $("#search_form");
@@ -170,8 +197,8 @@
             success: function (data) {
                 var msg = eval(data);
                 jQuery('div#productContainer').html(msg.result);
-                 jQuery('div#productpopup').html(msg.poup);
-                 jQuery('script#productscript').html(msg.popscript);
+                jQuery('div#productpopup').html(msg.poup);
+                jQuery('script#productscript').html(msg.popscript);
                 jQuery('div#filter-nav').html(msg.nav);
                 //showing rating
                 // jQuery('input.rating').rating();
@@ -187,7 +214,7 @@
     });
 </script>
 
-    <jcms:module:modal-popup-script/>
+<jcms:module:modal-popup-script/>
 
 </body>
 
