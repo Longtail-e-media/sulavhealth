@@ -2,7 +2,7 @@
 require_once("includes/initialize.php");
 // require_once("views/common_language.php");
 
-$result = $navigation = $home_gift_sets_modal= $home_gift_sets_script= '';
+$result = $navigation = $home_gift_sets_modal = $home_gift_sets_script = '';
 if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     $lang = !empty($session->get('lang_type')) ? $session->get('lang_type') : 'gr';
     foreach ($_POST as $key => $val) {
@@ -31,7 +31,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     //         ON pkg.destinationId = dst.id 
     //         WHERE pkg.status=1 ";
 
-    
+
     if (@$qtype[0] != 'all' and !empty($qtype)) {
         foreach ($qtype as $qty) {
             if (sizeof($qtype) > 1) {
@@ -66,7 +66,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
         $ser = Services::find_by_slug($gservice_slug);
         $sql .= " AND prod.service_id = $ser->id ";
     }
-   
+
     if (@$qcategory[0] != 'all' and !empty($qcategory)) {
         foreach ($qcategory as $qcat) {
             if (sizeof($qcategory) > 1) {
@@ -124,19 +124,22 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
         $bran = Activities::find_by_slug($gbrand_slug);
         $sql .= " AND prod.brand = $bran->id ";
     }
-    // if (!empty($gprice)) {
-    //     switch ($gprice) {
-    //         case '1000':
-    //             $sql .= " AND pkg.price <= $gprice ";
-    //             break;
-    //         case '2000':
-    //             $sql .= " AND (pkg.price > 1000 AND pkg.price <= $gprice)";
-    //             break;
-    //         case 'morethan2000':
-    //             $sql .= " AND pkg.price > 2000 ";
-    //             break;
-    //     }
-    // }
+    if (!empty($glprice) and !empty($ghprice)) {
+        $sql .= " AND ( prod.price1 >= $glprice AND prod.price1 <= $ghprice ) ";
+    }
+//     if (!empty($gprice)) {
+//         switch ($gprice) {
+//             case '1000':
+//                 $sql .= " AND pkg.price <= $gprice ";
+//                 break;
+//             case '2000':
+//                 $sql .= " AND (pkg.price > 1000 AND pkg.price <= $gprice)";
+//                 break;
+//             case 'morethan2000':
+//                 $sql .= " AND pkg.price > 2000 ";
+//                 break;
+//         }
+//     }
 
     $page = 1;
     $limit = 15;
@@ -153,32 +156,32 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     if ($total > 0) {
         while ($rows = $db->fetch_array($res)) {
             // if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {
-                // $rating = Package::get_avg_rating($rows['id']);
-                // $days = ($rows['days'] == 1) ? 'day' : 'days';
-                
-                $price_text = '';
-                if (!empty($rows['price']) and (empty($rows['offer_price']))) {
-                    $price_text = '<span>' . $rows['currency'] . '' . $rows['price1'] . '</span>';
-                }
-                if (!empty($rows['discount1'])) {
-                    $price_text = '<span>' . $rows['currency'] . '' . $rows['discount1'] . '</span><del>' . $rows['currency'] . '' . $rows['price1'] . '</del>';
-                }
-                $product = SubProduct::find_by_slug($rows['slug']);
-                if (!empty($product)) {
-                    $images = SubProductImage::getImagelist_by($product->id, 1, 0);
-                    $img = BASE_URL . 'template/web/img/product/one.jpg';
-                    if (!empty($images)) {
-                        foreach ($images as $image) {
-                            $file_path = SITE_ROOT . 'images/product/galleryimages/' . $image->image;
-                            if (file_exists($file_path)) {
-                                $img = IMAGE_PATH . 'product/galleryimages/' . $image->image;
-                            }
+            // $rating = Package::get_avg_rating($rows['id']);
+            // $days = ($rows['days'] == 1) ? 'day' : 'days';
+
+            $price_text = '';
+            if (!empty($rows['price']) and (empty($rows['offer_price']))) {
+                $price_text = '<span>' . $rows['currency'] . '' . $rows['price1'] . '</span>';
+            }
+            if (!empty($rows['discount1'])) {
+                $price_text = '<span>' . $rows['currency'] . '' . $rows['discount1'] . '</span><del>' . $rows['currency'] . '' . $rows['price1'] . '</del>';
+            }
+            $product = SubProduct::find_by_slug($rows['slug']);
+            if (!empty($product)) {
+                $images = SubProductImage::getImagelist_by($product->id, 1, 0);
+                $img = BASE_URL . 'template/web/img/product/one.jpg';
+                if (!empty($images)) {
+                    foreach ($images as $image) {
+                        $file_path = SITE_ROOT . 'images/product/galleryimages/' . $image->image;
+                        if (file_exists($file_path)) {
+                            $img = IMAGE_PATH . 'product/galleryimages/' . $image->image;
                         }
                     }
                 }
-                // pr($rows);
-                
-                $result .= '<div class="col-xl-3 col-sm-6 col-6">
+            }
+            // pr($rows);
+
+            $result .= '<div class="col-xl-3 col-sm-6 col-6">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
                     <div class="product-img product_hove"
                         data-href="' . BASE_URL . 'product/' . $rows['slug'] . '">
@@ -193,10 +196,10 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                         ' . $price_text . '
                         </div>
                         <div class="product-action">';
-                        if (!empty($rows['tag'])) {
-                            $result .= '<li class="sale-badge">' . $rows['tag'] . '</li>';
-                        }
-                        $result .= ' <ul>
+            if (!empty($rows['tag'])) {
+                $result .= '<li class="sale-badge">' . $rows['tag'] . '</li>';
+            }
+            $result .= ' <ul>
                                         <li>
                                             <a href="#" class="add-wishlist"
                                                 title="Add to Wishlist"
@@ -217,28 +220,28 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                     </div>
                 </div>
             </div>';
-              
-                $result .= '
+
+            $result .= '
                         </a >
                     </figure >
                     </div>
                 ';
             // }
-        
-        // $navigation .= '
-        //             <div class="pager-innner">
-        //                 <div class="row align-items-center text-center text-lg-left">
-        //                     <div class="col-12 col-lg-5">
-        //                         Showing result ' . $start . ' to ' . $end . ' from ' . $total_num . '
-        //                     </div>
-        //                     <div class="col-12 col-lg-7">';
-        // $navigation .= get_front_pagination_for_search($total_num, $limit, $page, BASE_URL . 'searchlist');
-        // $navigation .= '
-        //                     </div>
-        //                 </div>
-        //             </div>
-        // ';
-        $home_gift_sets_script .= '
+
+            // $navigation .= '
+            //             <div class="pager-innner">
+            //                 <div class="row align-items-center text-center text-lg-left">
+            //                     <div class="col-12 col-lg-5">
+            //                         Showing result ' . $start . ' to ' . $end . ' from ' . $total_num . '
+            //                     </div>
+            //                     <div class="col-12 col-lg-7">';
+            // $navigation .= get_front_pagination_for_search($total_num, $limit, $page, BASE_URL . 'searchlist');
+            // $navigation .= '
+            //                     </div>
+            //                 </div>
+            //             </div>
+            // ';
+            $home_gift_sets_script .= '
                 <script id="productscript">
                     $("#quick_view_modal_product_' . $rows['slug'] . '").on("shown.bs.modal", function () {
                       $(".ltn__blog-slider-one-active1").slick("setPosition");
@@ -287,10 +290,10 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                                 </div>
                                                 <div class="col-lg-7 col-12">
                                                     <div class="modal-product-info">
-                                                    <h3>' . (($lang == "gr") ? $rows['title_greek']  : $rows['title'] ) . '</h3>
-                                                        ' . (($lang == "gr") ? $rows['brief_greek']  : $rows['brief'] ) . '
+                                                    <h3>' . (($lang == "gr") ? $rows['title_greek'] : $rows['title']) . '</h3>
+                                                        ' . (($lang == "gr") ? $rows['brief_greek'] : $rows['brief']) . '
                 <div class="shoping-cart-table table-responsive">
-                    <form id="add-cart-product-' . $rows['slug']. '">
+                    <form id="add-cart-product-' . $rows['slug'] . '">
                     <table class="table">
                         <tbody>
                         
@@ -305,45 +308,45 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             }
             $prodPrice = (!empty($rows['discount1']) and $rows['discount1'] > 0) ? $rows['discount1'] : $rows['price1'];
             $home_gift_sets_modal .= '
-                                        <input type="hidden" name="product_qnt_1" value="' . $rows['qnt1']  . '">
-                                        <input type="hidden" name="product_net_qnt_1" value="' . $rows['netqnt1']  . '">
+                                        <input type="hidden" name="product_qnt_1" value="' . $rows['qnt1'] . '">
+                                        <input type="hidden" name="product_net_qnt_1" value="' . $rows['netqnt1'] . '">
                                         <label class="form-check-label">' . $rows['netqnt1'] . '</label>
                                     </div>
                                 </td>
                                 <td class="cart-product-price">
                                     <input type="hidden" name="product_price_1" value="' . $prodPrice . '">
-                                    ' . $rows['currency']  . ' ' . sprintf("%.2f", $prodPrice) . '
+                                    ' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '
                                 </td>
                                 <td class="cart-product-quantity">
                                     <div class="cart-plus-minus">
                                         <div class="dec qtybutton">-</div>
-                                        <input type="text" value="1" min="1" step="1" name="product_qty_1" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $rows['currency']  . ' " readonly>
+                                        <input type="text" value="1" min="1" step="1" name="product_qty_1" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $rows['currency'] . ' " readonly>
                                         <div class="inc qtybutton">+</div>
                                     </div>
                                 </td>
                                 <td class="cart-product-subtotal">
                                     <input type="hidden" name="product_total_1" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . $rows['currency']  . ' ' . $prodPrice . '</h6>
+                                    <h6 class="product-sub-total">' . $rows['currency'] . ' ' . $prodPrice . '</h6>
                                 </td>
                             </tr>
                             
             ';
 
             if (!empty($rows['qnt2'])) {
-                $prodPrice = (!empty( $rows['discount2'] ) and $rows['discount2'] > 0) ? $rows['discount2'] : $rows['price2'] ;
+                $prodPrice = (!empty($rows['discount2']) and $rows['discount2'] > 0) ? $rows['discount2'] : $rows['price2'];
                 $home_gift_sets_modal .= '
                             <tr>
                                 <td class="cart-product-info">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" name="product_check[]" value="2">
-                                        <input type="hidden" name="product_qnt_2" value="' . $rows['price2']  . '">
-                                        <input type="hidden" name="product_net_qnt_2" value="' . $rows['netqnt2']  . '">
+                                        <input type="hidden" name="product_qnt_2" value="' . $rows['price2'] . '">
+                                        <input type="hidden" name="product_net_qnt_2" value="' . $rows['netqnt2'] . '">
                                         <label class="form-check-label">' . $rows['netqnt2'] . '</label>
                                     </div>
                                 </td>
                                 <td class="cart-product-price">
                                     <input type="hidden" name="product_price_2" value="' . $prodPrice . '">
-                                    ' . $rows['currency']  . ' ' . sprintf("%.2f", $prodPrice) . '
+                                    ' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '
                                 </td>
                                 <td class="cart-product-quantity">
                                     <div class="cart-plus-minus">
@@ -354,22 +357,22 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                 </td>
                                 <td class="cart-product-subtotal">
                                     <input type="hidden" name="product_total_2" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . $rows['currency']  . ' 0.00</h6>
+                                    <h6 class="product-sub-total">' . $rows['currency'] . ' 0.00</h6>
                                 </td>
                             </tr>
                 ';
             }
 
-            if (!empty( $rows['qnt3'])) {
-                $prodPrice = (!empty( $rows['discount3']) and $rows['discount3'] > 0) ? $rows['discount3'] :  $rows['price3'] ;
+            if (!empty($rows['qnt3'])) {
+                $prodPrice = (!empty($rows['discount3']) and $rows['discount3'] > 0) ? $rows['discount3'] : $rows['price3'];
                 $home_gift_sets_modal .= '
                             <tr>
                                 <td class="cart-product-info">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" name="product_check[]" value="3">
                                         <input type="hidden" name="product_qnt_3" value="' . $rows['qnt3'] . '">
-                                        <input type="hidden" name="product_net_qnt_3" value="' .  $rows['netqnt3']  . '">
-                                        <label class="form-check-label">' . $rows['netqnt3']  . '</label>
+                                        <input type="hidden" name="product_net_qnt_3" value="' . $rows['netqnt3'] . '">
+                                        <label class="form-check-label">' . $rows['netqnt3'] . '</label>
                                     </div>
                                 </td>
                                 <td class="cart-product-price">
@@ -392,14 +395,14 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             }
 
             if (!empty($giftSet->qnt4)) {
-                $prodPrice = (!empty($rows['discount4']) and $rows['discount4'] > 0) ? $rows['discount4'] : $rows['price4'] ;
+                $prodPrice = (!empty($rows['discount4']) and $rows['discount4'] > 0) ? $rows['discount4'] : $rows['price4'];
                 $home_gift_sets_modal .= '
                             <tr>
                                 <td class="cart-product-info">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" name="product_check[]" value="4">
-                                        <input type="hidden" name="product_qnt_4" value="' . $rows['qnt4']  . '">
-                                        <input type="hidden" name="product_net_qnt_4" value="' . $rows['netqnt4']  . '">
+                                        <input type="hidden" name="product_qnt_4" value="' . $rows['qnt4'] . '">
+                                        <input type="hidden" name="product_net_qnt_4" value="' . $rows['netqnt4'] . '">
                                         <label class="form-check-label">' . $rows['netqnt4'] . '</label>
                                     </div>
                                 </td>
@@ -488,7 +491,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
              </figure>';
     }
 
-    echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" =>$home_gift_sets_script, "nav" => $navigation));
+    echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" => $home_gift_sets_script, "nav" => $navigation));
 }
 
 ?>
