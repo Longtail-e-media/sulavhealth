@@ -248,6 +248,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                     </div>
                 </div>
 
+                <!--
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
@@ -259,6 +260,8 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                                value="<?php echo !empty($subproductInfo->currency) ? $subproductInfo->currency : ""; ?>">
                     </div>
                 </div>
+                -->
+                <input type="hidden" name="currency" value="NPR">
 
                 <div class="form-row">
                     <div class="form-label col-md-2">
