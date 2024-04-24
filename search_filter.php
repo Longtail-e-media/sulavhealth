@@ -142,7 +142,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
 //     }
 
     $page = 1;
-    $limit = 15;
+    $limit = 150000000;
     $total_num = $db->num_rows($db->query($sql));
     $startpoint = ($page * $limit) - $limit;
     $start = $startpoint + 1;
