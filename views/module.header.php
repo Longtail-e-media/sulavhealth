@@ -11,7 +11,7 @@ $headerClass = ($fileName == 'indexxxx') ? 'ltn__header-area ltn__header-5 ltn__
 $header .= '
 <header class="ltn__header-area ltn__header-5 ltn__sticky-bg-white">
         <!-- ltn__header-middle-area start -->
-        <div class="ltn__header-middle-area ltn__header-sticky ltn__sticky-bg-black plr--9---">
+        <div class="ltn__header-middle-area ltn__sticky-bg-black plr--9---">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -95,9 +95,10 @@ else{
     <li><a href="'.BASE_URL.'register" id="id_register">Register</a></li>';
 }
 $brands= Brand:: get_brand();
+$brandmenu .= '<input type="search" placeholder="Filter Brands" class="m-2 p-1" name="brandFilterMenuSection" id="brandFilterMenuSection" autocomplete="off">';
 // pr($brands);
 foreach($brands as $brand){
-    $brandmenu .='<a class="dropdown-item" href="'.BASE_URL.'search/'.$brand->slug.'">'.$brand->title.'</a>';
+    $brandmenu .='<a class="dropdown-item brand-filter-menu" href="'.BASE_URL.'search/'.$brand->slug.'" item="'.$brand->title.'">'.$brand->title.'</a>';
 }
 // pr($_POST);
 $header .= '
@@ -179,7 +180,7 @@ $header .= '
 
 
             <nav class="down-nav">
-                <div class="container col header-menu-column menu-color-white">
+                <div class="container ltn__header-middle-area ltn__header-sticky">
                     <div class="header-menu d-none d-xl-block">
                         <div class="ltn__main-menu"
                             style="display: flex; align-items: center; justify-content: flex-start; gap: 40px;">
