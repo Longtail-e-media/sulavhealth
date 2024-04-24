@@ -95,9 +95,10 @@ else{
     <li><a href="'.BASE_URL.'register" id="id_register">Register</a></li>';
 }
 $brands= Brand:: get_brand();
+$brandmenu .= '<input type="search" placeholder="Filter Brands" class="m-2 p-1" name="brandFilterMenuSection" id="brandFilterMenuSection" autocomplete="off">';
 // pr($brands);
 foreach($brands as $brand){
-    $brandmenu .='<a class="dropdown-item" href="'.BASE_URL.'search/'.$brand->slug.'">'.$brand->title.'</a>';
+    $brandmenu .='<a class="dropdown-item brand-filter-menu" href="'.BASE_URL.'search/'.$brand->slug.'" item="'.$brand->title.'">'.$brand->title.'</a>';
 }
 // pr($_POST);
 $header .= '

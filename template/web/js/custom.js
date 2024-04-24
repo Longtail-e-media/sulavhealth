@@ -305,4 +305,11 @@ $(function () {
         });
         return false;
     });
+
+    $(document).on("keyup", "#brandFilterMenuSection", function() {
+        var value = $(this).val().toLowerCase();
+        $(".brand-filter-menu").filter(function() {
+            $(this).toggle($(this).attr('item').toLowerCase().indexOf(value) > -1)
+        });
+    });
 });
