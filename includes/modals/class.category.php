@@ -17,10 +17,10 @@ class category extends DatabaseObject
     var $added_date;
 
     //Find all by parent id the current database table.
-    static function find_all_byparnt($parentId = 0, $notid='')
+    static function find_all_byparnt($parentId = 0, $notid = '')
     {
         global $db;
-        $cond1 = !empty($notid)?' AND id<>'.$notid:'';
+        $cond1 = !empty($notid) ? ' AND id<>' . $notid : '';
         $sql = "SELECT * FROM " . self::$table_name . " WHERE parentId=$parentId $cond1 ORDER BY sortorder ASC";
         return self::find_by_sql($sql);
     }
@@ -31,6 +31,7 @@ class category extends DatabaseObject
         $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1 AND parentId=0 ORDER BY sortorder DESC ";
         return self::find_by_sql($sql);
     }
+
     public static function get_subcategory()
     {
         global $db;
@@ -124,45 +125,52 @@ class category extends DatabaseObject
             return true;
         }
     }
-    public static function get_all_selcate($actid=0,$selid=''){
-		global $db;		
-		$sql = "SELECT id,title FROM ".self::$table_name." WHERE parentId ='$actid' ORDER BY sortorder DESC";
-		$record = self::find_by_sql($sql);
-		$result='';
-		if($record){
-				$result.='<option value="all">Choose Sub category</option>';
-			foreach($record as $row){
-				$sel = ($selid==$row->id)?'selected':'';
-				$result.='<option value="'.$row->id.'" '.$sel.'>'.$row->title.'</option>';
-			}
-		}else{
-			$result.='<option value="all">Choose sub Category</option>';
-		}
-		return $result;
-	}
 
-    public static function get_all_homeselcate($actid=0,$selid=''){
-		global $db;		
-		$sql = "SELECT id,title FROM ".self::$table_name." WHERE parentId ='$actid' ORDER BY sortorder DESC";
-		$record = self::find_by_sql($sql);
-		$result='';
-		if($record){
-				$result.='<div class="custom-control custom-checkbox">
-                
-            ';
-			foreach($record as $row){
-				$sel = ($selid==$row->id)?'selected':'';
-                $tot = SubProduct::get_total_category_product($actid);
-				$result.='
-                <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="ser-'.$row->id.'" value="'.$row->id.'">
-                <label class="custom-control-label d-flex justify-content-between" for="ser-'.$row->id.'">'.$row->title.' <span class="checkbox-count">'.$tot.'</span></label>
-                ';
-			}
-		}else{
-			$result.='</div>';
-		}
-		return $result;
-	}
+    public static function get_all_selcate($actid = 0, $selid = '')
+    {
+        global $db;
+        $sql = "SELECT id,title FROM " . self::$table_name . " WHERE parentId ='$actid' ORDER BY sortorder DESC";
+        $record = self::find_by_sql($sql);
+        $result = '';
+        if ($record) {
+            $result .= '<option value="all">Choose Sub category</option>';
+            foreach ($record as $row) {
+                $sel = ($selid == $row->id) ? 'selected' : '';
+                $result .= '<option value="' . $row->id . '" ' . $sel . '>' . $row->title . '</option>';
+            }
+        } else {
+            $result .= '<option value="all">Choose sub Category</option>';
+        }
+        return $result;
+    }
+
+    public static function get_all_homeselcate($actid = 0, $selid = '')
+    {
+        $result = '';
+        $selectedIds = explode(',', $actid);
+        if (!empty($selectedIds)) {
+            foreach ($selectedIds as $selectedId) {
+                global $db;
+                $sql = "SELECT id,title FROM " . self::$table_name . " WHERE parentId ='$selectedId' ORDER BY sortorder DESC";
+                $record = self::find_by_sql($sql);
+                if ($record) {
+                    $result .= '<div class="custom-control custom-checkbox">
+                    ';
+                    foreach ($record as $row) {
+                        $sel = ($selid == $row->id) ? 'selected' : '';
+                        $tot = SubProduct::get_total_category_product($selectedId);
+                        $result .= '
+                        <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="ser-' . $row->id . '" value="' . $row->id . '">
+                        <label class="custom-control-label d-flex justify-content-between" for="ser-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                        ';
+                    }
+                } else {
+                    $result .= '</div>';
+                }
+            }
+        }
+        return $result;
+    }
 
     public static function get_all_filterdata($pId = 0, $selid = '')
     {
@@ -207,10 +215,10 @@ class category extends DatabaseObject
         return !empty($result_array) ? array_shift($result_array) : false;
     }
 
-    static function get_all_byparnt($parentId = 0, $notparentId='')
+    static function get_all_byparnt($parentId = 0, $notparentId = '')
     {
         global $db;
-        $cond1 = !empty($notparentId)?' AND id<>'.$notparentId:'';
+        $cond1 = !empty($notparentId) ? ' AND id<>' . $notparentId : '';
         $sql = "SELECT id,title FROM " . self::$table_name . " WHERE parentId=$parentId  AND status=1 $cond1 ORDER BY sortorder DESC";
         return self::find_by_sql($sql);
     }
@@ -255,8 +263,6 @@ class category extends DatabaseObject
         $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE id={$id} LIMIT 1");
         return !empty($result_array) ? array_shift($result_array) : false;
     }
-    
-
 
 
     public static function field_by_id($id = 0, $fields = "")

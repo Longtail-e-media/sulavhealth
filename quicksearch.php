@@ -12,9 +12,9 @@ $action = $_REQUEST['action'];
 
 switch ($action) {
     case "filteractivity":
-        $desId = addslashes($_REQUEST['destid']);
+        $selectedIds = addslashes($_REQUEST['selectedIds']);
         
-        $rec = category::get_all_homeselcate($desId);
+        $rec = category::get_all_homeselcate($selectedIds);
         echo json_encode(array("action" => "success", "result" => $rec));
         break;
 
