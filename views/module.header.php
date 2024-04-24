@@ -93,6 +93,7 @@ else{
     <li><a href="'.BASE_URL.'login" id="id_sign_in">Log in</a></li>
     <li><a href="'.BASE_URL.'register" id="id_register">Register</a></li>';
 }
+// pr($_POST);
 $header .= '
 
 
@@ -112,6 +113,7 @@ $header .= '
                             <div class="search-container">
                                 <input type="search" placeholder="Search for products and medicines..." class="search" id="searchkey" name="searchkey">
                                 <i class="fas fa-search search-icon"></i>
+                                <input type="hidden" value="" name="hotelslug"/>
                             </div>
                             </form>
                         </div>

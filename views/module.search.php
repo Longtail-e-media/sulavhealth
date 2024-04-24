@@ -9,6 +9,10 @@ if (isset($_REQUEST)) {
 $resisearch = $respkglist = $bread = $bread_title = $bread_text = $bread_text_extra = $navigation = '';
 $home_gift_sets_modal = $home_gift_sets_script ='';
 if (defined('SEARCH_PAGE')) {
+    // pr($_POST);
+    if (isset($hotelslug)) {
+        redirect_to( BASE_URL.'product/product-detail/'.$hotelslug);
+    }
     
 
     /* search page search form start*/

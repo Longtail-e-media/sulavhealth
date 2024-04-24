@@ -86,7 +86,8 @@ if(!empty($_REQUEST['term'])) {
     if ($totRec2 > 0) {
         while ($row = $db->fetch_object($query2)) {
 //            $hotel = $row->pkg_title . ', ' . $row->dest_title . ', ' . $row->region_title;
-            $hotel = '<i class="fas fa-search search-icon">'.$row->title.'</i>' ;
+            // $hotel = '<i class="fas fa-search search-icon"></i>'.$row->title.'' ;
+            $hotel = ''.$row->title.'' ;
             $link = $row->slug;
             $newArrc[] = array('value' => $hotel,'link' => $link, 'id' => $row->id);
         }

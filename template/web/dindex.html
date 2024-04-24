@@ -176,7 +176,9 @@
                 // minLength: 2,
                 showHintOnFocus: true,
                 select: function (event, ui) {
+                    // console.log(ui);
                     $('input[name="searchkey"]').val(ui.item.id);
+                    $('input[name="hotelslug"]').val(ui.item.link);
                 }
             });
             $("#searchform").validate({
@@ -186,7 +188,7 @@
                     searchkey: { required: true, }
                 },
                 messages: {
-                    searchkey: {required: "Please enter product name or category to start searching.",}
+                    searchkey: {required: "Please enter product name to start searching.",}
                 },
                 submitHandler: function (form) {
                     var Frmval = $("#searchform").serialize();
