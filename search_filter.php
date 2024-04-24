@@ -242,14 +242,14 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             //             </div>
             // ';
             $home_gift_sets_script .= '
-                <script id="productscript">
+                
                     $("#quick_view_modal_product_' . $rows['slug'] . '").on("shown.bs.modal", function () {
                       $(".ltn__blog-slider-one-active1").slick("setPosition");
                     })
-                </script>
+                
             ';
             $home_gift_sets_modal .= '
-                <div class="ltn__modal-area ltn__quick-view-modal-area">
+                <div class="ltn__modal-area ltn__quick-view-modal-area ">
                     <div class="modal fade" id="quick_view_modal_product_' . $rows['slug'] . '" tabindex="-1">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -290,8 +290,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                                 </div>
                                                 <div class="col-lg-7 col-12">
                                                     <div class="modal-product-info">
-                                                    <h3>' . (($lang == "gr") ? $rows['title_greek'] : $rows['title']) . '</h3>
-                                                        ' . (($lang == "gr") ? $rows['brief_greek'] : $rows['brief']) . '
+                                                    <h3>' .  $rows['title'] . '</h3>
+                                                        ' . $rows['brief'] . '
                 <div class="shoping-cart-table table-responsive">
                     <form id="add-cart-product-' . $rows['slug'] . '">
                     <table class="table">

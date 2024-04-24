@@ -647,7 +647,7 @@ if (defined('SEARCH_PAGE')) {
                 </script>
             ';
             $home_gift_sets_modal .= '
-                <div class="ltn__modal-area ltn__quick-view-modal-area productpopup">
+                <div class="ltn__modal-area ltn__quick-view-modal-area " id="productpopup">
                     <div class="modal fade" id="quick_view_modal_product_' . $rows['slug'] . '" tabindex="-1">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
