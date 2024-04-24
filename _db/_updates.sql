@@ -55,3 +55,7 @@ ALTER TABLE `tbl_product_sub` ADD `service_id` INT NOT NULL AFTER `homepage`;
 
 -- 2024-04-23
 ALTER TABLE `tbl_location` ADD `delivery_charge` FLOAT NOT NULL AFTER `homepage`;
+
+
+-- 2024-04-24
+ALTER TABLE `tbl_booking_info` ADD `shipping_country` VARCHAR(255) NOT NULL AFTER `person_comment`, ADD `shipping_district` VARCHAR(255) NOT NULL AFTER `shipping_country`, ADD `shipping_city` VARCHAR(255) NOT NULL AFTER `shipping_district`, ADD `shipping_post_code` VARCHAR(255) NOT NULL AFTER `shipping_city`;

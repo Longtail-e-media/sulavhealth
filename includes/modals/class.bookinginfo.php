@@ -9,14 +9,14 @@ class BookingInfo extends DatabaseObject
         'person_country_code', 'person_post_code', 'person_city', 'person_address', 'person_shipping_address', 'person_phone', 'person_comment', 'ip_address', 'pay_type',
         'shipping_type', 'shipping_amt', 'discount_amt', 'sub_total', 'grand_total', 'pay_amt', 'status', 'sortorder', 'added_date',
         'cc_number', 'cc_cvc', 'cc_exp_month', 'cc_exp_year', 'cc_id', 'cc_type', 'paymentDescription', 'authCode', 'paymentStatus', 'paymentId',
-        'pay_pan', 'pay_invoice', 'payment_date'
+        'pay_pan', 'pay_invoice', 'payment_date', 'shipping_country', 'shipping_district', 'shipping_city', 'shipping_post_code'
     );
 
     public $id, $user_id, $has_coupon, $coupon_code, $currency, $accesskey, $person_fname, $person_mname, $person_lname, $person_email, $person_country,
         $person_country_code, $person_post_code, $person_city, $person_address, $person_shipping_address, $person_phone, $person_comment, $ip_address, $pay_type,
         $shipping_type, $shipping_amt, $discount_amt, $sub_total, $grand_total, $pay_amt, $status, $sortorder, $added_date,
         $cc_number, $cc_cvc, $cc_exp_month, $cc_exp_year, $cc_id, $cc_type, $paymentDescription, $authCode, $paymentStatus, $paymentId,
-        $pay_pan, $pay_invoice, $payment_date;
+        $pay_pan, $pay_invoice, $payment_date, $shipping_country, $shipping_district, $shipping_city, $shipping_post_code;
 
     //Find a single row in the database where slug is provided.
     public static function find_by_tranid($tranid = 0)

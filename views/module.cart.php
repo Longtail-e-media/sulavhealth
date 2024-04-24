@@ -262,16 +262,16 @@ if (defined('CHECKOUT_PAGE')) {
                                     <div class="col-lg-12 col-md-12 mb-30">
                                         <h6>' . (($lang == "gr") ? "Διεύθυνση" : "Address") . '</h6>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="input-item">
                                                     <input type="text" name="address" value="' . ((!empty($checkLogin)) ? $checkLogin->facebook_uid : '') . '" placeholder="' . (($lang == "gr") ? "Διεύθυνση" : "Address") . '">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <!--<div class="col-md-6">
                                                 <div class="input-item">
                                                     <input type="text" name="shipping_address" placeholder="' . (($lang == "gr") ? "Διεύθυνση Αποστολής" : "Shipping Address") . '">
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 mb-30">
@@ -301,8 +301,8 @@ if (defined('CHECKOUT_PAGE')) {
                                                 <option value="">' . (($lang == "gr") ? "Επιλέξτε Χώρα" : "Select District") . '</option>
     ';
     $districts = Locationn::find_all();
-    foreach ($districts as $country) {
-        $checkout_form .= '<option value="' . $country->name . '">' . $country->name . '</option>';
+    foreach ($districts as $district) {
+        $checkout_form .= '<option value="' . $district->title . '" data-dc="' . $district->delivery_charge . '">' . $district->title . '</option>';
     }
     $checkout_form .= '
                                             </select>
@@ -324,7 +324,7 @@ if (defined('CHECKOUT_PAGE')) {
                                         </div>
                                     </div>
                                 </div>
-                                <p><label class="input-info-save mb-0"><input type="checkbox" name="ship_same_add" value="1"> ' . (($lang == "gr") ? "Να χρησιμοποιηθεί η διεύθυνση ως διεύθυνση αποστολής;;" : "Use Address as Shipping Address?") . '</label></p>
+                                <!--<p><label class="input-info-save mb-0"><input type="checkbox" name="ship_same_add" value="1"> ' . (($lang == "gr") ? "Να χρησιμοποιηθεί η διεύθυνση ως διεύθυνση αποστολής;;" : "Use Address as Shipping Address?") . '</label></p>-->
     ';
     if (empty($checkLogin)) {
         $checkout_form .= '<p><label class="input-info-save mb-0"><input type="checkbox" name="create_account" value="1"> ' . (($lang == "gr") ? "Δημιουργία Λογαριασμού;" : "Create an account?") . '</label></p>';
@@ -332,6 +332,57 @@ if (defined('CHECKOUT_PAGE')) {
         $checkout_form .= '<input type="hidden" name="user_id" value="' . $checkLogin->id . '">';
     }
     $checkout_form .= '
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 mb-30">
+                                        <h6>Shipping Address</h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="input-item">
+                                                    <input type="text" name="shipping_address" placeholder="' . (($lang == "gr") ? "Διεύθυνση Αποστολής" : "Shipping Address") . '">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 mb-30">
+                                        <h6>' . (($lang == "gr") ? "Χώρα" : "Country") . '</h6>
+                                        <div class="input-item">
+                                            <select class="nice-selec col-12" name="shipping_country" id="shipping_country">
+                                                <option value="">' . (($lang == "gr") ? "Επιλέξτε Χώρα" : "Select Country") . '</option>
+                                                <option value="Nepal" selected>Nepal</option>
+    ';
+    /*$countries = ShippingCountries::find_all();
+    foreach ($countries as $country) {
+        $checkout_form .= '<option value="' . $country->name . '">' . $country->name . '</option>';
+    }*/
+    $checkout_form .= '
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 mb-30">
+                                        <h6>' . (($lang == "gr") ? "Χώρα" : "District") . '</h6>
+                                        <div class="input-item">
+                                            <select class="nice-selec col-12" name="shipping_district" id="shipping_district">
+                                                <option value="">' . (($lang == "gr") ? "Επιλέξτε Χώρα" : "Select District") . '</option>
+    ';
+    $districts = Locationn::find_all();
+    foreach ($districts as $district) {
+        $checkout_form .= '<option value="' . $district->title . '" data-dc="' . $district->delivery_charge . '">' . $district->title . '</option>';
+    }
+    $checkout_form .= '
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 mb-30">
+                                        <div class="input-item">
+                                            <input type="text" name="shipping_city" value="" placeholder="' . CHECKOUT_CITY . '">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 mb-30">
+                                        <div class="input-item">
+                                            <input type="text" name="shipping_post_code" value="" placeholder="' . CHECKOUT_POST_CODE . '">
+                                        </div>
+                                    </div>
+                                </div>
                                 <h6>' . (($lang == "gr") ? "Σημειώσεις παραγγελίας (προαιρετικό)" : "Order Notes (optional)") . '</h6>
                                 <div class="input-item input-item-textarea ltn__custom-icon">
                                     <textarea name="message" placeholder="' . (($lang == "gr") ? "Σημειώσεις σχετικά με την παραγγελία σας, π.χ. ειδικές σημειώσεις για την παράδοση." : "Notes about your order, e.g. special notes for delivery.") . '"></textarea>
@@ -345,11 +396,11 @@ if (defined('CHECKOUT_PAGE')) {
                         <h4 class="title-2">' . (($lang == "gr") ? "Τρόπος Πληρωμής" : "Payment Method") . '</h4>
                         <div id="checkout_accordion_1">
                             <!-- card -->
-                            <div class="card">
+                            <!--<div class="card">
                                 <h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-1" aria-expanded="true">
                                 <input type="radio" name="payment_method" value="cheque_payment" checked>
                                     ' . (($lang == "gr") ? "Μεταφορά μέσω τράπεζας" : "Deposit in Bank") . '
-                                </h5>
+                                </h5>-->
                                 <!--<div id="faq-item-2-1" class="collapse show" data-parent="#checkout_accordion_1">
                                     <div class="card-body">
                                         <p>
@@ -359,7 +410,7 @@ if (defined('CHECKOUT_PAGE')) {
                                         </p>
                                     </div>
                                 </div>-->
-                            </div>
+                            <!--</div>-->
                             <!-- card -->
                             <!--<div class="card">
                                 <h5 class="collapsed ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-2" aria-expanded="false">
@@ -427,7 +478,7 @@ if (defined('CHECKOUT_PAGE')) {
                             <!-- card -->
                             <div class="card">
                                 <h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-3" aria-expanded="false">
-                                <input type="radio" name="payment_method" value="payment_at_store">
+                                <input type="radio" name="payment_method" value="payment_at_store" checked>
                                     ' . (($lang == "gr") ? "Εξόφληση κατά την παραλαβή από το κατάστημα" : "Cash on Delivery") . '
                                 </h5>
                             </div>
@@ -438,13 +489,13 @@ if (defined('CHECKOUT_PAGE')) {
                                 </h5>
                             </div>
                         </div>
-                        <div class="cart-coupon-row">
+                        <!--<div class="cart-coupon-row">
                             <div class="cart-coupon">
                                 <input type="text" name="coupon" id="coupon" placeholder="' . (($lang == "gr") ? "Κωδικός Κουπονιού" : "Coupon code") . '">
                                 <a class="btn theme-btn-2 btn-effect-2 coupon-btn" style="color:#fff;">' . (($lang == "gr") ? "Χρήση Κουπονιού" : "Apply Coupon") . '</a>
                                 <p id="couponMsg" style="display: none;"></p>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="ltn__payment-note mt-30 mb-30">
                             <p>' . (($lang == "gr")
             ? "Τα προσωπικά σας δεδομένα θα χρησιμοποιηθούν για την επεξεργασία της παραγγελίας σας και για άλλους σκοπούς που περιγράφονται στην πολιτική απορρήτου μας."
@@ -490,14 +541,14 @@ if (defined('CHECKOUT_PAGE')) {
     $checkout_form .= '
                             <tr id="coupon-discount" style="display: none;">
                                 <td>' . (($lang == "gr") ? "Coupon Discount" : "Coupon Discount") . '</td>
-                                <td id="coupon-discount-amount">€ 0.00</td>
+                                <td id="coupon-discount-amount">NPR 0.00</td>
                                 <input type="hidden" name="discount_amt" value="0">
                             </tr>
-                            <!--<tr>
-                                <td>' . (($lang == "gr") ? "Aποστολή και Παράδοση" : "Shipping and Handing") . '</td>
-                                <td id="shipping-amount">€ 0.00</td>
+                            <tr>
+                                <td>' . (($lang == "gr") ? "Aποστολή και Παράδοση" : "Delivery Charge") . '</td>
+                                <td id="shipping-amount">NPR 0.00</td>
                                 <input type="hidden" name="shipping_amt" value="0">
-                            </tr>-->
+                            </tr>
                             <tr>
                                 <td><strong>' . (($lang == "gr") ? "Σύνολο Παραγγελίας" : "Order Total") . '</strong></td>
                                 <td><strong id="grand-total">' . $subtotal . '</strong></td>
