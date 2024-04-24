@@ -203,7 +203,9 @@ if (defined('SEARCH_PAGE')) {
         
                         <div class="form-group"> 
                     <label>Sub-category:</label><br>
+                               <div class="subfilter">
                                '.$subcategory_filter.'
+                        </div>
                         </div>
 
                         

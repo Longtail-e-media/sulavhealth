@@ -13,8 +13,8 @@ $action = $_REQUEST['action'];
 switch ($action) {
     case "filteractivity":
         $desId = addslashes($_REQUEST['destid']);
-        $selId = addslashes($_REQUEST['selct']);
-        $rec = category::get_all_selcate($desId,$selId);
+        
+        $rec = category::get_all_homeselcate($desId);
         echo json_encode(array("action" => "success", "result" => $rec));
         break;
 

@@ -141,6 +141,29 @@ class category extends DatabaseObject
 		return $result;
 	}
 
+    public static function get_all_homeselcate($actid=0,$selid=''){
+		global $db;		
+		$sql = "SELECT id,title FROM ".self::$table_name." WHERE parentId ='$actid' ORDER BY sortorder DESC";
+		$record = self::find_by_sql($sql);
+		$result='';
+		if($record){
+				$result.='<div class="custom-control custom-checkbox">
+                
+            ';
+			foreach($record as $row){
+				$sel = ($selid==$row->id)?'selected':'';
+                $tot = SubProduct::get_total_category_product($actid);
+				$result.='
+                <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="ser-'.$row->id.'" value="'.$row->id.'">
+                <label class="custom-control-label d-flex justify-content-between" for="ser-'.$row->id.'">'.$row->title.' <span class="checkbox-count">'.$tot.'</span></label>
+                ';
+			}
+		}else{
+			$result.='</div>';
+		}
+		return $result;
+	}
+
     public static function get_all_filterdata($pId = 0, $selid = '')
     {
         global $db;
