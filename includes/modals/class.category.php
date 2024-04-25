@@ -158,7 +158,7 @@ class category extends DatabaseObject
                     ';
                     foreach ($record as $row) {
                         $sel = ($selid == $row->id) ? 'selected' : '';
-                        $tot = SubProduct::get_total_category_product($selectedId);
+                        $tot = SubProduct::get_total_category_product($row->id);
                         $result .= '
                         <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="ser-' . $row->id . '" value="' . $row->id . '">
                         <label class="custom-control-label d-flex justify-content-between" for="ser-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
