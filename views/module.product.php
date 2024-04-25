@@ -100,7 +100,7 @@ if (defined('HOME_PAGE')) {
 
                         <div class="container">
 
-                            <h3>New Products</h3>
+                            <h3 class="new-products">New Products</h3>
 
                             <div class="">
                                 <div class="tab-content tab-list3">

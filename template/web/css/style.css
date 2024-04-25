@@ -5764,9 +5764,13 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 
 .mini-cart-item {
   padding-top: 1.25rem;
-  padding-left: 0.625rem;
+  /* padding-left: 0.625rem; */
   margin-bottom: 1.25rem;
   border-top: 0.0625rem solid var(--border-color-1);
+  font-weight: ;
+}
+.mini-cart-item h6 {
+  font-weight: 500;
 }
 
 .mini-cart-item:first-child {
@@ -17458,4 +17462,8 @@ html {
 
 .brand-filter .search {
   width: auto;
+}
+
+.new-products {
+  color: #000!important;
 }
