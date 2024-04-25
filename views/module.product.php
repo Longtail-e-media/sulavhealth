@@ -146,6 +146,20 @@ if (defined('HOME_PAGE')) {
             if (!empty($giftSet->discount1)) {
                 $price_text = '<span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span><del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del>';
             }
+            $prodbrand = Brand::find_by_id($giftSet->brand);
+            $prodservice = Services::find_by_id($giftSet->service_id);
+            if (!empty($prodbrand)) {
+                $title = $prodbrand->title;
+                $slug= $prodbrand->slug;
+            } else {
+                $title = '';
+                $slug='';
+            }
+            if (!empty($prodservice)) {
+                $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $giftSet->slug . '';
+            } else {
+                $slugs = '' . BASE_URL . 'product/product-detail/' . $giftSet->slug . '';;
+            }
             $home_gift_sets .= '
             <div class="col-xl-3 col-sm-6 col-6">
             <div class="ltn__product-item ltn__product-item-3 text-center">
@@ -231,12 +245,14 @@ if (defined('HOME_PAGE')) {
                     }
                 }
             }
+            
             $home_gift_sets_modal .= '
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-7 col-12">
                                                     <div class="modal-product-info">
+                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
                                                         <h3>' . (($lang == "gr") ? $giftSet->title_greek : $giftSet->title) . '</h3>
                                                         ' . (($lang == "gr") ? $giftSet->brief_greek : $giftSet->brief) . '
 

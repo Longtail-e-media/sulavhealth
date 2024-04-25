@@ -8,6 +8,7 @@ if (isset($_REQUEST)) {
 
 $resisearch = $respkglist = $bread = $bread_title = $bread_text = $bread_text_extra = $navigation = '';
 $home_gift_sets_modal = $home_gift_sets_script = '';
+$minprice = $maxprice= '';
 if (defined('SEARCH_PAGE')) {
     // pr($_POST);
     if (isset($hotelslug) and !empty($hotelslug)) {
@@ -648,6 +649,7 @@ if (defined('SEARCH_PAGE')) {
                                                 </div>
                                                 <div class="col-lg-7 col-12">
                                                     <div class="modal-product-info">
+                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
                                                     <h3>' . (($lang == "gr") ? $rows['title_greek'] : $rows['title']) . '</h3>
                                                         ' . (($lang == "gr") ? $rows['brief_greek'] : $rows['brief']) . '
                 <div class="shoping-cart-table table-responsive">
@@ -873,9 +875,23 @@ if (defined('SEARCH_PAGE')) {
         $url = BASE_URL.'pages / errors';
         redirect_to($url);
     }*/
+    $maxs= SubProduct::get_max_price();
+
+    foreach($maxs as $max){
+    $maxprice = $max->discount1;
+    }
+    $mins= SubProduct::get_min_price();
+
+    foreach($mins as $min){
+    $minprice = $min->discount1;
+    }
+    //  pr($maxprice);
+   
 }
 
 $jVars['module:search-searchform'] = $resisearch;
+$jVars['module:search-maxprice'] = $maxprice;
+$jVars['module:search-minprice'] = $minprice;
 $jVars['module:modal-popup-search'] = $home_gift_sets_modal;
 $jVars['module:modal-popup-script'] = $home_gift_sets_script;
 $jVars['module:package-search-breadcrumb'] = $bread;

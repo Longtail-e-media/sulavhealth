@@ -59,6 +59,36 @@ class SubProduct extends DatabaseObject
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
+    public static function get_max_price()
+    {
+        global $db;
+        return self::find_by_sql("SELECT price1 , discount1
+        FROM " . self::$table_name . "
+        WHERE price1 = (
+            SELECT MAX(price1)
+            FROM " . self::$table_name . " 
+        ) AND discount1 = (
+            SELECT MAX(discount1)
+            FROM " . self::$table_name . "
+        )");
+        
+        
+        
+        
+    }
+    public static function get_min_price()
+    {
+        global $db;
+        return self::find_by_sql("SELECT price1 , discount1
+        FROM " . self::$table_name . "
+        WHERE price1 = (
+            SELECT MIN(price1) 
+            FROM " . self::$table_name . " WHERE price1 IS NOT NULL AND price1 <> 0
+        ) AND discount1 = (
+            SELECT MIN(discount1)
+            FROM " . self::$table_name . " WHERE discount1 IS NOT NULL AND discount1 <> 0
+        )");
+    }
 
     public static function get_type()
     {

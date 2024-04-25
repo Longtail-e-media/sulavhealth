@@ -175,6 +175,21 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             } else {
                 $slugs = '' . BASE_URL . 'product/product-detail/' . $rows['slug'] . '';;
             }
+            $prodbrand = Brand::find_by_id($rows['brand']);
+            $prodservice = Services::find_by_id($rows['service_id']);
+            if (!empty($prodbrand)) {
+                $title = $prodbrand->title;
+                $slug= $prodbrand->slug;
+            } else {
+                $title = '';
+                $slug='';
+            }
+            if (!empty($prodservice)) {
+                $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $rows['slug'] . '';
+            } else {
+                $slugs = '' . BASE_URL . 'product/product-detail/' . $rows['slug'] . '';;
+            }
+
 
             $result .= '<div class="col-xl-3 col-sm-6 col-6">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
@@ -255,6 +270,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                                 </div>
                                                 <div class="col-lg-7 col-12">
                                                     <div class="modal-product-info">
+                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
                                                     <h3>' .  $rows['title'] . '</h3>
                                                         ' . $rows['brief'] . '
                 <div class="shoping-cart-table table-responsive">
