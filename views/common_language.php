@@ -143,12 +143,12 @@ define("LOGIN_FORM_ERROR_EMAIL", ($lang == "gr") ? "Συμπληρώστε το 
 define("LOGIN_FORM_ERROR_EMAIL_VALID", ($lang == "gr") ? "Εισάγετε μια έγκυρη διεύθυνση email" : "Enter a valid email address");
 define("LOGIN_PASSWORD", ($lang == "gr") ? "Κωδικός" : "Password");
 define("LOGIN_FORM_ERROR_PASSWORD", ($lang == "gr") ? "Συμπληρώστε τον κωδικό σας" : "Enter your password");
-define("LOGIN_SIGN_IN", ($lang == "gr") ? "Σύνδεση" : "SIGN IN");
+define("LOGIN_SIGN_IN", ($lang == "gr") ? "Σύνδεση" : "Log In");
 define("LOGIN_FORGOT_YOUR_PASSWORD", ($lang == "gr") ? "Ξεχάσατε τον κωδικό σας;" : "Forgot Your Password?");
 define("LOGIN_RECOVER_PASSWORD", ($lang == "gr") ? "Ανάκτηση Κωδικού" : "Recover Password");
 define("LOGIN_SUBMIT", ($lang == "gr") ? "Υποβολή" : "SUBMIT");
 define("LOGIN_LOGIN", ($lang == "gr") ? "Σύνδεση" : "Login");
-define("LOGIN_SIGN_IN_TO_YOUR_ACCOUNT", ($lang == "gr") ? "Συνδεθείτε <br> στον λογαριασμό σας" : "Log In <br>To Your Account");
+define("LOGIN_SIGN_IN_TO_YOUR_ACCOUNT", ($lang == "gr") ? "Συνδεθείτε <br> στον λογαριασμό σας" : "Log In To Your Account");
 define("LOGIN_CONTENT",
     ($lang == "gr")
         ? '
@@ -183,7 +183,7 @@ $jVars['module:common_language:LOGIN_CREATE_ACCOUNT'] = LOGIN_CREATE_ACCOUNT;
  *      Register
  */
 define("REGISTER_REGISTER", ($lang == "gr") ? "Εγγραφή" : "Register");
-define("REGISTER_REGISTER_YOUR_ACCOUNT", ($lang == "gr") ? "Δημιουργία <br>Λογαριασμού" : "Register <br>Your Account");
+define("REGISTER_REGISTER_YOUR_ACCOUNT", ($lang == "gr") ? "Δημιουργία <br>Λογαριασμού" : "Register Your Account");
 define("REGISTER_EMAIL_ADDRESS", ($lang == "gr") ? "Ηλεκτρονική Διεύθυνση" : "Email Address");
 define("REGISTER_PHONE_NUMBER", ($lang == "gr") ? "Τηλέφωνο" : "Phone Number");
 define("REGISTER_CONFIRM_PASSWORD", ($lang == "gr") ? "Επιβεβαίωση κωδικού" : "Confirm Password");

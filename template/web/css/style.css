@@ -10027,9 +10027,9 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 /* ----------------------------------------
   Section title
 ---------------------------------------- */
-.section-title-area {
+/* .section-title-area {
   margin-bottom: 3.125rem;
-}
+} */
 
 .section-title-area p {
   margin-bottom: 0;
@@ -10050,8 +10050,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 }
 
 .section-title {
-  margin-bottom: 0.3125rem;
-  font-size: 3rem;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -17492,4 +17491,17 @@ html {
   margin: 0 !important;
   vertical-align: middle;
   text-align: right;
+}
+
+.account-login-inner input,
+#loginForm input {
+  background: none!important;
+  border: 0;
+  border-bottom: 1px solid #0f74b9;
+  padding-left: 0!important;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="submit"]:focus, textarea:focus {
+  border: 0;
+  border-bottom: 1px solid #9f1d65;
 }
