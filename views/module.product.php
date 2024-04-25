@@ -139,7 +139,7 @@ if (defined('HOME_PAGE')) {
                         alt="lab service 1">
                 </div>
                 <div class="product-info">
-                    <h4 class="product-title">'.$prodbrand->title.'</h4>
+                    <a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link"><h4 class="product-title">'.$prodbrand->title.'</h4></a>
                     <a href="' . $slugs . '"
                         class="product-link">' . $giftSet->title . '</a>
                     <div class="product-price">

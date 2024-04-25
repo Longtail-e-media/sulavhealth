@@ -201,6 +201,8 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                                 echo Package::get_internal_link($Lpageview, $LinkTypeview);
                                 // services Page Link
                                 echo Services::get_internal_link($Lpageview, $LinkTypeview);
+                                // services Page Link
+                                echo category::get_internal_link($Lpageview, $LinkTypeview);
                                 // Product Page Link
                                 // echo Product::get_internal_link($Lpageview, 1);
                                 // Packages Page Link

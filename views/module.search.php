@@ -564,7 +564,7 @@ if (defined('SEARCH_PAGE')) {
                             <img src="' . $img . '" alt="' . $rows['title'] . '">
                         </div>
                         <div class="product-info">
-                            <h4 class="product-title">' . $title . '</h4>
+                    <a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link"><h4 class="product-title">' . $title . '</h4></a>
                             <a href="' . $slugs . '" class="product-link">' . $rows['title'] . '</a>
                             <div class="product-price">
                                 ' . $price_text . '
@@ -657,7 +657,7 @@ if (defined('SEARCH_PAGE')) {
                                 <td class="cart-product-info">
                                     <div class="form-check form-check-inline">
             ';
-            if (!empty($giftSet->qnt2)) {
+            if (!empty($giftSet->qnt1)) {
                 $home_gift_sets_modal .= '<input class="form-check-input" type="checkbox" name="product_check[]" value="1">';
             } else {
                 $home_gift_sets_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';

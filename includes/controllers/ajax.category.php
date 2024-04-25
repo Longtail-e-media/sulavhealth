@@ -55,7 +55,7 @@
 				exit;		
 			endif;
 
-			$record->slug 		            = create_slug($_REQUEST['title']);
+			$category->slug 		            = create_slug($_REQUEST['title']);
 			// $category->image		= !empty($_REQUEST['imageArrayname']) ? $_REQUEST['imageArrayname'] : '';					
 			$category->title    = $_REQUEST['title'];	
 			// $category->brief    = $_REQUEST['brief'];

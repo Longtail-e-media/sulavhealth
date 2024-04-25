@@ -163,14 +163,26 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 }
             }
             // pr($rows);
+            $prodbrand = Brand::find_by_id($rows['brand']);
+            $prodservice = Services::find_by_id($rows['service_id']);
+            if (!empty($prodbrand)) {
+                $title = $prodbrand->title;
+            } else {
+                $title = '';
+            }
+            if (!empty($prodservice)) {
+                $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $rows['slug'] . '';
+            } else {
+                $slugs = '' . BASE_URL . 'product/product-detail/' . $rows['slug'] . '';;
+            }
 
             $result .= '<div class="col-xl-3 col-sm-6 col-6">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
-                    <div class="product-img product_hove" data-href="' . BASE_URL . 'product/' . $rows['slug'] . '">
+                  <a href="' . BASE_URL . 'product/productdetails/' . $rows['slug'] . '" class="product-link">  <div class="product-img product_hove" data-href="' . BASE_URL . 'product/' . $rows['slug'] . '">
                         <img src="' . $img . '" alt="lab service 1">
-                    </div>
+                    </div></a>
                     <div class="product-info">
-                        <h4 class="product-title">' . $rows['title'] . '</h4>
+                        <a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link"><h4 class="product-title">' . $title . '</h4></a>
                         <a href="' . BASE_URL . 'product/' . $rows['slug'] . '" class="product-link">' . $rows['title'] . '</a>
                         <div class="product-price">' . $price_text . '</div>
                         <div class="product-action">';
