@@ -548,8 +548,10 @@ if (defined('SEARCH_PAGE')) {
             $prodservice = Services::find_by_id($rows['service_id']);
             if (!empty($prodbrand)) {
                 $title = $prodbrand->title;
+                $slug= $prodbrand->slug;
             } else {
                 $title = '';
+                $slug='';
             }
             if (!empty($prodservice)) {
                 $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $rows['slug'] . '';
@@ -564,7 +566,11 @@ if (defined('SEARCH_PAGE')) {
                             <img src="' . $img . '" alt="' . $rows['title'] . '">
                         </div></a>
                         <div class="product-info">
+<<<<<<< Updated upstream
                             <h4 class="product-title"><a href="' . BASE_URL . 'search/' . @$prodbrand->slug . '" class="product-link">' . $title . '</a></h4>
+=======
+                            <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
+>>>>>>> Stashed changes
                             <a href="' . $slugs . '" class="product-link">' . $rows['title'] . '</a>
                             <div class="product-price">
                                 ' . $price_text . '
@@ -682,7 +688,7 @@ if (defined('SEARCH_PAGE')) {
                                 </td>
                                 <td class="cart-product-subtotal">
                                     <input type="hidden" name="product_total_1" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . $rows['currency'] . ' ' . $prodPrice . '</h6>
+                                    <h6 class="product-sub-total">' . $rows['currency'] . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
                                 </td>
                             </tr>
                             
