@@ -9,6 +9,7 @@ if ($Records) {
 
         $content = ($lang == "gr") ? $RecRow->content_greek : $RecRow->content;
 
+
         $file_path = SITE_ROOT . 'images/slideshow/video/' . $RecRow->source;
         if (file_exists($file_path)) {
             $reslide .= '
@@ -56,11 +57,14 @@ if (!empty($slides)) {
     ';
     foreach ($slides as $slide) {
         $file_path = SITE_ROOT . 'images/slideshow/' . $slide->image;
+        // pr($slide);
+        $linkTarget = ($slide->linktype == 1) ? ' target="_blank" ' : '';
+        $linksrc = ($slide->linktype == 1) ? $slide->linksrc : BASE_URL . $slide->linksrc;
         if (file_exists($file_path)) {
             $imgSlider .= '
             
                 <div class="" >
-                    <img style="object-position: top -50px right 0;" src="' . IMAGE_PATH . 'slideshow/' . $slide->image . '" alt="'.$slide->title.'">
+                  <img style="object-position: top -50px right 0;" src="' . IMAGE_PATH . 'slideshow/' . $slide->image . '" alt="'.$slide->title.'">
                 </div>
             ';
         }

@@ -764,6 +764,168 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                         </div>
                     </div>
                 </div>
+                <!-- <div class="ltn__shop-details-tab-menu">
+                    <div class="nav">
+                        <a class="active show" data-toggle="tab" href="#liton_tab_details_1_1">Related Products</a>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="liton_tab_details_1_1">
+                        <div class="ltn__shop-details-tab-content-inner">
+
+                            <div class="brand-images-wrapper owl-carousel owl-theme">
+
+                            <div class="item">
+                        <div class="col-xl-3 col-sm-6 col-6">
+            <div class="ltn__product-item ltn__product-item-3 text-center">
+                <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml">
+                    <a class="product-image-link" href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml"><img src="http://localhost/sulavhealth/template/web/img/product/one.jpg" alt="Mamaearth Breathe Easy Vapour Roll-on 40ml"></a>
+                </div>
+                <div class="product-info">
+                    <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
+                    <a href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml" class="product-link">Mamaearth Breathe Easy Vapour Roll-on 40ml</a>
+                    <div class="product-price">
+                        <span>NPR 380</span><del>NPR 398</del>
+                    </div>
+                    <div class="product-action">
+            <li class="sale-badge">Breathe Easy Vapour Roll-on for babies</li>
+                                    <ul>
+                                    <li>
+                                        <a href="#" class="add-wishlist"
+                                            title="Add to Wishlist"
+                                            data-cartid="mamaearth-breathe-easy-vapour-roll-on-40ml">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="ADD TO CART"
+                                            class="add-to-cart" data-toggle="modal"
+                                            data-target="#quick_view_modal_product_mamaearth-breathe-easy-vapour-roll-on-40ml">
+                                            Add to Cart
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                      </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="item">
+        <div class="col-xl-3 col-sm-6 col-6">
+            <div class="ltn__product-item ltn__product-item-3 text-center">
+                <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml">
+                    <a class="product-image-link" href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml"><img src="http://localhost/sulavhealth/template/web/img/product/one.jpg" alt="Mamaearth Breathe Easy Vapour Roll-on 40ml"></a>
+                </div>
+                <div class="product-info">
+                    <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
+                    <a href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml" class="product-link">Mamaearth Breathe Easy Vapour Roll-on 40ml</a>
+                    <div class="product-price">
+                        <span>NPR 380</span><del>NPR 398</del>
+                    </div>
+                    <div class="product-action">
+            <li class="sale-badge">Breathe Easy Vapour Roll-on for babies</li>
+                                    <ul>
+                                    <li>
+                                        <a href="#" class="add-wishlist"
+                                            title="Add to Wishlist"
+                                            data-cartid="mamaearth-breathe-easy-vapour-roll-on-40ml">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="ADD TO CART"
+                                            class="add-to-cart" data-toggle="modal"
+                                            data-target="#quick_view_modal_product_mamaearth-breathe-easy-vapour-roll-on-40ml">
+                                            Add to Cart
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                      </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="item">
+        <div class="col-xl-3 col-sm-6 col-6">
+            <div class="ltn__product-item ltn__product-item-3 text-center">
+                <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml">
+                    <a class="product-image-link" href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml"><img src="http://localhost/sulavhealth/template/web/img/product/one.jpg" alt="Mamaearth Breathe Easy Vapour Roll-on 40ml"></a>
+                </div>
+                <div class="product-info">
+                    <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
+                    <a href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml" class="product-link">Mamaearth Breathe Easy Vapour Roll-on 40ml</a>
+                    <div class="product-price">
+                        <span>NPR 380</span><del>NPR 398</del>
+                    </div>
+                    <div class="product-action">
+            <li class="sale-badge">Breathe Easy Vapour Roll-on for babies</li>
+                                    <ul>
+                                    <li>
+                                        <a href="#" class="add-wishlist"
+                                            title="Add to Wishlist"
+                                            data-cartid="mamaearth-breathe-easy-vapour-roll-on-40ml">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="ADD TO CART"
+                                            class="add-to-cart" data-toggle="modal"
+                                            data-target="#quick_view_modal_product_mamaearth-breathe-easy-vapour-roll-on-40ml">
+                                            Add to Cart
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                      </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="item">
+        <div class="col-xl-3 col-sm-6 col-6">
+            <div class="ltn__product-item ltn__product-item-3 text-center">
+                <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml">
+                    <a class="product-image-link" href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml"><img src="http://localhost/sulavhealth/template/web/img/product/one.jpg" alt="Mamaearth Breathe Easy Vapour Roll-on 40ml"></a>
+                </div>
+                <div class="product-info">
+                    <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
+                    <a href="http://localhost/sulavhealth/product/hygiene/mamaearth-breathe-easy-vapour-roll-on-40ml" class="product-link">Mamaearth Breathe Easy Vapour Roll-on 40ml</a>
+                    <div class="product-price">
+                        <span>NPR 380</span><del>NPR 398</del>
+                    </div>
+                    <div class="product-action">
+            <li class="sale-badge">Breathe Easy Vapour Roll-on for babies</li>
+                                    <ul>
+                                    <li>
+                                        <a href="#" class="add-wishlist"
+                                            title="Add to Wishlist"
+                                            data-cartid="mamaearth-breathe-easy-vapour-roll-on-40ml">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="ADD TO CART"
+                                            class="add-to-cart" data-toggle="modal"
+                                            data-target="#quick_view_modal_product_mamaearth-breathe-easy-vapour-roll-on-40ml">
+                                            Add to Cart
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                      </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+                        </div>
+                    </div>
+                </div> -->
             </div>
             <!-- Shop Tab End -->
         ';

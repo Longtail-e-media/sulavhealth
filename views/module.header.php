@@ -3,6 +3,7 @@
 $headera = '';
 $header = '';
 $brandmenu='';
+$checkout='';
 
 $current_url = pathinfo($_SERVER["PHP_SELF"]);
 $fileName = $current_url['filename'];
@@ -85,8 +86,8 @@ $userRec = User::find_by_id($userId);
 // pr($userRec);
 
 $username= 	$userRec->first_name;
-$logbutton=' <li><a href="'.BASE_URL.'dashboard" id="id_my_account">MyAccount</a></li>
-            <li><a href="'.BASE_URL.'logout" id="id_my_account">logout</a></li>';
+$logbutton=' <li><a href="'.BASE_URL.'dashboard" id="id_my_account">My Account</a></li>
+            <li><a href="'.BASE_URL.'logout" id="id_my_account">Log Out</a></li>';
 }
 else{
     $username= 	'Guest !';
@@ -102,6 +103,22 @@ $brandmenu .= '<div class="brand-filter search-container p-2">
 // pr($brands);
 foreach($brands as $brand){
     $brandmenu .='<a class="dropdown-item brand-filter-menu" href="'.BASE_URL.'search/'.$brand->slug.'" item="'.$brand->title.'">'.$brand->title.'</a>';
+}
+if ((defined('CHECKOUT_PAGE')) || (defined('CART_PAGE')) || defined('DASHBOARD_PAGE')) {
+
+    $checkout='';
+}
+else{
+    $checkout='<div class="mini-cart-icon">
+    <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+        <!-- <i class="icon-shopping-cart"></i> -->
+
+        <img class="user-cart"
+            src=\'https://s3-alpha-sig.figma.com/img/c361/18d1/72c572f3ba37b1c66353beb70ba9ab29?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GXQ~o3b6CSqjbJ1vyOZARvZQFMhGQ4r~QwuDb1urO8P0xZ~7ynbzdK0FngppL4YlTjRKeBBEXXTjZT9absRyD~gZzpAfIkWO-3OJFXiODrPg7tQQjgcshLgbWlm9cuo1y9DlHBf94udgdLH84HpTqz26uk6pQknl9l5TNmN6HMhkY0DXljFBPjSXNxrFB~eU3K9Z3tOnbiANK34aZ9iUlhQuHyh6VDZCZjdXfcJuuiW7IJzfszJ0yP1G9U1b92WaKYDBaU462q9fH8aKdXiCcKl8iT6kR~Jlg5Xcb736x8cvGV~-AVj4meH4Y0-cgg0M1ANa1RZ~ubp5Dz6jwpNjHw__\'
+            alt="">
+        <sup class="cart-total">' . $crtot . '</sup>
+    </a>
+</div>';
 }
 // pr($_POST);
 $header .= '
@@ -143,23 +160,14 @@ $header .= '
 
                             </ul>
                             <div class="user-details">
-                                <h4>Hello, '.$username.'</h4>
+                                <h4>Hello '.$username.',</h4>
 
                               <!--  '.$logbutton.' -->
                             </div>
 
                         </div>
                         <!-- mini-cart -->
-                        <div class="mini-cart-icon">
-                            <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
-                                <!-- <i class="icon-shopping-cart"></i> -->
-
-                                <img class="user-cart"
-                                    src=\'https://s3-alpha-sig.figma.com/img/c361/18d1/72c572f3ba37b1c66353beb70ba9ab29?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GXQ~o3b6CSqjbJ1vyOZARvZQFMhGQ4r~QwuDb1urO8P0xZ~7ynbzdK0FngppL4YlTjRKeBBEXXTjZT9absRyD~gZzpAfIkWO-3OJFXiODrPg7tQQjgcshLgbWlm9cuo1y9DlHBf94udgdLH84HpTqz26uk6pQknl9l5TNmN6HMhkY0DXljFBPjSXNxrFB~eU3K9Z3tOnbiANK34aZ9iUlhQuHyh6VDZCZjdXfcJuuiW7IJzfszJ0yP1G9U1b92WaKYDBaU462q9fH8aKdXiCcKl8iT6kR~Jlg5Xcb736x8cvGV~-AVj4meH4Y0-cgg0M1ANa1RZ~ubp5Dz6jwpNjHw__\'
-                                    alt="">
-                                <sup class="cart-total">' . $crtot . '</sup>
-                            </a>
-                        </div>
+                        '.$checkout.'
                         <!-- mini-cart -->
                         <!-- Mobile Menu Button -->
                         <div class="mobile-menu-toggle d-xl-none">

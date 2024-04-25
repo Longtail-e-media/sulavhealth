@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&rodisplay=swap" rel="stylesheet">
 
+
+
     <!-- Font Icons css -->
     <link rel="stylesheet" href="css/font-icons.css">
 
@@ -39,8 +41,8 @@
     <div class="row">
         <jcms:module:search-searchform/>
         <div class="col-md-10 product-filter-right">
-            <h2>Dietary Supplements</h2>
-            <label>(4 items found)</label>
+            <h2>List of Products</h2>
+            <jcms:module:search-totalitems/>
             <div id="productContainer" class="row">
                 <jcms:module:package-searchlist/>
             </div>
@@ -281,6 +283,7 @@
 <!-- Custom JS -->
 <script src="js/custom.js"></script>
 
+
 <script>
     var base_url = $('base').attr('url');
     // form filtering data
@@ -315,6 +318,7 @@
                 jQuery('div#productContainer').html(msg.result);
                 jQuery('div#productpopup').html(msg.popup);
                 jQuery('div#productscript').html(msg.popscript);
+                jQuery('div#totalitems').html(msg.itemlist);
                 // jQuery('div#filter-nav').html(msg.nav);
 
                 // setTimeout(reinitialiseSlick, 5000)

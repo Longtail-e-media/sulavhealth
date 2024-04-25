@@ -7,7 +7,7 @@ if (isset($_REQUEST)) {
 }
 
 $resisearch = $respkglist = $bread = $bread_title = $bread_text = $bread_text_extra = $navigation = '';
-$home_gift_sets_modal = $home_gift_sets_script = '';
+$home_gift_sets_modal = $home_gift_sets_script = $listofitems= '';
 $minprice = $maxprice= '';
 if (defined('SEARCH_PAGE')) {
     // pr($_POST);
@@ -513,7 +513,9 @@ if (defined('SEARCH_PAGE')) {
 
     $res = $db->query($sql);
     $total = $db->affected_rows($res);
-
+    $listofitems='
+    <div id="totalitems"></div>
+    <label>('.$total.' items found)</label>';
     if ($total > 0) {
         while ($rows = $db->fetch_array($res)) {
             // if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {
@@ -890,6 +892,7 @@ if (defined('SEARCH_PAGE')) {
 }
 
 $jVars['module:search-searchform'] = $resisearch;
+$jVars['module:search-totalitems'] = $listofitems;
 $jVars['module:search-maxprice'] = $maxprice;
 $jVars['module:search-minprice'] = $minprice;
 $jVars['module:modal-popup-search'] = $home_gift_sets_modal;

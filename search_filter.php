@@ -2,7 +2,7 @@
 require_once("includes/initialize.php");
 // require_once("views/common_language.php");
 
-$result = $navigation = $home_gift_sets_modal = $home_gift_sets_script = '';
+$result = $navigation = $home_gift_sets_modal = $home_gift_sets_script = $listofitems=  ''; 
 if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     $lang = !empty($session->get('lang_type')) ? $session->get('lang_type') : 'gr';
     foreach ($_POST as $key => $val) {
@@ -135,7 +135,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
 
     $res = $db->query($sql);
     $total = $db->affected_rows($res);
-
+    
+    $listofitems='<label>('.$total.' items found)</label>';
     if ($total > 0) {
         while ($rows = $db->fetch_array($res)) {
             // if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {
@@ -346,11 +347,13 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
 
     $home_gift_sets_modal = preg_replace('/\s+/', ' ', $home_gift_sets_modal);
     $home_gift_sets_modal = str_replace(array("\r", "\n"), '', $home_gift_sets_modal);
-
+    
     $home_gift_sets_script = preg_replace('/\s+/', ' ', $home_gift_sets_script);
     $home_gift_sets_script = str_replace(array("\r", "\n"), '', $home_gift_sets_script);
-
-    echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" => $home_gift_sets_script, "nav" => $navigation));
+    
+    $listofitems = preg_replace('/\s+/', ' ', $listofitems);
+    $listofitems = str_replace(array("\r", "\n"), '', $listofitems);
+    echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" => $home_gift_sets_script, "itemlist"=>$listofitems , "nav" => $navigation));
 }
 
 ?>
