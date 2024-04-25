@@ -186,7 +186,7 @@ $header .= '
                 <div class="container ltn__header-middle-area ltn__header-sticky">
                     <div class="header-menu d-none d-xl-block">
                         <div class="ltn__main-menu"
-                            style="display: flex; align-items: center; justify-content: flex-start; gap: 40px;">
+                            style="display: flex; align-items: center; justify-content: flex-start; gap: 10px;">
                             <div class="dropdown">
                                 <button class="brands dropdown-toggle" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

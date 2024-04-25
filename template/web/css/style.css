@@ -5076,9 +5076,9 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   padding: 0.625rem 0.875rem;
   display: block;
   white-space: nowrap;
-  color: var(--ltn__heading-color);
+  color: #9f1d65;
   /* font-weight: 800; */
-  letter-spacing: 0.0156rem;
+  /* letter-spacing: 0.0156rem; */
 }
 
 /* Submenu */
@@ -17069,10 +17069,10 @@ input.cart-plus-minus-box {
   display: flex;
   border: 0.0625rem solid #ccc;
   background-color: red;
-  width: 18.75rem;
-  height: 5rem;
+  width: 20rem;
+  height: 5.5rem;
   position: relative;
-  border-radius: 2.5rem;
+  border-radius: 3rem;
 }
 
 .product img {
@@ -17085,13 +17085,14 @@ input.cart-plus-minus-box {
 
 .product-list p {
   margin-top: -0.625rem;
-  max-width: 6.25rem;
-  font-size: 0.75em;
+  max-width: 10rem;
+  font-size: 0.35em;
   line-height: 1.25;
+  text-align: left;
 }
 
 .product .product-title {
-  margin-top: 0.4375rem;
+  margin-top: 0.55rem;
   padding-left: 8.125rem;
 }
 
@@ -17131,11 +17132,16 @@ input.cart-plus-minus-box {
 
 .access-items .access-title {
   margin-top: 1.875rem;
+  max-width: 18rem;
+  text-align: left;
 }
 
 .access-items .access-title h3 {
-  margin-bottom: 0;
+  margin-bottom: 3px;
   line-height: 1.1;
+}
+.access-items .access-title p {
+  text-align: left;
 }
 
 .popular-brands {
@@ -17236,12 +17242,12 @@ footer a:hover {
 
 .product-link {
   padding: 0.3125rem 0 !important;
-  color: #0e75ba;
+  color: #0E75BA !important;
 }
 
-.product-info .product-title {
-  font-size: 1rem;
-  font-weight: 400;
+.product-info .product-title a {
+  font-size: 1rem!important;
+  font-weight: 500!important;
 }
 
 .contact-us ul,
