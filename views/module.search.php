@@ -10,13 +10,11 @@ $resisearch = $respkglist = $bread = $bread_title = $bread_text = $bread_text_ex
 $home_gift_sets_modal = $home_gift_sets_script = '';
 if (defined('SEARCH_PAGE')) {
     // pr($_POST);
-    if (isset($hotelslug)) {
+    if (isset($hotelslug) and !empty($hotelslug)) {
         redirect_to(BASE_URL . 'product/product-detail/' . $hotelslug);
     }
 
-
     /* search page search form start*/
-
 
     /* type filter start*/
     $type_filter = '';
@@ -31,19 +29,6 @@ if (defined('SEARCH_PAGE')) {
     $obj2->title = 'Package';
     $typeRec[] = $obj2;
 
-    // $typeRec[] = array(
-    //     'id' => 1,
-    //     'title' => 'Product'
-    // );
-    // $typeRec[] = array(
-    //     'id' => 2,
-    //     'title' => 'Package'
-    // );
-    // $destinat = array(
-    //     array('id' => 1, 'title' => 'Product'),
-    //     array('id' => 2, 'title' => 'Package'));
-    // $typeRec = (object) $destinat;
-    // pr($typeRec);
     foreach ($typeRec as $typeRow) {
         if (@$type_slug) {
             $sel = (@$type_slug == $typeRow->slug) ? 'checked' : '';
@@ -73,12 +58,12 @@ if (defined('SEARCH_PAGE')) {
         $tot += SubProduct::get_total_service_product($serviceRow->id);
         $service_filter .= '
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input qservice" name="qservice[]" ' . $sel . ' id="ser-' . $serviceRow->id . '" value="' . $serviceRow->id . '">
-                    <label class="custom-control-label d-flex justify-content-between" for="ser-' . $serviceRow->id . '">' . $serviceRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                    <input type="checkbox" class="custom-control-input qservice" name="qservice[]" ' . $sel . ' id="serv-' . $serviceRow->id . '" value="' . $serviceRow->id . '">
+                    <label class="custom-control-label d-flex justify-content-between" for="serv-' . $serviceRow->id . '">' . $serviceRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
         ';
     }
-    // pr($_POST);
+
     /* category filter start*/
     $category_filter = '';
     $categoryRec = category::get_category();
@@ -137,7 +122,6 @@ if (defined('SEARCH_PAGE')) {
         ';
     }
 
-
     /* Price Range start*/
     // $price_filter = '';
     // $priceRec = array('1000' => 'Below USD 1000', '2000' => 'USD 1000 - 2000', 'morethan2000' => 'USD 2000 above');
@@ -183,78 +167,63 @@ if (defined('SEARCH_PAGE')) {
     /* Duration end*/
 
     $resisearch .= '
-    <div class="container mx-auto product-filter">
-        <div class="row">
-            <div class="product-filter-side col-md-2">
-                <h2>Filters</h2>
-                <form action="' . BASE_URL . 'searchlist" method="post" id="search_form">
-                <div class="form-group">
-                <label>Type:</label><br>
-                     ' . $type_filter . '
-                </div>   
-                <div class="form-group">
-                    <label>Services:</label><br>
-                               ' . $service_filter . '
+        <div class="container mx-auto product-filter">
+            <div class="row">
+                <div class="product-filter-side col-md-2">
+                    <h2>Filters</h2>
+                    
+                    <form action="' . BASE_URL . 'searchlist" method="post" id="search_form">
+                        <div class="form-group">
+                            <label>Type:</label><br>
+                            ' . $type_filter . '
+                        </div>   
+                        <div class="form-group">
+                            <label>Services:</label><br>
+                            ' . $service_filter . '
                         </div>             
-                <div class="form-group">
-                <label>Category:</label><br>
-                               ' . $category_filter . '
+                        <div class="form-group">
+                            <label>Category:</label><br>
+                            ' . $category_filter . '
                         </div>
-        
                         <div class="form-group"> 
-                    <label>Sub-category:</label><br>
-                               <div class="subfilter">
-                               ' . $subcategory_filter . '
-                        </div>
-                        </div>
-
-                        
-
-                        
-                        
-                       
-                        
-                        <div class="form-group">
-                    <label>Brands:</label><br>
-                             ' . $brand_filter . '
+                            <label>Sub-category:</label><br>
+                            <div class="subfilter">
+                                ' . $subcategory_filter . '
+                            </div>
                         </div>
                         <div class="form-group">
-                    <label for="price-range">Price Range:</label><br>
-                    <div class="price-container">
-                        <div class="price-input">
-                            <input type="text" id="price-start" readonly>
-                            <input type="text" id="price-end" readonly>
+                            <label>Brands:</label><br>
+                            ' . $brand_filter . '
                         </div>
-
-                        <div id="price-slider"></div>
-                    </div>
-
+                        <div class="form-group">
+                            <label for="price-range">Price Range:</label><br>
+                            <div class="price-container">
+                                <div class="price-input">
+                                    <input type="text" id="price-start" readonly>
+                                    <input type="text" id="price-end" readonly>
+                                </div>
+                                <div id="price-slider"></div>
+                            </div>
+                        </div>
+                    <!-- <button type="button" class="btn btn-primary">Apply Filter</button> -->
+                    </form>
                 </div>
-                <!-- <button type="button" class="btn btn-primary">Apply Filter</button> -->
-                </div>
-            ';
+    ';
     /* search page search form end*/
-
 
     global $db;
     // header search form
     if (!empty($search_term)) {
-        $sql = "SELECT pkg.id, pkg.title, pkg.slug, pkg.brief, pkg.days, pkg.image, pkg.price, pkg.offer_price, pkg.difficulty, pkg.accomodation,
-            dst.title as destination, dst.slug as destination_slug
-            FROM tbl_package  pkg 
-            INNER JOIN tbl_destination dst ON pkg.destinationId = dst.id 
-            INNER JOIN tbl_activities act ON pkg.activityId = act.id 
-            WHERE pkg.status=1 AND ( pkg.title LIKE '%" . $search_term . "%' OR dst.title LIKE '%" . $search_term . "%' OR act.title LIKE '%" . $search_term . "%' ) ";
+        $sql = "SELECT prod.*
+            FROM tbl_product_sub as prod  
+            INNER JOIN tbl_services as serv ON prod.service_id = serv.id 
+            INNER JOIN tbl_category as cat ON prod.Category = cat.id 
+            WHERE prod.status=1 AND 
+              ( prod.title LIKE '%" . $search_term . "%' OR 
+                serv.title LIKE '%" . $search_term . "%' OR 
+                cat.title LIKE '%" . $search_term . "%' ) ";
     } else {
-        $sql = "SELECT * 
-        FROM tbl_product_sub as prod  
-        WHERE status=1 ";
-        // $sql = "SELECT prod.id, prod.title, prod.slug, prod.brief, prod.qnt1, prod.banner_image, prod.price1, prod.discount1, prod.content, prod.netqnt1,prod.tag, prod.currency,
-        //     cat.title as category, cat.title as category_slug
-        //     FROM tbl_product_sub  prod 
-        //     INNER JOIN tbl_category  cat 
-        //     ON prod.Category = cat.id 
-        //     WHERE prod.status=1 ";
+        $sql = "SELECT * FROM tbl_product_sub as prod WHERE status=1 ";
     }
 
     /*$sql = "SELECT pkg.id, pkg.title, pkg.slug, pkg.breif, pkg.days, pkg.image, pkg.price, pkg.difficulty, pkg.accomodation,
@@ -266,7 +235,6 @@ if (defined('SEARCH_PAGE')) {
             INNER JOIN tbl_activities act 
             ON pkg.activityId = act.id 
             WHERE pkg.status=1 ";*/
-
 
     if (@$qtype[0] != 'all' and !empty($qtype)) {
         foreach ($qtype as $qty) {
@@ -287,7 +255,6 @@ if (defined('SEARCH_PAGE')) {
     //     $cate = Destination::find_by_slug($category_slug);
     //     $sql .= " AND prod.Category = $cate->id ";
     // }
-
     if (@$qcategory[0] != 'all' and !empty($qcategory)) {
         foreach ($qcategory as $qcat) {
             if (sizeof($qcategory) > 1) {
@@ -307,7 +274,6 @@ if (defined('SEARCH_PAGE')) {
         $cate = Destination::find_by_slug($category_slug);
         $sql .= " AND prod.Category = $cate->id ";
     }
-
     if (@$qservice[0] != 'all' and !empty($qservice)) {
         foreach ($qservice as $qserv) {
             if (sizeof($qservice) > 1) {
@@ -327,7 +293,6 @@ if (defined('SEARCH_PAGE')) {
         $ser = Services::find_by_slug($service_slug);
         $sql .= " AND prod.service_id = $ser->id ";
     }
-
     if (@$qsubcategory[0] != 'all' and !empty($qsubcategory)) {
         foreach ($qsubcategory as $qsubcat) {
             if (sizeof($qsubcategory) > 1) {
@@ -366,7 +331,6 @@ if (defined('SEARCH_PAGE')) {
         $bran = Brand::find_by_slug($brand_slug);
         $sql .= " AND prod.brand = $bran->id ";
     }
-
     if (!empty($gprice)) {
         switch ($gprice) {
             case '1000':
@@ -548,7 +512,7 @@ if (defined('SEARCH_PAGE')) {
 
     $res = $db->query($sql);
     $total = $db->affected_rows($res);
-//     echo '<pre>'; print_r($sql); die();
+
     if ($total > 0) {
         while ($rows = $db->fetch_array($res)) {
             // if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {
@@ -561,10 +525,10 @@ if (defined('SEARCH_PAGE')) {
 
             $price_text = '';
             if (!empty($rows['price1']) and (empty($rows['offer_price']))) {
-                $price_text = '<span>' . $rows['currency'] . '' . $rows['price1'] . '</span>';
+                $price_text = '<span>' . $rows['currency'] . ' ' . $rows['price1'] . '</span>';
             }
             if (!empty($rows['discount1'])) {
-                $price_text = '<span>' . $rows['currency'] . '' . $rows['discount1'] . '</span><del>' . $rows['currency'] . '' . $rows['price1'] . '</del>';
+                $price_text = '<span>' . $rows['currency'] . ' ' . $rows['discount1'] . '</span><del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del>';
             }
 
             $product = SubProduct::find_by_slug($rows['slug']);
@@ -594,24 +558,24 @@ if (defined('SEARCH_PAGE')) {
             }
             // pr($prodbrand);
             $respkglist .= '
-                
                 <div class="col-xl-3 col-sm-6 col-6">
-            <div class="ltn__product-item ltn__product-item-3 text-center">
-                <div class="product-img product_hove"
-                    data-href="' . $slugs . '">
-                    <img src="' . $img . '" alt="' . $rows['title'] . '">
-                </div>
-                <div class="product-info">
-                    <h4 class="product-title">' . $title . '</h4>
-                    <a href="' . $slugs . '" class="product-link">' . $rows['title'] . '</a>
-                    <div class="product-price">
-                    ' . $price_text . '
-                    </div>
-                    <div class="product-action">';
+                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                        <a href="' . $slugs . '"><div class="product-img product_hove" data-href="' . $slugs . '">
+                            <img src="' . $img . '" alt="' . $rows['title'] . '">
+                        </div></a>
+                        <div class="product-info">
+                            <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $title . '</a></h4>
+                            <a href="' . $slugs . '" class="product-link">' . $rows['title'] . '</a>
+                            <div class="product-price">
+                                ' . $price_text . '
+                            </div>
+                            <div class="product-action">
+            ';
             if (!empty($rows['tag'])) {
                 $respkglist .= '<li class="sale-badge">' . $rows['tag'] . '</li>';
             }
-            $respkglist .= '<ul>
+            $respkglist .= '
+                                <ul>
                                     <li>
                                         <a href="#" class="add-wishlist"
                                             title="Add to Wishlist"
@@ -628,15 +592,13 @@ if (defined('SEARCH_PAGE')) {
                                         </a>
                                     </li>
                                 </ul>
-                                      </div>
+                              </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-                
             ';
             $home_gift_sets_script .= '
-                <script id="productscript">
+                <script class="productscrip">
                     $("#quick_view_modal_product_' . $rows['slug'] . '").on("shown.bs.modal", function () {
                       $(".ltn__blog-slider-one-active1").slick("setPosition");
                     })
@@ -695,7 +657,7 @@ if (defined('SEARCH_PAGE')) {
                                 <td class="cart-product-info">
                                     <div class="form-check form-check-inline">
             ';
-            if (!empty($giftSet->qnt2)) {
+            if (!empty($giftSet->qnt1)) {
                 $home_gift_sets_modal .= '<input class="form-check-input" type="checkbox" name="product_check[]" value="1">';
             } else {
                 $home_gift_sets_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';

@@ -17,7 +17,7 @@ $header .= '
                     <div class="col">
                         <div class="site-logo-wrap">
                             <div class="site-logo">
-                                <a href="' . BASE_URL . 'home">
+                                <a href="' . BASE_URL . 'dhome">
                                     <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="' . $siteRegulars->sitetitle . '">
                                 </a>
                             </div>

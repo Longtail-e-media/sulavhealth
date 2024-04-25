@@ -20,6 +20,55 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .sticky-about {
+            position: sticky;
+            top: 10rem;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .about-content {
+            color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .about-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .others-content {
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .others-content h4 {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        .lead {
+            font-size: 1.05rem;
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        .about {
+            padding: 3rem 0;
+        }
+
+        h3,
+        h4 {
+            color: #0E75BA !important;
+        }
+    </style>
 </head>
 
 <body class="<jcms:site:language-class/>">
@@ -42,12 +91,13 @@
     <div class="ltn__utilize-overlay"></div>
 
     <!-- BREADCRUMB AREA START -->
-    <jcms:module:article:inner-bread/>
+    <jcms:module:article:inner-bread />
     <!-- BREADCRUMB AREA END -->
 
     <!-- ABOUT US AREA START -->
-    <div class="ltn__about-us-area pt-120--- pb-120">
-        <div class="container">
+   
+             <div class="container about mt-5 ">
+        <div class="row pt-60 pb-120">
             <jcms:module:article:inner-detail/>
         </div>
     </div>
@@ -69,47 +119,7 @@
 
 <!-- Custom JS -->
 <script src="js/custom.js"></script>
-<script>
-    
- if ($('#searchform')[0]) {
-            $("#searchkey").autocomplete({
-                source: base_url + "hotelcomplete.php",
-                // minLength: 2,
-                showHintOnFocus: true,
-                select: function (event, ui) {
-                    // console.log(ui);
-                    $('input[name="searchkey"]').val(ui.item.id);
-                    $('input[name="hotelslug"]').val(ui.item.link);
-                }
-            });
-            $("#searchform").validate({
-                errorElement: 'span',
-                errorClass: 'validate-has-error',
-                rules: {
-                    searchkey: { required: true, }
-                },
-                messages: {
-                    searchkey: {required: "Please enter product name to start searching.",}
-                },
-                submitHandler: function (form) {
-                    var Frmval = $("#searchform").serialize();
-                    $("#btn-search").attr("disabled", "true").html('Loading...');
-                    $("#searchform").submit();
-                    // $.ajax({
-                    //     type: "POST",
-                    //     dataType: "JSON",
-                    //     url: base_url + "hotelcomplete.php",
-                    //     data: "action=getlink&" + Frmval,
-                    //     success: function (data) {
-                    //         var msg = eval(data);
-                    //         window.location.href = base_url + "searchlist/" + data.url;
-                    //     }
-                    // });
-                    return false;
-                }
-            });
-        }
-</script>
+
 
 </body>
 </html>

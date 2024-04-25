@@ -21,16 +21,13 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             ON pkg.activityId = act.id 
             WHERE pkg.status=1 ";
     */
-    $sql = "SELECT * 
-        FROM tbl_product_sub as prod
-        WHERE status=1 ";
+    $sql = "SELECT * FROM tbl_product_sub as prod WHERE status=1 ";
     // $sql = "SELECT pkg.id, pkg.title, pkg.slug, pkg.breif, pkg.days, pkg.image, pkg.price, pkg.offer_price, pkg.difficulty, pkg.accomodation,
     //         dst.title as destination, dst.slug as destination_slug
     //         FROM tbl_package  pkg 
     //         INNER JOIN tbl_destination  dst 
     //         ON pkg.destinationId = dst.id 
     //         WHERE pkg.status=1 ";
-
 
     if (@$qtype[0] != 'all' and !empty($qtype)) {
         foreach ($qtype as $qty) {
@@ -66,7 +63,6 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
         $ser = Services::find_by_slug($gservice_slug);
         $sql .= " AND prod.service_id = $ser->id ";
     }
-
     if (@$qcategory[0] != 'all' and !empty($qcategory)) {
         foreach ($qcategory as $qcat) {
             if (sizeof($qcategory) > 1) {
@@ -127,19 +123,6 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     if (!empty($glprice) and !empty($ghprice)) {
         $sql .= " AND ( prod.price1 >= $glprice AND prod.price1 <= $ghprice ) ";
     }
-//     if (!empty($gprice)) {
-//         switch ($gprice) {
-//             case '1000':
-//                 $sql .= " AND pkg.price <= $gprice ";
-//                 break;
-//             case '2000':
-//                 $sql .= " AND (pkg.price > 1000 AND pkg.price <= $gprice)";
-//                 break;
-//             case 'morethan2000':
-//                 $sql .= " AND pkg.price > 2000 ";
-//                 break;
-//         }
-//     }
 
     $page = 1;
     $limit = 150000000;
@@ -180,52 +163,46 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 }
             }
             // pr($rows);
+            $prodbrand = Brand::find_by_id($rows['brand']);
+            $prodservice = Services::find_by_id($rows['service_id']);
+            if (!empty($prodbrand)) {
+                $title = $prodbrand->title;
+            } else {
+                $title = '';
+            }
+            if (!empty($prodservice)) {
+                $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $rows['slug'] . '';
+            } else {
+                $slugs = '' . BASE_URL . 'product/product-detail/' . $rows['slug'] . '';;
+            }
 
             $result .= '<div class="col-xl-3 col-sm-6 col-6">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
-                    <div class="product-img product_hove"
-                        data-href="' . BASE_URL . 'product/' . $rows['slug'] . '">
-                        <img src="' . $img . '"
-                            alt="lab service 1">
-                    </div>
+                  <a href="' . BASE_URL . 'product/productdetails/' . $rows['slug'] . '" class="product-link">  <div class="product-img product_hove" data-href="' . BASE_URL . 'product/' . $rows['slug'] . '">
+                        <img src="' . $img . '" alt="' . $rows['title'] . '">
+                    </div></a>
                     <div class="product-info">
-                        <h4 class="product-title">' . $rows['title'] . '</h4>
-                        <a href="' . BASE_URL . 'product/' . $rows['slug'] . '"
-                            class="product-link">' . $rows['title'] . '</a>
-                        <div class="product-price">
-                        ' . $price_text . '
-                        </div>
+                        <h4 class="product-title"><a href="' . $slugs . '" class="product-link">' . $title . '</a></h4>
+                        <a href="' . BASE_URL . 'product/' . $rows['slug'] . '" class="product-link">' . $rows['title'] . '</a>
+                        <div class="product-price">' . $price_text . '</div>
                         <div class="product-action">';
             if (!empty($rows['tag'])) {
                 $result .= '<li class="sale-badge">' . $rows['tag'] . '</li>';
             }
-            $result .= ' <ul>
-                                        <li>
-                                            <a href="#" class="add-wishlist"
-                                                title="Add to Wishlist"
-                                                data-cartid="' . $rows['slug'] . '">
-                                                <i class="far fa-heart"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="ADD TO CART"
-                                                class="add-to-cart" data-toggle="modal"
-                                                data-target="#quick_view_modal_product_' . $rows['slug'] . '">
-                                                Add to Cart
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                          </div>
+            $result .= '    <ul>
+                                <li><a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="' . $rows['slug'] . '"><i class="far fa-heart"></i></a></li>
+                                <li>
+                                    <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_' . $rows['slug'] . '">
+                                        Add to Cart <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>';
+                </div>';
 
-            $result .= '
-                        </a >
-                    </figure >
-                    </div>
-                ';
+
             // }
 
             // $navigation .= '
@@ -242,22 +219,17 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             //             </div>
             // ';
             $home_gift_sets_script .= '
-                
-                    $("#quick_view_modal_product_' . $rows['slug'] . '").on("shown.bs.modal", function () {
-                      $(".ltn__blog-slider-one-active1").slick("setPosition");
-                    })
-                
+                $("body").on("shown.bs.modal", "#quick_view_modal_product_' . $rows['slug'] . '", function () {
+                    // $(".ltn__blog-slider-one-active1").slick("setPosition"); 
+                    $(this).find(".ltn__blog-slider-one-active1").slick("setPosition");
+                })
             ';
             $home_gift_sets_modal .= '
                 <div class="ltn__modal-area ltn__quick-view-modal-area ">
                     <div class="modal fade" id="quick_view_modal_product_' . $rows['slug'] . '" tabindex="-1">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
                                 <div class="modal-body">
                                     <div class="ltn__quick-view-modal-inner">
                                         <div class="modal-product-item">
@@ -272,15 +244,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 foreach ($sliderImages as $sliderImage) {
                     $file_path = SITE_ROOT . 'images/product/galleryimages/' . $sliderImage->image;
                     if (file_exists($file_path)) {
-                        $home_gift_sets_modal .= '
-                            <div class="col-lg-12">
-                                <div class="ltn__blog-item ltn__blog-item-3">
-                                    <div class="ltn__blog-img">
-                                        <img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        ';
+                        $home_gift_sets_modal .= '<div class="col-lg-12"><div class="ltn__blog-item ltn__blog-item-3"><div class="ltn__blog-img"><img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '"></div></div></div>';
                     }
                 }
             }
@@ -296,7 +260,6 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                     <form id="add-cart-product-' . $rows['slug'] . '">
                     <table class="table">
                         <tbody>
-                        
                             <tr>
                                 <td class="cart-product-info">
                                     <div class="form-check form-check-inline">
@@ -307,16 +270,12 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 $home_gift_sets_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
             }
             $prodPrice = (!empty($rows['discount1']) and $rows['discount1'] > 0) ? $rows['discount1'] : $rows['price1'];
-            $home_gift_sets_modal .= '
-                                        <input type="hidden" name="product_qnt_1" value="' . $rows['qnt1'] . '">
+            $home_gift_sets_modal .= '<input type="hidden" name="product_qnt_1" value="' . $rows['qnt1'] . '">
                                         <input type="hidden" name="product_net_qnt_1" value="' . $rows['netqnt1'] . '">
                                         <label class="form-check-label">' . $rows['netqnt1'] . '</label>
                                     </div>
                                 </td>
-                                <td class="cart-product-price">
-                                    <input type="hidden" name="product_price_1" value="' . $prodPrice . '">
-                                    ' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '
-                                </td>
+                                <td class="cart-product-price"><input type="hidden" name="product_price_1" value="' . $prodPrice . '">' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '</td>
                                 <td class="cart-product-quantity">
                                     <div class="cart-plus-minus">
                                         <div class="dec qtybutton">-</div>
@@ -328,148 +287,27 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                     <input type="hidden" name="product_total_1" class="product_total" value="0">
                                     <h6 class="product-sub-total">' . $rows['currency'] . ' ' . $prodPrice . '</h6>
                                 </td>
-                            </tr>
-                            
-            ';
-
-            if (!empty($rows['qnt2'])) {
-                $prodPrice = (!empty($rows['discount2']) and $rows['discount2'] > 0) ? $rows['discount2'] : $rows['price2'];
-                $home_gift_sets_modal .= '
-                            <tr>
-                                <td class="cart-product-info">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="product_check[]" value="2">
-                                        <input type="hidden" name="product_qnt_2" value="' . $rows['price2'] . '">
-                                        <input type="hidden" name="product_net_qnt_2" value="' . $rows['netqnt2'] . '">
-                                        <label class="form-check-label">' . $rows['netqnt2'] . '</label>
-                                    </div>
-                                </td>
-                                <td class="cart-product-price">
-                                    <input type="hidden" name="product_price_2" value="' . $prodPrice . '">
-                                    ' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '
-                                </td>
-                                <td class="cart-product-quantity">
-                                    <div class="cart-plus-minus">
-                                        <div class="dec qtybutton">-</div>
-                                        <input type="text" value="0" min="0" step="1" name="product_qty_2" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
-                                        <div class="inc qtybutton">+</div>
-                                    </div>
-                                </td>
-                                <td class="cart-product-subtotal">
-                                    <input type="hidden" name="product_total_2" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . $rows['currency'] . ' 0.00</h6>
-                                </td>
-                            </tr>
-                ';
-            }
-
-            if (!empty($rows['qnt3'])) {
-                $prodPrice = (!empty($rows['discount3']) and $rows['discount3'] > 0) ? $rows['discount3'] : $rows['price3'];
-                $home_gift_sets_modal .= '
-                            <tr>
-                                <td class="cart-product-info">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="product_check[]" value="3">
-                                        <input type="hidden" name="product_qnt_3" value="' . $rows['qnt3'] . '">
-                                        <input type="hidden" name="product_net_qnt_3" value="' . $rows['netqnt3'] . '">
-                                        <label class="form-check-label">' . $rows['netqnt3'] . '</label>
-                                    </div>
-                                </td>
-                                <td class="cart-product-price">
-                                    <input type="hidden" name="product_price_3" value="' . $prodPrice . '">
-                                    ' . $rows['discount3'] . ' ' . sprintf("%.2f", $prodPrice) . '
-                                </td>
-                                <td class="cart-product-quantity">
-                                    <div class="cart-plus-minus">
-                                        <div class="dec qtybutton">-</div>
-                                        <input type="text" value="0" min="0" step="1" name="product_qty_3" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
-                                        <div class="inc qtybutton">+</div>
-                                    </div>
-                                </td>
-                                <td class="cart-product-subtotal">
-                                    <input type="hidden" name="product_total_3" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . $rows['discount3'] . ' 0.00</h6>
-                                </td>
-                            </tr>
-                ';
-            }
-
-            if (!empty($giftSet->qnt4)) {
-                $prodPrice = (!empty($rows['discount4']) and $rows['discount4'] > 0) ? $rows['discount4'] : $rows['price4'];
-                $home_gift_sets_modal .= '
-                            <tr>
-                                <td class="cart-product-info">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="product_check[]" value="4">
-                                        <input type="hidden" name="product_qnt_4" value="' . $rows['qnt4'] . '">
-                                        <input type="hidden" name="product_net_qnt_4" value="' . $rows['netqnt4'] . '">
-                                        <label class="form-check-label">' . $rows['netqnt4'] . '</label>
-                                    </div>
-                                </td>
-                                <td class="cart-product-price">
-                                    <input type="hidden" name="product_price_4" value="' . $prodPrice . '">
-                                    ' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '
-                                </td>
-                                <td class="cart-product-quantity">
-                                    <div class="cart-plus-minus">
-                                        <div class="dec qtybutton">-</div>
-                                        <input type="text" value="0" min="0" step="1" name="product_qty_4" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
-                                        <div class="inc qtybutton">+</div>
-                                    </div>
-                                </td>
-                                <td class="cart-product-subtotal">
-                                    <input type="hidden" name="product_total_4" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . $rows['currency'] . ' 0.00</h6>
-                                </td>
-                            </tr>
-                ';
-            }
-
-            $home_gift_sets_modal .= '
-                            
+                            </tr>                            
                         </tbody>
                     </table>
                     </form>
                 </div>
-                                                        <div class="ltn__product-details-menu-2">
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="ADD TO CART " data-cartid="' . $rows['slug'] . ' " form-id="add-cart-product-' . $rows['slug'] . '">
-                                                                        <i class="fas fa-shopping-cart"></i>
-                                                                        <span> ADD TO CART</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="' . BASE_URL . 'product/' . $rows['slug'] . ' " class="theme-btn-1 btn btn-effect-1">
-                                                                        <span>VIEW MORE</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> Checkout</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" class="add-wishlist" title=" Add to Wishlist " data-cartid="' . $rows['slug'] . ' ">
-                                                                        <i class="far fa-heart"></i>
-                                                                        <span> Add to Wishlist </span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <hr>
-                                                        <div class="ltn__social-media">
-                                                            <ul>
-                                                                <li>Share :</li>
-                                                                <li>
-<a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                                                                </li>
-                                                                <li>
-<a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $rows['slug'] . '&text=' . (($lang == 'gr') ? $rows['title_greek'] : $rows['title']) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-                                                                </li>
-                                                                <li>
-<a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                <div class="ltn__product-details-menu-2">
+                    <ul>
+                        <li><a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="ADD TO CART " data-cartid="' . $rows['slug'] . ' " form-id="add-cart-product-' . $rows['slug'] . '"><i class="fas fa-shopping-cart"></i><span> ADD TO CART</span></a></li>
+                        <li><a href="' . BASE_URL . 'product/' . $rows['slug'] . ' " class="theme-btn-1 btn btn-effect-1"><span>VIEW MORE</span></a></li>
+                        <li><a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> Checkout</a></li>
+                        <li><a href="#" class="add-wishlist" title=" Add to Wishlist " data-cartid="' . $rows['slug'] . ' "><i class="far fa-heart"></i><span> Add to Wishlist </span></a></li>
+                    </ul>
+                </div><hr>
+                <div class="ltn__social-media">
+                    <ul>
+                        <li>Share :</li>
+                        <li><a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $rows['slug'] . '&text=' . (($lang == 'gr') ? $rows['title_greek'] : $rows['title']) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -484,11 +322,16 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             ';
         }
     } else {
-        $result .= '
-            <figure class="tour-long-item-01">
-                 <h3>No Result Found</h3>
-             </figure>';
+        $result .= '<figure class="tour-long-item-01"><h3>No Result Found</h3></figure>';
     }
+    $result = preg_replace('/\s+/', ' ', $result);
+    $result = str_replace(array("\r", "\n"), '', $result);
+
+    $home_gift_sets_modal = preg_replace('/\s+/', ' ', $home_gift_sets_modal);
+    $home_gift_sets_modal = str_replace(array("\r", "\n"), '', $home_gift_sets_modal);
+
+    $home_gift_sets_script = preg_replace('/\s+/', ' ', $home_gift_sets_script);
+    $home_gift_sets_script = str_replace(array("\r", "\n"), '', $home_gift_sets_script);
 
     echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" => $home_gift_sets_script, "nav" => $navigation));
 }

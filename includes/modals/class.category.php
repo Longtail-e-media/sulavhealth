@@ -125,7 +125,23 @@ class category extends DatabaseObject
             return true;
         }
     }
-
+ public static function get_internal_link($selid = '')
+    {
+        global $db;
+        $sql = "SELECT id,title,slug FROM " . self::$table_name . " WHERE status='1' AND parentId=0 ORDER BY sortorder DESC";
+        $record = self::find_by_sql($sql);
+        $result = '';
+        if ($record) {
+            $result .= '<optgroup label="Category"> ';
+            foreach ($record as $row) {
+                $sel = ($selid == 'product/' . $row->slug) ? 'selected' : '';
+                $result .= '<option value="product/' . $row->slug . '" ' . $sel . '>' . $row->title . '</option>';
+            }
+        } else {
+            $result .= '</optgroup>';
+        }
+        return $result;
+    }
     public static function get_all_selcate($actid = 0, $selid = '')
     {
         global $db;
@@ -158,10 +174,10 @@ class category extends DatabaseObject
                     ';
                     foreach ($record as $row) {
                         $sel = ($selid == $row->id) ? 'selected' : '';
-                        $tot = SubProduct::get_total_category_product($selectedId);
+                        $tot = SubProduct::get_total_category_product($row->id);
                         $result .= '
-                        <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="ser-' . $row->id . '" value="' . $row->id . '">
-                        <label class="custom-control-label d-flex justify-content-between" for="ser-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                        <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="subcat-' . $row->id . '" value="' . $row->id . '">
+                        <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                         ';
                     }
                 } else {

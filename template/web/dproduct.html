@@ -50,7 +50,7 @@
 </div>
 
 <div id="productpopup">
-<jcms:module:modal-popup-search/>
+    <jcms:module:modal-popup-search/>
 </div>
 <jcms:module:footer/>
 
@@ -176,6 +176,9 @@
                     jQuery('div#productpopup').html(msg.popup);
                     jQuery('script#productscript').html(msg.popscript);
                     jQuery('div#filter-nav').html(msg.nav);
+
+                    reinitialiseSlick();
+
                     //showing rating
                     // jQuery('input.rating').rating();
                     //adding functionality to navigation
@@ -311,6 +314,9 @@
                 jQuery('div#productpopup').html(msg.popup);
                 jQuery('script#productscript').html(msg.popscript);
                 jQuery('div#filter-nav').html(msg.nav);
+
+                reinitialiseSlick();
+
                 //showing rating
                 // jQuery('input.rating').rating();
                 //adding functionality to navigation
@@ -324,45 +330,66 @@
         });
     });
 
-    //search function
-    if ($('#searchform')[0]) {
-        $("#searchkey").autocomplete({
-            source: base_url + "hotelcomplete.php",
-            // minLength: 2,
-            showHintOnFocus: true,
-            select: function (event, ui) {
-                // console.log(ui);
-                $('input[name="searchkey"]').val(ui.item.id);
-                $('input[name="hotelslug"]').val(ui.item.link);
-            }
+    // reinitialise Slick slider of product images in popup
+    function reinitialiseSlick() {
+        // Find the Slick slider element within the document
+        var sliderElement = jQuery(document).find(".ltn__blog-slider-one-active1");
+        // Initialize Slick slider on the found element
+        sliderElement.slick({
+            autoplay: true,
+            autoplaySpeed: 1500,
+            arrows: false,
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left" alt="Arrow Icon"></i></a>',
+            nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right" alt="Arrow Icon"></i></a>',
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 580,
+                    settings: {
+                        arrows: false,
+                        dots: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         });
-        $("#searchform").validate({
-            errorElement: 'span',
-            errorClass: 'validate-has-error',
-            rules: {
-                searchkey: {required: true,}
-            },
-            messages: {
-                searchkey: {required: "Please enter product name to start searching.",}
-            },
-            submitHandler: function (form) {
-                var Frmval = $("#searchform").serialize();
-                $("#btn-search").attr("disabled", "true").html('Loading...');
-                $("#searchform").submit();
-                // $.ajax({
-                //     type: "POST",
-                //     dataType: "JSON",
-                //     url: base_url + "hotelcomplete.php",
-                //     data: "action=getlink&" + Frmval,
-                //     success: function (data) {
-                //         var msg = eval(data);
-                //         window.location.href = base_url + "searchlist/" + data.url;
-                //     }
-                // });
-                return false;
-            }
-        });
+        // After initialization, set position of the slider
+        sliderElement.slick("setPosition");
     }
+
+
 
 </script>
 <script id="productscript"></script>
