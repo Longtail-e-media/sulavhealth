@@ -182,8 +182,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                         <img src="' . $img . '" alt="' . $rows['title'] . '">
                     </div></a>
                     <div class="product-info">
-                        <h4 class="product-title"><a href="' . $slugs . '" class="product-link">' . $title . '</a></h4>
-                        <a href="' . BASE_URL . 'product/' . $rows['slug'] . '" class="product-link">' . $rows['title'] . '</a>
+                        <h4 class="product-title"><a href="' . BASE_URL . 'search/' . @$prodbrand->slug . '" class="product-link">' . $title . '</a></h4>
+                        <a href="' . $slugs . '" class="product-link">' . $rows['title'] . '</a>
                         <div class="product-price">' . $price_text . '</div>
                         <div class="product-action">';
             if (!empty($rows['tag'])) {
