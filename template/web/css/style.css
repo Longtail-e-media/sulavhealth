@@ -8471,8 +8471,9 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 .product-img img {
   width: 100%;
   height: 20rem;
-  background-color: #fff;
-  object-fit: contain;
+  /* background-color: #fff;
+  object-fit: contain; */
+  object-fit: cover;
   position: relative;
   -webkit-transition: all 3.5s ease 0s;
   -o-transition: all 3.5s ease 0s;
@@ -8651,7 +8652,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 }
 
 .ltn__product-item .product-price {
-  margin-bottom: 0.75rem;
+  margin: 0.75rem 0;
 }
 
 .product-action ul {
@@ -8888,6 +8889,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 .modal-product-info h3 {
   font-size: 1.5rem;
   margin-bottom: 0.625rem;
+  color: #000!important;
 }
 
 .modal-product-info hr {
@@ -9012,7 +9014,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 
 .ltn__gallery-filter-menu button,
 .ltn__tab-menu a {
-  display: inline-block;
+  /* display: inline-block; */
   /* padding: 0.9375rem 2.5rem; */
   /* margin-right: 0.3125rem;
     margin-bottom: 0.625rem; */
@@ -17067,7 +17069,6 @@ input.cart-plus-minus-box {
 .product {
   display: flex;
   border: 0.0625rem solid #ccc;
-  background-color: red;
   width: 20rem;
   height: 5.5rem;
   position: relative;
@@ -17083,9 +17084,9 @@ input.cart-plus-minus-box {
 }
 
 .product-list p {
-  margin-top: -0.625rem;
+  /* margin-top: -0.625rem; */
   max-width: 10rem;
-  font-size: 0.35em;
+  font-size: 0.85em;
   line-height: 1.25;
   text-align: left;
 }
@@ -17093,6 +17094,11 @@ input.cart-plus-minus-box {
 .product .product-title {
   margin-top: 0.55rem;
   padding-left: 8.125rem;
+}
+.product .product-title a {
+  color: #0e75ba;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .access {
@@ -17135,9 +17141,12 @@ input.cart-plus-minus-box {
   text-align: left;
 }
 
-.access-items .access-title h3 {
-  margin-bottom: 3px;
-  line-height: 1.1;
+.access-items .access-title a {
+  line-height: 1;
+  color: #0e75ba;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 .access-items .access-title p {
   text-align: left;
@@ -17241,12 +17250,12 @@ footer a:hover {
 
 .product-link {
   padding: 0.3125rem 0 !important;
-  color: #0E75BA !important;
+  color: #0e75ba !important;
 }
 
 .product-info .product-title a {
-  font-size: 1rem!important;
-  font-weight: 500!important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
 }
 
 .contact-us ul,
@@ -17372,18 +17381,15 @@ footer a:hover {
   gap: 20px;
 }
 
-.price-container input {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: auto;
-  background: none;
-  background-color: white;
-  text-align: center;
-}
-
 .price-container div {
   width: 100%;
+  height: 6px;
+}
+
+.ui-slider-range {
+  background: #e9278e;
+  height: 6px;
+  border-radius: 3px;
 }
 
 .price-input {
@@ -17462,6 +17468,7 @@ html {
   padding: 20px;
   padding-top: 0;
   padding-bottom: 80px;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -17495,13 +17502,43 @@ html {
 
 .account-login-inner input,
 #loginForm input {
-  background: none!important;
+  background: none !important;
   border: 0;
   border-bottom: 1px solid #0f74b9;
-  padding-left: 0!important;
+  padding-left: 0 !important;
 }
 
-input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="submit"]:focus, textarea:focus {
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="submit"]:focus,
+textarea:focus {
   border: 0;
   border-bottom: 1px solid #9f1d65;
+}
+
+.custom-control-label {
+  text-transform: capitalize;
+}
+
+.product-filter-right h2 {
+  margin: 0 !important;
+}
+.product-filter-right label {
+  margin: 0 0 20px 0;
+}
+
+.price-container input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: auto;
+  height: auto;
+  background: none;
+  text-align: center;
+  background: transparent;
+  text-align: left;
+}
+.price-container input#price-end {
+  width: auto;
 }

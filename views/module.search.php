@@ -199,11 +199,11 @@ if (defined('SEARCH_PAGE')) {
                         <div class="form-group">
                             <label for="price-range">Price Range:</label><br>
                             <div class="price-container">
+                            <div id="price-slider" class="mt-20"></div>
                                 <div class="price-input">
                                     <input type="text" id="price-start" readonly>
                                     <input type="text" id="price-end" readonly>
                                 </div>
-                                <div id="price-slider"></div>
                             </div>
                         </div>
                     <!-- <button type="button" class="btn btn-primary">Apply Filter</button> -->
