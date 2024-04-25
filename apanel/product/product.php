@@ -16,7 +16,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
     ?>
 
     <h3>
-    <?php
+        <?php
         if (!empty($type)) {
             $select_html = '<div class="pad0L col-md-3"><select class="user-product-select">';
             foreach ($type as $key => $types) {
@@ -148,8 +148,8 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                             Service :
                         </label>
                     </div>
-                    <div class="form-input col-md-4"><?php pr($subproductInfo->service_id); ?>
-                        <?php  $selid = !empty($subproductInfo->service_id) ? $subproductInfo->service_id : 0; ?>
+                    <div class="form-input col-md-4">
+                        <?php $selid = !empty($subproductInfo->service_id) ? $subproductInfo->service_id : 0; ?>
                         <select data-placeholder="Choose" class="chosen-selec validate[required,length[0,500]]" id="service_id" name="service_id">
                             <?php echo Services::get_internal_link_product($selid); ?>
                         </select>
@@ -163,8 +163,9 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         </label>
                     </div>
                     <div class="form-input col-md-4">
-                    <?php  $cid = !empty($subproductInfo->Category) ? $subproductInfo->Category : 0; ?>
-                        <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Category" id="type" name="Category" selcId="<?php echo $cid; ?>">
+                        <?php $cid = !empty($subproductInfo->Category) ? $subproductInfo->Category : 0; ?>
+                        <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Category" id="type" name="Category"
+                                selcId="<?php echo $cid; ?>">
                             <?php $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 ORDER BY sortorder DESC ");
                             // pr($categories);
                             if ($categories) {
@@ -186,8 +187,9 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                     </div>
                     <div class="form-input col-md-4">
 
-                    <?php  $selid = !empty($subproductInfo->Subcategory) ? $subproductInfo->Subcategory : 0; ?>
-                        <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Subcategory" id="Subcategory" name="Subcategory" selId="<?php echo $selid; ?>">
+                        <?php $selid = !empty($subproductInfo->Subcategory) ? $subproductInfo->Subcategory : 0; ?>
+                        <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Subcategory" id="Subcategory" name="Subcategory"
+                                selId="<?php echo $selid; ?>">
                             <?php $pId = !empty($subproductInfo->Category) ? $subproductInfo->Category : 0;
                             echo Category::get_all_filterdata($pId, $selid); ?>
                         </select>
@@ -407,7 +409,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                     </div>
                 </div>-->
                 <div class="form-row">
-                <div class="form-label col-md-2">
+                    <div class="form-label col-md-2">
                         <label for="">
                             Homepage :
                         </label>
