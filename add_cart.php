@@ -143,6 +143,7 @@ switch ($_POST['action']) {
         $tot = 0.00;
         $total = 'NPR 0.00';
         $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
+        $totaldiv ='';
 
         if (!empty($sesRec)) {
             foreach ($sesRec as $k => $sesRow) {
@@ -162,7 +163,7 @@ switch ($_POST['action']) {
                         <div class="mini-cart-item clearfix cart-remove">
                             <div class="mini-cart-img">
                                 <img src="' . $img . '" alt="' . (($lang == "gr") ? $product->title_greek : $product->title) . '">
-                                <!--<span class="mini-cart-item-delete remove-cart" data-id="' . $product->id . '"><i class="icon-cancel"></i></span>-->
+                                <span class="mini-cart-item-delete remove-cart" data-id="' . $product->id . '"><i class="icon-cancel"></i></span>
                             </div>
                             <div class="mini-cart-info">
                                 <h6><a href="' . BASE_URL . 'product/' . $product->slug . '">' . (($lang == "gr") ? $product->title_greek : $product->title) . '</a></h6>
@@ -178,6 +179,8 @@ switch ($_POST['action']) {
                             </div>
                         </div>
                     ';
+
+
                 }
             }
         } else {
@@ -188,7 +191,24 @@ switch ($_POST['action']) {
 			';
         }
 
-        echo json_encode(array('result' => $res, 'sub_total' => $total));
+
+        if($tot > 0){
+            $totaldiv = '
+            <div class="mini-cart-sub-total">
+            <h5>Subtotal: <span class="sub-total-mini-cart">' . $total . '</span></h5>
+        </div>
+        <div class="btn-wrapper">
+            <a href="'.BASE_URL.'cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+            <a href="'.BASE_URL.'checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+        </div>';
+            }else{
+                $totaldiv = '               
+                <div class="mini-cart-item clearfix">
+                    <h6>No Items in Cart</h6>
+                </div>';
+                
+            }
+        echo json_encode(array('result' => $res, 'sub_total' => $totaldiv));
 
         break;
 
@@ -196,6 +216,8 @@ switch ($_POST['action']) {
 
         $message = '';
         $total = count($_SESSION['cart_detail']);
+        $totaldiv ='';
+        
         $item_id = !empty($_POST['item_id']) ? addslashes($_POST['item_id']) : '';
         if (!empty($item_id)) {
             unset($_SESSION['cart_detail'][$item_id]);
@@ -221,7 +243,23 @@ switch ($_POST['action']) {
             }
         }
 
-        echo json_encode(array('result' => $message, 'no_cart' => $total, 'sub_total' => $sub_total));
+        if($tot > 0){
+            $totaldiv = '
+            <div class="mini-cart-sub-total">
+                <h5>Subtotal: <span class="sub-total-mini-cart">' . $total . '</span></h5>
+            </div>
+            <div class="btn-wrapper">
+                <a href="'.BASE_URL.'cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                <a href="'.BASE_URL.'checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+            </div>';
+        }else{
+            $totaldiv = '               
+            <div class="mini-cart-item clearfix">
+                <h6>No Items in Cart</h6>
+            </div>';            
+        }
+
+        echo json_encode(array('result' => $message, 'no_cart' => $total, 'sub_total' => $totaldiv));
 
         break;
 
@@ -329,7 +367,7 @@ switch ($_POST['action']) {
                             <h5>' . (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . '</h5>
                             <p class="added-cart"><i class="fa fa-check-circle"></i> ' . (($lang == "gr") ? 'Προστέθηκε επιτυχώς στη Λίστα Επιθυμιών σας' : 'Successfully added to your Wishlist') . '</p>
                             <div class="btn-wrapper">
-                                <a href="' . BASE_URL . 'dashboard#wishlist" class="theme-btn-1 btn btn-effect-1">' . (($lang == "gr") ? 'Δείτε την Λίστα Επιθυμιών σας' : 'View Wishlist') . '</a>
+                                <a href="' . BASE_URL . 'dashboard" class="theme-btn-1 btn btn-effect-1">' . (($lang == "gr") ? 'Δείτε την Λίστα Επιθυμιών σας' : 'View Wishlist') . '</a>
                             </div>
                         </div>
                     ';

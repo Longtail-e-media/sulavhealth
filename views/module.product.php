@@ -61,16 +61,25 @@ if (!empty($sesRec)) {
                 </div>
     ';
 }
+// pr(get_defined_constants());
+
 $cart_menu .= '
             </div>
-            <div class="mini-cart-footer">
-                <div class="mini-cart-sub-total">
-                    <h5>' . HOME_SUB_TOTAL . ': <span class="sub-total-mini-cart">' . $total . '</span></h5>
-                </div>
-                <div class="btn-wrapper">
-                    <a href="' . BASE_URL . 'cart" class="theme-btn-1 btn btn-effect-1">' . HOME_VIEW_CART . '</a>
-                    <a href="' . BASE_URL . 'checkout" class="theme-btn-2 btn btn-effect-2">' . HOME_CHECKOUT . '</a>
-                </div>
+            <div class="mini-cart-footer">';
+
+            if (!empty($sesRec)) {
+                $cart_menu .= '
+
+                    <div class="mini-cart-sub-total">
+                        <h5>' . HOME_SUB_TOTAL . ': <span class="sub-total-mini-cart">' . $total . '</span></h5>
+                    </div>
+                    <div class="btn-wrapper">
+                        <a href="' . BASE_URL . 'cart" class="theme-btn-1 btn btn-effect-1">' . HOME_VIEW_CART . '</a>
+                        <a href="' . BASE_URL . 'checkout" class="theme-btn-2 btn btn-effect-2">' . HOME_CHECKOUT . '</a>
+                    </div>';
+            }
+            $cart_menu .= '
+
             </div>
         </div>
     </div>

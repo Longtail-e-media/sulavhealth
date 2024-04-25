@@ -45,9 +45,9 @@ CREATE TABLE `tbl_location` (
 ALTER TABLE `tbl_location` ADD PRIMARY KEY (`id`);
 ALTER TABLE `tbl_location` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---add location modules in modules table 22/04/2024
+-- add location modules in modules table 22/04/2024
 INSERT INTO `tbl_modules` (`id`, `parent_id`, `name`, `link`, `mode`, `icon_link`, `status`, `sortorder`, `added_date`, `properties`)
-VALUES (NULL, '0', 'Location Mgmt', 'Locationn/list', 'Locationn', 'icon-list', '1', '13', '2020-09-17', '')
+VALUES (NULL, '0', 'Location Mgmt', 'Locationn/list', 'Locationn', 'icon-list', '1', '13', '2020-09-17', '');
 
 UPDATE `tbl_modules` SET `status` = '1' WHERE `tbl_modules`.`id` = 14;
 ALTER TABLE `tbl_product_sub` ADD `service_id` INT NOT NULL AFTER `homepage`;
