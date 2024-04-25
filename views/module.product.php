@@ -83,7 +83,7 @@ $jVars['module:product:cart-menu'] = $cart_menu;
  *      Home page Gift Sets
  */
 $home_gift_sets = $home_gift_sets_modal = $home_gift_sets_script = '';
-$brand='';
+$brand = '';
 
 if (defined('HOME_PAGE')) {
     $giftSets = SubProduct::getHomepageProducts();
@@ -121,35 +121,35 @@ if (defined('HOME_PAGE')) {
                     }
                 }
             }
-            $prodbrand= Brand::find_by_id($giftSet->brand);
-            $prodservice= Services::find_by_id($giftSet->service_id);
+            $prodbrand = Brand::find_by_id($giftSet->brand);
+            $prodservice = Services::find_by_id($giftSet->service_id);
             // pr($prodbrand);
-            if(!empty($prodservice)){
-                $slugs= '' . BASE_URL . 'product/'.$prodservice->slug.'/' . $giftSet->slug . '';
+            if (!empty($prodservice)) {
+                $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $giftSet->slug . '';
+            } else {
+                $slugs = '' . BASE_URL . 'product/product-detail/' . $giftSet->slug . '';;
             }
-            else{
-                $slugs= '' . BASE_URL . 'product/product-detail/' . $giftSet->slug . '';;
+
+            $price_text = '';
+            if (!empty($giftSet->price1) and (empty($giftSet->offer_price))) {
+                $price_text = '<span>' . $giftSet->currency . ' ' . $giftSet->price1 . '</span>';
+            }
+            if (!empty($giftSet->discount1)) {
+                $price_text = '<span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span><del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del>';
             }
             $home_gift_sets .= '
             <div class="col-xl-3 col-sm-6 col-6">
             <div class="ltn__product-item ltn__product-item-3 text-center">
-                <div class="product-img product_hove"
-                    data-href="' . $slugs . '">
-                    <img src="' . $img . '"
-                        alt="lab service 1">
+                <div class="product-img product_hove" data-href="' . $slugs . '">
+                    <a href="' . $slugs . '"><img src="' . $img . '" alt="' . $giftSet->title . '"></a>
                 </div>
                 <div class="product-info">
-                    <a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link"><h4 class="product-title">'.$prodbrand->title.'</h4></a>
-                    <a href="' . $slugs . '"
-                        class="product-link">' . $giftSet->title . '</a>
+                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
+                    <a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a>
                     <div class="product-price">
-                        <span>' . $giftSet->currency . ' ' . $giftSet->discount1.'</span>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . ' </del>
+                        ' . $price_text . '
                     </div>
                     <div class="product-action">
-                        
-                  
-
             ';
             if (!empty($giftSet->tag)) {
                 $home_gift_sets .= '<li class="sale-badge">' . $giftSet->tag . '</li>';
@@ -439,20 +439,20 @@ if (defined('HOME_PAGE')) {
 </div>
         ';
     }
-    $branddatas= Brand::getHomepageBrands(10) ;
+    $branddatas = Brand::getHomepageBrands(10);
     //  pr($branddatas);
 
-    if($branddatas){
-        foreach($branddatas as $branddata){
-                $imgSrc = BASE_URL . 'template/web/img/services/personal.jpg';
-                $imgs = unserialize($branddata->image);
-                if (!empty($imgs)) {
-                    $file_path = SITE_ROOT . 'images/brand/' . $imgs[0];
-                    if (file_exists($file_path)) {
-                        $imgSrc = IMAGE_PATH . 'brand/' . $imgs[0];
-                    }
+    if ($branddatas) {
+        foreach ($branddatas as $branddata) {
+            $imgSrc = BASE_URL . 'template/web/img/services/personal.jpg';
+            $imgs = unserialize($branddata->image);
+            if (!empty($imgs)) {
+                $file_path = SITE_ROOT . 'images/brand/' . $imgs[0];
+                if (file_exists($file_path)) {
+                    $imgSrc = IMAGE_PATH . 'brand/' . $imgs[0];
                 }
-            $brand .= '<div class="item"><img src="'.$imgSrc.'"
+            }
+            $brand .= '<div class="item"><img src="' . $imgSrc . '"
             alt="" class="brand-images"></div>';
         }
     }
