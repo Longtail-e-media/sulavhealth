@@ -525,10 +525,10 @@ if (defined('SEARCH_PAGE')) {
 
             $price_text = '';
             if (!empty($rows['price1']) and (empty($rows['offer_price']))) {
-                $price_text = '<span>' . $rows['currency'] . '' . $rows['price1'] . '</span>';
+                $price_text = '<span>' . $rows['currency'] . ' ' . $rows['price1'] . '</span>';
             }
             if (!empty($rows['discount1'])) {
-                $price_text = '<span>' . $rows['currency'] . '' . $rows['discount1'] . '</span><del>' . $rows['currency'] . '' . $rows['price1'] . '</del>';
+                $price_text = '<span>' . $rows['currency'] . ' ' . $rows['discount1'] . '</span><del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del>';
             }
 
             $product = SubProduct::find_by_slug($rows['slug']);
@@ -560,11 +560,11 @@ if (defined('SEARCH_PAGE')) {
             $respkglist .= '
                 <div class="col-xl-3 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
-                        <div class="product-img product_hove" data-href="' . $slugs . '">
+                        <a href="' . $slugs . '"><div class="product-img product_hove" data-href="' . $slugs . '">
                             <img src="' . $img . '" alt="' . $rows['title'] . '">
-                        </div>
+                        </div></a>
                         <div class="product-info">
-                    <a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link"><h4 class="product-title">' . $title . '</h4></a>
+                            <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $title . '</a></h4>
                             <a href="' . $slugs . '" class="product-link">' . $rows['title'] . '</a>
                             <div class="product-price">
                                 ' . $price_text . '
