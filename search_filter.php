@@ -219,10 +219,11 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             //             </div>
             // ';
             $home_gift_sets_script .= '
+            <script>
                 $("body").on("shown.bs.modal", "#quick_view_modal_product_' . $rows['slug'] . '", function () {
-                    // $(".ltn__blog-slider-one-active1").slick("setPosition"); 
-                    $(this).find(".ltn__blog-slider-one-active1").slick("setPosition");
-                })
+                  setTimeout(reinitialiseSlick("#quick_view_modal_product_' . $rows['slug'] . '"), 500)
+                });
+            </script>
             ';
             $home_gift_sets_modal .= '
                 <div class="ltn__modal-area ltn__quick-view-modal-area ">

@@ -312,28 +312,28 @@
                 var msg = eval(data);
                 jQuery('div#productContainer').html(msg.result);
                 jQuery('div#productpopup').html(msg.popup);
-                jQuery('script#productscript').html(msg.popscript);
-                jQuery('div#filter-nav').html(msg.nav);
+                jQuery('div#productscript').html(msg.popscript);
+                // jQuery('div#filter-nav').html(msg.nav);
 
-                reinitialiseSlick();
+                // setTimeout(reinitialiseSlick, 5000)
 
                 //showing rating
                 // jQuery('input.rating').rating();
                 //adding functionality to navigation
-                $('.gnav').on('click', function () {
-                    $(this).navFunction();
-                });
-                $('html, body').animate({
-                    scrollTop: eval($("#scrolll").offset().top - 70)
-                }, 500);
+                // $('.gnav').on('click', function () {
+                //     $(this).navFunction();
+                // });
+                // $('html, body').animate({
+                //     scrollTop: eval($("#scrolll").offset().top - 70)
+                // }, 500);
             }
         });
     });
 
     // reinitialise Slick slider of product images in popup
-    function reinitialiseSlick() {
+    function reinitialiseSlick(_parent) {
         // Find the Slick slider element within the document
-        var sliderElement = jQuery(document).find(".ltn__blog-slider-one-active1");
+        var sliderElement = $(_parent).find(".ltn__blog-slider-one-active1");
         // Initialize Slick slider on the found element
         sliderElement.slick({
             autoplay: true,
@@ -386,13 +386,12 @@
             ]
         });
         // After initialization, set position of the slider
-        sliderElement.slick("setPosition");
+        // sliderElement.slick("setPosition");
     }
 
 
-
 </script>
-<script id="productscript"></script>
+<div id="productscript"></div>
 <jcms:module:modal-popup-script/>
 
 </body>
