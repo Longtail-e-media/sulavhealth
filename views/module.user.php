@@ -176,7 +176,7 @@ if (defined('DASHBOARD_PAGE')) {
             <div class="nav">
                 <a class="active show" data-toggle="tab" href="#liton_tab_1_1">' . (($lang == "gr") ? "Πίνακας Ελέγχου" : "Dashboard") . ' <i class="fas fa-home"></i></a>
                 <a data-toggle="tab" href="#liton_tab_1_2">' . (($lang == "gr") ? "Οι παραγγελίες μου" : "Orders") . ' <i class="fas fa-file-alt"></i></a>
-                <a data-toggle="tab" href="#liton_tab_1_3">' . (($lang == "gr") ? "Λίστα Επιθυμιών" : "Wishlist") . ' <i class="fas fa-list"></i></a>
+                <a data-toggle="tab" id="wishlist" href="#liton_tab_1_3">' . (($lang == "gr") ? "Λίστα Επιθυμιών" : "Wishlist") . ' <i class="fas fa-list"></i></a>
                 <a data-toggle="tab" href="#liton_tab_1_4">' . (($lang == "gr") ? "Ο λογαριασμός μου" : "Account Details") . ' <i class="fas fa-user"></i></a>
                 <a href="' . BASE_URL . 'logout">' . (($lang == "gr") ? "Έξοδος" : "Logout") . ' <i class="fas fa-sign-out-alt"></i></a>
             </div>

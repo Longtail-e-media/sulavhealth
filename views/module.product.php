@@ -135,8 +135,7 @@ if (defined('HOME_PAGE')) {
             <div class="ltn__product-item ltn__product-item-3 text-center">
                 <div class="product-img product_hove"
                     data-href="' . $slugs . '">
-                    <img src="' . $img . '"
-                        alt="lab service 1">
+                    <img src="' . $img . '"  alt="lab service 1">
                 </div>
                 <div class="product-info">
                     <h4 class="product-title">'.$prodbrand->title.'</h4>
@@ -379,7 +378,7 @@ if (defined('HOME_PAGE')) {
                                                                     </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="' . $slugs . '" class="theme-btn-1 btn btn-effect-1">
+                                                                    <a href="' . $slugs . '#liton_tab_1_3" class="theme-btn-1 btn btn-effect-1">
                                                                         <span>' . SHOP_VIEW_MORE . '</span>
                                                                     </a>
                                                                 </li>

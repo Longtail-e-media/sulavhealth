@@ -330,7 +330,7 @@ switch ($_POST['action']) {
                             <h5>' . (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . '</h5>
                             <p class="added-cart"><i class="fa fa-check-circle"></i> ' . (($lang == "gr") ? 'Προστέθηκε επιτυχώς στη Λίστα Επιθυμιών σας' : 'Successfully added to your Wishlist') . '</p>
                             <div class="btn-wrapper">
-                                <a href="' . BASE_URL . 'dashboard" class="theme-btn-1 btn btn-effect-1">' . (($lang == "gr") ? 'Δείτε την Λίστα Επιθυμιών σας' : 'View Wishlist') . '</a>
+                                <a href="' . BASE_URL . 'dashboard#wishlist" class="theme-btn-1 btn btn-effect-1">' . (($lang == "gr") ? 'Δείτε την Λίστα Επιθυμιών σας' : 'View Wishlist') . '</a>
                             </div>
                         </div>
                     ';
