@@ -174,20 +174,20 @@
                     var msg = eval(data);
                     jQuery('div#productContainer').html(msg.result);
                     jQuery('div#productpopup').html(msg.popup);
-                    jQuery('script#productscript').html(msg.popscript);
-                    jQuery('div#filter-nav').html(msg.nav);
+                    jQuery('div#productscript').html(msg.popscript);
+                    // jQuery('div#filter-nav').html(msg.nav);
 
-                    reinitialiseSlick();
+                    // setTimeout(reinitialiseSlick, 5000)
 
                     //showing rating
                     // jQuery('input.rating').rating();
                     //adding functionality to navigation
-                    $('.gnav').on('click', function () {
-                        $(this).navFunction();
-                    });
-                    $('html, body').animate({
-                        scrollTop: eval($("#scrolll").offset().top - 70)
-                    }, 500);
+                    // $('.gnav').on('click', function () {
+                    //     $(this).navFunction();
+                    // });
+                    // $('html, body').animate({
+                    //     scrollTop: eval($("#scrolll").offset().top - 70)
+                    // }, 500);
                 }
             });
         }
