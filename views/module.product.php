@@ -141,10 +141,10 @@ if (defined('HOME_PAGE')) {
             <div class="col-xl-3 col-sm-6 col-6">
             <div class="ltn__product-item ltn__product-item-3 text-center">
                 <div class="product-img product_hove" data-href="' . $slugs . '">
-                    <a href="' . $slugs . '"><img src="' . $img . '" alt="' . $giftSet->title . '"></a>
+                    <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $giftSet->title . '"></a>
                 </div>
                 <div class="product-info">
-                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
+                    <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
                     <a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a>
                     <div class="product-price">
                         ' . $price_text . '
@@ -379,19 +379,24 @@ if (defined('HOME_PAGE')) {
                                                                     </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="' . $slugs . '" class="theme-btn-1 btn btn-effect-1">
-                                                                        <span>' . SHOP_VIEW_MORE . '</span>
-                                                                    </a>
-                                                                </li>
+                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $giftSet->slug . '">
+                                                                    <i class="far fa-heart"></i>
+                                                                   <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
+                                                                </a>
+                                                            </li>
+                                                                
                                                                 <li>
                                                                 <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1">' . HOME_CHECKOUT . '</a>
                                                                 </li>
+
+                                                                <br/>
+
                                                                 <li>
-                                                                    <a href="#" class="add-wishlist" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $giftSet->slug . '">
-                                                                        <i class="far fa-heart"></i>
-                                                                        <span>' . SHOP_ADD_TO_WISHLIST . '</span>
+                                                                    <a href="' . $slugs . '" class="" style="text-decoration: underline; text-transform: capitalize;">
+                                                                        <span>' . SHOP_VIEW_MORE . '</span>
                                                                     </a>
                                                                 </li>
+                                                               
                                                             </ul>
                                                         </div>
                                                         <hr>
