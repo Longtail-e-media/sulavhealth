@@ -286,7 +286,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                 </td>
                                 <td class="cart-product-subtotal">
                                     <input type="hidden" name="product_total_1" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . $rows['currency'] . ' ' . $prodPrice . '</h6>
+                                    <h6 class="product-sub-total">' . $rows['currency'] . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
                                 </td>
                             </tr>                            
                         </tbody>

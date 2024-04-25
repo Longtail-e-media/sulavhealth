@@ -274,7 +274,7 @@ if (defined('HOME_PAGE')) {
                                 </td>
                                 <td class="cart-product-subtotal">
                                     <input type="hidden" name="product_total_1" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . $giftSet->currency . ' ' . $prodPrice . '</h6>
+                                    <h6 class="product-sub-total">' . $giftSet->currency . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
                                 </td>
                             </tr>
                             
@@ -367,7 +367,7 @@ if (defined('HOME_PAGE')) {
                                 </td>
                                 <td class="cart-product-subtotal">
                                     <input type="hidden" name="product_total_4" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . $giftSet->currency . ' 0.00</h6>
+                                    <h6 class="product-sub-total">' . sprintf("%.2f",$giftSet->currency) . ' 0.00</h6>
                                 </td>
                             </tr>
                 ';
