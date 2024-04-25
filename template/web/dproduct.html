@@ -50,7 +50,7 @@
 </div>
 
 <div id="productpopup">
-<jcms:module:modal-popup-search/>
+    <jcms:module:modal-popup-search/>
 </div>
 <jcms:module:footer/>
 
@@ -176,6 +176,9 @@
                     jQuery('div#productpopup').html(msg.popup);
                     jQuery('script#productscript').html(msg.popscript);
                     jQuery('div#filter-nav').html(msg.nav);
+
+                    reinitialiseSlick();
+                    
                     //showing rating
                     // jQuery('input.rating').rating();
                     //adding functionality to navigation
@@ -311,6 +314,9 @@
                 jQuery('div#productpopup').html(msg.popup);
                 jQuery('script#productscript').html(msg.popscript);
                 jQuery('div#filter-nav').html(msg.nav);
+
+                reinitialiseSlick();
+
                 //showing rating
                 // jQuery('input.rating').rating();
                 //adding functionality to navigation
@@ -323,6 +329,65 @@
             }
         });
     });
+
+    // reinitialise Slick slider of product images in popup
+    function reinitialiseSlick() {
+        // Find the Slick slider element within the document
+        var sliderElement = jQuery(document).find(".ltn__blog-slider-one-active1");
+        // Initialize Slick slider on the found element
+        sliderElement.slick({
+            autoplay: true,
+            autoplaySpeed: 2000,
+            arrows: false,
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left" alt="Arrow Icon"></i></a>',
+            nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right" alt="Arrow Icon"></i></a>',
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 580,
+                    settings: {
+                        arrows: false,
+                        dots: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+        // After initialization, set position of the slider
+        sliderElement.slick("setPosition");
+    }
 
     //search function
     if ($('#searchform')[0]) {
