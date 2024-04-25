@@ -239,6 +239,13 @@ if (defined('HOME_PAGE')) {
                                                     <div class="modal-product-info">
                                                         <h3>' . (($lang == "gr") ? $giftSet->title_greek : $giftSet->title) . '</h3>
                                                         ' . (($lang == "gr") ? $giftSet->brief_greek : $giftSet->brief) . '
+
+                                                        <br/>
+                                                        <br/>
+
+                                                        <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
+                                                            <span>' . SHOP_VIEW_MORE . '</span>
+                                                        </a>
             
                 <div class="shoping-cart-table table-responsive">
                     <form id="add-cart-product-' . $giftSet->slug . '">
@@ -381,30 +388,26 @@ if (defined('HOME_PAGE')) {
                 </div>
                                                         <div class="ltn__product-details-menu-2">  
                                                             <ul>
+                                                            <li>
+                                                            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $giftSet->slug . '">
+                                                                <i class="far fa-heart"></i>
+                                                               <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
+                                                            </a>
+                                                        </li>
+                                                            
                                                                 <li>
                                                                     <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $giftSet->slug . '" form-id="add-cart-product-' . $giftSet->slug . '">
                                                                         <i class="fas fa-shopping-cart"></i>
                                                                         <span>' . SHOP_ADD_TO_CART . '</span>
                                                                     </a>
                                                                 </li>
-                                                                <li>
-                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $giftSet->slug . '">
-                                                                    <i class="far fa-heart"></i>
-                                                                   <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
-                                                                </a>
-                                                            </li>
+                                                              
                                                                 
                                                                 <li>
                                                                 <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1">' . HOME_CHECKOUT . '</a>
                                                                 </li>
 
-                                                                <br/>
-
-                                                                <li>
-                                                                    <a href="' . $slugs . '" class="" style="text-decoration: underline; text-transform: capitalize;">
-                                                                        <span>' . SHOP_VIEW_MORE . '</span>
-                                                                    </a>
-                                                                </li>
+                                                               
                                                                
                                                             </ul>
                                                         </div>
