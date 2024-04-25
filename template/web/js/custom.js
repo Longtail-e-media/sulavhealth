@@ -114,8 +114,9 @@ $(function () {
                     },
                     success: function (data) {
                         var res = eval(data);
+                        // console.log(res);
                         $("div.mini-cart-product-area").html(res.result);
-                        $("span.sub-total-mini-cart").html(res.sub_total);
+                        $("div.mini-cart-footer").html(res.sub_total);
                         $("span#addedmessage").html(res.message).css('display', 'block').fadeOut(8000);
                     }
                 })
@@ -137,7 +138,9 @@ $(function () {
                 var res = eval(data);
                 $("sup.cart-total").html(res.no_cart);
                 _parent.remove();
-                $("span.sub-total-mini-cart").html(res.sub_total);
+                // $("span.sub-total-mini-cart").html(res.sub_total);
+                $("div.mini-cart-footer").html(res.sub_total);
+
             }
         });
         return false;
