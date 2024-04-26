@@ -143,7 +143,7 @@ if (defined('CART_PAGE')) {
                                         <div class="inc cqtybutton">+</div>
                                     </div>
                                 </td>
-                                <td class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . $rowTotal . '</td>
+                                <td class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
                                 <td class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</td>
                             </tr>
                         ';
