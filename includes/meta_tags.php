@@ -156,7 +156,7 @@ function MetaTagsFor_SEO()
 //    $seoSources .= '<meta name="language" content="en-us" />' . "\n";
     $seoSources .= '<meta name="keywords" content="' . $keywords . '">' . "\n";
     $seoSources .= '<meta name="description" content="' . $description . '">' . "\n";
-    $seoSources .= '<meta name="author" content="Commerz Nation">' . "\n\n";
+    $seoSources .= '<meta name="author" content="Sulav Health">' . "\n\n";
 
     //Facebook and twitter sharing
     $seoSources .= '<meta property="og:title" content="' . $sitetitle . '">' . "\n";
@@ -241,7 +241,27 @@ function MetaTagsFor_SEO()
                 $seoSources .= '<meta property="og:image" content="' . IMAGE_PATH . 'preference/' . $config->fb_upload . '">' . "\n";
                 $seoSources .= '<meta property="twitter:image" content="' . IMAGE_PATH . 'preference/' . $config->twitter_upload . '">' . "\n";
             }
-        } else {
+        }
+        elseif ($class == 'Product'){
+            $productRec = SubProduct::find_by_slug(addslashes($_REQUEST['slug']));
+            $prodctImgs = SubProductImage::getImagelist_by($productRec->id, 1);
+            if (!empty($prodctImgs)) {
+                foreach ($prodctImgs as $prodctImg) {
+                    $file_path = SITE_ROOT . 'images/product/galleryimages/' . $prodctImg->image;
+                    if (file_exists($file_path)) {
+                        $seoSources .= '<meta property="og:image" content="' . IMAGE_PATH . 'product/galleryimages/' . $prodctImg->image . '">' . "\n";
+                        $seoSources .= '<meta property="twitter:image" content="' . IMAGE_PATH . 'product/galleryimages/' . $prodctImg->image . '">' . "\n";
+                    } else {
+                        $seoSources .= '<meta property="og:image" content="' . IMAGE_PATH . 'preference/' . $config->fb_upload . '">' . "\n";
+                        $seoSources .= '<meta property="twitter:image" content="' . IMAGE_PATH . 'preference/' . $config->twitter_upload . '">' . "\n";
+                    }
+                }
+            } else {
+                $seoSources .= '<meta property="og:image" content="' . IMAGE_PATH . 'preference/' . $config->fb_upload . '">' . "\n";
+                $seoSources .= '<meta property="twitter:image" content="' . IMAGE_PATH . 'preference/' . $config->twitter_upload . '">' . "\n";
+            }
+        }
+        else {
             $seoSources .= '<meta property="og:image" content="' . IMAGE_PATH . 'preference/' . $config->fb_upload . '">' . "\n";
             $seoSources .= '<meta property="twitter:image" content="' . IMAGE_PATH . 'preference/' . $config->twitter_upload . '">' . "\n";
         }
