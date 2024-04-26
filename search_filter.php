@@ -49,8 +49,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             if (sizeof($qservice) > 1) {
                 if (array_values($qservice)[0] == $qserv) {
                     $sql .= " AND ( prod.service_id = $qserv ";
-                } elseif (end($qservice) == $qcat) {
-                    $sql .= " OR prod.service_id = $serv )";
+                } elseif (end($qservice) == $qserv) {
+                    $sql .= " OR prod.service_id = $qserv )";
                 } else {
                     $sql .= " OR prod.service_id = $qserv ";
                 }
@@ -123,7 +123,6 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     if (!empty($glprice) and !empty($ghprice)) {
         $sql .= " AND ( prod.price1 >= $glprice AND prod.price1 <= $ghprice ) ";
     }
-
     $page = 1;
     $limit = 150000000;
     $total_num = $db->num_rows($db->query($sql));

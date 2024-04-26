@@ -60,11 +60,17 @@ if (!empty($slides)) {
         // pr($slide);
         $linkTarget = ($slide->linktype == 1) ? ' target="_blank" ' : '';
         $linksrc = ($slide->linktype == 1) ? $slide->linksrc : BASE_URL . $slide->linksrc;
+        if($slide->linksrc){
+            $linkscript='onclick="window.location.href=\'' . $linksrc . '\';"';
+        }
+        else{
+            $linkscript='';
+        }
         if (file_exists($file_path)) {
             $imgSlider .= '
             
             <div class="">
-            <img style="object-position: top -50px right 0; cursor: pointer;" src="' . IMAGE_PATH . 'slideshow/' . $slide->image . '" alt="'.$slide->title.'" onclick="window.location.href=\'' . $linksrc . '\';">
+            <img style="object-position: top -50px right 0; cursor: pointer;" src="' . IMAGE_PATH . 'slideshow/' . $slide->image . '" alt="'.$slide->title.'" '.$linkscript.' >
         </div>
             ';
         }

@@ -160,11 +160,7 @@ $header .= '
 
                             </ul>
                             <div class="user-details">
-<<<<<<< Updated upstream
-                                <h4>Hello, '.$username.'!</h4>
-=======
                                 <h4>Hello '.$username.'</h4>
->>>>>>> Stashed changes
 
                               <!--  '.$logbutton.' -->
                             </div>
