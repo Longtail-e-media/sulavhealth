@@ -166,10 +166,10 @@ SELECT price1 , discount1
         return self::find_by_sql($sql);
     }
 
-    public static function get_relatedprod($type = '', $notid = '', $limit = '')
+    public static function get_relatedprod($service = '', $notid = '', $limit = '')
     {
         global $db;
-        $cond = !empty($type) ? ' AND type=' . $type : '';
+        $cond = !empty($service) ? ' AND service_id=' . $service : '';
         $cond2 = !empty($notid) ? ' AND id<>' . $notid : '';
         $cond3 = !empty($limit) ? ' LIMIT ' . $limit : '';
         $sql = "SELECT * FROM " . self::$table_name . " WHERE status=1 $cond $cond2 ORDER BY sortorder DESC " . $cond3;

@@ -502,7 +502,7 @@ $jVars['module:product:home-gift-sets-script'] = $home_gift_sets_script;
  *      Product Detail Page
  */
 
-$product_bread = $product_detail = '';
+$product_bread = $product_detail = $product_realted = $product_related_modal = $product_related_script = '';
 
 if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
     $slug = !empty($_REQUEST['slug']) ? addslashes($_REQUEST['slug']) : '';
@@ -519,6 +519,350 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
 
         $parentProd = Product::find_by_id($prodRec->type);
 
+        $prodrelateds= SubProduct::get_relatedprod($prodRec->service_id,$prodRec->id,4) ;
+        // pr($prodrelated);
+        if (!empty($prodrelateds)) {
+          
+            foreach ($prodrelateds as $prodrelated) {
+                // getting only one image to display
+                $prodrelatedImages = SubProductImage::getImagelist_by($prodrelated->id, 1, 0);
+                $img = BASE_URL . 'template/web/img/product/one.jpg';
+                if (!empty($prodrelatedImages)) {
+                    foreach ($prodrelatedImages as $prodrelatedImage) {
+                        $file_path = SITE_ROOT . 'images/product/galleryimages/' . $prodrelatedImage->image;
+                        if (file_exists($file_path)) {
+                            $img = IMAGE_PATH . 'product/galleryimages/' . $prodrelatedImage->image;
+                        }
+                    }
+                }
+                $prodbrand = Brand::find_by_id($prodrelated->brand);
+                $prodservice = Services::find_by_id($prodrelated->service_id);
+                // pr($prodbrand);
+                if (!empty($prodservice)) {
+                    $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $prodrelated->slug . '';
+                } else {
+                    $slugs = '' . BASE_URL . 'product/product-detail/' . $prodrelated->slug . '';;
+                }
+    
+                $price_text = '';
+                if (!empty($prodrelated->price1) and (empty($prodrelated->offer_price))) {
+                    $price_text = '<span>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</span>';
+                }
+                if (!empty($prodrelated->discount1)) {
+                    $price_text = '<span>' . $prodrelated->currency . ' ' . $prodrelated->discount1 . '</span><del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del>';
+                }
+                $prodbrand = Brand::find_by_id($prodrelated->brand);
+                $prodservice = Services::find_by_id($prodrelated->service_id);
+                if (!empty($prodbrand)) {
+                    $title = $prodbrand->title;
+                    $slug= $prodbrand->slug;
+                } else {
+                    $title = '';
+                    $slug='';
+                }
+                if (!empty($prodservice)) {
+                    $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $prodrelated->slug . '';
+                } else {
+                    $slugs = '' . BASE_URL . 'product/product-detail/' . $prodrelated->slug . '';;
+                }
+                $product_realted .= '
+                <div class="col-xl-3 col-sm-6 col-6">
+                <div class="ltn__product-item ltn__product-item-3 text-center">
+                
+                <div class="product-img product_hove" data-href="' . $slugs . '">
+                        <a class="product-image-link" href="' . $slugs . '">
+                        <img src="' . $img . '" alt="' . $prodrelated->title . '"></a>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
+                        <a href="' . $slugs . '" class="product-link">' . $prodrelated->title . '</a>
+                        <div class="product-price">
+                            ' . $price_text . '
+                        </div>
+                        <div class="product-action">
+                ';
+                if (!empty($prodrelated->tag)) {
+                    $product_realted .= '<li class="sale-badge">' . $prodrelated->tag . '</li>';
+                }
+                $product_realted .= '
+                                        <ul>
+                                        <li>
+                                            <a href="#" class="add-wishlist"
+                                                title="Add to Wishlist"
+                                                data-cartid="' . $prodrelated->slug . '">
+                                                <i class="far fa-heart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="ADD TO CART"
+                                                class="add-to-cart" data-toggle="modal"
+                                                data-target="#quick_view_modal_product_' . $prodrelated->slug . '">
+                                                Add to Cart
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                          </div>
+                    </div>
+                </div>
+            </div>
+                ';
+    
+                $product_related_script .= '
+                    <script>
+                        $("#quick_view_modal_product_' . $prodrelated->slug . '").on("shown.bs.modal", function () {
+                          $(".ltn__blog-slider-one-active1").slick("setPosition");
+                        })
+                    </script>
+                ';
+    
+                // Add to cart modal (Quick View Modal)
+                $product_related_modal .= '
+                    <div class="ltn__modal-area ltn__quick-view-modal-area">
+                        <div class="modal fade" id="quick_view_modal_product_' . $prodrelated->slug . '" tabindex="-1">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="ltn__quick-view-modal-inner">
+                                            <div class="modal-product-item">
+                                                <div class="row">
+                                                    <div class="col-lg-5 col-12">
+                                                        <div class="modal-product-img">
+                                                            <div class="row  ltn__blog-slider-one-active1 slick-arrow-1 ltn__blog-item-3-normal">
+                ';
+                $sliderImages = SubProductImage::getImagelist_by($prodrelated->id);
+                if (!empty($sliderImages)) {
+                    foreach ($sliderImages as $sliderImage) {
+                        $file_path = SITE_ROOT . 'images/product/galleryimages/' . $sliderImage->image;
+                        if (file_exists($file_path)) {
+                            $home_gift_sets_modal .= '
+                                <div class="col-lg-12">
+                                    <div class="ltn__blog-item ltn__blog-item-3">
+                                        <div class="ltn__blog-img">
+                                            <img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            ';
+                        }
+                    }
+                }
+                
+                $product_related_modal .= '
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-7 col-12">
+                                                        <div class="modal-product-info">
+                                                        <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
+                                                            <h3>' . (($lang == "gr") ? $prodrelated->title_greek : $prodrelated->title) . '</h3>
+                                                            ' . (($lang == "gr") ? $prodrelated->brief_greek : $prodrelated->brief) . '
+    
+                                                            <br/>
+                                                            <br/>
+    
+                                                            <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
+                                                                <span>' . SHOP_VIEW_MORE . '</span>
+                                                            </a>
+                
+                    <div class="shoping-cart-table table-responsive">
+                        <form id="add-cart-product-' . $prodrelated->slug . '">
+                        <table class="table">
+                            <tbody>
+                            
+                                <tr>
+                                    <td class="cart-product-info">
+                                        <div class="form-check form-check-inline">
+                ';
+                if (!empty($prodrelated->qnt2)) {
+                    $product_related_modal .= '<input class="form-check-input" type="checkbox" name="product_check[]" value="1">';
+                } else {
+                    $product_related_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
+                }
+                $prodPrice = (!empty($prodrelated->discount1) and $prodrelated->discount1 > 0) ? $prodrelated->discount1 : $prodrelated->price1;
+                $product_related_modal .= '
+                                            <input type="hidden" name="product_qnt_1" value="' . $prodrelated->qnt1 . '">
+                                            <input type="hidden" name="product_net_qnt_1" value="' . $prodrelated->netqnt1 . '">
+                                            <label class="form-check-label">' . $prodrelated->netqnt1 . '</label>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-price">
+                                        <input type="hidden" name="product_price_1" value="' . $prodPrice . '">
+                                        ' . $prodrelated->currency . ' ' . sprintf("%.2f", $prodPrice) . '
+                                    </td>
+                                    <td class="cart-product-quantity">
+                                        <div class="cart-plus-minus">
+                                            <div class="dec qtybutton">-</div>
+                                            <input type="text" value="1" min="1" step="1" name="product_qty_1" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $prodrelated->currency . '" readonly>
+                                            <div class="inc qtybutton">+</div>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-subtotal">
+                                        <input type="hidden" name="product_total_1" class="product_total" value="0">
+                                        <h6 class="product-sub-total">' . $prodrelated->currency . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
+                                    </td>
+                                </tr>
+                                
+                ';
+    
+                if (!empty($prodrelated->qnt2)) {
+                    $prodPrice = (!empty($prodrelated->discount2) and $prodrelated->discount2 > 0) ? $prodrelated->discount2 : $prodrelated->price2;
+                    $home_gift_sets_modal .= '
+                                <tr>
+                                    <td class="cart-product-info">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="product_check[]" value="2">
+                                            <input type="hidden" name="product_qnt_2" value="' . $prodrelated->qnt2 . '">
+                                            <input type="hidden" name="product_net_qnt_2" value="' . $prodrelated->netqnt2 . '">
+                                            <label class="form-check-label">' . $prodrelated->netqnt2 . '</label>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-price">
+                                        <input type="hidden" name="product_price_2" value="' . $prodPrice . '">
+                                        ' . $prodrelated->currency . ' ' . sprintf("%.2f", $prodPrice) . '
+                                    </td>
+                                    <td class="cart-product-quantity">
+                                        <div class="cart-plus-minus">
+                                            <div class="dec qtybutton">-</div>
+                                            <input type="text" value="0" min="0" step="1" name="product_qty_2" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $prodrelated->currency . '" readonly>
+                                            <div class="inc qtybutton">+</div>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-subtotal">
+                                        <input type="hidden" name="product_total_2" class="product_total" value="0">
+                                        <h6 class="product-sub-total">' . $prodrelated->currency . ' 0.00</h6>
+                                    </td>
+                                </tr>
+                    ';
+                }
+    
+                if (!empty($prodrelated->qnt3)) {
+                    $prodPrice = (!empty($prodrelated->discount3) and $prodrelated->discount3 > 0) ? $prodrelated->discount3 : $prodrelated->price3;
+                    $home_gift_sets_modal .= '
+                                <tr>
+                                    <td class="cart-product-info">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="product_check[]" value="3">
+                                            <input type="hidden" name="product_qnt_3" value="' . $prodrelated->qnt3 . '">
+                                            <input type="hidden" name="product_net_qnt_3" value="' . $prodrelated->netqnt3 . '">
+                                            <label class="form-check-label">' . $prodrelated->netqnt3 . '</label>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-price">
+                                        <input type="hidden" name="product_price_3" value="' . $prodPrice . '">
+                                        ' . $prodrelated->currency . ' ' . sprintf("%.2f", $prodPrice) . '
+                                    </td>
+                                    <td class="cart-product-quantity">
+                                        <div class="cart-plus-minus">
+                                            <div class="dec qtybutton">-</div>
+                                            <input type="text" value="0" min="0" step="1" name="product_qty_3" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $prodrelated->currency . '" readonly>
+                                            <div class="inc qtybutton">+</div>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-subtotal">
+                                        <input type="hidden" name="product_total_3" class="product_total" value="0">
+                                        <h6 class="product-sub-total">' . $prodrelated->currency . ' 0.00</h6>
+                                    </td>
+                                </tr>
+                    ';
+                }
+    
+                if (!empty($prodrelated->qnt4)) {
+                    $prodPrice = (!empty($prodrelated->discount4) and $prodrelated->discount4 > 0) ? $prodrelated->discount4 : $prodrelated->price4;
+                    $home_gift_sets_modal .= '
+                                <tr>
+                                    <td class="cart-product-info">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="product_check[]" value="4">
+                                            <input type="hidden" name="product_qnt_4" value="' . $prodrelated->qnt4 . '">
+                                            <input type="hidden" name="product_net_qnt_4" value="' . $prodrelated->netqnt4 . '">
+                                            <label class="form-check-label">' . $prodrelated->netqnt4 . '</label>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-price">
+                                        <input type="hidden" name="product_price_4" value="' . $prodPrice . '">
+                                        ' . $prodrelated->currency . ' ' . sprintf("%.2f", $prodPrice) . '
+                                    </td>
+                                    <td class="cart-product-quantity">
+                                        <div class="cart-plus-minus">
+                                            <div class="dec qtybutton">-</div>
+                                            <input type="text" value="0" min="0" step="1" name="product_qty_4" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $prodrelated->currency . '" readonly>
+                                            <div class="inc qtybutton">+</div>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-subtotal">
+                                        <input type="hidden" name="product_total_4" class="product_total" value="0">
+                                        <h6 class="product-sub-total">' . sprintf("%.2f",$prodrelated->currency) . ' 0.00</h6>
+                                    </td>
+                                </tr>
+                    ';
+                }
+    
+                $product_related_modal .= '
+                                
+                            </tbody>
+                        </table>
+                        </form>
+                    </div>
+                                                            <div class="ltn__product-details-menu-2">  
+                                                                <ul>
+                                                                <li style="padding-right: 7.28rem;">
+                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $prodrelated->slug . '">
+                                                                    <i class="far fa-heart"></i>
+                                                                   <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
+                                                                </a>
+                                                            </li>
+                                                                
+                                                                    <li>
+                                                                        <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $prodrelated->slug . '" form-id="add-cart-product-' . $prodrelated->slug . '">
+                                                                            <i class="fas fa-shopping-cart"></i>
+                                                                            <span>' . SHOP_ADD_TO_CART . '</span>
+                                                                        </a>
+                                                                    </li>
+                                                                  
+                                                                    
+                                                                    <li>
+                                                                    <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
+                                                                    </li>
+    
+                                                                   
+                                                                   
+                                                                </ul>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="ltn__social-media">
+                                                                <ul>
+                                                                    <li>' . SHOP_SHARE . ':</li>
+                                                                    <li>
+    <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $prodrelated->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                                                    </li>
+                                                                    <li>
+    <a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $prodrelated->slug . '&text=' . (($lang == 'gr') ? $prodrelated->title_greek : $prodrelated->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                                                    </li>
+                                                                    <li>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $prodrelated->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ';
+            }
+           
+        }
         $product_bread .= '
             <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-image" data-bg="' . $banner . '">
                 <div class="container">
@@ -709,6 +1053,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                             </tr>
                 ';
         }
+        
         $product_detail .= '
                                         </tbody>
                                     </table>
@@ -772,129 +1117,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                 <div class="col-md-12 product-filter-right mt-30">
                     <h5>Similar Products</h5>
                     <div id="productContainer" class="row">
-                        <div class="col-xl-3 col-sm-6 col-6">
-                            <div class="ltn__product-item ltn__product-item-3 text-center">
-                                <a href="https://sulavhealth.com/product/skin-care/shadow-gel-spf-50"><div class="product-img product_hove" data-href="https://sulavhealth.com/product/skin-care/shadow-gel-spf-50">
-                                    <img src="https://sulavhealth.com/images/product/galleryimages/WHF90-shadow-spf-50-gel-75gm.jpg" alt="Shadow Gel SPF 50+">
-                                </div></a>
-                                <div class="product-info">
-                                    <h4 class="product-title"><a href="https://sulavhealth.com/search/fix-derma" class="product-link">Fix Derma</a></h4>
-                                    <a href="https://sulavhealth.com/product/skin-care/shadow-gel-spf-50" class="product-link">Shadow Gel SPF 50+</a>
-                                    <div class="product-price">
-                                        <span>NPR 850</span><del>NPR 1000</del>
-                                    </div>
-                                    <div class="product-action">
-                    <li class="sale-badge">FixDerma Sunscreen for oily type of skin</li>
-                                        <ul>
-                                            <li>
-                                                <a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="shadow-gel-spf-50">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_shadow-gel-spf-50">
-                                                    Add to Cart
-                                                    <i class="fas fa-shopping-cart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                      </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="col-xl-3 col-sm-6 col-6">
-                            <div class="ltn__product-item ltn__product-item-3 text-center">
-                                <a href="https://sulavhealth.com/product/dietary-supplements/avd3-tablets"><div class="product-img product_hove" data-href="https://sulavhealth.com/product/dietary-supplements/avd3-tablets">
-                                    <img src="https://sulavhealth.com/images/product/galleryimages/4MW2D-avd3-(1).jpg" alt="AVD3 Tablets">
-                                </div></a>
-                                <div class="product-info">
-                                    <h4 class="product-title"><a href="https://sulavhealth.com/search/av-d3" class="product-link">AV-D3</a></h4>
-                                    <a href="https://sulavhealth.com/product/dietary-supplements/avd3-tablets" class="product-link">AVD3 Tablets</a>
-                                    <div class="product-price">
-                                        <span>NPR 3500</span><del>NPR 4000</del>
-                                    </div>
-                                    <div class="product-action">
-                    <li class="sale-badge">Calcium, Vitamin D, Vit B12, Glucosamine, Zinc</li>
-                                        <ul>
-                                            <li>
-                                                <a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="avd3-tablets">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_avd3-tablets">
-                                                    Add to Cart
-                                                    <i class="fas fa-shopping-cart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                      </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="col-xl-3 col-sm-6 col-6">
-                            <div class="ltn__product-item ltn__product-item-3 text-center">
-                                <a href="https://sulavhealth.com/product/lab-services/acupressure-mat-i-super-with-copper"><div class="product-img product_hove" data-href="https://sulavhealth.com/product/lab-services/acupressure-mat-i-super-with-copper">
-                                    <img src="https://sulavhealth.com/images/product/galleryimages/uqd0h-2411.jpg" alt="Acupressure MAT-I super with copper">
-                                </div></a>
-                                <div class="product-info">
-                                    <h4 class="product-title"><a href="https://sulavhealth.com/search/acs" class="product-link">ACS</a></h4>
-                                    <a href="https://sulavhealth.com/product/lab-services/acupressure-mat-i-super-with-copper" class="product-link">Acupressure MAT-I super with copper</a>
-                                    <div class="product-price">
-                                        <span>NPR 150</span><del>NPR 200</del>
-                                    </div>
-                                    <div class="product-action">
-                    <li class="sale-badge">111</li>
-                                        <ul>
-                                            <li>
-                                                <a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="acupressure-mat-i-super-with-copper">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_acupressure-mat-i-super-with-copper">
-                                                    Add to Cart
-                                                    <i class="fas fa-shopping-cart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                      </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="col-xl-3 col-sm-6 col-6">
-                            <div class="ltn__product-item ltn__product-item-3 text-center">
-                                <a href="https://sulavhealth.com/product/travel-medicines/devomine"><div class="product-img product_hove" data-href="https://sulavhealth.com/product/travel-medicines/devomine">
-                                    <img src="https://sulavhealth.com/template/web/img/product/one.jpg" alt="Devomine">
-                                </div></a>
-                                <div class="product-info">
-                                    <h4 class="product-title"><a href="https://sulavhealth.com/search/lomus" class="product-link">LOMUS</a></h4>
-                                    <a href="https://sulavhealth.com/product/travel-medicines/devomine" class="product-link">Devomine</a>
-                                    <div class="product-price">
-                                        <span>NPR 95</span>
-                                    </div>
-                                    <div class="product-action">
-                    <li class="sale-badge">Promethazine 25</li>
-                                        <ul>
-                                            <li>
-                                                <a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="devomine">
-                                                    <i class="far fa-heart"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_devomine">
-                                                    Add to Cart
-                                                    <i class="fas fa-shopping-cart"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                      </div>
-                                </div>
-                            </div>
-                        </div>
+                       '.$product_realted.'
                 </div>
             </div>
             </div>
@@ -907,6 +1130,8 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
 
 $jVars['module:product:product-bread'] = $product_bread;
 $jVars['module:product:product-detail'] = $product_detail;
+$jVars['module:product:product-related-modal'] = $product_related_modal;
+$jVars['module:product:product-related-script'] = $product_related_script;
 
 
 /**
