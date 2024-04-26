@@ -212,7 +212,7 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
         }
 
         $user_wish_list .= '
-        
+        <h3 class="mb-50">Wishlist</h3>
             <div class="shoping-cart-inner">
                 <div class="shoping-cart-table table-responsive">
                     <table class="table">
@@ -246,13 +246,16 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                             }
                         }
                         $user_wish_list .= '
-                        <h3 class="mb-50">Wishlist</h3>
+                        
                             <tr class="cart-remove">
                                 <td class="cart-product-image">
                                     <img src="' . $img . '" alt="' . ( $productRow->title ) . '">
                                 </td>
                                 <td class="cart-product-info">
-                                    <h4><a href="' . BASE_URL . 'product/' . $productRow->slug . '" target="_blank">' . ( $productRow->title ) . '</a></h4>
+                                    <h4><a href="' . BASE_URL . 'product/productdetails/' . $productRow->slug . '" target="_blank">' . ( $productRow->title ) . '</a></h4>
+                                </td>
+                                <td class="cart-product-info">
+                                    <p>' . ( $productRow->brief ) . '</p>
                                 </td>
                                 <td class="cart-product-add-cart">
 
