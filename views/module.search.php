@@ -513,9 +513,9 @@ if (defined('SEARCH_PAGE')) {
 
     $res = $db->query($sql);
     $total = $db->affected_rows($res);
-    $listofitems='
+    $listofitems .='
     
-    <label>('.$total.' items found)</label>';
+    <label id="totalitems">('.$total.' items found)</label>';
     if ($total > 0) {
         while ($rows = $db->fetch_array($res)) {
             // if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {

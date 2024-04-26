@@ -190,7 +190,7 @@ if (defined('CART_PAGE')) {
                     </tbody>
                 </table>
                 <div class="btn-wrapper text-right">
-                    <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1">' . (($lang == "gr") ? "Προχωρήστε στην ολοκλήρωση παραγγελίας" : "Proceed to checkout") . '</a>
+                    <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1" id="cartsubmit">' . (($lang == "gr") ? "Προχωρήστε στην ολοκλήρωση παραγγελίας" : "Proceed to checkout") . '</a>
                 </div>
             </div>
         ';
