@@ -182,19 +182,6 @@
                     jQuery('div#productContainer').html(msg.result);
                     jQuery('div#productpopup').html(msg.popup);
                     jQuery('div#productscript').html(msg.popscript);
-                    // jQuery('div#filter-nav').html(msg.nav);
-
-                    // setTimeout(reinitialiseSlick, 5000)
-
-                    //showing rating
-                    // jQuery('input.rating').rating();
-                    //adding functionality to navigation
-                    // $('.gnav').on('click', function () {
-                    //     $(this).navFunction();
-                    // });
-                    // $('html, body').animate({
-                    //     scrollTop: eval($("#scrolll").offset().top - 70)
-                    // }, 500);
                 }
             });
         }
@@ -288,7 +275,7 @@
 
 
 <script>
-    
+
     var base_url = $('base').attr('url');
     // form filtering data
     $('input[name="qcategory[]"]').on('change', function () {
@@ -310,7 +297,7 @@
         });
         return !1
     });
-    $('.qtype, .qcategory, .qactivities, .qsubcategory, .qservice, .qbrand, .gprice').on('click', function () {
+    $('body').on('click', '.qtype, .qcategory, .qactivities, .qsubcategory, .qservice, .qbrand, .gprice', function () {
         var form = $("#search_form");
         $.ajax({
             type: "POST",

@@ -172,39 +172,35 @@ class category extends DatabaseObject
                 $sql = "SELECT id,title FROM " . self::$table_name . " WHERE parentId ='$selectedId' ORDER BY sortorder DESC";
                 $record = self::find_by_sql($sql);
                 if ($record) {
-                    $result .= '<div class="custom-control custom-checkbox">
-                    ';
                     foreach ($record as $row) {
                         $sel = ($selid == $row->id) ? 'selected' : '';
                         $tot = SubProduct::get_total_subcategory_product($row->id);
                         if ($tot > 0) {
                             $result .= '
-                            <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="subcat-' . $row->id . '" value="' . $row->id . '">
-                            <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input qsubcategory" name="qsubcategory[]" ' . $sel . ' id="subcat-' . $row->id . '" value="' . $row->id . '">
+                                <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                            </div>
                             ';
                         }
                     }
-                } else {
-                    $result .= '</div>';
                 }
             }
         } else {
             $record = self::get_subcategory();
             if ($record) {
-                $result .= '<div class="custom-control custom-checkbox">
-                    ';
                 foreach ($record as $row) {
                     $sel = ($selid == $row->id) ? 'selected' : '';
                     $tot = SubProduct::get_total_subcategory_product($row->id);
                     if ($tot > 0) {
                         $result .= '
-                        <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="subcat-' . $row->id . '" value="' . $row->id . '">
-                        <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input qsubcategory" name="qsubcategory[]" ' . $sel . ' id="subcat-' . $row->id . '" value="' . $row->id . '">
+                            <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                        </div>
                         ';
                     }
                 }
-            } else {
-                $result .= '</div>';
             }
         }
         return $result;
