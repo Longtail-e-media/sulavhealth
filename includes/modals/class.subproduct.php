@@ -79,12 +79,16 @@ class SubProduct extends DatabaseObject
     public static function get_min_price()
     {
         global $db;
-        return self::find_by_sql("SELECT price1 , discount1
+        return self::find_by_sql("
+
+
+
+SELECT price1 , discount1
         FROM " . self::$table_name . "
         WHERE price1 = (
             SELECT MIN(price1) 
             FROM " . self::$table_name . " WHERE price1 IS NOT NULL AND price1 <> 0
-        ) AND discount1 = (
+        ) OR discount1 = (
             SELECT MIN(discount1)
             FROM " . self::$table_name . " WHERE discount1 IS NOT NULL AND discount1 <> 0
         )");

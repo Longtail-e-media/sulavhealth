@@ -34,7 +34,6 @@
 <jcms:module:product:cart-menu/>
 
 <jcms:module:menu:mob-menu/>
-
 <div class="ltn__utilize-overlay"></div>
 
 <div class="container mx-auto product-filter">
@@ -42,6 +41,7 @@
         <jcms:module:search-searchform/>
         <div class="col-md-10 product-filter-right">
             <h2>List of Products</h2>
+            <div id="totalitems"></div>
             <jcms:module:search-totalitems/>
             <div id="productContainer" class="row">
                 <jcms:module:package-searchlist/>
@@ -149,13 +149,14 @@
 
 <script>
     $(function () {
-
+        var mini=  <jcms:module:search-minprice/>;
+        var maxi=  <jcms:module:search-maxprice/>;
         $("#price-slider").slider({
             range: true,
-            // min: '<jcms:module:search-minprice/>',
-            min: 0,
-            max: '<jcms:module:search-maxprice/>',
-            values: [0, 5000],
+            min: mini,
+            //min: 0,
+            max: maxi,
+            values: [mini, maxi],
             slide: function (event, ui) {
                 $("#price-start").val("Rs." + ui.values[0]);
                 $("#price-end").val("Rs." + ui.values[1]);

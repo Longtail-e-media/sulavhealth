@@ -514,7 +514,7 @@ if (defined('SEARCH_PAGE')) {
     $res = $db->query($sql);
     $total = $db->affected_rows($res);
     $listofitems='
-    <div id="totalitems"></div>
+    
     <label>('.$total.' items found)</label>';
     if ($total > 0) {
         while ($rows = $db->fetch_array($res)) {
@@ -885,9 +885,15 @@ if (defined('SEARCH_PAGE')) {
     $mins= SubProduct::get_min_price();
 
     foreach($mins as $min){
-    $minprice = $min->discount1;
+        if($min->discount1==0){
+            $minprice = $min->price1;
+        }
+        else{
+            $minprice = $min->discount1;
+        }
+    
     }
-    //  pr($maxprice);
+    //   pr($min);
    
 }
 
