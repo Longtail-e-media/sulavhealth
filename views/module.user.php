@@ -352,12 +352,23 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
         <label>' . ( 'Blood Group' ) . ':</label>
         <input type="text" name="blood_group">
     </div>
-   
+   <!--
     <div class="col-md-12">
     <h6>Google Maps</h6>
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.293320542693!2d85.31337347525263!3d27.67732777619979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb196760d68d39%3A0xcff5b96bdc5c0764!2sLongtail%20e-media!5e0!3m2!1sen!2snp!4v1714128864192!5m2!1sen!2snp" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
+    -->
+    <div class="col-md-12">
+    <label for="google-maps-link">Google Maps Link:</label>
+    <input type="text" id="google-maps-link" name="google_maps_link" placeholder="Paste Google Maps link here" oninput="updateMap()">
+    <div id="map-preview" style="display: none;">
+        <iframe id="google-maps-iframe" src="" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
 </div>
+
+
+</div>
+
 
 
                         <div class="row">

@@ -389,5 +389,21 @@ if (window.location.hash === "#wishlist") {
     
 </script>
 
+<script>
+  function updateMap() {
+    var mapLink = document.getElementById('google-maps-link').value;
+    var mapIframe = document.getElementById('google-maps-iframe');
+
+    if (mapLink.trim() !== "") {
+        mapIframe.src = mapLink;
+        document.getElementById('map-preview').style.display = 'block';
+    } else {
+        mapIframe.src = '';
+        document.getElementById('map-preview').style.display = 'none';
+    }
+}
+</script>
+
+
 </body>
 </html>
