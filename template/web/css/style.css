@@ -726,6 +726,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="submit"],
+input[type="date"],
 textarea {
   background-color: var(--white);
   border: 0.125rem solid;
@@ -17658,6 +17659,14 @@ textarea:focus {
   padding-left: 0 !important;
 }
 
+#profileForm .input-item select {
+  background: none !important;
+  border: 0;
+  border-bottom: 1px solid #0f74b9;
+  padding-left: 0 !important;
+  padding: 15px 18px;
+}
+
 #profileForm label {
   margin-bottom: 0;
   font-weight: 800!important;
@@ -17665,3 +17674,9 @@ textarea:focus {
 #profileForm .row > div {
   padding: 20px;
 }
+.cart-product-add-cart {
+  text-align: right;
+  padding-right: 40px!important;
+}
+
+
