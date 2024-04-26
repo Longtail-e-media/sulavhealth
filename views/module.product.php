@@ -256,12 +256,12 @@ if (defined('HOME_PAGE')) {
                                                         <h3>' . (($lang == "gr") ? $giftSet->title_greek : $giftSet->title) . '</h3>
                                                         ' . (($lang == "gr") ? $giftSet->brief_greek : $giftSet->brief) . '
 
-                                                        <br/>
-                                                        <br/>
+                                                            <br/>
+                                                            <br/>
 
-                                                        <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
-                                                            <span>' . SHOP_VIEW_MORE . '</span>
-                                                        </a>
+                                                            <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
+                                                                <span>' . SHOP_VIEW_MORE . '</span>
+                                                            </a>
             
                 <div class="shoping-cart-table table-responsive">
                     <form id="add-cart-product-' . $giftSet->slug . '">

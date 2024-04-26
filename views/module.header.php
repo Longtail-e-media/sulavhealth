@@ -85,7 +85,7 @@ if(!empty($userId)){
 $userRec = User::find_by_id($userId);
 // pr($userRec);
 
-$username= 	$userRec->first_name;
+$username= 	''.$userRec->first_name.',';
 $logbutton=' <li><a href="'.BASE_URL.'dashboard" id="id_my_account">My Account</a></li>
             <li><a href="'.BASE_URL.'logout" id="id_my_account">Log Out</a></li>';
 }
@@ -160,7 +160,11 @@ $header .= '
 
                             </ul>
                             <div class="user-details">
+<<<<<<< Updated upstream
                                 <h4>Hello, '.$username.'!</h4>
+=======
+                                <h4>Hello '.$username.'</h4>
+>>>>>>> Stashed changes
 
                               <!--  '.$logbutton.' -->
                             </div>
