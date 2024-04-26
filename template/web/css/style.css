@@ -13096,9 +13096,7 @@ input.cart-plus-minus-box {
   width: 5.375rem;
 } */
 
-.cart-product-image img {
-  max-width: 6.25rem;
-}
+
 
 .cart-product-remove {
   cursor: pointer;
@@ -15808,7 +15806,7 @@ input.cart-plus-minus-box {
 ---------------------------------------------------- */
 .ltn__tab-menu-list .nav {
   display: block;
-  margin-right: 1.875rem;
+  /* margin-right: 1.875rem; */
   border: 0.0625rem solid #eee;
 }
 
@@ -15818,10 +15816,12 @@ input.cart-plus-minus-box {
   display: flex;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: flex-start;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  gap: 30px;
   padding: 0.9375rem 1.25rem;
   border-bottom: 0.0625rem solid var(--border-color-1);
 }
@@ -15831,18 +15831,20 @@ input.cart-plus-minus-box {
 }
 
 .ltn__tab-menu-list .nav a i {
-  font-size: 0.875rem;
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
 }
 
 .ltn__tab-menu-list .nav a.active {
-  background-color: var(--section-bg-2);
+  background-color: #0f74b9;
   color: var(--white);
 }
 
-.ltn__myaccount-tab-content-inner > p {
+/* .ltn__myaccount-tab-content-inner > p {
   padding: 1.25rem;
   background-color: var(--section-bg-1);
-}
+} */
 
 /* ----------------------------------------------------
     Time Schedule Area
@@ -17227,7 +17229,8 @@ footer a:hover {
 }
 
 .tab-content {
-  margin-top: 2.5rem;
+  padding: 0.5rem 3rem;
+  /* margin-top: 2.5rem; */
 }
 
 .product-action .add-wishlist {
@@ -17317,6 +17320,7 @@ footer a:hover {
   margin: 0;
   padding: 0;
   line-height: 0.65;
+  text-transform: capitalize;
   /* margin-top: 0.625rem; */
 }
 
@@ -17341,6 +17345,10 @@ footer a:hover {
   font-weight: 800;
 }
 
+.product-filter-right {
+  z-index: 50;
+  background: #f4f4f4;
+}
 .product-filter-right .product-title {
   font-size: 1em;
   font-weight: 400;
@@ -17449,9 +17457,10 @@ html {
   margin-top: -10px;
 }
 .brand-images-wrapper.owl-carousel img {
-  width: 150px;
+  width: 160px;
   height: 150px;
   object-fit: contain;
+  margin-left: 20px;
 }
 .brand-images-wrapper.owl-carousel .owl-nav,
 .brand-images-wrapper.owl-carousel .owl-dots {
@@ -17459,7 +17468,6 @@ html {
 }
 
 .brand-images-wrapper.owl-carousel .owl-stage {
-  background: red;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -17584,5 +17592,76 @@ textarea:focus {
 .payment-right {
   padding: 10px 40px;
   padding-right: 15px;
-padding-top: 0;
+  padding-top: 0;
+}
+
+@media (max-width: 768px) {
+  .billing-left {
+    padding: 25px 40px;
+  }
+  .payment-right {
+    padding: 10px 40px;
+  }
+}
+
+.dropdown.show {
+  border-radius: 10px;
+}
+
+.log-out {
+  background: rgb(179, 0, 0);
+}
+.log-out:hover {
+  color: rgb(179, 0, 0);
+}
+.cart-remove .add-to-cart {
+  margin-left: 0.625rem;
+  background-color: #9e1e63;
+  border-radius: 1.25rem;
+  color: #fff;
+  text-transform: capitalize;
+  font-weight: 500;
+  padding: 0.5rem 0.9375rem;
+}
+
+.cart-remove .add-to-cart:hover {
+  background-color: #0f74b9;
+}
+
+.cart-product-info {
+  width: 32rem;
+}
+
+.cart-product-info h4 {
+  margin: 0;
+  font-size: 1.15rem;
+  margin-left: 1.25rem;
+}
+.cart-product-info h4 a{
+  font-size: 1.15rem;
+}
+
+.cart-product-image {
+  width: 6.25rem;
+  overflow: hidden;
+}
+.cart-product-image img {
+  width: 6.25rem;
+  height: 80px;
+  object-fit: contain;
+}
+
+#profileForm input {
+  background: none !important;
+  border: 0;
+  border-bottom: 1px solid #0f74b9;
+  padding-left: 0 !important;
+}
+
+#profileForm label {
+  margin-bottom: 0;
+  font-weight: 800!important;
+}
+#profileForm .row > div {
+  padding: 20px;
 }

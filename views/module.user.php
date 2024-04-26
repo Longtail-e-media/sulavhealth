@@ -144,17 +144,18 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
 
         $user_nav .= '
             <div class="nav">
-                <a class="active show" data-toggle="tab" href="#liton_tab_1_1">' . ( 'Dashboard' ) . ' <i class="fas fa-home"></i></a>
-                <a data-toggle="tab" href="#liton_tab_1_2">' . ( 'Orders' ) . ' <i class="fas fa-file-alt"></i></a>
-                <a data-toggle="tab" id="wishlist" href="#liton_tab_1_3">' . ( 'Wishlist' ) . ' <i class="fas fa-list"></i></a>
-                <a data-toggle="tab" href="#liton_tab_1_4">' . ( 'Account Details' ) . ' <i class="fas fa-user"></i></a>
-                <a href="' . BASE_URL . 'logout">' . ( 'Logout' ) . ' <i class="fas fa-sign-out-alt"></i></a>
+                <a class="active show" data-toggle="tab" href="#liton_tab_1_1"> <i class="fas fa-home"></i> ' . ( 'Dashboard' ) . '</a>
+                <a data-toggle="tab" href="#liton_tab_1_2"> <i class="fas fa-file-alt"></i> ' . ( 'Orders' ) . ' </a>
+                <a data-toggle="tab" id="wishlist" href="#liton_tab_1_3"> <i class="fas fa-list"></i> ' . ( 'Wishlist' ) . ' </a>
+                <a data-toggle="tab" href="#liton_tab_1_4"><i class="fas fa-user"></i> ' . ( 'Account Details' ) . ' </a>
+                <a href="' . BASE_URL . 'logout"> <i class="fas fa-sign-out-alt"></i> ' . ( 'Logout' ) . ' </a>
             </div>
         ';
 
         $user_dashboard .= '
-                <p>Hello <strong>' . $userRec->first_name . ' ' . $userRec->last_name . '</strong> ( <small><a href="' . BASE_URL . 'logout">Log out</a></small>)</p>
+              <!--  <p style="text-transform: capitalize;">Hello, <strong>' . $userRec->first_name . ' ' . $userRec->last_name . '</strong> !</p> -->
                 <p>From your account dashboard you can view your <span>recent orders</span>, manage your <span>address</span>, and <span>edit your password and account details</span>.</p>
+          <!--      <a class="theme-btn-1 btn btn-effect-1 add-cart log-out" href="' . BASE_URL . 'logout">Log out</a> -->
             ';
 
         $orders = BookingInfo::find_all_by_user_id( $userId );
@@ -241,9 +242,13 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                                     <h4><a href="' . BASE_URL . 'product/' . $productRow->slug . '" target="_blank">' . ( $productRow->title ) . '</a></h4>
                                 </td>
                                 <td class="cart-product-add-cart">
-                                    <a class="submit-button-1 add-cart-wishlist" href="#" title="Add to Cart" data-cartid="' . $productRow->slug . '">' . ( 'Add to Cart' ) . '</a>
+
+                                    <a href="#" title="ADD TO CART" class="add-to-cart" data-cartid="' . $productRow->slug . '">
+                                    ' . ( 'Add to Cart' ) . '
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </a>
                                 </td>
-                                <td class="cart-product-remove remove-wishlist" data-id="' . $productRow->slug . '">x</td>
+                                <td class="cart-product-remove remove-wishlist" style="font-size: 1.5rem;" data-id="' . $productRow->slug . '">&times;</td>
                             </tr>
                         ';
                     }
@@ -290,17 +295,17 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                             <input type="text" name="phone" value="' . ( ( !empty( $userRec->contact ) ) ? $userRec->contact : '' ) . '">
                         </div>
                     </div>
-                    <fieldset>
-                        <legend>' . ( 'Password change' ) . '</legend>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <label>' . ( 'New password (leave blank to leave unchanged)' ) . ':</label>
                                 <input type="password" name="password" id="password">
+                                <br/>
+                                <br/>
                                 <label>' . ( 'Confirm new password' ) . ':</label>
                                 <input type="password" name="confirm_password">
                             </div>
                         </div>
-                    </fieldset>
                     <div class="btn-wrapper">
                         <button type="submit" id="submitProfile" class="btn theme-btn-1 btn-effect-1 text-uppercase">' . ( 'Save Changes' ) . '</button>
                     </div>
