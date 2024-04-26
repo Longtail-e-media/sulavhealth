@@ -928,6 +928,138 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                 </div> -->
             </div>
             <!-- Shop Tab End -->
+
+
+            <div class="row">
+                <div class="col-md-12 product-filter-right mt-30">
+                    <h5>Similar Products</h5>
+                    <div id="productContainer" class="row">
+                        <div class="col-xl-3 col-sm-6 col-6">
+                            <div class="ltn__product-item ltn__product-item-3 text-center">
+                                <a href="https://sulavhealth.com/product/skin-care/shadow-gel-spf-50"><div class="product-img product_hove" data-href="https://sulavhealth.com/product/skin-care/shadow-gel-spf-50">
+                                    <img src="https://sulavhealth.com/images/product/galleryimages/WHF90-shadow-spf-50-gel-75gm.jpg" alt="Shadow Gel SPF 50+">
+                                </div></a>
+                                <div class="product-info">
+                                    <h4 class="product-title"><a href="https://sulavhealth.com/search/fix-derma" class="product-link">Fix Derma</a></h4>
+                                    <a href="https://sulavhealth.com/product/skin-care/shadow-gel-spf-50" class="product-link">Shadow Gel SPF 50+</a>
+                                    <div class="product-price">
+                                        <span>NPR 850</span><del>NPR 1000</del>
+                                    </div>
+                                    <div class="product-action">
+                    <li class="sale-badge">FixDerma Sunscreen for oily type of skin</li>
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="shadow-gel-spf-50">
+                                                    <i class="far fa-heart"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_shadow-gel-spf-50">
+                                                    Add to Cart
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-xl-3 col-sm-6 col-6">
+                            <div class="ltn__product-item ltn__product-item-3 text-center">
+                                <a href="https://sulavhealth.com/product/dietary-supplements/avd3-tablets"><div class="product-img product_hove" data-href="https://sulavhealth.com/product/dietary-supplements/avd3-tablets">
+                                    <img src="https://sulavhealth.com/images/product/galleryimages/4MW2D-avd3-(1).jpg" alt="AVD3 Tablets">
+                                </div></a>
+                                <div class="product-info">
+                                    <h4 class="product-title"><a href="https://sulavhealth.com/search/av-d3" class="product-link">AV-D3</a></h4>
+                                    <a href="https://sulavhealth.com/product/dietary-supplements/avd3-tablets" class="product-link">AVD3 Tablets</a>
+                                    <div class="product-price">
+                                        <span>NPR 3500</span><del>NPR 4000</del>
+                                    </div>
+                                    <div class="product-action">
+                    <li class="sale-badge">Calcium, Vitamin D, Vit B12, Glucosamine, Zinc</li>
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="avd3-tablets">
+                                                    <i class="far fa-heart"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_avd3-tablets">
+                                                    Add to Cart
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-xl-3 col-sm-6 col-6">
+                            <div class="ltn__product-item ltn__product-item-3 text-center">
+                                <a href="https://sulavhealth.com/product/lab-services/acupressure-mat-i-super-with-copper"><div class="product-img product_hove" data-href="https://sulavhealth.com/product/lab-services/acupressure-mat-i-super-with-copper">
+                                    <img src="https://sulavhealth.com/images/product/galleryimages/uqd0h-2411.jpg" alt="Acupressure MAT-I super with copper">
+                                </div></a>
+                                <div class="product-info">
+                                    <h4 class="product-title"><a href="https://sulavhealth.com/search/acs" class="product-link">ACS</a></h4>
+                                    <a href="https://sulavhealth.com/product/lab-services/acupressure-mat-i-super-with-copper" class="product-link">Acupressure MAT-I super with copper</a>
+                                    <div class="product-price">
+                                        <span>NPR 150</span><del>NPR 200</del>
+                                    </div>
+                                    <div class="product-action">
+                    <li class="sale-badge">111</li>
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="acupressure-mat-i-super-with-copper">
+                                                    <i class="far fa-heart"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_acupressure-mat-i-super-with-copper">
+                                                    Add to Cart
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-xl-3 col-sm-6 col-6">
+                            <div class="ltn__product-item ltn__product-item-3 text-center">
+                                <a href="https://sulavhealth.com/product/travel-medicines/devomine"><div class="product-img product_hove" data-href="https://sulavhealth.com/product/travel-medicines/devomine">
+                                    <img src="https://sulavhealth.com/template/web/img/product/one.jpg" alt="Devomine">
+                                </div></a>
+                                <div class="product-info">
+                                    <h4 class="product-title"><a href="https://sulavhealth.com/search/lomus" class="product-link">LOMUS</a></h4>
+                                    <a href="https://sulavhealth.com/product/travel-medicines/devomine" class="product-link">Devomine</a>
+                                    <div class="product-price">
+                                        <span>NPR 95</span>
+                                    </div>
+                                    <div class="product-action">
+                    <li class="sale-badge">Promethazine 25</li>
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="devomine">
+                                                    <i class="far fa-heart"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_devomine">
+                                                    Add to Cart
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            </div>
         ';
 
     } else {
