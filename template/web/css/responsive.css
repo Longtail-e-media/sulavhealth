@@ -139,6 +139,10 @@
     height: 5rem;
     padding: 5px;
   }
+
+  .tab-content {
+    padding: 0;
+  }
 }
 
 @media (max-width: 1300px) {
@@ -160,3 +164,19 @@
   }
 }
 
+
+@media screen and (max-width: 1200px) {
+  #liton_tab_1_3 .table-responsive {
+    overflow-x: scroll;
+}
+
+#liton_tab_1_3 .table-responsive {
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+#liton_tab_1_3 .table-responsive .add-to-cart {
+  width: 12rem!important;
+}
+
+}

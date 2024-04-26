@@ -190,8 +190,8 @@ $header .= '
             </div>
 
 
-            <nav class="down-nav">
-                <div class="container ltn__header-middle-area ltn__header-sticky">
+            <nav class="down-nav ltn__header-middle-area ltn__header-sticky">
+                <div class="container">
                     <div class="header-menu d-none d-xl-block">
                         <div class="ltn__main-menu"
                             style="display: flex; align-items: center; justify-content: flex-start; gap: 10px;">
