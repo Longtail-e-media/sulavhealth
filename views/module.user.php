@@ -199,6 +199,13 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                         });
                     </script>
                 ";
+        } else {
+            $user_orders .= '
+            <p>You have no order images. Would you like to try from homepage?</p>
+            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="Homepage"> 
+            &#8592;  &nbsp; Go Home
+            </a>
+            ';
         }
 
         $user_wish_list .= '
@@ -256,9 +263,10 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
             }
         } else {
             $user_wish_list .= '
-                <tr>
-                    <td class="cart-product-image">' . ( 'No Item in Wishlist' ) . '</td>
-                </tr>
+            <p>You have no order images. Would you like to try from homepage?</p>
+            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="Homepage"> 
+            &#8592;  &nbsp; Go Home
+            </a>
             ';
         }
         $user_wish_list .= '
@@ -274,27 +282,83 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                 <form action="#" id="profileForm">
                     <input type="hidden" name="idValue" value="' . $userRec->id . '">
                     <div class="row mb-50">
-                        <div class="col-md-6">
-                            <label>' . ( 'First name' ) . ':</label>
-                            <input type="text" name="fname" value="' . ( ( !empty( $userRec->first_name ) ) ? $userRec->first_name : '' ) . '">
-                        </div>
-                        <div class="col-md-6">
-                            <label>' . ( 'Last name' ) . ':</label>
-                            <input type="text" name="lname" value="' . ( ( !empty( $userRec->last_name ) ) ? $userRec->last_name : '' ) . '">
-                        </div>
-                        <div class="col-md-6">
-                            <label>' . ( 'Display Email' ) . ':</label>
-                            <input type="email" name="email" value="' . ( ( !empty( $userRec->email ) ) ? $userRec->email : '' ) . '" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label>' . ( 'Address' ) . ':</label>
-                            <input type="text" name="address" value="' . ( ( !empty( $userRec->facebook_uid ) ) ? $userRec->facebook_uid : '' ) . '">
-                        </div>
-                        <div class="col-md-6">
-                            <label>' . ( 'Phone Number' ) . ':</label>
-                            <input type="text" name="phone" value="' . ( ( !empty( $userRec->contact ) ) ? $userRec->contact : '' ) . '">
-                        </div>
-                    </div>
+    <div class="col-md-6">
+        <label>' . ( 'First name' ) . ':</label>
+        <input type="text" name="fname" value="' . ( ( !empty( $userRec->first_name ) ) ? $userRec->first_name : '' ) . '">
+    </div>
+    <div class="col-md-6">
+        <label>' . ( 'Last name' ) . ':</label>
+        <input type="text" name="lname" value="' . ( ( !empty( $userRec->last_name ) ) ? $userRec->last_name : '' ) . '">
+    </div>
+    <div class="col-md-6">
+        <label>' . ( 'Email' ) . ':</label>
+        <input type="email" name="email" value="' . ( ( !empty( $userRec->email ) ) ? $userRec->email : '' ) . '" readonly>
+    </div>
+    <div class="col-md-6">
+        <label>' . ( 'Address' ) . ':</label>
+        <input type="text" name="address" value="' . ( ( !empty( $userRec->facebook_uid ) ) ? $userRec->facebook_uid : '' ) . '">
+    </div>
+    <div class="col-md-6">
+        <label>' . ( 'Phone Number' ) . ':</label>
+        <input type="text" name="phone" value="' . ( ( !empty( $userRec->contact ) ) ? $userRec->contact : '' ) . '">
+    </div>
+    <div class="col-md-6">
+                                        <h6>Gender</h6>
+                                        <div class="input-item">
+                                            <select class="nice-selec col-12" name="gender" value="gender">
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                    <label>' . ( 'Date of Birth' ) . ':</label>
+                                    <input type="date" name="dob">
+                                    </div>
+
+    <div class="col-md-6">
+    <h6>Marital Status</h6>
+    <div class="input-item">
+    <select class="nice-selec col-12" name="marital_status">
+    <option value="single">Single </option>
+    <option value="married">Married </option>
+</select>
+    </div>
+</div>
+    
+    <div class="col-md-6">
+        <label>' . ( 'Weight' ) . ':</label>
+        <input type="text" name="weight">
+    </div>
+    <div class="col-md-6">
+        <label>' . ( 'Height' ) . ':</label>
+        <input type="text" name="height">
+    </div>
+    <div class="col-md-6">
+        <label>' . ( 'District' ) . ':</label>
+        <input type="text" name="district">
+    </div>
+    <div class="col-md-6">
+        <label>' . ( 'City' ) . ':</label>
+        <input type="text" name="city">
+    </div>
+    <div class="col-md-6">
+        <label>' . ( 'Postal Code' ) . ':</label>
+        <input type="text" name="postal_code">
+    </div>
+    <div class="col-md-6">
+        <label>' . ( 'Blood Group' ) . ':</label>
+        <input type="text" name="blood_group">
+    </div>
+   
+    <div class="col-md-12">
+    <h6>Google Maps</h6>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.293320542693!2d85.31337347525263!3d27.67732777619979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb196760d68d39%3A0xcff5b96bdc5c0764!2sLongtail%20e-media!5e0!3m2!1sen!2snp!4v1714128864192!5m2!1sen!2snp" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</div>
+
 
                         <div class="row">
                             <div class="col-md-12">
