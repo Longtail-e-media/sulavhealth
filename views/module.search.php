@@ -8,6 +8,7 @@ if (isset($_REQUEST)) {
 
 $resisearch = $respkglist = $bread = $bread_title = $bread_text = $bread_text_extra = $navigation = '';
 $home_gift_sets_modal = $home_gift_sets_script = $listofitems = '';
+$serachtitle='List of Products';
 $minprice = $maxprice = '';
 if (defined('SEARCH_PAGE')) {
     // pr($_POST);
@@ -281,8 +282,10 @@ if (defined('SEARCH_PAGE')) {
     }
     if (@$category_slug) {
         $cate = Destination::find_by_slug($category_slug);
+        $serachtitle= $cate->title;
         $sql .= " AND prod.Category = $cate->id ";
     }
+   
     if (@$qservice[0] != 'all' and !empty($qservice)) {
         foreach ($qservice as $qserv) {
             if (sizeof($qservice) > 1) {
@@ -300,8 +303,11 @@ if (defined('SEARCH_PAGE')) {
     }
     if (@$service_slug) {
         $ser = Services::find_by_slug($service_slug);
+        $serachtitle= $ser->title;
         $sql .= " AND prod.service_id = $ser->id ";
     }
+    
+    // pr($serachtitle);
     if (@$qsubcategory[0] != 'all' and !empty($qsubcategory)) {
         foreach ($qsubcategory as $qsubcat) {
             if (sizeof($qsubcategory) > 1) {
@@ -319,8 +325,10 @@ if (defined('SEARCH_PAGE')) {
     }
     if (@$subcategory_slug) {
         $subcate = Destination::find_by_slug($subcategory_slug);
+        $serachtitle= $subcate->title;
         $sql .= " AND prod.Subcategory = $subcate->id ";
     }
+   
     if (@$qbrand[0] != 'all' and !empty($qbrand)) {
         foreach ($qbrand as $qbra) {
             if (sizeof($qbrand) > 1) {
@@ -338,8 +346,10 @@ if (defined('SEARCH_PAGE')) {
     }
     if (@$brand_slug) {
         $bran = Brand::find_by_slug($brand_slug);
+        $serachtitle= $bran->title;
         $sql .= " AND prod.brand = $bran->id ";
     }
+   
     if (!empty($gprice)) {
         switch ($gprice) {
             case '1000':
@@ -353,6 +363,7 @@ if (defined('SEARCH_PAGE')) {
                 break;
         }
     }
+    
 
     /* Breadcrumb Start*/
     // if (!empty($gdestination_slug)) {
@@ -916,5 +927,7 @@ $jVars['module:package-search-breadcrumb-title'] = $bread_title;
 $jVars['module:package-search-breadcrumb-text'] = $bread_text;
 $jVars['module:package-search-breadcrumb-extra'] = $bread_text_extra;
 $jVars['module:package-searchlist'] = $respkglist;
+$jVars['module:package-searchtitle'] = $serachtitle;
+
 $jVars['module:package-navigation'] = $navigation;
 ?>

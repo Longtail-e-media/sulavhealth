@@ -574,7 +574,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                         <img src="' . $img . '" alt="' . $prodrelated->title . '"></a>
                     </div>
                     <div class="product-info">
-                        <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
+                        <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                         <a href="' . $slugs . '" class="product-link">' . $prodrelated->title . '</a>
                         <div class="product-price">
                             ' . $price_text . '
