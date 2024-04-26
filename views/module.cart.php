@@ -322,36 +322,8 @@ if (defined('CHECKOUT_PAGE')) {
                     </div>
                 </div>
                 <div class="col-lg-5 payment-right">
-                    <div class="ltn__checkout-payment-method mt-50">
-                        <h4 class="title-2 mb-60">' . (($lang == "gr") ? "Τρόπος Πληρωμής" : "Payment Method") . '</h4>
-                        <div id="checkout_accordion_1">
-                            <div class="card">
-                                <h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-3" aria-expanded="false">
-                                <input type="radio" name="payment_method" value="payment_at_store" checked>
-                                    ' . (($lang == "gr") ? "Εξόφληση κατά την παραλαβή από το κατάστημα" : "Cash on Delivery") . '
-                                </h5>
-                            </div>
-                            <div class="card">
-                                <h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-4" aria-expanded="false">
-                                <input type="radio" name="payment_method" value="himalayan_bank">
-                                    ' . (($lang == "gr") ? "Pay Onlinee" : "Pay Online") . '
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="ltn__payment-note mt-30 mb-30">
-                            <p>' . (($lang == "gr")
-            ? "Τα προσωπικά σας δεδομένα θα χρησιμοποιηθούν για την επεξεργασία της παραγγελίας σας και για άλλους σκοπούς που περιγράφονται στην πολιτική απορρήτου μας."
-            : "Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.") . '</p>
-                            <input type="checkbox" name="agree" value="agree">
-                            ' . CHECKOUT_AGREE_TO_TERMS . '
-                        </div>
-                        <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit" id="checkoutSubmit">' . (($lang == "gr") ? "ΥΠΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ" : "Place order") . '</button>
-                        <p class="mt-20" style="display: none;" id="checkoutMsg"></p>
-                        <div class="error mt-20" style="display: none;"></div>
-                        <div class="success alert alert-success" style="display: none;"></div>
-                    </div>
 
-                    <div class="shoping-cart-total mt-50">
+                    <div class="shoping-cart-total mb-30">
                         <h4 class="title-2">' . (($lang == "gr") ? "Σύνολο Αγορών" : "Cart Totals") . '</h4>
                         <table class="table">
                             <tbody>
@@ -400,6 +372,38 @@ if (defined('CHECKOUT_PAGE')) {
                         <input type="hidden" name="grand_total" value="' . $tot . '">
                         <div class="empty-div"></div>
                     </div>
+                    
+                    
+                    <div class="ltn__checkout-payment-method mt-50">
+                        <h4 class="title-2 mb-60">' . (($lang == "gr") ? "Τρόπος Πληρωμής" : "Payment Method") . '</h4>
+                        <div id="checkout_accordion_1">
+                            <div class="card">
+                                <h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-3" aria-expanded="false">
+                                <input type="radio" name="payment_method" value="payment_at_store" checked>
+                                    ' . (($lang == "gr") ? "Εξόφληση κατά την παραλαβή από το κατάστημα" : "Cash on Delivery") . '
+                                </h5>
+                            </div>
+                            <div class="card">
+                                <h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-4" aria-expanded="false">
+                                <input type="radio" name="payment_method" value="himalayan_bank">
+                                    ' . (($lang == "gr") ? "Pay Onlinee" : "Pay Online") . '
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="ltn__payment-note mt-30 mb-30">
+                            <p>' . (($lang == "gr")
+            ? "Τα προσωπικά σας δεδομένα θα χρησιμοποιηθούν για την επεξεργασία της παραγγελίας σας και για άλλους σκοπούς που περιγράφονται στην πολιτική απορρήτου μας."
+            : "Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.") . '</p>
+                            <input type="checkbox" name="agree" value="agree">
+                            ' . CHECKOUT_AGREE_TO_TERMS . '
+                        </div>
+                        <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit" id="checkoutSubmit">' . (($lang == "gr") ? "ΥΠΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ" : "Place order") . '</button>
+                        <p class="mt-20" style="display: none;" id="checkoutMsg"></p>
+                        <div class="error mt-20" style="display: none;"></div>
+                        <div class="success alert alert-success" style="display: none;"></div>
+                    </div>
+
+                   
                 </div>
             </div>
         </form>

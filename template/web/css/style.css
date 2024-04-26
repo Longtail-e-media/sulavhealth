@@ -17086,7 +17086,7 @@ input.cart-plus-minus-box {
 .product-list p {
   /* margin-top: -0.625rem; */
   max-width: 10rem;
-  font-size: 0.9em;
+  font-size: 0.85em;
   line-height: 1.25;
   text-align: left;
 }
@@ -17577,11 +17577,12 @@ textarea:focus {
 }
 
 .billing-left {
-  padding: 10px 40px;
+  padding: 25px 40px;
   padding-left: 15px;
 }
 
 .payment-right {
   padding: 10px 40px;
-padding-right: 15px;
+  padding-right: 15px;
+padding-top: 0;
 }
