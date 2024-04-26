@@ -63,9 +63,9 @@ if (!empty($slides)) {
         if (file_exists($file_path)) {
             $imgSlider .= '
             
-                <div class="" >
-                  <img style="object-position: top -50px right 0;" src="' . IMAGE_PATH . 'slideshow/' . $slide->image . '" alt="'.$slide->title.'">
-                </div>
+            <div class="">
+            <img style="object-position: top -50px right 0; cursor: pointer;" src="' . IMAGE_PATH . 'slideshow/' . $slide->image . '" alt="'.$slide->title.'" onclick="window.location.href=\'' . $linksrc . '\';">
+        </div>
             ';
         }
     }

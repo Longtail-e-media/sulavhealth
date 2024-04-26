@@ -2115,7 +2115,7 @@ pre code {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 35px 0 0 0;
+    /* padding: 35px 0 0 0; */
 }
 
 .table-responsive>.table-bordered {

@@ -906,7 +906,36 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
         $hrid = ($lang == 'gr') ? '1' : '';
         $rescont = explode('<hr id="system_readmore' . $hrid . '" style="border-style: dashed; border-color: orange;" />', $cont);
         $content = (!empty($rescont[1])) ? $rescont[1] : $rescont[0];
-
+        $prodbrand = Brand::find_by_id($prodRec->brand);
+                $prodservice = Services::find_by_id($prodRec->service_id);
+                $prodcategory = Category::find_by_id($prodRec->Category);
+                $prodsubcategory = Category::find_by_id($prodRec->Subcategory);
+                if(!empty($prodcategory)){
+                    $category= $prodcategory->title;
+                }
+                else{
+                    $category='';
+                    $subcategory='';
+                }
+                if(!empty($prodsubcategory)){
+                    $subcategory= '>&nbsp;&nbsp;'.$prodsubcategory->title.'';
+                }
+                else{
+                    $subcategory='';
+                }
+                if (!empty($prodbrand)) {
+                    $title = $prodbrand->title;
+                    $slug= $prodbrand->slug;
+                    
+                } else {
+                    $title = '';
+                    $slug='';
+                }
+                if (!empty($prodservice)) {
+                    $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $prodRec->slug . '';
+                } else {
+                    $slugs = '' . BASE_URL . 'product/product-detail/' . $prodRec->slug . '';;
+                }
         $product_detail .= '
             <div class="ltn__shop-details-inner">
                 <div class="row">
@@ -922,7 +951,9 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     </div>
                     <div class="col-md-6">
                         <div class="modal-product-info shop-details-info pl-0">
+                        <span>'.$category.'</span>&nbsp;&nbsp;<span>'.$subcategory.'</span>
                             <h3>' . (($lang == 'gr') ? $prodRec->title_greek : $prodRec->title) . '</h3>
+                            <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
                             ' . (($lang == "gr") ? $prodRec->brief_greek : $prodRec->brief) . '
                             <div class="shoping-cart-table table-responsive">
                                 <form id="add-cart-product-' . $prodRec->slug . '">
@@ -1131,7 +1162,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
 $jVars['module:product:product-bread'] = $product_bread;
 $jVars['module:product:product-detail'] = $product_detail;
 $jVars['module:product:product-related-modal'] = $product_related_modal;
-$jVars['module:product:product-related-script'] = $product_related_script;
+$jVars['module:product:product-related-'] = $product_related_script;
 
 
 /**
