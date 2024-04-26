@@ -322,7 +322,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                     <ul>
                         <li>Share :</li>
                         <li><a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $rows['slug'] . '&text=' . (($lang == 'gr') ? $rows['title_greek'] : $rows['title']) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $rows['slug'] . '&text=' . ($rows['title']) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
                         <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
                     </ul>
                 </div>

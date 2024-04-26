@@ -17,7 +17,7 @@ if (defined('INNER_PAGE') and isset($_REQUEST['slug'])) {
             }
         }
     
-        $ttitle = ($lang == "gr") ? $recRow->title_greek : $recRow->title;
+        $ttitle = $recRow->title;
         $innerBread .= '
             <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-image" data-bg="' . $img . '">
                 <div class="container">
@@ -45,7 +45,7 @@ if (defined('INNER_PAGE') and isset($_REQUEST['slug'])) {
 
     
         $rescontent = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />',
-            trim((($lang == "gr") ? $recRow->content_greek : $recRow->content)));
+            trim(($recRow->content)));
         $content = (!empty($rescontent[1])) ? $rescontent[1] : $rescontent[0];
         $resinndetail .= $content;
     } else {
@@ -79,7 +79,7 @@ if (defined('HOME_PAGE')) {
         $readmore = (count($content) > 1) ? '<a href="' . BASE_URL .'' .$innRow->slug . '" title="">Read more...</a>' : '';
     }*/
 
-            $resinnh .= (($lang != "gr") ? $contentinfc[0] : $contentinfcgreek[0]);
+            $resinnh .= ($contentinfc[0]);
         }
     }
 

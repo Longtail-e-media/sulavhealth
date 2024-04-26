@@ -40,7 +40,7 @@ if ($menuRec):
         }
 
         $result .= '<li class="' . $pliClass . '">';
-        $result .= getMenuList(($lang == 'gr') ? $menuRow->name_gr : $menuRow->name, $menuRow->linksrc, $menuRow->linktype, $subclass . $subclass1, $chkchild);
+        $result .= getMenuList($menuRow->name, $menuRow->linksrc, $menuRow->linktype, $subclass . $subclass1, $chkchild);
         /* Second Level Menu */
         if ($menusubRec):
             $result .= '<ul>';
@@ -48,7 +48,7 @@ if ($menuRec):
                 $menusub2Rec = Menu::getMenuByParent($menusubRow->id, 1);
                 $chkparent2 = (!empty($menusub2Rec)) ? 1 : 0;
                 $result .= '<li>';
-                $result .= getMenuList(($lang == 'gr') ? $menusubRow->name_gr : $menusubRow->name, $menusubRow->linksrc, $menusubRow->linktype, '', $chkparent2);
+                $result .= getMenuList($menusubRow->name, $menusubRow->linksrc, $menusubRow->linktype, '', $chkparent2);
                 $result .= '</li>';
             endforeach;
             $result .= '</ul>';
@@ -85,7 +85,7 @@ if ($tMenus) {
     $topMenu .= '<ul>';
     foreach ($tMenus as $tMenu) {
         $topMenu .= '<li>';
-        $topMenu .= getMenuList(($lang == 'gr') ? $tMenu->name_gr : $tMenu->name, $tMenu->linksrc, $tMenu->linktype, '');
+        $topMenu .= getMenuList($tMenu->name, $tMenu->linksrc, $tMenu->linktype, '');
         $topMenu .= '</li>';
     }
     $topMenu .= '</ul>';
@@ -100,7 +100,7 @@ if ($FmenuRec):
     $resfooter .= '<ul>';
     foreach ($FmenuRec as $FmenuRow):
         $resfooter .= '<li>';
-        $resfooter .= getMenuList(($lang == 'gr') ? $FmenuRow->name_gr : $FmenuRow->name, $FmenuRow->linksrc, $FmenuRow->linktype, '');
+        $resfooter .= getMenuList($FmenuRow->name, $FmenuRow->linksrc, $FmenuRow->linktype, '');
         $resfooter .= '</li>';
     endforeach;
     $resfooter .= '</ul>';
@@ -114,7 +114,7 @@ if ($FmenuRec):
     $resfooter .= '<ul>';
     foreach ($FmenuRec as $FmenuRow):
         $resfooter .= '<li>';
-        $resfooter .= getMenuList(($lang == 'gr') ? $FmenuRow->name_gr : $FmenuRow->name, $FmenuRow->linksrc, $FmenuRow->linktype, '');
+        $resfooter .= getMenuList($FmenuRow->name, $FmenuRow->linksrc, $FmenuRow->linktype, '');
         $resfooter .= '</li>';
     endforeach;
     $resfooter .= '</ul>';
@@ -128,7 +128,7 @@ if ($FmenuRec):
     $resfooter .= '<ul>';
     foreach ($FmenuRec as $FmenuRow):
         $resfooter .= '<li>';
-        $resfooter .= getMenuList(($lang == 'gr') ? $FmenuRow->name_gr : $FmenuRow->name, $FmenuRow->linksrc, $FmenuRow->linktype, '');
+        $resfooter .= getMenuList($FmenuRow->name, $FmenuRow->linksrc, $FmenuRow->linktype, '');
         $resfooter .= '</li>';
     endforeach;
     $resfooter .= '</ul>';

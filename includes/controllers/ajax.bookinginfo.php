@@ -216,7 +216,7 @@
                     ob_start();
                     require("hbl_payment_form.php");
                     $payment_content = ob_get_clean();
-                    $array = array('payment_form' => true, 'message' => 'Payment need to be done.', 'payment_content' => $payment_content);
+                    $array = array('payment_form' => true, 'message' => 'Processing ...', 'payment_content' => $payment_content);
                     echo json_encode($array);
                 }
                 else {

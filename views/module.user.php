@@ -6,7 +6,7 @@
 $register_form = '';
 
 if ( defined( 'REGISTER_PAGE' ) ) {
-    $consent = ( $lang == 'gr' ) ? 'Επιλέγοντας \'Δημιουργία Λογαριασμού\', συναινώ με την Πολιτική Απορρήτου' : 'By clicking \'create account\', I consent to the privacy policy.';
+    $consent = 'By clicking \'create account\', I consent to the privacy policy.';
     $register_form .= '
     <form action="#" id="registerForm" class="ltn__form-box contact-form-box">
     <div class="mb-30"><input type="text" name="fname" placeholder="' . CONTACT_FORM_FIRST_NAME . '"></div>
@@ -41,20 +41,7 @@ if ( defined( 'REGISTER_PAGE' ) ) {
    </div>
 </form>
         <div class="by-agree text-center">
-    ';
-    $register_form .= ( $lang == 'gr' )
-    ? '
-            <p>Με τη δημιουργία λογαριασμού, συμφωνείτε με:</p>
-            <p><a href="' . BASE_URL . 'terms-conditions" target="_blank">ΟΡΟΥΣ ΧΡΗΣΗΣ </a> &nbsp; &nbsp; / &nbsp; &nbsp; <a href="' . BASE_URL . 'gdpr" target="_blank">ΠΟΛΙΤΙΚΗ ΑΠΟΡΡΗΤΟΥ</a></p>
-            <div class="go-to-btn mt-50">
-                <a href="' . BASE_URL . 'login">ΕΧΕΤΕ ΗΔΗ ΛΟΓΑΡΙΑΣΜΟ;</a>
-            </div>
-        '
-    : '
-           
-        
-        ';
-    $register_form .= '
+    
         </div>
     ';
 }
@@ -146,7 +133,7 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                         <div class="col-lg-12">
                             <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
                                 <div class="section-title-area ltn__section-title-2">
-                                    <h1 class="section-title white-color"><strong>' . ( ( $lang == 'gr' ) ? 'Ο λογαριασμός μου' : 'My Account' ) . '</strong></h1>
+                                    <h1 class="section-title white-color"><strong>' . ( 'My Account' ) . '</strong></h1>
                                 </div>
                             </div>
                         </div>
@@ -157,20 +144,15 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
 
         $user_nav .= '
             <div class="nav">
-                <a class="active show" data-toggle="tab" href="#liton_tab_1_1">' . ( ( $lang == 'gr' ) ? 'Πίνακας Ελέγχου' : 'Dashboard' ) . ' <i class="fas fa-home"></i></a>
-                <a data-toggle="tab" href="#liton_tab_1_2">' . ( ( $lang == 'gr' ) ? 'Οι παραγγελίες μου' : 'Orders' ) . ' <i class="fas fa-file-alt"></i></a>
-                <a data-toggle="tab" id="wishlist" href="#liton_tab_1_3">' . ( ( $lang == 'gr' ) ? 'Λίστα Επιθυμιών' : 'Wishlist' ) . ' <i class="fas fa-list"></i></a>
-                <a data-toggle="tab" href="#liton_tab_1_4">' . ( ( $lang == 'gr' ) ? 'Ο λογαριασμός μου' : 'Account Details' ) . ' <i class="fas fa-user"></i></a>
-                <a href="' . BASE_URL . 'logout">' . ( ( $lang == 'gr' ) ? 'Έξοδος' : 'Logout' ) . ' <i class="fas fa-sign-out-alt"></i></a>
+                <a class="active show" data-toggle="tab" href="#liton_tab_1_1">' . ( 'Dashboard' ) . ' <i class="fas fa-home"></i></a>
+                <a data-toggle="tab" href="#liton_tab_1_2">' . ( 'Orders' ) . ' <i class="fas fa-file-alt"></i></a>
+                <a data-toggle="tab" id="wishlist" href="#liton_tab_1_3">' . ( 'Wishlist' ) . ' <i class="fas fa-list"></i></a>
+                <a data-toggle="tab" href="#liton_tab_1_4">' . ( 'Account Details' ) . ' <i class="fas fa-user"></i></a>
+                <a href="' . BASE_URL . 'logout">' . ( 'Logout' ) . ' <i class="fas fa-sign-out-alt"></i></a>
             </div>
         ';
 
-        $user_dashboard .= ( $lang == 'gr' )
-        ? '
-                <p>Γεια σου <strong>' . $userRec->first_name . ' ' . $userRec->last_name . '</strong> (δεν είσαι ο/η <strong>' . $userRec->first_name . ' ' . $userRec->last_name . '</strong>; <small><a href="' . BASE_URL . 'logout">Έξοδος</a></small>)</p>
-                <p>Από τον πίνακα ελέγχου του λογαριασμού σας μπορείτε να δείτε τις πρόσφατες <span>παραγγελίες σας</span>, να αλλάξετε την <span>διεύθυνσή σας</span>, και <span>να επεξεργαστείτε τον κωδικό πρόσβασης και τα στοιχεία του λογαριασμού σας</span>.</p>
-            '
-        : '
+        $user_dashboard .= '
                 <p>Hello <strong>' . $userRec->first_name . ' ' . $userRec->last_name . '</strong> ( <small><a href="' . BASE_URL . 'logout">Log out</a></small>)</p>
                 <p>From your account dashboard you can view your <span>recent orders</span>, manage your <span>address</span>, and <span>edit your password and account details</span>.</p>
             ';
@@ -182,10 +164,10 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                     <table class="table" id="myTable">
                         <thead>
                         <tr>
-                            <th>' . ( ( $lang == 'gr' ) ? 'Παραγγελία' : 'Order' ) . '</th>
-                            <th>' . ( ( $lang == 'gr' ) ? 'Ημερομηνία' : 'Date' ) . '</th>
-                            <th>' . ( ( $lang == 'gr' ) ? 'Σύνολο' : 'Total' ) . '</th>
-                            <th>' . ( ( $lang == 'gr' ) ? 'Ενέργεια' : 'Action' ) . '</th>
+                            <th>' . ( 'Order' ) . '</th>
+                            <th>' . ( 'Date' ) . '</th>
+                            <th>' . ( 'Total' ) . '</th>
+                            <th>' . ( 'Action' ) . '</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -196,7 +178,7 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                             <td>' . ( $k + 1 ) . '</td>
                             <td>' . date( 'F d, Y', strtotime( $order->added_date ) ) . '</td>
                             <td>' . $order->currency . ' ' . $order->pay_amt . '</td>
-                            <td><a href="' . BASE_URL . 'cart/order/' . $order->accesskey . '" target="_blank">' . ( ( $lang == 'gr' ) ? 'Προβολή' : 'View' ) . '</a></td>
+                            <td><a href="' . BASE_URL . 'cart/order/' . $order->accesskey . '" target="_blank">' . ( 'View' ) . '</a></td>
                         </tr>
                 ';
             }
@@ -205,19 +187,7 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                     </table>
                 </div>
             ';
-            $user_orders_script .= ( $lang == 'gr' )
-            ? "
-                    <script>
-                        $(document).ready(function () {
-                            $('#myTable').DataTable({
-                                language: {
-                                    url: '" . BASE_URL . "template/web/js/el.json'
-                                }
-                            });
-                        });
-                    </script>
-                "
-            : "
+            $user_orders_script .= "
                     <script>
                         $(document).ready(function () {
                             $('#myTable').DataTable({
@@ -265,13 +235,13 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                         $user_wish_list .= '
                             <tr class="cart-remove">
                                 <td class="cart-product-image">
-                                    <img src="' . $img . '" alt="' . ( ( $lang == 'gr' ) ? $productRow->title_greek : $productRow->title ) . '">
+                                    <img src="' . $img . '" alt="' . ( $productRow->title ) . '">
                                 </td>
                                 <td class="cart-product-info">
-                                    <h4><a href="' . BASE_URL . 'product/' . $productRow->slug . '" target="_blank">' . ( ( $lang == 'gr' ) ? $productRow->title_greek : $productRow->title ) . '</a></h4>
+                                    <h4><a href="' . BASE_URL . 'product/' . $productRow->slug . '" target="_blank">' . ( $productRow->title ) . '</a></h4>
                                 </td>
                                 <td class="cart-product-add-cart">
-                                    <a class="submit-button-1 add-cart-wishlist" href="#" title="Add to Cart" data-cartid="' . $productRow->slug . '">' . ( ( $lang == 'gr' ) ? 'Προσθήκη στο Καλάθι' : 'Add to Cart' ) . '</a>
+                                    <a class="submit-button-1 add-cart-wishlist" href="#" title="Add to Cart" data-cartid="' . $productRow->slug . '">' . ( 'Add to Cart' ) . '</a>
                                 </td>
                                 <td class="cart-product-remove remove-wishlist" data-id="' . $productRow->slug . '">x</td>
                             </tr>
@@ -282,7 +252,7 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
         } else {
             $user_wish_list .= '
                 <tr>
-                    <td class="cart-product-image">' . ( ( $lang == 'gr' ) ? 'Δεν υπάρχουν προϊόντα στην λίστα επιθυμιών' : 'No Item in Wishlist' ) . '</td>
+                    <td class="cart-product-image">' . ( 'No Item in Wishlist' ) . '</td>
                 </tr>
             ';
         }
@@ -294,45 +264,45 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
         ';
 
         $user_profile .= '
-            <p>' . ( ( $lang == 'gr' ) ? 'Οι παρακάτω λεπτομέρειες θα χρησιμοποιηθούν στη σελίδα ολοκλήρωσης αγοράς ως προεπιλογή.' : 'The following details will be used on the checkout page by default.' ) . '</p>
+            <p>' . ( 'The following details will be used on the checkout page by default.' ) . '</p>
             <div class="ltn__form-box">
                 <form action="#" id="profileForm">
                     <input type="hidden" name="idValue" value="' . $userRec->id . '">
                     <div class="row mb-50">
                         <div class="col-md-6">
-                            <label>' . ( ( $lang == 'gr' ) ? 'Όνομα' : 'First name' ) . ':</label>
+                            <label>' . ( 'First name' ) . ':</label>
                             <input type="text" name="fname" value="' . ( ( !empty( $userRec->first_name ) ) ? $userRec->first_name : '' ) . '">
                         </div>
                         <div class="col-md-6">
-                            <label>' . ( ( $lang == 'gr' ) ? 'Επίθετο' : 'Last name' ) . ':</label>
+                            <label>' . ( 'Last name' ) . ':</label>
                             <input type="text" name="lname" value="' . ( ( !empty( $userRec->last_name ) ) ? $userRec->last_name : '' ) . '">
                         </div>
                         <div class="col-md-6">
-                            <label>' . ( ( $lang == 'gr' ) ? 'Email' : 'Display Email' ) . ':</label>
+                            <label>' . ( 'Display Email' ) . ':</label>
                             <input type="email" name="email" value="' . ( ( !empty( $userRec->email ) ) ? $userRec->email : '' ) . '" readonly>
                         </div>
                         <div class="col-md-6">
-                            <label>' . ( ( $lang == 'gr' ) ? 'Διεύθυνση' : 'Address' ) . ':</label>
+                            <label>' . ( 'Address' ) . ':</label>
                             <input type="text" name="address" value="' . ( ( !empty( $userRec->facebook_uid ) ) ? $userRec->facebook_uid : '' ) . '">
                         </div>
                         <div class="col-md-6">
-                            <label>' . ( ( $lang == 'gr' ) ? 'Τηλέφωνο Επικοινωνίας' : 'Phone Number' ) . ':</label>
+                            <label>' . ( 'Phone Number' ) . ':</label>
                             <input type="text" name="phone" value="' . ( ( !empty( $userRec->contact ) ) ? $userRec->contact : '' ) . '">
                         </div>
                     </div>
                     <fieldset>
-                        <legend>' . ( ( $lang == 'gr' ) ? 'ΑΛΛΑΓΗ ΚΩΔΙΚΟΥ' : 'Password change' ) . '</legend>
+                        <legend>' . ( 'Password change' ) . '</legend>
                         <div class="row">
                             <div class="col-md-12">
-                                <label>' . ( ( $lang == 'gr' ) ? 'Νέος Κωδικός' : 'New password (leave blank to leave unchanged)' ) . ':</label>
+                                <label>' . ( 'New password (leave blank to leave unchanged)' ) . ':</label>
                                 <input type="password" name="password" id="password">
-                                <label>' . ( ( $lang == 'gr' ) ? 'Επιβεβαίωση Νέου Κωδικού' : 'Confirm new password' ) . ':</label>
+                                <label>' . ( 'Confirm new password' ) . ':</label>
                                 <input type="password" name="confirm_password">
                             </div>
                         </div>
                     </fieldset>
                     <div class="btn-wrapper">
-                        <button type="submit" id="submitProfile" class="btn theme-btn-1 btn-effect-1 text-uppercase">' . ( ( $lang == 'gr' ) ? 'ΑΠΟΘΗΚΕΥΣΗ ΑΛΛΑΓΩΝ' : 'Save Changes' ) . '</button>
+                        <button type="submit" id="submitProfile" class="btn theme-btn-1 btn-effect-1 text-uppercase">' . ( 'Save Changes' ) . '</button>
                     </div>
                     <p id="profileMsg" class="mt-20" style="display: none;"></p>
                 </form>

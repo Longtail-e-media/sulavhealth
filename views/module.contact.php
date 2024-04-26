@@ -48,7 +48,7 @@ if (defined('CONTACT_PAGE')) {
                                         <img src="' . BASE_URL . 'template/web/img/icons/12.png" alt="Icon Image">
                                     </div>
                                     <h3>' . CONTACT_OFFICE_ADDRESS . '</h3>
-                                    <p>' . (($lang == "gr") ? $siteRegulars->fiscal_address_greek : $siteRegulars->fiscal_address) . '</p>
+                                    <p>' . ($siteRegulars->fiscal_address) . '</p>
                                 </div>
                             </div>
                             <div class="col-lg-4">

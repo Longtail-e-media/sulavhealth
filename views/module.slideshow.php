@@ -7,7 +7,7 @@ $Records = Slideshow::getSlideshow_by(0);
 if ($Records) {
     foreach ($Records as $i => $RecRow) {
 
-        $content = ($lang == "gr") ? $RecRow->content_greek : $RecRow->content;
+        $content = $RecRow->content;
 
 
         $file_path = SITE_ROOT . 'images/slideshow/video/' . $RecRow->source;

@@ -67,9 +67,7 @@ if ($_POST['action'] == "forcomment"):
     if (!$mail->Send()) {
         echo json_encode(array("action" => "unsuccess", "message" => "We could not sent your request at the time. Please try again later."));
     } else {
-        $msg = ($lang == "gr")
-            ? "Το μήνυμά σας ελήφθη με επιτυχία. Θα επικοινωνήσουμε μαζί σας το συντομότερο δυνατό. Ευχαριστούμε."
-            : "Your request has been successfully received, You will be shortly informed through mail with you verified by admin.";
+        $msg = "Your request has been successfully received, You will be shortly informed through mail with you verified by admin.";
         echo json_encode(array("action" => "success", "message" => $msg));
     }
 endif;
@@ -139,9 +137,7 @@ if ($_POST['action'] == "forinterest"):
     if (!$mail->Send()) {
         echo json_encode(array("action" => "unsuccess", "message" => "We could not sent your request at the time. Please try again later."));
     } else {
-        $msg = ($lang == "gr")
-            ? "Your request has been successfully received, You will be shortly informed through mail with you verified by admin."
-            : "Your request has been successfully received, You will be shortly informed through mail with you verified by admin.";
+        $msg = "Your request has been successfully received, You will be shortly informed through mail with you verified by admin.";
         echo json_encode(array("action" => "success", "message" => $msg));
     }
 endif;

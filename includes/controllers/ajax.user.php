@@ -245,18 +245,18 @@
 
             $checkDupliEmail        = User::checkDupliEmail($record->email);
             if ($checkDupliEmail):
-                $message = ($lang == "gr") ? "Αυτό το email υπάρχει ήδη." : "This email already exists.";
+                $message = "This email already exists.";
                 echo json_encode(array("action" => "warning", "message" => $message));
                 exit;
             endif;
 
             $db->begin();
             if ($record->save()): $db->commit();
-                $message = ($lang == "gr") ? "Your registration is successful, you will be redirected to Login page!" : "Your registration is successful, you will be redirected to Login page!";
+                $message = "Your registration is successful, you will be redirected to Login page!";
                 echo json_encode(array('action' => 'success', 'message' => $message ));
                 log_action("User [" . $record->first_name . " " . $record->last_name . "] login Created " . $GLOBALS['basic']['addedSuccess'], 1, 3);
             else:
-                $message = ($lang == "gr") ? "Internal error!" : "Internal error!";
+                $message = "Internal error!";
                 echo json_encode(array('action' => 'unsuccess', 'message' => $message));
             endif;
         break;
@@ -274,9 +274,7 @@
 
             $db->begin();
             if ($record->save()): $db->commit();
-                $message = ($lang == "gr")
-                    ? 'Οι αλλαγές του χρήστη \'' . $record->first_name . ' ' . $record->last_name . '\' ολοκληρώθηκαν επιτυχώς.'
-                    : 'Changes on User \'' . $record->first_name . ' ' . $record->last_name . '\' has been saved successfully.';
+                $message = 'Changes on User \'' . $record->first_name . ' ' . $record->last_name . '\' has been saved successfully.';
 
                 echo json_encode(array("action" => "success", "message" => $message));
                 log_action("User [" . $record->first_name . " ".$record->last_name."] Edit Successfully", 1, 4);
@@ -391,7 +389,7 @@
                 $uprec = User::find_by_mail($email);
 
                 if ($uprec->status == 0) {
-                    $message = (($lang == "gr") ? "Your account has not been approved!" : "Your account has not been approved!");
+                    $message = "Your account has not been approved!");
                     echo json_encode(array("action" => "error", "message" => $message));
                 } else {
                     $session->set('email_logged', $email);
@@ -405,11 +403,11 @@
                         setcookie("remem_email", '', time() - (60 * 60), "/", NULL);
                         setcookie("remem_pass", '', time() - (60 * 60), "/", NULL);
                     }
-                    $message = (($lang == "gr") ? "Welcome " . $uprec->first_name . "! You will be redirected to Dashboard shortly!" : "Welcome " . $uprec->first_name . "! You will be redirected to Dashboard shortly!");
+                    $message = "Welcome " . $uprec->first_name . "! You will be redirected to Dashboard shortly!";
                     echo json_encode(array("action" => "success", "message" => $message));
                 }
             } else {
-                $message = (($lang == "gr") ? "Email or Password doesn't match !" : "Email or Password doesn't match !");
+                $message = "Email or Password doesn't match !";
                 echo json_encode(array("action" => "error", "message" => $message));
             }
             break;
@@ -452,15 +450,15 @@
                 $mail->MsgHTML($msgbody);
 
                 if (!$mail->Send()):
-                    $message = (($lang == "gr") ? "Μη έγκυρη ηλεκτρονική διεύθυνση χρήστη" : "Not valid User email address");
+                    $message = "Not valid User email address";
                     echo json_encode(array('action' => 'unsuccess', 'message' => $message));
                 else:
                     $forgetRec->save();
-                    $message = (($lang == "gr") ? "Παρακαλώ ελέγξτε το email σας για ανάκτηση κωδικού" : "Please check your mail for reset password");
+                    $message = "Please check your mail for reset password";
                     echo json_encode(array('action' => 'success', 'message' => $message));
                 endif;
             else:
-                $message = (($lang == "gr") ? "Μη έγκυρη ηλεκτρονική διεύθυνση χρήστη" : "Not valid User email address");
+                $message = "Not valid User email address";
                 echo json_encode(array('action' => 'unsuccess', 'message' => $message));
             endif;
         break;
@@ -471,10 +469,10 @@
             $record->password   = md5($_REQUEST['password']);
             $record->access_code = @randomKeys(10);
             if ($record->save()):
-                $message = ($lang == "gr") ? "Ο Κωδικός σας έχει αλλάξει, παρακαλώ συνδεθείτε!" : "Password has been changed, please login!";
+                $message = "Password has been changed, please login!";
                 echo json_encode(array('action' => 'success', 'message' => $message));
             else:
-                $message = ($lang == "gr") ? "Λάθος συστήματος!" : "Internal error!";
+                $message = "Internal error!";
                 echo json_encode(array('action' => 'unsuccess', 'message' => $message));
             endif;
         break;

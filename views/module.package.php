@@ -24,7 +24,7 @@ if (defined('HOME_PAGE')) {
                         <div class="room-bg" style="background-image: url(' . $imgSrc . ');">
                         </div>
                         <div class="room-content">
-                            <h3><a href="' . BASE_URL . $homesubpkg->slug . '">' . (($lang == "gr") ? $homesubpkg->title_greek : $homesubpkg->title) . '</a></h3>
+                            <h3><a href="' . BASE_URL . $homesubpkg->slug . '">' . ($homesubpkg->title) . '</a></h3>
                         </div>
                     </div>
                 </div>
@@ -72,8 +72,8 @@ if (defined('PACKAGE_LIST_PAGE')) {
 
                            <!-- Post Text Sec -->
                             <div class="col-sm-6">
-                                <div class="text-section text-left"> <a href="' . BASE_URL . 'treatment/' . $RecRow->slug . '">' . (($lang == "gr") ? $RecRow->title_greek : $RecRow->title) . '</a>
-                                    <p>' . (($lang == "gr") ? $RecRow->brief_greek : $RecRow->detail) . '</p>
+                                <div class="text-section text-left"> <a href="' . BASE_URL . 'treatment/' . $RecRow->slug . '">' . ($RecRow->title) . '</a>
+                                    <p>' . ($RecRow->detail) . '</p>
                                     <a href="' . BASE_URL . 'treatment/' . $RecRow->slug . '" class="btn btn-1">' . VIEW_MORE . '</a>
                                 </div>
                             </div>
@@ -86,13 +86,13 @@ if (defined('PACKAGE_LIST_PAGE')) {
                             <div class="col-sm-6 col-md-7 col-md-push-5 text-center">';
                 $file_path = SITE_ROOT . 'images/package/listimage/' . $RecRow->list_image;
                 if (file_exists($file_path) and !empty($RecRow->list_image)) {
-                    $packagelist .= ' <div class="post-img left"> <img class="img-responsive" src="' . IMAGE_PATH . 'package/listimage/' . $RecRow->list_image . '" alt="' . (($lang == "gr") ? $RecRow->title_greek : $RecRow->title) . '"> </div>';
+                    $packagelist .= ' <div class="post-img left"> <img class="img-responsive" src="' . IMAGE_PATH . 'package/listimage/' . $RecRow->list_image . '" alt="' . ($RecRow->title) . '"> </div>';
                 }
                 $packagelist .= '</div>
                             <!-- Post Text Sec -->
                             <div class="col-sm-6 col-md-5 col-md-pull-7">
-                                <div class="text-section text-right"> <a href="' . BASE_URL . 'treatment/' . $RecRow->slug . '"> ' . (($lang == "gr") ? $RecRow->title_greek : $RecRow->title) . '</a>
-                                    <p>' . (($lang == "gr") ? $RecRow->brief_greek : $RecRow->detail) . '</p>
+                                <div class="text-section text-right"> <a href="' . BASE_URL . 'treatment/' . $RecRow->slug . '"> ' . ($RecRow->title) . '</a>
+                                    <p>' . ($RecRow->detail) . '</p>
                                     <a href="' . BASE_URL . 'treatment/' . $RecRow->slug . '" class="btn btn-1">' . VIEW_MORE . '</a>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@ if (defined('PACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                         <div class="col-lg-12">
                             <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
                                 <div class="section-title-area ltn__section-title-2">
-                                    <h1 class="section-title white-color"><strong>' . (($lang == "gr") ? $pkgRec->title_greek : $pkgRec->title) . '</strong></h1>
+                                    <h1 class="section-title white-color"><strong>' . ($pkgRec->title) . '</strong></h1>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +176,7 @@ if (defined('PACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                 $packagedetail .= '
                     <a class="nav-link ' . $active . '" id="v-pills-' . $sub->slug . '-tab" data-toggle="pill"  href="#v-pills-' . $sub->slug . '" 
                         role="tab" aria-controls="v-pills-' . $sub->slug . '" aria-selected="' . $ariaSelect . '">
-                        ' . (($lang == "gr") ? $sub->title_greek : $sub->title) . '
+                        ' . ($sub->title) . '
                         <span><i class="fas fa-long-arrow-alt-right"></i></span>
                     </a>
                 ';
@@ -194,7 +194,7 @@ if (defined('PACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                 $show = ($j == 0) ? 'show' : '';
                 $packagedetail .= '
                     <div class="tab-pane fade ' . $show . ' ' . $active . '" id="v-pills-' . $sub->slug . '" role="tabpanel" aria-labelledby="v-pills-' . $sub->slug . '-tab">
-                        ' . (($lang == "gr") ? $sub->content_greek : $sub->content) . '
+                        ' . ($sub->content) . '
                     </div>
                 ';
             }
@@ -246,7 +246,7 @@ if (defined('SUBPACKAGE_PAGE') and isset($_REQUEST['slug'])) {
             
                         <ul class="breadcrumb-nav">
                             <!-- <li><a href="index.html">Home</a></li> -->
-                            <li class="active">' . (($lang == "gr") ? $subpkgRec->title_greek : $subpkgRec->title) . '</li>
+                            <li class="active">' . ($subpkgRec->title) . '</li>
                         </ul>
                     </div>
                 </div>
@@ -254,7 +254,7 @@ if (defined('SUBPACKAGE_PAGE') and isset($_REQUEST['slug'])) {
         ';
 
         $class = 'pb-90';
-        $extraContent = ($lang == "gr") ? $subpkgRec->sub_title_greek : $subpkgRec->sub_title;
+        $extraContent = $subpkgRec->sub_title;
         if (!empty($extraContent)) {
             $class = '';
         }
@@ -266,7 +266,7 @@ if (defined('SUBPACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                         <div class="col-lg-4">
                             <div class="deatils-box">
                                 <div class="cancellation-box clearfix mb-60">
-                                    ' . (($lang == "gr") ? $subpkgRec->brief_greek : $subpkgRec->brief) . '
+                                    ' . ($subpkgRec->brief) . '
                                 </div>
                             </div>
                         </div>
@@ -274,7 +274,7 @@ if (defined('SUBPACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                         <div class="col-lg-8">
                             <div class="deatils-box">
                                 <div class="cancellation-box clearfix">
-                                    ' . (($lang == "gr") ? $subpkgRec->content_greek : $subpkgRec->content) . '
+                                    ' . ($subpkgRec->content) . '
                                 </div>
                             </div>
                         </div>
@@ -282,7 +282,7 @@ if (defined('SUBPACKAGE_PAGE') and isset($_REQUEST['slug'])) {
         $image2 = $subpkgRec->image2;
         $file_path = SITE_ROOT . 'images/subpackage/image2/' . $image2;
         $subpackageDetails .= (file_exists($file_path) and !empty($image2))
-            ? '<div class="col-lg-12"><img src="' . IMAGE_PATH . 'subpackage/image2/' . $image2 . '" alt="' . (($lang == "gr") ? $subpkgRec->title_greek : $subpkgRec->title) . '"></div>'
+            ? '<div class="col-lg-12"><img src="' . IMAGE_PATH . 'subpackage/image2/' . $image2 . '" alt="' . ($subpkgRec->title) . '"></div>'
             : '';
         $subpackageDetails .= '
                     </div>
@@ -297,7 +297,7 @@ if (defined('SUBPACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                         <div class="row justify-content-center">
                             <div class="col-lg-12">
                                 <div class="news-details-box">
-                                    ' . (($lang == "gr") ? $subpkgRec->sub_title_greek : $subpkgRec->sub_title) . '
+                                    ' . ($subpkgRec->sub_title) . '
                                 </div>
                             </div>
                         </div>
@@ -349,7 +349,7 @@ if (defined('PACKAGES_PAGE')) {
     foreach ($mainProducts as $i => $mainProduct) {
         $activeShow = ($i == 0) ? 'active show' : '';
         $package_detail .= '
-            <a class="' . $activeShow . '" data-toggle="tab" href="#product_' . $mainProduct->slug . '">' . (($lang == "gr") ? $mainProduct->title_greek : $mainProduct->title) . '</a>
+            <a class="' . $activeShow . '" data-toggle="tab" href="#product_' . $mainProduct->slug . '">' . ($mainProduct->title) . '</a>
         ';
     }
     $package_detail .= '</div>
@@ -385,7 +385,7 @@ if (defined('PACKAGES_PAGE')) {
                         <div class="col-lg-6">
                             <div class="ltn__product-item ltn__product-item-3">
                                 <div class="product-img">
-                                    <img src="' . $img . '" alt="' . (($lang == "gr") ? $product->title_greek : $product->title) . '">
+                                    <img src="' . $img . '" alt="' . ($product->title) . '">
                                     <div class="product-badge">
                                         <ul>
                     ';
@@ -398,7 +398,7 @@ if (defined('PACKAGES_PAGE')) {
                                 </div>
                                 <div class="product-info">
                                     <h2 class="product-title">
-                                        <a href="' . BASE_URL . 'product/' . $product->slug . '">' . (($lang == "gr") ? $product->title_greek : $product->title) . '</a>
+                                        <a href="' . BASE_URL . 'product/' . $product->slug . '">' . ($product->title) . '</a>
                                     </h2>
                                     <div class="product-price">
                     ';
@@ -408,8 +408,8 @@ if (defined('PACKAGES_PAGE')) {
                     } else {
                         $package_detail .= '<span>' . $product->currency . ' ' . sprintf('%.2f', $product->price1) . '</span>';
                     }
-                    $cont = ($lang == 'gr') ? $product->content_greek : $product->content;
-                    $hrid = ($lang == 'gr') ? '1' : '';
+                    $cont = $product->content;
+                    $hrid = '';
                     $rescont = explode('<hr id="system_readmore' . $hrid . '" style="border-style: dashed; border-color: orange;" />', $cont);
                     $package_detail .= '
                                     </div>
@@ -485,8 +485,8 @@ if (defined('PACKAGES_PAGE')) {
                                                         </div>
                                                         <div class="col-lg-7 col-12">
                                                             <div class="modal-product-info">
-                                                                <h3>' . (($lang == "gr") ? $product->title_greek : $product->title) . '</h3>
-                                                                ' . (($lang == "gr") ? $product->brief_greek : $product->brief) . '
+                                                                <h3>' . ($product->title) . '</h3>
+                                                                ' . ($product->brief) . '
                     
                         <div class="shoping-cart-table table-responsive">
                             <form id="add-cart-product-' . $product->slug . '">
@@ -656,7 +656,7 @@ if (defined('PACKAGES_PAGE')) {
         <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $product->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                                                                         </li>
                                                                         <li>
-        <a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $product->slug . '&text=' . (($lang == 'gr') ? $product->title_greek : $product->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $product->slug . '&text=' . ($product->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
                                                                         </li>
                                                                         <li>
         <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $product->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
@@ -706,7 +706,7 @@ if (defined('PACKAGES_PAGE')) {
                         <div class="col-xl-4 col-sm-6 col-6">
                             <div class="ltn__product-item ltn__product-item-3 text-center">
                                 <div class="product-img product_hove" data-href="' . BASE_URL . 'product/' . $product->slug . '">
-                                    <img src="' . $img . '" alt="' . (($lang == "gr") ? $product->title_greek : $product->title) . '">
+                                    <img src="' . $img . '" alt="' . ($product->title) . '">
                                     <div class="product-badge">
                                         <ul>
                     ';
@@ -738,7 +738,7 @@ if (defined('PACKAGES_PAGE')) {
                                 </div>
                                 <div class="product-info">
                                     <h2 class="product-title">
-                                        <a href="' . BASE_URL . 'product/' . $product->slug . '">' . (($lang == "gr") ? $product->title_greek : $product->title) . '</a>
+                                        <a href="' . BASE_URL . 'product/' . $product->slug . '">' . ($product->title) . '</a>
                                     </h2>
                                     <div class="product-price">
                     ';
@@ -805,8 +805,8 @@ if (defined('PACKAGES_PAGE')) {
                                                         </div>
                                                         <div class="col-lg-7 col-12">
                                                             <div class="modal-product-info">
-                                                                <h3>' . (($lang == "gr") ? $product->title_greek : $product->title) . '</h3>
-                                                                ' . (($lang == "gr") ? $product->brief_greek : $product->brief) . '
+                                                                <h3>' . ($product->title) . '</h3>
+                                                                ' . ($product->brief) . '
                     
                         <div class="shoping-cart-table table-responsive">
                             <form id="add-cart-product-' . $product->slug . '">
@@ -982,7 +982,7 @@ if (defined('PACKAGES_PAGE')) {
         <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $product->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                                                                         </li>
                                                                         <li>
-        <a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $product->slug . '&text=' . (($lang == 'gr') ? $product->title_greek : $product->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $product->slug . '&text=' . ($product->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
                                                                         </li>
                                                                         <li>
         <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $product->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>

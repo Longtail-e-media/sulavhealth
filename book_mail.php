@@ -37,7 +37,7 @@ if (!empty($bookingRec)) {
 	                        <a href="' . BASE_URL . '" target="_blank">
 	                            <img alt="Logo" src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;width: 200px;" border="0">
 	                        </a>
-	                        <p style="font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 14px;">' . (($lang == "gr") ? $siteRegulars->fiscal_address_greek : $siteRegulars->fiscal_address) . '</p>
+	                        <p style="font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 14px;">' . ($siteRegulars->fiscal_address) . '</p>
 	                    </td>
 	                </tr>
 	            </table>
@@ -63,11 +63,7 @@ if (!empty($bookingRec)) {
     $client_header .= '<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	                            <tr>
 	                                <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
-	                                ' . (($lang == "gr")
-            ? 'Ευχαριστούμε που επιλέξατε για τις αγορές σας το κατάστημα Evonymon. Η παραγγελία σας έχει καταχωρηθεί και θα εκτελεστεί μετά την αποδοχή της από 
-                                    τον διαχειριστή του καταστήματος, κατόπιν ελέγχου για τυχόν λάθη ή παραλείψεις. Εάν η μέθοδος πληρωμής που επιλέξατε είναι 
-                                    τραπεζικό έμβασμα ή πιστωτική κάρτα, η παραγγελία σας θα εκτελεστεί μόλις επιβεβαιωθεί η πληρωμή.'
-            : 'Thank you for choosing the Evonymon store for your purchases. Your order has been registered and will
+	                                ' . ('Thank you for choosing the Evonymon store for your purchases. Your order has been registered and will
                                     be executed after its acceptance by the store manager, after checking for any errors or omissions. If the payment method you
                                     have chosen is bank transfer or credit card, your order will be processed as soon as payment is confirmed.') . '
 	                                </td>
@@ -77,22 +73,22 @@ if (!empty($bookingRec)) {
     $admin_header .= '<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	                            <tr>
 	                                <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
-	                                ' . (($lang == "gr") ? 'We have got order with following details' : 'We have got order with following details') . '
+	                                ' . ('We have got order with following details') . '
 	                                </td>
 	                            </tr>
 	                        </table>';
 
     switch ($bookingRec->pay_type) {
         case "credit_card":
-            $order_status = ($lang == "gr") ? 'Πιστωτική Κάρτα' : 'Credit Card';
+            $order_status = 'Credit Card';
             break;
 
         case "cheque_payment":
-            $order_status = ($lang == "gr") ? 'Μεταφορά μέσω τράπεζας' : 'Deposit in Bank';
+            $order_status = 'Deposit in Bank';
             break;
 
         case "payment_at_store":
-            $order_status = ($lang == "gr") ? 'Εξόφληση κατά την παραλαβή από το κατάστημα' : 'Payment and receipt from the store';
+            $order_status = 'Payment and receipt from the store';
             break;
     }
 
@@ -118,29 +114,29 @@ if (!empty($bookingRec)) {
 	            <tr>
 	            <td align="center" valign="top" width="500">
 	            <![endif]-->
-	            <p style="font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 20px;">' . (($lang == "gr") ? 'Πληροφορίες Παραγγελίας' : 'Order Information') . '</p>
+	            <p style="font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 20px;">' . ('Order Information') . '</p>
 	            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px;" class="responsive-table">
 
 	                <tr>
                         <td style="padding: 10px 0 0 0; border-top: 1px dashed #aaaaaa;">
                             <table cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
-                                    <td>' . (($lang == "gr") ? 'Αριθμός Παραγγελίας' : 'Order ID') . '</td>
+                                    <td>' . ('Order ID') . '</td>
                                     <td>' . $bookingRec->accesskey . '</td>
                                 </tr>
                                 <tr>
-                                    <td>' . (($lang == "gr") ? 'Ημερομηνία Καταχώρησης' : 'Order Date') . '</td>
+                                    <td>' . ('Order Date') . '</td>
                                     <td>' . date('Y/M/D', strtotime($bookingRec->added_date)) . '</td>
                                 </tr>
                                 <tr>
-                                    <td>' . (($lang == "gr") ? 'Τρόπος Πληρωμής' : 'Payment Method') . '</td>
+                                    <td>' . ('Payment Method') . '</td>
                                     <td>' . $order_status . '</td>
                                 </tr>
     ';
     if (!empty($bookingRec->paymentId) and $bookingRec->paymentStatus == 'APPROVED') {
         $html .= '
                                 <tr>
-                                    <td>' . (($lang == "gr") ? 'Ταυτότητα συναλλαγής' : 'Transaction ID') . '</td>
+                                    <td>' . ('Transaction ID') . '</td>
                                     <td>' . $bookingRec->paymentId . '</td>
                                 </tr>
         ';
@@ -148,15 +144,15 @@ if (!empty($bookingRec)) {
     if (!empty($bookingRec->coupon_code) and $bookingRec->has_coupon == '1') {
         $html .= '
                                 <tr>
-                                    <td>' . (($lang == "gr") ? 'Κωδικός Κουπονιού' : 'Coupon Code') . '</td>
+                                    <td>' . ('Coupon Code') . '</td>
                                     <td>' . $bookingRec->coupon_code . '</td>
                                 </tr>
         ';
     }
     $html .= '
                                 <tr>
-                                    <td>' . (($lang == "gr") ? 'Κατάσταση Παραγγελίας' : 'Order Status') . '</td>
-                                    <td>' . (($lang == "gr") ? ' Σε επεξεργασία' : 'In process') . '</td>
+                                    <td>' . ('Order Status') . '</td>
+                                    <td>' . ('In process') . '</td>
                                 </tr>
                             </table>
                         </td>
@@ -168,10 +164,10 @@ if (!empty($bookingRec)) {
 	                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
 	                            <tr style="text-align:center;">
                                     <td>S.No.</td>
-                                    <td>' . (($lang == "gr") ? 'Προϊόν' : 'Product') . '</td>
-                                    <td>' . (($lang == "gr") ? 'Ποσότητα' : 'Quantity') . '</td>
-                                    <td>' . (($lang == "gr") ? 'Τιμή' : 'Price') . '</td>
-                                    <td>' . (($lang == "gr") ? 'Σύνολο' : 'Total') . '(NPR)</td>
+                                    <td>' . ('Product') . '</td>
+                                    <td>' . ('Quantity') . '</td>
+                                    <td>' . ('Price') . '</td>
+                                    <td>' . ('Total') . '(NPR)</td>
                                 </tr>
     ';
 
@@ -200,25 +196,25 @@ if (!empty($bookingRec)) {
 
     $html .= '
                                 <tr style="padding: 10px 0 0 0; border-top: 1px dashed #aaaaaa;">
-                                    <td colspan="4">' . (($lang == "gr") ? 'Μερικό Σύνολο ' : 'Sub Total') . '</td>
+                                    <td colspan="4">' . ('Sub Total') . '</td>
                                     <td style="text-align:center;">' . $bookingRec->sub_total . '</td>
                                 </tr>
     ';
     if ($bookingRec->discount_amt > 0) {
         $html .= '
                                 <tr>
-                                    <td colspan="4">' . (($lang == "gr") ? 'Έκπτωση κουπονιού' : 'Coupon Discount') . '</td>
+                                    <td colspan="4">' . ('Coupon Discount') . '</td>
                                     <td style="text-align:center;">' . $bookingRec->discount_amt . '</td>
                                 </tr>
         ';
     }
     $html .= '
                                 <tr>
-                                    <td colspan="4">' . (($lang == "gr") ? 'Aποστολή και Παράδοση' : 'Shipping and Handing') . '</td>
+                                    <td colspan="4">' . ('Shipping and Handing') . '</td>
                                     <td style="text-align:center;">' . $bookingRec->shipping_amt . '</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4">' . (($lang == "gr") ? 'Σύνολο' : 'Grand Total') . '</td>
+                                    <td colspan="4">' . ('Grand Total') . '</td>
                                     <td style="text-align:center;">' . $bookingRec->grand_total . '</td>
                                 </tr>
     ';
@@ -229,56 +225,56 @@ if (!empty($bookingRec)) {
 
 	            </table>
 
-	            <p style="font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 20px;">' . (($lang == "gr") ? 'προσωπικα ΣΤΟΙΧΕΙΑ' : 'Personal Details') . '</p>
+	            <p style="font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 20px;">' . ('Personal Details') . '</p>
 	            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px;" class="responsive-table">
 	                <tr>
-                        <td>' . (($lang == "gr") ? 'Όνομα' : 'First Name') . '</td>
+                        <td>' . ('First Name') . '</td>
                         <td>' . $bookingRec->person_fname . '</td>
                     </tr>
                     <tr>
-                        <td>' . (($lang == "gr") ? 'Επίθετο' : 'Last Name') . '</td>
+                        <td>' . ('Last Name') . '</td>
                         <td>' . $bookingRec->person_lname . '</td>
                     </tr>
                     <tr>
-                        <td>' . (($lang == "gr") ? 'Email' : 'Email Address') . '</td>
+                        <td>' . ('Email Address') . '</td>
                         <td>' . $bookingRec->person_email . '</td>
                     </tr>
                     <tr>
-                        <td>' . (($lang == "gr") ? 'Τηλέφωνο Επικοινωνίας' : 'Phone Number') . '</td>
+                        <td>' . ('Phone Number') . '</td>
                         <td>' . $bookingRec->person_phone . '</td>
                     </tr>
                     <tr>
-                        <td>' . (($lang == "gr") ? 'Χώρα' : 'Country') . '</td>
+                        <td>' . ('Country') . '</td>
                         <td>' . $bookingRec->person_country . '</td>
                     </tr>
     ';
     if (!empty($bookingRec->shipping_type)) {
         $html .= '
                     <tr>
-                        <td>' . (($lang == "gr") ? 'Προαίρεση Αποστολής' : 'Shipping Option') . '</td>
+                        <td>' . ('Shipping Option') . '</td>
                         <td>' . $bookingRec->shipping_type . '</td>
                     </tr>
         ';
     }
     $html .= '
                     <tr>
-                        <td>' . (($lang == "gr") ? 'Περιοχή' : 'Region') . '</td>
+                        <td>' . ('Region') . '</td>
                         <td>' . $bookingRec->person_mname . '</td>
                     </tr>
                     <tr>
-                        <td>' . (($lang == "gr") ? 'πόλη' : 'City') . '</td>
+                        <td>' . ('City') . '</td>
                         <td>' . $bookingRec->person_city . '</td>
                     </tr>
                     <tr>
-                        <td>' . (($lang == "gr") ? 'Ταχ. Κωδ.' : 'Post Code') . '</td>
+                        <td>' . ('Post Code') . '</td>
                         <td>' . $bookingRec->person_post_code . '</td>
                     </tr>
                     <tr>
-                        <td>' . (($lang == "gr") ? 'Διεύθυνση' : 'Address') . '</td>
+                        <td>' . ('Address') . '</td>
                         <td>' . $bookingRec->person_address . '</td>
                     </tr>
                     <tr>
-                        <td>' . (($lang == "gr") ? 'Διεύθυνση Αποστολής' : 'Shipping Address') . '</td>
+                        <td>' . ('Shipping Address') . '</td>
                         <td>' . $bookingRec->person_shipping_address . '</td>
                     </tr>
 	            </table>
@@ -300,7 +296,7 @@ if (!empty($bookingRec)) {
                     <tr>
                     <td align="center" valign="top" width="500">
                     <![endif]-->
-                    <p style="font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 16px;">' . (($lang == "gr") ? 'Προσωπικό αίτημα' : 'Personal Request') . '</p>
+                    <p style="font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 16px;">' . ('Personal Request') . '</p>
                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px;" class="responsive-table">
                         <tr>
                             <td>
@@ -344,7 +340,7 @@ if (!empty($bookingRec)) {
                                 <tr>
                                     <td align="left" class="padding-copy"
                                         style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #4e4e4e;">
-                                        ' . (($lang == "gr") ? 'Παρακαλώ, απαντήστε σε αυτό το e-mail αν έχετε οποιαδήποτε απορία.' : 'Please reply to this email if you have any questions.') . '
+                                        ' . ('Please reply to this email if you have any questions.') . '
                                     </td>
                                 </tr>
                             </table>

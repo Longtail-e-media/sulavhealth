@@ -105,7 +105,7 @@ switch ($_POST['action']) {
                         );
                 }
             }
-            $message = (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . ' product added !';
+            $message = $pkgRow->title . ' product added !';
             $total = count($_SESSION['cart_detail']);
 
             $images = SubProductImage::getImagelist_by($pkgRow->id, 1, 0);
@@ -120,14 +120,14 @@ switch ($_POST['action']) {
             }
             $content = '
                 <div class="modal-product-img">
-                    <img src="' . $img . '" alt="' . (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . '">
+                    <img src="' . $img . '" alt="' .  $pkgRow->title . '">
                 </div>
                 <div class="modal-product-info">
-                    <h5>' . (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . '</h5>
-                    <p class="added-cart"><i class="fa fa-check-circle"></i> ' . (($lang == "gr") ? 'Προστέθηκε επιτυχώς στο καλάθι σας' : 'Successfully added to your Cart') . '</p>
+                    <h5>' . $pkgRow->title . '</h5>
+                    <p class="added-cart"><i class="fa fa-check-circle"></i> ' . 'Successfully added to your Cart' . '</p>
                     <div class="btn-wrapper">
-                        <a href="' . BASE_URL . 'cart" class="theme-btn-1 btn btn-effect-1">' . (($lang == "gr") ? 'Δείτε το Καλάθι' : 'View Cart') . '</a>
-                        <a href="' . BASE_URL . 'checkout" class="theme-btn-2 btn btn-effect-2">' . (($lang == "gr") ? 'Ολοκλήρωση Παραγγελίας' : 'Checkout') . '</a>
+                        <a href="' . BASE_URL . 'cart" class="theme-btn-1 btn btn-effect-1">' . 'View Cart' . '</a>
+                        <a href="' . BASE_URL . 'checkout" class="theme-btn-2 btn btn-effect-2">' . 'Checkout' . '</a>
                     </div>
                 </div>
             ';
@@ -162,11 +162,11 @@ switch ($_POST['action']) {
                     $res .= '
                         <div class="mini-cart-item clearfix cart-remove">
                             <div class="mini-cart-img">
-                                <img src="' . $img . '" alt="' . (($lang == "gr") ? $product->title_greek : $product->title) . '">
+                                <img src="' . $img . '" alt="' . $product->title . '">
                                 <span class="mini-cart-item-delete remove-cart" data-id="' . $product->id . '"><i class="icon-cancel"></i></span>
                             </div>
                             <div class="mini-cart-info">
-                                <h6><a href="' . BASE_URL . 'product/' . $product->slug . '">' . (($lang == "gr") ? $product->title_greek : $product->title) . '</a></h6>
+                                <h6><a href="' . BASE_URL . 'product/' . $product->slug . '">' . $product->title . '</a></h6>
                     ';
                     $product_details = $sesRow['product_details'];
                     foreach ($product_details as $label => $detail) {
@@ -299,7 +299,7 @@ switch ($_POST['action']) {
                 $wishlistObj = $wishlist[0];
                 $oldList = unserialize($wishlistObj->data);
                 if (in_array($product_slug[0], $oldList)) {
-                    $message = ($lang == "gr") ? 'Το προϊόν είναι ήδη στη Λίστα Επιθυμιών σας ' : 'Product is already in Wishlist!';
+                    $message = 'Product is already in Wishlist!';
                     echo json_encode(array('action' => 'warning_already_in_wishlist', 'message' => $message));
                 } else {
                     array_push($oldList, $product_slug[0]);
@@ -322,13 +322,13 @@ switch ($_POST['action']) {
                         }
                         $content = '
                             <div class="modal-product-img">
-                                <img src="' . $img . '" alt="' . (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . '">
+                                <img src="' . $img . '" alt="' . $pkgRow->title . '">
                             </div>
                             <div class="modal-product-info">
-                                <h5>' . (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . '</h5>
-                                <p class="added-cart"><i class="fa fa-check-circle"></i> ' . (($lang == "gr") ? 'Προστέθηκε επιτυχώς στη Λίστα Επιθυμιών σας' : 'Successfully added to your Wishlist') . '</p>
+                                <h5>' . $pkgRow->title . '</h5>
+                                <p class="added-cart"><i class="fa fa-check-circle"></i> ' . 'Successfully added to your Wishlist' . '</p>
                                 <div class="btn-wrapper">
-                                    <a href="' . BASE_URL . 'dashboard#wishlist" class="theme-btn-1 btn btn-effect-1">' . (($lang == "gr") ? 'Δείτε την Λίστα Επιθυμιών σας' : 'View Wishlist') . '</a>
+                                    <a href="' . BASE_URL . 'dashboard#wishlist" class="theme-btn-1 btn btn-effect-1">' . 'View Wishlist' . '</a>
                                 </div>
                             </div>
                         ';
@@ -361,13 +361,13 @@ switch ($_POST['action']) {
                     }
                     $content = '
                         <div class="modal-product-img">
-                            <img src="' . $img . '" alt="' . (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . '">
+                            <img src="' . $img . '" alt="' . $pkgRow->title . '">
                         </div>
                         <div class="modal-product-info">
-                            <h5>' . (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . '</h5>
-                            <p class="added-cart"><i class="fa fa-check-circle"></i> ' . (($lang == "gr") ? 'Προστέθηκε επιτυχώς στη Λίστα Επιθυμιών σας' : 'Successfully added to your Wishlist') . '</p>
+                            <h5>' . $pkgRow->title . '</h5>
+                            <p class="added-cart"><i class="fa fa-check-circle"></i> ' . 'Successfully added to your Wishlist' . '</p>
                             <div class="btn-wrapper">
-                                <a href="' . BASE_URL . 'dashboard" class="theme-btn-1 btn btn-effect-1">' . (($lang == "gr") ? 'Δείτε την Λίστα Επιθυμιών σας' : 'View Wishlist') . '</a>
+                                <a href="' . BASE_URL . 'dashboard" class="theme-btn-1 btn btn-effect-1">' . 'View Wishlist' . '</a>
                             </div>
                         </div>
                     ';
@@ -378,7 +378,7 @@ switch ($_POST['action']) {
                 }
             }
         } else {
-            $message = ($lang == "gr") ? 'Παρακαλώ συνδεθείτε για προσθήκη προϊόντος στη Λίστα Επιθυμιών σας' : 'Please log in before adding Product to Wishlist!';
+            $message = 'Please log in before adding Product to Wishlist!';
             echo json_encode(array('action' => 'warning_no_login', 'message' => $message));
         }
 
@@ -473,7 +473,7 @@ switch ($_POST['action']) {
                 }
             }
 
-            $message = (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . ' product added !';
+            $message = $pkgRow->title . ' product added !';
             $total = count($_SESSION['cart_detail']);
 
             $images = SubProductImage::getImagelist_by($pkgRow->id, 1, 0);
@@ -488,14 +488,14 @@ switch ($_POST['action']) {
             }
             $content = '
                 <div class="modal-product-img">
-                    <img src="' . $img . '" alt="' . (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . '">
+                    <img src="' . $img . '" alt="' .  $pkgRow->title . '">
                 </div>
                 <div class="modal-product-info">
-                    <h5>' . (($lang == "gr") ? $pkgRow->title_greek : $pkgRow->title) . '</h5>
-                    <p class="added-cart"><i class="fa fa-check-circle"></i> ' . (($lang == "gr") ? 'Προστέθηκε επιτυχώς στο καλάθι σας' : 'Successfully added to your Cart') . '</p>
+                    <h5>' . $pkgRow->title . '</h5>
+                    <p class="added-cart"><i class="fa fa-check-circle"></i> ' . 'Successfully added to your Cart' . '</p>
                     <div class="btn-wrapper">
-                        <a href="' . BASE_URL . 'cart" class="theme-btn-1 btn btn-effect-1">' . (($lang == "gr") ? 'Δείτε το Καλάθι' : 'View Cart') . '</a>
-                        <a href="' . BASE_URL . 'checkout" class="theme-btn-2 btn btn-effect-2">' . (($lang == "gr") ? 'Ολοκλήρωση Παραγγελίας' : 'Checkout') . '</a>
+                        <a href="' . BASE_URL . 'cart" class="theme-btn-1 btn btn-effect-1">' . 'View Cart' . '</a>
+                        <a href="' . BASE_URL . 'checkout" class="theme-btn-2 btn btn-effect-2">' . 'Checkout' . '</a>
                     </div>
                 </div>
             ';

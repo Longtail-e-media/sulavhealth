@@ -24,7 +24,7 @@ $tpres .= '<div class="footer-e-banner">
                     <div class="small-info">
                       <p>';
 
-$tpres .= ($lang != 'gr') ? substr(strip_tags($siteRegulars->breif), 0, 20000) : substr(strip_tags($siteRegulars->brief_greek), 0, 20000);
+$tpres .= substr(strip_tags($siteRegulars->brief_greek), 0, 20000);
 
 
 $tpres .= '</p>
@@ -32,7 +32,7 @@ $tpres .= '</p>
                   </div>
                   <!-- Timing -->
                   <div class="col-sm-5 hrs">';
-$tpres .= ($lang != 'gr') ? $siteRegulars->opening_hour : $siteRegulars->opening_hour_greek;
+$tpres .= $siteRegulars->opening_hour_greek;
 $tpres .= '
                   </div>
                   <!-- Follow Us -->
@@ -75,7 +75,7 @@ if ($configRec) {
 
                             <li class="col-sm-4"> <i class="ion-ios-location-outline"></i>
                               <p>';
-    $reslocinfo .= ($lang != 'gr') ? $configRec->fiscal_address : $configRec->fiscal_address_greek;
+    $reslocinfo .= $configRec->fiscal_address_greek;
     $reslocinfo .= ' </p>
                             </li>
                             <!--Email Contact-->

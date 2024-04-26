@@ -14,7 +14,7 @@ switch ($_POST['action']) {
         if (!empty($couponRec)) {
             $today = date('Y-m-d');
             if ($couponRec->start_date <= $today and $couponRec->end_date >= $today) {
-                $message = ($lang == "gr") ? "Ο Κωδικός Κουπονιού έχει καταχωρηθεί!" : "Coupon code has been applied!";
+                $message = "Coupon code has been applied!";
                 echo json_encode(
                     array(
                         'action' => 'success',
@@ -24,11 +24,11 @@ switch ($_POST['action']) {
                     )
                 );
             } else {
-                $message = ($lang == "gr") ? "Ο Κωδικός Κουπονιού έχει λήξει!" : "Coupon code has expired!";
+                $message = "Coupon code has expired!";
                 echo json_encode(array('action' => 'unsuccess', 'message' => $message));
             }
         } else {
-            $message = ($lang == "gr") ? "Αδυναμία εύρεσης του Κωδικού Κουπονιού" : "Coupon code not found!";
+            $message = "Coupon code not found!";
             echo json_encode(array('action' => 'unsuccess', 'message' => $message));
         }
 
