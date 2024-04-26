@@ -153,6 +153,7 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
         ';
 
         $user_dashboard .= '
+        <h3 class="mb-50">Dashboard</h3>
               <!--  <p style="text-transform: capitalize;">Hello, <strong>' . $userRec->first_name . ' ' . $userRec->last_name . '</strong> !</p> -->
                 <p>From your account dashboard you can view your <span>recent orders</span>, manage your <span>address</span>, and <span>edit your password and account details</span>.</p>
           <!--      <a class="theme-btn-1 btn btn-effect-1 add-cart log-out" href="' . BASE_URL . 'logout">Log out</a> -->
@@ -161,6 +162,7 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
         $orders = BookingInfo::find_all_by_user_id( $userId );
         if ( !empty( $orders ) ) {
             $user_orders .= '
+            <h3 class="mb-50">Orders</h3>
                 <div class="table-responsive">
                     <table class="table" id="myTable">
                         <thead>
@@ -201,14 +203,16 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                 ";
         } else {
             $user_orders .= '
+            <h3 class="mb-50">Orders</h3>
             <p>You have no order images. Would you like to try from homepage?</p>
-            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="Homepage"> 
+            <a href="dhome" class="theme-btn-2 btn btn-effect-2" title="Homepage"> 
             &#8592;  &nbsp; Go Home
             </a>
             ';
         }
 
         $user_wish_list .= '
+        
             <div class="shoping-cart-inner">
                 <div class="shoping-cart-table table-responsive">
                     <table class="table">
@@ -223,6 +227,7 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                         <tbody>
         ';
         $wishes = WishList::find_by_user_id( $userId );
+       
         if ( !empty( $wishes ) ) {
             $prods = unserialize( $wishes->data );
             if ( !empty( $prods ) ) {
@@ -241,6 +246,7 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                             }
                         }
                         $user_wish_list .= '
+                        <h3 class="mb-50">Wishlist</h3>
                             <tr class="cart-remove">
                                 <td class="cart-product-image">
                                     <img src="' . $img . '" alt="' . ( $productRow->title ) . '">
@@ -263,8 +269,9 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
             }
         } else {
             $user_wish_list .= '
+            <h3 class="mb-50">Wishlist</h3>
             <p>You have no order images. Would you like to try from homepage?</p>
-            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="Homepage"> 
+            <a href="dhome" class="theme-btn-2 btn btn-effect-2" title="Homepage"> 
             &#8592;  &nbsp; Go Home
             </a>
             ';
@@ -277,6 +284,7 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
         ';
 
         $user_profile .= '
+        <h3 class="mb-50">Account Details</h3>
             <p>' . ( 'The following details will be used on the checkout page by default.' ) . '</p>
             <div class="ltn__form-box">
                 <form action="#" id="profileForm">
