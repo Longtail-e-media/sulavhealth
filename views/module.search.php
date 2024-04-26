@@ -850,13 +850,13 @@ if (defined('SEARCH_PAGE')) {
                                                     <ul>
                                                         <li>' . SHOP_SHARE . ':</li>
                                                         <li>
-<a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+<a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/product-detail/' . $rows['slug'] . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                                                         </li>
                                                         <li>
-<a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $rows['slug'] . '&text=' . (($lang == 'gr') ? $rows['title_greek'] : $rows['title']) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="https://twitter.com/share?url=' . BASE_URL . 'product/product-detail/' . $rows['slug'] . '&text=' . (($lang == 'gr') ? $rows['title_greek'] : $rows['title']) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
                                                         </li>
                                                         <li>
-<a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+<a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/product-detail/' . $rows['slug'] . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
                                                         </li>
                                                     </ul>
                                                 </div>

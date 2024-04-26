@@ -432,13 +432,13 @@ if (defined('HOME_PAGE')) {
                                                             <ul>
                                                                 <li>' . SHOP_SHARE . ':</li>
                                                                 <li>
-<a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $giftSet->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+<a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/product-detail/' . $giftSet->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                                                                 </li>
                                                                 <li>
-<a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $giftSet->slug . '&text=' . (($lang == 'gr') ? $giftSet->title_greek : $giftSet->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="https://twitter.com/share?url=' . BASE_URL . 'product/product-detail/' . $giftSet->slug . '&text=' . (($lang == 'gr') ? $giftSet->title_greek : $giftSet->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
                                                                 </li>
                                                                 <li>
-<a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $giftSet->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+<a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/product-detail/' . $giftSet->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -839,13 +839,13 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                                 <ul>
                                                                     <li>' . SHOP_SHARE . ':</li>
                                                                     <li>
-    <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $prodrelated->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/product-detail/' . $prodrelated->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                                                                     </li>
                                                                     <li>
-    <a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $prodrelated->slug . '&text=' . (($lang == 'gr') ? $prodrelated->title_greek : $prodrelated->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="https://twitter.com/share?url=' . BASE_URL . 'product/product-detail/' . $prodrelated->slug . '&text=' . (($lang == 'gr') ? $prodrelated->title_greek : $prodrelated->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
                                                                     </li>
                                                                     <li>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $prodrelated->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/product-detail/' . $prodrelated->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -953,7 +953,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                         <div class="modal-product-info shop-details-info pl-0">
                         <span>'.$category.'</span>&nbsp;&nbsp;<span>'.$subcategory.'</span>
                             <h3>' . (($lang == 'gr') ? $prodRec->title_greek : $prodRec->title) . '</h3>
-                            <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
+                            <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                             ' . (($lang == "gr") ? $prodRec->brief_greek : $prodRec->brief) . '
                             <div class="shoping-cart-table table-responsive">
                                 <form id="add-cart-product-' . $prodRec->slug . '">
@@ -988,7 +988,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                             </td>
                                             <td class="cart-product-subtotal">
                                                 <input type="hidden" name="product_total_1" class="product_total" value="0">
-                                                <h6 class="product-sub-total">' . $prodRec->currency . ' ' . $prodPrice . '</h6>
+                                                <h6 class="product-sub-total">' . $prodRec->currency . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                             </td>
                                         </tr>
         ';
@@ -1111,13 +1111,13 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                 <ul>
                                     <li>' . SHOP_SHARE . ':</li>
                                     <li>
-<a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $prodRec->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+<a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/product-detail/' . $prodRec->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                                     </li>
                                     <li>
-<a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $prodRec->slug . '&text=' . (($lang == 'gr') ? $prodRec->title_greek : $prodRec->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="https://twitter.com/share?url=' . BASE_URL . 'product/product-detail/' . $prodRec->slug . '&text=' . (($lang == 'gr') ? $prodRec->title_greek : $prodRec->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
                                     </li>
                                     <li>
-<a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $prodRec->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+<a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/product-detail/' . $prodRec->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -1505,13 +1505,13 @@ if (defined('SHOP_PAGE')) {
                                                                     <ul>
                                                                         <li>' . SHOP_SHARE . ':</li>
                                                                         <li>
-        <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $product->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/product-detail/' . $product->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                                                                         </li>
                                                                         <li>
-        <a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $product->slug . '&text=' . (($lang == 'gr') ? $product->title_greek : $product->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://twitter.com/share?url=' . BASE_URL . 'product/product-detail/' . $product->slug . '&text=' . (($lang == 'gr') ? $product->title_greek : $product->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
                                                                         </li>
                                                                         <li>
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $product->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/product-detail/' . $product->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -1831,13 +1831,13 @@ if (defined('SHOP_PAGE')) {
                                                                     <ul>
                                                                         <li>' . SHOP_SHARE . ':</li>
                                                                         <li>
-        <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $product->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/product-detail/' . $product->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                                                                         </li>
                                                                         <li>
-        <a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $product->slug . '&text=' . (($lang == 'gr') ? $product->title_greek : $product->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://twitter.com/share?url=' . BASE_URL . 'product/product-detail/' . $product->slug . '&text=' . (($lang == 'gr') ? $product->title_greek : $product->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
                                                                         </li>
                                                                         <li>
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $product->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/product-detail/' . $product->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
