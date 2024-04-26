@@ -125,7 +125,8 @@ class category extends DatabaseObject
             return true;
         }
     }
- public static function get_internal_link($selid = '')
+
+    public static function get_internal_link($selid = '')
     {
         global $db;
         $sql = "SELECT id,title,slug FROM " . self::$table_name . " WHERE status='1' AND parentId=0 ORDER BY sortorder DESC";
@@ -142,6 +143,7 @@ class category extends DatabaseObject
         }
         return $result;
     }
+
     public static function get_all_selcate($actid = 0, $selid = '')
     {
         global $db;
@@ -164,7 +166,7 @@ class category extends DatabaseObject
     {
         $result = '';
         $selectedIds = explode(',', $actid);
-        if (!empty($selectedIds)) {
+        if (!empty($selectedIds[0])) {
             foreach ($selectedIds as $selectedId) {
                 global $db;
                 $sql = "SELECT id,title FROM " . self::$table_name . " WHERE parentId ='$selectedId' ORDER BY sortorder DESC";
@@ -174,15 +176,35 @@ class category extends DatabaseObject
                     ';
                     foreach ($record as $row) {
                         $sel = ($selid == $row->id) ? 'selected' : '';
-                        $tot = SubProduct::get_total_category_product($row->id);
+                        $tot = SubProduct::get_total_subcategory_product($row->id);
+                        if ($tot > 0) {
+                            $result .= '
+                            <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="subcat-' . $row->id . '" value="' . $row->id . '">
+                            <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                            ';
+                        }
+                    }
+                } else {
+                    $result .= '</div>';
+                }
+            }
+        } else {
+            $record = self::get_subcategory();
+            if ($record) {
+                $result .= '<div class="custom-control custom-checkbox">
+                    ';
+                foreach ($record as $row) {
+                    $sel = ($selid == $row->id) ? 'selected' : '';
+                    $tot = SubProduct::get_total_subcategory_product($row->id);
+                    if ($tot > 0) {
                         $result .= '
                         <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="subcat-' . $row->id . '" value="' . $row->id . '">
                         <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                         ';
                     }
-                } else {
-                    $result .= '</div>';
                 }
+            } else {
+                $result .= '</div>';
             }
         }
         return $result;

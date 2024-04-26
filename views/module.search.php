@@ -7,8 +7,8 @@ if (isset($_REQUEST)) {
 }
 
 $resisearch = $respkglist = $bread = $bread_title = $bread_text = $bread_text_extra = $navigation = '';
-$home_gift_sets_modal = $home_gift_sets_script = $listofitems= '';
-$minprice = $maxprice= '';
+$home_gift_sets_modal = $home_gift_sets_script = $listofitems = '';
+$minprice = $maxprice = '';
 if (defined('SEARCH_PAGE')) {
     // pr($_POST);
     if (isset($hotelslug) and !empty($hotelslug)) {
@@ -40,7 +40,7 @@ if (defined('SEARCH_PAGE')) {
         $type_filter .= '
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input qtype" name="qtype[]" ' . $sel . ' id="type-' . $typeRow->id . '" value="' . $typeRow->id . '">
-                    <label class="custom-control-label" for="type-' . $typeRow->id . '">' . $typeRow->title . ' <span>' . $tot . '</span></label>
+                    <label class="custom-control-label d-flex justify-content-between" for="type-' . $typeRow->id . '">' . $typeRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
         ';
     }
@@ -57,12 +57,14 @@ if (defined('SEARCH_PAGE')) {
         }
         $tot = 0;
         $tot += SubProduct::get_total_service_product($serviceRow->id);
-        $service_filter .= '
+        if ($tot > 0) {
+            $service_filter .= '
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input qservice" name="qservice[]" ' . $sel . ' id="serv-' . $serviceRow->id . '" value="' . $serviceRow->id . '">
                     <label class="custom-control-label d-flex justify-content-between" for="serv-' . $serviceRow->id . '">' . $serviceRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
-        ';
+            ';
+        }
     }
 
     /* category filter start*/
@@ -76,12 +78,14 @@ if (defined('SEARCH_PAGE')) {
         }
         $tot = 0;
         $tot += SubProduct::get_total_category_product($categoryRow->id);
-        $category_filter .= '
+        if ($tot > 0) {
+            $category_filter .= '
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="cat-' . $categoryRow->id . '" value="' . $categoryRow->id . '">
                     <label class="custom-control-label d-flex justify-content-between" for="cat-' . $categoryRow->id . '">' . $categoryRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
-        ';
+            ';
+        }
     }
 
     /* activites filter start*/
@@ -95,12 +99,14 @@ if (defined('SEARCH_PAGE')) {
         }
         $tot = 0;
         $tot += SubProduct::get_total_subcategory_product($subcategoryRow->id);
-        $subcategory_filter .= '
+        if ($tot > 0) {
+            $subcategory_filter .= '
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input qsubcategory" name="qsubcategory[]" ' . $sel . ' id="subcat-' . $subcategoryRow->id . '" value="' . $subcategoryRow->id . '">
                     <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $subcategoryRow->id . '">' . $subcategoryRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
-        ';
+            ';
+        }
     }
     /* activites filter end*/
 
@@ -115,12 +121,14 @@ if (defined('SEARCH_PAGE')) {
         }
         $tot = 0;
         $tot += SubProduct::get_total_brand_product($brandRow->id);
-        $brand_filter .= '
+        if ($tot > 0) {
+            $brand_filter .= '
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input qbrand" name="qbrand[]" ' . $sel . ' id="bran-' . $brandRow->id . '" value="' . $brandRow->id . '">
                     <label class="custom-control-label d-flex justify-content-between" for="bran-' . $brandRow->id . '">' . $brandRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
-        ';
+            ';
+        }
     }
 
     /* Price Range start*/
@@ -513,9 +521,9 @@ if (defined('SEARCH_PAGE')) {
 
     $res = $db->query($sql);
     $total = $db->affected_rows($res);
-    $listofitems .='
+    $listofitems .= '
     
-    <label id="totalitems">('.$total.' items found)</label>';
+    <label id="totalitems">(' . $total . ' items found)</label>';
     if ($total > 0) {
         while ($rows = $db->fetch_array($res)) {
             // if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {
@@ -551,10 +559,10 @@ if (defined('SEARCH_PAGE')) {
             $prodservice = Services::find_by_id($rows['service_id']);
             if (!empty($prodbrand)) {
                 $title = $prodbrand->title;
-                $slug= $prodbrand->slug;
+                $slug = $prodbrand->slug;
             } else {
                 $title = '';
-                $slug='';
+                $slug = '';
             }
             if (!empty($prodservice)) {
                 $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $rows['slug'] . '';
@@ -569,7 +577,7 @@ if (defined('SEARCH_PAGE')) {
                             <img src="' . $img . '" alt="' . $rows['title'] . '">
                         </div></a>
                         <div class="product-info">
-                            <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
+                            <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                             <a href="' . $slugs . '" class="product-link">' . $rows['title'] . '</a>
                             <div class="product-price">
                                 ' . $price_text . '
@@ -651,7 +659,7 @@ if (defined('SEARCH_PAGE')) {
                                                 </div>
                                                 <div class="col-lg-7 col-12">
                                                     <div class="modal-product-info">
-                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
+                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                                                     <h3>' . (($lang == "gr") ? $rows['title_greek'] : $rows['title']) . '</h3>
                                                         ' . (($lang == "gr") ? $rows['brief_greek'] : $rows['brief']) . '
                 <div class="shoping-cart-table table-responsive">
@@ -688,7 +696,7 @@ if (defined('SEARCH_PAGE')) {
                                 </td>
                                 <td class="cart-product-subtotal">
                                     <input type="hidden" name="product_total_1" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . $rows['currency'] . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
+                                    <h6 class="product-sub-total">' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                 </td>
                             </tr>
                             
@@ -877,24 +885,23 @@ if (defined('SEARCH_PAGE')) {
         $url = BASE_URL.'pages / errors';
         redirect_to($url);
     }*/
-    $maxs= SubProduct::get_max_price();
+    $maxs = SubProduct::get_max_price();
 
-    foreach($maxs as $max){
-    $maxprice = $max->discount1;
+    foreach ($maxs as $max) {
+        $maxprice = $max->discount1;
     }
-    $mins= SubProduct::get_min_price();
+    $mins = SubProduct::get_min_price();
 
-    foreach($mins as $min){
-        if($min->discount1==0){
+    foreach ($mins as $min) {
+        if ($min->discount1 == 0) {
             $minprice = $min->price1;
-        }
-        else{
+        } else {
             $minprice = $min->discount1;
         }
-    
+
     }
     //   pr($min);
-   
+
 }
 
 $jVars['module:search-searchform'] = $resisearch;
