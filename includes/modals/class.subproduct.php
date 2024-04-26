@@ -166,6 +166,16 @@ SELECT price1 , discount1
         return self::find_by_sql($sql);
     }
 
+    public static function get_relatedprod($type = '', $notid = '', $limit = '')
+    {
+        global $db;
+        $cond = !empty($type) ? ' AND type=' . $type : '';
+        $cond2 = !empty($notid) ? ' AND id<>' . $notid : '';
+        $cond3 = !empty($limit) ? ' LIMIT ' . $limit : '';
+        $sql = "SELECT * FROM " . self::$table_name . " WHERE status=1 $cond $cond2 ORDER BY sortorder DESC " . $cond3;
+        return self::find_by_sql($sql);
+    }
+
     //FIND THE HIGHEST MAX NUMBER BY PARENT ID.
     static function find_maximum_byparent($field = "sortorder", $pid = "")
     {
