@@ -274,6 +274,12 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                                     <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
                                                     <h3>' .  $rows['title'] . '</h3>
                                                         ' . $rows['brief'] . '
+                                                        <br/>
+                                                        <br/>
+
+                                                        <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
+                                                            <span> VIEW MORE</span>
+                                                        </a>
                 <div class="shoping-cart-table table-responsive">
                     <form id="add-cart-product-' . $rows['slug'] . '">
                     <table class="table">
@@ -306,26 +312,51 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                     <h6 class="product-sub-total">' . $rows['currency'] . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
                                 </td>
                             </tr>                            
-                        </tbody>
-                    </table>
-                    </form>
-                </div>
-                <div class="ltn__product-details-menu-2">
-                    <ul>
-                        <li><a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="ADD TO CART " data-cartid="' . $rows['slug'] . ' " form-id="add-cart-product-' . $rows['slug'] . '"><i class="fas fa-shopping-cart"></i><span> ADD TO CART</span></a></li>
-                        <li><a href="' . BASE_URL . 'product/' . $rows['slug'] . ' " class="theme-btn-1 btn btn-effect-1"><span>VIEW MORE</span></a></li>
-                        <li><a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> Checkout</a></li>
-                        <li><a href="#" class="add-wishlist" title=" Add to Wishlist " data-cartid="' . $rows['slug'] . ' "><i class="far fa-heart"></i><span> Add to Wishlist </span></a></li>
-                    </ul>
-                </div><hr>
-                <div class="ltn__social-media">
-                    <ul>
-                        <li>Share :</li>
-                        <li><a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $rows['slug'] . '&text=' . ($rows['title']) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
+                            </tbody>
+                            </table>
+                            </form>
+                        </div>
+                                                                <div class="ltn__product-details-menu-2">  
+                                                                    <ul>
+                                                                    <li style="padding-right: 7.28rem;">
+                                                                    <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="" data-cartid="' . $rows['slug'] . '">
+                                                                        <i class="far fa-heart"></i>
+                                                                    </a>
+                                                                </li>
+                                                                    
+                                                                        <li>
+                                                                            <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="ADD TO CART" data-cartid="' . $rows['slug'] . '" form-id="add-cart-product-' . $rows['slug'] . '">
+                                                                                <i class="fas fa-shopping-cart"></i>
+                                                                                <span>ADD TO CART</span>
+                                                                            </a>
+                                                                        </li>
+                                                                      
+                                                                        
+                                                                        <li>
+                                                                        <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> CHECKOUT</a>
+                                                                        </li>
+                
+                                                                       
+                                                                       
+                                                                    </ul>
+                                                                </div>
+                                                                <hr>
+                                                                <div class="ltn__social-media">
+                                                                    <ul>
+                                                                        <li>Share:</li>
+                                                                        <li>
+                <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                                                        </li>
+                                                                        <li>
+                <a href="https://twitter.com/share?url=' . BASE_URL . 'product/' . $rows['slug'] . '&text=' . (($lang == 'gr') ? $rows['title_greek'] : $rows['title']) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                                                        </li>
+                                                                        <li>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/' . $rows['slug'] . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -334,9 +365,6 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                </form>
             ';
         }
     } else {
