@@ -389,7 +389,7 @@
                 $uprec = User::find_by_mail($email);
 
                 if ($uprec->status == 0) {
-                    $message = "Your account has not been approved!");
+                    $message = "Your account has not been approved!";
                     echo json_encode(array("action" => "error", "message" => $message));
                 } else {
                     $session->set('email_logged', $email);
