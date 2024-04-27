@@ -253,10 +253,9 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
                                 </td>
                                 <td class="cart-product-info">
                                     <h4><a href="' . BASE_URL . 'product/productdetails/' . $productRow->slug . '" target="_blank">' . ( $productRow->title ) . '</a></h4>
-                                </td>
-                                <td class="cart-product-info">
                                     <p>' . ( $productRow->brief ) . '</p>
-                                </td>
+                                    </td>
+                                
                                 <td class="cart-product-add-cart">
 
                                     <a href="#" title="ADD TO CART" class="add-to-cart" data-cartid="' . $productRow->slug . '">
