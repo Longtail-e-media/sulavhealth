@@ -212,64 +212,61 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
         }
 
         $user_wish_list .= '
-        <h3 class="mb-50">Wishlist</h3>
-            <div class="shoping-cart-inner">
-                <div class="shoping-cart-table table-responsive">
-                    <table class="table">
-                        <!-- <thead>
-                            <th class="cart-product-remove">X</th>
-                            <th class="cart-product-image">Image</th>
-                            <th class="cart-product-info">Title</th>
-                            <th class="cart-product-price">Price</th>
-                            <th class="cart-product-quantity">Quantity</th>
-                            <th class="cart-product-subtotal">Subtotal</th>
-                        </thead> -->
-                        <tbody>
-        ';
-        $wishes = WishList::find_by_user_id( $userId );
-       
-        if ( !empty( $wishes ) ) {
-            $prods = unserialize( $wishes->data );
-            if ( !empty( $prods ) ) {
-                foreach ( $prods as $prod ) {
-                    $productRow = SubProduct::find_by_slug( $prod );
-                    if ( !empty( $productRow ) ) {
-                        // getting only one image to display
-                        $giftSetImages = SubProductImage::getImagelist_by( $productRow->id, 1, 0 );
-                        $img = BASE_URL . 'template/web/img/product/one.jpg';
-                        if ( !empty( $giftSetImages ) ) {
-                            foreach ( $giftSetImages as $giftSetImage ) {
-                                $file_path = SITE_ROOT . 'images/product/galleryimages/' . $giftSetImage->image;
-                                if ( file_exists( $file_path ) ) {
-                                    $img = IMAGE_PATH . 'product/galleryimages/' . $giftSetImage->image;
-                                }
-                            }
-                        }
-                        $user_wish_list .= '
-                        
-                            <tr class="cart-remove">
-                                <td class="cart-product-image">
-                                    <img src="' . $img . '" alt="' . ( $productRow->title ) . '">
-                                </td>
-                                <td class="cart-product-info">
-                                    <h4><a href="' . BASE_URL . 'product/productdetails/' . $productRow->slug . '" target="_blank">' . ( $productRow->title ) . '</a></h4>
-                                    <p>' . ( $productRow->brief ) . '</p>
-                                    </td>
-                                
-                                <td class="cart-product-add-cart">
+    <h3 class="mb-50">Wishlist</h3>
+    <div class="shoping-cart-inner">
+        <div class="shoping-cart-table table-responsive">
+            <div class="wishlist-container">
+';
 
-                                    <a href="#" title="ADD TO CART" class="add-to-cart" data-cartid="' . $productRow->slug . '">
-                                    ' . ( 'Add to Cart' ) . '
-                                            <i class="fas fa-shopping-cart"></i>
-                                        </a>
-                                </td>
-                                <td class="cart-product-remove remove-wishlist" style="font-size: 1.5rem;" data-id="' . $productRow->slug . '">&times;</td>
-                            </tr>
-                        ';
+$wishes = WishList::find_by_user_id($userId);
+
+if (!empty($wishes)) {
+    $prods = unserialize($wishes->data);
+    if (!empty($prods)) {
+        foreach ($prods as $prod) {
+            $productRow = SubProduct::find_by_slug($prod);
+            if (!empty($productRow)) {
+                // getting only one image to display
+                $giftSetImages = SubProductImage::getImagelist_by($productRow->id, 1, 0);
+                $img = BASE_URL . 'template/web/img/product/one.jpg';
+                if (!empty($giftSetImages)) {
+                    foreach ($giftSetImages as $giftSetImage) {
+                        $file_path = SITE_ROOT . 'images/product/galleryimages/' . $giftSetImage->image;
+                        if (file_exists($file_path)) {
+                            $img = IMAGE_PATH . 'product/galleryimages/' . $giftSetImage->image;
+                        }
                     }
                 }
+                $user_wish_list .= '
+                    <div class="wishlist-item">
+                        <div class="wishlist-image">
+                            <img src="' . $img . '" alt="' . ($productRow->title) . '">
+                        </div>
+                        <div class="wishlist-info">
+                            <h4><a href="' . BASE_URL . 'product/productdetails/' . $productRow->slug . '" target="_blank">' . ($productRow->title) . '</a></h4>
+                            <p>' . ($productRow->brief) . '</p>
+                        </div>
+                        <div class="wishlist-buttons">
+                        <div class="wishlist-actions">
+                            <a href="#" title="ADD TO CART" class="add-to-cart" data-cartid="' . $productRow->slug . '">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                        </div>
+                        <div class="cart-product-remove remove-wishlist">
+                            <a  href="#"
+                            title="Delete"
+                            class="remove-from-cart" data-cartid="' . $productRow->slug . '">
+                                
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                    </div>
+                ';
             }
-        } else {
+        }
+    }
+} else {
             $user_wish_list .= '
             <h3 class="mb-50">Wishlist</h3>
             <p>You have no order images. Would you like to try from homepage?</p>
@@ -279,8 +276,7 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
             ';
         }
         $user_wish_list .= '
-                        </tbody>
-                    </table>
+                </div>
                 </div>
             </div>
         ';
