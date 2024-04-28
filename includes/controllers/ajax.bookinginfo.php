@@ -121,8 +121,8 @@
             $bookRec->person_country        = $country;
             $bookRec->shipping_type         = (!empty($country_type)) ? $country_type : '';
             $bookRec->person_country_code   = Countries::find_by_name($country);
-            $bookRec->person_city           = $city;
-            $bookRec->person_post_code      = $post_code;
+            $bookRec->person_city           = (!empty($city)) ? $city : '';
+            $bookRec->person_post_code      = (!empty($post_code)) ? $post_code : '';
             $bookRec->person_address        = $address;
             $bookRec->person_shipping_address = $shipping_address;
             $bookRec->person_phone          = $phone;
@@ -130,12 +130,12 @@
 
             $bookRec->shipping_country      = $shipping_country;
             $bookRec->shipping_district     = $shipping_district;
-            $bookRec->shipping_city         = $shipping_city;
-            $bookRec->shipping_post_code    = $shipping_post_code;
+            $bookRec->shipping_city         = (!empty($shipping_city)) ? $shipping_city : '';
+            $bookRec->shipping_post_code    = (!empty($shipping_post_code)) ? $shipping_post_code : '';
 
             $bookRec->ip_address        = $_SERVER['REMOTE_ADDR'];
             $bookRec->pay_type          = $payment_method;
-//            $bookRec->shipping_amt      = $shipping_amt;
+            $bookRec->shipping_amt      = $shipping_amt;
             $bookRec->discount_amt      = $discount_amt;
             $bookRec->sub_total         = $sub_total;
             $bookRec->grand_total       = $grand_total;
@@ -156,6 +156,7 @@
                         if (!empty($product)) {
                             $product_details = $sesRow['product_details'];
                             foreach ($product_details as $label => $detail) {
+
                                 $csql = "INSERT INTO tbl_booking_product SET 
                                   booking_id = '" . $booking_id . "', 
                                   product_id = '" . $product->id . "', 
@@ -181,7 +182,8 @@
                         $record->email          = $_REQUEST['email'];
                         $record->contact        = $_REQUEST['phone'];
                         $record->facebook_uid   = $_REQUEST['address'];
-                        $record->password       = md5('password12345');
+                        // $record->password       = md5('password12345');
+                        $record->password       = md5($_REQUEST['create_password']);
                         $record->accesskey      = @randomKeys(25);
                         $record->group_id       = 2;
                         $record->status         = 0;
@@ -190,24 +192,23 @@
 
                         $checkDupliEmail        = User::checkDupliEmail($record->email);
                         if ($checkDupliEmail) {
-                            $newAccountMsg = ($lang == "gr") ? 'Το email έχει ήδη χρησιμοποιηθεί! Αδυναμία δημιουργίας νέου λογαριασμού!' : 'Email already used! Could not create new account!';
+                            $newAccountMsg = 'Email already used! Could not create new account!';
                         } else {
                             $db->begin();
                             if ($record->save()):
                                 $db->commit();
-                                $newAccountMsg = ($lang == "gr")
-                                    ? 'Ο λογαριασμός δημιουργήθηκε με email ' . $email . ' και κωδικό password12345. Παρακαλώ για επιβεβαίωση του λογαριασμού σας πριν να συνδεθείτε.'
-                                    : 'Your account has been created with email ' . $email . ' and password password12345. Please wait for account verification before you can login.';
+                                include('create_account_email.php');
+                                $newAccountMsg = 'Your account has been created with email ' . $email . ' and password password12345. Please wait for account verification before you can login.';
                                 log_action("User [" . $record->first_name . " " . $record->last_name . "] login Created " . $GLOBALS['basic']['addedSuccess'], 1, 3);
                             else:
-                                $newAccountMsg = ($lang == "gr") ? 'Αδυναμία δημιουργίας νέου λογαριασμού.' : 'Could not create new account!';
+                                $newAccountMsg = 'Could not create new account!';
                             endif;
                         }
                     }
                 }
 
                 // send email
-                // include(SITE_ROOT . 'book_mail.php');
+                 include(SITE_ROOT . 'book_mail.php');
 
                 // clear shopping cart
                 unset($_SESSION['cart_detail']);
@@ -304,8 +305,8 @@
 		case "delete":
 			$id = $_REQUEST['id'];
 			$record = Bookinginfo::find_by_id($id);
-			$db->query("DELETE FROM tbl_bookinginfo WHERE id='{$id}'");
-			reOrder("tbl_bookinginfo", "sortorder");
+			$db->query("DELETE FROM tbl_booking_info WHERE id='{$id}'");
+			reOrder("tbl_booking_info", "sortorder");
 
 			$records = Bookinginfo::find_all();
 			$fixedOrder = "sortOrder";

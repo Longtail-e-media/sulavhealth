@@ -39,7 +39,7 @@
         }
 
         #country_type-error {
-            margin-left:130px;
+            margin-left: 130px;
         }
     </style>
 </head>
@@ -54,7 +54,7 @@
     <!-- HEADER AREA END -->
 
     <!-- Utilize Cart Menu Start -->
-    <jcms:module:product:cart-menu />
+    <jcms:module:product:cart-menu/>
     <!-- Utilize Cart Menu End -->
 
     <!-- Utilize Mobile Menu Start -->
@@ -329,6 +329,15 @@
             $('input[name="grand_total"]').val(NewTotal);
         });
 
+        // Create an account
+        $('#create_account').on('click', function () {
+            if ($(this).is(':checked')) {
+                $('#create_password').parent().parent().removeClass('d-none');
+            } else {
+                $('#create_password').parent().parent().addClass('d-none');
+            }
+        })
+
         $('#checkoutForm').validate({
             errorElement: 'span',
             errorClass: 'validate-has-error text-danger',
@@ -348,6 +357,7 @@
                 shipping_city: {required: !0},
                 shipping_address: {required: !0},
                 shipping_post_code: {required: !0},
+                create_password: {required: !0},
                 cc_number: {required: !0},
                 cc_cvc: {required: !0},
                 cc_exp_month: {required: !0},
@@ -371,8 +381,9 @@
                 shipping_country: {required: "Choose your Shipping Country"},
                 shipping_district: {required: "Choose your Shipping District"},
                 shipping_city: {required: "Enter your Shipping city"},
-                shipping_address: {required: "<jcms:module:common_language:CHECKOUT_FORM_SHIPPING_ADDRESS_ERROR/>"},
+                shipping_address: {required: "Enter your Shipping Address"},
                 shipping_post_code: {required: "Enter your Shipping Post Code"},
+                create_password: {required: "Enter your Password"},
                 cc_number: {required: "Enter your Credit Card Number"},
                 cc_cvc: {required: "Enter your Credit Card CVC"},
                 cc_exp_month: {required: "Enter your Credit Card Expiry Month"},
@@ -573,7 +584,7 @@
             });
         }
     });
-   
+
 </script>
 
 </body>

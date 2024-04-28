@@ -521,7 +521,7 @@ if (defined('PACKAGES_PAGE')) {
                                             </div>
                                         </td>
                                         <td class="cart-product-subtotal">
-                                            <input type="hidden" name="product_total_1" class="product_total" value="0">
+                                            <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
                                             <h6 class="product-sub-total">' . $product->currency . ' ' . $prodPrice . '</h6>
                                         </td>
                                     </tr>
@@ -841,7 +841,7 @@ if (defined('PACKAGES_PAGE')) {
                                             </div>
                                         </td>
                                         <td class="cart-product-subtotal">
-                                            <input type="hidden" name="product_total_1" class="product_total" value="0">
+                                            <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
                                             <h6 class="product-sub-total">' . $product->currency . ' ' . $prodPrice . '</h6>
                                         </td>
                                     </tr>

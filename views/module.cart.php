@@ -294,7 +294,7 @@ if (defined('CHECKOUT_PAGE')) {
                                 </div>                                <!--<p><label class="input-info-save mb-0"><input type="checkbox" name="ship_same_add" value="1"> ' . ("Use Address as Shipping Address?") . '</label></p>-->
     ';
     if (empty($checkLogin)) {
-        $checkout_form .= '<p><label class="input-info-save mb-0"><input type="checkbox" name="create_account" value="1"> ' . ("Create an account?") . '</label></p>';
+        $checkout_form .= '<p><label class="input-info-save mb-0"><input type="checkbox" name="create_account" id="create_account" value="1"> ' . ("Create an account?") . '</label></p>';
     } else {
         $checkout_form .= '<input type="hidden" name="user_id" value="' . $checkLogin->id . '">';
     }
@@ -302,16 +302,50 @@ if (defined('CHECKOUT_PAGE')) {
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 mb-30">
                                         <div class="row">
+                                            <div class="col-md-12 mb-30 d-none">
+                                                <div class="input-item">
+                                                    <input type="text" name="create_password" id="create_password" placeholder="Password">
+                                                </div>
+                                            </div>
                                             <div class="col-md-12 mb-30">
                                                 <div class="input-item">
                                                     <input type="text" name="shipping_address" placeholder="' . ("Shipping Address") . '">
                                                 </div>
                                             </div>
+                                            <div class="col-lg-6 col-md-6 mb-30">
+                                                <h6>' . "Shipping Country" . '</h6>
+                                                <div class="input-item">
+                                                    <select class="nice-selec col-12" name="shipping_country" id="shipping_country">
+                                                        <option value="">' . ("Select Shipping Country") . '</option>
+                                                        <option value="Nepal" selected>Nepal</option>
+            ';
+    /*$countries = ShippingCountries::find_all();
+    foreach ($countries as $country) {
+        $checkout_form .= '<option value="' . $country->name . '">' . $country->name . '</option>';
+    }*/
+    $checkout_form .= '
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 mb-30">
+                                                <h6>' . ("Shipping District") . '</h6>
+                                                <div class="input-item">
+                                                    <select class="nice-selec col-12" name="shipping_district" id="shipping_district">
+                                                        <option value="">' . ("Select Shipping District") . '</option>
+            ';
+    $districts = Locationn::find_all();
+    foreach ($districts as $district) {
+        $checkout_form .= '<option value="' . $district->title . '" data-dc="' . $district->delivery_charge . '">' . $district->title . '</option>';
+    }
+    $checkout_form .= '
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="col-md-12">
                                                 <h6>' . ("Order Notes (optional)") . '</h6>
-                                <div class="input-item input-item-textarea ltn__custom-icon">
-                                    <textarea name="message" placeholder="' . ("Notes about your order, e.g. special notes for delivery.") . '"></textarea>
-                                </div>
+                                                <div class="input-item input-item-textarea ltn__custom-icon">
+                                                    <textarea name="message" placeholder="' . ("Notes about your order, e.g. special notes for delivery.") . '"></textarea>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -379,7 +413,7 @@ if (defined('CHECKOUT_PAGE')) {
                         <div id="checkout_accordion_1">
                             <div class="card">
                                 <h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-3" aria-expanded="false">
-                                <input type="radio" name="payment_method" value="payment_at_store" checked>
+                                <input type="radio" name="payment_method" value="cash_on_delivery" checked>
                                     ' . (($lang == "gr") ? "Εξόφληση κατά την παραλαβή από το κατάστημα" : "Cash on Delivery") . '
                                 </h5>
                             </div>

@@ -296,7 +296,7 @@ if (defined('HOME_PAGE')) {
                                     </div>
                                 </td>
                                 <td class="cart-product-subtotal">
-                                    <input type="hidden" name="product_total_1" class="product_total" value="0">
+                                    <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
                                     <h6 class="product-sub-total">' . $giftSet->currency . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
                                 </td>
                             </tr>
@@ -703,7 +703,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                         </div>
                                     </td>
                                     <td class="cart-product-subtotal">
-                                        <input type="hidden" name="product_total_1" class="product_total" value="0">
+                                        <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
                                         <h6 class="product-sub-total">' . $prodrelated->currency . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
                                     </td>
                                 </tr>
@@ -987,7 +987,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                 </div>
                                             </td>
                                             <td class="cart-product-subtotal">
-                                                <input type="hidden" name="product_total_1" class="product_total" value="0">
+                                                <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
                                                 <h6 class="product-sub-total">' . $prodRec->currency . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                             </td>
                                         </tr>
@@ -1373,7 +1373,7 @@ if (defined('SHOP_PAGE')) {
                                             </div>
                                         </td>
                                         <td class="cart-product-subtotal">
-                                            <input type="hidden" name="product_total_1" class="product_total" value="0">
+                                            <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
                                             <h6 class="product-sub-total">' . $product->currency . ' ' . $prodPrice . '</h6>
                                         </td>
                                     </tr>
@@ -1693,7 +1693,7 @@ if (defined('SHOP_PAGE')) {
                                             </div>
                                         </td>
                                         <td class="cart-product-subtotal">
-                                            <input type="hidden" name="product_total_1" class="product_total" value="0">
+                                            <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
                                             <h6 class="product-sub-total">' . $product->currency . ' ' . $prodPrice . '</h6>
                                         </td>
                                     </tr>

@@ -2,7 +2,7 @@
 require_once("includes/initialize.php");
 // require_once("views/common_language.php");
 
-$result = $navigation = $home_gift_sets_modal = $home_gift_sets_script = $listofitem=  ''; 
+$result = $navigation = $home_gift_sets_modal = $home_gift_sets_script = $listofitem = '';
 if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     $lang = !empty($session->get('lang_type')) ? $session->get('lang_type') : 'gr';
     foreach ($_POST as $key => $val) {
@@ -134,8 +134,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
 
     $res = $db->query($sql);
     $total = $db->affected_rows($res);
-    
-    $listofitem .='('.$total.' items found)';
+
+    $listofitem .= '(' . $total . ' items found)';
     if ($total > 0) {
         while ($rows = $db->fetch_array($res)) {
             // if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {
@@ -179,10 +179,10 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             $prodservice = Services::find_by_id($rows['service_id']);
             if (!empty($prodbrand)) {
                 $title = $prodbrand->title;
-                $slug= $prodbrand->slug;
+                $slug = $prodbrand->slug;
             } else {
                 $title = '';
-                $slug='';
+                $slug = '';
             }
             if (!empty($prodservice)) {
                 $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $rows['slug'] . '';
@@ -270,8 +270,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                                 </div>
                                                 <div class="col-lg-7 col-12">
                                                     <div class="modal-product-info">
-                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
-                                                    <h3>' .  $rows['title'] . '</h3>
+                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
+                                                    <h3>' . $rows['title'] . '</h3>
                                                         ' . $rows['brief'] . '
                                                         <br/>
                                                         <br/>
@@ -307,8 +307,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                     </div>
                                 </td>
                                 <td class="cart-product-subtotal">
-                                    <input type="hidden" name="product_total_1" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . $rows['currency'] . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
+                                    <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
+                                    <h6 class="product-sub-total">' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                 </td>
                             </tr>                            
                             </tbody>
@@ -374,12 +374,12 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
 
     $home_gift_sets_modal = preg_replace('/\s+/', ' ', $home_gift_sets_modal);
     $home_gift_sets_modal = str_replace(array("\r", "\n"), '', $home_gift_sets_modal);
-    
+
     $home_gift_sets_script = preg_replace('/\s+/', ' ', $home_gift_sets_script);
     $home_gift_sets_script = str_replace(array("\r", "\n"), '', $home_gift_sets_script);
-    
 
-    echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" => $home_gift_sets_script, "itemlist"=>$listofitem , "nav" => $navigation));
+
+    echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" => $home_gift_sets_script, "itemlist" => $listofitem, "nav" => $navigation));
 }
 
 ?>

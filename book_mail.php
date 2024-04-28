@@ -63,9 +63,8 @@ if (!empty($bookingRec)) {
     $client_header .= '<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	                            <tr>
 	                                <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
-	                                ' . ('Thank you for choosing the Evonymon store for your purchases. Your order has been registered and will
-                                    be executed after its acceptance by the store manager, after checking for any errors or omissions. If the payment method you
-                                    have chosen is bank transfer or credit card, your order will be processed as soon as payment is confirmed.') . '
+	                                ' . ('Thank you for choosing '.$siteRegulars->sitetitle.' for your purchases. Your order has been registered and will
+                                    be executed after its acceptance by the store manager, after checking for any errors or omissions.') . '
 	                                </td>
 	                            </tr>
 	                        </table>';
@@ -83,12 +82,16 @@ if (!empty($bookingRec)) {
             $order_status = 'Credit Card';
             break;
 
+        case "himalayan_bank":
+            $order_status = 'Online Payment';
+            break;
+
         case "cheque_payment":
             $order_status = 'Deposit in Bank';
             break;
 
-        case "payment_at_store":
-            $order_status = 'Payment and receipt from the store';
+        case "cash_on_delivery":
+            $order_status = 'Cash on Delivery';
             break;
     }
 
@@ -210,7 +213,7 @@ if (!empty($bookingRec)) {
     }
     $html .= '
                                 <tr>
-                                    <td colspan="4">' . ('Shipping and Handing') . '</td>
+                                    <td colspan="4">' . ('Delivery Charge') . '</td>
                                     <td style="text-align:center;">' . $bookingRec->shipping_amt . '</td>
                                 </tr>
                                 <tr>
@@ -258,16 +261,8 @@ if (!empty($bookingRec)) {
     }
     $html .= '
                     <tr>
-                        <td>' . ('Region') . '</td>
+                        <td>' . ('District') . '</td>
                         <td>' . $bookingRec->person_mname . '</td>
-                    </tr>
-                    <tr>
-                        <td>' . ('City') . '</td>
-                        <td>' . $bookingRec->person_city . '</td>
-                    </tr>
-                    <tr>
-                        <td>' . ('Post Code') . '</td>
-                        <td>' . $bookingRec->person_post_code . '</td>
                     </tr>
                     <tr>
                         <td>' . ('Address') . '</td>
@@ -276,6 +271,14 @@ if (!empty($bookingRec)) {
                     <tr>
                         <td>' . ('Shipping Address') . '</td>
                         <td>' . $bookingRec->person_shipping_address . '</td>
+                    </tr>
+                    <tr>
+                        <td>' . ('Shipping Country') . '</td>
+                        <td>' . $bookingRec->shipping_country . '</td>
+                    </tr>
+                    <tr>
+                        <td>' . ('Shipping District') . '</td>
+                        <td>' . $bookingRec->shipping_district . '</td>
                     </tr>
 	            </table>
 

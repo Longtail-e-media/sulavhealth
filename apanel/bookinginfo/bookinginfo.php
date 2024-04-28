@@ -83,6 +83,7 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                     <li><strong>Country Code : </strong><?php echo set_na($bookingRow->person_country_code); ?></li>
                     <li><strong>City : </strong><?php echo set_na($bookingRow->person_city); ?></li>
                     <li><strong>Region : </strong><?php echo set_na($bookingRow->person_mname); ?></li>
+                    <li><strong>Shipping Country: </strong><?php echo $bookingRow->shipping_country; ?></li>
                     <?php if (!empty($bookingRow->coupon_code)) { ?>
                         <li><strong>Coupon Code : </strong><?php echo $bookingRow->coupon_code; ?></li>
                     <?php } ?>
@@ -99,7 +100,9 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                         echo $newformat; ?>
                     </li>
                     <li><strong>Address : </strong><?php echo set_na($bookingRow->person_address); ?></li>
+                    <li><strong>District : </strong><?php echo $bookingRow->person_mname; ?></li>
                     <li><strong>Shipping Address: </strong><?php echo $bookingRow->person_shipping_address; ?></li>
+                    <li><strong>Shipping District: </strong><?php echo $bookingRow->shipping_district; ?></li>
                     <?php if (!empty($bookingRow->shipping_type)) { ?>
                         <li><strong>Shipping Type : </strong><?php echo $bookingRow->shipping_type; ?></li>
                     <?php } ?>
@@ -146,10 +149,10 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                                         <td><?= $bookingRow->discount_amt ?></td>
                                     </tr>
                                 <?php } ?>
-                                <!--<tr>
-                                    <td colspan="3" align="right">Shipping and Handing</td>
-                                    <td><?= $bookingRow->shipping_amt ?></td>
-                                </tr>-->
+                                <tr>
+                                    <td colspan="3" align="right">Delivery Charge</td>
+                                    <td><?= ($bookingRow->shipping_amt) ? $bookingRow->shipping_amt : '0' ?></td>
+                                </tr>
                                 <tr>
                                     <td colspan="3" align="right">Grand Total</td>
                                     <td><?= $bookingRow->grand_total ?></td>
@@ -187,7 +190,7 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                             <?php } ?>
                         </li>
                     <?php } else { ?>
-                        <li><strong>Payment Type : </strong>Deposit in Bank</li>
+                        <li><strong>Payment Type : </strong>Cash on Delivery</li>
                     <?php } ?>
                 </ul>
             </div>
