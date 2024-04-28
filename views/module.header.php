@@ -160,7 +160,7 @@ $header .= '
 
                             </ul>
                             <div class="user-details">
-                                <h4>Hello, '.$username.'!</h4>
+                                <h4>Hello, '.$username.'</h4>
 
                               <!--  '.$logbutton.' -->
                             </div>

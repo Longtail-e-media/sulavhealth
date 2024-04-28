@@ -508,6 +508,7 @@ switch ($_POST['action']) {
     case 'remove_wishlist':
 
         $message = '';
+        $default = '';
         $item_id = !empty($_POST['item_id']) ? addslashes($_POST['item_id']) : '';
         if (!empty($item_id)) {
 
@@ -520,6 +521,12 @@ switch ($_POST['action']) {
             if (empty($prods)) {
                 $sql = "DELETE FROM tbl_wishlist WHERE user_id={$userId}";
                 $db->query($sql);
+
+                $default ='<p>You have no order images. Would you like to try from homepage?</p>
+                <a href="dhome" class="theme-btn-2 btn btn-effect-2" title="Homepage"> 
+                &#8592;  &nbsp; Go Home
+                </a>';
+                
             } else {
                 $wishlistObj->data = serialize($prods);
                 $wishlistObj->modified_date = registered();
@@ -530,9 +537,11 @@ switch ($_POST['action']) {
             }
 
             $message = 'Product removed !';
+
+          
         }
 
-        echo json_encode(array('result' => $message));
+        echo json_encode(array('result' => $message , 'defaultmsg' => $default));
 
         break;
 

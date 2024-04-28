@@ -709,6 +709,9 @@ if (defined('SEARCH_PAGE')) {
                                     ' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '
                                 </td>
                                 <td class="cart-product-quantity">
+                                <span>QTY</span
+                                </td>
+                                <td class="cart-product-quantity">
                                     <div class="cart-plus-minus">
                                         <div class="dec qtybutton">-</div>
                                         <input type="text" value="1" min="1" step="1" name="product_qty_1" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $rows['currency'] . ' " readonly>
