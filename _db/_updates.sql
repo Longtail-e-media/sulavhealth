@@ -59,3 +59,10 @@ ALTER TABLE `tbl_location` ADD `delivery_charge` FLOAT NOT NULL AFTER `homepage`
 
 -- 2024-04-24
 ALTER TABLE `tbl_booking_info` ADD `shipping_country` VARCHAR(255) NOT NULL AFTER `person_comment`, ADD `shipping_district` VARCHAR(255) NOT NULL AFTER `shipping_country`, ADD `shipping_city` VARCHAR(255) NOT NULL AFTER `shipping_district`, ADD `shipping_post_code` VARCHAR(255) NOT NULL AFTER `shipping_city`;
+
+
+-- 2024-04-28
+ALTER TABLE `tbl_users` ADD `gender` INT NOT NULL AFTER `email`, ADD `dob` VARCHAR(20) NOT NULL AFTER `gender`, ADD `marital_status` INT(1) NOT NULL AFTER `dob`,
+    ADD `weight` FLOAT NOT NULL AFTER `marital_status`, ADD `height` FLOAT NOT NULL AFTER `weight`, ADD `district` VARCHAR(255) NOT NULL AFTER `height`,
+    ADD `city` VARCHAR(255) NOT NULL AFTER `district`, ADD `postal` VARCHAR(255) NOT NULL AFTER `city`, ADD `blood_group` VARCHAR(255) NOT NULL AFTER `postal`,
+    ADD `Google_maps` TEXT NOT NULL AFTER `blood_group`;
