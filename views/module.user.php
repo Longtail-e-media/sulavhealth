@@ -119,7 +119,7 @@ $jVars[ 'module:user:reset-password-form' ] = $rest_password_form;
 /**
 *      User Account Pages
 */
-$user_banner = $user_nav = $user_dashboard = $user_orders = $user_orders_script = $user_wish_list = $user_profile = '';
+$user_banner = $user_nav = $user_dashboard = $user_orders = $user_dashboard_script =$user_orders_script = $user_wish_list = $user_profile = '';
 
 if ( defined( 'DASHBOARD_PAGE' ) ) {
     $userId = $session->get( 'user_id' );
@@ -154,6 +154,51 @@ if ( defined( 'DASHBOARD_PAGE' ) ) {
 
         $user_dashboard .= '
         <h3 class="mb-50">Dashboard</h3>
+        ';
+        $orders = BookingInfo::find_all_by_user_id( $userId );
+        if ( !empty( $orders ) ) {
+            $user_dashboard .= '
+            <h3 class="mb-50">Orders</h3>
+                <div class="table-responsive">
+                    <table class="table" id="myTable">
+                        <thead>
+                        <tr>
+                            <th>' . ( 'Order' ) . '</th>
+                            <th>' . ( 'Date' ) . '</th>
+                            <th>' . ( 'Total' ) . '</th>
+                            <th>' . ( 'Action' ) . '</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+            ';
+            foreach ( $orders as $k => $order ) {
+                $user_dashboard .= '
+                        <tr>
+                            <td>' . ( $k + 1 ) . '</td>
+                            <td>' . date( 'F d, Y', strtotime( $order->added_date ) ) . '</td>
+                            <td>' . $order->currency . ' ' . $order->pay_amt . '</td>
+                            <td><a href="' . BASE_URL . 'cart/order/' . $order->accesskey . '" target="_blank">' . ( 'View' ) . '</a></td>
+                        </tr>
+                ';
+            }
+            $user_dashboard .= '
+                        </tbody>
+                    </table>
+                </div>
+            ';
+            $user_dashboard_script .= "
+                    <script>
+                        $(document).ready(function () {
+                            $('#myTable').DataTable({
+                                language: {
+                                    url: '" . BASE_URL . "template/web/js/en.json'
+                                }
+                            });
+                        });
+                    </script>
+                ";
+        }
+        $user_dashboard .='
               <!--  <p style="text-transform: capitalize;">Hello, <strong>' . $userRec->first_name . ' ' . $userRec->last_name . '</strong> !</p> -->
                 <p>From your account dashboard you can view your <span>recent orders</span>, manage your <span>address</span>, and <span>edit your password and account details</span>.</p>
           <!--      <a class="theme-btn-1 btn btn-effect-1 add-cart log-out" href="' . BASE_URL . 'logout">Log out</a> -->
@@ -404,5 +449,6 @@ $jVars[ 'module:user:user-nav' ] = $user_nav;
 $jVars[ 'module:user:user-dashboard' ] = $user_dashboard;
 $jVars[ 'module:user:user-orders' ] = $user_orders;
 $jVars[ 'module:user:user-orders-script' ] = $user_orders_script;
+$jVars[ 'module:user:user-dashboard-script' ] = $user_dashboard_script;
 $jVars[ 'module:user:user-wish-list' ] = $user_wish_list;
 $jVars[ 'module:user:user-profile' ] = $user_profile;
