@@ -4,7 +4,7 @@ class User extends DatabaseObject
 {
 
     protected static $table_name = "tbl_users";
-    protected static $db_fields = array('id', 'first_name', 'middle_name', 'last_name', 'contact', 'email', 'optional_email', 'username', 'password', 'accesskey', 'image', 'group_id', 'access_code', 'facebook_uid', 'facebook_accesstoken', 'facebook_tokenexpire', 'sortorder', 'status', 'added_date', 'permission');
+    protected static $db_fields = array('id', 'first_name', 'middle_name', 'last_name', 'contact', 'email','Google_maps','blood_group','postal','city','district','height','weight','gender','dob','marital_status', 'optional_email', 'username', 'password', 'accesskey', 'image', 'group_id', 'access_code', 'facebook_uid', 'facebook_accesstoken', 'facebook_tokenexpire', 'sortorder', 'status', 'added_date', 'permission');
 
     public $id;
     public $first_name;
@@ -13,6 +13,16 @@ class User extends DatabaseObject
     public $contact;
     public $name;
     public $email;
+    public $gender;
+    public $dob;
+    public $marital_status;
+    public $weight;
+    public $height;
+    public $district;
+    public $city;
+    public $postal;
+    public $blood_group;
+    public $Google_maps;
     public $optional_email;
     public $username;
     public $password;

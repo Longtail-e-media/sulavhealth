@@ -204,7 +204,7 @@ $(function () {
     });
 
     // Remove from Wishlist
-    $(document).on('click', 'td.remove-wishlist', function () {
+    $(document).on('click', '#remove-wishlist', function () {
         var _cartId = $(this).attr('data-id'),
             _parent = jQuery(this).parents(".cart-remove");
         $.ajax({
@@ -213,8 +213,10 @@ $(function () {
             url: base_url + "add_cart.php",
             data: "action=remove_wishlist&item_id=" + _cartId,
             success: function (data) {
+                // console.log(msg.defaultmsg);
                 var res = eval(data);
                 _parent.remove();
+                jQuery('div#defaultmsg').html(res.defaultmsg);
             }
         });
         return false;

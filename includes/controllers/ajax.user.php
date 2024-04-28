@@ -266,6 +266,16 @@
             $record->first_name     = $_REQUEST['fname'];
             $record->last_name      = $_REQUEST['lname'];
             $record->email          = $_REQUEST['email'];
+            $record->gender          = $_REQUEST['gender'];
+            $record->dob          = $_REQUEST['dob'];
+            $record->marital_status          = $_REQUEST['marital_status'];
+            $record->weight          = $_REQUEST['weight'];
+            $record->height          = $_REQUEST['height'];
+            $record->district          = $_REQUEST['district'];
+            $record->city          = $_REQUEST['city'];
+            $record->postal_code          = $_REQUEST['postal_code'];
+            $record->blood_group          = $_REQUEST['blood_group'];
+            $record->Google_maps          = $_REQUEST['Google_maps'];
             $record->facebook_uid   = $_REQUEST['address'];
             $record->contact        = $_REQUEST['phone'];
             $record->password       = (!empty($_REQUEST['password'])) ? md5($_REQUEST['password']) : $record->password;

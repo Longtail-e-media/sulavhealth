@@ -283,7 +283,8 @@ if (!empty($wishes)) {
                     }
                 }
                 $user_wish_list .= '
-                    <div class="wishlist-item">
+                <div id="defaultmsg">
+                    <div class="wishlist-item cart-remove">
                         <div class="wishlist-image">
                             <img src="' . $img . '" alt="' . ($productRow->title) . '">
                         </div>
@@ -293,18 +294,19 @@ if (!empty($wishes)) {
                         </div>
                         <div class="wishlist-buttons">
                         <div class="wishlist-actions">
-                            <a href="#" title="ADD TO CART" class="add-to-cart" data-cartid="' . $productRow->slug . '">
+                            <a href="#" title="ADD TO CART" class="add-to-cart add-cart-wishlist" data-cartid="' . $productRow->slug . '">
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>
                         </div>
                         <div class="cart-product-remove remove-wishlist">
                             <a  href="#"
                             title="Delete"
-                            class="remove-from-cart" data-cartid="' . $productRow->slug . '">
+                            class="remove-from-cart remove-wishlist" id="remove-wishlist" data-id="' . $productRow->slug . '">
                                 
                                 <i class="fas fa-trash"></i>
                             </a>
                         </div>
+                    </div>
                     </div>
                     </div>
                 ';
@@ -313,7 +315,7 @@ if (!empty($wishes)) {
     }
 } else {
             $user_wish_list .= '
-            <h3 class="mb-50">Wishlist</h3>
+            
             <p>You have no order images. Would you like to try from homepage?</p>
             <a href="dhome" class="theme-btn-2 btn btn-effect-2" title="Homepage"> 
             &#8592;  &nbsp; Go Home
@@ -325,7 +327,7 @@ if (!empty($wishes)) {
                 </div>
             </div>
         ';
-
+        
         $user_profile .= '
         <h3 class="mb-50">Account Details</h3>
             <p>' . ( 'The following details will be used on the checkout page by default.' ) . '</p>
@@ -357,51 +359,51 @@ if (!empty($wishes)) {
                                         <h6>Gender</h6>
                                         <div class="input-item">
                                             <select class="nice-selec col-12" name="gender" value="gender">
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                            <option value="other">Other</option>
+                                            <option value="0">Male</option>
+                                            <option value="1">Female</option>
+                                            <option value="2">Other</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                     <label>' . ( 'Date of Birth' ) . ':</label>
-                                    <input type="date" name="dob">
+                                    <input type="date" name="dob" value="' . ( ( !empty( $userRec->dob ) ) ? $userRec->dob: '' ) . '">
                                     </div>
 
     <div class="col-md-6">
     <h6>Marital Status</h6>
     <div class="input-item">
     <select class="nice-selec col-12" name="marital_status">
-    <option value="single">Single </option>
-    <option value="married">Married </option>
+    <option value="0">Single </option>
+    <option value="1">Married </option>
 </select>
     </div>
 </div>
     
     <div class="col-md-6">
         <label>' . ( 'Weight' ) . ':</label>
-        <input type="text" name="weight">
+        <input type="text" name="weight" value="' . ( ( !empty( $userRec->weight ) ) ? $userRec->weight : '' ) . '"> 
     </div>
     <div class="col-md-6">
         <label>' . ( 'Height' ) . ':</label>
-        <input type="text" name="height">
+        <input type="text" name="height" value="' . ( ( !empty( $userRec->height ) ) ? $userRec->height : '' ) . '">
     </div>
     <div class="col-md-6">
         <label>' . ( 'District' ) . ':</label>
-        <input type="text" name="district">
+        <input type="text" name="district" value="' . ( ( !empty( $userRec->district ) ) ? $userRec->district : '' ) . '">
     </div>
     <div class="col-md-6">
         <label>' . ( 'City' ) . ':</label>
-        <input type="text" name="city">
+        <input type="text" name="city" value="' . ( ( !empty( $userRec->city ) ) ? $userRec->city : '' ) . '">
     </div>
     <div class="col-md-6">
         <label>' . ( 'Postal Code' ) . ':</label>
-        <input type="text" name="postal_code">
+        <input type="text" name="postal_code" value="' . ( ( !empty( $userRec->postal_code ) ) ? $userRec->postal_code : '' ) . '">
     </div>
     <div class="col-md-6">
         <label>' . ( 'Blood Group' ) . ':</label>
-        <input type="text" name="blood_group">
+        <input type="text" name="blood_group" value="' . ( ( !empty( $userRec->blood_group ) ) ? $userRec->blood_group : '' ) . '">
     </div>
    <!--
     <div class="col-md-12">
@@ -411,7 +413,7 @@ if (!empty($wishes)) {
     -->
     <div class="col-md-12">
     <label for="google-maps-link">Google Maps Link:</label>
-    <input type="text" id="google-maps-link" name="google_maps_link" placeholder="Paste Google Maps link here" oninput="updateMap()">
+    <input type="text" id="google-maps-link" name="Google_maps" placeholder="Paste Google Maps link here" value="' . ( ( !empty( $userRec->Google_maps ) ) ? $userRec->Google_maps : '' ) . '" oninput="updateMap()">
     <div id="map-preview" style="display: none;">
         <iframe id="google-maps-iframe" src="" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
