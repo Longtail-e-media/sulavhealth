@@ -43,10 +43,11 @@ class BookingInfo extends DatabaseObject
         return self::find_by_sql("SELECT * FROM " . self::$table_name . " ORDER BY sortorder DESC");
     }
 
-    public static function find_all_by_user_id($u_id = '')
+    public static function find_all_by_user_id($u_id = '', $limit = '')
     {
         global $db;
-        return self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE user_id={$u_id} ORDER BY sortorder DESC");
+        $cond = (!empty($limit)) ? " LIMIT {$limit} " : '';
+        return self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE user_id={$u_id} ORDER BY sortorder DESC {$cond}");
     }
 
     //Find a single row in the database where id is provided.

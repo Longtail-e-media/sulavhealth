@@ -189,8 +189,9 @@ if (defined('CART_PAGE')) {
                     </tr>
                     </tbody>
                 </table>
+                <p class="mt-20 alert alert-danger" style="display: none;" id="checkoutMsg"></p>
                 <div class="btn-wrapper text-right">
-                    <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1">' . ("Proceed to checkout") . '</a>
+                    <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1" id="proceedToCheckout">' . ("Proceed to checkout") . '</a>
                 </div>
             </div>
         ';

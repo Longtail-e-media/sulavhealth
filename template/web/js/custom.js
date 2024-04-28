@@ -309,6 +309,19 @@ $(function () {
         return false;
     });
 
+    $(document).on('click', '#proceedToCheckout', function (e) {
+        e.preventDefault();
+        if ($('.cart-remove').length < 1) {
+            var msg = "No Items in Cart. Please add Items!";
+            $('#checkoutMsg')
+                .html(msg)
+                .css('display', 'block')
+                .fadeOut(8000);
+        } else {
+            window.location.href = base_url + 'checkout';
+        }
+    })
+
     $(document).on("keyup", "#brandFilterMenuSection", function () {
         var value = $(this).val().toLowerCase();
         $(".brand-filter-menu").filter(function () {

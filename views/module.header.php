@@ -2,8 +2,8 @@
 
 $headera = '';
 $header = '';
-$brandmenu='';
-$checkout='';
+$brandmenu = '';
+$checkout = '';
 
 $current_url = pathinfo($_SERVER["PHP_SELF"]);
 $fileName = $current_url['filename'];
@@ -81,35 +81,33 @@ if (!empty($sesRec)) {
     }
 }
 $userId = $session->get("user_id");
-if(!empty($userId)){
-$userRec = User::find_by_id($userId);
+if (!empty($userId)) {
+    $userRec = User::find_by_id($userId);
 // pr($userRec);
 
-$username= 	''.$userRec->first_name.',';
-$logbutton=' <li><a href="'.BASE_URL.'dashboard" id="id_my_account">My Account</a></li>
-            <li><a href="'.BASE_URL.'logout" id="id_my_account">Log Out</a></li>';
+    $username = '' . $userRec->first_name . '!';
+    $logbutton = ' <li><a href="' . BASE_URL . 'dashboard" id="id_my_account">My Account</a></li>
+            <li><a href="' . BASE_URL . 'logout" id="id_my_account">Log Out</a></li>';
+} else {
+    $username = 'Guest !';
+    $logbutton = '
+    <li><a href="' . BASE_URL . 'login" id="id_sign_in">Log in</a></li>
+    <li><a href="' . BASE_URL . 'register" id="id_register">Register</a></li>';
 }
-else{
-    $username= 	'Guest !';
-    $logbutton='
-    <li><a href="'.BASE_URL.'login" id="id_sign_in">Log in</a></li>
-    <li><a href="'.BASE_URL.'register" id="id_register">Register</a></li>';
-}
-$brands= Brand:: get_brand();
+$brands = Brand:: get_brand();
 $brandmenu .= '<div class="brand-filter search-container p-2">
 <input type="search" placeholder="Filter Brands" class="search search-input search-input" name="brandFilterMenuSection" id="brandFilterMenuSection" autocomplete="off">
 <i class="fas fa-search search-icon"></i>
 </div>';
 // pr($brands);
-foreach($brands as $brand){
-    $brandmenu .='<a class="dropdown-item brand-filter-menu" href="'.BASE_URL.'search/'.$brand->slug.'" item="'.$brand->title.'">'.$brand->title.'</a>';
+foreach ($brands as $brand) {
+    $brandmenu .= '<a class="dropdown-item brand-filter-menu" href="' . BASE_URL . 'search/' . $brand->slug . '" item="' . $brand->title . '">' . $brand->title . '</a>';
 }
 if ((defined('CHECKOUT_PAGE')) || (defined('CART_PAGE')) || defined('DASHBOARD_PAGE')) {
 
-    $checkout='';
-}
-else{
-    $checkout='<div class="mini-cart-icon">
+    $checkout = '';
+} else {
+    $checkout = '<div class="mini-cart-icon">
     <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
         <!-- <i class="icon-shopping-cart"></i> -->
 
@@ -136,7 +134,7 @@ $header .= '
 
                     <div class="ltn__header-options ltn__header-options-2">
                         <div class="ltn__drop-menu user-menu">
-                            <form id="searchform" method="POST" action="'.BASE_URL.'search">
+                            <form id="searchform" method="POST" action="' . BASE_URL . 'search">
                             <div class="search-container">
                                 <input type="search" placeholder="Search for products and medicines..." class="search" id="searchkey" name="searchkey">
                                 <i class="fas fa-search search-icon"></i>
@@ -154,20 +152,20 @@ $header .= '
                                     <img src=\'https://s3-alpha-sig.figma.com/img/394e/8c83/fae8707eee905756e1bd5fe16b21d16a?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwCGjHcpOvB2PLWdnJUVS8Imesl7BtnErPjdLIPoCgtEkk51ly3tVQZgVZydpe1JcSNLXjXUT8T1VwaRtQpwMBdYYoXUNN8YaCojXzdhj1RkiLtTpLEONCfWlEsPJUQrmFr4xquASUEfZnrzCV3p3E-SBbakXlslM85SQN~1k-SjBBkrpmmEZuwFUQ-PdkashE4qjzC1TWjtwmgaPYGV0XigepLPwVrQ1vkcLOtQ3T3dcwt3uPOkSNyEeaUsz-IrX7pf8ZDK4I9K-SZp4DH4RHYAp3s3C3Z-lnsTJtTUBMYvk3DjPziAFvmpvZFRnEKSsjqKWqoRma7qFhCxc-u-Uw__\'
                                         alt="" class="user-icon">
                                     <ul>
-                                        '.$logbutton.'
+                                        ' . $logbutton . '
                                     </ul>
                                 </li>
 
                             </ul>
                             <div class="user-details">
-                                <h4>Hello, '.$username.'</h4>
+                                <h4>Hello, ' . $username . '</h4>
 
-                              <!--  '.$logbutton.' -->
+                              <!--  ' . $logbutton . ' -->
                             </div>
 
                         </div>
                         <!-- mini-cart -->
-                        '.$checkout.'
+                        ' . $checkout . '
                         <!-- mini-cart -->
                         <!-- Mobile Menu Button -->
                         <div class="mobile-menu-toggle d-xl-none">
@@ -201,7 +199,7 @@ $header .= '
                                     Brands &nbsp; &nbsp;
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    '.$brandmenu.'
+                                    ' . $brandmenu . '
                                 </div>
                             </div>
                             ' . $jVars['module:menu:main-menu'] . '
