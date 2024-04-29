@@ -28,9 +28,9 @@ $footer .= '
                             <h4 class="footer-title">Address</h4>
                             <div class="footer-menu">
                                 <ul>
-                                    <li><a href="'.$configRec->mail_address.'" target="_blank">'.$configRec->fiscal_address.'</a>
+                                    <li><a href="' . $configRec->mail_address . '" target="_blank">' . $configRec->fiscal_address . '</a>
                                     </li>
-                                    <li><a href="'.$configRec->mail_address.'" target="_blank"><i
+                                    <li><a href="' . $configRec->mail_address . '" target="_blank"><i
                                                 class="fas fa-map-marker-alt mr-2"></i>View google
                                             map</a>
                                     </li>
@@ -91,13 +91,13 @@ $footer .= '
                         </ul>
 
                         <img style="height:30px; object-fit: contain;"
-                            src="https://s3-alpha-sig.figma.com/img/5070/586c/c585ea14d42071c8e8a6499d919515bd?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Atj2nhvfWL9iXQYRraWpImixg~nRtFxxmeRmSHYyv~TTSTEWM8rF44fo6WbXtu3w~FEVjpdPx28-GczuRSeSSNHDAFB48o7UYLsc69Q1DC9YfGjh-7BdPKtgX12N-44440UD-VLnd4Tfi~jpv3q~sTaaUtvsmIXcLWTX3FJc0DivGCkPzzRcHxDcpOWNzg8BuWCyQKmy6EJcsG5stqqj2IdrIKYkztZpmls3CG3vA8GreXETnVgT7yEQo8j4~LT83JqXD8DjnzmQnYjxwlJQNMVvcKjxbyrlSsjszRWlFMMYvMOpW~75uaEardcMjJJHaDymi78C8X6h1cls0yU5oQ__"
+                            src="' . BASE_URL . 'template/web/img/payment-footer.png"
                             alt="Payment Image">
                     </div>
                 </div>
 
                 <p style="font-size: 0.8em; padding: 5px 0;">
-                    '.strip_tags($configRec->breif).'
+                    ' . strip_tags($configRec->breif) . '
                 </p>
                 <p style="font-size: 0.8em;">&copy; ' . str_replace('{year}', date('Y'), $configRec->copyright) . '| Website
                 by <a style="font-size: 1em;" href="https://longtail.info/">Longtail e-media</a></p>
