@@ -120,7 +120,7 @@ switch ($_POST['action']) {
             }
             $content = '
                 <div class="modal-product-img">
-                    <img src="' . $img . '" alt="' .  $pkgRow->title . '">
+                    <img src="' . $img . '" alt="' . $pkgRow->title . '">
                 </div>
                 <div class="modal-product-info">
                     <h5>' . $pkgRow->title . '</h5>
@@ -143,7 +143,7 @@ switch ($_POST['action']) {
         $tot = 0.00;
         $total = 'NPR 0.00';
         $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
-        $totaldiv ='';
+        $totaldiv = '';
 
         if (!empty($sesRec)) {
             foreach ($sesRec as $k => $sesRow) {
@@ -192,22 +192,22 @@ switch ($_POST['action']) {
         }
 
 
-        if($tot > 0){
+        if ($tot > 0) {
             $totaldiv = '
             <div class="mini-cart-sub-total">
             <h5>Subtotal: <span class="sub-total-mini-cart">' . $total . '</span></h5>
         </div>
         <div class="btn-wrapper">
-            <a href="'.BASE_URL.'cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-            <a href="'.BASE_URL.'checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+            <a href="' . BASE_URL . 'cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+            <a href="' . BASE_URL . 'checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
         </div>';
-            }else{
-                $totaldiv = '               
+        } else {
+            $totaldiv = '               
                 <div class="mini-cart-item clearfix">
                     <h6>No Items in Cart</h6>
                 </div>';
-                
-            }
+
+        }
         echo json_encode(array('result' => $res, 'sub_total' => $totaldiv));
 
         break;
@@ -216,8 +216,8 @@ switch ($_POST['action']) {
 
         $message = '';
         $total = count($_SESSION['cart_detail']);
-        $totaldiv ='';
-        
+        $totaldiv = '';
+
         $item_id = !empty($_POST['item_id']) ? addslashes($_POST['item_id']) : '';
         if (!empty($item_id)) {
             unset($_SESSION['cart_detail'][$item_id]);
@@ -243,20 +243,20 @@ switch ($_POST['action']) {
             }
         }
 
-        if($tot > 0){
+        if ($tot > 0) {
             $totaldiv = '
             <div class="mini-cart-sub-total">
                 <h5>Subtotal: <span class="sub-total-mini-cart">' . $total . '</span></h5>
             </div>
             <div class="btn-wrapper">
-                <a href="'.BASE_URL.'cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                <a href="'.BASE_URL.'checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                <a href="' . BASE_URL . 'cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                <a href="' . BASE_URL . 'checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
             </div>';
-        }else{
+        } else {
             $totaldiv = '               
             <div class="mini-cart-item clearfix">
                 <h6>No Items in Cart</h6>
-            </div>';            
+            </div>';
         }
 
         echo json_encode(array('result' => $message, 'no_cart' => $total, 'sub_total' => $totaldiv));
@@ -339,7 +339,7 @@ switch ($_POST['action']) {
                     }
                 }
             } else {
-                $record = New WishList();
+                $record = new WishList();
                 $record->user_id = $userId;
                 $record->data = serialize($product_slug);
                 $record->added_date = registered();
@@ -488,7 +488,7 @@ switch ($_POST['action']) {
             }
             $content = '
                 <div class="modal-product-img">
-                    <img src="' . $img . '" alt="' .  $pkgRow->title . '">
+                    <img src="' . $img . '" alt="' . $pkgRow->title . '">
                 </div>
                 <div class="modal-product-info">
                     <h5>' . $pkgRow->title . '</h5>
@@ -509,7 +509,7 @@ switch ($_POST['action']) {
 
         $message = '';
         $default = '';
-        $item_id = !empty($_POST['item_id']) ? addslashes($_POST['item_id']) : '';
+        $item_id = !empty($_POST['item_id']) ? ($_POST['item_id']) : '';
         if (!empty($item_id)) {
 
             $userId = $session->get("user_id");
@@ -522,11 +522,11 @@ switch ($_POST['action']) {
                 $sql = "DELETE FROM tbl_wishlist WHERE user_id={$userId}";
                 $db->query($sql);
 
-                $default ='<p>You have no order images. Would you like to try from homepage?</p>
+                $default = '<p>You have no order images. Would you like to try from homepage?</p>
                 <a href="dhome" class="theme-btn-2 btn btn-effect-2" title="Homepage"> 
                 &#8592;  &nbsp; Go Home
                 </a>';
-                
+
             } else {
                 $wishlistObj->data = serialize($prods);
                 $wishlistObj->modified_date = registered();
@@ -537,11 +537,9 @@ switch ($_POST['action']) {
             }
 
             $message = 'Product removed !';
-
-          
         }
 
-        echo json_encode(array('result' => $message , 'defaultmsg' => $default));
+        echo json_encode(array('result' => $message, 'defaultmsg' => $default));
 
         break;
 
