@@ -215,7 +215,7 @@
                                 </div>
                                 <div class="col-lg-10">
                                     <div class="tab-content">
-                                        
+
                                         <div class="tab-pane fade active show" id="liton_tab_1_1">
                                             <div class="ltn__myaccount-tab-content-inner">
                                                 <jcms:module:user:user-dashboard/>
@@ -331,6 +331,7 @@
                 email: {required: !0, email: !0},
                 address: {required: !0},
                 phone: {required: !0},
+                dob: {required: !0},
                 // password: {required: !0},
                 confirm_password: {equalTo: "#password"}
             },
@@ -343,6 +344,7 @@
                 },
                 address: {required: "Enter your Address"},
                 phone: {required: "Enter your Phone Number"},
+                dob: {required: "Enter your DOB"},
                 // password: {required: "Enter your Password"},
                 confirm_password: {equalTo: "Password Mismatch !"}
             },
@@ -382,27 +384,27 @@
             }
         })
 
-if (window.location.hash === "#wishlist") {
+        if (window.location.hash === "#wishlist") {
             $('a[href="#liton_tab_1_3"]').tab('show');
         }
 
     });
-    
+
 </script>
 
 <script>
-  function updateMap() {
-    var mapLink = document.getElementById('google-maps-link').value;
-    var mapIframe = document.getElementById('google-maps-iframe');
+    function updateMap() {
+        var mapLink = document.getElementById('google-maps-link').value;
+        var mapIframe = document.getElementById('google-maps-iframe');
 
-    if (mapLink.trim() !== "") {
-        mapIframe.src = mapLink;
-        document.getElementById('map-preview').style.display = 'block';
-    } else {
-        mapIframe.src = '';
-        document.getElementById('map-preview').style.display = 'none';
+        if (mapLink.trim() !== "") {
+            mapIframe.src = mapLink;
+            document.getElementById('map-preview').style.display = 'block';
+        } else {
+            mapIframe.src = '';
+            document.getElementById('map-preview').style.display = 'none';
+        }
     }
-}
 </script>
 
 

@@ -261,6 +261,7 @@ if (defined('DASHBOARD_PAGE')) {
     <div class="shoping-cart-inner">
         <div class="shoping-cart-table table-responsive">
             <div class="wishlist-container">
+                <div id="defaultmsg"></div>
 ';
 
         $wishes = WishList::find_by_user_id($userId);
@@ -283,33 +284,31 @@ if (defined('DASHBOARD_PAGE')) {
                             }
                         }
                         $user_wish_list .= '
-                <div id="defaultmsg">
-                    <div class="wishlist-item cart-remove">
-                        <div class="wishlist-image">
-                            <img src="' . $img . '" alt="' . ($productRow->title) . '">
-                        </div>
-                        <div class="wishlist-info">
-                            <h4><a href="' . BASE_URL . 'product/productdetails/' . $productRow->slug . '" target="_blank">' . ($productRow->title) . '</a></h4>
-                            <p>' . ($productRow->brief) . '</p>
-                        </div>
-                        <div class="wishlist-buttons">
-                        <div class="wishlist-actions">
-                            <a href="#" title="ADD TO CART" class="add-to-cart add-cart-wishlist" data-cartid="' . $productRow->slug . '">
+                
+                        <div class="wishlist-item cart-remove">
+                            <div class="wishlist-image">
+                                <img src="' . $img . '" alt="' . ($productRow->title) . '">
+                            </div>
+                            <div class="wishlist-info">
+                                <h4><a href="' . BASE_URL . 'product/productdetails/' . $productRow->slug . '" target="_blank">' . ($productRow->title) . '</a></h4>
+                                <p>' . ($productRow->brief) . '</p>
+                            </div>
+                            <div class="wishlist-buttons">
+                                <div class="wishlist-actions">
+                                    <a href="#" title="ADD TO CART" class="add-to-cart add-cart-wishlist" data-cartid="' . $productRow->slug . '">
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>
+                                </div>
+                                <div class="cart-product-remove remove-wishlist">
+                                    <a  href="#"
+                                    title="Delete"
+                                    class="remove-from-cart remove-wishlist" id="remove-wishlist" data-id="' . $productRow->slug . '">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="cart-product-remove remove-wishlist">
-                            <a  href="#"
-                            title="Delete"
-                            class="remove-from-cart remove-wishlist" id="remove-wishlist" data-id="' . $productRow->slug . '">
-                                
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </div>
-                    </div>
-                    </div>
-                    </div>
-                ';
+                        ';
                     }
                 }
             }
@@ -399,7 +398,7 @@ if (defined('DASHBOARD_PAGE')) {
     </div>
     <div class="col-md-6">
         <label>' . ('Postal Code') . ':</label>
-        <input type="text" name="postal_code" value="' . ((!empty($userRec->postal_code)) ? $userRec->postal_code : '') . '">
+        <input type="text" name="postal_code" value="' . ((!empty($userRec->postal)) ? $userRec->postal : '') . '">
     </div>
     <div class="col-md-6">
         <label>' . ('Blood Group') . ':</label>
