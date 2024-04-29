@@ -110,22 +110,15 @@ if ((defined('CHECKOUT_PAGE')) || (defined('CART_PAGE')) || defined('DASHBOARD_P
     $checkout = '<div class="mini-cart-icon">
     <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
         <!-- <i class="icon-shopping-cart"></i> -->
-
         <img class="user-cart"
-            src=\'https://s3-alpha-sig.figma.com/img/c361/18d1/72c572f3ba37b1c66353beb70ba9ab29?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GXQ~o3b6CSqjbJ1vyOZARvZQFMhGQ4r~QwuDb1urO8P0xZ~7ynbzdK0FngppL4YlTjRKeBBEXXTjZT9absRyD~gZzpAfIkWO-3OJFXiODrPg7tQQjgcshLgbWlm9cuo1y9DlHBf94udgdLH84HpTqz26uk6pQknl9l5TNmN6HMhkY0DXljFBPjSXNxrFB~eU3K9Z3tOnbiANK34aZ9iUlhQuHyh6VDZCZjdXfcJuuiW7IJzfszJ0yP1G9U1b92WaKYDBaU462q9fH8aKdXiCcKl8iT6kR~Jlg5Xcb736x8cvGV~-AVj4meH4Y0-cgg0M1ANa1RZ~ubp5Dz6jwpNjHw__\'
-            alt="">
+            src="' . BASE_URL . 'template/web/img/cart-header.png"
+            alt="Cart">
         <sup class="cart-total">' . $crtot . '</sup>
     </a>
 </div>';
 }
 // pr($_POST);
 $header .= '
-
-
-
-                                        
-                                             
-
                                     </div>
                                 </li>
                             </ul>
@@ -149,8 +142,8 @@ $header .= '
                             <ul>
                                 <li>
                                     <!-- <i class="icon-user"></i> -->
-                                    <img src=\'https://s3-alpha-sig.figma.com/img/394e/8c83/fae8707eee905756e1bd5fe16b21d16a?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hwCGjHcpOvB2PLWdnJUVS8Imesl7BtnErPjdLIPoCgtEkk51ly3tVQZgVZydpe1JcSNLXjXUT8T1VwaRtQpwMBdYYoXUNN8YaCojXzdhj1RkiLtTpLEONCfWlEsPJUQrmFr4xquASUEfZnrzCV3p3E-SBbakXlslM85SQN~1k-SjBBkrpmmEZuwFUQ-PdkashE4qjzC1TWjtwmgaPYGV0XigepLPwVrQ1vkcLOtQ3T3dcwt3uPOkSNyEeaUsz-IrX7pf8ZDK4I9K-SZp4DH4RHYAp3s3C3Z-lnsTJtTUBMYvk3DjPziAFvmpvZFRnEKSsjqKWqoRma7qFhCxc-u-Uw__\'
-                                        alt="" class="user-icon">
+                                    <img src="' . BASE_URL . 'template/web/img/user-header.png"
+                                        alt="User" class="user-icon">
                                     <ul>
                                         ' . $logbutton . '
                                     </ul>
