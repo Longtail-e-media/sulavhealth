@@ -367,7 +367,7 @@ switch ($_POST['action']) {
                             <h5>' . $pkgRow->title . '</h5>
                             <p class="added-cart"><i class="fa fa-check-circle"></i> ' . 'Successfully added to your Wishlist' . '</p>
                             <div class="btn-wrapper">
-                                <a href="' . BASE_URL . 'dashboard" class="theme-btn-1 btn btn-effect-1">' . 'View Wishlist' . '</a>
+                                <a href="' . BASE_URL . 'dashboard#wishlist" class="theme-btn-1 btn btn-effect-1">' . 'View Wishlist' . '</a>
                             </div>
                         </div>
                     ';
