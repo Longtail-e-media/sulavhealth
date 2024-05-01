@@ -138,12 +138,14 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     $listofitem .= '(' . $total . ' items found)';
     if ($total > 0) {
         while ($rows = $db->fetch_array($res)) {
+            // pr($rows);
+            
             // if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {
             // $rating = Package::get_avg_rating($rows['id']);
             // $days = ($rows['days'] == 1) ? 'day' : 'days';
 
             $price_text = '';
-            if (!empty($rows['price']) and (empty($rows['offer_price']))) {
+            if (!empty($rows['price1']) and (empty($rows['offer_price']))) {
                 $price_text = '<span>' . $rows['currency'] . '' . $rows['price1'] . '</span>';
             }
             if (!empty($rows['discount1'])) {
@@ -264,6 +266,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                     }
                 }
             }
+          
             $home_gift_sets_modal .= '
                                                         </div>
                                                     </div>
@@ -293,6 +296,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 $home_gift_sets_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
             }
             $prodPrice = (!empty($rows['discount1']) and $rows['discount1'] > 0) ? $rows['discount1'] : $rows['price1'];
+           
             $home_gift_sets_modal .= '<input type="hidden" name="product_qnt_1" value="' . $rows['qnt1'] . '">
                                         <input type="hidden" name="product_net_qnt_1" value="' . $rows['netqnt1'] . '">
                                         <label class="form-check-label">' . $rows['netqnt1'] . '</label>
