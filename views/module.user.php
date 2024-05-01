@@ -262,6 +262,7 @@ if (defined('DASHBOARD_PAGE')) {
         <div class="shoping-cart-table table-responsive">
             <div class="wishlist-container">
                 <div id="defaultmsg"></div>
+                <div id="defaultmsgadd"></div>
 ';
 
         $wishes = WishList::find_by_user_id($userId);

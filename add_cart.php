@@ -140,6 +140,7 @@ switch ($_POST['action']) {
     case 'list_cart':
 
         $res = '';
+        $default = '';
         $tot = 0.00;
         $total = 'NPR 0.00';
         $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
@@ -182,8 +183,13 @@ switch ($_POST['action']) {
 
 
                 }
+               
             }
         } else {
+            $default = '<p>You have no order images. Would you like to try from homepage?</p>
+                    <a href="dhome" class="theme-btn-2 btn btn-effect-2" title="Homepage"> 
+                    &#8592;  &nbsp; Go Home
+                    </a>';
             $res .= '
                 <div class="mini-cart-item clearfix">
                     <h6>Select your products and add to your shopping cart !</h6>
@@ -202,13 +208,18 @@ switch ($_POST['action']) {
             <a href="' . BASE_URL . 'checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
         </div>';
         } else {
+            $default = '<p>You have no order images. Would you like to try from homepage?</p>
+                    <a href="dhome" class="theme-btn-2 btn btn-effect-2" title="Homepage"> 
+                    &#8592;  &nbsp; Go Home
+                    </a>';
+            
             $totaldiv = '               
                 <div class="mini-cart-item clearfix">
                     <h6>No Items in Cart</h6>
                 </div>';
 
         }
-        echo json_encode(array('result' => $res, 'sub_total' => $totaldiv));
+        echo json_encode(array('result' => $res, 'defaultmsg'=>$default, 'sub_total' => $totaldiv));
 
         break;
 
@@ -246,7 +257,7 @@ switch ($_POST['action']) {
         if ($tot > 0) {
             $totaldiv = '
             <div class="mini-cart-sub-total">
-                <h5>Subtotal: <span class="sub-total-mini-cart">' . $total . '</span></h5>
+                <h5>Subtotal: <span class="sub-total-mini-cart">' . $sub_total . '</span></h5>
             </div>
             <div class="btn-wrapper">
                 <a href="' . BASE_URL . 'cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
@@ -393,6 +404,7 @@ switch ($_POST['action']) {
         $pkgRow = Subproduct::find_by_slug($item_slug);
         $total = 0;
         $message = '';
+        $defaultadd ='';
 
         if (!empty($pkgRow)) {
             if (isset($_SESSION['cart_detail'])) {
@@ -463,7 +475,12 @@ switch ($_POST['action']) {
 
             if (empty($prods)) {
                 $sql = "DELETE FROM tbl_wishlist WHERE user_id={$userId}";
+                
                 $db->query($sql);
+                $defaultadd = '<p>You have no order images. Would you like to try from homepage?</p>
+                    <a href="dhome" class="theme-btn-2 btn btn-effect-2" title="Homepage"> 
+                    &#8592;  &nbsp; Go Home
+                    </a>';
             } else {
                 $wishes->data = serialize($prods);
                 $wishes->modified_date = registered();
@@ -501,7 +518,7 @@ switch ($_POST['action']) {
             ';
         }
 
-        echo json_encode(array('result' => $message, 'no_cart' => $total, 'content' => $content));
+        echo json_encode(array('result' => $message, 'no_cart' => $total, 'defaultmsgadd' => $defaultadd, 'content' => $content));
 
         break;
 

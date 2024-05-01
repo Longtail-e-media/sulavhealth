@@ -183,7 +183,8 @@ $(function () {
                 $("sup.cart-total").html(res.no_cart);
                 $(".add_to_cart_modal_content").html(res.content);
                 $("#add_to_cart_modal").modal();
-                $this.parent().parent().remove();
+                $("div#defaultmsgadd").html(res.defaultmsgadd);
+                $this.parent().parent().parent().remove();
                 $.ajax({
                     type: "POST",
                     dataType: "JSON",
@@ -206,7 +207,7 @@ $(function () {
     // Remove from Wishlist
     $(document).on('click', '#remove-wishlist', function () {
         var _cartId = $(this).attr('data-id'),
-            _parent = jQuery(this).parents(".cart-remove");
+            _parent = jQuery(this).parent().parent().parent();
         $.ajax({
             type: "POST",
             dataType: "JSON",
@@ -276,6 +277,7 @@ $(function () {
     }
 
     $(document).on('click', 'td.remove-cart', function () {
+       
         var _cartId = $(this).attr('data-id'),
             _cartLabel = $(this).attr('data-label'),
             _parent = jQuery(this).parents(".cart-remove"),
@@ -290,6 +292,7 @@ $(function () {
                 $("sup.cart-total").html(res.no_cart);
                 _parent.remove();
                 $("td.sub-total-cart").html(res.sub_total);
+            
                 $.ajax({
                     type: "POST",
                     dataType: "JSON",
@@ -311,7 +314,8 @@ $(function () {
 
     $(document).on('click', '#proceedToCheckout', function (e) {
         e.preventDefault();
-        if ($('.cart-remove').length < 1) {
+        
+        if ($(document).find('.cart-remove').length < 1) {
             var msg = "No Items in Cart. Please add Items!";
             $('#checkoutMsg')
                 .html(msg)

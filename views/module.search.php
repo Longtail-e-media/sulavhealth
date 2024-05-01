@@ -571,10 +571,10 @@ if (defined('SEARCH_PAGE')) {
             $prodbrand = Brand::find_by_id($rows['brand']);
             $prodservice = Services::find_by_id($rows['service_id']);
             if (!empty($prodbrand)) {
-                $title = $prodbrand->title;
+                $titlebrand = $prodbrand->title;
                 $slug = $prodbrand->slug;
             } else {
-                $title = '';
+                $titlebrand = '';
                 $slug = '';
             }
             if (!empty($prodservice)) {
@@ -590,7 +590,7 @@ if (defined('SEARCH_PAGE')) {
                             <img src="' . $img . '" alt="' . $rows['title'] . '">
                         </div></a>
                         <div class="product-info">
-                            <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
+                            <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $titlebrand . '</a></h4>
                             <a href="' . $slugs . '" class="product-link">' . $rows['title'] . '</a>
                             <div class="product-price">
                                 ' . $price_text . '
@@ -672,7 +672,7 @@ if (defined('SEARCH_PAGE')) {
                                                 </div>
                                                 <div class="col-lg-7 col-12">
                                                     <div class="modal-product-info">
-                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
+                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $titlebrand . '</a></h4>
                                                     <h3>' . (($lang == "gr") ? $rows['title_greek'] : $rows['title']) . '</h3>
                                                         ' . (($lang == "gr") ? $rows['brief_greek'] : $rows['brief']) . '
                                                         <br/>
