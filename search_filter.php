@@ -3,6 +3,7 @@ require_once("includes/initialize.php");
 // require_once("views/common_language.php");
 
 $result = $navigation = $home_gift_sets_modal = $home_gift_sets_script = $listofitem = '';
+$serachtitle = 'List of Products';
 if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     $lang = !empty($session->get('lang_type')) ? $session->get('lang_type') : 'gr';
     foreach ($_POST as $key => $val) {
@@ -59,8 +60,9 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             }
         }
     }
-    if (@$gservice_slug) {
-        $ser = Services::find_by_slug($gservice_slug);
+    if (@$service_slug) {
+        $ser = Services::find_by_slug($service_slug);
+        $serachtitle = $ser->title;
         $sql .= " AND prod.service_id = $ser->id ";
     }
     if (@$qcategory[0] != 'all' and !empty($qcategory)) {
@@ -78,8 +80,9 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             }
         }
     }
-    if (@$gcategory_slug) {
-        $cate = Destination::find_by_slug($gcategory_slug);
+    if (@$category_slug) {
+        $cate = Destination::find_by_slug($category_slug);
+        $serachtitle = $cate->title;
         $sql .= " AND prod.Category = $cate->id ";
     }
     if (@$qsubcategory[0] != 'all' and !empty($qsubcategory)) {
@@ -97,8 +100,9 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             }
         }
     }
-    if (@$gsubcategory_slug) {
-        $subcate = Destination::find_by_slug($gsubcategory_slug);
+    if (@$subcategory_slug) {
+        $subcate = Destination::find_by_slug($subcategory_slug);
+        $serachtitle = $subcate->title;
         $sql .= " AND prod.Subcategory = $subcate->id ";
     }
     if (@$qbrand[0] != 'all' and !empty($qbrand)) {
@@ -116,8 +120,9 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             }
         }
     }
-    if (@$gbrand_slug) {
-        $bran = Activities::find_by_slug($gbrand_slug);
+    if (@$brand_slug) {
+        $bran = Activities::find_by_slug($brand_slug);
+        $serachtitle = $bran->title;
         $sql .= " AND prod.brand = $bran->id ";
     }
     if (!empty($glprice) and !empty($ghprice)) {
@@ -387,7 +392,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     $home_gift_sets_script = str_replace(array("\r", "\n"), '', $home_gift_sets_script);
 
 
-    echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" => $home_gift_sets_script, "itemlist" => $listofitem, "nav" => $navigation));
+    echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" => $home_gift_sets_script, "itemlist" => $listofitem, "serachtitle"=>$serachtitle, "nav" => $navigation));
 }
 
 ?>
