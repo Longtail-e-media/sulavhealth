@@ -142,9 +142,10 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
 
     $listofitem .= '(' . $total . ' items found)';
     if ($total > 0) {
+        $i = 1;
         while ($rows = $db->fetch_array($res)) {
             // pr($rows);
-            
+
             // if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {
             // $rating = Package::get_avg_rating($rows['id']);
             // $days = ($rows['days'] == 1) ? 'day' : 'days';
@@ -197,7 +198,12 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 $slugs = '' . BASE_URL . 'product/product-detail/' . $rows['slug'] . '';;
             }
 
-
+            // for top part (opening)
+            if ($i % 3 == 1) {
+                $result .= '
+                    <div class="lazy"><!--
+                ';
+            }
             $result .= '<div class="col-xl-3 col-sm-6 col-6">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
                   <a href="' . BASE_URL . 'product/productdetails/' . $rows['slug'] . '" class="product-link">  <div class="product-img product_hove" data-href="' . BASE_URL . 'product/' . $rows['slug'] . '">
@@ -223,6 +229,13 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                     </div>
                 </div>
                 </div>';
+            // for bottom part (closing)
+            if ($i % 3 == 0 or $i == $total) {
+                $result .= ' 
+                    --></div>
+                ';
+            }
+            $i++;
 
 
             // }
@@ -271,7 +284,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                     }
                 }
             }
-          
+
             $home_gift_sets_modal .= '
                                                         </div>
                                                     </div>
@@ -301,7 +314,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 $home_gift_sets_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
             }
             $prodPrice = (!empty($rows['discount1']) and $rows['discount1'] > 0) ? $rows['discount1'] : $rows['price1'];
-           
+
             $home_gift_sets_modal .= '<input type="hidden" name="product_qnt_1" value="' . $rows['qnt1'] . '">
                                         <input type="hidden" name="product_net_qnt_1" value="' . $rows['netqnt1'] . '">
                                         <label class="form-check-label">' . $rows['netqnt1'] . '</label>
@@ -392,7 +405,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     $home_gift_sets_script = str_replace(array("\r", "\n"), '', $home_gift_sets_script);
 
 
-    echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" => $home_gift_sets_script, "itemlist" => $listofitem, "serachtitle"=>$serachtitle, "nav" => $navigation));
+    echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" => $home_gift_sets_script, "itemlist" => $listofitem, "serachtitle" => $serachtitle, "nav" => $navigation));
 }
 
 ?>

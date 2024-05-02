@@ -25,7 +25,6 @@
 
 
 </head>
-</style>
 
 <body class="<jcms:site:language-class/>">
 
@@ -182,6 +181,7 @@
                     jQuery('div#productContainer').html(msg.result);
                     jQuery('div#productpopup').html(msg.popup);
                     jQuery('div#productscript').html(msg.popscript);
+                    $(document).find('.lazy').lazyload();
                 }
             });
         }
@@ -267,6 +267,7 @@
 <script src="js/plugins.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/jquery.validate.min.js"></script>
+<script src="js/jquery.lazyload.min.js"></script>
 <!-- Main JS -->
 <script src="js/main.js"></script>
 
@@ -312,6 +313,7 @@
                 jQuery('div#productscript').html(msg.popscript);
                 jQuery('div#totalitems').html(msg.itemlist);
                 jQuery('div#searchtitle').html(msg.serachtitle);
+                $(document).find('.lazy').lazyload();
                 // jQuery('label#totalitems').html('');
                 // jQuery('label#totalitems').html(msg.itemlist);
                 // jQuery('div#filter-nav').html(msg.nav);
@@ -390,7 +392,9 @@
         // sliderElement.slick("setPosition");
     }
 
-
+    $(document).ready(function(){
+        $('.lazy').lazyload();
+    });
 </script>
 <div id="productscript"></div>
 <jcms:module:modal-popup-script/>

@@ -538,6 +538,7 @@ if (defined('SEARCH_PAGE')) {
     
     <label id="totalitems">(' . $total . ' items found)</label>';
     if ($total > 0) {
+        $i = 1;
         while ($rows = $db->fetch_array($res)) {
             // if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {
             // $sql = "SELECT AVG(rating) 'rating' FROM tbl_review WHERE package_id=" . $rows['id'];
@@ -583,6 +584,12 @@ if (defined('SEARCH_PAGE')) {
                 $slugs = '' . BASE_URL . 'product/product-detail/' . $rows['slug'] . '';;
             }
             // pr($prodbrand);
+            // for top part (opening)
+            if ($i % 3 == 1) {
+                $respkglist .= '
+                    <div class="lazy"><!--
+                ';
+            }
             $respkglist .= '
                 <div class="col-xl-3 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
@@ -623,6 +630,13 @@ if (defined('SEARCH_PAGE')) {
                     </div>
                 </div>
             ';
+            // for bottom part (closing)
+            if ($i % 3 == 0 or $i == $total) {
+                $respkglist .= ' 
+                    --></div>
+                ';
+            }
+            $i++;
             $home_gift_sets_script .= '
                 <script class="productscrip">
                     $("#quick_view_modal_product_' . $rows['slug'] . '").on("shown.bs.modal", function () {
