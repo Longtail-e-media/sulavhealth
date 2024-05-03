@@ -103,7 +103,7 @@ $brandmenu .= '<div class="brand-filter search-container p-2">
 foreach ($brands as $brand) {
     $brandmenu .= '<a class="dropdown-item brand-filter-menu" href="' . BASE_URL . 'search/' . $brand->slug . '" item="' . $brand->title . '">' . $brand->title . '</a>';
 }
-if ((defined('CHECKOUT_PAGE')) || (defined('CART_PAGE')) || defined('DASHBOARD_PAGE')) {
+if ((defined('CHECKOUT_PAGE')) || (defined('CART_PAGE'))) {
 
     $checkout = '';
 } else {
