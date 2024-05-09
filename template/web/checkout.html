@@ -70,6 +70,9 @@
     <!-- WISHLIST AREA START -->
     <div class="ltn__checkout-area mb-105">
         <div class="container mx-auto">
+            <style>#map {
+                height: 400px;
+            }</style>
             <jcms:module:cart:checkout-form/>
         </div>
     </div>
@@ -93,6 +96,14 @@
 <!-- Custom JS -->
 <script src="js/custom.js"></script>
 <!--<script type="text/javascript" src='https://www.simplify.com/commerce/v1/simplify.js'></script>-->
+
+<link rel="stylesheet" href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
 
 <script>
     var base_url = $('base').attr('url');
@@ -583,6 +594,26 @@
                 }
             });
         }
+    });
+
+    // Initialize Leaflet map
+    var map = L.map('map').setView([27.6772614, 85.3161699], 15); // Set your initial map view
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // Create a draggable marker
+    var marker = L.marker([27.6772614, 85.3161699], {draggable: true}).addTo(map);
+
+    // Event listener for drag end event
+    marker.on('dragend', function (event) {
+        var marker = event.target;
+        var position = marker.getLatLng();
+        //console.log(position.lat, position.lng); // You can use the new position here
+        $('input[name="shipping_latitude"]').val(position.lat);
+        $('input[name="shipping_longitude"]').val(position.lng);
     });
 
 </script>

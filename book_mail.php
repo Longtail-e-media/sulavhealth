@@ -259,6 +259,14 @@ if (!empty($bookingRec)) {
                     </tr>
         ';
     }
+    if(!empty($bookingRec->shipping_latitude) and !empty($bookingRec->shipping_longitude)){
+        $html.= '
+                    <tr>
+                        <td>Shipping Geolocation</td>
+                        <td>(' . $bookingRec->shipping_latitude . ', ' . $bookingRec->shipping_longitude . ')</td>
+                    </tr>
+        ';
+    }
     $html .= '
                     <tr>
                         <td>' . ('District') . '</td>

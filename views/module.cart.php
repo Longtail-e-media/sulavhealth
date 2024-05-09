@@ -342,7 +342,10 @@ if (defined('CHECKOUT_PAGE')) {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-12"><h6>Shipping Location (Choose on Map)</h6><div id="map"></div></div>
+                                            <input type="hidden" name="shipping_latitude">
+                                            <input type="hidden" name="shipping_longitude">
+                                            <div class="col-md-12 mt-3">
                                                 <h6>' . ("Order Notes (optional)") . '</h6>
                                                 <div class="input-item input-item-textarea ltn__custom-icon">
                                                     <textarea name="message" placeholder="' . ("Notes about your order, e.g. special notes for delivery.") . '"></textarea>
@@ -357,7 +360,8 @@ if (defined('CHECKOUT_PAGE')) {
                     </div>
                 </div>
                 <div class="col-lg-5 payment-right">
-
+                    <div class="sticky-top">
+                    
                     <div class="shoping-cart-total mb-30">
                         <h4 class="title-2">' . ("Cart Totals") . '</h4>
                         <table class="table">
@@ -437,7 +441,8 @@ if (defined('CHECKOUT_PAGE')) {
                         <div class="error mt-20" style="display: none;"></div>
                         <div class="success alert alert-success" style="display: none;"></div>
                     </div>
-
+                    
+                    </div>
                    
                 </div>
             </div>

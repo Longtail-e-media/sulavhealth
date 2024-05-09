@@ -133,6 +133,9 @@
             $bookRec->shipping_city         = (!empty($shipping_city)) ? $shipping_city : '';
             $bookRec->shipping_post_code    = (!empty($shipping_post_code)) ? $shipping_post_code : '';
 
+            $bookRec->shipping_latitude     = (!empty($shipping_latitude)) ? $shipping_latitude : '';
+            $bookRec->shipping_longitude    = (!empty($shipping_longitude)) ? $shipping_longitude : '';
+
             $bookRec->ip_address        = $_SERVER['REMOTE_ADDR'];
             $bookRec->pay_type          = $payment_method;
             $bookRec->shipping_amt      = $shipping_amt;

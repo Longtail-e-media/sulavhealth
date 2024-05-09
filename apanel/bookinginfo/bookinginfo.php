@@ -87,6 +87,9 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                     <?php if (!empty($bookingRow->coupon_code)) { ?>
                         <li><strong>Coupon Code : </strong><?php echo $bookingRow->coupon_code; ?></li>
                     <?php } ?>
+                    <?php if (!empty($bookingRec->shipping_latitude) and !empty($bookingRec->shipping_longitude)) { ?>
+                        <li><strong>Shipping Geolocation : </strong>(<?php echo $bookingRow->shipping_latitude; ?>, <?php echo $bookingRow->shipping_latitude; ?>)</li>
+                    <?php } ?>
                 </ul>
             </div>
 

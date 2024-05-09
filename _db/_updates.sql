@@ -66,3 +66,9 @@ ALTER TABLE `tbl_users` ADD `gender` INT NOT NULL AFTER `email`, ADD `dob` VARCH
     ADD `weight` FLOAT NOT NULL AFTER `marital_status`, ADD `height` FLOAT NOT NULL AFTER `weight`, ADD `district` VARCHAR(255) NOT NULL AFTER `height`,
     ADD `city` VARCHAR(255) NOT NULL AFTER `district`, ADD `postal` VARCHAR(255) NOT NULL AFTER `city`, ADD `blood_group` VARCHAR(255) NOT NULL AFTER `postal`,
     ADD `Google_maps` TEXT NOT NULL AFTER `blood_group`;
+
+
+-- 2024-05-09
+ALTER TABLE `tbl_booking_info` ADD `shipping_latitude` VARCHAR(50) NOT NULL AFTER `shipping_post_code`, ADD `shipping_longitude` VARCHAR(50) NOT NULL AFTER `shipping_latitude`;
+
+
