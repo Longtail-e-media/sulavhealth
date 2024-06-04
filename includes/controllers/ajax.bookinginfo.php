@@ -189,7 +189,7 @@
                         $record->password       = md5($_REQUEST['create_password']);
                         $record->accesskey      = @randomKeys(25);
                         $record->group_id       = 2;
-                        $record->status         = 0;
+                        $record->status         = 1;
                         $record->sortorder      = User::find_maximum();
                         $record->added_date     = registered();
 
