@@ -193,6 +193,9 @@ if (defined('CART_PAGE')) {
                 <div class="btn-wrapper text-right">
                     <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1" id="proceedToCheckout">' . ("Proceed to checkout") . '</a>
                 </div>
+                <div class="btn-wrapper text-center">
+                    <a href="#" class="theme-btn-2 btn btn-effect-2" onclick="history.back();">Back</a>
+                </div>
             </div>
         ';
     }
