@@ -412,7 +412,6 @@ if (defined('CHECKOUT_PAGE')) {
                         </table>
                         <input type="hidden" name="sub_total" value="' . $tot . '">
                         <input type="hidden" name="grand_total" value="' . $tot . '">
-                        <div class="empty-div"></div>
                     </div>
                     
                     
@@ -443,6 +442,7 @@ if (defined('CHECKOUT_PAGE')) {
                         <p class="mt-20" style="display: none;" id="checkoutMsg"></p>
                         <div class="error mt-20" style="display: none;"></div>
                         <div class="success alert alert-success" style="display: none;"></div>
+                        <div class="empty-div d-none"></div>
                     </div>
                     
                     </div>
