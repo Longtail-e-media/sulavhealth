@@ -70,15 +70,16 @@ if ($lang != 'gr') {
 $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
 $crtot = 0;
 if (!empty($sesRec)) {
-    foreach ($sesRec as $k => $sesRow) {
-        $product = SubProduct::find_by_slug($sesRow['slug']);
-        if (!empty($product)) {
-            $product_details = $sesRow['product_details'];
-            foreach ($product_details as $label => $detail) {
-                $crtot += $detail['quantity'];
-            }
-        }
-    }
+//    foreach ($sesRec as $k => $sesRow) {
+//        $product = SubProduct::find_by_slug($sesRow['slug']);
+//        if (!empty($product)) {
+//            $product_details = $sesRow['product_details'];
+//            foreach ($product_details as $label => $detail) {
+//                $crtot += $detail['quantity'];
+//            }
+//        }
+//    }
+    $crtot = count($_SESSION['cart_detail']);
 }
 $userId = $session->get("user_id");
 if (!empty($userId)) {
