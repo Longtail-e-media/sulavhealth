@@ -72,3 +72,5 @@ ALTER TABLE `tbl_users` ADD `gender` INT NOT NULL AFTER `email`, ADD `dob` VARCH
 ALTER TABLE `tbl_booking_info` ADD `shipping_latitude` VARCHAR(50) NOT NULL AFTER `shipping_post_code`, ADD `shipping_longitude` VARCHAR(50) NOT NULL AFTER `shipping_latitude`;
 
 
+-- 2024-06-07
+ALTER TABLE `tbl_category` ADD `type` INT NOT NULL DEFAULT '1' AFTER `brief`;

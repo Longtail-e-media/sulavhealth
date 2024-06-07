@@ -4,7 +4,7 @@ class category extends DatabaseObject
 {
 
     protected static $table_name = "tbl_category";
-    protected static $db_fields = array('id', 'title', 'fa_icon', 'parentId', 'image', 'brief', 'status', 'sortorder', 'added_date');
+    protected static $db_fields = array('id', 'title', 'fa_icon', 'parentId', 'image', 'brief', 'type', 'status', 'sortorder', 'added_date');
 
     var $id;
     var $title;
@@ -12,6 +12,7 @@ class category extends DatabaseObject
     var $image;
     var $brief;
     var $fa_icon;
+    var $type;
     var $status;
     var $sortorder;
     var $added_date;

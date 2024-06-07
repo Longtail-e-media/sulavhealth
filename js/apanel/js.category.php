@@ -32,6 +32,15 @@
                 showMessage(msg.action, msg.message);
             }
         });
+
+        $('#parentId').on('change', function () {
+            var pId = $(this).val();
+            if (pId > 0) {
+                $('.rowType').addClass('hide');
+            } else {
+                $('.rowType').removeClass('hide');
+            }
+        })
     });
 
 
@@ -105,21 +114,6 @@
             }
         })
     });
-
-    // Edit records
-    function editRecord(Re) {
-        $.ajax({
-            type: "POST",
-            dataType: "JSON",
-            url: getLocation(),
-            data: 'action=editExistsRecord&id=' + Re,
-            success: function (data) {
-                var msg = eval(data);
-                $("#title").val(msg.title);
-                $("#idValue").val(msg.editId);
-            }
-        });
-    }
 
     // Deleting Record
     function recordDelete(Re) {

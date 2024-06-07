@@ -21,6 +21,7 @@
 			// $category->image		= !empty($_REQUEST['imageArrayname']) ? $_REQUEST['imageArrayname'] : '';
 			// $category->icon    	= !empty($_REQUEST['fa_icon'])?$_REQUEST['fa_icon']:''; 			
 			// $category->brief    	= $_REQUEST['brief'];	
+			$category->type		    = $_REQUEST['type'];
 			$category->status		= $_REQUEST['status'];
 			$category->sortorder	= category::find_maximum_byparent("sortorder",$_REQUEST['parentId']);
 			$category->added_date 	= registered();
@@ -55,12 +56,13 @@
 				exit;		
 			endif;
 
-			$category->slug 		            = create_slug($_REQUEST['title']);
-			// $category->image		= !empty($_REQUEST['imageArrayname']) ? $_REQUEST['imageArrayname'] : '';					
-			$category->title    = $_REQUEST['title'];	
-			// $category->brief    = $_REQUEST['brief'];
-			// $category->icon    	= !empty($_REQUEST['fa_icon'])?$_REQUEST['fa_icon']:'';	
-			$category->status   = $_REQUEST['status'];	
+            $category->slug         = create_slug($_REQUEST['title']);
+            // $category->image		= !empty($_REQUEST['imageArrayname']) ? $_REQUEST['imageArrayname'] : '';
+            $category->title        = $_REQUEST['title'];
+            // $category->brief    = $_REQUEST['brief'];
+            // $category->icon    	= !empty($_REQUEST['fa_icon'])?$_REQUEST['fa_icon']:'';
+            $category->type         = $_REQUEST['type'];
+            $category->status       = $_REQUEST['status'];
 
 			$db->begin();				
 			if($category->save()):$db->commit();	

@@ -10,21 +10,17 @@ if (isset($_GET['page']) && $_GET['page'] == "category" && isset($_GET['mode']) 
     $parentId = (isset($_REQUEST['id']) and !empty($_REQUEST['id'])) ? addslashes($_REQUEST['id']) : 0;
     ?>
     <h3>
-        List categorys
+        List category
         <?php if (!empty($_REQUEST['id'])) { ?>
             <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
                onClick="viewcategorylist(0);">
-    <span class="glyph-icon icon-separator">
-        <i class="glyph-icon icon-arrow-circle-left"></i>
-    </span>
+                <span class="glyph-icon icon-separator"><i class="glyph-icon icon-arrow-circle-left"></i></span>
                 <span class="button-content"> Back </span>
             </a>
         <?php } ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="AddNewcategory();">
-    <span class="glyph-icon icon-separator">
-    	<i class="glyph-icon icon-plus-square"></i>
-    </span>
+            <span class="glyph-icon icon-separator"><i class="glyph-icon icon-plus-square"></i></span>
             <span class="button-content"> Add New </span>
         </a>
     </h3>
@@ -58,11 +54,11 @@ if (isset($_GET['page']) && $_GET['page'] == "category" && isset($_GET['mode']) 
                                 <a class="primary-bg medium btn loadingbar-demo"
                                    title="" <?php echo ($countChild) ? 'onClick="viewChildlist(' . $record->id . ');"' : ''; ?>
                                    href="javascript:void(0);">
-                        <span class="button-content">
-                            <span class="badge bg-orange radius-all-4 mrg5R" title=""
-                                  data-original-title="Badge with tooltip"><?php echo $countChild; ?></span>
-                            <span class="text-transform-upr font-bold font-size-11">View Lists</span>
-                        </span>
+                                    <span class="button-content">
+                                        <span class="badge bg-orange radius-all-4 mrg5R" title=""
+                                              data-original-title="Badge with tooltip"><?php echo $countChild; ?></span>
+                                        <span class="text-transform-upr font-bold font-size-11">View Lists</span>
+                                    </span>
                                 </a>
                             <?php } else {
                                 echo 'N/A';
@@ -105,9 +101,7 @@ if (isset($_GET['page']) && $_GET['page'] == "category" && isset($_GET['mode']) 
             </select>
         </div>
         <a class="btn medium primary-bg" href="javascript:void(0);" id="applySelected_btn">
-    <span class="glyph-icon icon-separator float-right">
-      <i class="glyph-icon icon-cog"></i>
-    </span>
+            <span class="glyph-icon icon-separator float-right"><i class="glyph-icon icon-cog"></i></span>
             <span class="button-content"> Click </span>
         </a>
     </div>
@@ -116,6 +110,9 @@ if (isset($_GET['page']) && $_GET['page'] == "category" && isset($_GET['mode']) 
     if (isset($_GET['id']) && !empty($_GET['id'])):
         $categoryId = addslashes($_REQUEST['id']);
         $categoryInfo = category::find_by_id($categoryId);
+        $type_product = ($categoryInfo->status == 1) ? "checked" : " ";
+        $type_package = ($categoryInfo->status == 0) ? "checked" : " ";
+        $type_hide = ($categoryInfo->parentId == 0) ? '' : 'hide';
         $status = ($categoryInfo->status == 1) ? "checked" : " ";
         $unstatus = ($categoryInfo->status == 0) ? "checked" : " ";
     endif;
@@ -124,9 +121,7 @@ if (isset($_GET['page']) && $_GET['page'] == "category" && isset($_GET['mode']) 
         <?php echo (isset($_GET['id'])) ? 'Edit category' : 'Add category'; ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="viewcategorylist(<?php echo !empty($categoryInfo->parentId) ? $categoryInfo->parentId : 0; ?>);">
-    <span class="glyph-icon icon-separator">
-        <i class="glyph-icon icon-arrow-circle-left"></i>
-    </span>
+            <span class="glyph-icon icon-separator"><i class="glyph-icon icon-arrow-circle-left"></i></span>
             <span class="button-content"> Back </span>
         </a>
     </h3>
@@ -158,6 +153,24 @@ if (isset($_GET['page']) && $_GET['page'] == "category" && isset($_GET['mode']) 
                                value="<?php echo !empty($categoryInfo->title) ? htmlentities($categoryInfo->title) : ""; ?>">
                     </div>
                 </div>
+
+
+                <div class="form-row rowType <?php echo !empty($type_hide) ? $type_hide : ''; ?>">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Type :
+                        </label>
+                    </div>
+                    <div class="form-checkbox-radio col-md-9">
+                        <input type="radio" class="custom-radio" name="type" id="checktype1"
+                               value="1" <?php echo !empty($status) ? $status : "checked"; ?>>
+                        <label for="">Product</label>
+                        <input type="radio" class="custom-radio" name="type" id="checktype2"
+                               value="2" <?php echo !empty($unstatus) ? $unstatus : ""; ?>>
+                        <label for="">Package</label>
+                    </div>
+                </div>
+
                 <!-- <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">

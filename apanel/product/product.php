@@ -124,6 +124,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
         $status = ($subproductInfo->status == 1) ? "checked" : " ";
         $unstatus = ($subproductInfo->status == 0) ? "checked" : " ";
     endif;
+    $initialType = 1;
     ?>
 
     <h3>
@@ -140,7 +141,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
         <div class="example-code">
             <form action="" class="col-md-12 center-margin" id="subproduct_frm">
 
-                <input type="hidden" name="type" id="type" value="<?php echo $typeid; ?>"/>
+
 
                 <div class="form-row">
                     <div class="form-label col-md-2">
@@ -164,20 +165,24 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                     </div>
                     <div class="form-input col-md-4">
                         <?php $cid = !empty($subproductInfo->Category) ? $subproductInfo->Category : 0; ?>
-                        <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Category" id="type" name="Category"
+                        <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Category" id="Category" name="Category"
                                 selcId="<?php echo $cid; ?>">
                             <?php $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 ORDER BY sortorder DESC ");
                             // pr($categories);
                             if ($categories) {
-                                foreach ($categories as $category) {
+                                foreach ($categories as $k => $category) {
+                                    if($k == 0){$initialType = $category->type;}
                                     $cat = $category->id;
-                                    $sel = (!empty($cat) && $cat == $category->id) ? 'selected' : ''; ?>
-                                    <option value="<?= $category->id; ?>" <?= $sel; ?>><?= $category->title; ?></option>
+                                    $sel = (!empty($cat) && $cat == $category->id) ? 'selected' : '';
+                                    $initialType = (!empty($cat) && $cat == $category->id) ? $category->type : $initialType;?>
+                                    <option value="<?= $category->id; ?>" <?= $sel; ?> selType="<?= $category->type; ?>"><?= $category->title; ?></option>
                                 <?php }
                             } ?>
                         </select>
                     </div>
                 </div>
+
+                <input type="hidden" name="type" id="type" value="<?php echo $initialType; ?>"/>
 
                 <div class="form-row">
                     <div class="form-label col-md-2">

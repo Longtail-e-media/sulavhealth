@@ -170,7 +170,8 @@
             var destId = $(this).val();
             var subId = $('.Subcategory').attr('selId');
             // var destId = $('.Category').attr('selcId');
-        console.log(subId);
+            var newType = $('option:selected',this).attr('selType');
+            $('input[name="type"]').val(newType);
             $('.Subcategory').html('<option>Loading...</option>');
             $.ajax({
                 type: "POST",
