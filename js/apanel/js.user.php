@@ -23,6 +23,13 @@
             }
         });
 
+        $('#dob').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'yy-mm-dd'
+        });
+
         $('.lstatusToggler').on('click', function () {
             var Re = $(this).attr('moduleId');
             var status = $(this).attr('status');

@@ -217,20 +217,192 @@ if (isset($_GET['page']) && $_GET['page'] == "user" && isset($_GET['mode']) && $
                                value="<?php echo !empty($usersInfo->email) ? $usersInfo->email : ""; ?>">
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-label col-md-2">
-                        <label for="">
-                            CC Email :
-                        </label>
+
+                <?php if (isset($_GET['id']) and $usersInfo->group_id != '2') { ?>
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                CC Email :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <input placeholder="CC Email Address" class="col-md-4" type="text" id="optional_email"
+                                   name="optional_email"
+                                   value="<?php echo !empty($usersInfo->optional_email) ? $usersInfo->optional_email : ""; ?>">
+                            <br/>
+                            <small>if more than one email address. e.g. email1@email.com;email2@email.com</small>
+                        </div>
                     </div>
-                    <div class="form-input col-md-20">
-                        <input placeholder="CC Email Address" class="col-md-4" type="text" id="optional_email"
-                               name="optional_email"
-                               value="<?php echo !empty($usersInfo->optional_email) ? $usersInfo->optional_email : ""; ?>">
-                        <br/>
-                        <small>if more than one email address. e.g. email1@email.com;email2@email.com</small>
+                <?php } ?>
+
+                <?php if (isset($_GET['id']) and $usersInfo->group_id == '2') { ?>
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Address :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <input placeholder="Address" class="col-md-4" type="text" id="facebook_uid"
+                                   name="facebook_uid"
+                                   value="<?php echo !empty($usersInfo->facebook_uid) ? $usersInfo->facebook_uid : ""; ?>">
+                        </div>
                     </div>
-                </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Phone Number :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <input placeholder="Phone Number" class="col-md-4" type="text" id="contact"
+                                   name="contact"
+                                   value="<?php echo !empty($usersInfo->contact) ? $usersInfo->contact : ""; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Gender :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <select data-placeholder="Choose Field Type"
+                                    class="chosen-selec validate[required,length[0,500]] col-md-4" id="gender"
+                                    name="gender">
+                                <option value="">Choose</option>
+                                <option value="0" <?php echo (!empty($usersInfo->gender) && $usersInfo->gender == 0) ? 'selected' : '';?> >Male</option>
+                                <option value="1" <?php echo (!empty($usersInfo->gender) && $usersInfo->gender == 1) ? 'selected' : '';?> >Female</option>
+                                <option value="2" <?php echo (!empty($usersInfo->gender) && $usersInfo->gender == 2) ? 'selected' : '';?> >Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                DOB :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <input placeholder="DOB" class="col-md-4" type="text" id="dob"
+                                   name="dob"
+                                   value="<?php echo !empty($usersInfo->dob) ? $usersInfo->dob : ""; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Marital Status :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <select data-placeholder="Choose Field Type"
+                                    class="chosen-selec validate[required,length[0,500]] col-md-4" id="marital_status"
+                                    name="marital_status">
+                                <option value="">Choose</option>
+                                <option value="0" <?php echo (!empty($usersInfo->marital_status) && $usersInfo->marital_status == 0) ? 'selected' : '';?> >Single</option>
+                                <option value="1" <?php echo (!empty($usersInfo->marital_status) && $usersInfo->marital_status == 1) ? 'selected' : '';?> >Married</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Weight :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <input placeholder="Weight" class="col-md-4" type="text" id="weight"
+                                   name="weight"
+                                   value="<?php echo !empty($usersInfo->weight) ? $usersInfo->weight : ""; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Height :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <input placeholder="Height" class="col-md-4" type="text" id="height"
+                                   name="height"
+                                   value="<?php echo !empty($usersInfo->height) ? $usersInfo->height : ""; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                District :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <input placeholder="District" class="col-md-4" type="text" id="district"
+                                   name="district"
+                                   value="<?php echo !empty($usersInfo->district) ? $usersInfo->district : ""; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                City :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <input placeholder="City" class="col-md-4" type="text" id="city"
+                                   name="city"
+                                   value="<?php echo !empty($usersInfo->city) ? $usersInfo->city : ""; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Postal Code :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <input placeholder="Postal Code" class="col-md-4" type="text" id="postal"
+                                   name="postal"
+                                   value="<?php echo !empty($usersInfo->postal) ? $usersInfo->postal : ""; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Blood Group :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <input placeholder="Blood Group" class="col-md-4" type="text" id="blood_group"
+                                   name="blood_group"
+                                   value="<?php echo !empty($usersInfo->blood_group) ? $usersInfo->blood_group : ""; ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Google Maps Link :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-20">
+                            <input placeholder="Google Maps Link" class="col-md-4" type="text" id="Google_maps"
+                                   name="Google_maps"
+                                   value="<?php echo !empty($usersInfo->Google_maps) ? $usersInfo->Google_maps : ""; ?>">
+                        </div>
+                    </div>
+                <?php } ?>
+
+
                 <div class="form-row">
                     <div class="form-label col-md-2"></div>
                     <div class="form-checkbox-radio col-md-9">
