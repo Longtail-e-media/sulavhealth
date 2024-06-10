@@ -335,19 +335,19 @@ if (defined('CHECKOUT_PAGE')) {
                                                 <h6>' . ("Shipping District") . '</h6>
                                                 <div class="input-item">
                                                     <select class="nice-selec col-12" name="shipping_district" id="shipping_district">
-                                                        <option value="">' . ("Select Shipping District") . '</option>
+                                                        <option value="" data-dc="0" data-lat="27.6772614" data-long="85.3161699">' . ("Select Shipping District") . '</option>
             ';
     $districts = Locationn::find_all();
     foreach ($districts as $district) {
-        $checkout_form .= '<option value="' . $district->title . '" data-dc="' . $district->delivery_charge . '">' . $district->title . '</option>';
+        $checkout_form .= '<option value="' . $district->title . '" data-dc="' . $district->delivery_charge . '" data-lat="' . $district->latitude . '" data-long="' . $district->longitude . '">' . $district->title . '</option>';
     }
     $checkout_form .= '
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-12"><h6>Shipping Location (Choose on Map)</h6><div id="map"></div></div>
-                                            <input type="hidden" name="shipping_latitude">
-                                            <input type="hidden" name="shipping_longitude">
+                                            <input type="hidden" name="shipping_latitude" value="27.6772614">
+                                            <input type="hidden" name="shipping_longitude" value="85.3161699">
                                             <div class="col-md-12 mt-3">
                                                 <h6>' . ("Order Notes (optional)") . '</h6>
                                                 <div class="input-item input-item-textarea ltn__custom-icon">

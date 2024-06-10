@@ -74,3 +74,7 @@ ALTER TABLE `tbl_booking_info` ADD `shipping_latitude` VARCHAR(50) NOT NULL AFTE
 
 -- 2024-06-07
 ALTER TABLE `tbl_category` ADD `type` INT NOT NULL DEFAULT '1' AFTER `brief`;
+
+
+-- 2024-06-10
+ALTER TABLE `tbl_location` ADD `latitude` VARCHAR(255) NOT NULL AFTER `title`, ADD `longitude` VARCHAR(255) NOT NULL AFTER `latitude`;

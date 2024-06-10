@@ -338,6 +338,11 @@
 
             $('#grand-total').html('NPR ' + NewTotal);
             $('input[name="grand_total"]').val(NewTotal);
+
+            // changing map
+            const latitude = selectedOption.data("lat");
+            const longitude = selectedOption.data("long");
+            updateMap(latitude, longitude);
         });
 
         // Create an account
@@ -404,196 +409,52 @@
             submitHandler: function (form) {
                 $("button#checkoutSubmit").attr("disabled", "true").text('<jcms:module:common_language:CONTACT_FORM_ERROR_PROCESSING/>');
 
-                var payment_method = $('input[name=payment_method]:checked').val();
-
-                if (payment_method === 'credit_card') {
-                    processPayment();
-                } else {
-                    var Frmval = $("form#checkoutForm").serialize();
-                    $.ajax({
-                        type: "POST",
-                        dataType: "JSON",
-                        url: base_url + "includes/controllers/ajax.bookinginfo.php",
-                        data: "action=request_inquiry&" + Frmval,
-                        success: function (data) {
-                            var msg = eval(data);
-                            if (msg.action == 'unsuccess') {
-                                $('#checkoutMsg')
-                                    .html(msg.message)
-                                    .removeClass('alert-success')
-                                    .addClass('alert alert-danger')
-                                    .css('display', 'block')
-                                    .fadeOut(8000);
-                                $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
-                            }
-                            if (msg.action == 'success') {
-                                $('#checkoutMsg')
-                                    .html(msg.message)
-                                    .removeClass('alert-danger')
-                                    .addClass('alert alert-success')
-                                    .css('display', 'block')
-                                    .fadeOut(30000);
-                                $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
-                                $("form#checkoutForm")[0].reset();
-                                setTimeout(function () {
-                                    window.location.href = "";
-                                }, 30000);
-                            }
-                            if (msg.payment_form) {
-                                $('#checkoutMsg')
-                                    .html(msg.message)
-                                    .removeClass('alert-danger')
-                                    .addClass('alert alert-success')
-                                    .css('display', 'block')
-                                    .fadeOut(8000);
-                                $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
-                                $(".empty-div").html(msg.payment_content);
-                            }
+                var Frmval = $("form#checkoutForm").serialize();
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: base_url + "includes/controllers/ajax.bookinginfo.php",
+                    data: "action=request_inquiry&" + Frmval,
+                    success: function (data) {
+                        var msg = eval(data);
+                        if (msg.action == 'unsuccess') {
+                            $('#checkoutMsg')
+                                .html(msg.message)
+                                .removeClass('alert-success')
+                                .addClass('alert alert-danger')
+                                .css('display', 'block')
+                                .fadeOut(8000);
+                            $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
                         }
-                    });
-                }
+                        if (msg.action == 'success') {
+                            $('#checkoutMsg')
+                                .html(msg.message)
+                                .removeClass('alert-danger')
+                                .addClass('alert alert-success')
+                                .css('display', 'block')
+                                .fadeOut(30000);
+                            $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
+                            $("form#checkoutForm")[0].reset();
+                            setTimeout(function () {
+                                window.location.href = "";
+                            }, 30000);
+                        }
+                        if (msg.payment_form) {
+                            $('#checkoutMsg')
+                                .html(msg.message)
+                                .removeClass('alert-danger')
+                                .addClass('alert alert-success')
+                                .css('display', 'block')
+                                .fadeOut(8000);
+                            $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
+                            $(".empty-div").html(msg.payment_content);
+                        }
+                    }
+                });
 
                 return false;
             }
         });
-
-        function createInput(name, value) {
-            var input = document.createElement('input');
-            input.setAttribute('type', 'hidden');
-            input.setAttribute('name', name);
-            input.setAttribute('value', value);
-            return input;
-        }
-
-        function createSecure3dForm(data) {
-            var secure3dData = data.threedsecure;
-            var secure3dForm = document.createElement('form');
-            secure3dForm.setAttribute('method', 'POST');
-            secure3dForm.setAttribute('action', secure3dData.acsUrl);
-            secure3dForm.setAttribute('target', 'secure3d-frame');
-
-            var merchantDetails = secure3dData.md;
-            var parReq = secure3dData.paReq;
-            var termUrl = secure3dData.termUrl;
-
-            secure3dForm.append(createInput('PaReq', parReq));
-            secure3dForm.append(createInput('TermUrl', termUrl));
-            secure3dForm.append(createInput('MD', merchantDetails));
-
-            return secure3dForm;
-        }
-
-        function processPayment() {
-            var actualAmt = parseFloat($('input[name=grand_total]').val()) * 100;
-            var payload = {
-                action: 'createToken',
-                cc_number: $('#cc-number').val(),
-                cc_exp_month: $('#cc-exp-month').val(),
-                cc_exp_year: $('#cc-exp-year').val(),
-                cc_cvc: $('#cc-cvc').val(),
-                currency: 'EUR',
-                amount: actualAmt
-            };
-
-            var ajaxUrl = base_url + "includes/controllers/ajax.bookinginfo.php";
-
-            $.post(ajaxUrl, payload, function (response) {
-                var parsed = JSON.parse(response);
-
-                var token = parsed.token;
-
-                if (parsed.error) {
-                    console.error("Error creating card token", parsed);
-                    if (parsed.errorCode == "validation") {
-                        errorMessage = "<p class='myinfobox alert alert-danger'>" + parsed.fieldErrors + "</p>";
-                    } else {
-                        errorMessage = "<p class='myinfobox alert alert-danger'>" + parsed.error + "</p>";
-                    }
-                    $(".error").css('display', 'block');
-                    $(errorMessage).prependTo('.error').fadeIn(500, function () {
-                        $('.myinfobox').delay(8e3).fadeOut(500)
-                    });
-                    $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
-                } else if (parsed.threedsecure.enrolled) {
-                    var secure3dForm = createSecure3dForm(parsed);
-                    var iframeNode = $('#secure3d-frame');
-
-                    $(secure3dForm).insertAfter(iframeNode);
-                    $(window).scrollTop(0);
-                    iframeNode.show();
-
-                    var process3dSecureCallback = function (threedsResponse) {
-                        console.log('Processing 3D Secure callback...');
-                        window.removeEventListener('message', process3dSecureCallback);
-
-                        var simplifyDomain = 'https://www.simplify.com'; // For UAT you can use 'https://uat.simplify.com'
-
-                        if (threedsResponse.origin === simplifyDomain && JSON.parse(threedsResponse.data)['secure3d']['authenticated']) {  // JSON.parse(data.data)['secure3d.authenticated']) {
-                            var Frmval = $("form#checkoutForm").serialize();
-                            $.ajax({
-                                type: "POST",
-                                dataType: "JSON",
-                                url: base_url + "includes/controllers/ajax.bookinginfo.php",
-                                data: "action=request_inquiry&simplifyToken=" + token + "&" + Frmval,
-                                success: function (data) {
-                                    var msg = eval(data);
-                                    if (msg.action == 'unsuccess_payment') {
-                                        $('#checkoutMsg')
-                                            .html("Payment failed with response... <br/> " + JSON.stringify(msg.message))
-                                            .removeClass('alert-success')
-                                            .addClass('alert alert-danger')
-                                            .css('display', 'block')
-                                            .delay(10e3)
-                                            .fadeOut(100);
-                                        $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
-                                    }
-                                    if (msg.action == 'unsuccess') {
-                                        $('#checkoutMsg')
-                                            .html(msg.message)
-                                            .removeClass('alert-success')
-                                            .addClass('alert alert-danger')
-                                            .css('display', 'block')
-                                            .fadeOut(8000);
-                                        $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
-                                    }
-                                    if (msg.action == 'success') {
-                                        $('#checkoutMsg')
-                                            .html(msg.message)
-                                            .removeClass('alert-danger')
-                                            .addClass('alert alert-success')
-                                            .css('display', 'block')
-                                            .fadeOut(30000);
-                                        $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
-                                        $("form#checkoutForm")[0].reset();
-                                        setTimeout(function () {
-                                            window.location.href = "";
-                                        }, 30000);
-                                    }
-                                    $('html, body').animate({
-                                        scrollTop: $("#checkoutSubmit").offset().top
-                                    }, 500);
-                                    iframeNode.hide();
-                                }
-                            });
-                        }
-                    };
-
-                    iframeNode.on('load', function () {
-                        window.addEventListener('message', process3dSecureCallback);
-                    });
-
-                    secure3dForm.submit();
-                } else {
-                    console.error("Error creating card token", parsed);
-                    errorMessage = "<p class='myinfobox alert alert-danger'>3D Secure is not enabled on this Card. Payment Failure !!!</p>";
-                    $(".error").css('display', 'block');
-                    $(errorMessage).prependTo('.error').fadeIn(500, function () {
-                        $('.myinfobox').delay(8e3).fadeOut(500)
-                    });
-                    $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
-                }
-            });
-        }
     });
 
     // Initialize Leaflet map
@@ -615,6 +476,13 @@
         $('input[name="shipping_latitude"]').val(position.lat);
         $('input[name="shipping_longitude"]').val(position.lng);
     });
+
+    // update map according to shipping district chosen
+    function updateMap(lat, long) {
+        var newLatLng = new L.LatLng(lat, long);
+        map.panTo(newLatLng);
+        marker.setLatLng(newLatLng);
+    }
 
 </script>
 

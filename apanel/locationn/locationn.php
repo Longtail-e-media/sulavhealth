@@ -112,7 +112,7 @@ if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode'])
                             Title :
                         </label>
                     </div>
-                    <div class="form-input col-md-20">
+                    <div class="form-input col-md-10">
                         <input placeholder="Title" class="col-md-6 validate[required,length[0,200]]" type="text"
                                name="title" id="title"
                                value="<?php echo !empty($locationnInfo->title) ? $locationnInfo->title : ""; ?>">
@@ -125,10 +125,37 @@ if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode'])
                             Delivery Charge :
                         </label>
                     </div>
-                    <div class="form-input col-md-20">
+                    <div class="form-input col-md-10">
                         <input placeholder="Delivery Charge" class="col-md-6 validate[required,length[0,200]]" type="number"
                                name="delivery_charge" id="delivery_charge" min="0" step="1"
                                value="<?php echo !empty($locationnInfo->delivery_charge) ? $locationnInfo->delivery_charge : ""; ?>">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Latitude :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-10">
+                        <input placeholder="Latitude" class="col-md-6 validate[required,length[0,200]]" type="text"
+                               name="latitude" id="latitude"
+                               value="<?php echo !empty($locationnInfo->latitude) ? $locationnInfo->latitude : ""; ?>">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Longitude :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-10">
+                        <input placeholder="Longitude" class="col-md-6 validate[required,length[0,200]]" type="text"
+                               name="longitude" id="longitude"
+                               value="<?php echo !empty($locationnInfo->longitude) ? $locationnInfo->longitude : ""; ?>">
+                        <br><small><a href="https://www.latlong.net/" target="_blank">Get geolocation here</a></small>
                     </div>
                 </div>
 

@@ -5,10 +5,10 @@ class locationn extends DatabaseObject
 
     protected static $table_name = "tbl_location";
     protected static $db_fields = array(
-        'id', 'slug', 'title', 'delivery_charge', 'image', 'status', 'sortorder', 'added_date', 'modified_date', 'homepage'
+        'id', 'slug', 'title', 'delivery_charge', 'latitude', 'longitude', 'image', 'status', 'sortorder', 'added_date', 'modified_date', 'homepage'
     );
 
-    public $id, $slug, $title, $delivery_charge, $image, $status, $sortorder, $added_date, $modified_date, $homepage;
+    public $id, $slug, $title, $delivery_charge, $latitude, $longitude, $image, $status, $sortorder, $added_date, $modified_date, $homepage;
 
     public static function checkDupliName($title = '')
     {
@@ -19,12 +19,14 @@ class locationn extends DatabaseObject
             return true;
         }
     }
+
     public static function get_locationn()
     {
         global $db;
         $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1  ORDER BY sortorder DESC ";
         return self::find_by_sql($sql);
     }
+
     public static function get_by_type($type = "1")
     {
         global $db;
