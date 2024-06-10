@@ -31,8 +31,15 @@ class Services extends DatabaseObject
     public static function get_services()
     {
         global $db;
-        $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1  ORDER BY sortorder DESC ";
+        $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1  ORDER BY title ASC ";
         return self::find_by_sql($sql);
+    }
+
+    static function get_services_by_slug($slug = '')
+    {
+        global $db;
+        $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE slug='$slug' LIMIT 1");
+        return $result_array;
     }
 
     public static function checkDupliName($title = '')

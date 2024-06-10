@@ -283,12 +283,16 @@
         var checkedValues = $("input[name='qcategory[]']:checked").map(function () {
             return $(this).val();
         }).get();
+
+        // checking if we're on Service page, gotten by clicking "Service" from header
+        const service_check = $('input[name="flag_service_check"]').val();
+
         $('.subfilter').html('<option>Loading...</option>');
         $.ajax({
             type: "POST",
             dataType: "JSON",
             url: base_url + "quicksearch.php",
-            data: "action=filteractivity&selectedIds=" + checkedValues,
+            data: "action=filteractivity&selectedIds=" + checkedValues + "&service_check=" + service_check,
             success: function (data) {
                 var msg = eval(data);
                 if (msg.action == 'success') {
@@ -299,6 +303,9 @@
         return !1
     });
     $('body').on('click', '.qtype, .qcategory, .qactivities, .qsubcategory, .qservice, .qbrand, .gprice', function () {
+        // checking if we're on Service page, gotten by clicking "Service" from header
+        const service_check = $('input[name="flag_service_check"]').val();
+
         var form = $("#search_form");
         $.ajax({
             type: "POST",
@@ -307,12 +314,16 @@
             data: "action=filter_data&" + form.serialize(), // serializes the form's elements.
             success: function (data) {
                 var msg = eval(data);
-                console.log(msg.itemlist);
                 jQuery('div#productContainer').html(msg.result);
                 jQuery('div#productpopup').html(msg.popup);
                 jQuery('div#productscript').html(msg.popscript);
                 jQuery('div#totalitems').html(msg.itemlist);
-                jQuery('div#searchtitle').html(msg.serachtitle);
+
+                // if we are in Service induced page, then dont change title
+                if (service_check === 'undefined') {
+                    jQuery('div#searchtitle').html(msg.serachtitle);
+                }
+
                 $(document).find('.lazy').lazyload();
                 // jQuery('label#totalitems').html('');
                 // jQuery('label#totalitems').html(msg.itemlist);

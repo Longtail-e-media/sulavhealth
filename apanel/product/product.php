@@ -212,7 +212,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                             <?php $categories = Brand::find_by_sql("SELECT * FROM tbl_brands ORDER BY sortorder DESC ");
                             if ($categories) {
                                 foreach ($categories as $category) {
-                                    $cat = !empty($subproductInfo->type) ? $subproductInfo->type : $id;
+                                    $cat = !empty($subproductInfo->brand) ? $subproductInfo->brand : '';
                                     $sel = (!empty($cat) && $cat == $category->id) ? 'selected' : ''; ?>
                                     <option value="<?= $category->id; ?>" <?= $sel; ?>><?= $category->title; ?></option>
                                 <?php }

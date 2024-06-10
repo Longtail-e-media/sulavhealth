@@ -49,10 +49,17 @@ if (defined('SEARCH_PAGE')) {
 
     /* category filter start*/
     $service_filter = '';
-    $serviceRec = Services::get_services();
+    if (@$service_slug) {
+        $serviceRec = Services::get_services_by_slug($service_slug);
+    } else {
+        $serviceRec = Services::get_services();
+    }
     foreach ($serviceRec as $serviceRow) {
+        $disabled = $hidden = '';
         if (@$service_slug) {
             $sel = (@$service_slug == $serviceRow->slug) ? 'checked' : '';
+            $disabled = 'disabled';
+            $hidden = '<input type="hidden" name="qservice[]" value="' . $serviceRow->id . '"><input type="hidden" name="flag_service_check" value="' . $serviceRow->id . '">';
         } else {
             $sel = @in_array($serviceRow->id, @$qservice) ? 'checked' : '';
         }
@@ -61,7 +68,8 @@ if (defined('SEARCH_PAGE')) {
         if ($tot > 0) {
             $service_filter .= '
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input qservice" name="qservice[]" ' . $sel . ' id="serv-' . $serviceRow->id . '" value="' . $serviceRow->id . '">
+                    <input type="checkbox" class="custom-control-input qservice" name="qservice[]" ' . $sel . ' id="serv-' . $serviceRow->id . '" value="' . $serviceRow->id . '" ' . $disabled . '>
+                    ' . $hidden . '
                     <label class="custom-control-label d-flex justify-content-between" for="serv-' . $serviceRow->id . '">' . $serviceRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
             ';
@@ -70,7 +78,12 @@ if (defined('SEARCH_PAGE')) {
 
     /* category filter start*/
     $category_filter = '';
-    $categoryRec = category::get_category();
+    if (@$service_slug) {
+        $serviceRecord = Services::find_by_slug($service_slug);
+        $categoryRec = category::get_category_by_service($serviceRecord->id);
+    } else {
+        $categoryRec = category::get_category();
+    }
     foreach ($categoryRec as $categoryRow) {
         if (@$category_slug) {
             $sel = (@$category_slug == $categoryRow->slug) ? 'checked' : '';
@@ -78,7 +91,12 @@ if (defined('SEARCH_PAGE')) {
             $sel = @in_array($categoryRow->id, @$qcategory) ? 'checked' : '';
         }
         $tot = 0;
-        $tot += SubProduct::get_total_category_product($categoryRow->id);
+        if (@$service_slug) {
+            $serviceRecord = Services::find_by_slug($service_slug);
+            $tot += SubProduct::get_total_category_product_service($categoryRow->id, $serviceRecord->id);
+        } else {
+            $tot += SubProduct::get_total_category_product($categoryRow->id);
+        }
         if ($tot > 0) {
             $category_filter .= '
                 <div class="custom-control custom-checkbox">
@@ -91,7 +109,12 @@ if (defined('SEARCH_PAGE')) {
 
     /* activites filter start*/
     $subcategory_filter = '';
-    $subcategoryRec = category::get_subcategory();
+    if (@$service_slug) {
+        $serviceRecord = Services::find_by_slug($service_slug);
+        $subcategoryRec = category::get_subcategory_by_service($serviceRecord->id);
+    } else {
+        $subcategoryRec = category::get_subcategory();
+    }
     foreach ($subcategoryRec as $subcategoryRow) {
         if (@$subcategory_slug) {
             $sel = (@$subcategory_slug == $subcategoryRow->slug) ? 'checked' : '';
@@ -99,7 +122,12 @@ if (defined('SEARCH_PAGE')) {
             $sel = (@$qsubcategory[0] == $subcategoryRow->id) ? 'checked' : '';
         }
         $tot = 0;
-        $tot += SubProduct::get_total_subcategory_product($subcategoryRow->id);
+        if (@$service_slug) {
+            $serviceRecord = Services::find_by_slug($service_slug);
+            $tot += SubProduct::get_total_subcategory_product_service($subcategoryRow->id, $serviceRecord->id);
+        } else {
+            $tot += SubProduct::get_total_subcategory_product($subcategoryRow->id);
+        }
         if ($tot > 0) {
             $subcategory_filter .= '
                 <div class="custom-control custom-checkbox">
@@ -113,7 +141,12 @@ if (defined('SEARCH_PAGE')) {
 
     /* brand filter start*/
     $brand_filter = '';
-    $brandRec = Brand::get_brand();
+    if (@$service_slug) {
+        $serviceRecord = Services::find_by_slug($service_slug);
+        $brandRec = Brand::get_brand_service($serviceRecord->id);
+    } else {
+        $brandRec = Brand::get_brand();
+    }
     foreach ($brandRec as $brandRow) {
         if (@$brand_slug) {
             $sel = (@$brand_slug == $brandRow->slug) ? 'checked' : '';
@@ -121,7 +154,12 @@ if (defined('SEARCH_PAGE')) {
             $sel = @in_array($brandRow->id, @$qbrand) ? 'checked' : '';
         }
         $tot = 0;
-        $tot += SubProduct::get_total_brand_product($brandRow->id);
+        if (@$service_slug) {
+            $serviceRecord = Services::find_by_slug($service_slug);
+            $tot += SubProduct::get_total_brand_product_service($brandRow->id,$serviceRecord->id);
+        } else {
+            $tot += SubProduct::get_total_brand_product($brandRow->id);
+        }
         if ($tot > 0) {
             $brand_filter .= '
                 <div class="custom-control custom-checkbox">
@@ -183,10 +221,10 @@ if (defined('SEARCH_PAGE')) {
                     <h2>Filters</h2>
                     
                     <form action="' . BASE_URL . 'searchlist" method="post" id="search_form">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>Type:</label><br>
                             ' . $type_filter . '
-                        </div>   
+                        </div>  --> 
                         <div class="form-group">
                             <label>Services:</label><br>
                             ' . $service_filter . '
@@ -916,20 +954,19 @@ if (defined('SEARCH_PAGE')) {
         $url = BASE_URL.'pages / errors';
         redirect_to($url);
     }*/
-    $maxs = SubProduct::get_max_price();
 
+    $maxs = SubProduct::get_max_price();
     foreach ($maxs as $max) {
         $maxprice = $max->discount1;
     }
-    $mins = SubProduct::get_min_price();
 
+    $mins = SubProduct::get_min_price();
     foreach ($mins as $min) {
         if ($min->discount1 == 0) {
             $minprice = $min->price1;
         } else {
             $minprice = $min->discount1;
         }
-
     }
     //   pr($min);
 

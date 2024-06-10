@@ -29,7 +29,19 @@ class category extends DatabaseObject
     public static function get_category()
     {
         global $db;
-        $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1 AND parentId=0 ORDER BY sortorder DESC ";
+        $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1 AND parentId=0 ORDER BY title ASC ";
+        return self::find_by_sql($sql);
+    }
+
+    public static function get_category_by_service($service_id = '')
+    {
+        global $db;
+        $sql = "SELECT cat.id, cat.title FROM " . self::$table_name . " AS cat 
+                INNER JOIN tbl_product_sub as prod ON prod.Category = cat.id
+                INNER JOIN tbl_services as serv ON serv.id = prod.service_id
+                WHERE serv.id = {$service_id} AND serv.status=1 AND prod.status=1 AND cat.parentId=0
+                GROUP BY cat.id 
+                ORDER BY cat.title ASC ";
         return self::find_by_sql($sql);
     }
 
@@ -37,6 +49,18 @@ class category extends DatabaseObject
     {
         global $db;
         $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1 AND parentId!=0 ORDER BY sortorder DESC ";
+        return self::find_by_sql($sql);
+    }
+
+    public static function get_subcategory_by_service($service_id = '')
+    {
+        global $db;
+        $sql = "SELECT cat.id, cat.title FROM " . self::$table_name . " AS cat 
+                INNER JOIN tbl_product_sub as prod ON prod.Subcategory = cat.id
+                INNER JOIN tbl_services as serv ON serv.id = prod.service_id
+                WHERE serv.id = {$service_id} AND serv.status=1 AND prod.status=1 AND cat.parentId!=0
+                GROUP BY cat.id 
+                ORDER BY cat.title ASC ";
         return self::find_by_sql($sql);
     }
 
@@ -163,23 +187,35 @@ class category extends DatabaseObject
         return $result;
     }
 
-    public static function get_all_homeselcate($actid = 0, $selid = '')
+    public static function get_all_homeselcate($actid = 0, $service_id = '')
     {
         $result = '';
         $selectedIds = explode(',', $actid);
         if (!empty($selectedIds[0])) {
             foreach ($selectedIds as $selectedId) {
                 global $db;
-                $sql = "SELECT id,title FROM " . self::$table_name . " WHERE parentId ='$selectedId' ORDER BY sortorder DESC";
+                if(!empty($service_id)){
+                    $sql = "SELECT cat.id, cat.title FROM " . self::$table_name . " AS cat 
+                            INNER JOIN tbl_product_sub as prod ON prod.Subcategory = cat.id
+                            INNER JOIN tbl_services as serv ON serv.id = prod.service_id
+                            WHERE cat.parentId='$selectedId' AND serv.id = {$service_id} AND serv.status=1 AND prod.status=1 AND cat.parentId!=0
+                            GROUP BY cat.id 
+                            ORDER BY cat.title ASC ";
+                } else {
+                    $sql = "SELECT id,title FROM " . self::$table_name . " WHERE parentId='$selectedId' ORDER BY sortorder DESC";
+                }
                 $record = self::find_by_sql($sql);
                 if ($record) {
                     foreach ($record as $row) {
-                        $sel = ($selid == $row->id) ? 'selected' : '';
-                        $tot = SubProduct::get_total_subcategory_product($row->id);
+                        if (!empty($service_id)) {
+                            $tot = SubProduct::get_total_subcategory_product_service($row->id, $service_id);
+                        } else {
+                            $tot = SubProduct::get_total_subcategory_product($row->id);
+                        }
                         if ($tot > 0) {
                             $result .= '
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input qsubcategory" name="qsubcategory[]" ' . $sel . ' id="subcat-' . $row->id . '" value="' . $row->id . '">
+                                <input type="checkbox" class="custom-control-input qsubcategory" name="qsubcategory[]" id="subcat-' . $row->id . '" value="' . $row->id . '">
                                 <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                             </div>
                             ';
@@ -188,20 +224,28 @@ class category extends DatabaseObject
                 }
             }
         } else {
-            $record = self::get_subcategory();
+            if(!empty($service_id)){
+                $record = self::get_subcategory_by_service($service_id);
+            }else{
+                $record = self::get_subcategory();
+            }
             if ($record) {
                 foreach ($record as $row) {
-                    $sel = ($selid == $row->id) ? 'selected' : '';
-                    $tot = SubProduct::get_total_subcategory_product($row->id);
+                    if (!empty($service_id)) {
+                        $tot = SubProduct::get_total_subcategory_product_service($row->id, $service_id);
+                    } else {
+                        $tot = SubProduct::get_total_subcategory_product($row->id);
+                    }
                     if ($tot > 0) {
                         $result .= '
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input qsubcategory" name="qsubcategory[]" ' . $sel . ' id="subcat-' . $row->id . '" value="' . $row->id . '">
-                            <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
-                        </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input qsubcategory" name="qsubcategory[]" id="subcat-' . $row->id . '" value="' . $row->id . '">
+                                <label class="custom-control-label d-flex justify-content-between" for="subcat-' . $row->id . '">' . $row->title . ' <span class="checkbox-count">' . $tot . '</span></label>
+                            </div>
                         ';
                     }
                 }
+
             }
         }
         return $result;

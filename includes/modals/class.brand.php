@@ -25,6 +25,17 @@ class Brand extends DatabaseObject
         $sql = "SELECT id, title,slug FROM " . self::$table_name . " WHERE status=1  ORDER BY sortorder DESC ";
         return self::find_by_sql($sql);
     }
+    public static function get_brand_service($serviceId = '')
+    {
+        global $db;
+        $sql = "SELECT b.id, b.title, b.slug FROM " . self::$table_name . " AS b 
+                INNER JOIN tbl_product_sub as prod ON prod.brand = b.id
+                INNER JOIN tbl_services as serv ON serv.id = prod.service_id
+                WHERE serv.id = {$serviceId} AND serv.status=1 AND prod.status=1 
+                GROUP BY b.id 
+                ORDER BY b.title ASC ";
+        return self::find_by_sql($sql);
+    }
     public static function get_by_type($type = "1")
     {
         global $db;

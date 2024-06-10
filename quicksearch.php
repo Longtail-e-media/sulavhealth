@@ -13,8 +13,9 @@ $action = $_REQUEST['action'];
 switch ($action) {
     case "filteractivity":
         $selectedIds = addslashes($_REQUEST['selectedIds']);
-        
-        $rec = category::get_all_homeselcate($selectedIds);
+        $service_check = ($_REQUEST['service_check'] != 'undefined') ? $_REQUEST['service_check'] : '';
+
+        $rec = category::get_all_homeselcate($selectedIds, $service_check);
         echo json_encode(array("action" => "success", "result" => $rec));
         break;
 

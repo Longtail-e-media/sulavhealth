@@ -36,10 +36,26 @@ class SubProduct extends DatabaseObject
         return $tot;
     }
 
+    public static function get_total_category_product_service($catid = '', $servid = '')
+    {
+        global $db;
+        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Category=$catid AND service_id=$servid ORDER BY sortorder DESC ";
+        $tot = $db->num_rows($db->query($sql));
+        return $tot;
+    }
+
     public static function get_total_subcategory_product($id = '')
     {
         global $db;
         $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Subcategory=$id ORDER BY sortorder DESC ";
+        $tot = $db->num_rows($db->query($sql));
+        return $tot;
+    }
+
+    public static function get_total_subcategory_product_service($catid = '', $servid = '')
+    {
+        global $db;
+        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Subcategory=$catid AND service_id=$servid ORDER BY sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -52,6 +68,14 @@ class SubProduct extends DatabaseObject
         return $tot;
     }
 
+    public static function get_total_brand_product_service($brandId = '', $seriveId = '')
+    {
+        global $db;
+        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND service_id=$seriveId ORDER BY sortorder DESC ";
+        $tot = $db->num_rows($db->query($sql));
+        return $tot;
+    }
+
     public static function get_total_service_product($id = '')
     {
         global $db;
@@ -59,6 +83,7 @@ class SubProduct extends DatabaseObject
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
+
     public static function get_max_price()
     {
         global $db;
@@ -71,19 +96,12 @@ class SubProduct extends DatabaseObject
             SELECT MAX(discount1)
             FROM " . self::$table_name . "
         )");
-        
-        
-        
-        
     }
+
     public static function get_min_price()
     {
         global $db;
-        return self::find_by_sql("
-
-
-
-SELECT price1 , discount1
+        return self::find_by_sql("SELECT price1 , discount1
         FROM " . self::$table_name . "
         WHERE price1 = (
             SELECT MIN(price1) 
