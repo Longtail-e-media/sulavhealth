@@ -67,10 +67,12 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' or $_SERVER['REQUEST_METHOD'] == 'GET'
         $CreditCardDetails  = !empty($response_obj->response->Data[0]->CreditCardDetails->CardNumber) ? $response_obj->response->Data[0]->CreditCardDetails->CardNumber : '';
         $TransactionAmount  = $response_obj->response->Data[0]->TransactionAmount->Amount;
         $TransactionDateTime = $response_obj->response->Data[0]->TransactionDateTime;
+        $ResponseDescription = (!empty($response_obj->response->Data[0]->PspResponse->ResponseDescription)) ? $response_obj->response->Data[0]->PspResponse->ResponseDescription : '';
+        $ResponseCode       = (!empty($response_obj->response->Data[0]->PspResponse->ResponseCode)) ? $response_obj->response->Data[0]->PspResponse->ResponseCode : '';
         $ip_address         = $_SERVER['REMOTE_ADDR'];
         $d                  = new DateTime('' . $TransactionDateTime . '');
 
-        if (!empty($ApprovalCode)) {
+        if ($ResponseDescription = 'Success' and $ResponseCode = '00' and !empty($ApprovalCode) and $ApprovalCode != '000000') {
             $payment_sql = "
                 UPDATE `tbl_booking_info` SET 
                 `pay_type`      = 'Himalayan Bank',
@@ -92,7 +94,8 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' or $_SERVER['REQUEST_METHOD'] == 'GET'
             $success = 'Transaction Success';
             $message = 'Your booking has been successfully made. We will back you shortly.';
 
-        } else {
+        }
+        else {
             $sql = "UPDATE `tbl_booking_info` 
                     SET 
                         `pay_type`      = 'Himalayan Bank',
@@ -104,6 +107,52 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST' or $_SERVER['REQUEST_METHOD'] == 'GET'
                     WHERE 
                         `id` = '" . $payRecord->id . "'";
             $db->query($sql);
+
+            if ($payRecord->user_id > 0) {
+                $productsArr = [];
+                $sql = "SELECT * FROM tbl_booking_product WHERE booking_id='$payRecord->id' ORDER BY booking_id ASC ";
+                $query = $db->query($sql);
+                $tot = $db->num_rows($query);
+                if ($tot > 0) {
+                    while ($row = $db->fetch_object($query)) {
+                        $pkgRec = SubProduct::find_by_id($row->product_id);
+                        if(!empty($pkgRec)){
+                            $productsArr[] =  $pkgRec->slug;
+                        }
+                    }
+                }
+
+                $sql = "SELECT * FROM tbl_wishlist WHERE user_id={$payRecord->user_id} LIMIT 1";
+                $wishlist = WishList::find_by_sql($sql);
+                if (!empty($wishlist)) {
+                    $wishlistObj = $wishlist[0];
+                    $oldList = unserialize($wishlistObj->data);
+
+                    // Find unique values in $productsArr that are not in $oldList
+                    $uniqueValues = array_diff($productsArr, $oldList);
+
+                    // Merge these unique values into $oldList
+                    $oldList = array_merge($oldList, $uniqueValues);
+
+                    $wishlistObj->data = serialize($oldList);
+                    $wishlistObj->modified_date = registered();
+                    $db->begin();
+                    if ($wishlistObj->save()) {
+                        $db->commit();
+                    }
+                }
+                else {
+                    $record = new WishList();
+                    $record->user_id = $payRecord->user_id;
+                    $record->data = serialize($productsArr);
+                    $record->added_date = registered();
+                    $record->modified_date = registered();
+                    $db->begin();
+                    if ($record->save()) {
+                        $db->commit();
+                    }
+                }
+            }
 
             // $send_email = 1;
             // $hotel_row = $htrow;

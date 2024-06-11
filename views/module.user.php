@@ -163,7 +163,7 @@ if (defined('DASHBOARD_PAGE')) {
         $orders = BookingInfo::find_all_by_user_id($userId, 5);
         if (!empty($orders)) {
             $user_dashboard .= '
-            <h3 class="mb-50">Orders</h3>
+            <h3 class="mb-50">Latest Orders</h3>
                 <div class="table-responsive">
                     <table class="table" id="myTable">
                         <thead>
@@ -209,7 +209,7 @@ if (defined('DASHBOARD_PAGE')) {
             $user_orders .= '
             <h3 class="mb-50">Orders</h3>
                 <div class="table-responsive">
-                    <table class="table" id="myTable">
+                    <table class="table" id="myTable2">
                         <thead>
                         <tr>
                             <th>' . ('Order') . '</th>
@@ -238,7 +238,7 @@ if (defined('DASHBOARD_PAGE')) {
             $user_orders_script .= "
                     <script>
                         $(document).ready(function () {
-                            $('#myTable').DataTable({
+                            $('#myTable2').DataTable({
                                 language: {
                                     url: '" . BASE_URL . "template/web/js/en.json'
                                 }
