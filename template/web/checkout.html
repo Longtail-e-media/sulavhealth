@@ -482,6 +482,8 @@
         var newLatLng = new L.LatLng(lat, long);
         map.panTo(newLatLng);
         marker.setLatLng(newLatLng);
+        $('input[name="shipping_latitude"]').val(lat);
+        $('input[name="shipping_longitude"]').val(long);
     }
 
 </script>

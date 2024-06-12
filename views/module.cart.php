@@ -281,9 +281,13 @@ if (defined('CHECKOUT_PAGE')) {
                                             <select class="nice-selec col-12" name="region" id="region">
                                                 <option value="">' . ("Select District") . '</option>
     ';
-    $districts = Locationn::find_all();
-    foreach ($districts as $district) {
-        $checkout_form .= '<option value="' . $district->title . '" data-dc="' . $district->delivery_charge . '">' . $district->title . '</option>';
+    $sql = "SELECT district_name as district FROM districts ORDER BY district ASC";
+    $query = $db->query($sql);
+    $total = $db->num_rows($query);
+    if ($total > 0) {
+        while ($row = $db->fetch_object($query)) {
+            $checkout_form .= '<option value="' . $row->district . '">' . $row->district . '</option>';
+        }
     }
     $checkout_form .= '
                                             </select>

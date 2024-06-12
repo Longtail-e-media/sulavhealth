@@ -201,10 +201,10 @@
                             if ($record->save()):
                                 $db->commit();
                                 include('create_account_email.php');
-                                $newAccountMsg = 'Your account has been created with email ' . $email . ' and password password12345. Please wait for account verification before you can login.';
+                                $newAccountMsg = ' Your account has been created successfully! Please login with email ' . $email . ' !';
                                 log_action("User [" . $record->first_name . " " . $record->last_name . "] login Created " . $GLOBALS['basic']['addedSuccess'], 1, 3);
                             else:
-                                $newAccountMsg = 'Could not create new account!';
+                                $newAccountMsg = ' Could not create new account!';
                             endif;
                         }
                     }

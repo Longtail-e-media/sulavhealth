@@ -22,7 +22,7 @@ class Brand extends DatabaseObject
     public static function get_brand()
     {
         global $db;
-        $sql = "SELECT id, title,slug FROM " . self::$table_name . " WHERE status=1  ORDER BY sortorder DESC ";
+        $sql = "SELECT id, title,slug FROM " . self::$table_name . " WHERE status=1  ORDER BY title ASC ";
         return self::find_by_sql($sql);
     }
     public static function get_brand_service($serviceId = '')

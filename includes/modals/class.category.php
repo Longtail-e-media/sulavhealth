@@ -48,7 +48,7 @@ class category extends DatabaseObject
     public static function get_subcategory()
     {
         global $db;
-        $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1 AND parentId!=0 ORDER BY sortorder DESC ";
+        $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1 AND parentId!=0 ORDER BY title ASC ";
         return self::find_by_sql($sql);
     }
 
