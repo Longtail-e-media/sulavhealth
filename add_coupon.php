@@ -152,4 +152,18 @@ switch ($_POST['action']) {
         }
         echo json_encode(array('shipping_cost' => $shippingCost));
         break;
+
+    case 'ship_district':
+        $mainlocation = locationn::find_by_title($location);
+        if (!empty($location)) {
+            $locations = locationn::get_all_byparnt($mainlocation->id);
+        } else {
+            $locations = locationn::get_all_bychild();
+        }
+        $result = '<option value="" data-dc="0" data-lat="27.6772614" data-long="85.3161699">Select Shipping District</option>';
+        foreach ($locations as $location) {
+            $result .= '<option value="' . $location->title . '" data-dc="' . $location->delivery_charge . '" data-lat="' . $location->latitude . '" data-long="' . $location->longitude . '">' . $location->title . '</option>';
+        }
+        echo json_encode(array('action' => 'success', 'message' => $result));
+        break;
 }

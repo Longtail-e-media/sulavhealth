@@ -101,3 +101,6 @@ VALUES (1, 'Bhojpur', 1), (2, 'Dhankuta', 1), (3, 'Ilam', 1), (4, 'Jhapa', 1), (
 ALTER TABLE `districts` ADD PRIMARY KEY (`district_id`), ADD KEY `province_id` (`province_id`);
 ALTER TABLE `districts` MODIFY `district_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 ALTER TABLE `districts` ADD CONSTRAINT `districts_ibfk_1` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`province_id`);
+
+-- 2024-06-12
+ALTER TABLE `tbl_location` ADD `parentId` INT NOT NULL AFTER `delivery_charge`;

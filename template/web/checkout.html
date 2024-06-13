@@ -345,6 +345,21 @@
             updateMap(latitude, longitude);
         });
 
+        // shipping District
+        $('#shipping_location').on('change', function () {
+            var selectedOption = $("#shipping_location option:selected").val();
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: base_url + "add_coupon.php",
+                data: "action=ship_district&location=" + selectedOption,
+                success: function (data) {
+                    var msg = eval(data);
+                    $('#shipping_district').html(msg.message);
+                }
+            });
+        });
+
         // Create an account
         $('#create_account').on('click', function () {
             if ($(this).is(':checked')) {
@@ -373,6 +388,7 @@
                 shipping_city: {required: !0},
                 shipping_address: {required: !0},
                 shipping_post_code: {required: !0},
+                shipping_location: {required: !0},
                 create_password: {required: !0},
                 cc_number: {required: !0},
                 cc_cvc: {required: !0},
@@ -399,6 +415,7 @@
                 shipping_city: {required: "Enter your Shipping city"},
                 shipping_address: {required: "Enter your Shipping Address"},
                 shipping_post_code: {required: "Enter your Shipping Post Code"},
+                shipping_location: {required: "Choose your Shipping Location"},
                 create_password: {required: "Enter your Password"},
                 cc_number: {required: "Enter your Credit Card Number"},
                 cc_cvc: {required: "Enter your Credit Card CVC"},

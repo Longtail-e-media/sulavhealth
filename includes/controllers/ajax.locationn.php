@@ -18,6 +18,7 @@
 			
 			// $record->slug 		            = create_slug($_REQUEST['title']);
 			$record->title 		            = $_REQUEST['title'];
+            $record->parentId               = $_REQUEST['parentId'];
             $record->delivery_charge        = $_REQUEST['delivery_charge'];
             $record->latitude               = $_REQUEST['latitude'];
             $record->longitude              = $_REQUEST['longitude'];
@@ -57,6 +58,7 @@
 			
 			// $record->slug 		            = create_slug($_REQUEST['title']);
 			$record->title 		            = $_REQUEST['title'];
+            $record->parentId               = $_REQUEST['parentId'];
             $record->delivery_charge        = $_REQUEST['delivery_charge'];
             $record->latitude               = $_REQUEST['latitude'];
             $record->longitude              = $_REQUEST['longitude'];

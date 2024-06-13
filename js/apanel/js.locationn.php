@@ -124,6 +124,10 @@
         window.location.href = "<?php echo ADMIN_URL?>locationn/list";
     }
 
+    function viewChildlist(Re) {
+        window.location.href = "<?php echo ADMIN_URL?>locationn/list/" + Re;
+    }
+
     /***************************************** Add New *******************************************/
     function addNewlocationn() {
         window.location.href = "<?php echo ADMIN_URL?>locationn/addEdit";

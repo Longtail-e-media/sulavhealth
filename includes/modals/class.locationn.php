@@ -5,10 +5,10 @@ class locationn extends DatabaseObject
 
     protected static $table_name = "tbl_location";
     protected static $db_fields = array(
-        'id', 'slug', 'title', 'delivery_charge', 'latitude', 'longitude', 'image', 'status', 'sortorder', 'added_date', 'modified_date', 'homepage'
+        'id', 'slug', 'title', 'parentId', 'delivery_charge', 'latitude', 'longitude', 'image', 'status', 'sortorder', 'added_date', 'modified_date', 'homepage'
     );
 
-    public $id, $slug, $title, $delivery_charge, $latitude, $longitude, $image, $status, $sortorder, $added_date, $modified_date, $homepage;
+    public $id, $slug, $title, $parentId, $delivery_charge, $latitude, $longitude, $image, $status, $sortorder, $added_date, $modified_date, $homepage;
 
     public static function checkDupliName($title = '')
     {
@@ -60,12 +60,76 @@ class locationn extends DatabaseObject
         return self::find_by_sql($sql);
     }
 
+    static function find_all_byparnt($parentId = 0, $notid = '')
+    {
+        global $db;
+        $cond1 = !empty($notid) ? ' AND id<>' . $notid : '';
+        $sql = "SELECT * FROM " . self::$table_name . " WHERE parentId=$parentId $cond1 ORDER BY sortorder ASC";
+        return self::find_by_sql($sql);
+    }
+
     // Article display
     public static function getArticle($page = "")
     {
         global $db;
         $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE name='{$page}' AND status=1 LIMIT 1");
         return !empty($result_array) ? array_shift($result_array) : false;
+    }
+
+    static function get_all_byparnt($parentId = 0, $notparentId = '')
+    {
+        global $db;
+        $cond1 = !empty($notparentId) ? ' AND id<>' . $notparentId : '';
+        $sql = "SELECT * FROM " . self::$table_name . " WHERE parentId=$parentId  AND status=1 $cond1 ORDER BY sortorder DESC";
+        return self::find_by_sql($sql);
+    }
+
+    static function get_all_bychild($parentId = 0, $room = '')
+    {
+        global $db;
+        $cond1 = !empty($room) ? ' AND id<>' . $room : '';
+        $sql = "SELECT * FROM " . self::$table_name . " WHERE parentId<>$parentId  AND status=1 $cond1 ORDER BY sortorder DESC";
+        return self::find_by_sql($sql);
+    }
+
+    public static function getTotalChild($pid = '')
+    {
+        global $db;
+        $query = "SELECT COUNT(id) AS tot FROM " . self::$table_name . " WHERE parentId= $pid ";
+        $sql = $db->query($query);
+        $ret = $db->fetch_array($sql);
+        return $ret['tot'];
+    }
+
+    public static function get_parentList_bylevel($level = 1, $selid = 0)
+    {
+        global $db;
+        $sql1 = "SELECT id,title FROM " . self::$table_name . " WHERE parentId='0' ORDER BY sortorder ASC";
+        $result = '';
+        $prodtRec1 = self::find_by_sql($sql1);
+
+        $result .= '<select data-placeholder="None" class="chosen-selec" id="parentId" name="parentId">';
+        $result .= '<option value="0">None</option>';
+        /******** First level ********/
+        if ($prodtRec1):
+            foreach ($prodtRec1 as $prodtRow1):
+                $sel1 = ($selid == $prodtRow1->id) ? 'selected' : '';
+                $result .= '<option value="' . $prodtRow1->id . '" ' . $sel1 . '>' . $prodtRow1->title . '</option>';
+                /******** Second level ********/
+                if ($level != 1) {
+                    $sql2 = "SELECT id,title FROM " . self::$table_name . " WHERE parentId='" . $prodtRow1->id . "' ORDER BY sortorder ASC";
+                    $prodtRec2 = self::find_by_sql($sql2);
+                    if ($prodtRec2):
+                        foreach ($prodtRec2 as $prodtRow2):
+                            $sel2 = ($selid == $prodtRow2->id) ? 'selected' : '';
+                            $result .= '<option value="' . $prodtRow2->id . '" ' . $sel2 . '>&nbsp;&nbsp;- ' . $prodtRow2->title . '</option>';
+                        endforeach;
+                    endif;
+                }
+            endforeach;
+        endif;
+        $result .= '</select>';
+        return $result;
     }
 
     /************************** Article menu link  by me ***************************/
@@ -116,6 +180,13 @@ class locationn extends DatabaseObject
     {
         global $db;
         $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE slug='$slug' AND status='1' LIMIT 1");
+        return !empty($result_array) ? array_shift($result_array) : false;
+    }
+
+    static function find_by_title($title = '')
+    {
+        global $db;
+        $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE title='$title' AND status='1' LIMIT 1");
         return !empty($result_array) ? array_shift($result_array) : false;
     }
 

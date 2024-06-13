@@ -320,7 +320,7 @@ if (defined('CHECKOUT_PAGE')) {
                                                     <input type="text" name="shipping_address" placeholder="' . ("Shipping Address") . '">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 mb-30">
+                                            <!--<div class="col-lg-6 col-md-6 mb-30">
                                                 <h6>' . "Shipping Country" . '</h6>
                                                 <div class="input-item">
                                                     <select class="nice-selec col-12" name="shipping_country" id="shipping_country">
@@ -334,6 +334,21 @@ if (defined('CHECKOUT_PAGE')) {
     $checkout_form .= '
                                                     </select>
                                                 </div>
+                                            </div> -->
+                                            <input type="hidden" name="shipping_country" value="Nepal">
+                                            <div class="col-lg-6 col-md-6 mb-30">
+                                                <h6>' . "Shipping Location" . '</h6>
+                                                <div class="input-item">
+                                                    <select class="nice-selec col-12" name="shipping_location" id="shipping_location">
+                                                        <option value="">' . ("Select Shipping Location") . '</option>
+            ';
+    $parentLocations = locationn::get_all_byparnt();
+    foreach ($parentLocations as $country) {
+        $checkout_form .= '<option value="' . $country->title . '">' . $country->title . '</option>';
+    }
+    $checkout_form .= '
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 mb-30">
                                                 <h6>' . ("Shipping District") . '</h6>
@@ -341,7 +356,7 @@ if (defined('CHECKOUT_PAGE')) {
                                                     <select class="nice-selec col-12" name="shipping_district" id="shipping_district">
                                                         <option value="" data-dc="0" data-lat="27.6772614" data-long="85.3161699">' . ("Select Shipping District") . '</option>
             ';
-    $districts = Locationn::find_all();
+    $districts = Locationn::get_all_bychild();
     foreach ($districts as $district) {
         $checkout_form .= '<option value="' . $district->title . '" data-dc="' . $district->delivery_charge . '" data-lat="' . $district->latitude . '" data-long="' . $district->longitude . '">' . $district->title . '</option>';
     }

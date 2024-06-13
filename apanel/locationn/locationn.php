@@ -5,10 +5,17 @@ $moduleId = 26;                // module id >>>>> tbl_modules
 $moduleFoldername = "locationn";        // Image folder name
 
 if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode']) && $_GET['mode'] == "list"):
-   
+    $parentId = (isset($_REQUEST['id']) and !empty($_REQUEST['id'])) ? addslashes($_REQUEST['id']) : 0;
     ?>
     <h3>
         List locations
+        <?php if (!empty($_REQUEST['id'])) { ?>
+            <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
+               onClick="viewlocationnList();">
+                <span class="glyph-icon icon-separator"><i class="glyph-icon icon-arrow-circle-left"></i></span>
+                <span class="button-content"> Back </span>
+            </a>
+        <?php } ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="addNewlocationn();">
             <span class="glyph-icon icon-separator"><i class="glyph-icon icon-plus-square"></i></span>
@@ -25,12 +32,15 @@ if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode'])
                     <th class="text-center"><input class="check-all" type="checkbox"/></th>
                     <th class="text-center">Title</th>
                     <!--<th>Title(Greek)</th>-->
+                    <?php if ($parentId == 0) { ?>
+                        <th class="text-center">Sub category</th>
+                    <?php } ?>
                     <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <?php $records = locationn::find_by_sql("SELECT * FROM " . $moduleTablename . " ORDER BY sortorder DESC ");
+                <?php $records = locationn::find_all_byparnt($parentId);
                 foreach ($records as $key => $record): ?>
                     <tr id="<?php echo $record->id; ?>">
                         <td style="display:none;"><?php echo $key + 1; ?></td>
@@ -43,6 +53,24 @@ if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode'])
                             </div>
                         </td>
                         <!--<td><?php echo $record->title_greek; ?></td>-->
+                        <?php if ($parentId == 0) { ?>
+                            <td class="text-center">
+                                <?php $countChild = locationn::getTotalChild($record->id);
+                                if ($countChild) { ?>
+                                    <a class="primary-bg medium btn loadingbar-demo"
+                                       title="" <?php echo ($countChild) ? 'onClick="viewChildlist(' . $record->id . ');"' : ''; ?>
+                                       href="javascript:void(0);">
+                                    <span class="button-content">
+                                        <span class="badge bg-orange radius-all-4 mrg5R" title=""
+                                              data-original-title="Badge with tooltip"><?php echo $countChild; ?></span>
+                                        <span class="text-transform-upr font-bold font-size-11">View Lists</span>
+                                    </span>
+                                    </a>
+                                <?php } else {
+                                    echo 'N/A';
+                                } ?>
+                            </td>
+                        <?php } ?>
                         <td class="text-center">
                             <?php
                             $statusImage = ($record->status == 1) ? "bg-green" : "bg-red";
@@ -106,6 +134,18 @@ if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode'])
     <div class="example-box">
         <div class="example-code">
             <form action="" class="col-md-12 center-margin" id="articles_frm">
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Parent :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-4">
+                        <?php $Parentview = !empty($locationnInfo->parentId) ? $locationnInfo->parentId : 0;
+                        echo locationn::get_parentList_bylevel(1, $Parentview); ?>
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
