@@ -344,7 +344,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                                                 <div class="ltn__product-details-menu-2">  
                                                                     <ul>
                                                                     <li style="padding-right: 7.28rem;">
-                                                                    <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="" data-cartid="' . $rows['slug'] . '">
+                                                                    <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="" data-cartid="' . $rows['slug'] . '">
                                                                         <i class="far fa-heart"></i>
                                                                     </a>
                                                                 </li>

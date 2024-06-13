@@ -128,7 +128,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
     ?>
 
     <h3>
-        <?php echo (isset($_GET['subid'])) ? 'Edit Sub Product' : 'Add Sub Product'; ?>
+        <?php echo (isset($_GET['subid'])) ? 'Edit' : 'Add'; ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="viewProductList();">
             <span class="glyph-icon icon-separator"><i class="glyph-icon icon-arrow-circle-left"></i></span>
@@ -160,7 +160,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Product Category :
+                            Category :
                         </label>
                     </div>
                     <div class="form-input col-md-4">
@@ -187,7 +187,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Product Sub Category :
+                            Sub Category :
                         </label>
                     </div>
                     <div class="form-input col-md-4">
@@ -204,7 +204,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Product Brand :
+                            Brand :
                         </label>
                     </div>
                     <div class="form-input col-md-4">

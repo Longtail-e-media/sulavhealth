@@ -315,11 +315,6 @@ if (defined('CHECKOUT_PAGE')) {
                                                     <input type="text" name="create_password" id="create_password" placeholder="Password">
                                                 </div>
                                             </div>
-                                            <div class="col-md-12 mb-30">
-                                                <div class="input-item">
-                                                    <input type="text" name="shipping_address" placeholder="' . ("Shipping Address") . '">
-                                                </div>
-                                            </div>
                                             <!--<div class="col-lg-6 col-md-6 mb-30">
                                                 <h6>' . "Shipping Country" . '</h6>
                                                 <div class="input-item">
@@ -362,6 +357,11 @@ if (defined('CHECKOUT_PAGE')) {
     }
     $checkout_form .= '
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-30">
+                                                <div class="input-item">
+                                                    <input type="text" name="shipping_address" placeholder="' . ("Shipping Address") . '">
                                                 </div>
                                             </div>
                                             <div class="col-md-12"><h6>Shipping Location (Choose on Map)</h6><div id="map"></div></div>

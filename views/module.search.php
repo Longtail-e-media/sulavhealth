@@ -880,7 +880,7 @@ if (defined('SEARCH_PAGE')) {
                                                 <div class="ltn__product-details-menu-2">  
                                                     <ul>
                                                     <li style="padding-right: 7.28rem;">
-                                                    <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $rows['slug'] . '">
+                                                    <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $rows['slug'] . '">
                                                         <i class="far fa-heart"></i>
                                                        <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
                                                     </a>
