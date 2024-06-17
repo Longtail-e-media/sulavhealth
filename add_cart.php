@@ -565,7 +565,7 @@ switch ($_POST['action']) {
         $message = '';
         $total = count($_SESSION['cart_detail']);
         $item_id = !empty($_POST['item_id']) ? addslashes($_POST['item_id']) : '';
-        if (!empty($item_id)) {
+        /* if (!empty($item_id)) {
             $item_label = !empty($_POST['item_label']) ? addslashes($_POST['item_label']) : '';
             if (!empty($item_label)) {
                 unset($_SESSION['cart_detail'][$item_id]['product_details'][$item_label]);
@@ -575,6 +575,11 @@ switch ($_POST['action']) {
                 $total = count($_SESSION['cart_detail']);
                 $message = 'Product removed !';
             }
+        } */
+        if (!empty($item_id)) {
+            unset($_SESSION['cart_detail'][$item_id]);
+            $total = count($_SESSION['cart_detail']);
+            $message = 'Product removed !';
         }
 
         $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
