@@ -126,7 +126,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
         $sql .= " AND prod.brand = $bran->id ";
     }
     if (!empty($glprice) and !empty($ghprice)) {
-        $sql .= " AND ( prod.price1 >= $glprice AND prod.price1 <= $ghprice ) ";
+        $sql .= " AND ( (prod.price1 >= $glprice AND prod.price1 <= $ghprice) OR (prod.discount1 >= $glprice AND prod.discount1 <= $ghprice)) ";
     }
     $page = 1;
     $limit = 150000000;
@@ -152,10 +152,10 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
 
             $price_text = '';
             if (!empty($rows['price1']) and (empty($rows['offer_price']))) {
-                $price_text = '<span>' . $rows['currency'] . '' . $rows['price1'] . '</span>';
+                $price_text = '<span>' . $rows['currency'] . ' ' . $rows['price1'] . '</span>';
             }
             if (!empty($rows['discount1'])) {
-                $price_text = '<span>' . $rows['currency'] . '' . $rows['discount1'] . '</span><del>' . $rows['currency'] . '' . $rows['price1'] . '</del>';
+                $price_text = '<span>' . $rows['currency'] . ' ' . $rows['discount1'] . '</span><del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del>';
             }
             $product = SubProduct::find_by_slug($rows['slug']);
             if (!empty($product)) {

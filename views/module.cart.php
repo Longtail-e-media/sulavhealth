@@ -260,9 +260,9 @@ if (defined('CHECKOUT_PAGE')) {
                                         <div class="input-item input-item-phone ltn__custom-icon mb-30">
                                             <input type="text" name="phone" value="' . ((!empty($checkLogin)) ? $checkLogin->contact : '') . '" placeholder="' . CONTACT_PHONE_NUMBER . '">
                                         </div>
-                                                    <div class="input-item">
-                                                        <input type="text" name="address" value="' . ((!empty($checkLogin)) ? $checkLogin->facebook_uid : '') . '" placeholder="' . (($lang == "gr") ? "Διεύθυνση" : "Address") . '">
-                                                    </div>
+                                        <div class="input-item">
+                                            <input type="text" name="address" value="' . ((!empty($checkLogin)) ? $checkLogin->facebook_uid : '') . '" placeholder="' . (($lang == "gr") ? "Διεύθυνση" : "Address") . '">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -292,7 +292,9 @@ if (defined('CHECKOUT_PAGE')) {
     $total = $db->num_rows($query);
     if ($total > 0) {
         while ($row = $db->fetch_object($query)) {
-            $checkout_form .= '<option value="' . $row->district . '">' . $row->district . '</option>';
+            $pdis = ((!empty($checkLogin)) ? $checkLogin->district : '');
+            $sel = (strtolower($pdis) == strtolower($row->district)) ? 'selected' : '';
+            $checkout_form .= '<option value="' . $row->district . '" ' . $sel . '>' . $row->district . '</option>';
         }
     }
     $checkout_form .= '

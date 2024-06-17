@@ -261,15 +261,19 @@ if (defined('SEARCH_PAGE')) {
 
     global $db;
     // header search form
-    if (!empty($search_term)) {
-        $sql = "SELECT prod.*
+    if (!empty($searchkey)) {
+        /*$sql = "SELECT prod.*
             FROM tbl_product_sub as prod  
             INNER JOIN tbl_services as serv ON prod.service_id = serv.id 
             INNER JOIN tbl_category as cat ON prod.Category = cat.id 
             WHERE prod.status=1 AND 
-              ( prod.title LIKE '%" . $search_term . "%' OR 
-                serv.title LIKE '%" . $search_term . "%' OR 
-                cat.title LIKE '%" . $search_term . "%' ) ";
+              ( prod.title LIKE '%" . $searchkey . "%' OR
+                serv.title LIKE '%" . $searchkey . "%' OR
+                cat.title LIKE '%" . $searchkey . "%' ) ";*/
+        $sql = "SELECT prod.*
+            FROM tbl_product_sub as prod  
+            WHERE prod.status=1 AND 
+              ( prod.title LIKE '%" . $searchkey . "%' ) ";
     } else {
         $sql = "SELECT * FROM tbl_product_sub as prod WHERE status=1 ";
     }

@@ -102,7 +102,11 @@ $brandmenu .= '<div class="brand-filter search-container p-2">
 </div>';
 // pr($brands);
 foreach ($brands as $brand) {
-    $brandmenu .= '<a class="dropdown-item brand-filter-menu" href="' . BASE_URL . 'search/' . $brand->slug . '" item="' . $brand->title . '">' . $brand->title . '</a>';
+    $tot = 0;
+    $tot += SubProduct::get_total_brand_product($brand->id);
+    if ($tot > 0) {
+        $brandmenu .= '<a class="dropdown-item brand-filter-menu" href="' . BASE_URL . 'search/' . $brand->slug . '" item="' . $brand->title . '">' . $brand->title . '</a>';
+    }
 }
 if ((defined('CHECKOUT_PAGE')) || (defined('CART_PAGE'))) {
 

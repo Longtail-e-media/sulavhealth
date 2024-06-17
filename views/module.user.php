@@ -269,6 +269,7 @@ if (defined('DASHBOARD_PAGE')) {
 
         if (!empty($wishes)) {
             $prods = unserialize($wishes->data);
+            $prods = array_reverse($prods);
             if (!empty($prods)) {
                 foreach ($prods as $prod) {
                     $productRow = SubProduct::find_by_slug($prod);
