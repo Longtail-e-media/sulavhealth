@@ -63,8 +63,7 @@ if (!empty($bookingRec)) {
     $client_header .= '<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	                            <tr>
 	                                <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
-	                                ' . ('Thank you for choosing '.$siteRegulars->sitetitle.' for your purchases. Your order has been registered and will
-                                    be executed after its acceptance by the store manager, after checking for any errors or omissions.') . '
+	                                ' . ('Thank you for choosing us. '.$siteRegulars->sitetitle.'. Your order has been registered.') . '
 	                                </td>
 	                            </tr>
 	                        </table>';
@@ -415,7 +414,16 @@ if (!empty($bookingRec)) {
     $ccusermail = User::field_by_id(1, 'optional_email');
 
     $mail = new PHPMailer();
-    $mail->CharSet = 'UTF-8';
+//    $mail->CharSet = 'UTF-8';
+
+    $mail->IsSMTP();
+    $mail->SMTPAuth     = true;
+    $mail->SMTPSecure   = "ssl";
+    $mail->Host         = "mail.sulavhealth.com";
+    $mail->Port         = "465";
+    $mail->Username     = 'smtp@sulavhealth.com';
+    $mail->Password     = 'G4coCsdHj.Ay';
+
     $mail->SetFrom($email, $fullname);
     $mail->AddReplyTo($email, $fullname);
     $mail->AddAddress($site_email, $site_name);
@@ -439,7 +447,16 @@ if (!empty($bookingRec)) {
     if ($success) {
         //Reply to Customer
         $replymail = new PHPMailer();
-        $replymail->CharSet = 'UTF-8';
+//        $replymail->CharSet = 'UTF-8';
+
+        $replymail->IsSMTP();
+        $replymail->SMTPAuth     = true;
+        $replymail->SMTPSecure   = "ssl";
+        $replymail->Host         = "mail.sulavhealth.com";
+        $replymail->Port         = "465";
+        $replymail->Username     = 'smtp@sulavhealth.com';
+        $replymail->Password     = 'G4coCsdHj.Ay';
+
         $replymail->SetFrom($site_email, $site_name);
         $replymail->AddReplyTo($site_email, $site_name);
         $replymail->AddAddress($email, $fullname);

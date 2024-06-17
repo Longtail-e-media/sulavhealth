@@ -343,7 +343,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                         </div>
                                                                 <div class="ltn__product-details-menu-2">  
                                                                     <ul>
-                                                                    <li style="padding-right: 7.28rem;">
+                                                                    <li style="padding-right: 16.28rem;">
                                                                     <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="" data-cartid="' . $rows['slug'] . '">
                                                                         <i class="far fa-heart"></i>
                                                                     </a>
@@ -357,9 +357,9 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                                                         </li>
                                                                       
                                                                         
-                                                                        <li>
+                                                                        <!--<li>
                                                                         <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> CHECKOUT</a>
-                                                                        </li>
+                                                                        </li>-->
                 
                                                                        
                                                                        

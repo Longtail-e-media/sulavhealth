@@ -879,7 +879,7 @@ if (defined('SEARCH_PAGE')) {
         </div>
                                                 <div class="ltn__product-details-menu-2">  
                                                     <ul>
-                                                    <li style="padding-right: 7.28rem;">
+                                                    <li style="padding-right: 16.28rem;">
                                                     <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $rows['slug'] . '">
                                                         <i class="far fa-heart"></i>
                                                        <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
@@ -894,9 +894,9 @@ if (defined('SEARCH_PAGE')) {
                                                         </li>
                                                       
                                                         
-                                                        <li>
+                                                        <!--<li>
                                                         <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
-                                                        </li>
+                                                        </li>-->
 
                                                        
                                                        

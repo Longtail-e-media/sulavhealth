@@ -239,6 +239,12 @@ if (defined('CHECKOUT_PAGE')) {
                         <div class="ltn__checkout-single-content mt-50">
                             <h4 class="title-2">' . ("Billing Details") . '</h4>
                             <div class="ltn__checkout-single-content-info">
+    ';
+    if (empty($checkLogin)) {
+        $checkout_form .= '<div class="mb-20"><a href="' . BASE_URL . 'login" class="text-primary" style="text-decoration: underline;">ALREADY HAVE AN ACCOUNT ?</a></div>';
+    }
+    $checkout_form .= '
+                                
                                 <h6>' . ("Personal Information") . '</h6>
                                 <div class="row">
                                     <div class="col-md-12 mb-30">
