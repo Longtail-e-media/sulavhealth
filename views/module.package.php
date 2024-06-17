@@ -504,7 +504,7 @@ if (defined('PACKAGES_PAGE')) {
                     }
                     $prodPrice = (!empty($product->discount1) and $product->discount1 > 0) ? $product->discount1 : $product->price1;
                     $pkg_add_to_cart_modal .= '
-                                                <input type="hidden" name="product_qnt_1" value="' . $product->qnt1 . '">
+                                                <input type="hidden" name="product_qnt_1" value="' . $product->slug . '">
                                                 <input type="hidden" name="product_net_qnt_1" value="' . $product->netqnt1 . '">
                                                 <label class="form-check-label">' . $product->netqnt1 . '</label>
                                             </div>
@@ -824,7 +824,7 @@ if (defined('PACKAGES_PAGE')) {
                     }
                     $prodPrice = (!empty($product->discount1) and $product->discount1 > 0) ? $product->discount1 : $product->price1;
                     $pkg_add_to_cart_modal .= '
-                                                <input type="hidden" name="product_qnt_1" value="' . $product->qnt1 . '">
+                                                <input type="hidden" name="product_qnt_1" value="' . $product->slug . '">
                                                 <input type="hidden" name="product_net_qnt_1" value="' . $product->netqnt1 . '">
                                                 <label class="form-check-label">' . $product->netqnt1 . '</label>
                                             </div>

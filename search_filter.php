@@ -315,7 +315,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             }
             $prodPrice = (!empty($rows['discount1']) and $rows['discount1'] > 0) ? $rows['discount1'] : $rows['price1'];
 
-            $home_gift_sets_modal .= '<input type="hidden" name="product_qnt_1" value="' . $rows['qnt1'] . '">
+            $home_gift_sets_modal .= '<input type="hidden" name="product_qnt_1" value="' . $rows['slug'] . '">
                                         <input type="hidden" name="product_net_qnt_1" value="' . $rows['netqnt1'] . '">
                                         <label class="form-check-label">' . $rows['netqnt1'] . '</label>
                                     </div>

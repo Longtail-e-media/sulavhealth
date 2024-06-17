@@ -47,7 +47,8 @@ switch ($_POST['action']) {
                                 $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['price'] = $price_value;
                                 $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['quantity'] = $qnt;
                                 $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['total'] = $newTotal;
-                            } else {
+                            }
+                            else {
                                 $netqnt = 'product_net_qnt_' . $product_check[$i];
                                 $price = 'product_price_' . $product_check[$i];
                                 $quantity = 'product_qty_' . $product_check[$i];
@@ -64,7 +65,8 @@ switch ($_POST['action']) {
                             }
                         }
                     }
-                } else {
+                }
+                else {
                     // check if product has multiple checkboxes
                     if (is_array($product_check) and !empty($product_check)) {
                         $pDetails = array();
@@ -85,7 +87,8 @@ switch ($_POST['action']) {
                             );
                     }
                 }
-            } else {
+            }
+            else {
                 if (is_array($product_check) and !empty($product_check)) {
                     $pDetails = array();
                     $lengthArr = sizeof($product_check);
