@@ -115,10 +115,24 @@ class SubProduct extends DatabaseObject
         FROM " . self::$table_name . "
         WHERE price1 = (
             SELECT MAX(price1)
-            FROM " . self::$table_name . " 
+            FROM " . self::$table_name . "  WHERE status = 1
         ) AND discount1 = (
             SELECT MAX(discount1)
-            FROM " . self::$table_name . "
+            FROM " . self::$table_name . " WHERE status = 1
+        )");
+    }
+
+    public static function get_max_price_by_field($field='',$id='')
+    {
+        global $db;
+        return self::find_by_sql("SELECT price1 , discount1
+        FROM " . self::$table_name . "
+        WHERE price1 = (
+            SELECT MAX(price1)
+            FROM " . self::$table_name . " WHERE {$field}={$id} AND status = 1
+        ) AND discount1 = (
+            SELECT MAX(discount1)
+            FROM " . self::$table_name . " WHERE {$field}={$id} AND status = 1
         )");
     }
 
@@ -129,10 +143,24 @@ class SubProduct extends DatabaseObject
         FROM " . self::$table_name . "
         WHERE price1 = (
             SELECT MIN(price1) 
-            FROM " . self::$table_name . " WHERE price1 IS NOT NULL AND price1 <> 0
+            FROM " . self::$table_name . " WHERE price1 IS NOT NULL AND price1 <> 0 AND status = 1
         ) OR discount1 = (
             SELECT MIN(discount1)
-            FROM " . self::$table_name . " WHERE discount1 IS NOT NULL AND discount1 <> 0
+            FROM " . self::$table_name . " WHERE discount1 IS NOT NULL AND discount1 <> 0 AND status = 1
+        )");
+    }
+
+    public static function get_min_price_by_field($field='',$id='')
+    {
+        global $db;
+        return self::find_by_sql("SELECT price1 , discount1
+        FROM " . self::$table_name . "
+        WHERE price1 = (
+            SELECT MIN(price1) 
+            FROM " . self::$table_name . " WHERE price1 IS NOT NULL AND price1 <> 0 AND {$field}={$id} AND status = 1
+        ) OR discount1 = (
+            SELECT MIN(discount1)
+            FROM " . self::$table_name . " WHERE discount1 IS NOT NULL AND discount1 <> 0 AND {$field}={$id} AND status = 1
         )");
     }
 

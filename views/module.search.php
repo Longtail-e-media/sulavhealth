@@ -89,8 +89,7 @@ if (defined('SEARCH_PAGE')) {
     if (@$service_slug) {
         $serviceRecord = Services::find_by_slug($service_slug);
         $categoryRec = category::get_category_by_service($serviceRecord->id);
-    }
-    elseif (!empty($brand_slug)) {
+    } elseif (!empty($brand_slug)) {
         $brandRec = Brand::find_by_slug($brand_slug);
         $categoryRec = category::get_category_by_brand($brandRec->id);
     } else {
@@ -127,8 +126,7 @@ if (defined('SEARCH_PAGE')) {
     if (@$service_slug) {
         $serviceRecord = Services::find_by_slug($service_slug);
         $subcategoryRec = category::get_subcategory_by_service($serviceRecord->id);
-    }
-    elseif (!empty($brand_slug)) {
+    } elseif (!empty($brand_slug)) {
         $brandRec = Brand::find_by_slug($brand_slug);
         $subcategoryRec = category::get_subcategory_by_brand($brandRec->id);
     } else {
@@ -987,21 +985,38 @@ if (defined('SEARCH_PAGE')) {
         redirect_to($url);
     }*/
 
-    $maxs = SubProduct::get_max_price();
+    if (!empty($service_slug)) {
+        $serviceRecord = Services::find_by_slug($service_slug);
+        $maxs = SubProduct::get_max_price_by_field('service_id', $serviceRecord->id);
+    } elseif (!empty($brand_slug)) {
+        $brandRec = Brand::find_by_slug($brand_slug);
+        $maxs = SubProduct::get_max_price_by_field('brand', $brandRec->id);
+    } else {
+        $maxs = SubProduct::get_max_price();
+    }
     foreach ($maxs as $max) {
         $maxprice = $max->discount1;
     }
 
-    $mins = SubProduct::get_min_price();
+    if (!empty($service_slug)) {
+        $serviceRecord = Services::find_by_slug($service_slug);
+        $mins = SubProduct::get_min_price_by_field('service_id', $serviceRecord->id);
+    } elseif (!empty($brand_slug)) {
+        $brandRec = Brand::find_by_slug($brand_slug);
+        $mins = SubProduct::get_min_price_by_field('brand', $brandRec->id);
+    } else {
+        $mins = SubProduct::get_min_price();
+    }
+    $pa = $da = [];
     foreach ($mins as $min) {
         if ($min->discount1 == 0) {
-            $minprice = $min->price1;
+            $pa[] = $min->price1;
         } else {
-            $minprice = $min->discount1;
+            $da[] = $min->discount1;
         }
     }
-    //   pr($min);
-
+    $combinedArray = array_merge($pa, $da);
+    $minprice = min($combinedArray);
 }
 
 $jVars['module:search-searchform'] = $resisearch;
