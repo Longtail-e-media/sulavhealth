@@ -42,6 +42,18 @@ class Services extends DatabaseObject
         return $result_array;
     }
 
+    public static function get_services_by_brand($brandId = '')
+    {
+        global $db;
+        $sql = "SELECT s.id, s.title, s.slug FROM " . self::$table_name . " AS s 
+                INNER JOIN tbl_product_sub as prod ON prod.service_id = s.id
+                INNER JOIN tbl_brands as b ON b.id = prod.brand
+                WHERE b.id = {$brandId} AND s.status=1 AND prod.status=1 
+                GROUP BY s.id 
+                ORDER BY s.title ASC ";
+        return self::find_by_sql($sql);
+    }
+
     public static function checkDupliName($title = '')
     {
         global $db;

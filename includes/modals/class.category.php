@@ -45,6 +45,18 @@ class category extends DatabaseObject
         return self::find_by_sql($sql);
     }
 
+    public static function get_category_by_brand($brand_id = '')
+    {
+        global $db;
+        $sql = "SELECT cat.id, cat.title FROM " . self::$table_name . " AS cat 
+                INNER JOIN tbl_product_sub as prod ON prod.Category = cat.id
+                INNER JOIN tbl_brands as b ON b.id = prod.brand
+                WHERE b.id = {$brand_id} AND b.status=1 AND prod.status=1 AND cat.parentId=0
+                GROUP BY cat.id 
+                ORDER BY cat.title ASC ";
+        return self::find_by_sql($sql);
+    }
+
     public static function get_subcategory()
     {
         global $db;
@@ -59,6 +71,18 @@ class category extends DatabaseObject
                 INNER JOIN tbl_product_sub as prod ON prod.Subcategory = cat.id
                 INNER JOIN tbl_services as serv ON serv.id = prod.service_id
                 WHERE serv.id = {$service_id} AND serv.status=1 AND prod.status=1 AND cat.parentId!=0
+                GROUP BY cat.id 
+                ORDER BY cat.title ASC ";
+        return self::find_by_sql($sql);
+    }
+
+    public static function get_subcategory_by_brand($brand_id = '')
+    {
+        global $db;
+        $sql = "SELECT cat.id, cat.title FROM " . self::$table_name . " AS cat 
+                INNER JOIN tbl_product_sub as prod ON prod.Subcategory = cat.id
+                INNER JOIN tbl_brands as b ON b.id = prod.brand
+                WHERE b.id = {$brand_id} AND b.status=1 AND prod.status=1 AND cat.parentId!=0
                 GROUP BY cat.id 
                 ORDER BY cat.title ASC ";
         return self::find_by_sql($sql);
@@ -187,18 +211,25 @@ class category extends DatabaseObject
         return $result;
     }
 
-    public static function get_all_homeselcate($actid = 0, $service_id = '')
+    public static function get_all_homeselcate($actid = 0, $service_id = '', $brand_id = '')
     {
         $result = '';
         $selectedIds = explode(',', $actid);
         if (!empty($selectedIds[0])) {
             foreach ($selectedIds as $selectedId) {
                 global $db;
-                if(!empty($service_id)){
+                if (!empty($service_id)) {
                     $sql = "SELECT cat.id, cat.title FROM " . self::$table_name . " AS cat 
                             INNER JOIN tbl_product_sub as prod ON prod.Subcategory = cat.id
                             INNER JOIN tbl_services as serv ON serv.id = prod.service_id
                             WHERE cat.parentId='$selectedId' AND serv.id = {$service_id} AND serv.status=1 AND prod.status=1 AND cat.parentId!=0
+                            GROUP BY cat.id 
+                            ORDER BY cat.title ASC ";
+                } elseif (!empty($brand_id)) {
+                    $sql = "SELECT cat.id, cat.title FROM " . self::$table_name . " AS cat 
+                            INNER JOIN tbl_product_sub as prod ON prod.Subcategory = cat.id
+                            INNER JOIN tbl_brands as b ON b.id = prod.brand
+                            WHERE cat.parentId='$selectedId' AND b.id = {$brand_id} AND b.status=1 AND prod.status=1 AND cat.parentId!=0
                             GROUP BY cat.id 
                             ORDER BY cat.title ASC ";
                 } else {
@@ -209,6 +240,8 @@ class category extends DatabaseObject
                     foreach ($record as $row) {
                         if (!empty($service_id)) {
                             $tot = SubProduct::get_total_subcategory_product_service($row->id, $service_id);
+                        } elseif (!empty($brand_id)) {
+                            $tot = SubProduct::get_total_subcategory_brand_product($brand_id, $row->id);
                         } else {
                             $tot = SubProduct::get_total_subcategory_product($row->id);
                         }
@@ -224,15 +257,19 @@ class category extends DatabaseObject
                 }
             }
         } else {
-            if(!empty($service_id)){
+            if (!empty($service_id)) {
                 $record = self::get_subcategory_by_service($service_id);
-            }else{
+            } elseif (!empty($brand_id)) {
+                $record = self::get_subcategory_by_brand($brand_id);
+            } else {
                 $record = self::get_subcategory();
             }
             if ($record) {
                 foreach ($record as $row) {
                     if (!empty($service_id)) {
                         $tot = SubProduct::get_total_subcategory_product_service($row->id, $service_id);
+                    } elseif(!empty($brand_id)){
+                        $tot = SubProduct::get_total_subcategory_brand_product($brand_id, $row->id);
                     } else {
                         $tot = SubProduct::get_total_subcategory_product($row->id);
                     }

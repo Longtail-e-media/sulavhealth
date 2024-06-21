@@ -287,12 +287,15 @@
         // checking if we're on Service page, gotten by clicking "Service" from header
         const service_check = $('input[name="flag_service_check"]').val();
 
+        // checking if we're on Brand page, gotten by clicking "Brands" dropdown from header
+        const brand_check = $('input[name="flag_brand_check"]').val();
+
         $('.subfilter').html('<option>Loading...</option>');
         $.ajax({
             type: "POST",
             dataType: "JSON",
             url: base_url + "quicksearch.php",
-            data: "action=filteractivity&selectedIds=" + checkedValues + "&service_check=" + service_check,
+            data: "action=filteractivity&selectedIds=" + checkedValues + "&service_check=" + service_check + "&brand_check=" + brand_check,
             success: function (data) {
                 var msg = eval(data);
                 if (msg.action == 'success') {
@@ -302,6 +305,7 @@
         });
         return !1
     });
+
     $('body').on('click', '.qtype, .qcategory, .qactivities, .qsubcategory, .qservice, .qbrand, .gprice', function () {
         // checking if we're on Service page, gotten by clicking "Service" from header
         const service_check = $('input[name="flag_service_check"]').val();

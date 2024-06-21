@@ -128,6 +128,13 @@ class Brand extends DatabaseObject
         return !empty($result_array) ? array_shift($result_array) : false;
     }
 
+    static function get_brands_by_slug($slug = '')
+    {
+        global $db;
+        $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE slug='$slug' LIMIT 1");
+        return $result_array;
+    }
+
     //Get sortorder by id
     public static function field_by_id($id = 0, $fields = "")
     {

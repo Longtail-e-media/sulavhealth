@@ -36,6 +36,14 @@ class SubProduct extends DatabaseObject
         return $tot;
     }
 
+    public static function get_total_category_brand_product($brandId = '', $categoryId = '')
+    {
+        global $db;
+        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND Category=$categoryId ORDER BY sortorder DESC ";
+        $tot = $db->num_rows($db->query($sql));
+        return $tot;
+    }
+
     public static function get_total_category_product_service($catid = '', $servid = '')
     {
         global $db;
@@ -48,6 +56,14 @@ class SubProduct extends DatabaseObject
     {
         global $db;
         $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Subcategory=$id ORDER BY sortorder DESC ";
+        $tot = $db->num_rows($db->query($sql));
+        return $tot;
+    }
+
+    public static function get_total_subcategory_brand_product($brandId = '', $subCategoryId = '')
+    {
+        global $db;
+        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND Subcategory=$subCategoryId ORDER BY sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -80,6 +96,14 @@ class SubProduct extends DatabaseObject
     {
         global $db;
         $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND service_id=$id ORDER BY sortorder DESC ";
+        $tot = $db->num_rows($db->query($sql));
+        return $tot;
+    }
+
+    public static function get_total_service_brand_product($brandId = '', $servid = '')
+    {
+        global $db;
+        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND service_id=$servid ORDER BY sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }

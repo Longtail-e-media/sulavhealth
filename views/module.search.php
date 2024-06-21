@@ -51,6 +51,9 @@ if (defined('SEARCH_PAGE')) {
     $service_filter = '';
     if (@$service_slug) {
         $serviceRec = Services::get_services_by_slug($service_slug);
+    } elseif (!empty($brand_slug)) {
+        $brandRec = Brand::find_by_slug($brand_slug);
+        $serviceRec = Services::get_services_by_brand($brandRec->id);
     } else {
         $serviceRec = Services::get_services();
     }
@@ -64,7 +67,12 @@ if (defined('SEARCH_PAGE')) {
             $sel = @in_array($serviceRow->id, @$qservice) ? 'checked' : '';
         }
         $tot = 0;
-        $tot += SubProduct::get_total_service_product($serviceRow->id);
+        if (@$brand_slug) {
+            $brandRec = Brand::find_by_slug($brand_slug);
+            $tot += SubProduct::get_total_service_brand_product($brandRec->id, $serviceRow->id);
+        } else {
+            $tot += SubProduct::get_total_service_product($serviceRow->id);
+        }
         if ($tot > 0) {
             $service_filter .= '
                 <div class="custom-control custom-checkbox">
@@ -81,6 +89,10 @@ if (defined('SEARCH_PAGE')) {
     if (@$service_slug) {
         $serviceRecord = Services::find_by_slug($service_slug);
         $categoryRec = category::get_category_by_service($serviceRecord->id);
+    }
+    elseif (!empty($brand_slug)) {
+        $brandRec = Brand::find_by_slug($brand_slug);
+        $categoryRec = category::get_category_by_brand($brandRec->id);
     } else {
         $categoryRec = category::get_category();
     }
@@ -94,6 +106,9 @@ if (defined('SEARCH_PAGE')) {
         if (@$service_slug) {
             $serviceRecord = Services::find_by_slug($service_slug);
             $tot += SubProduct::get_total_category_product_service($categoryRow->id, $serviceRecord->id);
+        } elseif (@$brand_slug) {
+            $brandRec = Brand::find_by_slug($brand_slug);
+            $tot += SubProduct::get_total_category_brand_product($brandRec->id, $categoryRow->id);
         } else {
             $tot += SubProduct::get_total_category_product($categoryRow->id);
         }
@@ -112,6 +127,10 @@ if (defined('SEARCH_PAGE')) {
     if (@$service_slug) {
         $serviceRecord = Services::find_by_slug($service_slug);
         $subcategoryRec = category::get_subcategory_by_service($serviceRecord->id);
+    }
+    elseif (!empty($brand_slug)) {
+        $brandRec = Brand::find_by_slug($brand_slug);
+        $subcategoryRec = category::get_subcategory_by_brand($brandRec->id);
     } else {
         $subcategoryRec = category::get_subcategory();
     }
@@ -125,6 +144,9 @@ if (defined('SEARCH_PAGE')) {
         if (@$service_slug) {
             $serviceRecord = Services::find_by_slug($service_slug);
             $tot += SubProduct::get_total_subcategory_product_service($subcategoryRow->id, $serviceRecord->id);
+        } elseif (@$brand_slug) {
+            $brandRec = Brand::find_by_slug($brand_slug);
+            $tot += SubProduct::get_total_subcategory_brand_product($brandRec->id, $subcategoryRow->id);
         } else {
             $tot += SubProduct::get_total_subcategory_product($subcategoryRow->id);
         }
@@ -144,26 +166,32 @@ if (defined('SEARCH_PAGE')) {
     if (@$service_slug) {
         $serviceRecord = Services::find_by_slug($service_slug);
         $brandRec = Brand::get_brand_service($serviceRecord->id);
+    } elseif (!empty($brand_slug)) {
+        $brandRec = Brand::get_brands_by_slug($brand_slug);
     } else {
         $brandRec = Brand::get_brand();
     }
     foreach ($brandRec as $brandRow) {
+        $disabled = $hidden = '';
         if (@$brand_slug) {
             $sel = (@$brand_slug == $brandRow->slug) ? 'checked' : '';
+            $disabled = 'disabled';
+            $hidden = '<input type="hidden" name="qbrand[]" value="' . $brandRow->id . '"><input type="hidden" name="flag_brand_check" value="' . $brandRow->id . '">';
         } else {
             $sel = @in_array($brandRow->id, @$qbrand) ? 'checked' : '';
         }
         $tot = 0;
         if (@$service_slug) {
             $serviceRecord = Services::find_by_slug($service_slug);
-            $tot += SubProduct::get_total_brand_product_service($brandRow->id,$serviceRecord->id);
+            $tot += SubProduct::get_total_brand_product_service($brandRow->id, $serviceRecord->id);
         } else {
             $tot += SubProduct::get_total_brand_product($brandRow->id);
         }
         if ($tot > 0) {
             $brand_filter .= '
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input qbrand" name="qbrand[]" ' . $sel . ' id="bran-' . $brandRow->id . '" value="' . $brandRow->id . '">
+                    <input type="checkbox" class="custom-control-input qbrand" name="qbrand[]" ' . $sel . ' id="bran-' . $brandRow->id . '" value="' . $brandRow->id . '" ' . $disabled . '>
+                    ' . $hidden . '
                     <label class="custom-control-label d-flex justify-content-between" for="bran-' . $brandRow->id . '">' . $brandRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
             ';
