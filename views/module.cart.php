@@ -32,6 +32,23 @@ if (defined('CART_PAGE')) {
             if ($tot > 0) {
                 $cart_detail .= '
                     <div class="shoping-cart-table table-responsive">
+                        <div>
+                            <ul>
+                                <li>Order ID: ' . $order->accesskey . '</li>
+                                <li>Total: ' . $order->currency . ' ' . $order->pay_amt . '</li>
+                                <li>Full Name: ' . $order->person_fname . ' ' . $order->person_lname . '</li>
+                                <li>Email: ' . $order->person_email . '</li>
+                                <li>Contact: ' . $order->person_phone . '</li>
+                                <li>Country: ' . $order->person_country . '</li>
+                                <li>District: ' . $order->person_mname . '</li>
+                                <li>Address: ' . $order->person_address . '</li>
+                                <li>Shipping Country: ' . $order->shipping_country . '</li>
+                                <li>Shipping District: ' . $order->shipping_district . '</li>
+                                <li>Shipping Address: ' . $order->person_shipping_address . '</li>
+                                <li>Order Date: ' . date('F d, Y', strtotime($order->added_date)) . '</li>
+                                <li>Order Notes: ' . $order->person_comment . '</li>
+                            </ul>
+                        </div>
                         <table class="table">
                             <!--<thead>
                                 <th class="cart-product-image">Image</th>
@@ -62,7 +79,7 @@ if (defined('CART_PAGE')) {
                                     <img src="' . $img . '" alt="' . ($product->title) . '">
                                 </td>
                                 <td class="cart-product-info">
-                                    <h4><a href="' . BASE_URL . 'product/' . $product->slug . '">' . ($product->title) . '</a></h4>
+                                    <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' . ($product->title) . '</a></h4>
                                 </td>
                                 <td class="cart-product-label">
                                     ' . $row->product_netqnt . '
@@ -86,7 +103,8 @@ if (defined('CART_PAGE')) {
                 ';
             }
         }
-    } else {
+    }
+    else {
         $cart_detail .= '
             <div class="shoping-cart-table table-responsive">
                 <table class="table">

@@ -168,18 +168,32 @@ if (defined('DASHBOARD_PAGE')) {
                     <table class="table" id="myTable">
                         <thead>
                         <tr>
-                            <th>' . ('Order') . '</th>
-                            <th>' . ('Date') . '</th>
-                            <th>' . ('Total') . '</th>
-                            <th>' . ('Action') . '</th>
+                            <th>Order</th>
+                            <th>Order ID</th>
+                            <th>Products</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
             ';
             foreach ($orders as $k => $order) {
+                $product_list = '';
+                $sql = "SELECT * FROM tbl_booking_product WHERE booking_id='$order->id' ORDER BY booking_id ASC ";
+                $query = $db->query($sql);
+                $tot = $db->num_rows($query);
+                if ($tot > 0) {
+                    while ($row = $db->fetch_object($query)) {
+                        $pkgRec = SubProduct::find_by_id($row->product_id);
+                        $product_list .= $pkgRec->title . ' (x' . $row->product_quantity . ')<br/>';
+                    }
+                }
                 $user_dashboard .= '
                         <tr>
-                            <td>' . ($k + 1) . '</td>
+                            <td >' . ($k + 1) . '</td>
+                            <td>' . $order->accesskey . '</td>
+                            <td>' . $product_list . '</td>
                             <td>' . date('F d, Y', strtotime($order->added_date)) . '</td>
                             <td>' . $order->currency . ' ' . $order->pay_amt . '</td>
                             <td><a href="' . BASE_URL . 'cart/order/' . $order->accesskey . '" target="_blank">' . ('View') . '</a></td>
@@ -212,18 +226,32 @@ if (defined('DASHBOARD_PAGE')) {
                     <table class="table" id="myTable2">
                         <thead>
                         <tr>
-                            <th>' . ('Order') . '</th>
-                            <th>' . ('Date') . '</th>
-                            <th>' . ('Total') . '</th>
-                            <th>' . ('Action') . '</th>
+                            <th>Order</th>
+                            <th>Order ID</th>
+                            <th>Products</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
             ';
             foreach ($orders as $k => $order) {
+                $product_list = '';
+                $sql = "SELECT * FROM tbl_booking_product WHERE booking_id='$order->id' ORDER BY booking_id ASC ";
+                $query = $db->query($sql);
+                $tot = $db->num_rows($query);
+                if ($tot > 0) {
+                    while ($row = $db->fetch_object($query)) {
+                        $pkgRec = SubProduct::find_by_id($row->product_id);
+                        $product_list .= $pkgRec->title . ' (x' . $row->product_quantity . ')<br/>';
+                    }
+                }
                 $user_orders .= '
                         <tr>
                             <td>' . ($k + 1) . '</td>
+                            <td>' . $order->accesskey . '</td>
+                            <td>' . $product_list . '</td>
                             <td>' . date('F d, Y', strtotime($order->added_date)) . '</td>
                             <td>' . $order->currency . ' ' . $order->pay_amt . '</td>
                             <td><a href="' . BASE_URL . 'cart/order/' . $order->accesskey . '" target="_blank">' . ('View') . '</a></td>
