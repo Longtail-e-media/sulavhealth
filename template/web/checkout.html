@@ -83,6 +83,42 @@
     <!-- FOOTER AREA END -->
 
     <iframe name="secure3d-frame" id="secure3d-frame"></iframe>
+
+    <!-- Login Form -->
+    <div class="ltn__modal-area ltn__quick-view-modal-area " id="productpopup">
+        <div class="modal fade" id="quick_view_login_form" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ltn__quick-view-modal-inner">
+                            <div class="modal-product-item">
+                                <div class="row">
+                                    <div class="col-lg-6 mx-auto mt-25">
+                                        <div class="account-login-inner text-center">
+                                            <div class="section-title-area text-center">
+                                                <h3 class="section-title">Log in to your Account</h3>
+                                            </div>
+                                            <form action="#" id="loginForm" class="ltn__form-box contact-form-box">
+                                                <div class="mb-30"><input type="text" name="email" placeholder="Email*"></div>
+                                                <div class="mb-30"><input type="password" name="password" placeholder="Password*"></div>
+                                                <div class="btn-wrapper mt-0"><button class="theme-btn-1 btn btn-block" type="submit" id="submitLogin">Log In</button></div>
+                                                <p id="loginMsg" class="mt-20" style="display: none;"></p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Body main wrapper end -->
 
@@ -109,6 +145,57 @@
     var base_url = $('base').attr('url');
 
     $(document).ready(function () {
+        // Login Form
+        $("#loginForm").validate({
+            errorElement: 'span',
+            errorClass: 'validate-has-error text-danger',
+            rules: {
+                email: {required: !0, email: !0},
+                password: {required: !0}
+            },
+            messages: {
+                email: {
+                    required: "<jcms:module:common_language:LOGIN_FORM_ERROR_EMAIL/>",
+                    email: "<jcms:module:common_language:LOGIN_FORM_ERROR_EMAIL_VALID/>"
+                },
+                password: {required: "<jcms:module:common_language:LOGIN_FORM_ERROR_PASSWORD/>"}
+            },
+            submitHandler: function (form) {
+                if (form) {
+                    var Frmval = $("#loginForm").serialize();
+                    $("button#submitLogin").attr("disabled", "true").text('<jcms:module:common_language:CONTACT_FORM_ERROR_PROCESSING/>');
+                    $.ajax({
+                        type: "POST",
+                        dataType: "JSON",
+                        url: base_url + "includes/controllers/ajax.user.php",
+                        data: "action=frontLogin&" + Frmval + "&page=checkout",
+                        success: function (data) {
+                            var msg = eval(data);
+                            if (msg.action == 'success') {
+                                $('#loginMsg')
+                                    .html(msg.message)
+                                    .removeClass('alert-danger')
+                                    .addClass('alert alert-success')
+                                    .css('display', 'block')
+                                    .fadeOut(8000);
+                                $("button#submitLogin").removeAttr("disabled").text('<jcms:module:common_language:LOGIN_SIGN_IN/>');
+                                setTimeout(function () { window.location.href = ""; }, 3000);
+                            }
+                            if (msg.action == 'error') {
+                                $('#loginMsg')
+                                    .html(msg.message)
+                                    .removeClass('alert-success')
+                                    .addClass('alert alert-danger')
+                                    .css('display', 'block')
+                                    .fadeOut(8000);
+                                $("button#submitLogin").removeAttr("disabled").text('SIGN IN');
+                            }
+                        }
+                    });
+                    return !1;
+                }
+            }
+        })
 
         // Apply coupon
         $('.coupon-btn').on('click', function () {

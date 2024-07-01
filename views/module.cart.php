@@ -259,7 +259,7 @@ if (defined('CHECKOUT_PAGE')) {
                             <div class="ltn__checkout-single-content-info">
     ';
     if (empty($checkLogin)) {
-        $checkout_form .= '<div class="mb-20"><a href="' . BASE_URL . 'login" class="text-primary" style="text-decoration: underline;">ALREADY HAVE AN ACCOUNT ?</a></div>';
+        $checkout_form .= '<div class="mb-20"><a href="#" data-toggle="modal" data-target="#quick_view_login_form" class="text-primary" style="text-decoration: underline;">ALREADY HAVE AN ACCOUNT ?</a></div>';
     }
     $checkout_form .= '
                                 

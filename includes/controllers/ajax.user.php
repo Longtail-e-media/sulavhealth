@@ -414,6 +414,9 @@
                         setcookie("remem_pass", '', time() - (60 * 60), "/", NULL);
                     }
                     $message = "Welcome " . $uprec->first_name . "! You will be redirected to Dashboard shortly!";
+                    if (isset($_REQUEST['page']) and $_REQUEST['page'] == 'checkout') {
+                        $message = "Welcome " . $uprec->first_name . "!";
+                    }
                     echo json_encode(array("action" => "success", "message" => $message));
                 }
             } else {
