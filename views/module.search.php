@@ -994,9 +994,17 @@ if (defined('SEARCH_PAGE')) {
     } else {
         $maxs = SubProduct::get_max_price();
     }
+    $pa = $da = [];
     foreach ($maxs as $max) {
         $maxprice = $max->discount1;
+        if ($max->discount1 == 0) {
+            $pa[] = $max->price1;
+        } else {
+            $da[] = $max->discount1;
+        }
     }
+    $combinedArray = array_merge($pa, $da);
+    $maxprice = max($combinedArray);
 
     if (!empty($service_slug)) {
         $serviceRecord = Services::find_by_slug($service_slug);

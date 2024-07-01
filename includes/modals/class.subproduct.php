@@ -116,7 +116,7 @@ class SubProduct extends DatabaseObject
         WHERE price1 = (
             SELECT MAX(price1)
             FROM " . self::$table_name . "  WHERE status = 1
-        ) AND discount1 = (
+        ) OR discount1 = (
             SELECT MAX(discount1)
             FROM " . self::$table_name . " WHERE status = 1
         )");
@@ -130,7 +130,7 @@ class SubProduct extends DatabaseObject
         WHERE price1 = (
             SELECT MAX(price1)
             FROM " . self::$table_name . " WHERE {$field}={$id} AND status = 1
-        ) AND discount1 = (
+        ) OR discount1 = (
             SELECT MAX(discount1)
             FROM " . self::$table_name . " WHERE {$field}={$id} AND status = 1
         )");
