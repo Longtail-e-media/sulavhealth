@@ -146,7 +146,7 @@ if (defined('CART_PAGE')) {
                                     <img src="' . $img . '" alt="' . ($product->title) . '">
                                 </td>
                                 <td class="cart-product-info">
-                                    <h4><a href="' . BASE_URL . 'product/' . $product->slug . '">' . ($product->title) . '</a></h4>
+                                    <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' . ($product->title) . '</a></h4>
                                 </td>
                                 <td class="cart-product-label">
                                     ' . $detail['netqnt'] . '
