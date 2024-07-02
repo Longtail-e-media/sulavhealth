@@ -167,14 +167,14 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         <?php $cid = !empty($subproductInfo->Category) ? $subproductInfo->Category : 0; ?>
                         <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Category" id="Category" name="Category"
                                 selcId="<?php echo $cid; ?>">
-                            <?php $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 AND type={$typeid} ORDER BY sortorder DESC ");
+                            <?php $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 AND type={$typeid} ORDER BY sortorder ASC ");
                             // pr($categories);
                             if ($categories) {
                                 foreach ($categories as $k => $category) {
                                     if($k == 0){$initialType = $category->type;}
                                     $cat = $category->id;
-                                    $sel = (!empty($cat) && $cat == $category->id) ? 'selected' : '';
-                                    $initialType = (!empty($cat) && $cat == $category->id) ? $category->type : $initialType;?>
+                                    $sel = (!empty($cat) && $cat == $subproductInfo->Category) ? 'selected' : '';
+                                    $initialType = (!empty($cat) && $cat == $subproductInfo->Category) ? $category->type : $initialType;?>
                                     <option value="<?= $category->id; ?>" <?= $sel; ?> selType="<?= $category->type; ?>"><?= $category->title; ?></option>
                                 <?php }
                             } ?>
@@ -191,7 +191,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         </label>
                     </div>
                     <div class="form-input col-md-4">
-
+0
                         <?php $selid = !empty($subproductInfo->Subcategory) ? $subproductInfo->Subcategory : 0; ?>
                         <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Subcategory" id="Subcategory" name="Subcategory"
                                 selId="<?php echo $selid; ?>">
