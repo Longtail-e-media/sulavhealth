@@ -298,10 +298,11 @@ if (defined('SEARCH_PAGE')) {
                 cat.title LIKE '%" . $searchkey . "%' ) ";*/
         $sql = "SELECT prod.*
             FROM tbl_product_sub as prod  
-            WHERE prod.status=1 AND 
+            INNER JOIN tbl_brands as br ON br.id = prod.brand
+            WHERE prod.status = 1 AND br.status = 1 AND
               ( prod.title LIKE '%" . $searchkey . "%' ) ";
     } else {
-        $sql = "SELECT * FROM tbl_product_sub as prod WHERE status=1 ";
+        $sql = "SELECT prod.* FROM tbl_product_sub as prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status = 1";
     }
 
     /*$sql = "SELECT pkg.id, pkg.title, pkg.slug, pkg.breif, pkg.days, pkg.image, pkg.price, pkg.difficulty, pkg.accomodation,
@@ -596,7 +597,7 @@ if (defined('SEARCH_PAGE')) {
     $startpoint = ($page * $limit) - $limit;
     $start = $startpoint + 1;
     $end = (($startpoint + $limit) > $total_num) ? $total_num : $startpoint + $limit;
-    $sql .= " ORDER BY sortorder ASC";
+    $sql .= " ORDER BY prod.sortorder ASC";
     // $sql .= " ORDER BY prod.sortorder ASC";
     $sql .= " LIMIT " . $startpoint . "," . $limit;
 

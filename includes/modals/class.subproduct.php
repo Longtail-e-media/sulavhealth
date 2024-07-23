@@ -31,7 +31,8 @@ class SubProduct extends DatabaseObject
     public static function get_total_category_product($id = '')
     {
         global $db;
-        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Category=$id ORDER BY sortorder DESC ";
+//        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Category=$id ORDER BY sortorder DESC ";
+        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.Category=$id GROUP BY prod.id ORDER BY prod.sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -39,7 +40,8 @@ class SubProduct extends DatabaseObject
     public static function get_total_category_brand_product($brandId = '', $categoryId = '')
     {
         global $db;
-        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND Category=$categoryId ORDER BY sortorder DESC ";
+//        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND Category=$categoryId ORDER BY sortorder DESC ";
+        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.Category=$catid AND prod.service_id=$servid GROUP BY prod.id ORDER BY prod.sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -47,7 +49,8 @@ class SubProduct extends DatabaseObject
     public static function get_total_category_product_service($catid = '', $servid = '')
     {
         global $db;
-        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Category=$catid AND service_id=$servid ORDER BY sortorder DESC ";
+//        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Category=$catid AND service_id=$servid ORDER BY sortorder DESC ";
+        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.Category=$catid AND prod.service_id=$servid GROUP BY prod.id ORDER BY prod.sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -55,7 +58,8 @@ class SubProduct extends DatabaseObject
     public static function get_total_subcategory_product($id = '')
     {
         global $db;
-        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Subcategory=$id ORDER BY sortorder DESC ";
+//        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Subcategory=$id ORDER BY sortorder DESC ";
+        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.Subcategory=$id GROUP BY prod.id ORDER BY prod.sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -63,7 +67,8 @@ class SubProduct extends DatabaseObject
     public static function get_total_subcategory_brand_product($brandId = '', $subCategoryId = '')
     {
         global $db;
-        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND Subcategory=$subCategoryId ORDER BY sortorder DESC ";
+//        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND Subcategory=$subCategoryId ORDER BY sortorder DESC ";
+        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.brand=$brandId AND prod.Subcategory=$subCategoryId GROUP BY prod.id ORDER BY prod.sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -71,7 +76,8 @@ class SubProduct extends DatabaseObject
     public static function get_total_subcategory_product_service($catid = '', $servid = '')
     {
         global $db;
-        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Subcategory=$catid AND service_id=$servid ORDER BY sortorder DESC ";
+//        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND Subcategory=$catid AND service_id=$servid ORDER BY sortorder DESC ";
+        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.Subcategory=$catid AND prod.service_id=$servid GROUP BY prod.id ORDER BY prod.sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -79,7 +85,8 @@ class SubProduct extends DatabaseObject
     public static function get_total_brand_product($id = '')
     {
         global $db;
-        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$id ORDER BY sortorder DESC ";
+//        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$id ORDER BY sortorder DESC ";
+        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.brand=$id GROUP BY prod.id ORDER BY prod.sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -87,7 +94,8 @@ class SubProduct extends DatabaseObject
     public static function get_total_brand_product_service($brandId = '', $seriveId = '')
     {
         global $db;
-        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND service_id=$seriveId ORDER BY sortorder DESC ";
+//        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND service_id=$seriveId ORDER BY sortorder DESC ";
+        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.brand=$brandId AND prod.service_id=$seriveId GROUP BY prod.id ORDER BY prod.sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -95,7 +103,8 @@ class SubProduct extends DatabaseObject
     public static function get_total_service_product($id = '')
     {
         global $db;
-        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND service_id=$id ORDER BY sortorder DESC ";
+//         $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND service_id=$id ORDER BY sortorder DESC ";
+        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.service_id=$id GROUP BY prod.id ORDER BY prod.sortorder DESC";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -103,7 +112,8 @@ class SubProduct extends DatabaseObject
     public static function get_total_service_brand_product($brandId = '', $servid = '')
     {
         global $db;
-        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND service_id=$servid ORDER BY sortorder DESC ";
+        // $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND service_id=$servid ORDER BY sortorder DESC ";
+        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.brand=$brandId AND prod.service_id=$servid GROUP BY prod.id ORDER BY prod.sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
@@ -111,7 +121,7 @@ class SubProduct extends DatabaseObject
     public static function get_max_price()
     {
         global $db;
-        return self::find_by_sql("SELECT price1 , discount1
+        /*return self::find_by_sql("SELECT price1 , discount1
         FROM " . self::$table_name . "
         WHERE price1 = (
             SELECT MAX(price1)
@@ -119,13 +129,25 @@ class SubProduct extends DatabaseObject
         ) OR discount1 = (
             SELECT MAX(discount1)
             FROM " . self::$table_name . " WHERE status = 1
+        )");*/
+
+        return self::find_by_sql("SELECT price1 , discount1
+        FROM " . self::$table_name . "
+        WHERE price1 = (
+            SELECT MAX(prod.price1) FROM " . self::$table_name . " AS prod
+            INNER JOIN tbl_brands as br ON br.id = prod.brand  
+            WHERE prod.status = 1 AND br.status = 1
+        ) OR discount1 = (
+            SELECT MAX(prod.discount1) FROM " . self::$table_name . " AS prod
+            INNER JOIN tbl_brands as br ON br.id = prod.brand  
+            WHERE prod.status = 1 AND br.status = 1
         )");
     }
 
     public static function get_max_price_by_field($field='',$id='')
     {
         global $db;
-        return self::find_by_sql("SELECT price1 , discount1
+        /* return self::find_by_sql("SELECT price1 , discount1
         FROM " . self::$table_name . "
         WHERE price1 = (
             SELECT MAX(price1)
@@ -133,6 +155,18 @@ class SubProduct extends DatabaseObject
         ) OR discount1 = (
             SELECT MAX(discount1)
             FROM " . self::$table_name . " WHERE {$field}={$id} AND status = 1
+        )"); */
+
+        return self::find_by_sql("SELECT price1 , discount1
+        FROM " . self::$table_name . "
+        WHERE price1 = (
+            SELECT MAX(prod.price1) FROM " . self::$table_name . " AS prod
+            INNER JOIN tbl_brands AS br ON br.id = prod.brand
+            WHERE prod.{$field}={$id} AND prod.status = 1 AND br.status = 1
+        ) OR discount1 = (
+            SELECT MAX(prod.discount1) FROM " . self::$table_name . " AS prod
+            INNER JOIN tbl_brands AS br ON br.id = prod.brand
+            WHERE prod.{$field}={$id} AND prod.status = 1 AND br.status = 1
         )");
     }
 
@@ -142,11 +176,13 @@ class SubProduct extends DatabaseObject
         return self::find_by_sql("SELECT price1 , discount1
         FROM " . self::$table_name . "
         WHERE price1 = (
-            SELECT MIN(price1) 
-            FROM " . self::$table_name . " WHERE price1 IS NOT NULL AND price1 <> 0 AND status = 1
+            SELECT MIN(prod.price1)  FROM " . self::$table_name . " AS prod
+            INNER JOIN tbl_brands as br on br.id = prod.brand 
+            WHERE prod.price1 IS NOT NULL AND prod.price1 <> 0 AND prod.status = 1 AND br.status = 1
         ) OR discount1 = (
-            SELECT MIN(discount1)
-            FROM " . self::$table_name . " WHERE discount1 IS NOT NULL AND discount1 <> 0 AND status = 1
+            SELECT MIN(prod.discount1) FROM " . self::$table_name . " AS prod
+            INNER JOIN tbl_brands as br on br.id = prod.brand  
+            WHERE prod.discount1 IS NOT NULL AND prod.discount1 <> 0 AND prod.status = 1 AND br.status = 1
         )");
     }
 
@@ -156,11 +192,15 @@ class SubProduct extends DatabaseObject
         return self::find_by_sql("SELECT price1 , discount1
         FROM " . self::$table_name . "
         WHERE price1 = (
-            SELECT MIN(price1) 
-            FROM " . self::$table_name . " WHERE price1 IS NOT NULL AND price1 <> 0 AND {$field}={$id} AND status = 1
+            SELECT MIN(prod.price1) FROM " . self::$table_name . " AS prod 
+            INNER JOIN tbl_brands AS br ON br.id = prod.brand
+            WHERE prod.price1 IS NOT NULL AND prod.price1 <> 0 
+            AND prod.{$field}={$id} AND prod.status = 1 AND br.status = 1
         ) OR discount1 = (
-            SELECT MIN(discount1)
-            FROM " . self::$table_name . " WHERE discount1 IS NOT NULL AND discount1 <> 0 AND {$field}={$id} AND status = 1
+            SELECT MIN(prod.discount1) FROM " . self::$table_name . " AS prod 
+            INNER JOIN tbl_brands AS br ON br.id = prod.brand
+            WHERE prod.discount1 IS NOT NULL AND prod.discount1 <> 0 
+            AND prod.{$field}={$id} AND prod.status = 1 AND br.status = 1
         )");
     }
 

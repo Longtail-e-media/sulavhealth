@@ -22,7 +22,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             ON pkg.activityId = act.id 
             WHERE pkg.status=1 ";
     */
-    $sql = "SELECT * FROM tbl_product_sub as prod WHERE status=1 ";
+    $sql = "SELECT prod.* FROM tbl_product_sub as prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status = 1";
     // $sql = "SELECT pkg.id, pkg.title, pkg.slug, pkg.breif, pkg.days, pkg.image, pkg.price, pkg.offer_price, pkg.difficulty, pkg.accomodation,
     //         dst.title as destination, dst.slug as destination_slug
     //         FROM tbl_package  pkg 
