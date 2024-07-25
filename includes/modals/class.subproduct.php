@@ -41,7 +41,7 @@ class SubProduct extends DatabaseObject
     {
         global $db;
 //        $sql = "SELECT id FROM " . self::$table_name . " WHERE status=1 AND brand=$brandId AND Category=$categoryId ORDER BY sortorder DESC ";
-        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.Category=$catid AND prod.service_id=$servid GROUP BY prod.id ORDER BY prod.sortorder DESC ";
+        $sql = "SELECT prod.id FROM " . self::$table_name . " AS prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status=1 AND prod.Category=$categoryId AND prod.brand=$brandId GROUP BY prod.id ORDER BY prod.sortorder DESC ";
         $tot = $db->num_rows($db->query($sql));
         return $tot;
     }
