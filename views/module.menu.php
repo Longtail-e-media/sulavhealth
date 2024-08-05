@@ -55,7 +55,88 @@ if ($menuRec):
         endif;
         $result .= '</li>';
     endforeach;
-    $result .= '</ul>';
+    $result .= '<li class="menu-icon"><a href="#">SKIN CARE</a>
+                    <ul class="mega-menu">
+                        <li class="first-mega"><a href="#">Skin Care</a>
+                            <ul>
+                                <li>Skin care or skincare is a range of practices that support skin integrity, enhance its appearance, and relieve skin conditions.
+                                    <br/><br/><span class="pt-80" style="font-weight:600;"><a href="#">Read More</a></span>
+                                </li>
+                            </ul>
+                            <ul class="note-link">
+                                <li><a href="https://sulavhealth.com/dhome">https://sulavhealth.com/dhome</a></li>
+                                <li><a href="https://sulavhealth.com/dhome">https://sulavhealth.com/dhome</a></li>
+                                <li><a href="https://sulavhealth.com/dhome">https://sulavhealth.com/dhome</a></li>
+                                <li><a href="https://sulavhealth.com/dhome">https://sulavhealth.com/dhome</a></li>
+                                <li><a href="https://sulavhealth.com/dhome">https://sulavhealth.com/dhome</a></li>
+                                <li><a href="https://sulavhealth.com/dhome">https://sulavhealth.com/dhome</a></li>
+                            </ul>
+                        </li>
+                        <li class="second-mega">
+                            <div class="row">
+                                <div class="col-xl-3 col-sm-6 col-6">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml">
+                                            <a class="product-image-link" href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml"><img src="http://localhost/sulavhealth/images/product/galleryimages/DzfhP-5f9fa8692126980001f8b881_mamaearth-tea-tree-shampoo-for-dandruff-free-hai.jpeg" alt="Mamaearth Tea Tree Shampoo 250ml"></a>
+                                        </div>
+                                        <div class="product-info">
+                                            <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
+                                            <a href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml" class="product-link">Mamaearth Tea Tree Shampoo 250ml</a>
+                                            <div class="product-price">
+                                                <span>NPR 530</span><del>NPR 558.4</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-xl-3 col-sm-6 col-6">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml">
+                                            <a class="product-image-link" href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml"><img src="http://localhost/sulavhealth/images/product/galleryimages/DzfhP-5f9fa8692126980001f8b881_mamaearth-tea-tree-shampoo-for-dandruff-free-hai.jpeg" alt="Mamaearth Tea Tree Shampoo 250ml"></a>
+                                        </div>
+                                        <div class="product-info">
+                                            <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
+                                            <a href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml" class="product-link">Mamaearth Tea Tree Shampoo 250ml</a>
+                                            <div class="product-price">
+                                                <span>NPR 530</span><del>NPR 558.4</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-sm-6 col-6">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml">
+                                            <a class="product-image-link" href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml"><img src="http://localhost/sulavhealth/images/product/galleryimages/DzfhP-5f9fa8692126980001f8b881_mamaearth-tea-tree-shampoo-for-dandruff-free-hai.jpeg" alt="Mamaearth Tea Tree Shampoo 250ml"></a>
+                                        </div>
+                                        <div class="product-info">
+                                            <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
+                                            <a href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml" class="product-link">Mamaearth Tea Tree Shampoo 250ml</a>
+                                            <div class="product-price">
+                                                <span>NPR 530</span><del>NPR 558.4</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-sm-6 col-6">
+                                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                                        <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml">
+                                            <a class="product-image-link" href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml"><img src="http://localhost/sulavhealth/images/product/galleryimages/DzfhP-5f9fa8692126980001f8b881_mamaearth-tea-tree-shampoo-for-dandruff-free-hai.jpeg" alt="Mamaearth Tea Tree Shampoo 250ml"></a>
+                                        </div>
+                                        <div class="product-info">
+                                            <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
+                                            <a href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml" class="product-link">Mamaearth Tea Tree Shampoo 250ml</a>
+                                            <div class="product-price">
+                                                <span>NPR 530</span><del>NPR 558.4</del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li> 
+                    </ul>
+                </li></ul>';
 endif;
 
 if ($lang != 'gr') {
