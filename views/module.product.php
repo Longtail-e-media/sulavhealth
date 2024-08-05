@@ -3,6 +3,9 @@
 /**
  *      Cart Menu
  */
+
+use Aws\Api\Service;
+
 $cart_menu = '';
 
 $cart_menu .= '
@@ -167,7 +170,7 @@ if (defined('HOME_PAGE')) {
                     <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $giftSet->title . '"></a>
                 </div>
                 <div class="product-info">
-                    <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
+                    <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
                     <a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a>
                     <div class="product-price">
                         ' . $price_text . '
@@ -279,7 +282,7 @@ if (defined('HOME_PAGE')) {
             }
             $prodPrice = (!empty($giftSet->discount1) and $giftSet->discount1 > 0) ? $giftSet->discount1 : $giftSet->price1;
             $home_gift_sets_modal .= '
-                                        <input type="hidden" name="product_qnt_1" value="' . $giftSet->slug . '">
+                                        <input type="hidden" name="product_qnt_1" value="' . $giftSet->qnt1 . '">
                                         <input type="hidden" name="product_net_qnt_1" value="' . $giftSet->netqnt1 . '">
                                         <label class="form-check-label">' . $giftSet->netqnt1 . '</label>
                                     </div>
@@ -409,8 +412,8 @@ if (defined('HOME_PAGE')) {
                 </div>
                                                         <div class="ltn__product-details-menu-2">  
                                                             <ul>
-                                                            <li style="padding-right: 16.28rem;">
-                                                            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $giftSet->slug . '">
+                                                            <li style="padding-right: 7.28rem;">
+                                                            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $giftSet->slug . '">
                                                                 <i class="far fa-heart"></i>
                                                                <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
                                                             </a>
@@ -424,9 +427,9 @@ if (defined('HOME_PAGE')) {
                                                                 </li>
                                                               
                                                                 
-                                                                <!--<li>
+                                                                <li>
                                                                 <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
-                                                                </li>-->
+                                                                </li>
 
                                                                
                                                                
@@ -495,12 +498,404 @@ if (defined('HOME_PAGE')) {
         }
     }
 
+    $services_gift_sets = $services_gift_sets_modal = $services_gift_sets_script = '';
+    $homeservices= Services::get_services_home();
+    // pr($homeservices);
+
+    foreach($homeservices as $homeservice){
+        $homeSets= SubProduct::get_home_brand_product_service($homeservice->id);
+        if (!empty($homeservices)) {
+            $services_gift_sets .= '
+            <div class="ltn__product-tab-area ltn__product-gutter pt-115">
+            <div class="">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ltn__tab-menu ltn__tab-menu-2 ltn__tab-menu-top-right--">
+    
+                            <div class="container">
+    
+                                <h3 class="new-products">'.$homeservice->title.'</h3>
+    
+                                <div class="">
+                                    <div class="tab-content tab-list3">
+    
+                                        <div class="tab-pane fade active show" id="product_lab-services">
+                                            <div class="ltn__product-tab-content-inner ltn__product-grid-view">
+                                                <div class="row">
+            ';
+
+            $serviceSets= SubProduct::get_home_brand_product_service($homeservice->id);
+            // pr($serviceSets);
+            foreach ($serviceSets as $serviceSet) {
+                // getting only one image to display
+                $serviceSetImages = SubProductImage::getImagelist_by($serviceSet->id, 1, 0);
+                $img = BASE_URL . 'template/web/img/product/one.jpg';
+                if (!empty($serviceSetImages)) {
+                    foreach ($serviceSetImages as $serviceSetImage) {
+                        $file_path = SITE_ROOT . 'images/product/galleryimages/' . $serviceSetImage->image;
+                        if (file_exists($file_path)) {
+                            $img = IMAGE_PATH . 'product/galleryimages/' . $serviceSetImage->image;
+                        }
+                    }
+                }
+                $prodbrand = Brand::find_by_id($serviceSet->brand);
+                $prodservice = Services::find_by_id($serviceSet->service_id);
+                // pr($prodbrand);
+                if (!empty($prodservice)) {
+                    $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $serviceSet->slug . '';
+                } else {
+                    $slugs = '' . BASE_URL . 'product/product-detail/' . $serviceSet->slug . '';;
+                }
+    
+                $price_text = '';
+                if (!empty($serviceSet->price1) and (empty($serviceSet->offer_price))) {
+                    $price_text = '<span>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</span>';
+                }
+                if (!empty($serviceSet->discount1)) {
+                    $price_text = '<span>' . $serviceSet->currency . ' ' . $serviceSet->discount1 . '</span><del>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</del>';
+                }
+                $prodbrand = Brand::find_by_id($serviceSet->brand);
+                $prodservice = Services::find_by_id($serviceSet->service_id);
+                if (!empty($prodbrand)) {
+                    $title = $prodbrand->title;
+                    $slug= $prodbrand->slug;
+                } else {
+                    $title = '';
+                    $slug='';
+                }
+                if (!empty($prodservice)) {
+                    $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $serviceSet->slug . '';
+                } else {
+                    $slugs = '' . BASE_URL . 'product/product-detail/' . $serviceSet->slug . '';;
+                }
+                $services_gift_sets .= '
+                <div class="col-xl-3 col-sm-6 col-6">
+                <div class="ltn__product-item ltn__product-item-3 text-center">
+                    <div class="product-img product_hove" data-href="' . $slugs . '">
+                        <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $serviceSet->title . '"></a>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
+                        <a href="' . $slugs . '" class="product-link">' . $serviceSet->title . '</a>
+                        <div class="product-price">
+                            ' . $price_text . '
+                        </div>
+                        <div class="product-action">
+                ';
+                if (!empty($serviceSet->tag)) {
+                    $services_gift_sets .= '<li class="sale-badge">' . $serviceSet->tag . '</li>';
+                }
+                $services_gift_sets .= '
+                                        <ul>
+                                        <li>
+                                            <a href="#" class="add-wishlist"
+                                                title="Add to Wishlist"
+                                                data-cartid="' . $serviceSet->slug . '">
+                                                <i class="far fa-heart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="ADD TO CART"
+                                                class="add-to-cart" data-toggle="modal"
+                                                data-target="#quick_view_modal_product_' . $serviceSet->slug . '">
+                                                Add to Cart
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                          </div>
+                    </div>
+                </div>
+            </div>
+                ';
+    
+                $services_gift_sets_script .= '
+                    <script>
+                        $("#quick_view_modal_product_' . $serviceSet->slug . '").on("shown.bs.modal", function () {
+                          $(".ltn__blog-slider-one-active1").slick("setPosition");
+                        })
+                    </script>
+                ';
+    
+                // Add to cart modal (Quick View Modal)
+                $services_gift_sets_modal .= '
+                    <div class="ltn__modal-area ltn__quick-view-modal-area">
+                        <div class="modal fade" id="quick_view_modal_product_' . $serviceSet->slug . '" tabindex="-1">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="ltn__quick-view-modal-inner">
+                                            <div class="modal-product-item">
+                                                <div class="row">
+                                                    <div class="col-lg-5 col-12">
+                                                        <div class="modal-product-img">
+                                                            <div class="row  ltn__blog-slider-one-active1 slick-arrow-1 ltn__blog-item-3-normal">
+                ';
+                $sliderImages = SubProductImage::getImagelist_by($serviceSet->id);
+                if (!empty($sliderImages)) {
+                    foreach ($sliderImages as $sliderImage) {
+                        $file_path = SITE_ROOT . 'images/product/galleryimages/' . $sliderImage->image;
+                        if (file_exists($file_path)) {
+                            $services_gift_sets_modal .= '
+                                <div class="col-lg-12">
+                                    <div class="ltn__blog-item ltn__blog-item-3">
+                                        <div class="ltn__blog-img">
+                                            <img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            ';
+                        }
+                    }
+                }
+                
+                $services_gift_sets_modal .= '
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-7 col-12">
+                                                        <div class="modal-product-info">
+                                                        <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
+                                                            <h3>' . (($lang == "gr") ? $serviceSet->title_greek : $serviceSet->title) . '</h3>
+                                                            ' . (($lang == "gr") ? $serviceSet->brief_greek : $serviceSet->brief) . '
+    
+                                                                <br/>
+                                                                <br/>
+    
+                                                                <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
+                                                                    <span>' . SHOP_VIEW_MORE . '</span>
+                                                                </a>
+                
+                    <div class="shoping-cart-table table-responsive">
+                        <form id="add-cart-product-' . $serviceSet->slug . '">
+                        <table class="table">
+                            <tbody>
+                            
+                                <tr>
+                                    <td class="cart-product-info">
+                                        <div class="form-check form-check-inline">
+                ';
+                if (!empty($serviceSet->qnt2)) {
+                    $services_gift_sets_modal .= '<input class="form-check-input" type="checkbox" name="product_check[]" value="1">';
+                } else {
+                    $services_gift_sets_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
+                }
+                $prodPrice = (!empty($serviceSet->discount1) and $serviceSet->discount1 > 0) ? $serviceSet->discount1 : $serviceSet->price1;
+                $services_gift_sets_modal .= '
+                                            <input type="hidden" name="product_qnt_1" value="' . $serviceSet->qnt1 . '">
+                                            <input type="hidden" name="product_net_qnt_1" value="' . $serviceSet->netqnt1 . '">
+                                            <label class="form-check-label">' . $serviceSet->netqnt1 . '</label>
+                                        </div>
+                                    </td>
+                                   
+                                    <td class="cart-product-price">
+                                    <input type="hidden" name="product_price_1" value="' . $prodPrice . '">
+                                    
+                                    ' . $serviceSet->currency . ' ' . sprintf("%.2f", $prodPrice) . '
+                                    </td>
+                                    <td class="cart-product-quantity">
+                                    <span>QTY</span
+                                    </td>
+                                    <td class="cart-product-quantity">
+                                        <div class="cart-plus-minus">
+                                            <div class="dec qtybutton">-</div>
+                                            <input type="text" value="1" min="1" step="1" name="product_qty_1" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $serviceSet->currency . '" readonly>
+                                            <div class="inc qtybutton">+</div>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-subtotal">
+                                        <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
+                                        <h6 class="product-sub-total">' . $serviceSet->currency . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
+                                    </td>
+                                </tr>
+                                
+                ';
+    
+                if (!empty($serviceSet->qnt2)) {
+                    $prodPrice = (!empty($serviceSet->discount2) and $serviceSet->discount2 > 0) ? $serviceSet->discount2 : $serviceSet->price2;
+                    $services_gift_sets_modal .= '
+                                <tr>
+                                    <td class="cart-product-info">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="product_check[]" value="2">
+                                            <input type="hidden" name="product_qnt_2" value="' . $serviceSet->qnt2 . '">
+                                            <input type="hidden" name="product_net_qnt_2" value="' . $serviceSet->netqnt2 . '">
+                                            <label class="form-check-label">' . $serviceSet->netqnt2 . '</label>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-price">
+                                        <input type="hidden" name="product_price_2" value="' . $prodPrice . '">
+                                        ' . $serviceSet->currency . ' ' . sprintf("%.2f", $prodPrice) . '
+                                    </td>
+                                    <td class="cart-product-quantity">
+                                        <div class="cart-plus-minus">
+                                            <div class="dec qtybutton">-</div>
+                                            <input type="text" value="0" min="0" step="1" name="product_qty_2" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $serviceSet->currency . '" readonly>
+                                            <div class="inc qtybutton">+</div>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-subtotal">
+                                        <input type="hidden" name="product_total_2" class="product_total" value="0">
+                                        <h6 class="product-sub-total">' . $serviceSet->currency . ' 0.00</h6>
+                                    </td>
+                                </tr>
+                    ';
+                }
+    
+                if (!empty($serviceSet->qnt3)) {
+                    $prodPrice = (!empty($serviceSet->discount3) and $serviceSet->discount3 > 0) ? $serviceSet->discount3 : $serviceSet->price3;
+                    $services_gift_sets_modal .= '
+                                <tr>
+                                    <td class="cart-product-info">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="product_check[]" value="3">
+                                            <input type="hidden" name="product_qnt_3" value="' . $serviceSet->qnt3 . '">
+                                            <input type="hidden" name="product_net_qnt_3" value="' . $serviceSet->netqnt3 . '">
+                                            <label class="form-check-label">' . $serviceSet->netqnt3 . '</label>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-price">
+                                        <input type="hidden" name="product_price_3" value="' . $prodPrice . '">
+                                        ' . $serviceSet->currency . ' ' . sprintf("%.2f", $prodPrice) . '
+                                    </td>
+                                    <td class="cart-product-quantity">
+                                        <div class="cart-plus-minus">
+                                            <div class="dec qtybutton">-</div>
+                                            <input type="text" value="0" min="0" step="1" name="product_qty_3" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $serviceSet->currency . '" readonly>
+                                            <div class="inc qtybutton">+</div>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-subtotal">
+                                        <input type="hidden" name="product_total_3" class="product_total" value="0">
+                                        <h6 class="product-sub-total">' . $serviceSet->currency . ' 0.00</h6>
+                                    </td>
+                                </tr>
+                    ';
+                }
+    
+                if (!empty($serviceSet->qnt4)) {
+                    $prodPrice = (!empty($serviceSet->discount4) and $serviceSet->discount4 > 0) ? $serviceSet->discount4 : $serviceSet->price4;
+                    $services_gift_sets_modal .= '
+                                <tr>
+                                    <td class="cart-product-info">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name="product_check[]" value="4">
+                                            <input type="hidden" name="product_qnt_4" value="' . $serviceSet->qnt4 . '">
+                                            <input type="hidden" name="product_net_qnt_4" value="' . $serviceSet->netqnt4 . '">
+                                            <label class="form-check-label">' . $serviceSet->netqnt4 . '</label>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-price">
+                                        <input type="hidden" name="product_price_4" value="' . $prodPrice . '">
+                                        ' . $serviceSet->currency . ' ' . sprintf("%.2f", $prodPrice) . '
+                                    </td>
+                                    <td class="cart-product-quantity">
+                                        <div class="cart-plus-minus">
+                                            <div class="dec qtybutton">-</div>
+                                            <input type="text" value="0" min="0" step="1" name="product_qty_4" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $serviceSet->currency . '" readonly>
+                                            <div class="inc qtybutton">+</div>
+                                        </div>
+                                    </td>
+                                    <td class="cart-product-subtotal">
+                                        <input type="hidden" name="product_total_4" class="product_total" value="0">
+                                        <h6 class="product-sub-total">' . sprintf("%.2f",$serviceSet->currency) . ' 0.00</h6>
+                                    </td>
+                                </tr>
+                    ';
+                }
+    
+                $services_gift_sets_modal .= '
+                                
+                            </tbody>
+                        </table>
+                        </form>
+                    </div>
+                                                            <div class="ltn__product-details-menu-2">  
+                                                                <ul>
+                                                                <li style="padding-right: 7.28rem;">
+                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $serviceSet->slug . '">
+                                                                    <i class="far fa-heart"></i>
+                                                                   <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
+                                                                </a>
+                                                            </li>
+                                                                
+                                                                    <li>
+                                                                        <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $serviceSet->slug . '" form-id="add-cart-product-' . $serviceSet->slug . '">
+                                                                            <i class="fas fa-shopping-cart"></i>
+                                                                            <span>' . SHOP_ADD_TO_CART . '</span>
+                                                                        </a>
+                                                                    </li>
+                                                                  
+                                                                    
+                                                                    <li>
+                                                                    <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
+                                                                    </li>
+    
+                                                                   
+                                                                   
+                                                                </ul>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="ltn__social-media">
+                                                                <ul>
+                                                                    <li>' . SHOP_SHARE . ':</li>
+                                                                    <li>
+    <a href="https://www.facebook.com/sharer.php?u=' . BASE_URL . 'product/product-detail/' . $serviceSet->slug . '" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                                                    </li>
+                                                                    <li>
+    <a href="https://twitter.com/share?url=' . BASE_URL . 'product/product-detail/' . $serviceSet->slug . '&text=' . (($lang == 'gr') ? $serviceSet->title_greek : $serviceSet->title) . '" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                                                    </li>
+                                                                    <li>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . BASE_URL . 'product/product-detail/' . $serviceSet->slug . '" target="_blank" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ';
+            }
+            $services_gift_sets .= '
+            </div>
+            </div>
+        </div>
+    
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+            ';
+        }
+    }
+
 }
 
 $jVars['module:product:home-gift-sets'] = $home_gift_sets;
-$jVars['module:product:home-brand'] = $brand;
 $jVars['module:product:home-gift-sets-modal'] = $home_gift_sets_modal;
 $jVars['module:product:home-gift-sets-script'] = $home_gift_sets_script;
+$jVars['module:product:home-services-sets'] = $services_gift_sets;
+$jVars['module:product:home-services-sets-modal'] = $services_gift_sets_modal;
+$jVars['module:product:home-services-sets-script'] = $services_gift_sets_script;
+$jVars['module:product:home-brand'] = $brand;
 
 
 /**
@@ -691,7 +1086,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                 }
                 $prodPrice = (!empty($prodrelated->discount1) and $prodrelated->discount1 > 0) ? $prodrelated->discount1 : $prodrelated->price1;
                 $product_related_modal .= '
-                                            <input type="hidden" name="product_qnt_1" value="' . $prodrelated->slug . '">
+                                            <input type="hidden" name="product_qnt_1" value="' . $prodrelated->qnt1 . '">
                                             <input type="hidden" name="product_net_qnt_1" value="' . $prodrelated->netqnt1 . '">
                                             <label class="form-check-label">' . $prodrelated->netqnt1 . '</label>
                                         </div>
@@ -819,8 +1214,8 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     </div>
                                                             <div class="ltn__product-details-menu-2">  
                                                                 <ul>
-                                                                <li style="padding-right: 16.28rem;">
-                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $prodrelated->slug . '">
+                                                                <li style="padding-right: 7.28rem;">
+                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $prodrelated->slug . '">
                                                                     <i class="far fa-heart"></i>
                                                                    <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
                                                                 </a>
@@ -834,9 +1229,9 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                                     </li>
                                                                   
                                                                     
-                                                                    <!--<li>
+                                                                    <li>
                                                                     <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
-                                                                    </li>-->
+                                                                    </li>
     
                                                                    
                                                                    
@@ -897,7 +1292,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $slides .= '
                         <div class="single-large-img">
                             <a href="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" data-rel="lightcase:myCollection">
-                                <img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '" style="max-height:100%">
+                                <img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '" style="max-height:500px">
                             </a>
                         </div>
                     ';
@@ -945,7 +1340,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $slugs = '' . BASE_URL . 'product/product-detail/' . $prodRec->slug . '';;
                 }
         $product_detail .= '
-            <div class="ltn__shop-details-inner product_details_gaping">
+            <div class="ltn__shop-details-inner">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="ltn__shop-details-img-gallery">
@@ -961,7 +1356,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                         <div class="modal-product-info shop-details-info pl-0">
                         <span>'.$category.'</span>&nbsp;&nbsp;<span>'.$subcategory.'</span>
                             <h3>' . (($lang == 'gr') ? $prodRec->title_greek : $prodRec->title) . '</h3>
-                            <h4 class="product-title brand-name brand-name_bg"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">Brand | ' . $title . '</a></h4>
+                            <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                             ' . (($lang == "gr") ? $prodRec->brief_greek : $prodRec->brief) . '
                             <div class="shoping-cart-table table-responsive">
                                 <form id="add-cart-product-' . $prodRec->slug . '">
@@ -978,7 +1373,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
         }
         $prodPrice = (!empty($prodRec->discount1) and $prodRec->discount1 > 0) ? $prodRec->discount1 : $prodRec->price1;
         $product_detail .= '
-                                                    <input type="hidden" name="product_qnt_1" value="' . $prodRec->slug . '">
+                                                    <input type="hidden" name="product_qnt_1" value="' . $prodRec->qnt1 . '">
                                                     <input type="hidden" name="product_net_qnt_1" value="' . $prodRec->netqnt1 . '">
                                                     <label class="form-check-label">' . $prodRec->netqnt1 . '</label>
                                                 </div>
@@ -1146,7 +1541,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="liton_tab_details_1_1">
                         <div class="ltn__shop-details-tab-content-inner">
-                           <!-- <h4 class="title-2">' . (($lang == 'gr') ? $prodRec->title_greek : $prodRec->title) . '</h4> -->
+                            <h4 class="title-2">' . (($lang == 'gr') ? $prodRec->title_greek : $prodRec->title) . '</h4>
                             ' . $content . '
                         </div>
                     </div>
@@ -1367,7 +1762,7 @@ if (defined('SHOP_PAGE')) {
                     }
                     $prodPrice = (!empty($product->discount1) and $product->discount1 > 0) ? $product->discount1 : $product->price1;
                     $shop_add_to_cart_modal .= '
-                                                <input type="hidden" name="product_qnt_1" value="' . $product->slug . '">
+                                                <input type="hidden" name="product_qnt_1" value="' . $product->qnt1 . '">
                                                 <input type="hidden" name="product_net_qnt_1" value="' . $product->netqnt1 . '">
                                                 <label class="form-check-label">' . $product->netqnt1 . '</label>
                                             </div>
@@ -1687,7 +2082,7 @@ if (defined('SHOP_PAGE')) {
                     }
                     $prodPrice = (!empty($product->discount1) and $product->discount1 > 0) ? $product->discount1 : $product->price1;
                     $shop_add_to_cart_modal .= '
-                                                <input type="hidden" name="product_qnt_1" value="' . $product->slug . '">
+                                                <input type="hidden" name="product_qnt_1" value="' . $product->qnt1 . '">
                                                 <input type="hidden" name="product_net_qnt_1" value="' . $product->netqnt1 . '">
                                                 <label class="form-check-label">' . $product->netqnt1 . '</label>
                                             </div>
