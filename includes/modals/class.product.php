@@ -34,6 +34,8 @@ class Product extends DatabaseObject
         return self::find_by_sql($sql);
     }
 
+    
+
     // view package Front.
     static function getHomePackage($limit = '')
     {

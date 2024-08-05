@@ -22,9 +22,10 @@
 			$record->content		= (!empty($_REQUEST['content'])) ? $_REQUEST['content'] : '';
 			$record->content_greek 	= (!empty($_REQUEST['content_greek'])) ? $_REQUEST['content_greek'] : '';
 			$record->status			= $_REQUEST['status'];
+			$record->homepage			= $_REQUEST['homepage'];
 			
 			$record->sortorder		= Services::find_maximum();
-
+			
 			$checkDupliName=Services::checkDupliName($record->title);			
 			if($checkDupliName):
 				echo json_encode(array("action"=>"warning","message"=>"Services Title Already Exists."));		
@@ -33,39 +34,40 @@
 			
 			$db->begin();
 			if($record->save()): $db->commit();
-			   $message  = sprintf($GLOBALS['basic']['addedSuccess_'], "Services '".$record->title."'");
+			$message  = sprintf($GLOBALS['basic']['addedSuccess_'], "Services '".$record->title."'");
 			echo json_encode(array("action"=>"success","message"=>$message));
-				log_action("Services [".$record->title."]".$GLOBALS['basic']['addedSuccess'],1,3);
-			else: $db->rollback();
-				echo json_encode(array("action"=>"error","message"=>$GLOBALS['basic']['unableToSave']));
+			log_action("Services [".$record->title."]".$GLOBALS['basic']['addedSuccess'],1,3);
+		else: $db->rollback();
+		echo json_encode(array("action"=>"error","message"=>$GLOBALS['basic']['unableToSave']));
+	endif;
+	break;
+	
+	case "edit":
+		$record = Services::find_by_id($_REQUEST['idValue']);
+		
+		if($record->title!=$_REQUEST['title']){
+			$checkDupliName=Services::checkDupliName($_REQUEST['title']);
+			if($checkDupliName):
+				echo json_encode(array("action"=>"warning","message"=>"Services title is already exist."));		
+				exit;		
 			endif;
-		break;
-			
-		case "edit":
-			$record = Services::find_by_id($_REQUEST['idValue']);
-			
-			if($record->title!=$_REQUEST['title']){
-				$checkDupliName=Services::checkDupliName($_REQUEST['title']);
-				if($checkDupliName):
-					echo json_encode(array("action"=>"warning","message"=>"Services title is already exist."));		
-					exit;		
-				endif;
-			}
-
-			$record->slug 			= create_slug($_REQUEST['title']);
-			$record->title 			= $_REQUEST['title'];
-            $record->title_greek    = (!empty($_REQUEST['title_greek'])) ? $_REQUEST['title_greek'] : '';
-            $record->icon		    = (!empty($_REQUEST['icon']))? $_REQUEST['icon'] : '';
-            $record->content		= (!empty($_REQUEST['content'])) ? $_REQUEST['content'] : '';
-            $record->content_greek 	= (!empty($_REQUEST['content_greek'])) ? $_REQUEST['content_greek'] : '';
-			$record->status			= $_REQUEST['status'];
-			$db->begin();
-			if($record->save()): $db->commit();
-			   $message  = sprintf($GLOBALS['basic']['changesSaved_'], "Services '".$record->title."'");
-			   echo json_encode(array("action"=>"success","message"=>$message));
-			   log_action("Services [".$record->title."] Edit Successfully",1,4);
-			else: $db->rollback(); echo json_encode(array("action"=>"notice","message"=>$GLOBALS['basic']['noChanges']));
-			endif;
+		}
+		
+		$record->slug 			= create_slug($_REQUEST['title']);
+		$record->title 			= $_REQUEST['title'];
+		$record->title_greek    = (!empty($_REQUEST['title_greek'])) ? $_REQUEST['title_greek'] : '';
+		$record->icon		    = (!empty($_REQUEST['icon']))? $_REQUEST['icon'] : '';
+		$record->content		= (!empty($_REQUEST['content'])) ? $_REQUEST['content'] : '';
+		$record->content_greek 	= (!empty($_REQUEST['content_greek'])) ? $_REQUEST['content_greek'] : '';
+		$record->status			= $_REQUEST['status'];
+		$record->homepage			= $_REQUEST['homepage'];
+		$db->begin();
+		if($record->save()): $db->commit();
+		$message  = sprintf($GLOBALS['basic']['changesSaved_'], "Services '".$record->title."'");
+		echo json_encode(array("action"=>"success","message"=>$message));
+		log_action("Services [".$record->title."] Edit Successfully",1,4);
+	else: $db->rollback(); echo json_encode(array("action"=>"notice","message"=>$GLOBALS['basic']['noChanges']));
+endif;
 		break;
 			
 		case "delete":

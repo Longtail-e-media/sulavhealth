@@ -87,6 +87,8 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
         $advInfo = Services::find_by_id($advId);
         $status = ($advInfo->status == 1) ? "checked" : " ";
         $unstatus = ($advInfo->status == 0) ? "checked" : " ";
+        $homepage = ($advInfo->homepage == 1) ? "checked" : " ";
+        $nohomepage = ($advInfo->homepage == 0) ? "checked" : " ";
     endif;
     ?>
     <h3>
@@ -156,6 +158,19 @@ if (isset($_GET['page']) && $_GET['page'] == "services" && isset($_GET['mode']) 
                 </div>
             </div>
             -->
+            <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Homepage Display:
+                        </label>
+                    </div>
+                    <div class="form-checkbox-radio col-md-9">
+                        <input type="radio" class="custom-radio" name="homepage" id="check1" value="1" <?php echo !empty($homepage) ? $homepage : "checked"; ?>>
+                        <label for="">Yes</label>
+                        <input type="radio" class="custom-radio" name="homepage" id="check0" value="0" <?php echo !empty($nohomepage) ? $nohomepage : ""; ?>>
+                        <label for="">No</label>
+                    </div>
+                </div>
 
                 <div class="form-row">
                     <div class="form-label col-md-2">

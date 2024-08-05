@@ -4,11 +4,12 @@ class Services extends DatabaseObject
 {
 
     protected static $table_name = "tbl_services";
-    protected static $db_fields = array('id', 'slug', 'title', 'title_greek', 'icon', 'content', 'content_greek', 'status', 'sortorder', 'meta_title', 'meta_keywords', 'meta_description');
+    protected static $db_fields = array('id', 'slug', 'title', 'title_greek', 'icon', 'content', 'content_greek', 'status', 'homepage', 'sortorder', 'meta_title', 'meta_keywords', 'meta_description');
 
     public $id;
     public $slug;
     public $title;
+    public $homepage;
     public $title_greek;
     public $icon;
     public $content;
@@ -32,6 +33,12 @@ class Services extends DatabaseObject
     {
         global $db;
         $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1  ORDER BY title ASC ";
+        return self::find_by_sql($sql);
+    }
+    public static function get_services_home()
+    {
+        global $db;
+        $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1 AND homepage=1 ORDER BY sortorder ASC ";
         return self::find_by_sql($sql);
     }
 
