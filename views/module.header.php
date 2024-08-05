@@ -132,6 +132,18 @@ $header .= '
                     </div>
 
                     <div class="ltn__header-options ltn__header-options-2">
+
+                        <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
+                            <ul>
+                                <li><a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
+                                    <ul>
+                                        <li><a href="#">English</a></li>
+                                        <li><a href="#">Nepali</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                                    
                         <div class="dropdown">
                             <button class="brands dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

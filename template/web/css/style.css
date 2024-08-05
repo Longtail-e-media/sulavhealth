@@ -5635,6 +5635,19 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   color: inherit;
 }
 
+.ltn__currency-menu{
+    background: #f7f7f7;
+    padding: 2px 10px;
+    border-radius: 7px;
+}
+
+.ltn__drop-menu.ltn__currency-menu ul li:hover > a {
+    color: #a52c69;
+}
+
+.ltn__drop-menu.ltn__currency-menu:hover ul li > ul{
+  margin-left: -8px;
+}
 .ltn__header-options-2 .mobile-menu-toggle > a {
   width: 3.125rem;
   height: 3.125rem;
@@ -6225,7 +6238,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   font-family: "icomoon";
-  color: var(--ltn__secondary-color);
+  color: #a2336d;
 }
 
 /* ----------------------------------------
