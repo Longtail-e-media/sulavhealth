@@ -113,7 +113,8 @@ if ((defined('CHECKOUT_PAGE')) || (defined('CART_PAGE'))) {
     $checkout = '';
 } else {
     $checkout = '<div class="mini-cart-icon">
-    <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+     <!--  <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">-->
+   <a href="'.BASE_URL.'cart" class="ltn__utilize-toggl">
         <!-- <i class="icon-shopping-cart"></i> -->
         <img class="user-cart"
             src="' . BASE_URL . 'template/web/img/cart-header.png"
@@ -131,6 +132,15 @@ $header .= '
                     </div>
 
                     <div class="ltn__header-options ltn__header-options-2">
+                        <div class="dropdown">
+                            <button class="brands dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Brands &nbsp; &nbsp;
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            ' . $brandmenu . '
+                            </div>
+                            </div>
                         <div class="ltn__drop-menu user-menu">
                             <form id="searchform" method="POST" action="' . BASE_URL . 'search">
                             <div class="search-container">
@@ -190,16 +200,7 @@ $header .= '
                 <div class="container">
                     <div class="header-menu d-none d-xl-block">
                         <div class="ltn__main-menu"
-                            style="display: flex; align-items: center; justify-content: flex-start; gap: 10px;">
-                            <div class="dropdown">
-                                <button class="brands dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Brands &nbsp; &nbsp;
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    ' . $brandmenu . '
-                                </div>
-                            </div>
+                            style="display: flex; align-items: center; justify-content:flex-start;; gap: 16px;">
                             ' . $jVars['module:menu:main-menu'] . '
                             
                         </div>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html class="no-js" lang="el-GR">
+<head>
+    <jcms:site:seotitle/>
+
+    <jcms:site:fevicon/>
+
+    <!-- font language -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <!-- Font Icons css -->
+    <link rel="stylesheet" href="css/font-icons.css">
+    <!-- plugins css -->
+    <link rel="stylesheet" href="css/plugins.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body class="<jcms:site:language-class/>">
+
+<!-- Body main wrapper start -->
+<div class="body-wrapper">
+
+    <!-- HEADER AREA START (header-5) -->
+    <jcms:module:header/>
+    <!-- HEADER AREA END -->
+
+    <!-- Utilize Cart Menu Start -->
+    <jcms:module:product:cart-menu/>
+    <!-- Utilize Cart Menu End -->
+
+    <!-- Utilize Mobile Menu Start -->
+    <jcms:module:menu:mob-menu/>
+    <!-- Utilize Mobile Menu End -->
+
+    <div class="ltn__utilize-overlay"></div>
+
+    <!-- BREADCRUMB AREA START -->
+    <jcms:module:contact:breadcrumb/>
+    <!-- BREADCRUMB AREA END -->
+
+    <!-- CONTACT ADDRESS AREA START -->
+    <jcms:module:contact:address/>
+    <!-- CONTACT ADDRESS AREA END -->
+
+    <!-- CONTACT MESSAGE AREA START -->
+    <jcms:module:contact:form/>
+    <!-- CONTACT MESSAGE AREA END -->
+
+    <!-- GOOGLE MAP AREA START -->
+    <jcms:module:contact:map/>
+    <!-- GOOGLE MAP AREA END -->
+
+    <!-- FOOTER AREA START -->
+    <jcms:module:footer/>
+    <!-- FOOTER AREA END -->
+</div>
+<!-- Body main wrapper end -->
+
+<!-- All JS Plugins -->
+<script src="js/plugins.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+
+<script src="js/jquery.validate.min.js"></script>
+<!-- Contact Form -->
+<script src="js/contact.js"></script>
+<!-- Main JS -->
+<script src="js/main.js"></script>
+
+<!-- Custom JS -->
+<script src="js/custom.js"></script>
+
+<script type="text/javascript">
+    var base_url = $('base').attr('url');
+
+    $(document).ready(function () {
+        $('#contact_form').validate({
+            errorElement: 'span',
+            errorClass: 'validate-has-error text-danger',
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                phone: {required: true},
+                email: {
+                    required: true,
+                    email: true
+                },
+                message: {required: true}
+            },
+            messages: {
+                name: {
+                    required: "<jcms:module:common_language:CONTACT_FORM_ERROR_FULL_NAME/>",
+                    minlength: "<jcms:module:common_language:CONTACT_FORM_ERROR_FIRST_NAME_MINIMUM/>"
+                },
+                phone: {required: "<jcms:module:common_language:CONTACT_FORM_ERROR_PHONE/>"},
+                email: {
+                    required: "<jcms:module:common_language:CONTACT_FORM_ERROR_EMAIL/>",
+                    email: "<jcms:module:common_language:CONTACT_FORM_ERROR_EMAIL_CORRECT/>"
+                },
+                message: {required: "<jcms:module:common_language:CONTACT_FORM_ERROR_MESSAGE/>"}
+            },
+            submitHandler: function (form) {
+                var Frmval = $("form#contact_form").serialize();
+                $("button#submit").attr("disabled", "true").text('<jcms:module:common_language:CONTACT_FORM_ERROR_PROCESSING/>');
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: base_url + "enquery_mail.php",
+                    data: "action=forcomment&" + Frmval,
+                    success: function (data) {
+                        var msg = eval(data);
+                        $("button#submit").removeAttr("disabled").text('<jcms:module:common_language:CONTACT_FORM_SUBMIT/>');
+                        $('p.form-messege').html(msg.message).addClass('alert alert-success').css('display', 'block').fadeOut(10000);
+                        $("form#contact_form")[0].reset();
+                    }
+                });
+                return false;
+            }
+        })
+    });
+   
+</script>
+</body>
+</html>
+

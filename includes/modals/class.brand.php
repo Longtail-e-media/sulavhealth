@@ -127,7 +127,7 @@ class Brand extends DatabaseObject
         $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE slug='$slug' AND status='1' LIMIT 1");
         return !empty($result_array) ? array_shift($result_array) : false;
     }
-
+    
     static function get_brands_by_slug($slug = '')
     {
         global $db;

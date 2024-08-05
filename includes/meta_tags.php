@@ -140,7 +140,7 @@ function MetaTagsFor_SEO()
 
 
     $seoSources = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' . "\n";
-    $seoSources .= '<meta http-equiv="Content-Language" content="el" />' . "\n";
+    $seoSources .= '<meta http-equiv="Content-Language" content="en" />' . "\n";
     $seoSources .= '<meta http-equiv="X-UA-Compatible" content="IE=edge">' . "\n";
 
 //    $seoSources .= '<meta charset="utf-8">' . "\n\n";

@@ -301,7 +301,14 @@ if (defined('SEARCH_PAGE')) {
             INNER JOIN tbl_brands as br ON br.id = prod.brand
             WHERE prod.status = 1 AND br.status = 1 AND
               ( prod.title LIKE '%" . $searchkey . "%' ) ";
-    } else {
+    } 
+    elseif(!empty($type)){
+        $sql = "SELECT prod.*
+            FROM tbl_product_sub as prod  
+            INNER JOIN tbl_brands as br ON br.id = prod.brand
+            WHERE prod.status = 1 AND br.status = 1 AND prod.type = 2 ";
+    } 
+    else {
         $sql = "SELECT prod.* FROM tbl_product_sub as prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status = 1";
     }
 
@@ -605,7 +612,7 @@ if (defined('SEARCH_PAGE')) {
     $total = $db->affected_rows($res);
     $listofitems .= '
     
-    <label id="totalitems">(' . $total . ' items found)</label>';
+    <label id="totalitems">' . $total . '  items found in this category</label>';
     if ($total > 0) {
         $i = 1;
         while ($rows = $db->fetch_array($res)) {

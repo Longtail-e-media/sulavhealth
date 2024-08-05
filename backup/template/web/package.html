@@ -1,0 +1,105 @@
+<!doctype html>
+<html class="no-js" lang="el-GR">
+<head>
+    <jcms:site:seotitle/>
+
+    <jcms:site:fevicon/>
+
+    <!-- font language -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <!-- Font Icons css -->
+    <link rel="stylesheet" href="css/font-icons.css">
+    <!-- plugins css -->
+    <link rel="stylesheet" href="css/plugins.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        #more {
+            display: none;
+        }
+
+        div.sticky {
+            position: sticky;
+            top: 109px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body class="<jcms:site:language-class/>">
+
+<!-- Body main wrapper start -->
+<div class="body-wrapper">
+
+    <!-- HEADER AREA START (header-5) -->
+    <jcms:module:header/>
+    <!-- HEADER AREA END -->
+
+    <!-- Utilize Cart Menu Start -->
+    <jcms:module:product:cart-menu/>
+    <!-- Utilize Cart Menu End -->
+
+    <!-- Utilize Mobile Menu Start -->
+    <jcms:module:menu:mob-menu/>
+    <!-- Utilize Mobile Menu End -->
+
+    <div class="ltn__utilize-overlay"></div>
+
+    <!-- BREADCRUMB AREA START -->
+    <jcms:module:package:package-bred/>
+    <!-- BREADCRUMB AREA END -->
+
+    <!-- ABOUT US AREA START -->
+    <div class="ltn__about-us-area pt-120--- pb-120 resourse12">
+        <div class="container">
+            <jcms:module:package:package-detail/>
+        </div>
+    </div>
+    <!-- ABOUT US AREA END -->
+
+    <!-- FOOTER AREA START -->
+    <jcms:module:footer/>
+    <!-- FOOTER AREA END -->
+
+</div>
+<!-- Body main wrapper end -->
+
+<!-- All JS Plugins -->
+<script src="js/plugins.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<!-- Main JS -->
+<script src="js/main.js"></script>
+
+<!-- Custom JS -->
+<script src="js/custom.js"></script>
+
+<script>
+    function myFunction() {
+        var dots = document.getElementById("dots");
+        var moreText = document.getElementById("more");
+        var btnText = document.getElementById("myBtn");
+
+        if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "View More";
+            moreText.style.display = "none";
+        } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "View Less";
+            moreText.style.display = "inline";
+        }
+    }
+</script>
+
+</body>
+</html>
+

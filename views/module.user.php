@@ -329,7 +329,7 @@ if (defined('DASHBOARD_PAGE')) {
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>
                                 </div>
-                                <div class="cart-product-remove remove-wishlist">
+                                <div class="cart-product-remove remove-wishlist wishlistnew">
                                     <a  href="#"
                                     title="Delete"
                                     class="remove-from-cart remove-wishlist" id="remove-wishlist" data-id="' . $productRow->slug . '">

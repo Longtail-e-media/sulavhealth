@@ -128,7 +128,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     if (!empty($glprice) and !empty($ghprice)) {
         $sql .= " AND ( (prod.discount1 >= $glprice AND prod.discount1 <= $ghprice) OR (prod.discount1 = 0 AND prod.price1 >= $glprice AND prod.price1 <= $ghprice) ) ";
     }
-
+    
     $page = 1;
     $limit = 150000000;
     $total_num = $db->num_rows($db->query($sql));

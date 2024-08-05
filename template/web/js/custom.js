@@ -292,7 +292,7 @@ $(function () {
                 $("sup.cart-total").html(res.no_cart);
                 _parent.remove();
                 $("td.sub-total-cart").html(res.sub_total);
-            
+                $("#itemnone").html(res.noitem);
                 $.ajax({
                     type: "POST",
                     dataType: "JSON",
@@ -304,6 +304,7 @@ $(function () {
                         var res = eval(data);
                         $("div.mini-cart-product-area").html(res.result);
                         $("span.sub-total-mini-cart").html(res.sub_total);
+                        
                     }
                 })
                 get_total(currency);

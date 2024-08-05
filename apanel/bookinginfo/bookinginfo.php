@@ -32,7 +32,13 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                         <td><?php echo set_na($record->person_fname . ' ' . $record->person_lname); ?></td>
                         <td>Email : <?php echo set_na($record->person_email); ?><br/>Contact No. : <?php echo set_na($record->person_phone); ?></td>
                         <td class="text-center"><?php echo $record->added_date; ?></td>
-                        <td class="text-center"><?php echo set_na($record->pay_type); ?></td>
+                        <td class="text-center">
+                            <?php 
+                                if($record->pay_type == 'Himalayan Bank'){ echo "HBL - ".$record->paymentStatus;}
+                                elseif($record->pay_type == 'himalayan_bank'){ echo "HBL - Unsuccess"; }
+                                else{echo set_na($record->pay_type);}
+                            ?>
+                        </td>
                         <td class="text-center">
                             <a href="javascript:void(0);" class="loadingbar-demo btn small bg-green tooltip-button" data-placement="top" title="View"
                                onclick="viewRecord(<?php echo $record->id; ?>);">
@@ -191,6 +197,11 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                                 <strong>Invoice No. : <?php echo ucfirst($bookingRow->pay_invoice) ?></strong><br/>
                                 <strong>Bank Approved Code : <?php echo $row->authCode; ?></strong><br/>
                             <?php } ?>
+                        </li>
+                    <?php } else if ($bookingRow->pay_type == "himalayan_bank") { ?>
+                        <li><strong>Payment Type : </strong>Himalayan Bank</li>
+                        <li>
+                            <strong>Payment Status : </strong>Unsuccess<br/>
                         </li>
                     <?php } else { ?>
                         <li><strong>Payment Type : </strong>Cash on Delivery</li>

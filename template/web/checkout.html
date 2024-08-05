@@ -44,7 +44,7 @@
     </style>
 </head>
 
-<body class="<jcms:site:language-class/>">
+<body class="<jcms:site:language-class/>" oncontextmenu="return false;">
 
 <!-- Body main wrapper start -->
 <div class="body-wrapper">
@@ -525,31 +525,50 @@
                             $('#checkoutMsg')
                                 .html(msg.message)
                                 .removeClass('alert-success')
-                                .addClass('alert alert-danger')
-                                .css('display', 'block')
-                                .fadeOut(8000);
-                            $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
+                                // .addClass('alert alert-danger')
+                                .css('display', 'block');
+                                // .fadeOut(8000);
+                                $('#checkout_alert').modal('show');
+                            $("button#checkoutSubmit").text('Order Placed');
+                        }
+                        if (msg.action == 'unsuccessorder') {
+                            $('#checkoutMsg')
+                                .html(msg.message)
+                                .removeClass('alert-success')
+                                // .addClass('alert alert-danger')
+                                .css('display', 'block');
+                                // .fadeOut(8000);
+                                $('#checkout_alert').modal('show');
+                            $("button#checkoutSubmit").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
                         }
                         if (msg.action == 'success') {
                             $('#checkoutMsg')
                                 .html(msg.message)
                                 .removeClass('alert-danger')
-                                .addClass('alert alert-success')
-                                .css('display', 'block')
-                                .fadeOut(30000);
+                                // .addClass('alert alert-success')
+                                .css('display', 'block');
+                                // $('#checkout_alert').modal('show');
+                                // .fadeOut(30000);
                             $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
+                            $('#coupon-discount-amount').html(msg.discountval);
+                            $('#shipping-amount').html(msg.shippingval);
+                            $('.probdetail').html(msg.prodval);
+                            $('#grand-total').html(msg.shippingval);
                             $("form#checkoutForm")[0].reset();
+                            
+                            $('#checkout_alert').modal('show');
                             setTimeout(function () {
-                                window.location.href = "";
-                            }, 30000);
+                                window.location.href = "dhome";
+                            }, 5000);
                         }
                         if (msg.payment_form) {
                             $('#checkoutMsg')
                                 .html(msg.message)
                                 .removeClass('alert-danger')
                                 .addClass('alert alert-success')
-                                .css('display', 'block')
-                                .fadeOut(8000);
+                                .css('display', 'block');
+                                $('#checkout_alert').modal('show');
+                                // .fadeOut(8000);
                             $("button#checkoutSubmit").removeAttr("disabled").text('<jcms:module:common_language:CHECKOUT_PLACE_ORDER/>');
                             $(".empty-div").html(msg.payment_content);
                         }
@@ -589,6 +608,12 @@
         $('input[name="shipping_latitude"]').val(lat);
         $('input[name="shipping_longitude"]').val(long);
     }
+    
+    //  document.addEventListener('keydown', function(e) {
+    //         if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.shiftKey && e.key === 'C')) {
+    //             e.preventDefault();
+    //         }
+    //     });
 
 </script>
 

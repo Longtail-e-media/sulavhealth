@@ -31,9 +31,122 @@ if (defined('CART_PAGE')) {
             $tot = $db->num_rows($query);
             if ($tot > 0) {
                 $cart_detail .= '
+                <div class="liton__shoping-cart-area pt-80 pb-10 mb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping-cart-inner shopping-inner-cart1">
+                        <h2>Cart Details</h2>
+                        
                     <div class="shoping-cart-table table-responsive">
                         <div>
-                            <ul>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="cart-details1">
+                                        <label>Order ID</label>
+                                        <p class="cart-details-text1">' . $order->accesskey . ' </p>
+                                    </div>
+                                </div>
+                           
+                            
+                            <div class="col-md-3">
+                                <div class="cart-details1">
+                                    <label>Total Amount</label>
+                                    <p class="cart-details-text1">' . $order->currency . ' ' . $order->pay_amt . ' </p>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="col-md-3"></div>
+                            
+                            <div class="col-md-3"></div>
+                            
+                             </div>
+                            
+                            <div class="row">
+                                
+                                
+                                
+                                <div class="col-md-3">
+                                    <div class="cart-details1">
+                                        <label>Full Name</label>
+                                        <p class="cart-details-text1">' . $order->person_fname . ' ' . $order->person_lname . ' </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="cart-details1">
+                                        <label>Email</label>
+                                        <p class="cart-details-text1">' . $order->person_email . ' </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="cart-details1">
+                                        <label>Contact</label>
+                                        <p class="cart-details-text1">' . $order->person_phone . ' </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="cart-details1">
+                                        <label>Country</label>
+                                        <p class="cart-details-text1">' . $order->person_country . ' </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="cart-details1">
+                                        <label>District</label>
+                                        <p class="cart-details-text1">' . $order->person_mname . ' </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="cart-details1">
+                                        <label>Address</label>
+                                        <p class="cart-details-text1">' . $order->person_address . ' </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="cart-details1">
+                                        <label>Shipping Country</label>
+                                        <p class="cart-details-text1">' . $order->shipping_country . ' </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="cart-details1">
+                                        <label>Shipping District</label>
+                                        <p class="cart-details-text1">' . $order->shipping_district . ' </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="cart-details1">
+                                        <label>Shipping Address</label>
+                                        <p class="cart-details-text1">' . $order->person_shipping_address . ' </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="cart-details1">
+                                        <label>Order Date</label>
+                                        <p class="cart-details-text1">' . date('F d, Y', strtotime($order->added_date)) . ' </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12">
+                                    <div class="cart-details1">
+                                        <label>Order Notes</label>
+                                        <!--<p class="cart-details-text1">' . $order->person_comment . ' </p>-->
+                                        <textarea>' . $order->person_comment . '</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!--<ul>
                                 <li>Order ID: ' . $order->accesskey . '</li>
                                 <li>Total: ' . $order->currency . ' ' . $order->pay_amt . '</li>
                                 <li>Full Name: ' . $order->person_fname . ' ' . $order->person_lname . '</li>
@@ -47,7 +160,8 @@ if (defined('CART_PAGE')) {
                                 <li>Shipping Address: ' . $order->person_shipping_address . '</li>
                                 <li>Order Date: ' . date('F d, Y', strtotime($order->added_date)) . '</li>
                                 <li>Order Notes: ' . $order->person_comment . '</li>
-                            </ul>
+                            </ul>-->
+                            <br/>
                         </div>
                         <table class="table">
                             <!--<thead>
@@ -100,70 +214,84 @@ if (defined('CART_PAGE')) {
                             </tbody>
                         </table>
                     </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
                 ';
             }
         }
     }
     else {
         $cart_detail .= '
-            <div class="shoping-cart-table table-responsive">
-                <table class="table">
-                    <!-- <thead>
-                        <th class="cart-product-remove">Remove</th>
-                        <th class="cart-product-image">Image</th>
-                        <th class="cart-product-info">Product</th>
-                        <th class="cart-product-price">Price</th>
-                        <th class="cart-product-quantity">Quantity</th>
-                        <th class="cart-product-subtotal">Subtotal</th>
-                    </thead> -->
-                    <tbody>
-        ';
-
-        $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
-        $tot = 0.00;
-        $subtotal = 'NPR 0.00';
-        if (!empty($sesRec)) {
-            foreach ($sesRec as $k => $sesRow) {
-                $product = SubProduct::find_by_slug($sesRow['slug']);
-                if (!empty($product)) {
-                    $images = SubProductImage::getImagelist_by($product->id, 1, 0);
-                    $img = BASE_URL . 'template/web/img/product/one.jpg';
-                    if (!empty($images)) {
-                        foreach ($images as $image) {
-                            $file_path = SITE_ROOT . 'images/product/galleryimages/' . $image->image;
-                            if (file_exists($file_path)) {
-                                $img = IMAGE_PATH . 'product/galleryimages/' . $image->image;
-                            }
-                        }
-                    }
-
-                    $product_details = $sesRow['product_details'];
-                    foreach ($product_details as $label => $detail) {
-                        $rowTotal = (float)$detail['quantity'] * (float)$detail['price'];
-                        $cart_detail .= '
-                            <tr class="cart-remove">
-                                <td class="cart-product-image">
-                                    <img src="' . $img . '" alt="' . ($product->title) . '">
-                                </td>
-                                <td class="cart-product-info">
-                                    <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' . ($product->title) . '</a></h4>
-                                </td>
-                                <td class="cart-product-label">
-                                    ' . $detail['netqnt'] . '
-                                </td>
-                                <td class="cart-product-price">
-                                    ' . $product->currency . ' ' . sprintf("%.2f", $detail['price']) . '
-                                </td>
-                                <td class="cart-product-quantity">
-                                    <div class="cart-plus-minus">
-                                        <div class="dec cqtybutton">-</div>
-                                        <input type="text" value="' . $detail['quantity'] . '" total="' . $rowTotal . '" price="' . $detail['price'] . '" currency="' . $product->currency . '" data-id="' . $product->id . '" data-label="' . $label . '" min="1" step="1" name="qtybutton" class="cart-plus-minus-box cin-input">
-                                        <div class="inc cqtybutton">+</div>
-                                    </div>
-                                </td>
-                                <td class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
-                                <td class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</td>
-                            </tr>
+        <div class="liton__shoping-cart-area pt-80 pb-10 mb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping-cart-inner shopping-inner-cart1">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h2>Cart</h2>
+                                <div class="shoping-cart-table shoping-cart1 table-responsive">
+                                    <table class="table">
+                                        <!-- <thead>
+                                            <th class="cart-product-remove">Remove</th>
+                                            <th class="cart-product-image">Image</th>
+                                            <th class="cart-product-info">Product</th>
+                                            <th class="cart-product-price">Price</th>
+                                            <th class="cart-product-quantity">Quantity</th>
+                                            <th class="cart-product-subtotal">Subtotal</th>
+                                        </thead> -->
+                                        <tbody>
+                    ';
+            
+                    $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
+                    $tot = 0.00;
+                    $subtotal = 'NPR 0.00';
+                    if (!empty($sesRec)) {
+                        foreach ($sesRec as $k => $sesRow) {
+                            $product = SubProduct::find_by_slug($sesRow['slug']);
+                            if (!empty($product)) {
+                                $images = SubProductImage::getImagelist_by($product->id, 1, 0);
+                                $img = BASE_URL . 'template/web/img/product/one.jpg';
+                                if (!empty($images)) {
+                                    foreach ($images as $image) {
+                                        $file_path = SITE_ROOT . 'images/product/galleryimages/' . $image->image;
+                                        if (file_exists($file_path)) {
+                                            $img = IMAGE_PATH . 'product/galleryimages/' . $image->image;
+                                        }
+                                    }
+                                }
+            
+                                $product_details = $sesRow['product_details'];
+                                foreach ($product_details as $label => $detail) {
+                                    $rowTotal = (float)$detail['quantity'] * (float)$detail['price'];
+                                    $cart_detail .= '
+                                            <tr class="cart-remove">
+                                                <td class="cart-product-image">
+                                                    <img src="' . $img . '" alt="' . ($product->title) . '">
+                                                </td>
+                                                <td class="cart-product-info">
+                                                    <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' . ($product->title) . '</a></h4>
+                                                </td>
+                                                <td class="cart-product-label">
+                                                    ' . $detail['netqnt'] . '
+                                                </td>
+                                                <td class="cart-product-price">
+                                                    ' . $product->currency . ' ' . sprintf("%.2f", $detail['price']) . '
+                                                </td>
+                                                <td class="cart-product-quantity">
+                                                    <div class="cart-plus-minus">
+                                                        <div class="dec cqtybutton">-</div>
+                                                        <input type="text" value="' . $detail['quantity'] . '" total="' . $rowTotal . '" price="' . $detail['price'] . '" currency="' . $product->currency . '" data-id="' . $product->id . '" data-label="' . $label . '" min="1" step="1" name="qtybutton" class="cart-plus-minus-box cin-input">
+                                                        <div class="inc cqtybutton">+</div>
+                                                    </div>
+                                                </td>
+                                                <td class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
+                                                <td class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</td>
+                                            </tr>
+                                            <div id="itemnone"></div>
                         ';
                         $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']);
                     }
@@ -182,39 +310,48 @@ if (defined('CART_PAGE')) {
         $total = (float)$tot + (float)$vat + (float)$shipping;
         $totalValue = 'NPR ' . sprintf('%.2f', $total);
         $cart_detail .= '
-                    </tbody>
-                </table>
-            </div>
-            <div class="shoping-cart-total mt-50">
-                <h4>' . ("Cart Totals") . '</h4>
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td>' . ("Cart Subtotal") . '</td>
-                        <td class="sub-total-main-cart" data="' . $tot . '">' . $subtotal . '</td>
-                    </tr>
-                    <!--<tr>
-                        <td>Shipping and Handing</td>
-                        <td>$15.00</td>
-                    </tr>
-                    <tr>
-                        <td>Vat</td>
-                        <td>$00.00</td>
-                    </tr>-->
-                    <tr>
-                        <td><strong>' . ("Order Total") . '</strong></td>
-                        <td class="sub-total-main-cart" data="' . $tot . '"><strong>' . $totalValue . '</strong></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <p class="mt-20 alert alert-danger" style="display: none;" id="checkoutMsg"></p>
-                <div class="btn-wrapper text-right">
-                    <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1" id="proceedToCheckout">' . ("Proceed to checkout") . '</a>
+                                            </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <h4>' . ("Cart Totals") . '</h4>
+                                <div class="shoping-cart-total shoping-cart1-total">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td>' . ("Cart Subtotal") . '</td>
+                                            <td class="sub-total-main-cart" data="' . $tot . '">' . $subtotal . '</td>
+                                        </tr>
+                                        <!--<tr>
+                                            <td>Shipping and Handing</td>
+                                            <td>$15.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vat</td>
+                                            <td>$00.00</td>
+                                        </tr>-->
+                                        <tr>
+                                            <td><strong>' . ("Order Total") . '</strong></td>
+                                            <td class="sub-total-main-cart" data="' . $tot . '"><strong>' . $totalValue . '</strong></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="btn-wrapper text-right">
+                                        <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1" id="proceedToCheckout">' . ("Proceed to checkout") . '</a>
+                                    </div>
+                                    <div class="btn-wrapper text-center">
+                                        <a href="#" class="theme-btn-2 btn btn-effect-2" onclick="history.back();">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="btn-wrapper text-center">
-                    <a href="#" class="theme-btn-2 btn btn-effect-2" onclick="history.back();">Back</a>
-                </div>
             </div>
+        </div>
+    </div>
         ';
     }
 }
@@ -261,11 +398,13 @@ if (defined('CHECKOUT_PAGE')) {
     if (empty($checkLogin)) {
         $checkout_form .= '<div class="mb-20"><a href="#" data-toggle="modal" data-target="#quick_view_login_form" class="text-primary" style="text-decoration: underline;">ALREADY HAVE AN ACCOUNT ?</a></div>';
     }
+    $order_key                      = @randomKeys('7');
     $checkout_form .= '
                                 
                                 <h6>' . ("Personal Information") . '</h6>
                                 <div class="row">
                                     <div class="col-md-12 mb-30">
+                                    <input type="hidden" name="order_key" value="'.$order_key.'"/>
                                         <div class="input-item input-item-name ltn__custom-icon mb-30">
                                             <input type="text" name="fname" value="' . ((!empty($checkLogin)) ? $checkLogin->first_name : '') . '" placeholder="' . CONTACT_FORM_FIRST_NAME . '">
                                         </div>
@@ -412,7 +551,7 @@ if (defined('CHECKOUT_PAGE')) {
                     
                     <div class="shoping-cart-total mb-30">
                         <h4 class="title-2">' . ("Cart Totals") . '</h4>
-                        <table class="table">
+                        <table class="table cart__totals">
                             <tbody>
     ';
     $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
@@ -426,8 +565,9 @@ if (defined('CHECKOUT_PAGE')) {
                 foreach ($product_details as $label => $detail) {
                     $rowTotal = (float)$detail['quantity'] * (float)$detail['price'];
                     $checkout_form .= '
-                        <tr>
-                            <td>' . ($product->title) . ' - ' . $detail['netqnt'] . ' <strong>× ' . $detail['quantity'] . '</strong></td>
+                        <tr class="probdetail">
+                            <td>' . ($product->title) . ' - ' . $detail['netqnt'] . '</td>
+                            <td><strong>× ' . $detail['quantity'] . '</strong></td>
                             <td>' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
                             <input type="hidden" name="currency" value="' . $product->currency . '">
                         </tr>
@@ -446,11 +586,13 @@ if (defined('CHECKOUT_PAGE')) {
                             </tr>
                             <tr>
                                 <td>' . ("Delivery Charge") . '</td>
+                                <td></td>
                                 <td id="shipping-amount">NPR 0.00</td>
                                 <input type="hidden" name="shipping_amt" value="0">
                             </tr>
                             <tr>
                                 <td><strong>' . ("Order Total") . '</strong></td>
+                                <td></td>
                                 <td><strong id="grand-total">' . $subtotal . '</strong></td>
                             </tr>
                             </tbody>
@@ -465,14 +607,14 @@ if (defined('CHECKOUT_PAGE')) {
                         <div id="checkout_accordion_1">
                             <div class="card">
                                 <h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-3" aria-expanded="false">
-                                <input type="radio" name="payment_method" value="cash_on_delivery" checked>
-                                    ' . (($lang == "gr") ? "Εξόφληση κατά την παραλαβή από το κατάστημα" : "Cash on Delivery") . '
+                                <input type="radio" name="payment_method" value="cash_on_delivery" id="ch_delivery" checked>
+                                <label for="ch_delivery">    ' . (($lang == "gr") ? "Εξόφληση κατά την παραλαβή από το κατάστημα" : "Cash on Delivery") . '</label>
                                 </h5>
                             </div>
                             <div class="card">
                                 <h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-4" aria-expanded="false">
-                                <input type="radio" name="payment_method" value="himalayan_bank">
-                                    ' . (($lang == "gr") ? "Pay Onlinee" : "Pay Online") . '
+                                <input type="radio" name="payment_method" value="himalayan_bank" id="py__online">
+                                  <label for="py__online">  ' . (($lang == "gr") ? "Pay Onlinee" : "Pay Online") . '</label>
                                 </h5>
                             </div>
                         </div>
@@ -484,7 +626,7 @@ if (defined('CHECKOUT_PAGE')) {
                             ' . CHECKOUT_AGREE_TO_TERMS . '
                         </div>
                         <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit" id="checkoutSubmit">' . (($lang == "gr") ? "ΥΠΟΒΟΛΗ ΠΑΡΑΓΓΕΛΙΑΣ" : "Place order") . '</button>
-                        <p class="mt-20" style="display: none;" id="checkoutMsg"></p>
+                       
                         <div class="error mt-20" style="display: none;"></div>
                         <div class="success alert alert-success" style="display: none;"></div>
                         <div class="empty-div d-none"></div>
@@ -495,6 +637,41 @@ if (defined('CHECKOUT_PAGE')) {
                 </div>
             </div>
         </form>
+
+        <div class="ltn__modal-area ltn__quick-view-modal-area " id="productpopup">
+        <div class="modal fade" id="checkout_alert" tabindex="-1">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="ltn__quick-view-modal-inner">
+                            <div class="modal-product-item">
+                                <div class="row">
+                                    <div class="mx-auto mt-25">
+                                        <div class="account-login-inner text-center">
+                                            <div class="section-title-area text-center">
+                                                <h3 class="section-title">Notification !</h3>
+                                            </div>
+                                           <p class="mt-20" style="display: none;" id="checkoutMsg"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                        <div class="modal-footer">
+                <a href="'.BASE_URL.'dhome" class="btn btn-primary">Go Home</a>
+            </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
     ';
 }
 

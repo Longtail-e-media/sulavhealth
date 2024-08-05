@@ -167,7 +167,7 @@ if (defined('HOME_PAGE')) {
                     <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $giftSet->title . '"></a>
                 </div>
                 <div class="product-info">
-                    <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
+                    <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                     <a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a>
                     <div class="product-price">
                         ' . $price_text . '
@@ -897,7 +897,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $slides .= '
                         <div class="single-large-img">
                             <a href="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" data-rel="lightcase:myCollection">
-                                <img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '" style="max-height:500px">
+                                <img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '" style="max-height:100%">
                             </a>
                         </div>
                     ';
@@ -945,7 +945,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $slugs = '' . BASE_URL . 'product/product-detail/' . $prodRec->slug . '';;
                 }
         $product_detail .= '
-            <div class="ltn__shop-details-inner">
+            <div class="ltn__shop-details-inner product_details_gaping">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="ltn__shop-details-img-gallery">
@@ -961,7 +961,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                         <div class="modal-product-info shop-details-info pl-0">
                         <span>'.$category.'</span>&nbsp;&nbsp;<span>'.$subcategory.'</span>
                             <h3>' . (($lang == 'gr') ? $prodRec->title_greek : $prodRec->title) . '</h3>
-                            <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
+                            <h4 class="product-title brand-name brand-name_bg"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">Brand | ' . $title . '</a></h4>
                             ' . (($lang == "gr") ? $prodRec->brief_greek : $prodRec->brief) . '
                             <div class="shoping-cart-table table-responsive">
                                 <form id="add-cart-product-' . $prodRec->slug . '">
@@ -1146,7 +1146,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="liton_tab_details_1_1">
                         <div class="ltn__shop-details-tab-content-inner">
-                            <h4 class="title-2">' . (($lang == 'gr') ? $prodRec->title_greek : $prodRec->title) . '</h4>
+                           <!-- <h4 class="title-2">' . (($lang == 'gr') ? $prodRec->title_greek : $prodRec->title) . '</h4> -->
                             ' . $content . '
                         </div>
                     </div>

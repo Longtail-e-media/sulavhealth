@@ -43,7 +43,7 @@ if ($_POST['action'] == "forcomment"):
 
     $mail = new PHPMailer(); // defaults to using php "mail()"
 
-//    $mail->CharSet = 'UTF-8';
+    //    $mail->CharSet = 'UTF-8';
 
     $mail->IsSMTP();
     $mail->SMTPAuth     = true;
@@ -52,7 +52,7 @@ if ($_POST['action'] == "forcomment"):
     $mail->Port         = "465";
     $mail->Username     = 'smtp@sulavhealth.com';
     $mail->Password     = 'G4coCsdHj.Ay';
-
+    
     $mail->SetFrom($usermail, $sitename);
     $mail->AddReplyTo($usermail, $sitename);
     $mail->AddAddress($record->email, $name);

@@ -100,6 +100,15 @@
                 $$key = $val;
             }
 
+            if($order_key){
+                $ordercheck= Bookinginfo::find_by_tranid($order_key);
+            if(!empty($ordercheck)){
+                $message = "Order already placed!";
+                echo json_encode(array("action" => "unsuccessorder", "message" => $message));
+                exit; 
+            }
+            }
+
             if (empty($currency)) {
                 $message = ($lang == "gr") ? "No Items in Cart. Please add Items!!" : "No Items in Cart. Please add Items!";
                 echo json_encode(array("action" => "unsuccess", "message" => $message));
@@ -112,7 +121,7 @@
             $bookRec->has_coupon            = (!empty($coupon)) ? 1 : 0;
             $bookRec->coupon_code           = (!empty($coupon)) ? $coupon : '';
             $bookRec->currency              = $currency;
-            $trans_key                      = @randomKeys('7');
+            $trans_key                      = $order_key;
             $bookRec->accesskey             = $trans_key;
             $bookRec->person_fname          = $fname;
             $bookRec->person_mname          = (!empty($region)) ? $region : '';
@@ -215,19 +224,26 @@
 
                 // clear shopping cart
                 unset($_SESSION['cart_detail']);
+                // if(empty($_SESSION)) {
+                //     $message =  'Checkout Success ! Your order has been successfully placed.' . $newAccountMsg;
+                //     echo json_encode(array("action" => "success", "message" => $message));
+                // }
+                
 
-                if ($bookRec->pay_type == 'himalayan_bank') {
+                if ($bookRec->pay_type != 'himalayan_bank') {
+                    
+                    $message = ($lang == "gr")
+                        ? 'Checkout Success ! Your order has been successfully placed.<br/> You will be redirected to homepage in 5 sec' . $newAccountMsg
+                        : 'Checkout Success ! Your order has been successfully placed.<br/> You will be redirected to homepage in 5 sec' . $newAccountMsg;
+                    echo json_encode(array("action" => "success", "message" => $message,"discountval"=>"NPR 0.00","shippingval"=>"NPR 0.00","prodval"=>""));
+                    
+                }
+                else {
                     ob_start();
                     require("hbl_payment_form.php");
                     $payment_content = ob_get_clean();
                     $array = array('payment_form' => true, 'message' => 'Processing ...', 'payment_content' => $payment_content);
                     echo json_encode($array);
-                }
-                else {
-                    $message = ($lang == "gr")
-                        ? 'Checkout Success ! Your order has been successfully placed' . $newAccountMsg
-                        : 'Checkout Success ! Your order has been successfully placed.' . $newAccountMsg;
-                    echo json_encode(array("action" => "success", "message" => $message));
                 }
             } else {
                 $db->rollback();

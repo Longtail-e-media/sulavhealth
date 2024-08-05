@@ -1,0 +1,182 @@
+/* ====================================================
+    Responsive
+==================================================== */
+/* Desktop 1200 - up */
+.container {
+  width: 100%;
+  padding: 0 0.85rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1426px;
+  }
+}
+
+/* Normal desktop :62rem. (Laptop 14") */
+@media (min-width: 992px) and (max-width: 1200px) {
+  /* Global */
+  h1 {
+    font-size: 1.875rem;
+  }
+
+  h2 {
+    font-size: 1.625rem;
+  }
+
+  h3 {
+    font-size: 1.375rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+
+  h5 {
+    font-size: 1.125rem;
+  }
+
+  h6 {
+    font-size: 1rem;
+  }
+}
+
+/* Tablet device :48rem. */
+@media (min-width: 768px) and (max-width: 992px) {
+  /* Global */
+  body {
+    font-size: 0.875rem;
+  }
+
+  h1 {
+    font-size: 1.625rem;
+  }
+
+  h2 {
+    font-size: 1.375rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  h4 {
+    font-size: 1.125rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  h6 {
+    font-size: 0.9375rem;
+  }
+
+  p {
+    font-size: 0.875rem;
+  }
+}
+
+/* small mobile :20rem. */
+@media (max-width: 768px) {
+  /* Global */
+  body {
+    font-size: 0.875rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+  }
+
+  h4 {
+    font-size: 1.3rem;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+  }
+
+  h6 {
+    font-size: 0.875rem;
+  }
+
+  p {
+    font-size: 0.875rem;
+  }
+
+  .language12 .ltn__currency-menu ul li ul {
+    position: relative;
+    margin-top: 0.625rem;
+  }
+
+  .slick-slide img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center !important;
+  }
+
+  .product-img img {
+    height: 12rem;
+  }
+
+  .product-action .add-to-cart {
+    margin: 0;
+    font-size: 0.75rem;
+    margin-top: 10px;
+  }
+
+  .brand-images-wrapper .brand-images {
+    width: 5rem;
+    height: 5rem;
+    padding: 5px;
+  }
+
+  .tab-content {
+    padding: 0;
+  }
+}
+
+@media (max-width: 1300px) {
+  .site-logo img {
+    margin-top: 0.3125rem;
+    width: 9.6875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .product-list {
+    /* grid-template-columns: repeat(4, 1fr); */
+  }
+}
+
+@media (max-width: 565px) {
+  .product {
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 1200px) {
+  #liton_tab_1_3 .table-responsive {
+    overflow-x: scroll;
+}
+
+#liton_tab_1_3 .table-responsive {
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+#liton_tab_1_3 .table-responsive .add-to-cart {
+  width: 12rem!important;
+}
+
+}

@@ -110,8 +110,8 @@ if (isset($_GET['page']) && $_GET['page'] == "category" && isset($_GET['mode']) 
     if (isset($_GET['id']) && !empty($_GET['id'])):
         $categoryId = addslashes($_REQUEST['id']);
         $categoryInfo = category::find_by_id($categoryId);
-        $type_product = ($categoryInfo->status == 1) ? "checked" : " ";
-        $type_package = ($categoryInfo->status == 0) ? "checked" : " ";
+        $type_product = ($categoryInfo->type == 1) ? "checked" : " ";
+        $type_package = ($categoryInfo->type == 2) ? "checked" : " ";
         $type_hide = ($categoryInfo->parentId == 0) ? '' : 'hide';
         $status = ($categoryInfo->status == 1) ? "checked" : " ";
         $unstatus = ($categoryInfo->status == 0) ? "checked" : " ";
@@ -163,10 +163,10 @@ if (isset($_GET['page']) && $_GET['page'] == "category" && isset($_GET['mode']) 
                     </div>
                     <div class="form-checkbox-radio col-md-9">
                         <input type="radio" class="custom-radio" name="type" id="checktype1"
-                               value="1" <?php echo !empty($status) ? $status : "checked"; ?>>
+                               value="1" <?php echo !empty($type_product) ? $type_product : "checked"; ?>>
                         <label for="">Product</label>
                         <input type="radio" class="custom-radio" name="type" id="checktype2"
-                               value="2" <?php echo !empty($unstatus) ? $unstatus : ""; ?>>
+                               value="2" <?php echo !empty($type_package) ? $type_package : ""; ?>>
                         <label for="">Package</label>
                     </div>
                 </div>

@@ -413,17 +413,26 @@ if (!empty($bookingRec)) {
     $site_name = Config::getField('sitename', true);
     $ccusermail = User::field_by_id(1, 'optional_email');
 
+    
     $mail = new PHPMailer();
-//    $mail->CharSet = 'UTF-8';
+    $mail->CharSet = 'UTF-8';
 
     $mail->IsSMTP();
     $mail->SMTPAuth     = true;
     $mail->SMTPSecure   = "ssl";
-    $mail->Host         = "mail.sulavhealth.com";
     $mail->Port         = "465";
-    $mail->Username     = 'smtp@sulavhealth.com';
-    $mail->Password     = 'G4coCsdHj.Ay';
-
+    
+    
+    $mail->Host         = "mail.sulavhealth.com";
+    $mail->Username     = 'smtpsulav@sulavhealth.com';
+    $mail->Password     = 'E+^Ul0?&9MM+';
+    
+    /*
+    $mail->Host         = "smtp.gmail.com";
+    $mail->Username     = 'send.mail.9849@gmail.com';
+    $mail->Password     = 'yiflapsmhmkfpuud';
+    */
+    
     $mail->SetFrom($email, $fullname);
     $mail->AddReplyTo($email, $fullname);
     $mail->AddAddress($site_email, $site_name);
@@ -438,7 +447,7 @@ if (!empty($bookingRec)) {
         }
     }
 //    $mail->AddBCC("swarna@longtail.info", "Longtail E-media");
-    $mail->AddBCC("swarnamanshakya@gmail.com", "SMS");
+    // $mail->AddBCC("swarnamanshakya@gmail.com", "SMS");
 
     $mail->Subject = "Order Placement - " . $site_name . " - " . $bookingRec->accesskey;
     $mail->MsgHTML($top . $admin_header . $html . $html2 . $html3 . $admin_footer . $bottom);
@@ -447,23 +456,68 @@ if (!empty($bookingRec)) {
     if ($success) {
         //Reply to Customer
         $replymail = new PHPMailer();
-//        $replymail->CharSet = 'UTF-8';
+        $replymail->CharSet = 'UTF-8';
 
         $replymail->IsSMTP();
         $replymail->SMTPAuth     = true;
         $replymail->SMTPSecure   = "ssl";
-        $replymail->Host         = "mail.sulavhealth.com";
         $replymail->Port         = "465";
-        $replymail->Username     = 'smtp@sulavhealth.com';
-        $replymail->Password     = 'G4coCsdHj.Ay';
-
+        
+        $replymail->Host         = "mail.sulavhealth.com";
+        $replymail->Username     = 'smtpsulav@sulavhealth.com';
+        $replymail->Password     = 'E+^Ul0?&9MM+';
+        
+        /*$replymail->Host         = "smtp.gmail.com";
+        $replymail->Username     = 'send.mail.9849@gmail.com';
+        $replymail->Password     = 'yiflapsmhmkfpuud';*/
+        
         $replymail->SetFrom($site_email, $site_name);
         $replymail->AddReplyTo($site_email, $site_name);
         $replymail->AddAddress($email, $fullname);
 //        $replymail->AddBCC("swarna@longtail.info", "Longtail E-media");
-        $replymail->AddBCC("swarnamanshakya@gmail.com", "SMS");
+        // $replymail->AddBCC("swarnamanshakya@gmail.com", "SMS");
         $replymail->Subject = "Order Placement - " . $site_name . " - " . $bookingRec->accesskey;
         $replymail->MsgHTML($top . $client_header . $html . $html2 . $html3 . $client_footer . $bottom);
         @$replymail->Send();
     }
+    
+    
+    /*
+    $ccemails = '';
+    if (!empty($ccusermail)) {
+        $rec = explode(';', $ccusermail);
+        if ($rec) {
+            foreach ($rec as $row) {
+                $ccemails .= $row;
+                $ccemails .= (end($rec) == $row) ? '' : ', ';
+            }
+        }
+    }
+    
+    $to      = 'swarna@longtail.info';
+    $subject = "Order Placement - " . $site_name . " - " . $bookingRec->accesskey;
+    $subject = "Order Placement - " . $site_name;
+    $headers = array(
+        'From'          => $fullname . ' ' . $email,
+        'Reply-To'      => $fullname . ' ' . $email,
+        'Cc'            => $ccemails,
+        'MIME-Version'  => '1.0',
+        'Content-type'  => 'text/html; charset=utf-8'
+    );
+    $res = mail($to, $subject, $top . $admin_header . $html . $html2 . $html3 . $admin_footer . $bottom, $headers);
+    
+    if($res){
+        $to      = $email;
+        $subject = "Order Placement - " . $site_name . " - " . $bookingRec->accesskey;
+        $subject = "Order Placement - " . $site_name;
+        $headers = array(
+            'From'          => $site_name . ' ' . $site_email,
+            'Reply-To'      => $site_name . ' ' . $site_email,
+            'MIME-Version'  => '1.0',
+            'Content-type'  => 'text/html; charset=utf-8'
+        );
+        $res = mail($to, $subject, $top . $client_header . $html . $html2 . $html3 . $client_footer . $bottom, $headers);
+    }
+    */
+    
 }

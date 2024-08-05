@@ -222,7 +222,7 @@ switch ($_POST['action']) {
                 </div>';
 
         }
-        echo json_encode(array('result' => $res, 'defaultmsg'=>$default, 'sub_total' => $totaldiv));
+        echo json_encode(array('result' => $res, 'defaultmsg'=>$default, 'sub_total' => $totaldiv, 'noitem' =>'No Items in Cart'));
 
         break;
 
@@ -603,7 +603,7 @@ switch ($_POST['action']) {
             }
         }
 
-        echo json_encode(array('result' => $message, 'no_cart' => $total, 'sub_total' => $sub_total));
+        echo json_encode(array('result' => $message, 'no_cart' => $total, 'sub_total' => $sub_total, 'noitem' =>'No Items in Cart'));
 
         break;
 }

@@ -457,6 +457,15 @@
                 $mail = new PHPMailer();
 
                 $mail->SetFrom($AdminEmail, $siteName, 0);
+                
+                $mail->IsSMTP();
+                $mail->SMTPAuth     = true;
+                $mail->SMTPSecure   = "ssl";
+                $mail->Port         = "465";
+                $mail->Host         = "mail.sulavhealth.com";
+                $mail->Username     = 'smtpsulav@sulavhealth.com';
+                $mail->Password     = 'E+^Ul0?&9MM+';
+    
                 $mail->AddReplyTo($forgetRec->email, $fullName);
                 $mail->AddAddress($forgetRec->email, $fullName);
                 $mail->Subject = "Forgot password on " . $siteName;

@@ -31,6 +31,9 @@ if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode'])
                     <th style="display:none;"></th>
                     <th class="text-center"><input class="check-all" type="checkbox"/></th>
                     <th class="text-center">Title</th>
+                    <?php if ($parentId != 0) { ?>
+                    <th class="text-center">Delivery Charge</th>
+                    <?php } ?>
                     <!--<th>Title(Greek)</th>-->
                     <?php if ($parentId == 0) { ?>
                         <th class="text-center">Sub category</th>
@@ -52,6 +55,9 @@ if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode'])
                                    title="<?php echo $record->title; ?>"><?php echo $record->title; ?></a>
                             </div>
                         </td>
+                        <?php if ($parentId != 0) { $dcharge= ($record->delivery_charge != 0) ? $record->delivery_charge : "N/A";?>
+                        <td class="text-center"><?php echo $dcharge;?></td>
+                        <?php }?>
                         <!--<td><?php echo $record->title_greek; ?></td>-->
                         <?php if ($parentId == 0) { ?>
                             <td class="text-center">

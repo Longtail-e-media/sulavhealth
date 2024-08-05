@@ -25,7 +25,7 @@ RewriteRule ^imaging-treatment/page/([0-9]+)?$  package_list.php?pageno=$1 [L]
 RewriteRule ^treatment/([a-zA-Z0-9-=]+)$        package.php?slug=$1 [L]
 
 # For Packages Page
-RewriteRule ^packages/?$                        packages.php [L]
+#RewriteRule ^packages/?$                        packages.php [L]
 
 #For gallery pages.
 RewriteRule ^gallery-list/?$                    gallery.php [L]
@@ -64,6 +64,7 @@ RewriteRule ^searchlist/page/([0-9]+)$          search.php?pageno=$1 [L]
 RewriteRule ^search/([a-zA-Z0-9-]+)$            search.php?brand_slug=$1 [L]
 RewriteRule ^product/([a-zA-Z0-9-]+)$           search.php?service_slug=$1 [L]
 RewriteRule ^searchlist/([a-zA-Z0-9-=]+)/?$     search.php?code=$1 [L]
+RewriteRule ^packages/?$                        search.php?type=2 [L]
 
 #For user login and register pages.
 RewriteRule ^register/?$                        register.php [L]
