@@ -4281,6 +4281,12 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   color: var(--white);
 }
 
+.note-link{
+    height: 115px;
+    overflow: scroll;
+    overflow-x: auto;
+}
+
 /* ----------------------------------------------------
     Popular Post Widget
 ---------------------------------------------------- */
@@ -5386,6 +5392,14 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   min-width: 50%;
   width: 50%;
 }
+.mega-menu.column-2 > .first-mega{
+  width: 25%;
+}
+
+.mega-menu.column-2 > .second-mega{
+  width: 75%;
+}
+
 
 .mega-menu.column-3 > li {
   min-width: 33.33%;
