@@ -131,6 +131,11 @@ $header .= '
                         </div>
                     </div>
 
+
+
+
+
+
                     <div class="ltn__header-options ltn__header-options-2">
 
                         <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu" id="google_translate_element">
