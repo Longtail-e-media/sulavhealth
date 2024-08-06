@@ -8693,8 +8693,12 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 
 .product-price del {
   /* opacity: 0.6; */
-  margin-left: 0.3125rem;
+  margin-right: 0.3125rem;
   font-size: 80%;
+}
+
+.product-price .font-14{
+  font-size: 14px;
 }
 
 .ltn__product-item .product-price {

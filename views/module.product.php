@@ -173,6 +173,10 @@ if (defined('HOME_PAGE')) {
                     <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                     <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a></h3>
                     <div class="product-price">
+                        <span>NPR 530</span>|<span>13%off</span><br/>
+                        <del>NPR 558.4</del> <span class="font-14">Save NPR 400</span> 
+                    </div>
+                    <div class="product-price">
                         ' . $price_text . '
                     </div>
                     <div class="product-action">
