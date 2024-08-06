@@ -171,7 +171,7 @@ if (defined('HOME_PAGE')) {
                 </div>
                 <div class="product-info">
                     <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
-                    <a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a>
+                    <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a></h3>
                     <div class="product-price">
                         ' . $price_text . '
                     </div>
@@ -506,7 +506,7 @@ if (defined('HOME_PAGE')) {
         $homeSets= SubProduct::get_home_brand_product_service($homeservice->id);
         if (!empty($homeservices)) {
             $services_gift_sets .= '
-            <div class="ltn__product-tab-area ltn__product-gutter pt-115">
+            <div class="ltn__product-tab-area ltn__product-gutter">
             <div class="">
                 <div class="row">
                     <div class="col-lg-12">
@@ -576,7 +576,7 @@ if (defined('HOME_PAGE')) {
                     </div>
                     <div class="product-info">
                         <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
-                        <a href="' . $slugs . '" class="product-link">' . $serviceSet->title . '</a>
+                        <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $serviceSet->title . '</a></h3>
                         <div class="product-price">
                             ' . $price_text . '
                         </div>
@@ -975,7 +975,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     </div>
                     <div class="product-info">
                         <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
-                        <a href="' . $slugs . '" class="product-link">' . $prodrelated->title . '</a>
+                        <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $prodrelated->title . '</a></h3>
                         <div class="product-price">
                             ' . $price_text . '
                         </div>

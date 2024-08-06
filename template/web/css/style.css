@@ -17392,9 +17392,14 @@ footer a:hover {
   text-align: left;
 }
 
+.product-link-title{
+  height: 60px;
+}
+
 .product-link {
   padding: 0.3125rem 0 !important;
   color: #0e75ba !important;
+  font-size: 17px !important;
 }
 
 .product-info .product-title a {
