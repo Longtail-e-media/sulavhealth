@@ -170,7 +170,7 @@ if (defined('HOME_PAGE')) {
                     <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $giftSet->title . '"></a>
                 </div>
                 <div class="product-info">
-                    <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
+                    <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                     <a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a>
                     <div class="product-price">
                         ' . $price_text . '
@@ -575,7 +575,7 @@ if (defined('HOME_PAGE')) {
                         <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $serviceSet->title . '"></a>
                     </div>
                     <div class="product-info">
-                        <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $prodbrand->slug . '" class="product-link">' . $prodbrand->title . '</a></h4>
+                        <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                         <a href="' . $slugs . '" class="product-link">' . $serviceSet->title . '</a>
                         <div class="product-price">
                             ' . $price_text . '
