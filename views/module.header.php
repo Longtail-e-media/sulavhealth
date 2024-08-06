@@ -133,7 +133,7 @@ $header .= '
 
                     <div class="ltn__header-options ltn__header-options-2">
 
-                        <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
+                        <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu" id="google_translate_element">
                             <ul>
                                 <li><a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
                                     <ul>
@@ -143,6 +143,7 @@ $header .= '
                                 </li>
                             </ul>
                         </div>
+                        
                                     
                         <div class="dropdown">
                             <button class="brands dropdown-toggle" type="button" id="dropdownMenuButton"
