@@ -2,7 +2,7 @@
 class Article extends DatabaseObject {
 
 	protected static $table_name = "tbl_articles";
-	protected static $db_fields = array('id', 'parent_id', 'slug', 'title', 'title_greek', 'content_greek', 'sub_title', 'linksrc', 'linktype', 'content', 'status', 'sortorder', 'meta_title', 'meta_keywords', 'meta_description', 'meta_title_greek', 'meta_keywords_greek', 'meta_description_greek', 'type', 'added_date', 'modified_date', 'homepage', 'image');
+	protected static $db_fields = array('id', 'parent_id', 'slug', 'title', 'title_greek', 'content_greek', 'sub_title', 'linksrc', 'linktype', 'content', 'status', 'sortorder', 'meta_title', 'meta_keywords', 'meta_description', 'meta_title_greek', 'meta_keywords_greek', 'meta_description_greek', 'type', 'added_date', 'modified_date', 'homepage', 'image','subtype','prodcategory', 'Subcategory', 'brand', 'service_id');
 	
 	public $id;
 	public $parent_id;
@@ -27,6 +27,11 @@ class Article extends DatabaseObject {
 	public $modified_date;
 	public $homepage;
 	public $image;		
+	public $subtype;		
+	public $prodcategory;		
+	public $Subcategory;		
+	public $service_id;		
+	public $brand;		
 	
 	public static function checkDupliName($title='') {
 		global $db;

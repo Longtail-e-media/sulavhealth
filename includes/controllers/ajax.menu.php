@@ -21,6 +21,10 @@
 			$record->linksrc 		= $_REQUEST['linksrc'];
 			$record->parentOf 		= $_REQUEST['parentOf'];
 			$record->linktype 		= $_REQUEST['linktype'];
+			$record->menutype 		= $_REQUEST['menutype'];
+			$record->service_id         = (!empty($_REQUEST['service_id'])) ? $_REQUEST['service_id'] : '0';
+    		$record->category 			    = !empty($_REQUEST['category'])?$_REQUEST['category']:'';
+    		$record->Subcategory 			    = !empty($_REQUEST['Subcategory'])?$_REQUEST['Subcategory']:'';
 			$record->status			= $_REQUEST['status'];
 			$record->sortorder		= Menu::find_maximum_byparent("sortorder",$_REQUEST['parentOf']);
 			$record->added_date 	= registered();
@@ -46,6 +50,10 @@
 			$record->linksrc 	= $_REQUEST['linksrc'];
 			$record->parentOf 	= $_REQUEST['parentOf'];
 			$record->linktype 	= $_REQUEST['linktype'];
+			$record->menutype 		= $_REQUEST['menutype'];
+			$record->service_id         = (!empty($_REQUEST['service_id'])) ? $_REQUEST['service_id'] : '0';
+    		$record->category 			    = !empty($_REQUEST['category'])?$_REQUEST['category']:'';
+    		$record->Subcategory 			    = !empty($_REQUEST['Subcategory'])?$_REQUEST['Subcategory']:'';
 			$record->status		= $_REQUEST['status'];
 			
 			$db->begin();
@@ -89,6 +97,13 @@
 			datatableReordering('tbl_menu', $sortIds, "sortorder", "parentOf",$posId);
 			$message  = sprintf($GLOBALS['basic']['sorted_'], "Menu"); 
 			echo json_encode(array("action"=>"success","message"=>$message));
-		break;		
+		break;	
+		case "filteractivity":
+			$desId = addslashes($_REQUEST['destid']);
+			$selId = addslashes($_REQUEST['selct']);
+			// $selcId = addslashes($_REQUEST['selcct']);
+			$rec = category::get_all_selcate($desId,$selId);
+			echo json_encode(array("action" => "success", "result" => $rec));
+			break;	
 	}
 ?>

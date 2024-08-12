@@ -47,7 +47,10 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                     <th style="display:none;"></th>
                     <th class="text-center"><input class="check-all" type="checkbox"/></th>
                     <th>Title</th>
-                    <th class="text-center">Images</th>
+                    <th>Amount</th>
+                    <th>Discount Percentage</th>
+                    <th>Discounted Amt</th>
+                    <th class="text-center"></th>
                     <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                 </tr>
                 </thead>
@@ -62,6 +65,21 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                             <div class="col-md-7">
                                 <a href="javascript:void(0);" onClick="editSubProduct(<?php echo $record->type; ?>,<?php echo $record->id; ?>);"
                                    class="loadingbar-demo" title="<?php echo $record->title; ?>"><?php echo $record->title; ?></a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-md-7">
+                               <?php echo $record->price1; ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-md-7">
+                               <?php $discountper= (!empty($record->discountedp)) ? $record->discountedp . "%" : "N/A"; echo $discountper;  ?>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-md-7">
+                               <?php $discountamt= (!empty($record->discount1)) ? $record->discount1 : "N/A"; echo $discountamt; ?>
                             </div>
                         </td>
                         <td class="text-center">
@@ -235,6 +253,100 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                     </div>
                 </div>
 
+                <div class="form-row">
+                            <div class="form-label col-md-2">
+                                <label for="">
+                            additional :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-20">
+                        <?php 
+                        $svfr = !empty($subproductInfo->additional) ? $subproductInfo->additional : '';
+                        $saveRec = unserialize(base64_decode($svfr));
+                        if(!empty($saveRec)){
+                            
+                            foreach($saveRec as $recdata){
+                            
+                                // $child_id = $recdata->id;
+                                // $child_title = isset($saveRec[$child_id]['id']) ? $saveRec[$child_id]['title'] : $recdata->title;
+                                ?>
+
+<div>
+                        <input placeholder="Title" class="col-md-4 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id']?>][name]"
+                               value="<?php echo !empty($recdata['name']) ? $recdata['name'] : ""; ?>">
+                               <input placeholder="qty" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][qty]"
+                               value="<?php echo !empty($recdata['qty']) ? $recdata['qty'] : ""; ?>">
+                               <input placeholder="price" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][price]"
+                               value="<?php echo !empty($recdata['price']) ? $recdata['price'] : ""; ?>">
+                               <span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br></div>
+                <?php
+                              } 
+                }else{?>
+                <input placeholder="Title" class="col-md-4 validate[required,length[0,250]]" type="text" name="additional[1][name]"
+                               value="">
+                               <input placeholder="Title" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[1][qty]"
+                               value="">
+                               <input placeholder="Title" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[1][price]"
+                               value="">
+                    
+
+                <?php }?>
+                    </div>
+                    <div id="add_option_div"></div>
+                                    <a href="javascript:void(0);" class="btn medium bg-blue tooltip-button" title="Add" onclick="addFeaturesRows();">
+                                        <i class="glyph-icon icon-plus-square"></i>
+                                    </a> 
+                </div>
+
+                 <!-- Feature Listing -->
+                 <?php $svfr = !empty($rowInfo->additional) ? $rowInfo->additional : '';
+                $saveRec = unserialize(base64_decode($svfr));
+
+                if (!empty($saveRec)) {
+                    foreach ($saveRec as $recRow) { ?>
+                        <div class="form-row">
+                            <div class="form-label col-md-2">
+                                <label for="">
+                                    <?php echo $recRow->title; ?> :
+                                </label>
+                            </div>
+                            <?php
+
+                            ?>
+                            <div class="form-checkbox-radio col-md-10 form-input">
+                                <input type="text" placeholder="Title" class="col-md-4 validate[length[0,250]]"
+                                       name="fparent[<?php echo $recRow->id; ?>][name]" value="<?php echo $savedTitle; ?>">
+                                <div class="clear"></div>
+                                <div class="d-flex">
+                                    <div class="row">
+                                <?php
+
+                                            $check = isset($childRow['id']) ? 'checked="checked"' : ''; ?>
+                                            <div><input type="checkbox" class="custom-radio"
+                                                        name="feature[<?php echo $recRow->id; ?>][<?php echo $child_id; ?>][id]"
+                                                        value="<?php echo $child_id; ?>" <?php echo $check; ?>>
+                                                <input type="text" placeholder="Icon Class" class="col-md-2 validate[length[0,30]]"
+                                                       name="feature[<?php echo $recRow->id; ?>][<?php echo $child_id; ?>][icon_class]"
+                                                       value="<?php echo $childRow['icon_class']; ?>">
+                                                <input type="text" placeholder="Title" class="col-md-6 validate[length[0,100]]"
+                                                       name="feature[<?php echo $recRow->id; ?>][<?php echo $child_id; ?>][title]"
+                                                       value="<?php echo $childRow['title']; ?>">
+                                                <span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br></div>
+                                    
+                                    </div>
+                                </div>
+                                <div id="add_option_div<?php echo $recRow->id; ?>"></div>
+                                    <a href="javascript:void(0);" class="btn medium bg-blue tooltip-button" title="Add" onclick="addFeaturesRows('<?php echo $recRow->id; ?>');">
+                                        <i class="glyph-icon icon-plus-square"></i>
+                                    </a> 
+                                </div>
+                        </div>
+                    <?php }
+                } 
+                else{
+                    
+                }?>
+
                 <!--<div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">Title (Greek):</label>
@@ -279,14 +391,17 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         </label>
                     </div>
                     <div class="form-input col-md-10">
-                        <input placeholder="Gross Weight 1" class="col-md-2 validate[required,length[0,50]]" type="text" name="netqnt1" id="netqnt1"
+                        <input placeholder="Gross Weight " class="col-md-2 validate[required,length[0,50]]" type="text" name="netqnt1" id="netqnt1"
                                value="<?php echo !empty($subproductInfo->netqnt1) ? $subproductInfo->netqnt1 : ""; ?>">
                         <!--<input placeholder="Gross Weight 1" class="col-md-2 validate[required,length[0,50]]" type="text" name="qnt1" id="qnt1"
                                value="<?php echo !empty($subproductInfo->qnt1) ? $subproductInfo->qnt1 : ""; ?>">-->
                         <input placeholder="Price 1" class="col-md-2 validate[required,length[0,50]]" type="number" step="0.01" min="0" name="price1" id="price1"
                                value="<?php echo !empty($subproductInfo->price1) ? $subproductInfo->price1 : ""; ?>">
-                        <input placeholder="Discount Price 1" class="col-md-2 validate[length[0,50]]" type="number" step="0.01" min="0" name="discount1"
+                               <input placeholder="Discounted percentage " class="col-md-2 validate[length[0,50]]" type="number" step="0.01" min="0" name="discountedp"
+                               id="discountedp" value="<?php echo !empty($subproductInfo->discountedp) ? $subproductInfo->discountedp : ""; ?>">
+                               <input placeholder="Discount Price " class="col-md-2 validate[length[0,50]]" type="number" step="0.01" min="0" name="discount1"
                                id="discount1" value="<?php echo !empty($subproductInfo->discount1) ? $subproductInfo->discount1 : ""; ?>">
+                        
                         <!--<br><br>-->
 
                         <!--<input placeholder="Gross Weight 2" class="col-md-2 validate[length[0,50]]" type="text" name="netqnt2" id="netqnt2"

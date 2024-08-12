@@ -31,6 +31,10 @@
 			
 			$record->slug 		            = $_REQUEST['slug'];
 			$record->title 		            = $_REQUEST['title'];
+			$record->service_id         = (!empty($_REQUEST['service_id'])) ? $_REQUEST['service_id'] : '0';
+			$record->prodcategory 			    = !empty($_REQUEST['prodcategory'])?$_REQUEST['prodcategory']:'';
+			$record->Subcategory 			    = !empty($_REQUEST['Subcategory'])?$_REQUEST['Subcategory']:'';
+			// $record->brand 			    = $_REQUEST['brand'];
 //			$record->sub_title 		        = $_REQUEST['sub_title'];
 			$record->image		            = serialize(array_values(array_filter($_REQUEST['imageArrayname'])));
 //			$record->linksrc 	            = $_REQUEST['linksrc'];
@@ -42,6 +46,7 @@
 			$record->homepage	            = $_REQUEST['homepage'];
 			$record->meta_title		        = $_REQUEST['meta_title'];
 			$record->meta_keywords		    = $_REQUEST['meta_keywords'];
+			
 			$record->meta_description	    = $_REQUEST['meta_description'];
 // 			$record->meta_title_greek	    = $_REQUEST['meta_title_greek'];
 // 			$record->meta_keywords_greek    = $_REQUEST['meta_keywords_greek'];
@@ -82,6 +87,10 @@
 			
 			$record->slug 		            = $_REQUEST['slug'];
 			$record->title 		            = $_REQUEST['title'];
+			$record->service_id         = (!empty($_REQUEST['service_id'])) ? $_REQUEST['service_id'] : '0';
+			$record->prodcategory 			    = !empty($_REQUEST['prodcategory'])?$_REQUEST['prodcategory']:'';
+			$record->Subcategory 			    = !empty($_REQUEST['Subcategory'])?$_REQUEST['Subcategory']:'';
+			// $record->brand 			    = $_REQUEST['brand'];
 //			$record->sub_title 		        = $_REQUEST['sub_title'];
 			$record->image		            = serialize(array_values(array_filter($_REQUEST['imageArrayname'])));
 //			$record->linksrc 	            = $_REQUEST['linksrc'];
@@ -176,5 +185,13 @@
 			$message  = sprintf($GLOBALS['basic']['sorted_'], "Article"); 
 			echo json_encode(array("action"=>"success","message"=>$message));
 		break;
+
+		case "filteractivity":
+			$desId = addslashes($_REQUEST['destid']);
+			$selId = addslashes($_REQUEST['selct']);
+			// $selcId = addslashes($_REQUEST['selcct']);
+			$rec = category::get_all_selcate($desId,$selId);
+			echo json_encode(array("action" => "success", "result" => $rec));
+			break;
 	}
 ?>

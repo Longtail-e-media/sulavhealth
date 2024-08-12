@@ -137,6 +137,66 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                     </div>
                 </div>
 
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Service :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-4">
+                        <?php $selid = !empty($articlesInfo->service_id) ? $articlesInfo->service_id : 0; ?>
+                        <select data-placeholder="Choose" class="chosen-selec validate[required,length[0,500]]" id="service_id" name="service_id">
+                            <?php echo Services::get_internal_link_product($selid); ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Category :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-4">
+                        <?php $cid = !empty($articlesInfo->prodcategory) ? $articlesInfo->prodcategory : 0; ?>
+                        <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] prodcategory" id="prodcategory" name="prodcategory"
+                                selcId="<?php echo $cid; ?>">
+                            <?php 
+                            // $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 AND type={$typeid} ORDER BY sortorder ASC ");
+                            $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 ORDER BY sortorder ASC ");
+                            // pr($categories);
+                            if ($categories) {
+                                foreach ($categories as $k => $category) {
+                                    if($k == 0){$initialType = $category->type;}
+                                    $cat = $category->id;
+                                    $sel = (!empty($cat) && $cat == $articlesInfo->prodcategory) ? 'selected' : '';
+                                    $initialType = (!empty($cat) && $cat == $articlesInfo->prodcategory) ? $category->type : $initialType;?>
+                                    <option value="<?= $category->id; ?>" <?= $sel; ?> selType="<?= $category->type; ?>"><?= $category->title; ?></option>
+                                <?php }
+                            } ?>
+                        </select>
+                    </div>
+                </div>
+
+                <input type="hidden" name="type" id="type" value="<?php echo $initialType; ?>"/>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Sub Category :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-4">
+
+                        <?php $selid = !empty($articlesInfo->Subcategory) ? $articlesInfo->Subcategory : 0; ?>
+                        <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Subcategory" id="Subcategory" name="Subcategory"
+                                selId="<?php echo $selid; ?>">
+                            <?php $pId = !empty($articlesInfo->prodcategory) ? $articlesInfo->prodcategory : 0;
+                            echo Category::get_all_filterdata($pId, $selid); ?>
+                        </select>
+                    </div>
+                </div>
+
                 <!--<div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="" class="row">
@@ -372,8 +432,8 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
         var base_url = "<?php echo ASSETS_PATH; ?>";
         var editor_arr = ["content"];
         create_editor(base_url, editor_arr);
-        var editor_arr1 = ["content_greek"];
-        create_editor1(base_url, editor_arr1);
+        // var editor_arr1 = ["content_greek"];
+        // create_editor1(base_url, editor_arr1);
     </script>
 
     <script type="text/javascript" src="<?php echo ASSETS_PATH; ?>uploadify/jquery.uploadify.min.js"></script>

@@ -147,7 +147,12 @@ if (defined('HOME_PAGE')) {
                 $price_text = '<span>' . $giftSet->currency . ' ' . $giftSet->price1 . '</span>';
             }
             if (!empty($giftSet->discount1)) {
-                $price_text = '<span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span><del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del>';
+                $discountamt= $giftSet->price1 - $giftSet->discount1;
+                $price_text = '
+                <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
+                
+                ';
             }
             $prodbrand = Brand::find_by_id($giftSet->brand);
             $prodservice = Services::find_by_id($giftSet->service_id);
@@ -172,10 +177,10 @@ if (defined('HOME_PAGE')) {
                 <div class="product-info">
                     <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                     <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a></h3>
-                    <div class="product-price">
+                    <!--<div class="product-price">
                         <span>NPR 530</span>|<span>13%off</span><br/>
                         <del>NPR 558.4</del> <span class="font-14">Save NPR 400</span> 
-                    </div>
+                    </div>-->
                     <div class="product-price">
                         ' . $price_text . '
                     </div>
@@ -555,8 +560,13 @@ if (defined('HOME_PAGE')) {
                 if (!empty($serviceSet->price1) and (empty($serviceSet->offer_price))) {
                     $price_text = '<span>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</span>';
                 }
-                if (!empty($serviceSet->discount1)) {
-                    $price_text = '<span>' . $serviceSet->currency . ' ' . $serviceSet->discount1 . '</span><del>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</del>';
+                if (!empty($giftSet->discount1)) {
+                    $discountamt= $giftSet->price1 - $giftSet->discountedp;
+                    $price_text = '
+                    <span>' . $giftSet->currency . ' '.$giftSet->discountedp.'</span>|<span>' . $giftSet->discount1 . '%off</span><br/>
+                            <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
+                    
+                    ';
                 }
                 $prodbrand = Brand::find_by_id($serviceSet->brand);
                 $prodservice = Services::find_by_id($serviceSet->service_id);
@@ -891,15 +901,16 @@ if (defined('HOME_PAGE')) {
         }
     }
 
-}
 
+    $jVars['module:product:home-services-sets'] = $services_gift_sets;
+    $jVars['module:product:home-services-sets-modal'] = $services_gift_sets_modal;
+    $jVars['module:product:home-services-sets-script'] = $services_gift_sets_script;
 $jVars['module:product:home-gift-sets'] = $home_gift_sets;
 $jVars['module:product:home-gift-sets-modal'] = $home_gift_sets_modal;
 $jVars['module:product:home-gift-sets-script'] = $home_gift_sets_script;
-$jVars['module:product:home-services-sets'] = $services_gift_sets;
-$jVars['module:product:home-services-sets-modal'] = $services_gift_sets_modal;
-$jVars['module:product:home-services-sets-script'] = $services_gift_sets_script;
+
 $jVars['module:product:home-brand'] = $brand;
+}
 
 
 /**
@@ -953,7 +964,12 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $price_text = '<span>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</span>';
                 }
                 if (!empty($prodrelated->discount1)) {
-                    $price_text = '<span>' . $prodrelated->currency . ' ' . $prodrelated->discount1 . '</span><del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del>';
+                    $discountamt= $prodrelated->price1 - $prodrelated->discountedp;
+                    $price_text = '
+                    <span>' . $prodrelated->currency . ' '.$prodrelated->discountedp.'</span>|<span>' . $prodrelated->discount1 . '%off</span><br/>
+                            <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt. '</span> 
+                    
+                    ';
                 }
                 $prodbrand = Brand::find_by_id($prodrelated->brand);
                 $prodservice = Services::find_by_id($prodrelated->service_id);

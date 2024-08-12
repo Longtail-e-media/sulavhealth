@@ -156,7 +156,12 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 $price_text = '<span>' . $rows['currency'] . ' ' . $rows['price1'] . '</span>';
             }
             if (!empty($rows['discount1'])) {
-                $price_text = '<span>' . $rows['currency'] . ' ' . $rows['discount1'] . '</span><del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del>';
+                $discountamt= $rows['price1'] - $rows['discount1'];
+                $price_text = '
+                <span>' . $rows['currency'] . ' '.$rows['discount1'].'</span>|<span>' . $rows['discountedp'] . '%off</span><br/>
+                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span> 
+                
+                ';
             }
             $product = SubProduct::find_by_slug($rows['slug']);
             if (!empty($product)) {

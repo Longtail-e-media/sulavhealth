@@ -89,6 +89,34 @@
         })
     });
 
+    $(document).ready(function () {
+    //auto select sub category
+    var base_url = '<?php echo BASE_URL;?>';
+    
+    $('.prodcategory').on('change', function () {
+        var destId = $(this).val();
+        console.log(destId);
+        var subId = $('.Subcategory').attr('selId');
+        // var destId = $('.Category').attr('selcId');
+        var newType = $('option:selected',this).attr('selType');
+        $('input[name="type"]').val(newType);
+        $('.Subcategory').html('<option>Loading...</option>');
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: getLocation(),
+            data: "action=filteractivity&destid=" + destId + "&selct=" + subId ,
+            success: function (data) {
+                var msg = eval(data);
+                if (msg.action == 'success') {
+                    $('.Subcategory').html(msg.result);
+                }
+            }
+        });
+        return !1
+    })
+    });
+
     // Edit records
     function editRecord(Re) {
         $.ajax({

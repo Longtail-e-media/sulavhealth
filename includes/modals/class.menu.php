@@ -4,7 +4,7 @@ class Menu extends DatabaseObject
 {
 
     protected static $table_name = "tbl_menu";
-    protected static $db_fields = array('id', 'name', 'linksrc', 'parentOf', 'status', 'sortorder', 'linktype', 'added_date', 'type', 'name_gr');
+    protected static $db_fields = array('id', 'name', 'linksrc', 'parentOf', 'status', 'sortorder', 'linktype', 'menuxtype', 'added_date', 'type', 'name_gr','subtype','category', 'menutype','Subcategory', 'service_id');
 
     public $id;
     public $name;
@@ -15,7 +15,12 @@ class Menu extends DatabaseObject
     public $linktype;
     public $added_date;
     public $type;
+    public $menutype;
     public $name_gr;
+    public $subtype;		
+	public $category;		
+	public $Subcategory;		
+	public $service_id;	
 
     //Find a single row in the database where id is provided.
     public static function find_by_linksrc($linksrc = '')

@@ -12,4 +12,6 @@ includes/initialize.php
 /images
 userfiles
 
+backup
+
 *.zip

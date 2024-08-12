@@ -94,6 +94,33 @@ $(document).ready(function(){
 		var selVal = $("select option:selected").val();
 		(selVal==0)?$('.menu-position').slideDown():$('.menu-position').slideUp();
 	})
+
+
+	//auto select sub category
+	var base_url = '<?php echo BASE_URL;?>';
+    
+	$('.Category').on('change', function () {
+		var destId = $(this).val();
+		var subId = $('.Subcategory').attr('selId');
+		// var destId = $('.Category').attr('selcId');
+		var newType = $('option:selected',this).attr('selType');
+		$('input[name="type"]').val(newType);
+		$('.Subcategory').html('<option>Loading...</option>');
+		$.ajax({
+			type: "POST",
+			dataType: "JSON",
+			url: getLocation(),
+			data: "action=filteractivity&destid=" + destId + "&selct=" + subId ,
+			success: function (data) {
+				var msg = eval(data);
+				if (msg.action == 'success') {
+					$('.Subcategory').html(msg.result);
+				}
+			}
+		});
+		return !1
+	});
+
 });
 
 /***************************************** AddEdit New Menu *******************************************/
@@ -140,6 +167,36 @@ $(document).ready(function(){
 		$('#linksrc').val($(this).val());
 	});
 });
+
+function menuTypeSelect(Re) {
+	console.log(Re);
+    if (Re == 1) {
+        $('#oldmenu').removeClass("hide");
+    } else {
+        $('#oldmenu').addClass("hide");
+    }
+}
+
+// Initially hide the element with id 'oldmenu'
+// $(document).ready(function() {
+//     $('.articlemenu').addClass("hide");
+// });
+
+// function menuTypeSelect(Re){
+// 	if(Re == 0) {		
+// 		$('#oldmenu').removeClass("hide");
+// 		// ($('#linksrc').val() == 'https://www.') ? $('#linksrc').val('') : null ;
+// 	} else {
+// 		$('#oldmenu').addClass("hide");
+// 		// ($('#linksrc').val() == '') ? $('#linksrc').val("https://www.") : null ;
+// 	}
+// }
+// $(document).ready(function(){	
+// 	$('#linkPage').change(function(){
+// 		$('#linksrc').val($(this).val());
+// 	});
+// });
+	
 		
 /***************************************** Delete Records *******************************************/
 function recordDelete(Re,Relvl){

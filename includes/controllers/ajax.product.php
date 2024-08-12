@@ -176,6 +176,18 @@ switch ($action) {
         $record	= new SubProduct();
 
         $record->type 			    = $_REQUEST['type'];
+        $additional = (isset($_REQUEST['additional']) and !empty($_REQUEST['additional']))?$_REQUEST['additional']:'';
+        $newArr = array();
+        // pr($additional);
+                if(!empty($additional)){		
+                    // pr($additional);		
+                    foreach($additional as $key=>$val){
+                        $final_title = !empty($additional[$key])?$val['name']:'';
+                        $final_qty  = !empty($additional[$key])?$val['qty']:'';
+                        $final_price  = !empty($additional[$key])?$val['price']:'';
+                        $newArr[$key] = array('id'=>$key,'name'=>$final_title,'qty'=>$final_qty,'price'=>$final_price);
+                        }
+                }
         $record->slug 			    = create_slug($_REQUEST['title']);
         $record->title 			    = $_REQUEST['title'];
         $record->service_id         = (!empty($_REQUEST['service_id'])) ? $_REQUEST['service_id'] : '0';
@@ -190,6 +202,7 @@ switch ($action) {
         // $record->qnt1 			    = $_REQUEST['qnt1'];
         $record->price1 			= $_REQUEST['price1'];
         $record->discount1 		    = !empty($_REQUEST['discount1'])?$_REQUEST['discount1']:'';
+        $record->discountedp 		    = !empty($_REQUEST['discountedp'])?$_REQUEST['discountedp']:'';
         $record->netqnt2 		    = !empty($_REQUEST['netqnt2'])?$_REQUEST['netqnt2']:'';
         $record->qnt2 		        = !empty($_REQUEST['qnt2'])?$_REQUEST['qnt2']:'';
         $record->price2 		    = !empty($_REQUEST['price2'])?$_REQUEST['price2']:'';
@@ -206,66 +219,80 @@ switch ($action) {
         $record->brief 		        = !empty($_REQUEST['brief'])?$_REQUEST['brief']:'';
         $record->brief_greek        = !empty($_REQUEST['brief_greek'])?$_REQUEST['brief_greek']:'';
         $record->content 		    = $_REQUEST['content'];
+        $record->additional				= base64_encode(serialize($newArr));
         // $record->content_greek 		= $_REQUEST['content_greek'];
         $record->status			    = $_REQUEST['status'];
-
+        
         $record->meta_title		        = $_REQUEST['meta_title'];
         $record->meta_keywords		    = $_REQUEST['meta_keywords'];
         $record->meta_description	    = $_REQUEST['meta_description'];
         // $record->meta_title_greek		= $_REQUEST['meta_title_greek'];
         // $record->meta_keywords_greek	= $_REQUEST['meta_keywords_greek'];
         // $record->meta_description_greek	= $_REQUEST['meta_description_greek'];
-
+        
         $record->sortorder		= SubProduct::find_maximum_byparent("sortorder",$_REQUEST['type']);
         $record->added_date 	= registered();
         $record->modified_date  = registered();
-
+        
         $checkDupliTitle = SubProduct::checkDupliTitle($record->title);
         if ($checkDupliTitle):
             echo json_encode(array("action" => "warning", "message" => "Title Already Exists."));
             exit;
         endif;
-
+        
         $db->begin();
         if ($record->save()): $db->commit();
-            $message = sprintf($GLOBALS['basic']['addedSuccess_'], "Sub Product '" . $record->title . "'");
-            echo json_encode(array("action" => "success", "message" => $message));
-            log_action($message, 1, 3);
-        else: $db->rollback();
-            echo json_encode(array("action" => "error", "message" => $GLOBALS['basic']['unableToSave']));
+        $message = sprintf($GLOBALS['basic']['addedSuccess_'], "Sub Product '" . $record->title . "'");
+        echo json_encode(array("action" => "success", "message" => $message));
+        log_action($message, 1, 3);
+    else: $db->rollback();
+    echo json_encode(array("action" => "error", "message" => $GLOBALS['basic']['unableToSave']));
+endif;
+break;
+
+case "editSubProduct":
+    
+    $record = SubProduct::find_by_id($_REQUEST['idValue']);
+    
+    if ($record->title != $_REQUEST['title']) {
+        $checkDupliTitle = SubProduct::checkDupliTitle($_REQUEST['title']);
+        if ($checkDupliTitle):
+            echo json_encode(array("action" => "warning", "message" => "Title already exists."));
+            exit;
         endif;
-    break;
-
-    case "editSubProduct":
-
-        $record = SubProduct::find_by_id($_REQUEST['idValue']);
-
-        if ($record->title != $_REQUEST['title']) {
-            $checkDupliTitle = SubProduct::checkDupliTitle($_REQUEST['title']);
-            if ($checkDupliTitle):
-                echo json_encode(array("action" => "warning", "message" => "Title already exists."));
-                exit;
-            endif;
-        }
-
-        $record->type 			    = $_REQUEST['type'];
-        $record->slug 			    = create_slug($_REQUEST['title']);
-        $record->service_id         = (!empty($_REQUEST['service_id'])) ? $_REQUEST['service_id'] : '0';
-        $record->Category 			    = $_REQUEST['Category'];
-        $record->Subcategory 			    = $_REQUEST['Subcategory'];
-        $record->brand 			    = $_REQUEST['brand'];
-        $record->title 			    = $_REQUEST['title'];
-        $record->title_greek        = (!empty($_REQUEST['title_greek'])) ? $_REQUEST['title_greek'] : '';
-        $record->tag                = (!empty($_REQUEST['tag'])) ? $_REQUEST['tag'] : '';
-        $record->currency 			= $_REQUEST['currency'];
-        $record->netqnt1 			= $_REQUEST['netqnt1'];
-        $record->homepage	            = $_REQUEST['homepage'];
-        // $record->qnt1 			    = $_REQUEST['qnt1'];
-        $record->price1 			= $_REQUEST['price1'];
-        $record->discount1 		    = !empty($_REQUEST['discount1'])?$_REQUEST['discount1']:'';
-        $record->netqnt2 		    = !empty($_REQUEST['netqnt2'])?$_REQUEST['netqnt2']:'';
-        $record->qnt2 		        = !empty($_REQUEST['qnt2'])?$_REQUEST['qnt2']:'';
-        $record->price2 		    = !empty($_REQUEST['price2'])?$_REQUEST['price2']:'';
+    }
+    $additional = (isset($_REQUEST['additional']) and !empty($_REQUEST['additional']))?$_REQUEST['additional']:'';
+    $newArr = array();
+	// pr($additional);
+			if(!empty($additional)){		
+                // pr($additional);		
+				foreach($additional as $key=>$val){
+					$final_title = !empty($additional[$key])?$val['name']:'';
+					$final_qty  = !empty($additional[$key])?$val['qty']:'';
+					$final_price  = !empty($additional[$key])?$val['price']:'';
+					$newArr[$key] = array('id'=>$key,'name'=>$final_title,'qty'=>$final_qty,'price'=>$final_price);
+					}
+			}
+    
+    $record->type 			    = $_REQUEST['type'];
+    $record->slug 			    = create_slug($_REQUEST['title']);
+    $record->service_id         = (!empty($_REQUEST['service_id'])) ? $_REQUEST['service_id'] : '0';
+    $record->Category 			    = $_REQUEST['Category'];
+    $record->Subcategory 			    = $_REQUEST['Subcategory'];
+    $record->brand 			    = $_REQUEST['brand'];
+    $record->title 			    = $_REQUEST['title'];
+    $record->title_greek        = (!empty($_REQUEST['title_greek'])) ? $_REQUEST['title_greek'] : '';
+    $record->tag                = (!empty($_REQUEST['tag'])) ? $_REQUEST['tag'] : '';
+    $record->currency 			= $_REQUEST['currency'];
+    $record->netqnt1 			= $_REQUEST['netqnt1'];
+    $record->homepage	            = $_REQUEST['homepage'];
+    // $record->qnt1 			    = $_REQUEST['qnt1'];
+    $record->price1 			= $_REQUEST['price1'];
+    $record->discount1 		    = !empty($_REQUEST['discount1'])?$_REQUEST['discount1']:'';
+    $record->discountedp 		    = !empty($_REQUEST['discountedp'])?$_REQUEST['discountedp']:'';
+    $record->netqnt2 		    = !empty($_REQUEST['netqnt2'])?$_REQUEST['netqnt2']:'';
+    $record->qnt2 		        = !empty($_REQUEST['qnt2'])?$_REQUEST['qnt2']:'';
+    $record->price2 		    = !empty($_REQUEST['price2'])?$_REQUEST['price2']:'';
         $record->discount2 		    = !empty($_REQUEST['discount2'])?$_REQUEST['discount2']:'';
         $record->netqnt3 		    = !empty($_REQUEST['netqnt3'])?$_REQUEST['netqnt3']:'';
         $record->qnt3 		        = !empty($_REQUEST['qnt3'])?$_REQUEST['qnt3']:'';
@@ -279,6 +306,7 @@ switch ($action) {
         $record->brief 		        = !empty($_REQUEST['brief'])?$_REQUEST['brief']:'';
         $record->brief_greek        = !empty($_REQUEST['brief_greek'])?$_REQUEST['brief_greek']:'';
         $record->content 		    = $_REQUEST['content'];
+        $record->additional				= base64_encode(serialize($newArr));
         // $record->content_greek 		= $_REQUEST['content_greek'];
         $record->status			    = $_REQUEST['status'];
 

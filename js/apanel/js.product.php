@@ -48,6 +48,17 @@
             });
         })
 
+        $(document).ready(function () {
+
+            $("#discountedp").change(function(){
+                var discountper= $('input[name="discountedp"]').val();
+                var  amount= $('input[name="price1"]').val();
+                var discountamt= amount*discountper/100;
+                var finalamt= amount- discountamt;
+                $('input[name="discount1"]').val(finalamt);
+        })
+    })
+
         $(".subImagegallery-sort").sortable({
             //connectWith: ".video-sort",
             start: function (event, ui) {
@@ -357,6 +368,23 @@
             $('.divMessageBox').fadeOut();
             $('.MessageBoxContainer').fadeOut(1000);
         });
+    }
+
+    /****************************added from roomapi for add and delete buton s*/
+    $(function () {
+        $(document).on('click', '.remove_feature_row', function () {
+            $(this).parent().remove();
+        });
+    });
+
+    function addFeaturesRows() {
+        // console.log(feature_id);
+        var rowNum = Math.floor((Math.random() * 999) + 1);
+        var newRow = '<input type="text" placeholder="Title" class="col-md-2 validate[length[0,30]]" name="additional[' + rowNum + '][name]">';
+        newRow += '<input type="text" placeholder="qty" class="col-md-2 validate[length[0,30]]" name="additional[' + rowNum + '][qty]">';
+        newRow += ' <input type="text" placeholder="Price" class="col-md-6 validate[length[0,100]]" name="additional[' + rowNum + '][price]"><span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br></div>';
+
+        $('#add_option_div' ).append(newRow);
     }
 
     function toggleMetadata() {

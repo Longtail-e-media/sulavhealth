@@ -7,7 +7,7 @@ class SubProduct extends DatabaseObject
         'id', 'slug', 'title', 'title_greek', 'tag', 'currency', 'banner_image',
         'netqnt1', 'qnt1', 'price1', 'discount1', 'netqnt2', 'qnt2', 'price2', 'discount2', 'netqnt3', 'qnt3', 'price3', 'discount3',
         'netqnt4', 'qnt4', 'price4', 'discount4', 'brief', 'brief_greek', 'content', 'content_greek', 'status', 'sortorder', 'added_date', 'modified_date', 'brand', 'Subcategory', 'Category', 'homepage',
-        'meta_title', 'meta_keywords', 'meta_description', 'meta_title_greek', 'meta_keywords_greek', 'meta_description_greek', 'type', 'service_id');
+        'meta_title', 'meta_keywords', 'meta_description', 'meta_title_greek', 'meta_keywords_greek', 'meta_description_greek', 'type', 'service_id','discountedp','additional');
 
     // Netqnt is the net weight shown to the customer
     // qnt is the gross weight used for price calculation, not shown to customer
@@ -16,8 +16,8 @@ class SubProduct extends DatabaseObject
         $id, $slug, $title, $title_greek, $tag, $currency, $banner_image,
         $netqnt1, $qnt1, $price1, $discount1, $netqnt2, $qnt2, $price2, $discount2, $netqnt3, $qnt3, $price3, $discount3,
         $netqnt4, $qnt4, $price4, $discount4, $brief, $brief_greek, $content, $content_greek, $status, $sortorder, $added_date, $modified_date,
-        $meta_title, $Category, $Subcategory, $brand, $homepage, $meta_keywords, $meta_description, $meta_title_greek, $meta_keywords_greek, $meta_description_greek, $type,
-        $service_id;
+        $meta_title, $Category, $Subcategory, $brand, $homepage, $meta_keywords, $meta_description, $meta_title_greek, $meta_keywords_greek, $meta_description_greek, $type, $additional,
+        $service_id,$discountedp;
 
 
     //Get Facility Ttle
