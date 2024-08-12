@@ -72,71 +72,39 @@ if ($menuRec):
                                 <li><a href="https://sulavhealth.com/dhome">https://sulavhealth.com/dhome</a></li>
                             </ul>
                         </li>
-                        <li class="second-mega">
-                            <div class="row">
-                                <div class="col-xl-3 col-sm-6 col-6">
-                                    <div class="ltn__product-item ltn__product-item-3 text-center">
-                                        <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml">
-                                            <a class="product-image-link" href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml"><img src="http://localhost/sulavhealth/images/product/galleryimages/DzfhP-5f9fa8692126980001f8b881_mamaearth-tea-tree-shampoo-for-dandruff-free-hai.jpeg" alt="Mamaearth Tea Tree Shampoo 250ml"></a>
-                                        </div>
-                                        <div class="product-info">
-                                            <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
-                                            <a href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml" class="product-link">Mamaearth Tea Tree Shampoo 250ml</a>
-                                            <div class="product-price">
-                                                <span>NPR 530</span><del>NPR 558.4</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-xl-3 col-sm-6 col-6">
-                                    <div class="ltn__product-item ltn__product-item-3 text-center">
-                                        <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml">
-                                            <a class="product-image-link" href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml"><img src="http://localhost/sulavhealth/images/product/galleryimages/DzfhP-5f9fa8692126980001f8b881_mamaearth-tea-tree-shampoo-for-dandruff-free-hai.jpeg" alt="Mamaearth Tea Tree Shampoo 250ml"></a>
-                                        </div>
-                                        <div class="product-info">
-                                            <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
-                                            <a href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml" class="product-link">Mamaearth Tea Tree Shampoo 250ml</a>
-                                            <div class="product-price">
-                                                <span>NPR 530</span><del>NPR 558.4</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-xl-3 col-sm-6 col-6">
-                                    <div class="ltn__product-item ltn__product-item-3 text-center">
-                                        <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml">
-                                            <a class="product-image-link" href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml"><img src="http://localhost/sulavhealth/images/product/galleryimages/DzfhP-5f9fa8692126980001f8b881_mamaearth-tea-tree-shampoo-for-dandruff-free-hai.jpeg" alt="Mamaearth Tea Tree Shampoo 250ml"></a>
-                                        </div>
-                                        <div class="product-info">
-                                            <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
-                                            <a href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml" class="product-link">Mamaearth Tea Tree Shampoo 250ml</a>
-                                            <div class="product-price">
-                                                <span>NPR 530</span><del>NPR 558.4</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-xl-3 col-sm-6 col-6">
-                                    <div class="ltn__product-item ltn__product-item-3 text-center">
-                                        <div class="product-img product_hove" data-href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml">
-                                            <a class="product-image-link" href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml"><img src="http://localhost/sulavhealth/images/product/galleryimages/DzfhP-5f9fa8692126980001f8b881_mamaearth-tea-tree-shampoo-for-dandruff-free-hai.jpeg" alt="Mamaearth Tea Tree Shampoo 250ml"></a>
-                                        </div>
-                                        <div class="product-info">
-                                            <h4 class="product-title brand-name"><a href="http://localhost/sulavhealth/search/mama-earth" class="product-link">Mama Earth</a></h4>
-                                            <a href="http://localhost/sulavhealth/product/product-detail/mamaearth-tea-tree-shampoo-250ml" class="product-link">Mamaearth Tea Tree Shampoo 250ml</a>
-                                            <div class="product-price">
-                                                <span>NPR 530</span><del>NPR 558.4</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li> 
+                        <li><a href="#">Derma Products</a>
+                            <ul>
+                                <li><a href="#">Shadow Gel SPF 50+</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Eye Products</a>
+                            <ul>
+                                <li><a href="#">Shadow Gel SPF 50+</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Hygiene Products</a>
+                            <ul>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                            </ul>
+                        </li>
                     </ul>
-                </li></ul>';
+                </li>
+                </ul>';
 endif;
 
 if ($lang != 'gr') {
