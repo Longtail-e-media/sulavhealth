@@ -1532,6 +1532,74 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                     </li>
                                 </ul>
                             </div>
+
+                            <h4>Additional Product</h4>
+
+                            <form>
+                                <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td class="cart-product-quantity">
+                                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                            </td>
+                                            <td class="cart-product-info">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="hidden" name="product_check[]" checked="" value="1">
+                                                    <input type="hidden" name="product_qnt_1" value="">
+                                                    <input type="hidden" name="product_net_qnt_1" value="250ml">
+                                                    <label class="form-check-label">Additonal Product</label>
+                                                </div>
+                                            </td>
+                                            
+                                            <td class="cart-product-quantity">
+                                                <span>QTY</span>
+                                            </td>
+                                            <td class="cart-product-quantity">
+                                                <div class="cart-plus-minus">
+                                                    <div class="dec qtybutton">-</div>
+                                                    <input type="text" value="1" min="1" step="1" name="product_qty_1" class="cart-plus-minus-box qty" price="530" currency="NPR" readonly="">
+                                                    <div class="inc qtybutton">+</div>
+                                                </div>
+                                            </td>
+                                            <td class="cart-product-subtotal">
+                                                <input type="hidden" name="product_total_1" class="product_total" value="530.00">
+                                                <h6 class="product-sub-total">NPR 530.00</h6>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="cart-product-quantity">
+                                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                            </td>
+                                            <td class="cart-product-info">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="hidden" name="product_check[]" checked="" value="1">
+                                                    <input type="hidden" name="product_qnt_1" value="">
+                                                    <input type="hidden" name="product_net_qnt_1" value="250ml">
+                                                    <label class="form-check-label">Additonal Product</label>
+                                                </div>
+                                            </td>
+                                            
+                                            <td class="cart-product-quantity">
+                                                <span>QTY</span>
+                                            </td>
+                                            <td class="cart-product-quantity">
+                                                <div class="cart-plus-minus">
+                                                    <div class="dec qtybutton">-</div>
+                                                    <input type="text" value="1" min="1" step="1" name="product_qty_1" class="cart-plus-minus-box qty" price="530" currency="NPR" readonly="">
+                                                    <div class="inc qtybutton">+</div>
+                                                </div>
+                                            </td>
+                                            <td class="cart-product-subtotal">
+                                                <input type="hidden" name="product_total_1" class="product_total" value="530.00">
+                                                <h6 class="product-sub-total">NPR 530.00</h6>
+                                            </td>
+                                        </tr>
+        
+                                        </tbody>
+                                    </table>
+
+                            </form>
                             <hr>
                             <div class="ltn__social-media">
                                 <ul>
