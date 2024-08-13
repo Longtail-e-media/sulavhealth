@@ -290,14 +290,12 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         <?php }?>
                     </div>
 
-                    <div class="form-input col-md-2"></div>
-
-                    <div class="form-input col-md-12">
+                    
                         <div id="add_option_div"></div>
                         <a href="javascript:void(0);" class="btn medium bg-blue tooltip-button" title="Add" onclick="addFeaturesRows();">
                             <i class="glyph-icon icon-plus-square"></i>
                         </a> 
-                    </div>
+                    
                 </div>
 
                  <!-- Feature Listing -->

@@ -13087,18 +13087,22 @@ blockquote::before {
 }
 
 .qtybutton,
-.cqtybutton {
+.qtybuttonadd,
+.cqtybutton
+.qtybuttonadd {
   height: 100%;
   width: 30%;
 }
 
 .dec.qtybutton,
+.dec.qtybuttonadd,
 .dec.cqtybutton {
   float: left;
   border-right: 0.125rem solid;
 }
 
 .inc.qtybutton,
+.inc.qtybuttonadd,
 .inc.cqtybutton {
   float: right;
   border-left: 0.125rem solid;
@@ -13106,8 +13110,10 @@ blockquote::before {
 
 .cart-plus-minus,
 .dec.qtybutton,
+.dec.qtybuttonadd,
 .dec.cqtybutton,
 .inc.qtybutton,
+.inc.qtybuttonadd,
 .inc.cqtybutton {
   background-color: var(--white);
   border-color: var(--border-color-11);

@@ -1425,10 +1425,10 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                         foreach ($additionaldatas as $key => $additionaldata) {
                                         $product_detail .= '
                                          <tr>
-                                            <td class="cart-product-quantity">
+                                            <td class="cart-product-info">
                                                 <input type="checkbox" id="additionalchk" class="additionalchk" name="additionalchk" currency="' . $prodRec->currency . '" value="">
                                             </td>
-                                            <td class="cart-product-info">
+                                            <td class="cart-product-price">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="hidden" name="additionalchk[]" checked="" value="1">
                                                     <input type="hidden" name="additionalqnt" value="">
@@ -1449,13 +1449,13 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                             </td>
                                             <td class="cart-product-subtotal">
                                                 <input type="hidden" name="additional_total[]" class="additional_total product_total_page" value="'.$additionaldata['price'].'">
-                                                <h6 class="additional-sub-total">NPR 0.00</h6>
+                                                <h6 class="additional-sub-total product-sub-total">NPR 0.00</h6>
                                             </td>
                                         </tr>';
                                         }
 $product_detail .= '
                                         <tr>
-                                            <td class="cart-product-quantity">
+                                            <td class="cart-product-info">
                                             </td>
                                             <td class="cart-product-info">
                                             </td>
@@ -1463,11 +1463,10 @@ $product_detail .= '
                                             <td class="cart-product-quantity">
                                             </td>
                                             <td class="cart-product-quantity">
-                                                <div class="cart-plus-minus">
-                                                Grand Total
-                                                </div>
+                                                <h4>Grand Total</h4>
+                                            
                                             </td>
-                                            <td class="cart-product-subtotal">
+                                            <td class="cart-product-subtotal product-sub-total">
                                                 <input type="hidden" name="Grand_total" class="Grand_total" value="">
                                                 <h6 class="Grand-sub-total">NPR 0.00</h6>
                                             </td>
