@@ -1413,7 +1413,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                 </div>
                                             </td>
                                             <td class="cart-product-subtotal">
-                                                <input type="hidden" name="product_total_1" class="product_total product_total_page" value="' . $prodPrice . '">
+                                                <input type="hidden" name="product_total_1" class="product_total product_total_main" value="' . $prodPrice . '">
                                                 <h6 class="product-sub-total">' . $prodRec->currency . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                             </td>
                                         </tr>
@@ -1443,12 +1443,12 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                             <td class="cart-product-quantity">
                                                 <div class="cart-plus-minus">
                                                     <div class="dec qtybuttonadd">-</div>
-                                                    <input type="text" value="1" min="1" step="1" name="additionalchkqty1" class="cart-plus-minus-box qty" price="530" currency="NPR" readonly="">
+                                                    <input type="text" value="1" min="1" step="1" name="additionalchkqty1" class="cart-plus-minus-box qty" price="'.$additionaldata['price'].'" currency="NPR" readonly="">
                                                     <div class="inc qtybuttonadd">+</div>
                                                 </div>
                                             </td>
                                             <td class="cart-product-subtotal">
-                                                <input type="hidden" name="additional_total" class="additional_total product_total_page" value="'.$additionaldata['price'].'">
+                                                <input type="hidden" name="additional_total[]" class="additional_total product_total_page" value="'.$additionaldata['price'].'">
                                                 <h6 class="additional-sub-total">NPR 0.00</h6>
                                             </td>
                                         </tr>';

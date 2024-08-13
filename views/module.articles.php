@@ -188,7 +188,6 @@ else{
 </div>
 
 <div id="productpopup">
-    <jcms:module:modal-popup-search/>
 </div>';
 }
 }

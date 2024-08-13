@@ -145,7 +145,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                     </div>
                     <div class="form-input col-md-4">
                         <?php $selid = !empty($articlesInfo->service_id) ? $articlesInfo->service_id : 0; ?>
-                        <select data-placeholder="Choose" class="chosen-selec validate[required,length[0,500]]" id="service_id" name="service_id">
+                        <select data-placeholder="Choose" class="chosen-selec " id="service_id" name="service_id">
                             <?php echo Services::get_internal_link_product($selid); ?>
                         </select>
                     </div>

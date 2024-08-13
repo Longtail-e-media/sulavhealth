@@ -89,7 +89,7 @@ $(function () {
         cartTotal.html(currency + ' ' + priceTotal);
         inputTotal.val(priceTotal);
         $button.parent().find("input").val(newVal);
-        // addcartTotal = $('input[name="additional_total"]').val();
+        // addcartTotal = $('input[name="additional_total[]"]').val();
         // finaltotal = (parseFloat(priceTotal)+parseFloat(addcartTotal));
         // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
         var chked= $('input[name=additionalchk]:checked');
@@ -107,8 +107,8 @@ $(function () {
         currency = $check.attr('currency'),
         cartTotal = $check.parent().parent().find(".additional-sub-total");
         var amtper= $('input[name="product_total_1"]').val();
-        var defper= $('input[name="additional_total"]').val();
-        addcartTotal = $('input[name="additional_total"]').val();
+        var defper= $('input[name="additional_total[]"]').val();
+        addcartTotal = $('input[name="additional_total[]"]').val();
         finaltotal = (parseFloat(amtper)+parseFloat(addcartTotal));
         cartTotal.html(defper);
         // var chked= $('input[name=additionalchk]:checked');
@@ -165,12 +165,22 @@ $(function () {
 
     function page_get_total(currency) {
         var totalPoints = 0; 
+        var chked= $('input[name=additionalchk]:checked');
+        
         $('input.product_total_page').each(function () {
+            console.log(chked);
+            if(chked.length > 0){
             totalPoints += parseFloat($(this).val());
+
+        }
         });
+        maincartTotal = $('input[name="product_total_1"]').val();
+        totalPoints = (parseFloat(totalPoints)+parseFloat(maincartTotal));
         totalPoints = totalPoints.toFixed(2);
         console.log(totalPoints);
         $('.Grand-sub-total').html(currency + ' ' + totalPoints);
+    
+    
     }
 
     // Add to cart

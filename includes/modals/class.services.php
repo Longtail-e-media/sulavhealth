@@ -120,7 +120,7 @@ class Services extends DatabaseObject
         $record = self::find_by_sql($sql);
         $result = '';
         if ($record) {
-            $result .= '<option value="">Select Service</option>';
+            $result .= '<option value="0">Select Service</option>';
             foreach ($record as $row) {
                 $sel = ($selid == $row->id) ? 'selected' : '';
                 $result .= '<option value="' . $row->id . '" ' . $sel . '>' . $row->title . '</option>';
