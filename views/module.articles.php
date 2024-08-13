@@ -187,7 +187,7 @@ else{
                 $slugother= ''.BASE_URL.'product/'.$servicerelated->slug.'';
             }
             
-            $resinndetail .= ' <a href="'.$slugother.'" class="article-botton">View All</a>
+            $resinndetail .= ' <a href="'.BASE_URL.$search.'" class="article-botton">View All</a>
         </div>
     </div>
 

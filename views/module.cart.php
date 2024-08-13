@@ -6,6 +6,7 @@
 $cart_bread = $cart_detail = '';
 
 if (defined('CART_PAGE')) {
+    // pr($_SESSION);
     $cart_bread .= '
         <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white  bg-image" data-bg="' . BASE_URL . 'template/web/img/bg/9.jpg">
             <div class="container">

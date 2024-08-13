@@ -61,6 +61,7 @@ switch ($_POST['action']) {
                                         'price' => $$price,
                                         'quantity' => $checkquantity,
                                         'total' => $$total
+                                       
                                     );
                             }
                         }

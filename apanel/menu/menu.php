@@ -241,6 +241,10 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                     <div class="col-md" style="padding-left:0px !important;">
                     </div>
                     <div class="col-md-12 articlemenu <?php echo $menuhide?>" id="oldmenu" style="padding-left:0px !important;">
+                    <?php
+                            $submenu = Menu::countSubMenu($menu->id);
+                            if (!empty($submenu)){
+                                ?>
                         <div class="form-row">
                             <div class="form-label col-md-2">
                                 <label for="">
@@ -255,6 +259,8 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                                 </select>
                             </div>
                         </div>
+                        <?php
+                               } ?>
 
                         <div class="form-row">
                             <div class="form-label col-md-2">
@@ -290,7 +296,10 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                         </div>
 
                         <input type="hidden" name="type" id="type" value="<?php echo $initialType; ?>" />
-
+                        <?php
+                            $submenu = Menu::countSubMenu($menu->id);
+                            if (!empty($submenu)){
+                                ?>
                         <div class="form-row">
                             <div class="form-label col-md-2">
                                 <label for="">
@@ -308,6 +317,8 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                                 </select>
                             </div>
                         </div>
+                        <?php
+                               } ?>
 
                     </div>
                 </div>

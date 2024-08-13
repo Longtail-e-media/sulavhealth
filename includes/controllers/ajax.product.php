@@ -183,9 +183,9 @@ switch ($action) {
                     // pr($additional);		
                     foreach($additional as $key=>$val){
                         $final_title = !empty($additional[$key])?$val['name']:'';
-                        $final_qty  = !empty($additional[$key])?$val['qty']:'';
+                        // $final_qty  = !empty($additional[$key])?$val['qty']:'';
                         $final_price  = !empty($additional[$key])?$val['price']:'';
-                        $newArr[$key] = array('id'=>$key,'name'=>$final_title,'qty'=>$final_qty,'price'=>$final_price);
+                        $newArr[$key] = array('id'=>$key,'name'=>$final_title,'price'=>$final_price);
                         }
                 }
         $record->slug 			    = create_slug($_REQUEST['title']);
@@ -268,9 +268,9 @@ case "editSubProduct":
                 // pr($additional);		
 				foreach($additional as $key=>$val){
 					$final_title = !empty($additional[$key])?$val['name']:'';
-					$final_qty  = !empty($additional[$key])?$val['qty']:'';
+					// $final_qty  = !empty($additional[$key])?$val['qty']:'';
 					$final_price  = !empty($additional[$key])?$val['price']:'';
-					$newArr[$key] = array('id'=>$key,'name'=>$final_title,'qty'=>$final_qty,'price'=>$final_price);
+					$newArr[$key] = array('id'=>$key,'name'=>$final_title,'price'=>$final_price);
 					}
 			}
     

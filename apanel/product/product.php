@@ -270,9 +270,9 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         <div>
                             <input placeholder="Title" class="col-md-4 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id']?>][name]"
                                value="<?php echo !empty($recdata['name']) ? $recdata['name'] : ""; ?>">
-                            <input placeholder="qty" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][qty]"
-                               value="<?php echo !empty($recdata['qty']) ? $recdata['qty'] : ""; ?>">
-                            <input placeholder="price" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][price]"
+                              <!-- <input placeholder="qty" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][qty]"
+                               value="<?php echo !empty($recdata['qty']) ? $recdata['qty'] : ""; ?>">-->
+                               <input placeholder="price" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][price]"
                                value="<?php echo !empty($recdata['price']) ? $recdata['price'] : ""; ?>">
                             <span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br>
                         </div>
@@ -280,9 +280,9 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                                       } 
                         }else{?>
                         <input placeholder="Title" class="col-md-4 validate[required,length[0,250]]" type="text" name="additional[1][name]"
-                               value="">
-                               <input placeholder="Title" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[1][qty]"
-                               value="">
+                               value="asdasd">
+                              <!-- <input placeholder="Title" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[1][qty]"
+                               value="">-->
                                <input placeholder="Title" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[1][price]"
                                value="">
                     

@@ -93,7 +93,7 @@ $(function () {
         // finaltotal = (parseFloat(priceTotal)+parseFloat(addcartTotal));
         // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
         var chked= $('input[name=additionalchk]:checked');
-        console.log(chked);
+        // console.log(chked);
         if(chked.length >  0){
         page_get_total(currency);
     }
@@ -107,16 +107,18 @@ $(function () {
         currency = $check.attr('currency'),
         cartTotal = $check.parent().parent().find(".additional-sub-total");
         var amtper= $('input[name="product_total_1"]').val();
-        var defper= $('input[name="additional_total[]"]').val();
+        // var defper= $('input[name="additional_total[]"]').val();
+        var defper= $check.parent().parent().find(".additional_total");
+        
         addcartTotal = $('input[name="additional_total[]"]').val();
         finaltotal = (parseFloat(amtper)+parseFloat(addcartTotal));
-        cartTotal.html(defper);
+        cartTotal.html(defper.val());
         // var chked= $('input[name=additionalchk]:checked');
         // console.log(chked);
         // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
         // $('.Grand-sub-total').html(finaltotal);
         var chked= $('input[name=additionalchk]:checked');
-        console.log(chked);
+        // console.log(chked);
         if(chked.length > 0){
         page_get_total(currency);
     }
@@ -165,11 +167,14 @@ $(function () {
 
     function page_get_total(currency) {
         var totalPoints = 0; 
-        var chked= $('input[name=additionalchk]:checked');
         
         $('input.product_total_page').each(function () {
-            console.log(chked);
-            if(chked.length > 0){
+            var $checkbox= $(this);
+            var chk = $checkbox.parent().parent().find(".additionalchk");
+            console.log(chk.is(":checked"));
+            var chked= $('input[name=additionalchk]:checked');
+            // console.log(chked);
+            if(chk.is(":checked")){
             totalPoints += parseFloat($(this).val());
 
         }
@@ -177,7 +182,7 @@ $(function () {
         maincartTotal = $('input[name="product_total_1"]').val();
         totalPoints = (parseFloat(totalPoints)+parseFloat(maincartTotal));
         totalPoints = totalPoints.toFixed(2);
-        console.log(totalPoints);
+        // console.log(totalPoints);
         $('.Grand-sub-total').html(currency + ' ' + totalPoints);
     
     
