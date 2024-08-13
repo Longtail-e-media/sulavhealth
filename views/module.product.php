@@ -1417,6 +1417,13 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                 <h6 class="product-sub-total">' . $prodRec->currency . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                             </td>
                                         </tr>
+
+                                        <h4>Additional Product</h4>';
+                                        $additionaldatas= unserialize(base64_decode($prodRec->additional));
+                                        if(!empty($additionaldatas)){
+                                        // pr($additionaldatas);
+                                        foreach ($additionaldatas as $key => $additionaldata) {
+                                        $product_detail .= '
                                          <tr>
                                             <td class="cart-product-quantity">
                                                 <input type="checkbox" id="additionalchk" class="additionalchk" name="additionalchk" currency="' . $prodRec->currency . '" value="">
@@ -1426,7 +1433,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                     <input class="form-check-input" type="hidden" name="additionalchk[]" checked="" value="1">
                                                     <input type="hidden" name="additionalqnt" value="">
                                                     <input type="hidden" name="additionalchk_net_qnt_1" value="250ml">
-                                                    <label class="form-check-label">Additonal Product</label>
+                                                    <label class="form-check-label">'.$additionaldata['name'].'</label>
                                                 </div>
                                             </td>
                                             
@@ -1441,11 +1448,12 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                 </div>
                                             </td>
                                             <td class="cart-product-subtotal">
-                                                <input type="hidden" name="additional_total" class="additional_total product_total_page" value="530.00">
+                                                <input type="hidden" name="additional_total" class="additional_total product_total_page" value="'.$additionaldata['price'].'">
                                                 <h6 class="additional-sub-total">NPR 0.00</h6>
                                             </td>
-                                        </tr>
-
+                                        </tr>';
+                                        }
+$product_detail .= '
                                         <tr>
                                             <td class="cart-product-quantity">
                                             </td>
@@ -1465,6 +1473,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                             </td>
                                         </tr>
         ';
+                                    }
         if (!empty($prodRec->qnt2)) {
             $prodPrice = (!empty($prodRec->discount2) and $prodRec->discount2 > 0) ? $prodRec->discount2 : $prodRec->price2;
             $product_detail .= '
@@ -1581,7 +1590,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                 </ul>
                             </div>
 
-                            <h4>Additional Product</h4>
+                            
 
                             <form>
                                 <table class="table">
