@@ -75,6 +75,7 @@ $(function () {
             currency = $input.attr('currency'),
             inputTotal = $button.parent().parent().parent().find(".product_total"),
             cartTotal = $button.parent().parent().parent().find(".product-sub-total");
+            
 
         if ($button.text() == "+") {
             newVal = parseFloat(oldValue) + 1;
@@ -88,7 +89,64 @@ $(function () {
         cartTotal.html(currency + ' ' + priceTotal);
         inputTotal.val(priceTotal);
         $button.parent().find("input").val(newVal);
+        addcartTotal = $('input[name="additional_total"]').val();
+        // finaltotal = (parseFloat(priceTotal)+parseFloat(addcartTotal));
+        // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
+        page_get_total(currency);
     });
+
+    $(".additionalchk").on("change",function (){
+        var $check = $(this);
+        currency = $check.attr('currency'),
+        cartTotal = $check.parent().parent().find(".additional-sub-total");
+        var amtper= $('input[name="product_total_1"]').val();
+        addcartTotal = $('input[name="additional_total"]').val();
+        finaltotal = (parseFloat(amtper)+parseFloat(addcartTotal));
+        cartTotal.html(amtper);
+        // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
+        // $('.Grand-sub-total').html(finaltotal);
+        page_get_total(currency);
+    }) 
+
+    $(".qtybuttonadd").on("click", function () {
+        // console.log('123123');
+        var $button = $(this);
+        var oldValue = $button.parent().find("input").val();
+        var newVal = oldValue;
+        var $input = $button.parent().find("input"),
+        price = parseFloat($input.attr('price')),
+        currency = $input.attr('currency'),
+        inputTotal = $button.parent().parent().parent().find(".additional_total"),
+        cartTotal = $button.parent().parent().parent().find(".additional-sub-total");
+        
+        
+        if ($button.text() == "+") {
+            newVal = parseFloat(oldValue) + 1;
+        } else {
+            if (oldValue > 1) {
+                newVal = parseFloat(oldValue) - 1;
+            }
+        }
+        var priceTotal = newVal * price;
+        priceTotal = priceTotal.toFixed(2);
+        cartTotal.html(currency + ' ' + priceTotal);
+        inputTotal.val(priceTotal);
+        $button.parent().find("input").val(newVal);
+        maincartTotal = $('input[name="product_total_1"]').val();
+        finaltotal = (parseFloat(priceTotal)+parseFloat(maincartTotal));
+        // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
+        page_get_total(currency);
+    })
+
+    function page_get_total(currency) {
+        var totalPoints = 0; 
+        $('input.product_total_page').each(function () {
+            totalPoints += parseFloat($(this).val());
+        });
+        totalPoints = totalPoints.toFixed(2);
+        console.log(totalPoints);
+        $('.Grand-sub-total').html(currency + ' ' + totalPoints);
+    }
 
     // Add to cart
     $(document).on('click', 'a.add-cart', function () {
@@ -268,7 +326,7 @@ $(function () {
     });
 
     function get_total(currency) {
-        var totalPoints = 0;
+        var totalPoints = 0; 
         $('input.cin-input').each(function () {
             totalPoints += parseFloat($(this).attr('total'));
         });

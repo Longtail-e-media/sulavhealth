@@ -35,7 +35,6 @@ class Product extends DatabaseObject
     }
 
     
-
     // view package Front.
     static function getHomePackage($limit = '')
     {

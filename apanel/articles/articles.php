@@ -165,6 +165,9 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                             // $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 AND type={$typeid} ORDER BY sortorder ASC ");
                             $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 ORDER BY sortorder ASC ");
                             // pr($categories);
+                            ?>
+                            <option value="0">Select Service</option>
+                            <?php
                             if ($categories) {
                                 foreach ($categories as $k => $category) {
                                     if($k == 0){$initialType = $category->type;}

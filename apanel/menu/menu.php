@@ -267,17 +267,21 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                                 <select data-placeholder="Choose Field Type"
                                     class="chosen-selec validate[required,length[0,500]] Category" id="Category"
                                     name="Category" selcId="<?php echo $cid; ?>">
+                                    
                                     <?php 
                             // $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 AND type={$typeid} ORDER BY sortorder ASC ");
                             $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 ORDER BY sortorder ASC ");
                             // pr($categories);
-                            if ($categories) {
+                            if ($categories) { 
+                                ?>
+                            <option value="">Select Service</option>
+                            <?php
                                 foreach ($categories as $k => $category) {
                                     if($k == 0){$initialType = $category->type;}
                                     $cat = $category->id;
                                     $sel = (!empty($cat) && $cat == $menu ->category) ? 'selected' : '';
                                     $initialType = (!empty($cat) && $cat == $menu ->category) ? $category->type : $initialType;?>
-                                    <option value="<?= $category->id; ?>" <?= $sel; ?>
+                                   <option value="<?= $category->id; ?>" <?= $sel; ?>
                                         selType="<?= $category->type; ?>"><?= $category->title; ?></option>
                                     <?php }
                             } ?>

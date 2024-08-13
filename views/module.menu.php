@@ -1,5 +1,5 @@
 <?php
-$result = $translation = '';
+$result = $resultarticle = $translation = '';
 
 $menuRec = Menu::getMenuByParent(0, 1);
 
@@ -8,6 +8,7 @@ $data = explode('/', $current_url);
 
 if ($menuRec):
     $result .= '<ul>';
+    // pr($menuRec);
     foreach ($menuRec as $menuRow):
         $tot = strlen(SITE_FOLDER) + 2;
         $data = substr($_SERVER['REQUEST_URI'], $tot);
@@ -38,22 +39,103 @@ if ($menuRec):
         if (($chk == 'index') and ($menuRow->linksrc == 'home')) {
             $liclass = ' active ';
         }
-
+        if($menuRow->menutype==0){
         $result .= '<li class="' . $pliClass . '">';
         $result .= getMenuList($menuRow->name, $menuRow->linksrc, $menuRow->linktype, $subclass . $subclass1, $chkchild);
+        
         /* Second Level Menu */
         if ($menusubRec):
             $result .= '<ul>';
             foreach ($menusubRec as $menusubRow):
-                $menusub2Rec = Menu::getMenuByParent($menusubRow->id, 1);
-                $chkparent2 = (!empty($menusub2Rec)) ? 1 : 0;
-                $result .= '<li>';
-                $result .= getMenuList($menusubRow->name, $menusubRow->linksrc, $menusubRow->linktype, '', $chkparent2);
-                $result .= '</li>';
+                // pr($menuRec);
+                // if($menuRow->menutype==0){
+                    // pr($menuRow);
+                    $menusub2Rec = Menu::getMenuByParent($menusubRow->id, 1);
+                    // pr($menusub2Rec);
+                    $chkparent2 = (!empty($menusub2Rec)) ? 1 : 0;
+                    $result .= '<li>';
+                    $result .= getMenuList($menusubRow->name, $menusubRow->linksrc, $menusubRow->linktype, '', $chkparent2);
+                    $result .= '</li>';
+                // }
+                // elseif($menuRow->menutype==1){
+                // pr($resultarticle);
+
+              
+                
+            // }
             endforeach;
             $result .= '</ul>';
         endif;
         $result .= '</li>';
+    }
+    else{
+    $menuarticles = Article::menuArticle($menuRow->category, $menuRow->Subcategory, $menuRow->service_id);
+    // pr($db->last_query);
+    // pr($menuarticles);
+    $firstarticles= array_shift($menuarticles);
+    // pr($firstarticles);
+    $result .= '<li class="menu-icon"><a href="#">'.$menuRow->name.'</a>
+                <ul class="mega-menu">';
+    if(!empty($firstarticles)):
+        $result .= '<li class="first-mega"><a href="#">'.$firstarticles->title.'</a>
+                <ul>
+                    <li>'.$firstarticles->content.'
+                        <br/><br/><span class="pt-80" style="font-weight:600;"><a href="'. BASE_URL.$firstarticles->slug.'">Read More</a></span>
+                    </li>
+                </ul>';
+             $result .= '   <ul class="note-link">';
+             
+             foreach($menuarticles as $menuarticle):
+             $result .= '
+                    <li><a href="'.BASE_URL.''.$menuarticle->slug.'">'.$menuarticle->title.'</a></li>
+               ';
+            endforeach;
+               
+                    $result .= ' </ul>
+            </li>';
+    endif;
+
+        $menusubRec = Menu::getMenuByParent($menuRow->id, 1);
+        if ($menusubRec):
+            $result .= '';
+            foreach ($menusubRec as $menusubRow):
+                // pr($menuRec);
+                // if($menuRow->menutype==0){
+                    // pr($menuRow);
+                    $menusub2Rec = Menu::getMenuByParent($menusubRow->id, 1);
+                    // pr($menusub2Rec);
+                    $chkparent2 = (!empty($menusub2Rec)) ? 1 : 0;
+                    $result .= '<li>';
+                    $result .= getMenuList($menusubRow->name, $menusubRow->linksrc, $menusubRow->linktype, '', $chkparent2);
+                    $menusubsubRec = Menu::getMenuByParent($menusubRow->id, 1);
+                    $result .= '<ul>';
+                    foreach ($menusubsubRec as $menusubsubRow):
+                        $menusub3Rec = Menu::getMenuByParent($menusubsubRow->id, 1);
+                    // pr($menusub2Rec);
+                    $chkparent3 = (!empty($menusub3Rec)) ? 1 : 0;
+                    $result .= '<li>';
+                    $result .= getMenuList($menusubsubRow->name, $menusubsubRow->linksrc, $menusubsubRow->linktype, '', $chkparent3);
+                    $result .= '</li>';
+                    endforeach;
+                    $result .= '</ul>';
+                    // $menusub3Rec = Menu::getMenuByParent($menusubRow->id, 1);
+
+                    $result .= '</ul>';
+                // }
+                // elseif($menuRow->menutype==1){
+                // pr($resultarticle);
+
+              
+                
+            // }
+            endforeach;
+            $result .= '';
+        endif;
+        $result .= ' 
+                </ul>
+                </li>';
+        // pr($resultarticle);
+    }
     endforeach;
     $result .= '<li class="menu-icon"><a href="#">SKIN CARE</a>
                     <ul class="mega-menu">

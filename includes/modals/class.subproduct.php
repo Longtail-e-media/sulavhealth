@@ -28,6 +28,39 @@ class SubProduct extends DatabaseObject
         return self::find_by_sql($sql);
     }
 
+
+    // Homepage Display
+	public static function menuproduct($Category='', $Subcategory='', $service_id='') {
+		global $db;
+		$sql='';
+		$lmt = !empty($limit)?' LIMIT '.$limit:'';
+		$sql .= "SELECT * FROM ".self::$table_name." WHERE status='1' AND (Category='$Category' OR Subcategory='$Subcategory' OR service_id='$service_id')";
+		if(!empty($Category!=0)){
+		$sql .="AND (Category<>0)";
+	}
+	elseif(!empty($Subcategory!=0)){
+		$sql .="AND (Category<>0)";
+	}
+	elseif(!empty($service_id!=0)){
+		$sql .="AND (service_id<>0)";
+	}
+	elseif(!empty($Subcategory!=0 AND $service_id!=0)){
+		$sql .="AND (service_id<>0 AND Subcategory<>0)";
+	}
+	elseif(!empty($Category!=0 AND $service_id!=0)){
+		$sql .="(service_id<>0 AND Category<>0)";
+	}
+	elseif(!empty($Category!=0 AND $Subcategory!=0)){
+		$sql .="(Subcategory<>0 AND Category<>0)";
+	}
+	elseif(!empty($Category!=0 AND $Subcategory!=0 AND $service_id!=0)){
+		$sql .="AND (Subcategory<>0 AND Category<>0 AND service_id<>0)";
+	}
+	$sql .="ORDER BY sortorder ASC LIMIT 4";
+
+		return self::find_by_sql($sql);
+	}
+
     public static function get_total_category_product($id = '')
     {
         global $db;
