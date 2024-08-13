@@ -158,16 +158,13 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
     <div class="example-box">
         <div class="example-code">
             <form action="" class="col-md-12 center-margin" id="subproduct_frm">
-
-
-
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Service :
                         </label>
                     </div>
-                    <div class="form-input col-md-4">
+                    <div class="form-input col-md-6">
                         <?php $selid = !empty($subproductInfo->service_id) ? $subproductInfo->service_id : 0; ?>
                         <select data-placeholder="Choose" class="chosen-selec validate[required,length[0,500]]" id="service_id" name="service_id">
                             <?php echo Services::get_internal_link_product($selid); ?>
@@ -181,7 +178,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                             Category :
                         </label>
                     </div>
-                    <div class="form-input col-md-4">
+                    <div class="form-input col-md-6">
                         <?php $cid = !empty($subproductInfo->Category) ? $subproductInfo->Category : 0; ?>
                         <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Category" id="Category" name="Category"
                                 selcId="<?php echo $cid; ?>">
@@ -210,7 +207,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                             Sub Category :
                         </label>
                     </div>
-                    <div class="form-input col-md-4">
+                    <div class="form-input col-md-6">
 
                         <?php $selid = !empty($subproductInfo->Subcategory) ? $subproductInfo->Subcategory : 0; ?>
                         <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Subcategory" id="Subcategory" name="Subcategory"
@@ -227,7 +224,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                             Brand :
                         </label>
                     </div>
-                    <div class="form-input col-md-4">
+                    <div class="form-input col-md-6">
                         <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]]" id="brand" name="brand">
                             <?php $categories = Brand::find_by_sql("SELECT * FROM tbl_brands ORDER BY sortorder DESC ");
                             if ($categories) {
@@ -247,19 +244,19 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                             Title :
                         </label>
                     </div>
-                    <div class="form-input col-md-20">
-                        <input placeholder="Title" class="col-md-6 validate[required,length[0,250]]" type="text" name="title" id="title"
+                    <div class="form-input col-md-6">
+                        <input placeholder="Title" class="col-md-6 validate[required,length[0,250]]" type="text" name="title" id="title" style="width:100%;"
                                value="<?php echo !empty($subproductInfo->title) ? $subproductInfo->title : ""; ?>">
                     </div>
                 </div>
 
                 <div class="form-row">
-                            <div class="form-label col-md-2">
-                                <label for="">
-                            additional :
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Additional Products:
                         </label>
                     </div>
-                    <div class="form-input col-md-20">
+                    <div class="form-input col-md-8">
                         <?php 
                         $svfr = !empty($subproductInfo->additional) ? $subproductInfo->additional : '';
                         $saveRec = unserialize(base64_decode($svfr));
@@ -270,19 +267,19 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                                 // $child_id = $recdata->id;
                                 // $child_title = isset($saveRec[$child_id]['id']) ? $saveRec[$child_id]['title'] : $recdata->title;
                                 ?>
-
-<div>
-                        <input placeholder="Title" class="col-md-4 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id']?>][name]"
+                        <div>
+                            <input placeholder="Title" class="col-md-4 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id']?>][name]"
                                value="<?php echo !empty($recdata['name']) ? $recdata['name'] : ""; ?>">
-                               <input placeholder="qty" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][qty]"
+                            <input placeholder="qty" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][qty]"
                                value="<?php echo !empty($recdata['qty']) ? $recdata['qty'] : ""; ?>">
-                               <input placeholder="price" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][price]"
+                            <input placeholder="price" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][price]"
                                value="<?php echo !empty($recdata['price']) ? $recdata['price'] : ""; ?>">
-                               <span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br></div>
-                <?php
-                              } 
-                }else{?>
-                <input placeholder="Title" class="col-md-4 validate[required,length[0,250]]" type="text" name="additional[1][name]"
+                            <span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br>
+                        </div>
+                        <?php
+                                      } 
+                        }else{?>
+                        <input placeholder="Title" class="col-md-4 validate[required,length[0,250]]" type="text" name="additional[1][name]"
                                value="">
                                <input placeholder="Title" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[1][qty]"
                                value="">
@@ -290,12 +287,17 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                                value="">
                     
 
-                <?php }?>
+                        <?php }?>
                     </div>
-                    <div id="add_option_div"></div>
-                                    <a href="javascript:void(0);" class="btn medium bg-blue tooltip-button" title="Add" onclick="addFeaturesRows();">
-                                        <i class="glyph-icon icon-plus-square"></i>
-                                    </a> 
+
+                    <div class="form-input col-md-2"></div>
+
+                    <div class="form-input col-md-12">
+                        <div id="add_option_div"></div>
+                        <a href="javascript:void(0);" class="btn medium bg-blue tooltip-button" title="Add" onclick="addFeaturesRows();">
+                            <i class="glyph-icon icon-plus-square"></i>
+                        </a> 
+                    </div>
                 </div>
 
                  <!-- Feature Listing -->
@@ -360,11 +362,11 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Tag :
+                            Tag Line :
                         </label>
                     </div>
-                    <div class="form-input col-md-20">
-                        <input placeholder="Tag" class="col-md-6 validate[length[0,250]]" type="text" name="tag" id="tag"
+                    <div class="form-input col-md-6">
+                        <input placeholder="Tag" class="col-md-6 validate[length[0,250]]" type="text" name="tag" id="tag" style="width:100%"
                                value="<?php echo !empty($subproductInfo->tag) ? $subproductInfo->tag : ""; ?>">
                     </div>
                 </div>
