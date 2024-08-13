@@ -132,7 +132,7 @@ if ($menuRec):
             $result .= '';
         endif;
         $result .= ' 
-                </ul>
+                
                 </li>';
         // pr($resultarticle);
     }
