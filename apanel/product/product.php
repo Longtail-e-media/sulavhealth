@@ -256,7 +256,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                             Additional Products:
                         </label>
                     </div>
-                    <div class="form-input col-md-8">
+                    <div class="form-input col-md-7">
                         <?php 
                         $svfr = !empty($subproductInfo->additional) ? $subproductInfo->additional : '';
                         $saveRec = unserialize(base64_decode($svfr));
@@ -268,22 +268,22 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                                 // $child_title = isset($saveRec[$child_id]['id']) ? $saveRec[$child_id]['title'] : $recdata->title;
                                 ?>
                         <div>
-                            <input placeholder="Title" class="col-md-4 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id']?>][name]"
+                            <input placeholder="Product Name" class="col-md-5 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id']?>][name]"
                                value="<?php echo !empty($recdata['name']) ? $recdata['name'] : ""; ?>">
                               <!-- <input placeholder="qty" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][qty]"
                                value="<?php echo !empty($recdata['qty']) ? $recdata['qty'] : ""; ?>">-->
-                               <input placeholder="price" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][price]"
+                               <input placeholder="price" class="col-md-5 validate[required,length[0,250]]" type="text" name="additional[<?php echo $recdata['id'] ?>][price]"
                                value="<?php echo !empty($recdata['price']) ? $recdata['price'] : ""; ?>">
                             <span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br>
                         </div>
                         <?php
                                       } 
                         }else{?>
-                        <input placeholder="Title" class="col-md-4 validate[required,length[0,250]]" type="text" name="additional[1][name]"
-                               value="asdasd">
+                        <input placeholder="Product Name" class="col-md-5 validate[required,length[0,250]]" type="text" name="additional[1][name]"
+                               value="">
                               <!-- <input placeholder="Title" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[1][qty]"
                                value="">-->
-                               <input placeholder="Title" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[1][price]"
+                               <input placeholder="Price" class="col-md-5 validate[required,length[0,250]]" type="text" name="additional[1][price]"
                                value="">
                     
 
@@ -322,16 +322,17 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                                 <?php
 
                                             $check = isset($childRow['id']) ? 'checked="checked"' : ''; ?>
-                                            <div><input type="checkbox" class="custom-radio"
+                                            <input type="checkbox" class="custom-radio"
                                                         name="feature[<?php echo $recRow->id; ?>][<?php echo $child_id; ?>][id]"
                                                         value="<?php echo $child_id; ?>" <?php echo $check; ?>>
-                                                <input type="text" placeholder="Icon Class" class="col-md-2 validate[length[0,30]]"
+                                                <input type="text" placeholder="Icon Class" class="col-md-5 validate[length[0,30]]"
                                                        name="feature[<?php echo $recRow->id; ?>][<?php echo $child_id; ?>][icon_class]"
                                                        value="<?php echo $childRow['icon_class']; ?>">
-                                                <input type="text" placeholder="Title" class="col-md-6 validate[length[0,100]]"
+                                                <input type="text" placeholder="Title" class="col-md-5 validate[length[0,100]]"
                                                        name="feature[<?php echo $recRow->id; ?>][<?php echo $child_id; ?>][title]"
                                                        value="<?php echo $childRow['title']; ?>">
-                                                <span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br></div>
+                                                <span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br>
+                                            
                                     
                                     </div>
                                 </div>
@@ -483,9 +484,9 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                             Brief :
                         </label>
                     </div>
-                    <div class="form-input col-md-20">
+                    <div class="form-input col-md-6">
                         <div class="form-input">
-                            <textarea placeholder="Brief" class="col-md-6 validate[required]" name="brief" id="brief"
+                            <textarea placeholder="Brief" class="col-md-12 validate[required]" name="brief" id="brief"
                                       type="text"><?php echo !empty($subproductInfo->brief) ? $subproductInfo->brief : ""; ?></textarea>
                         </div>
                     </div>
