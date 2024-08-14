@@ -291,6 +291,22 @@ if (defined('CART_PAGE')) {
                                                 </td>
                                                 <td class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
                                                 <td class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</td>
+                                               
+                                                <tr class="cart-remove">
+                                                    <td class="cart-product-info">
+                                                        <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' . ($product->title) . '</a></h4>
+                                                    </td>
+                                                    <td class="cart-product-label">
+                                                        ' . $detail['netqnt'] . '
+                                                    </td>
+                                                    <td class="cart-product-price">
+                                                        ' . $product->currency . ' ' . sprintf("%.2f", $detail['price']) . '
+                                                    </td>
+                                                    
+                                                    <td class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
+                                                    <td class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</td>
+                                                </tr>
+                                               
                                             </tr>
                                             <div id="itemnone"></div>
                         ';
