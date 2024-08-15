@@ -602,6 +602,12 @@ if (defined('CHECKOUT_PAGE')) {
                                 <input type="hidden" name="discount_amt" value="0">
                             </tr>
                             <tr>
+                                <td>Additonal Product</td>
+                                <td>Arya Skin Care</td>
+                                <td id="coupon-discount-amount">NPR 0.00</td>
+                                <input type="hidden" name="discount_amt" value="0">
+                            </tr>
+                            <tr>
                                 <td>' . ("Delivery Charge") . '</td>
                                 <td></td>
                                 <td id="shipping-amount">NPR 0.00</td>
