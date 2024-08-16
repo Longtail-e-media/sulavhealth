@@ -8713,6 +8713,8 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 .product-action li {
   display: inline-block;
   margin-top: 0;
+  min-height: 48px;
+
 }
 
 .product-action li a {
@@ -8788,7 +8790,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 
 .ltn__product-item-3 .product-title {
   font-size: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0px;
 }
 
 .ltn__product-item-3 .product-price {
