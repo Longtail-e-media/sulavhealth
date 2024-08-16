@@ -319,7 +319,7 @@ if (defined('CART_PAGE')) {
                                          $cart_detail .= '   
                                          
                                                         <div class="row">
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <div class="cart-product-info">
                                                             <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' .$additionaldata['addname']. '</a></h4>
                                                         </div>
@@ -337,7 +337,7 @@ if (defined('CART_PAGE')) {
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <div class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $adddetrow) . '</div>
                                                     </div>
 
