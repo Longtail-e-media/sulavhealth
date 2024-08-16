@@ -318,7 +318,7 @@ if (defined('CART_PAGE')) {
                                                     // pr($addrowTotal);
                                          $cart_detail .= '   
                                          
-                                                        <div class="row">
+                                                <div class="row">
                                                     <div class="col-md-3">
                                                         <div class="cart-product-info">
                                                             <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' .$additionaldata['addname']. '</a></h4>
@@ -344,7 +344,7 @@ if (defined('CART_PAGE')) {
                                                     <div class="col-md-2">
                                                         <div class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</div>
                                                     </div>
-                                                    </div>
+                                                </div>
                                                 
                                                                 ';}
 
@@ -662,13 +662,28 @@ if (defined('CHECKOUT_PAGE')) {
                                                     $addrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
                                                     @$addrowmainTotal += (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
                                                     // pr($additionaldata['price']);
-                       $checkout_form .= ' 
+                       $checkout_form .= '
                         <tr>
-                                <td>-- ' .$additionaldata['addname']. '</td>
-                                <td><strong>× ' . $additionaldata['quantityadd'] . '</strong></td>
-                                <td id="coupon-discount-amount">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</td>
-                                <input type="hidden" name="discount_amt" value="0">
-                            </tr>
+                            <td>
+                            <div class="additional-product" style="width: 100%;position: relative;">
+                                <fieldset>
+                                    <legend>Additional Products</legend>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div>-- ' .$additionaldata['addname']. '</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div><strong>× ' . $additionaldata['quantityadd'] . '</strong></div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div id="coupon-discount-amount">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</div>
+                                            <input type="hidden" name="discount_amt" value="0">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            </td>
+                        </tr>
                     ';
 
                 }
