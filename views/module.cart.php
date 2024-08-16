@@ -250,6 +250,7 @@ if (defined('CART_PAGE')) {
                     $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
                     $tot = 0.00;
                     $subtotal = 'NPR 0.00';
+                    // pr($sesRec);
                     if (!empty($sesRec)) {
                         foreach ($sesRec as $k => $sesRow) {
                             $product = SubProduct::find_by_slug($sesRow['slug']);
@@ -266,12 +267,13 @@ if (defined('CART_PAGE')) {
                                 }
             
                                 $product_details = $sesRow['product_details'];
+                                
                                 foreach ($product_details as $label => $detail) {
                                     // pr($detail);
                                     // pr($detail['addtionaldetail']['addname'][0]);
                                     $rowTotal = (float)$detail['quantity'] * (float)$detail['price'];
                                     $cart_detail .= '
-                                            <tr class="cart-remove" >
+                                            <tr class="cart-remove">
                                                 <td class="cart-product-image">
                                                     <img src="' . $img . '" alt="' . ($product->title) . '">
                                                 </td>
@@ -295,11 +297,16 @@ if (defined('CART_PAGE')) {
                                                 <td class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</td>
                                                ';
                                             //    pr($detail['addtionaldetail']);
-                                            //    pr($additionaldatas);
+                                            $addrowTotal=0;
                                             if(!empty($detail['addtionaldetail'])){
-                                                   $additionaldatas= $detail['addtionaldetail'];
+                                                $additionaldatas= $detail['addtionaldetail'];
                                                 // pr($additionaldatas);
-                                                // $addrowTotal='';
+                                                $cart_detail .= '<tr class="cart-remove-' . $product->id . ' cart-remove">
+                                            <td>
+                                                <div class="additional-product" style="width: 100%;position: relative;">
+                                                    <fieldset>
+                                                        <legend>Additional Products</legend>';
+                                               
                                                 foreach ($additionaldatas as $key => $additionaldata) {
                                                     @$addrowTotal += ((float)$additionaldata['quantityadd'] * (float)$additionaldata['price']);
                                                     // @$addrowTotal = ((float)$additionaldata['quantityadd'] * (float)$additionaldata['price']);
@@ -311,11 +318,6 @@ if (defined('CART_PAGE')) {
                                                     // pr($addrowTotal);
                                          $cart_detail .= '   
                                          
-                                        <tr class="cart-remove-' . $product->id . '">
-                                            <td>
-                                                <div class="additional-product" style="width: 100%;position: relative;">
-                                                    <fieldset>
-                                                        <legend>Additional Products</legend>
                                                         <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="cart-product-info">
@@ -341,23 +343,30 @@ if (defined('CART_PAGE')) {
 
                                                     <div class="col-md-2">
                                                         <div class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</div>
-                                                </div>
-                                                </td>
-                                        </tr>
+                                                    </div>
+                                                    </div>
                                                 
                                                                 ';}
-                                                                // pr($addrowTotal);
-                                            }
 
- $cart_detail .= '
-                                                
+                                                                $cart_detail .= ' </fieldset>
+                                                        </div>
+                                                </td>
+                                        </tr>';
 
-                                               
-                                               
-                                               
-                                            </tr>
-                                            <div id="itemnone"></div>
-                        ';
+                                                                 //    pr($additionaldatas);
+                                                                }
+                                                                
+                                                                $cart_detail .= '
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                </tr>
+                                                                <div id="itemnone"></div>
+                                                                ';
+                                                                // pr($addrowTotal,0);
                         if(!empty($additionaldatas)){
                         $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + $addrowTotal;
                     }else{
@@ -628,6 +637,7 @@ if (defined('CHECKOUT_PAGE')) {
     $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
     // pr($_SESSION);   
     $tot = 0.00;
+    $addrowmainTotal='';
     $subtotal = 'NPR 0.00';
     if (!empty($sesRec)) {
         foreach ($sesRec as $k => $sesRow) {
@@ -644,16 +654,17 @@ if (defined('CHECKOUT_PAGE')) {
                             <td>' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
                             <input type="hidden" name="currency" value="' . $product->currency . '">
                         </tr>';
-                        $additionaldatas= $detail['addtionaldetail'];
-                                            //    pr($additionaldatas);
-                                               if(!empty($additionaldatas)){
-                                                // pr($additionaldatas);
+                        //    pr($additionaldatas);
+                        if(!empty($detail['addtionaldetail'])){
+                            // pr($additionaldatas);
+                            $additionaldatas= $detail['addtionaldetail'];
                                                 foreach ($additionaldatas as $key => $additionaldata) {
                                                     $addrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                    @$addrowmainTotal += (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
                                                     // pr($additionaldata['price']);
                        $checkout_form .= ' 
                         <tr>
-                                <td>' .$additionaldata['addname']. '</td>
+                                <td>-- ' .$additionaldata['addname']. '</td>
                                 <td><strong>× ' . $additionaldata['quantityadd'] . '</strong></td>
                                 <td id="coupon-discount-amount">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</td>
                                 <input type="hidden" name="discount_amt" value="0">
@@ -663,7 +674,7 @@ if (defined('CHECKOUT_PAGE')) {
                 }
             }
             if(!empty($additionaldatas)){
-                $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + ((float)$additionaldata['quantityadd'] * (float)$additionaldata['price']);
+                $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + $addrowmainTotal;
 
             }
             else{
