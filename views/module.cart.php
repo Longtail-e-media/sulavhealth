@@ -303,20 +303,39 @@ if (defined('CART_PAGE')) {
                                                     $addrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
                                          $cart_detail .= '   
                                          
-                                         <tr class="cart-remove">
-                                                    <td class="cart-product-info">
-                                                        <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' .$additionaldata['addname']. '</a></h4>
-                                                    </td>
-                                                    <td class="cart-product-label">
-                                                        ' . $additionaldata['quantityadd'] . '
-                                                    </td>
-                                                    <td class="cart-product-price">
-                                                        ' . $product->currency . ' ' . sprintf("%.2f", $additionaldata['price']) . '
-                                                    </td>
-                                                    
-                                                    <td class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</td>
-                                                    <td class="cart-product-remove remove-cart" data-id="' . $key . '" data-label="' . $label . '" currency="' . $product->currency . '">x</td>
-                                                </tr>
+                                        <tr class="cart-remove">
+                                            <td>
+                                                <div class="additional-product" style="width: 100%;position: relative;">
+                                                    <fieldset>
+                                                        <legend>Additional Products</legend>
+                                                        <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="cart-product-info">
+                                                            <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' .$additionaldata['addname']. '</a></h4>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="cart-product-label">
+                                                            ' . $additionaldata['quantityadd'] . '
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="cart-product-price">
+                                                            ' . $product->currency . ' ' . sprintf("%.2f", $additionaldata['price']) . '
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="cart-product-remove remove-cart" data-id="' . $key . '" data-label="' . $label . '" currency="' . $product->currency . '">x</div>
+                                                </div>
+                                                </td>
+                                        </tr>
                                                 
                                                                 ';}
                                             }
