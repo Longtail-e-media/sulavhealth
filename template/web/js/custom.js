@@ -92,8 +92,8 @@ $(function () {
         // addcartTotal = $('input[name="additional_total[]"]').val();
         // finaltotal = (parseFloat(priceTotal)+parseFloat(addcartTotal));
         // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
-        var chked= $('input[name=additionalchk]:checked');
-        // console.log(chked);
+        var chked= $('input[name=additionalchkbox]:checked');
+        
         if(chked.length >  0){
         page_get_total(currency);
     }
@@ -113,13 +113,15 @@ $(function () {
         addcartTotal = $('input[name="additional_total[]"]').val();
         finaltotal = (parseFloat(amtper)+parseFloat(addcartTotal));
         cartTotal.html(defper.val());
-        // var chked= $('input[name=additionalchk]:checked');
+        // var chked= $('input[name=additionalchkbox]:checked');
         // console.log(chked);
         // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
         // $('.Grand-sub-total').html(finaltotal);
-        var chked= $('input[name=additionalchk]:checked');
+        var chked= $('input[name=additionalchkbox]:checked');
         // console.log(chked);
+        // console.log(chked.length);
         if(chked.length > 0){
+            
         page_get_total(currency);
     }
     else{
@@ -155,7 +157,7 @@ $(function () {
         maincartTotal = $('input[name="product_total_1"]').val();
         finaltotal = (parseFloat(priceTotal)+parseFloat(maincartTotal));
         // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
-        var chked= $('input[name=additionalchk]:checked');
+        var chked= $('input[name=additionalchkbox]:checked');
         // console.log(chked);
         if(chked.length > 0){
         page_get_total(currency);
@@ -171,14 +173,15 @@ $(function () {
         $('input.product_total_page').each(function () {
             var $checkbox= $(this);
             var chk = $checkbox.parent().parent().find(".additionalchk");
-            console.log(chk.is(":checked"));
-            var chked= $('input[name=additionalchk]:checked');
+            console.log(chk);
+            var chked= $('input[name=additionalchkbox]:checked');
             // console.log(chked);
             if(chk.is(":checked")){
             totalPoints += parseFloat($(this).val());
-
+            
         }
-        });
+    });
+    
         maincartTotal = $('input[name="product_total_1"]').val();
         totalPoints = (parseFloat(totalPoints)+parseFloat(maincartTotal));
         totalPoints = totalPoints.toFixed(2);

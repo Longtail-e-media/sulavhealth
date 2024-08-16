@@ -299,8 +299,16 @@ if (defined('CART_PAGE')) {
                                             //    pr($additionaldatas);
                                                if(!empty($additionaldatas)){
                                                 // pr($additionaldatas);
+                                                $addrowTotal='';
+                                                $addrowTotal='';
                                                 foreach ($additionaldatas as $key => $additionaldata) {
-                                                    $addrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                    $addrowTotal ++= (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                    // pr($addrowTotal);
+                                                    $adddetrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                    // pr($addrowTotal);
+                                                    // pr($addrowTotal);
+                                                    $adddetrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                    // pr($addrowTotal);
                                          $cart_detail .= '   
                                          
                                         <tr class="cart-remove">
@@ -349,7 +357,13 @@ if (defined('CART_PAGE')) {
                                             </tr>
                                             <div id="itemnone"></div>
                         ';
+                        if(!empty($additionaldatas)){
+                        if(!empty($additionaldatas)){
                         $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + $addrowTotal;
+                    }else{
+                        $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']);
+
+                    }
                     }
                     $subtotal = $product->currency . ' ' . sprintf('%.2f', $tot);
                 }
