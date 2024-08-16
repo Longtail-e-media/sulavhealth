@@ -302,7 +302,7 @@ if (defined('CART_PAGE')) {
                                                 $addrowTotal='';
                                                 $addrowTotal='';
                                                 foreach ($additionaldatas as $key => $additionaldata) {
-                                                    $addrowTotal ++= (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                    $addrowTotal += (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
                                                     // pr($addrowTotal);
                                                     $adddetrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
                                                     // pr($addrowTotal);
@@ -311,7 +311,6 @@ if (defined('CART_PAGE')) {
                                                     // pr($addrowTotal);
                                          $cart_detail .= '   
                                          
-                                        <tr class="cart-remove">
                                             <td>
                                                 <div class="additional-product" style="width: 100%;position: relative;">
                                                     <fieldset>
@@ -343,7 +342,6 @@ if (defined('CART_PAGE')) {
                                                         <div class="cart-product-remove remove-cart" data-id="' . $key . '" data-label="' . $label . '" currency="' . $product->currency . '">x</div>
                                                 </div>
                                                 </td>
-                                        </tr>
                                                 
                                                                 ';}
                                             }
@@ -367,6 +365,7 @@ if (defined('CART_PAGE')) {
                     }
                     $subtotal = $product->currency . ' ' . sprintf('%.2f', $tot);
                 }
+            }
             }
         } else {
             $cart_detail .= '
