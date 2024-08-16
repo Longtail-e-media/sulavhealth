@@ -21,11 +21,14 @@ switch ($_POST['action']) {
         $message = '';
 
         if (!empty($pkgRow)) {
+            // pr($_POST);
             if (isset($_SESSION['cart_detail'])) {
+                // pr($_SESSION);
                 // check if product already in cart
                 if (array_key_exists($pkgRow->id, $_SESSION['cart_detail'])) {
                     // check if product has multiple checkboxes
                     if (is_array($product_check) and !empty($product_check)) {
+                        // pr($product_check);
                         $lengthArr = sizeof($product_check);
                         // check for each checkbox
                         for ($i = 0; $i < $lengthArr; $i++) {
@@ -43,10 +46,44 @@ switch ($_POST['action']) {
                                 $qnt = $qnt + $quantity_value;
                                 $newTotal = (float)$qnt * (float)$price_value;
                                 $newTotal = sprintf("%.2f", $newTotal);
+                                $additionalDetails = array();
+                                // pr($additionalchkbox);
+                                // pr($_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['addtionaldetail']);
+                                $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['addtionaldetail']= array() ;
+                                // pr($_SESSION);
+                                if ((!empty($additionalchkbox) &&  is_array($additionalchkbox)) || !empty($additionalchkbox)) {
+                                    $lengthaddArr = sizeof($additionalchkbox);
+                                    $addnameVar='';
+                                    $addatyVar='';
+                                    $addtotalVar='';
+                                    $alltotalVar='';
+                                    foreach($additionalchkbox as $additionalmain){
+                                        // Extract values from variable variables
+                                        // $addname = $$addnameVar;
+                                        // $addaty = $$addatyVar;
+                                        // $addtotal = $$addtotalVar;
+                                        // $alltotal = $$alltotalVar;
+                                        
+                                        // Add to the additional details array
+                                        $additionalDetails[$additionalmain] = array(
+                                            'addname' => $additionalname_1[$additionalmain],
+                                            'price' => $additional_total_1[$additionalmain],
+                                            'quantityadd' => $additionalchkqty_1[$additionalmain]
+                                        );
+                                    }
+                                    // pr($additionalDetails);
+                               
+                                
+                            }
+
+
+
                                 $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['netqnt'] = $net_qnt;
                                 $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['price'] = $price_value;
                                 $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['quantity'] = $qnt;
+                                $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['addtionaldetail'] = $additionalDetails;
                                 $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['total'] = $newTotal;
+                               
                             }
                             else {
                                 $netqnt = 'product_net_qnt_' . $product_check[$i];
@@ -70,27 +107,98 @@ switch ($_POST['action']) {
                 else {
                     // check if product has multiple checkboxes
                     if (is_array($product_check) and !empty($product_check)) {
+                        // pr($additionalchkbox);
                         $pDetails = array();
                         $lengthArr = sizeof($product_check);
                         for ($i = 0; $i < $lengthArr; $i++) {
+                            // pr($product_check[$i]);
                             $label = 'product_qnt_' . $product_check[$i];
                             $netqnt = 'product_net_qnt_' . $product_check[$i];
                             $price = 'product_price_' . $product_check[$i];
                             $quantity = 'product_qty_' . $product_check[$i];
                             $checkquantity = ($$quantity > 0) ? $$quantity : 1;
-                            $total = 'product_total_' . $product_check[$i];
-                            $pDetails[$$label] = array('netqnt' => $$netqnt, 'price' => $$price, 'quantity' => $checkquantity, 'total' => $$total);
-                        }
+                            $additionalDetails = array();
+
+                            if ((!empty($additionalchkbox) && is_array($additionalchkbox))||!empty($additionalchkbox) ) {
+                                $lengthaddArr = sizeof($additionalchkbox);
+                                $addnameVar='';
+                                $addatyVar='';
+                                $addtotalVar='';
+                                $alltotalVar='';
+                                foreach($additionalchkbox as $additionalmain){
+                                    // Extract values from variable variables
+                                    // $addname = $$addnameVar;
+                                    // $addaty = $$addatyVar;
+                                    // $addtotal = $$addtotalVar;
+                                    // $alltotal = $$alltotalVar;
+                                    
+                                    // Add to the additional details array
+                                    $additionalDetails[$additionalmain] = array(
+                                        'addname' => $additionalname_1[$additionalmain],
+                                        'price' => $additional_total_1[$additionalmain],
+                                        'quantityadd' => $additionalchkqty_1[$additionalmain]
+                                    );
+                                }
+                                // pr($additionalDetails);
+                                
+                                
+                                // for ($a = 0; $a < $lengthaddArr; $a++) {
+                                //     // Construct variable names
+                                    
+                                //     $addchekVar = 'additionalchkbox' . $additionalchkbox[$a];
+                                //     $addnameVar = 'additionalname_' . $additionalchkbox[$a];
+                                //     $addatyVar = 'additionalchkqty_' . $additionalchkbox[$a];
+                                //     $addtotalVar = 'additional_total_' . $additionalchkbox[$a];
+                                //     $alltotalVar = 'Grand_total_1';
+                        
+                                //     // Extract values from variable variables
+                                //     $addname = $$addnameVar;
+                                //     $addaty = $$addatyVar;
+                                //     $addtotal = $$addtotalVar;
+                                //     $alltotal = $$alltotalVar;
+                        
+                                //     // Add to the additional details array
+                                //     $additionalDetails = array(
+                                //         'addname' => $addname,
+                                //         'price' => $addtotal,
+                                //         'quantityadd' => $addaty,
+                                //         'finaltotal' => $alltotal
+                                //     );
+                                // }
+                           
+                        
+                            $pDetails[$$label] = array(
+                                'netqnt' => $$netqnt,
+                                'price' => $$price,
+                                'quantity' => $checkquantity,
+                                'total' => $total,
+                                'addtionaldetail' => $additionalDetails
+                            );
+                            
+                            
+                        }else{
+                        $total = 'product_total_' . $product_check[$i];
+                        $pDetails[$$label] = array('netqnt' => $$netqnt, 'price' => $$price, 'quantity' => $checkquantity, 'total' => $$total);
+                    
+                    }
+                    // pr($pDetails);
+                    }
+                }
+                           
+                            // $total = 'product_total_' . $product_check[$i];
+                       
                         $_SESSION['cart_detail'][$pkgRow->id] =
                             array(
                                 'slug' => $pkgRow->slug,
                                 'product_details' => $pDetails
                             );
-                    }
-                }
+                    
+                       
+            }
             }
             else {
                 if (is_array($product_check) and !empty($product_check)) {
+                    // pr($product_check);
                     $pDetails = array();
                     $lengthArr = sizeof($product_check);
                     for ($i = 0; $i < $lengthArr; $i++) {
@@ -99,6 +207,15 @@ switch ($_POST['action']) {
                         $price = 'product_price_' . $product_check[$i];
                         $quantity = 'product_qty_' . $product_check[$i];
                         $checkquantity = ($$quantity > 0) ? $$quantity : 1;
+                        if (is_array($additionalchkbox) and !empty($additionalchkbox)) {
+                            $lengthaddArr = sizeof($product_check);
+                            for ($a = 0; $a < $lengthArr; $a++) {
+                        $addname='add_prod_name' . $additionalname[$a];
+                        $addaty='add_prod_name' . $additionalname[$a];
+                        $addname='add_prod_name' . $additionalname[$a];
+                        // $additioanl=array('netqnt' => $$netqnt, 'price' => $$price, 'quantity' => $checkquantity, 'total' => $$total);;
+                        }
+                        }
                         $total = 'product_total_' . $product_check[$i];
                         $pDetails[$$label] = array('netqnt' => $$netqnt, 'price' => $$price, 'quantity' => $checkquantity, 'total' => $$total);
                     }

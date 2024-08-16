@@ -459,6 +459,23 @@ function getMenuList($caption="", $link="", $type=0, $class="",$nicon=""){
 	return "<a href=\"".$linkhref."\" ".$classLink.$idLink.$linkType.$dropclass." >".$caption.$nicon."</a>";
 }
 
+function getSubMenuList($caption="", $link="", $type=0, $class="",$nicon=""){
+	$classLink 	= ($class == '') ? '' : 'class=" '.$class.'"';
+	
+// 	$nicon = !empty($nicon)?'<i class="fa fa-angle-down" aria-hidden="true"></i>':'';
+	$nicon = !empty($nicon)?'':'';
+	$dropclass = !empty($nicon)?" ":" ";
+	
+	$escArray	= array(" ","@","!","#","$","%","^","&","*","(",")",",",".","\\","+","=");
+	$captionStr = str_replace($escArray,"_",strtolower($caption));
+	$id 		= "id_".$captionStr;
+	
+	$idLink 	= ($id == '') ? '' : ' id="'.$id.'"';
+	$linkType	= ($type == 0) ? '' : ' target="_blank"';
+	$linkhref	= ($type == 0) ? BASE_URL.'subcategory/'.$link : $link;
+	return "<a href=\"".$linkhref."\" ".$classLink.$idLink.$linkType.$dropclass." >".$caption.$nicon."</a>";
+}
+
 function getResMenuList($caption="", $link="", $type=0, $class="",$dash=''){
 	$classLink 	= ($class == '') ? '' : 'class="'.$class.'"';
 	$linkhref	= ($link == '') ? '#' : $link;

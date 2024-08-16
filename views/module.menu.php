@@ -109,18 +109,31 @@ if ($menuRec):
                     $result .= getMenuList($menusubRow->name, $menusubRow->linksrc, $menusubRow->linktype, '', $chkparent2);
                     $menusubsubRec = Menu::getMenuByParent($menusubRow->id, 1);
                     $result .= '<ul>';
-                    foreach ($menusubsubRec as $menusubsubRow):
+                        $menusubsubRec = Category::get_menu_subcategory($menusubRow->category);
+                        // pr($menusubRow);
+                        // pr($menusubsubRec);
+                        // $chkparent3 = (!empty($menusub3Rec)) ? 1 : 0;
+                        foreach ($menusubsubRec as $menusubsubRow):
+                            $chkparent3 = (!empty($menusub3Rec)) ? 1 : 0;
                         $menusub3Rec = Menu::getMenuByParent($menusubsubRow->id, 1);
-                    // pr($menusub2Rec);
-                    $chkparent3 = (!empty($menusub3Rec)) ? 1 : 0;
-                    $result .= '<li>';
-                    $result .= getMenuList($menusubsubRow->name, $menusubsubRow->linksrc, $menusubsubRow->linktype, '', $chkparent3);
+                            $result .= '<li>';
+                    $result .= getSubMenuList($menusubsubRow->title, $menusubsubRow->slug, $menusubsubRow->slug, '', $chkparent3);
                     $result .= '</li>';
-                    endforeach;
+                endforeach;
+                    
+                    // foreach ($menusubsubRec as $menusubsubRow):
+                    //     $menusub3Rec = Menu::getMenuByParent($menusubsubRow->id, 1);
+                    // // pr($menusub2Rec);
+                    // $chkparent3 = (!empty($menusub3Rec)) ? 1 : 0;
+                    // $menusub3Rec = Menu::getMenuByParent($menusubsubRow->id, 1);// 
+                    $result .= '<li>';
+                    // $result .= getMenuList($menusubsubRow->name, $menusubsubRow->linksrc, $menusubsubRow->linktype, '', $chkparent3);
+                    // $result .= '</li>';
+                    // endforeach;
                     $result .= '</ul>';
                     // $menusub3Rec = Menu::getMenuByParent($menusubRow->id, 1);
 
-                    $result .= '</ul>';
+                    // $result .= '</ul>';
                 // }
                 // elseif($menuRow->menutype==1){
                 // pr($resultarticle);
@@ -129,11 +142,9 @@ if ($menuRec):
                 
             // }
             endforeach;
-            $result .= '';
+            $result .= '</ul>';
         endif;
-        $result .= ' 
-                
-                </li>';
+        $result .= '</li>';
         // pr($resultarticle);
     }
     endforeach;

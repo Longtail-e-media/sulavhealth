@@ -267,6 +267,8 @@ if (defined('CART_PAGE')) {
             
                                 $product_details = $sesRow['product_details'];
                                 foreach ($product_details as $label => $detail) {
+                                    // pr($detail);
+                                    // pr($detail['addtionaldetail']['addname'][0]);
                                     $rowTotal = (float)$detail['quantity'] * (float)$detail['price'];
                                     $cart_detail .= '
                                             <tr class="cart-remove">
@@ -291,26 +293,44 @@ if (defined('CART_PAGE')) {
                                                 </td>
                                                 <td class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
                                                 <td class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</td>
-                                               
-                                                <tr class="cart-remove">
+                                               ';
+                                            //    pr($detail['addtionaldetail']);
+                                               $additionaldatas= $detail['addtionaldetail'];
+                                            //    pr($additionaldatas);
+                                               if(!empty($additionaldatas)){
+                                                // pr($additionaldatas);
+                                                foreach ($additionaldatas as $key => $additionaldata) {
+                                                    $addrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                         $cart_detail .= '   
+                                         
+                                         <tr class="cart-remove">
                                                     <td class="cart-product-info">
-                                                        <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' . ($product->title) . '</a></h4>
+                                                        <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' .$additionaldata['addname']. '</a></h4>
                                                     </td>
                                                     <td class="cart-product-label">
-                                                        ' . $detail['netqnt'] . '
+                                                        ' . $additionaldata['quantityadd'] . '
                                                     </td>
                                                     <td class="cart-product-price">
-                                                        ' . $product->currency . ' ' . sprintf("%.2f", $detail['price']) . '
+                                                        ' . $product->currency . ' ' . sprintf("%.2f", $additionaldata['price']) . '
                                                     </td>
                                                     
-                                                    <td class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
-                                                    <td class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</td>
+                                                    <td class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</td>
+                                                    <td class="cart-product-remove remove-cart" data-id="' . $key . '" data-label="' . $label . '" currency="' . $product->currency . '">x</td>
                                                 </tr>
+                                                
+                                                                ';}
+                                            }
+
+ $cart_detail .= '
+                                                
+
+                                               
+                                               
                                                
                                             </tr>
                                             <div id="itemnone"></div>
                         ';
-                        $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']);
+                        $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + $addrowTotal;
                     }
                     $subtotal = $product->currency . ' ' . sprintf('%.2f', $tot);
                 }
@@ -572,6 +592,7 @@ if (defined('CHECKOUT_PAGE')) {
                             <tbody>
     ';
     $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
+    // pr($_SESSION);   
     $tot = 0.00;
     $subtotal = 'NPR 0.00';
     if (!empty($sesRec)) {
@@ -580,6 +601,7 @@ if (defined('CHECKOUT_PAGE')) {
             if (!empty($product)) {
                 $product_details = $sesRow['product_details'];
                 foreach ($product_details as $label => $detail) {
+                    // pr($detail);
                     $rowTotal = (float)$detail['quantity'] * (float)$detail['price'];
                     $checkout_form .= '
                         <tr class="probdetail">
@@ -588,6 +610,12 @@ if (defined('CHECKOUT_PAGE')) {
                             <td>' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
                             <input type="hidden" name="currency" value="' . $product->currency . '">
                         </tr>
+                        <tr>
+                                <td>Additonal Product</td>
+                                <td>Arya Skin Care</td>
+                                <td id="coupon-discount-amount">NPR 0.00</td>
+                                <input type="hidden" name="discount_amt" value="0">
+                            </tr>
                     ';
                     $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']);
                 }
@@ -601,12 +629,7 @@ if (defined('CHECKOUT_PAGE')) {
                                 <td id="coupon-discount-amount">NPR 0.00</td>
                                 <input type="hidden" name="discount_amt" value="0">
                             </tr>
-                            <tr>
-                                <td>Additonal Product</td>
-                                <td>Arya Skin Care</td>
-                                <td id="coupon-discount-amount">NPR 0.00</td>
-                                <input type="hidden" name="discount_amt" value="0">
-                            </tr>
+                            
                             <tr>
                                 <td>' . ("Delivery Charge") . '</td>
                                 <td></td>

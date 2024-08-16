@@ -184,6 +184,8 @@ $(function () {
         totalPoints = totalPoints.toFixed(2);
         // console.log(totalPoints);
         $('.Grand-sub-total').html(currency + ' ' + totalPoints);
+        // console.log(input[name="Grand_total"]);
+        $('input[name=Grand_total_1]').val(currency + ' ' + totalPoints);
     
     
     }

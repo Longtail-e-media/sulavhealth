@@ -4,10 +4,11 @@ class category extends DatabaseObject
 {
 
     protected static $table_name = "tbl_category";
-    protected static $db_fields = array('id', 'title', 'fa_icon', 'parentId', 'image', 'brief', 'type', 'status', 'sortorder', 'added_date');
+    protected static $db_fields = array('id', 'title','slug', 'fa_icon', 'parentId', 'image', 'brief', 'type', 'status', 'sortorder', 'added_date');
 
     var $id;
     var $title;
+    var $slug;
     var $parentId;
     var $image;
     var $brief;
@@ -26,6 +27,20 @@ class category extends DatabaseObject
         return self::find_by_sql($sql);
     }
 
+    static function find_by_slug($slug = '')
+    {
+        global $db;
+        $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE slug='$slug' AND parentId='0' LIMIT 1");
+        return !empty($result_array) ? array_shift($result_array) : false;
+    }
+   
+
+    static function find_by_sub_slug($slug = '')
+    {
+        global $db;
+        $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE slug='$slug' LIMIT 1");
+        return !empty($result_array) ? array_shift($result_array) : false;
+    }
     public static function get_category()
     {
         global $db;
@@ -56,11 +71,23 @@ class category extends DatabaseObject
                 ORDER BY cat.title ASC ";
         return self::find_by_sql($sql);
     }
+    public static function get_category_by_slugcat($cat_id = '')
+    {
+        global $db;
+        $sql = "SELECT * FROM " . self::$table_name . " WHERE id=$cat_id LIMIT 1";
+       return self::find_by_sql($sql);
+    }
 
     public static function get_subcategory()
     {
         global $db;
         $sql = "SELECT id, title FROM " . self::$table_name . " WHERE status=1 AND parentId!=0 ORDER BY title ASC ";
+        return self::find_by_sql($sql);
+    }
+    public static function get_menu_subcategory($category)
+    {
+        global $db;
+        $sql = "SELECT * FROM " . self::$table_name . " WHERE status=1 AND parentId=$category ORDER BY title ASC ";
         return self::find_by_sql($sql);
     }
 
@@ -184,8 +211,8 @@ class category extends DatabaseObject
         if ($record) {
             $result .= '<optgroup label="Category"> ';
             foreach ($record as $row) {
-                $sel = ($selid == 'product/' . $row->slug) ? 'selected' : '';
-                $result .= '<option value="product/' . $row->slug . '" ' . $sel . '>' . $row->title . '</option>';
+                $sel = ($selid == 'category/' . $row->slug) ? 'selected' : '';
+                $result .= '<option value="category/' . $row->slug . '" ' . $sel . '>' . $row->title . '</option>';
             }
         } else {
             $result .= '</optgroup>';

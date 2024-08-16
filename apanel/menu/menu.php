@@ -209,7 +209,7 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                                 // services Page Link
                                 echo Services::get_internal_link($Lpageview, $LinkTypeview);
                                 // services Page Link
-                                // echo category::get_internal_link($Lpageview, $LinkTypeview);
+                                echo category::get_internal_link($Lpageview, $LinkTypeview);
                                 // Product Page Link
                                 // echo Product::get_internal_link($Lpageview, 1);
                                 // Packages Page Link
@@ -243,7 +243,7 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                     <div class="col-md-12 articlemenu <?php echo $menuhide?>" id="oldmenu" style="padding-left:0px !important;">
                     <?php
                             $submenu = Menu::countSubMenu($menu->id);
-                            if (!empty($submenu)){
+                            if (empty($submenu)){
                                 ?>
                         <div class="form-row">
                             <div class="form-label col-md-2">
@@ -271,8 +271,8 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                             <div class="form-input col-md-4">
                                 <?php $cid = !empty($menu ->category) ? $menu ->category : 0; ?>
                                 <select data-placeholder="Choose Field Type"
-                                    class="chosen-selec validate[required,length[0,500]] Category" id="Category"
-                                    name="Category" selcId="<?php echo $cid; ?>">
+                                    class="chosen-selec validate[required,length[0,500]] Category" id="category"
+                                    name="category" selcId="<?php echo $cid; ?>">
                                     
                                     <?php 
                             // $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 AND type={$typeid} ORDER BY sortorder ASC ");
@@ -280,13 +280,13 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                             // pr($categories);
                             if ($categories) { 
                                 ?>
-                            <option value="">Select Service</option>
+                            <!--<option value="">Select Service</option>-->
                             <?php
                                 foreach ($categories as $k => $category) {
                                     if($k == 0){$initialType = $category->type;}
                                     $cat = $category->id;
-                                    $sel = (!empty($cat) && $cat == $menu ->category) ? 'selected' : '';
-                                    $initialType = (!empty($cat) && $cat == $menu ->category) ? $category->type : $initialType;?>
+                                    $sel = (!empty($cat) && $cat == $menu->category) ? 'selected' : '';
+                                    $initialType = (!empty($cat) && $cat == $menu->category) ? $category->type : $initialType;?>
                                    <option value="<?= $category->id; ?>" <?= $sel; ?>
                                         selType="<?= $category->type; ?>"><?= $category->title; ?></option>
                                     <?php }
@@ -298,7 +298,7 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                         <input type="hidden" name="type" id="type" value="<?php echo $initialType; ?>" />
                         <?php
                             $submenu = Menu::countSubMenu($menu->id);
-                            if (!empty($submenu)){
+                            if (empty($submenu)){
                                 ?>
                         <div class="form-row">
                             <div class="form-label col-md-2">

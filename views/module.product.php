@@ -1421,17 +1421,17 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                         <h4>Additional Product</h4>';
                                         $additionaldatas= unserialize(base64_decode($prodRec->additional));
                                         if(!empty($additionaldatas)){
-                                        // pr($additionaldatas);
-                                        foreach ($additionaldatas as $key => $additionaldata) {
+                                            foreach ($additionaldatas as $key => $additionaldata) {
+                                            // pr($additionaldata);
                                         $product_detail .= '
                                          <tr>
                                             <td class="cart-product-info">
-                                                <input type="checkbox" id="additionalchk" class="additionalchk" name="additionalchk" currency="' . $prodRec->currency . '" value="">
+                                                <input type="checkbox" id="additionalchk" class="additionalchk" name="additionalchkbox[]" currency="' . $prodRec->currency . '" value="'.$additionaldata['id'].'">
                                             </td>
                                             <td class="cart-product-price">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="hidden" name="additionalchk[]" checked="" value="1">
-                                                    <input type="hidden" name="additionalqnt" value="">
+                                                    <input type="hidden" name="additionalname_1['.$additionaldata['id'].']" value="'.$additionaldata['name'].'">
                                                     <input type="hidden" name="additionalchk_net_qnt_1" value="250ml">
                                                     <label class="form-check-label">'.$additionaldata['name'].'</label>
                                                 </div>
@@ -1443,12 +1443,12 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                             <td class="cart-product-quantity">
                                                 <div class="cart-plus-minus">
                                                     <div class="dec qtybuttonadd">-</div>
-                                                    <input type="text" value="1" min="1" step="1" name="additionalchkqty1" class="cart-plus-minus-box qty" price="'.$additionaldata['price'].'" currency="NPR" readonly="">
+                                                    <input type="text" value="1" min="1" step="1" name="additionalchkqty_1['.$additionaldata['id'].']" class="cart-plus-minus-box qty" price="'.$additionaldata['price'].'" currency="NPR" readonly="">
                                                     <div class="inc qtybuttonadd">+</div>
                                                 </div>
                                             </td>
                                             <td class="cart-product-subtotal">
-                                                <input type="hidden" name="additional_total[]" class="additional_total product_total_page" value="'.$additionaldata['price'].'">
+                                                <input type="hidden" name="additional_total_1['.$additionaldata['id'].']" class="additional_total product_total_page" value="'.$additionaldata['price'].'">
                                                 <h6 class="additional-sub-total product-sub-total">NPR 0.00</h6>
                                             </td>
                                         </tr>';
@@ -1467,7 +1467,7 @@ $product_detail .= '
                                             
                                             </td>
                                             <td class="cart-product-subtotal product-sub-total">
-                                                <input type="hidden" name="Grand_total" class="Grand_total" value="">
+                                                <input type="hidden" name="Grand_total_1" class="Grand_total" value="">
                                                 <h6 class="Grand-sub-total">NPR 0.00</h6>
                                             </td>
                                         </tr>

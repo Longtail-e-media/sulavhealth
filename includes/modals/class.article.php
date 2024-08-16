@@ -107,6 +107,38 @@ class Article extends DatabaseObject {
 
 		return self::find_by_sql($sql);
 	}
+
+	// Homepage Display
+	public static function menudetailArticle($prodcategory='', $Subcategory='', $service_id='',$notid='') {
+		global $db;
+		$sql='';
+		$lmt = !empty($limit)?' LIMIT '.$limit:'';
+		$sql .= "SELECT * FROM ".self::$table_name." WHERE status='1' AND (prodcategory='$prodcategory' OR Subcategory='$Subcategory' OR service_id='$service_id') AND id<>$notid ";
+		if(!empty($prodcategory!=0)){
+		$sql .="AND (prodcategory<>0)";
+	}
+	elseif(!empty($Subcategory!=0)){
+		$sql .="AND (prodcategory<>0)";
+	}
+	elseif(!empty($service_id!=0)){
+		$sql .="AND (service_id<>0)";
+	}
+	elseif(!empty($Subcategory!=0 AND $service_id!=0)){
+		$sql .="AND (service_id<>0 AND Subcategory<>0)";
+	}
+	elseif(!empty($prodcategory!=0 AND $service_id!=0)){
+		$sql .="(service_id<>0 AND prodcategory<>0)";
+	}
+	elseif(!empty($prodcategory!=0 AND $Subcategory!=0)){
+		$sql .="(Subcategory<>0 AND prodcategory<>0)";
+	}
+	elseif(!empty($prodcategory!=0 AND $Subcategory!=0 AND $service_id!=0)){
+		$sql .="AND (Subcategory<>0 AND prodcategory<>0 AND service_id<>0)";
+	}
+	$sql .="ORDER BY sortorder ASC LIMIT 10";
+	// pr($sql);
+		return self::find_by_sql($sql);
+	}
 	
 	// Article display
 	public static function getArticle($page="") {

@@ -73,6 +73,15 @@ if (defined('SEARCH_PAGE')) {
         } else {
             $tot += SubProduct::get_total_service_product($serviceRow->id);
         }
+        // if (@$category_slug) {
+        //     $categoryRecord = category::find_by_slug($category_slug);
+        //     $tot += SubProduct::get_total_category_product_service($serviceRow->id, $categoryRecord->id);
+        // } elseif (@$brand_slug) {
+        //     $brandRec = Brand::find_by_slug($brand_slug);
+        //     $tot += SubProduct::get_total_category_brand_product($brandRec->id, $categoryRow->id);
+        // } else {
+        //     $tot += SubProduct::get_total_category_product($categoryRow->id);
+        // }
         if ($tot > 0) {
             $service_filter .= '
                 <div class="custom-control custom-checkbox">
@@ -92,14 +101,29 @@ if (defined('SEARCH_PAGE')) {
     } elseif (!empty($brand_slug)) {
         $brandRec = Brand::find_by_slug($brand_slug);
         $categoryRec = category::get_category_by_brand($brandRec->id);
-    } else {
+    } 
+    elseif (!empty($category_slug)) {
+        $catRec = category::find_by_slug($category_slug);
+        $categoryRec = category::get_category_by_slugcat($catRec->id);
+    }
+    else {
         $categoryRec = category::get_category();
     }
     foreach ($categoryRec as $categoryRow) {
+        $disabled = $hidden = '';
         if (@$category_slug) {
             $sel = (@$category_slug == $categoryRow->slug) ? 'checked' : '';
+            $disabled = 'disabled';
+            $hidden = '<input type="hidden" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="cat-' . $categoryRow->id . '" value="' . $categoryRow->id . '">';
         } else {
             $sel = @in_array($categoryRow->id, @$qcategory) ? 'checked' : '';
+        }
+        $tot = 0;
+        if (@$brand_slug) {
+            $brandRec = Brand::find_by_slug($brand_slug);
+            $tot += SubProduct::get_total_category_brand_product($brandRec->id, $serviceRow->id);
+        } else {
+            $tot += SubProduct::get_total_category_product($categoryRow->id);
         }
         $tot = 0;
         if (@$service_slug) {
@@ -114,7 +138,8 @@ if (defined('SEARCH_PAGE')) {
         if ($tot > 0) {
             $category_filter .= '
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="cat-' . $categoryRow->id . '" value="' . $categoryRow->id . '">
+                    <input type="checkbox" class="custom-control-input qcategory" name="qcategory[]" ' . $sel . ' id="cat-' . $categoryRow->id . '" value="' . $categoryRow->id . '" ' . $disabled . '>
+                    ' . $hidden . '
                     <label class="custom-control-label d-flex justify-content-between" for="cat-' . $categoryRow->id . '">' . $categoryRow->title . ' <span class="checkbox-count">' . $tot . '</span></label>
                 </div>
             ';
@@ -129,6 +154,11 @@ if (defined('SEARCH_PAGE')) {
     } elseif (!empty($brand_slug)) {
         $brandRec = Brand::find_by_slug($brand_slug);
         $subcategoryRec = category::get_subcategory_by_brand($brandRec->id);
+    } 
+    elseif (!empty($subcategory_slug)) {
+        $subcatRec = category::find_by_sub_slug($subcategory_slug);
+        // pr($subcatRec);
+        $subcategoryRec = category::get_category_by_slugcat($subcatRec->id);
     } else {
         $subcategoryRec = category::get_subcategory();
     }
@@ -357,7 +387,8 @@ if (defined('SEARCH_PAGE')) {
         }
     }
     if (@$category_slug) {
-        $cate = Destination::find_by_slug($category_slug);
+        $cate = category::find_by_slug($category_slug);
+        
         $serachtitle = $cate->title;
         $sql .= " AND prod.Category = $cate->id ";
     }
@@ -400,7 +431,8 @@ if (defined('SEARCH_PAGE')) {
         }
     }
     if (@$subcategory_slug) {
-        $subcate = Destination::find_by_slug($subcategory_slug);
+        $subcate = category::find_by_sub_slug($subcategory_slug);
+        // pr($subcate);
         $serachtitle = $subcate->title;
         $sql .= " AND prod.Subcategory = $subcate->id ";
     }
@@ -607,7 +639,7 @@ if (defined('SEARCH_PAGE')) {
     $sql .= " ORDER BY prod.sortorder ASC";
     // $sql .= " ORDER BY prod.sortorder ASC";
     $sql .= " LIMIT " . $startpoint . "," . $limit;
-
+    // pr($sql);
     $res = $db->query($sql);
     $total = $db->affected_rows($res);
     $listofitems .= '
