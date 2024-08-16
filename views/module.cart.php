@@ -8,11 +8,11 @@ $cart_bread = $cart_detail = '';
 if (defined('CART_PAGE')) {
     // pr($_SESSION);
     $cart_bread .= '
-        <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white  bg-image" data-bg="' . BASE_URL . 'template/web/img/bg/9.jpg">
+        <div class="ltn_breadcrumb-area ltnbreadcrumb-area-2 ltn_breadcrumb-color-white  bg-image" data-bg="' . BASE_URL . 'template/web/img/bg/9.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                        <div class="ltn_breadcrumb-inner ltn_breadcrumb-inner-2 justify-content-between">
                             <div class="section-title-area ltn__section-title-2">
                                 <h1 class="section-title white-color"><strong>' . HOME_CART . '</strong></h1>
                             </div>
@@ -250,6 +250,7 @@ if (defined('CART_PAGE')) {
                     $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
                     $tot = 0.00;
                     $subtotal = 'NPR 0.00';
+                    // pr($sesRec);
                     if (!empty($sesRec)) {
                         foreach ($sesRec as $k => $sesRow) {
                             $product = SubProduct::find_by_slug($sesRow['slug']);
@@ -266,6 +267,7 @@ if (defined('CART_PAGE')) {
                                 }
             
                                 $product_details = $sesRow['product_details'];
+                                
                                 foreach ($product_details as $label => $detail) {
                                     // pr($detail);
                                     // pr($detail['addtionaldetail']['addname'][0]);
@@ -293,29 +295,29 @@ if (defined('CART_PAGE')) {
                                                 </td>
                                                 <td class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
                                                 <td class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</td>
-                                            </tr>
                                                ';
                                             //    pr($detail['addtionaldetail']);
-                                               $additionaldatas= $detail['addtionaldetail'];
-                                            //    pr($additionaldatas);
-                                               if(!empty($additionaldatas)){
+                                            $addrowTotal=0;
+                                            if(!empty($detail['addtionaldetail'])){
+                                                $additionaldatas= $detail['addtionaldetail'];
                                                 // pr($additionaldatas);
-                                                $addrowTotal='';
-                                                $addrowTotal='';
-                                                foreach ($additionaldatas as $key => $additionaldata) {
-                                                    $addrowTotal += (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
-                                                    // pr($addrowTotal);
-                                                    $adddetrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
-                                                    // pr($addrowTotal);
-                                                    // pr($addrowTotal);
-                                                    $adddetrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
-                                                    // pr($addrowTotal);
-                                         $cart_detail .= '   
-                                         <tr>
+                                                $cart_detail .= '<tr class="cart-remove-' . $product->id . ' cart-remove">
                                             <td>
                                                 <div class="additional-product" style="width: 100%;position: relative;">
                                                     <fieldset>
-                                                        <legend>Additional Products</legend>
+                                                        <legend>Additional Products</legend>';
+                                               
+                                                foreach ($additionaldatas as $key => $additionaldata) {
+                                                    @$addrowTotal += ((float)$additionaldata['quantityadd'] * (float)$additionaldata['price']);
+                                                    // @$addrowTotal = ((float)$additionaldata['quantityadd'] * (float)$additionaldata['price']);
+                                                    
+                                                    // $addrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                    // pr($addrowTotal);
+                                                    // pr($addrowTotal);
+                                                    $adddetrow = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                    // pr($addrowTotal);
+                                         $cart_detail .= '   
+                                         
                                                         <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="cart-product-info">
@@ -336,34 +338,42 @@ if (defined('CART_PAGE')) {
                                                     </div>
 
                                                     <div class="col-md-2">
-                                                        <div class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</div>
+                                                        <div class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $adddetrow) . '</div>
                                                     </div>
 
                                                     <div class="col-md-2">
-                                                        <div class="cart-product-remove remove-cart" data-id="' . $key . '" data-label="' . $label . '" currency="' . $product->currency . '">x</div>
-                                                </div>
-                                                </td>
+                                                        <div class="cart-product-remove remove-cart" data-id="' . $product->id . '" data-label="' . $label . '" currency="' . $product->currency . '">x</div>
+                                                    </div>
+                                                    </div>
                                                 
                                                                 ';}
-                                            }
 
- $cart_detail .= '
-                                                
+                                                                $cart_detail .= ' </fieldset>
+                                                        </div>
+                                                </td>
+                                        </tr>';
 
-                                               
-                                               
-                                               
-                                            </tr>
-                                            <div id="itemnone"></div>
-                        ';
-                        if(!empty($additionaldatas)){
+                                                                 //    pr($additionaldatas);
+                                                                }
+                                                                
+                                                                $cart_detail .= '
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                </tr>
+                                                                <div id="itemnone"></div>
+                                                                ';
+                                                                // pr($addrowTotal,0);
                         if(!empty($additionaldatas)){
                         $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + $addrowTotal;
                     }else{
                         $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']);
 
                     }
-                    }
+                    
                     $subtotal = $product->currency . ' ' . sprintf('%.2f', $tot);
                 }
             }
@@ -438,11 +448,11 @@ $checkout_bread = $checkout_form = '';
 
 if (defined('CHECKOUT_PAGE')) {
     $checkout_bread .= '
-        <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white  bg-image" data-bg="' . BASE_URL . 'template/web/img/bg/012.jpg">
+        <div class="ltn_breadcrumb-area ltnbreadcrumb-area-2 ltn_breadcrumb-color-white  bg-image" data-bg="' . BASE_URL . 'template/web/img/bg/012.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                        <div class="ltn_breadcrumb-inner ltn_breadcrumb-inner-2 justify-content-between">
                             <div class="section-title-area ltn__section-title-2">
                                 <h1 class="section-title white-color"><strong>' . ("Checkout") . '</strong></h1>
                             </div>
@@ -627,6 +637,7 @@ if (defined('CHECKOUT_PAGE')) {
     $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
     // pr($_SESSION);   
     $tot = 0.00;
+    $addrowmainTotal='';
     $subtotal = 'NPR 0.00';
     if (!empty($sesRec)) {
         foreach ($sesRec as $k => $sesRow) {
@@ -643,16 +654,17 @@ if (defined('CHECKOUT_PAGE')) {
                             <td>' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
                             <input type="hidden" name="currency" value="' . $product->currency . '">
                         </tr>';
-                        $additionaldatas= $detail['addtionaldetail'];
-                                            //    pr($additionaldatas);
-                                               if(!empty($additionaldatas)){
-                                                // pr($additionaldatas);
+                        //    pr($additionaldatas);
+                        if(!empty($detail['addtionaldetail'])){
+                            // pr($additionaldatas);
+                            $additionaldatas= $detail['addtionaldetail'];
                                                 foreach ($additionaldatas as $key => $additionaldata) {
                                                     $addrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                    @$addrowmainTotal += (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
                                                     // pr($additionaldata['price']);
                        $checkout_form .= ' 
                         <tr>
-                                <td>' .$additionaldata['addname']. '</td>
+                                <td>-- ' .$additionaldata['addname']. '</td>
                                 <td><strong>× ' . $additionaldata['quantityadd'] . '</strong></td>
                                 <td id="coupon-discount-amount">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</td>
                                 <input type="hidden" name="discount_amt" value="0">
@@ -662,7 +674,7 @@ if (defined('CHECKOUT_PAGE')) {
                 }
             }
             if(!empty($additionaldatas)){
-                $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + ((float)$additionaldata['quantityadd'] * (float)$additionaldata['price']);
+                $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + $addrowmainTotal;
 
             }
             else{
@@ -736,7 +748,7 @@ if (defined('CHECKOUT_PAGE')) {
             </div>
         </form>
 
-        <div class="ltn__modal-area ltn__quick-view-modal-area " id="productpopup">
+        <div class="ltn_modal-area ltn_quick-view-modal-area " id="productpopup">
         <div class="modal fade" id="checkout_alert" tabindex="-1">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">

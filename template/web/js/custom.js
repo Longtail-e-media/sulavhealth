@@ -232,6 +232,7 @@ $(function () {
     $(document).on('click', 'span.remove-cart', function () {
         var _cartId = $(this).attr('data-id'),
             _parent = jQuery(this).parents(".cart-remove");
+            // console.log('_cartId');
         $.ajax({
             type: "POST",
             dataType: "JSON",
@@ -241,6 +242,7 @@ $(function () {
                 var res = eval(data);
                 $("sup.cart-total").html(res.no_cart);
                 _parent.remove();
+                // $(".cart-remove-"+_cartId).remove();
                 // $("span.sub-total-mini-cart").html(res.sub_total);
                 $("div.mini-cart-footer").html(res.sub_total);
 
@@ -385,6 +387,7 @@ $(function () {
             _cartLabel = $(this).attr('data-label'),
             _parent = jQuery(this).parents(".cart-remove"),
             currency = $(this).attr('currency');
+            // console.log(_cartId);
         $.ajax({
             type: "POST",
             dataType: "JSON",
@@ -394,6 +397,7 @@ $(function () {
                 var res = eval(data);
                 $("sup.cart-total").html(res.no_cart);
                 _parent.remove();
+                $(".cart-remove-"+_cartId).remove();
                 $("td.sub-total-cart").html(res.sub_total);
                 $("#itemnone").html(res.noitem);
                 $.ajax({
