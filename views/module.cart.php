@@ -609,15 +609,34 @@ if (defined('CHECKOUT_PAGE')) {
                             <td><strong>× ' . $detail['quantity'] . '</strong></td>
                             <td>' . $product->currency . ' ' . sprintf("%.2f", $rowTotal) . '</td>
                             <input type="hidden" name="currency" value="' . $product->currency . '">
-                        </tr>
+                        </tr>';
+                        $additionaldatas= $detail['addtionaldetail'];
+                                            //    pr($additionaldatas);
+                                               if(!empty($additionaldatas)){
+                                                // pr($additionaldatas);
+                                                foreach ($additionaldatas as $key => $additionaldata) {
+                                                    $addrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                    // pr($additionaldata['price']);
+                       $checkout_form .= ' 
                         <tr>
-                                <td>Additonal Product</td>
-                                <td>Arya Skin Care</td>
-                                <td id="coupon-discount-amount">NPR 0.00</td>
+                                <td>' .$additionaldata['addname']. '</td>
+                                <td><strong>× ' . $additionaldata['quantityadd'] . '</strong></td>
+                                <td id="coupon-discount-amount">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</td>
                                 <input type="hidden" name="discount_amt" value="0">
                             </tr>
                     ';
-                    $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']);
+
+                }
+            }
+            if(!empty($additionaldatas)){
+                $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + ((float)$additionaldata['quantityadd'] * (float)$additionaldata['price']);
+
+            }
+            else{
+
+                $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']);
+            }
+                    
                 }
                 $subtotal = $product->currency . ' ' . sprintf('%.2f', $tot);
             }
