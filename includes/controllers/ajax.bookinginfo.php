@@ -168,12 +168,14 @@
                         if (!empty($product)) {
                             $product_details = $sesRow['product_details'];
                             foreach ($product_details as $label => $detail) {
-
+// pr($detail['addtionaldetail']);
+$addobj= serialize($detail['addtionaldetail']);
                                 $csql = "INSERT INTO tbl_booking_product SET 
                                   booking_id = '" . $booking_id . "', 
                                   product_id = '" . $product->id . "', 
                                   product_currency = '".$product->currency."',
                                   product_label = '" . $label . "',
+                                  additionalprod = '" . $addobj . "',
                                   product_netqnt = '" . $detail['netqnt'] . "',
                                   product_quantity = '".$detail['quantity']."',
                                   product_price = '".$detail['price']."',

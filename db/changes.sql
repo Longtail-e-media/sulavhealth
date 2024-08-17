@@ -9,3 +9,7 @@ ALTER TABLE `tbl_menu` ADD `menutype` INT(1) NOT NULL AFTER `icon`;
 ALTER TABLE `tbl_menu` ADD `subtype` INT(11) NOT NULL AFTER `menutype`, ADD `category` INT(11) NOT NULL AFTER `subtype`, ADD `Subcategory` INT(11) NOT NULL AFTER `category`;
 
 ALTER TABLE `tbl_menu` ADD `service_id` INT(11) NOT NULL AFTER `Subcategory`;
+
+
+ALTER TABLE `tbl_booking_info` ADD `additionalprod` TEXT NOT NULL AFTER `payment_date`;
+ALTER TABLE `tbl_booking_product` ADD `additionalprod` TEXT NOT NULL AFTER `product_id`;

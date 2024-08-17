@@ -420,6 +420,47 @@ $(function () {
         return false;
     });
 
+    $(document).on('click', 'div.remove-cartadd', function () {
+        
+        var _cartId = $(this).attr('data-id'),
+        _cartLabel = $(this).attr('data-label'),
+        _cartLabelId = $(this).attr('data-parent-id'),
+        _parent = jQuery(this).parents(".remove-parentadd"),
+        currency = $(this).attr('currency');
+        // console.log(_cartId);
+        // console.log('123123');
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: base_url + "add_cart.php",
+            data: "action=remove_from_cart_add&item_id=" + _cartId + "&item_label=" + _cartLabel+ "&item_label_id=" + _cartLabelId,
+            success: function (data) {
+                var res = eval(data);
+                $("sup.cart-total").html(res.no_cart);
+                _parent.remove();
+                $(".cart-remove-"+_cartId).remove();
+                $("td.sub-total-cart").html(res.sub_total);
+                $("#itemnone").html(res.noitem);
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: base_url + "add_cart.php",
+                    data: {
+                        action: "list_cart"
+                    },
+                    success: function (data) {
+                        var res = eval(data);
+                        $("div.mini-cart-product-area").html(res.result);
+                        $("span.sub-total-mini-cart").html(res.sub_total);
+                        
+                    }
+                })
+                get_total(currency);
+            }
+        });
+        return false;
+    });
+
     $(document).on('click', '#proceedToCheckout', function (e) {
         e.preventDefault();
         
