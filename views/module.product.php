@@ -291,7 +291,7 @@ if (defined('HOME_PAGE')) {
             }
             $prodPrice = (!empty($giftSet->discount1) and $giftSet->discount1 > 0) ? $giftSet->discount1 : $giftSet->price1;
             $home_gift_sets_modal .= '
-                                        <input type="hidden" name="product_qnt_1" value="' . $giftSet->qnt1 . '">
+                                        <input type="hidden" name="product_qnt_1" value="' . $giftSet->slug . '">
                                         <input type="hidden" name="product_net_qnt_1" value="' . $giftSet->netqnt1 . '">
                                         <label class="form-check-label">' . $giftSet->netqnt1 . '</label>
                                     </div>
@@ -701,7 +701,7 @@ if (defined('HOME_PAGE')) {
                 }
                 $prodPrice = (!empty($serviceSet->discount1) and $serviceSet->discount1 > 0) ? $serviceSet->discount1 : $serviceSet->price1;
                 $services_gift_sets_modal .= '
-                                            <input type="hidden" name="product_qnt_1" value="' . $serviceSet->qnt1 . '">
+                                            <input type="hidden" name="product_qnt_1" value="' . $serviceSet->slug . '">
                                             <input type="hidden" name="product_net_qnt_1" value="' . $serviceSet->netqnt1 . '">
                                             <label class="form-check-label">' . $serviceSet->netqnt1 . '</label>
                                         </div>
@@ -1106,7 +1106,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                 }
                 $prodPrice = (!empty($prodrelated->discount1) and $prodrelated->discount1 > 0) ? $prodrelated->discount1 : $prodrelated->price1;
                 $product_related_modal .= '
-                                            <input type="hidden" name="product_qnt_1" value="' . $prodrelated->qnt1 . '">
+                                            <input type="hidden" name="product_qnt_1" value="' . $prodrelated->slug . '">
                                             <input type="hidden" name="product_net_qnt_1" value="' . $prodrelated->netqnt1 . '">
                                             <label class="form-check-label">' . $prodrelated->netqnt1 . '</label>
                                         </div>
@@ -1393,7 +1393,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
         }
         $prodPrice = (!empty($prodRec->discount1) and $prodRec->discount1 > 0) ? $prodRec->discount1 : $prodRec->price1;
         $product_detail .= '
-                                                    <input type="hidden" name="product_qnt_1" value="' . $prodRec->qnt1 . '">
+                                                    <input type="hidden" name="product_qnt_1" value="' . $prodRec->slug . '">
                                                     <input type="hidden" name="product_net_qnt_1" value="' . $prodRec->netqnt1 . '">
                                                     <label class="form-check-label">' . $prodRec->netqnt1 . '</label>
                                                 </div>
@@ -1849,7 +1849,7 @@ if (defined('SHOP_PAGE')) {
                     }
                     $prodPrice = (!empty($product->discount1) and $product->discount1 > 0) ? $product->discount1 : $product->price1;
                     $shop_add_to_cart_modal .= '
-                                                <input type="hidden" name="product_qnt_1" value="' . $product->qnt1 . '">
+                                                <input type="hidden" name="product_qnt_1" value="' . $product->slug . '">
                                                 <input type="hidden" name="product_net_qnt_1" value="' . $product->netqnt1 . '">
                                                 <label class="form-check-label">' . $product->netqnt1 . '</label>
                                             </div>

@@ -191,7 +191,24 @@ if (!empty($bookingRec)) {
                         <td>' . $row->product_total . '</td>
                     </tr>
                 ';
+                if(!empty($row->additionalprod)){
+                    $additionaldata= unserialize($row->additionalprod);
+                    // pr($additionaldata);
+                    $addtotal='';
+                    foreach($additionaldata as $addddata){
+                        $addtotal= (float)$addddata['quantityadd'] * (float)$addddata['price'];
+                    $html .= '
+                    <tr style="' . $styl . '">
+                        <td>+</td>
+                        <td>' . $addddata['addname'] . ' - ' . $addddata['quantityadd'] . '</td>
+                        <td>' . $addddata['quantityadd'] . '</td>
+                        <td>' . $addddata['price'] . '</td>
+                        <td>' . $addtotal . '</td>
+                    </tr>
+                '; 
+                }
                 $sn++;
+            }
             }
         }
     }
@@ -417,15 +434,15 @@ if (!empty($bookingRec)) {
     $mail = new PHPMailer();
     $mail->CharSet = 'UTF-8';
 
-    $mail->IsSMTP();
-    $mail->SMTPAuth     = true;
-    $mail->SMTPSecure   = "ssl";
-    $mail->Port         = "465";
+    // $mail->IsSMTP();
+    // $mail->SMTPAuth     = true;
+    // $mail->SMTPSecure   = "ssl";
+    // $mail->Port         = "465";
     
     
-    $mail->Host         = "mail.sulavhealth.com";
-    $mail->Username     = 'smtpsulav@sulavhealth.com';
-    $mail->Password     = 'E+^Ul0?&9MM+';
+    // $mail->Host         = "mail.sulavhealth.com";
+    // $mail->Username     = 'smtpsulav@sulavhealth.com';
+    // $mail->Password     = 'E+^Ul0?&9MM+';
     
     /*
     $mail->Host         = "smtp.gmail.com";
@@ -458,14 +475,14 @@ if (!empty($bookingRec)) {
         $replymail = new PHPMailer();
         $replymail->CharSet = 'UTF-8';
 
-        $replymail->IsSMTP();
-        $replymail->SMTPAuth     = true;
-        $replymail->SMTPSecure   = "ssl";
-        $replymail->Port         = "465";
+        // $replymail->IsSMTP();
+        // $replymail->SMTPAuth     = true;
+        // $replymail->SMTPSecure   = "ssl";
+        // $replymail->Port         = "465";
         
-        $replymail->Host         = "mail.sulavhealth.com";
-        $replymail->Username     = 'smtpsulav@sulavhealth.com';
-        $replymail->Password     = 'E+^Ul0?&9MM+';
+        // $replymail->Host         = "mail.sulavhealth.com";
+        // $replymail->Username     = 'smtpsulav@sulavhealth.com';
+        // $replymail->Password     = 'E+^Ul0?&9MM+';
         
         /*$replymail->Host         = "smtp.gmail.com";
         $replymail->Username     = 'send.mail.9849@gmail.com';
