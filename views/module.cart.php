@@ -350,7 +350,7 @@
                                                     $cart_detail .= '<tr class="cart-remove-' . $product->id . ' cart-remove">
                                                 <td>
                                                     <div class="additional-product" style="width: 100%;position: relative;">
-                                                        <fieldset>
+                                                        <fieldset style="padding:30px 10px;">
                                                             <legend>Additional Products</legend>';
                                                 
                                                     foreach ($additionaldatas as $key => $additionaldata) {
@@ -365,20 +365,20 @@
                                             $cart_detail .= '   
                                             
                                                             <div class="row remove-parentadd">
-                                                        <div class="col-md-2">
+                                                        <div class="col-md-3">
                                                             <div class="cart-product-info">
                                                                 <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' .$additionaldata['addname']. '</a></h4>
                                                             </div>
                                                         </div>
                                                         
 
-                                                        <div class="col-md-2">
+                                                        <div class="col-md-1">
                                                             <div class="cart-product-label">
                                                                 ' . $additionaldata['quantityadd'] . '
                                                             </div>
                                                         </div>
                                                         
-                                                        <div class="col-md-2">
+                                                        <div class="col-md-3">
                                                         <div class="cart-plus-minus">
                                                             <div class="dec cqtybuttonadd">-</div>
                                                             <input type="text" value="' . $additionaldata['quantityadd'] . '" total="' . $adddetrow . '" price="' . $additionaldata['price'] . '" currency="' . $product->currency . '" data-id="' . $key . '" data-parent-id="' . $product->id . '" data-label="' . $label . '" min="1" step="1" name="qtybutton" class="cart-plus-minus-box cin-input">
@@ -397,7 +397,7 @@
                                                             
                                                         </div>
 
-                                                        <div class="col-md-2">
+                                                        <div class="col-md-1">
                                                             <div class="cart-product-remove remove-cartadd" data-id="' . $key . '" data-label="' . $product->slug . '" data-parent-id="' . $product->id . '"currency="' . $product->currency . '">x</div>
                                                         </div>
                                                         </div>

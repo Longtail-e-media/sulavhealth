@@ -13102,6 +13102,7 @@ blockquote::before {
 .qtybutton,
 .qtybuttonadd,
 .cqtybutton,
+.cqtybuttonadd,
 .qtybuttonadd {
   height: 100%;
   width: 30%;
@@ -13109,6 +13110,7 @@ blockquote::before {
 
 .dec.qtybutton,
 .dec.qtybuttonadd,
+.dec.cqtybuttonadd,
 .dec.cqtybutton {
   float: left;
   border-right: 0.125rem solid;
@@ -13116,6 +13118,7 @@ blockquote::before {
 
 .inc.qtybutton,
 .inc.qtybuttonadd,
+.inc.cqtybuttonadd,
 .inc.cqtybutton {
   float: right;
   border-left: 0.125rem solid;
@@ -13126,6 +13129,8 @@ blockquote::before {
 .dec.qtybuttonadd,
 .dec.cqtybutton,
 .inc.qtybutton,
+.dec.cqtybuttonadd,
+.inc.cqtybuttonadd,
 .inc.qtybuttonadd,
 .inc.cqtybutton {
   background-color: var(--white);
