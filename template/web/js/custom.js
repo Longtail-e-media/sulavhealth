@@ -92,7 +92,7 @@ $(function () {
         // addcartTotal = $('input[name="additional_total[]"]').val();
         // finaltotal = (parseFloat(priceTotal)+parseFloat(addcartTotal));
         // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
-        var chked= $('input[name=additionalchkbox]:checked');
+        var chked= $('input[name="additionalchkbox[]"]:checked');
         
         if(chked.length >  0){
         page_get_total(currency);
@@ -117,7 +117,7 @@ $(function () {
         // console.log(chked);
         // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
         // $('.Grand-sub-total').html(finaltotal);
-        var chked= $('input[name=additionalchkbox]:checked');
+        var chked= $('input[name="additionalchkbox[]"]:checked');
         // console.log(chked);
         // console.log(chked.length);
         if(chked.length > 0){
@@ -157,8 +157,8 @@ $(function () {
         maincartTotal = $('input[name="product_total_1"]').val();
         finaltotal = (parseFloat(priceTotal)+parseFloat(maincartTotal));
         // $('.Grand-sub-total').html(currency + ' ' + finaltotal);
-        var chked= $('input[name=additionalchkbox]:checked');
-        // console.log(chked);
+        var chked= $('input[name="additionalchkbox[]"]:checked');
+        console.log(chked);
         if(chked.length > 0){
         page_get_total(currency);
     }
@@ -174,7 +174,7 @@ $(function () {
             var $checkbox= $(this);
             var chk = $checkbox.parent().parent().find(".additionalchk");
             console.log(chk);
-            var chked= $('input[name=additionalchkbox]:checked');
+            var chked= $('input[name="additionalchkbox[]"]:checked');
             // console.log(chked);
             if(chk.is(":checked")){
             totalPoints += parseFloat($(this).val());
@@ -399,21 +399,23 @@ $(function () {
                 _parent.remove();
                 $(".cart-remove-"+_cartId).remove();
                 $("td.sub-total-cart").html(res.sub_total);
+                console.log(res.sub_total);
                 $("#itemnone").html(res.noitem);
-                $.ajax({
-                    type: "POST",
-                    dataType: "JSON",
-                    url: base_url + "add_cart.php",
-                    data: {
-                        action: "list_cart"
-                    },
-                    success: function (data) {
-                        var res = eval(data);
-                        $("div.mini-cart-product-area").html(res.result);
-                        $("span.sub-total-mini-cart").html(res.sub_total);
+                // $.ajax({
+                //     type: "POST",
+                //     dataType: "JSON",
+                //     url: base_url + "add_cart.php",
+                //     data: {
+                //         action: "list_cart"
+                //     },
+                //     success: function (data) {
+                //         var res = eval(data);
+                //         $("div.mini-cart-product-area").html(res.result);
+                //         $("span.sub-total-mini-cart").html(res.sub_total);
                         
-                    }
-                })
+                        
+                //     }
+                // })
                 get_total(currency);
             }
         });
@@ -425,6 +427,7 @@ $(function () {
         var _cartId = $(this).attr('data-id'),
         _cartLabel = $(this).attr('data-label'),
         _cartLabelId = $(this).attr('data-parent-id'),
+        _cartparentLabelId = $(this).attr('data-parent-id'),
         _parent = jQuery(this).parents(".remove-parentadd"),
         currency = $(this).attr('currency');
         // console.log(_cartId);
@@ -433,7 +436,7 @@ $(function () {
             type: "POST",
             dataType: "JSON",
             url: base_url + "add_cart.php",
-            data: "action=remove_from_cart_add&item_id=" + _cartId + "&item_label=" + _cartLabel+ "&item_label_id=" + _cartLabelId,
+            data: "action=remove_from_cart_add&item_id=" + _cartId + "&item_label=" + _cartLabel+ "&item_label_id=" + _cartLabelId + "&parent_label_id=" + _cartparentLabelId  ,
             success: function (data) {
                 var res = eval(data);
                 $("sup.cart-total").html(res.no_cart);

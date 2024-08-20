@@ -118,16 +118,7 @@ switch ($_POST['action']) {
 
                             if ((!empty($additionalchkbox) && is_array($additionalchkbox)) || !empty($additionalchkbox)) {
                                 $lengthaddArr = sizeof($additionalchkbox);
-                                $addnameVar = '';
-                                $addatyVar = '';
-                                $addtotalVar = '';
-                                $alltotalVar = '';
                                 foreach ($additionalchkbox as $additionalmain) {
-                                    // Extract values from variable variables
-                                    // $addname = $$addnameVar;
-                                    // $addaty = $$addatyVar;
-                                    // $addtotal = $$addtotalVar;
-                                    // $alltotal = $$alltotalVar;
 
                                     // Add to the additional details array
                                     $additionalDetails[$additionalmain] = array(
@@ -198,17 +189,55 @@ switch ($_POST['action']) {
                         $price = 'product_price_' . $product_check[$i];
                         $quantity = 'product_qty_' . $product_check[$i];
                         $checkquantity = ($$quantity > 0) ? $$quantity : 1;
-                        if (is_array($additionalchkbox) and !empty($additionalchkbox)) {
-                            $lengthaddArr = sizeof($product_check);
-                            for ($a = 0; $a < $lengthArr; $a++) {
-                                $addname = 'add_prod_name' . $additionalname[$a];
-                                $addaty = 'add_prod_name' . $additionalname[$a];
-                                $addname = 'add_prod_name' . $additionalname[$a];
-                                // $additioanl=array('netqnt' => $$netqnt, 'price' => $$price, 'quantity' => $checkquantity, 'total' => $$total);;
+                        if ((!empty($additionalchkbox) && is_array($additionalchkbox)) || !empty($additionalchkbox)) {
+                            $lengthaddArr = sizeof($additionalchkbox);
+                            foreach ($additionalchkbox as $additionalmain) {
+
+                                // Add to the additional details array
+                                $additionalDetails[$additionalmain] = array(
+                                    'addname' => $additionalname_1[$additionalmain],
+                                    'price' => $additional_total_1[$additionalmain],
+                                    'quantityadd' => $additionalchkqty_1[$additionalmain]
+                                );
                             }
+                            // pr($additionalDetails);
+
+
+                            // for ($a = 0; $a < $lengthaddArr; $a++) {
+                            //     // Construct variable names
+
+                            //     $addchekVar = 'additionalchkbox' . $additionalchkbox[$a];
+                            //     $addnameVar = 'additionalname_' . $additionalchkbox[$a];
+                            //     $addatyVar = 'additionalchkqty_' . $additionalchkbox[$a];
+                            //     $addtotalVar = 'additional_total_' . $additionalchkbox[$a];
+                            //     $alltotalVar = 'Grand_total_1';
+
+                            //     // Extract values from variable variables
+                            //     $addname = $$addnameVar;
+                            //     $addaty = $$addatyVar;
+                            //     $addtotal = $$addtotalVar;
+                            //     $alltotal = $$alltotalVar;
+
+                            //     // Add to the additional details array
+                            //     $additionalDetails = array(
+                            //         'addname' => $addname,
+                            //         'price' => $addtotal,
+                            //         'quantityadd' => $addaty,
+                            //         'finaltotal' => $alltotal
+                            //     );
+                            // }
+
+
+                            $pDetails[$$label] = array(
+                                'netqnt' => $$netqnt,
+                                'price' => $$price,
+                                'quantity' => $checkquantity,
+                                'total' => $total,
+                                'addtionaldetail' => $additionalDetails
+                            );
                         }
                         $total = 'product_total_' . $product_check[$i];
-                        $pDetails[$$label] = array('netqnt' => $$netqnt, 'price' => $$price, 'quantity' => $checkquantity, 'total' => $$total);
+                        // $pDetails[$$label] = array('netqnt' => $$netqnt, 'price' => $$price, 'quantity' => $checkquantity, 'total' => $$total);
                     }
                     $_SESSION['cart_detail'][$pkgRow->id] =
                         array(
@@ -702,13 +731,14 @@ switch ($_POST['action']) {
         if (!empty($sesRec)) {
             foreach ($sesRec as $k => $sesRow) {
                 $product = SubProduct::find_by_slug($sesRow['slug']);
-                $addrowTotal = 0;
-
+                
                 if (!empty($product)) {
                     $product_details = $sesRow['product_details'];
+                    // pr($product_details);
                     foreach ($product_details as $label => $detail) {
+                        $addrowTotal = 0;
                         // pr($detail['addtionaldetail']); 
-
+                        
                         if (!empty($detail['addtionaldetail'])) {
                             $additionaldatas = $detail['addtionaldetail'];
 
@@ -718,18 +748,22 @@ switch ($_POST['action']) {
 
                             }
                         }
-
+                        
                         if (!empty($detail['addtionaldetail'])) {
-                            $tot += (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + $addrowTotal;
+                            $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + $addrowTotal;
+                            $tot = sprintf("%.2f", $tot);
                         } else {
-                            $tot += (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']);
+                            $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']);
+                            $tot = sprintf("%.2f", $tot);
                         }
-                        $tot = sprintf("%.2f", $tot);
+                        
                     }
                     $sub_total = $product->currency . ' ' . $tot;
                 }
             }
+            
         }
+        // pr($sub_total,0);
 
         echo json_encode(array('result' => $message, 'no_cart' => $total, 'sub_total' => $sub_total, 'noitem' => $noitem));
 
@@ -742,6 +776,8 @@ switch ($_POST['action']) {
         // pr($_POST);
         $item_id = !empty($_POST['item_id']) ? addslashes($_POST['item_id']) : '';
         $item_label = !empty($_POST['item_label']) ? addslashes($_POST['item_label']) : '';
+        $parent_id = !empty($_POST['parent_label_id']) ? addslashes($_POST['parent_label_id']) : '';
+        // pr($parent_id);
         /* if (!empty($item_id)) {
                 $item_label = !empty($_POST['item_label']) ? addslashes($_POST['item_label']) : '';
                 if (!empty($item_label)) {
@@ -753,8 +789,10 @@ switch ($_POST['action']) {
                     $message = 'Product removed !';
                 }
             } */
+        //    pr($_SESSION['cart_detail'][$parent_id]['product_details'][$item_label]['addtionaldetail'][$item_id]);
         if (!empty($item_id)) {
-            unset($_SESSION['cart_detail'][$item_label]['addtionaldetail'][$item_id]);
+            unset($_SESSION['cart_detail'][$parent_id]['product_details'][$item_label]['addtionaldetail'][$item_id]);
+
             $total = count($_SESSION['cart_detail']);
             $message = 'Product removed !';
         }
@@ -762,22 +800,41 @@ switch ($_POST['action']) {
         $sesRec = isset($_SESSION['cart_detail']) ? $_SESSION['cart_detail'] : '';
         $tot = 0.00;
         $sub_total = 'NPR 0.00';
+        $add_total = 'NPR 0.00';
 
         if (!empty($sesRec)) {
             foreach ($sesRec as $k => $sesRow) {
                 $product = SubProduct::find_by_slug($sesRow['slug']);
                 if (!empty($product)) {
                     $product_details = $sesRow['product_details'];
-                    pr($sesRow(['product_details'][$item_label]['addtionaldetail']));
-                    $add_details = $sesRow(['product_details'][$item_label]['addtionaldetail'][$item_id]);
-                    foreach ($product_details as $label => $detail) {
+                    // $product_parent = $sesRow['product_details'];
+                    //  pr($sesRow);
+                    //  pr($_SESSION);
+                    // pr($sesRow['product_details']['mamaearth-tea-tree-shampoo-250ml']['addtionaldetail'][$item_id]);
 
-                        $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']);
-                        foreach ($product_details as $label => $detail) {
+                    foreach ($product_details as $label => $detail) {
+                        // pr($detail);
+                        if (!empty($detail['addtionaldetail'])) {
+                            $add_details = $detail['addtionaldetail'];
+                            foreach ($add_details as $label => $add_detail) {
+
+                                @$addrowTotal += ((float)$add_detail['quantityadd'] * (float)$add_detail['price']);
+                            }
                         }
-                        $tot = sprintf("%.2f", $tot);
+               
+                       
+                    if(!empty($add_details)){
+                            $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + $addrowTotal;
                     }
+                    else{
+                        $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']);
+                    }
+                
+                        
+                        $tot = sprintf("%.2f", $tot);
+                   
                     $sub_total = $product->currency . ' ' . $tot;
+                }
                 }
             }
         }
