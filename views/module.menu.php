@@ -166,10 +166,16 @@ if ($menuRec):
                             </ul>
                         </li>
                         <li><a href="#">Derma Products</a>
-                            <ul>
+                            <ul class="megamenu1">
                                 <li><a href="#">Shadow Gel SPF 50+</a></li>
                                 <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
                                 <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
                                 <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
                                 <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
                                 <li><a href="#">Strallium Stretch Mark Cream</a></li>
