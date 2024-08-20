@@ -658,35 +658,37 @@ if (defined('CHECKOUT_PAGE')) {
                         if(!empty($detail['addtionaldetail'])){
                             // pr($additionaldatas);
                             $additionaldatas= $detail['addtionaldetail'];
-                                                foreach ($additionaldatas as $key => $additionaldata) {
-                                                    $addrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
-                                                    @$addrowmainTotal += (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
-                                                    // pr($additionaldata['price']);
-                       $checkout_form .= '
-                        <tr>
-                            <td>
+                                $checkout_form .= ' <tr>
+                            <td colspan="3">
                             <div class="additional-product" style="width: 100%;position: relative;">
-                                <fieldset>
-                                    <legend>Additional Products</legend>
+                                <fieldset style="padding: 15px 30px 10px 30px;">
+                                    <legend>Additional Products</legend>';
+                                                    foreach ($additionaldatas as $key => $additionaldata) {
+                                                        $addrowTotal = (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                        @$addrowmainTotal += (float)$additionaldata['quantityadd'] * (float)$additionaldata['price'];
+                                                        // pr($additionaldata['price']);
+                        $checkout_form .= ' 
+                           
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <div>-- ' .$additionaldata['addname']. '</div>
+                                            <div style="margin-bottom:12px;">' .$additionaldata['addname']. '</div>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-2">  
                                             <div><strong>× ' . $additionaldata['quantityadd'] . '</strong></div>
                                         </div>
                                         <div class="col-md-5">
-                                            <div id="coupon-discount-amount">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</div>
+                                            <div id="coupon-discount-amount" style="float:right;">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</div>
                                             <input type="hidden" name="discount_amt" value="0">
                                         </div>
                                     </div>
-                                </fieldset>
+                               
+                        ';
+
+                    }
+                    $checkout_form .= '  </fieldset>
                             </div>
                             </td>
-                        </tr>
-                    ';
-
-                }
+                        </tr>';
             }
             if(!empty($additionaldatas)){
                 $tot = (float)$tot + ((float)$detail['quantity'] * (float)$detail['price']) + $addrowmainTotal;
