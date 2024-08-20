@@ -432,6 +432,31 @@ switch ($_POST['action']) {
         echo json_encode(array('result' => $message));
         break;
 
+        case 'update_cart_add':
+            $message = '';
+            $item_id = !empty($_POST['item_id']) ? addslashes($_POST['item_id']) : '';
+            $item_parent_id = !empty($_POST['item_parent_id']) ? addslashes($_POST['item_parent_id']) : '';
+            $item_label = !empty($_POST['item_label']) ? addslashes($_POST['item_label']) : '';
+            $item_price = !empty($_POST['item_price']) ? addslashes($_POST['item_price']) : '';
+            $item_qty = !empty($_POST['item_qty']) ? addslashes($_POST['item_qty']) : '1';
+            if(!empty($item_id)){
+            if (!empty($item_parent_id) and !empty($item_label)) {
+                $pkgRow = SubProduct::find_by_id($item_parent_id);
+                if (!empty($pkgRow)) {
+                    // pr($_SESSION);
+                    $newTotal = (float)$item_qty * (float)$item_price;
+                    $newTotal = sprintf("%.2f", $newTotal);
+                    $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$item_label]['addtionaldetail'][$item_id]['price'] = $item_price;
+                    $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$item_label]['addtionaldetail'][$item_id]['quantityadd'] = $item_qty;
+                    // $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$item_label]['total'] = $newTotal;
+                    // pr($item_qty);
+                }
+                $message = 'Sub Product Updated !';
+            }
+            }
+            echo json_encode(array('result' => $message));
+            break;
+
     case 'add_wishlist':
 
         foreach ($_POST as $key => $val) {

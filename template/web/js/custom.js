@@ -372,6 +372,54 @@ $(function () {
         $button.parent().find("input").val(newVal);
     });
 
+
+    $(".cqtybuttonadd").on("click", function () {
+        var $button = $(this);
+        var newVal = 0;
+        var rate = 0;
+        var oldValue = $button.parent().find("input").val();
+
+        var $input = $button.parent().find("input"),
+            price = parseFloat($input.attr('price')),
+            currency = $input.attr('currency'),
+            cartRowTotal = $button.parent().parent().parent().find(".product-sub-total-add"),
+            _cartId = $input.attr('data-id'),
+            _parentId = $input.attr('data-parent-id'),
+            _cartLabel = $input.attr('data-label');
+            // console.log(cartRowTotal);
+            // console.log(_cartId);
+            // console.log(_parentId);
+            // console.log(_cartLabel);
+
+        if ($button.text() == "+") {
+            newVal = parseFloat(oldValue) + 1;
+        } else {
+            if (oldValue > 1) {
+                newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 1;
+            }
+        }
+
+        rate = (newVal * price);
+        rate = rate.toFixed(2);
+        $input.attr('total', rate);
+        get_total(currency);
+
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: base_url + "add_cart.php",
+            data: "action=update_cart_add&item_id=" + _cartId + "&item_label=" + _cartLabel + "&item_price=" + price + "&item_qty=" + newVal + "&item_parent_id=" + _parentId,
+            success: function (data) {
+            }
+        })
+
+        var priceTotal = newVal * price;
+        priceTotal = priceTotal.toFixed(2);
+        cartRowTotal.html(currency + ' ' + priceTotal);
+        $button.parent().find("input").val(newVal);
+    });
     function get_total(currency) {
         var totalPoints = 0; 
         $('input.cin-input').each(function () {

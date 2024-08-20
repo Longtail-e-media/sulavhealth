@@ -377,6 +377,14 @@
                                                                 ' . $additionaldata['quantityadd'] . '
                                                             </div>
                                                         </div>
+                                                        
+                                                        <div class="col-md-2">
+                                                        <div class="cart-plus-minus">
+                                                            <div class="dec cqtybuttonadd">-</div>
+                                                            <input type="text" value="' . $additionaldata['quantityadd'] . '" total="' . $adddetrow . '" price="' . $additionaldata['price'] . '" currency="' . $product->currency . '" data-id="' . $key . '" data-parent-id="' . $product->id . '" data-label="' . $label . '" min="1" step="1" name="qtybutton" class="cart-plus-minus-box cin-input">
+                                                            <div class="inc cqtybuttonadd">+</div>
+                                                        </div>
+                                                         </div>
 
                                                         <div class="col-md-2">
                                                             <div class="cart-product-price">
@@ -385,8 +393,8 @@
                                                         </div>
 
                                                         <div class="col-md-2">
-                                                            <div class="cart-product-subtotal product-sub-total">' . $product->currency . ' ' . sprintf("%.2f", $adddetrow) . '</div>
-                                                            <input type="hidden"total="'.$adddetrow.'"  class="cart-plus-minus-box cin-input">
+                                                            <div class="cart-product-subtotal product-sub-total-add">' . $product->currency . ' ' . sprintf("%.2f", $adddetrow) . '</div>
+                                                            
                                                         </div>
 
                                                         <div class="col-md-2">
