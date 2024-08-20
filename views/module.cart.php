@@ -706,7 +706,7 @@
                                 // pr($additionaldatas);
                                 $additionaldatas= $detail['addtionaldetail'];
                                 $checkout_form .= ' <tr>
-                            <td>
+                            <td colspan="3">
                             <div class="additional-product" style="width: 100%;position: relative;">
                                 <fieldset>
                                     <legend>Additional Products</legend>';
@@ -724,7 +724,7 @@
                                             <div><strong>× ' . $additionaldata['quantityadd'] . '</strong></div>
                                         </div>
                                         <div class="col-md-5">
-                                            <div id="coupon-discount-amount">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</div>
+                                            <div id="coupon-discount-amount" style="float:right;">' . $product->currency . ' ' . sprintf("%.2f", $addrowTotal) . '</div>
                                             <input type="hidden" name="discount_amt" value="0">
                                         </div>
                                     </div>
