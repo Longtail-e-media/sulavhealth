@@ -289,6 +289,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
 
                         <?php }?>
                     </div>
+                    <div class="form-input col-md-3"></div>
 
                     
                         <div id="add_option_div"></div>

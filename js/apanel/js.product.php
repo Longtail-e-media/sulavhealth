@@ -380,9 +380,9 @@
     function addFeaturesRows() {
         // console.log(feature_id);
         var rowNum = Math.floor((Math.random() * 999) + 1);
-        var newRow = '<div><input type="text" placeholder="Title" class="col-md-2 validate[length[0,30]]" name="additional[' + rowNum + '][name]">';
+        var newRow = '<div class="row"><div class="form-input"><div class=" form-input col-md-3"></div><input type="text" placeholder="Product Name" class="col-md-4 validate[length[0,30]]" name="additional[' + rowNum + '][name]">';
         // newRow += '<input type="text" placeholder="qty" class="col-md-2 validate[length[0,30]]" name="additional[' + rowNum + '][qty]">';
-        newRow += ' <input type="text" placeholder="Price" class="col-md-6 validate[length[0,100]]" name="additional[' + rowNum + '][price]"><span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br></div>';
+        newRow += ' <input type="text" placeholder="Price" class="col-md-4 validate[length[0,100]]" name="additional[' + rowNum + '][price]"><span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br></div></div>';
 
         $('#add_option_div' ).append(newRow);
     }
