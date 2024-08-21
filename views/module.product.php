@@ -1421,7 +1421,8 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                         ';
                                         $additionaldatas= unserialize(base64_decode($prodRec->additional));
                                         if(!empty($additionaldatas)){
-                                           $product_detail .= ' <h4>Additional Product</h4>';
+                                           $product_detail .= ' <tr>
+                                            <td class="cart-product-info"><h4>Additional Product</h4></td></tr>';
                                             foreach ($additionaldatas as $key => $additionaldata) {
                                             // pr($additionaldata);
                                         $product_detail .= '
