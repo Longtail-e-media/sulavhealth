@@ -109,7 +109,7 @@ if ($menuRec):
                     $result .= getMenuList($menusubRow->name, $menusubRow->linksrc, $menusubRow->linktype, '', $chkparent2);
                     $menusubsubRec = Menu::getMenuByParent($menusubRow->id, 1);
                     $result .= '<ul>';
-                        $menusubsubRec = Category::get_menu_subcategory($menusubRow->category);
+                    $menusubsubRec = Category::get_subcategory_by_menu($menusubRow->category);
                         // pr($menusubRow);
                         // pr($menusubsubRec);
                         // $chkparent3 = (!empty($menusub3Rec)) ? 1 : 0;

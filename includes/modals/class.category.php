@@ -115,6 +115,17 @@ class category extends DatabaseObject
         return self::find_by_sql($sql);
     }
 
+    public static function get_subcategory_by_menu($cat_id = '')
+    {
+        global $db;
+        $sql = "SELECT cat.id, cat.title, cat.slug FROM " . self::$table_name . " AS cat 
+                INNER JOIN tbl_product_sub as prod ON prod.Subcategory = cat.id
+                WHERE cat.parentId = {$cat_id} AND cat.status=1 AND prod.status=1 AND cat.parentId!=0
+                GROUP BY cat.id 
+                ORDER BY cat.title ASC ";
+        return self::find_by_sql($sql);
+    }
+
     // Get total Child no.
     public static function getTotalChild($pid = '')
     {
