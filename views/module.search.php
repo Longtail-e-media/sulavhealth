@@ -50,7 +50,7 @@ if (defined('SEARCH_PAGE')) {
     /* category filter start*/
     $service_filter = '';
     if (@$service_slug) {
-        $serviceRec = Services::get_services_by_slug($service_slug);
+        $serviceRec = Services::get_services_by_slug_and_type($service_slug);
     } elseif (!empty($brand_slug)) {
         $brandRec = Brand::find_by_slug($brand_slug);
         $serviceRec = Services::get_services_by_brand($brandRec->id);

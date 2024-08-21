@@ -1,0 +1,419 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <jcms:site:seotitle/>
+    <jcms:site:fevicon/>
+    <!-- font language -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&rodisplay=swap" rel="stylesheet">
+
+
+
+    <!-- Font Icons css -->
+    <link rel="stylesheet" href="css/font-icons.css">
+
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <!-- plugins css -->
+    <link rel="stylesheet" href="css/plugins.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="css/responsive.css">
+
+
+</head>
+
+<body class="<jcms:site:language-class/>">
+
+<jcms:module:header/>
+
+<jcms:module:product:cart-menu/>
+
+<jcms:module:menu:mob-menu/>
+<div class="ltn__utilize-overlay"></div>
+
+<div class="container mx-auto product-filter">
+    <div class="row">
+        <jcms:module:search-searchform/>
+        <div class="col-md-10 product-filter-right">
+            <h2><div id="searchtitle"><jcms:module:package-searchtitle/></div></h2>
+            <div id="totalitems">
+
+                <jcms:module:search-totalitems/>
+            </div>
+            <div id="productContainer" class="row">
+                <jcms:module:package-searchlist/>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div id="productpopup">
+    <jcms:module:modal-popup-search/>
+</div>
+<jcms:module:footer/>
+
+<!-- MODAL AREA START (Add To Cart Modal) -->
+<div class="ltn__modal-area ltn__add-to-cart-modal-area">
+    <div class="modal fade" id="add_to_cart_modal" tabindex="-1">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="ltn__quick-view-modal-inner">
+                        <div class="modal-product-item">
+                            <div class="row">
+                                <div class="col-12 add_to_cart_modal_content">
+                                    <div class="modal-product-img">
+                                        <img src="img/product/one.jpg" alt="#">
+                                    </div>
+                                    <div class="modal-product-info">
+                                        <h5><a href="#">Gift One</a></h5>
+                                        <p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to your Cart</p>
+                                        <div class="btn-wrapper">
+                                            <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                                            <a href="#" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                                        </div>
+                                    </div>
+                                    <!-- additional-info -->
+                                    <div class="additional-info d-none">
+                                        <p>We want to give you <b>10% discount</b> for your first order, <br> Use discount code at checkout</p>
+                                        <div class="payment-method">
+                                            <img src="img/icons/payment.png" alt="#">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL AREA END -->
+
+<!-- MODAL AREA START (Wishlist Modal) -->
+<div class="ltn__modal-area ltn__add-to-cart-modal-area">
+    <div class="modal fade" id="liton_wishlist_modal" tabindex="-1">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="ltn__quick-view-modal-inner">
+                        <div class="modal-product-item">
+                            <div class="row">
+                                <div class="col-12 wishlist_modal_content">
+                                    <div class="modal-product-img">
+                                        <img src="img/product/one.jpg" alt="#">
+                                    </div>
+                                    <div class="modal-product-info">
+                                        <h5><a href="product-details.html">Gift One</a></h5>
+                                        <p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to your Wishlist</p>
+                                        <div class="btn-wrapper">
+                                            <a href="wishlist.html" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
+                                        </div>
+                                    </div>
+                                    <!-- additional-info -->
+                                    <div class="additional-info d-none">
+                                        <p>We want to give you <b>10% discount</b> for your first order, <br> Use discount code at checkout</p>
+                                        <div class="payment-method">
+                                            <img src="img/icons/payment.png" alt="#">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL AREA END -->
+
+<script src='https://code.jquery.com/jquery-3.5.1.js'></script>
+<script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+
+<script>
+    $(function () {
+        var mini=  <jcms:module:search-minprice/>;
+        var maxi=  <jcms:module:search-maxprice/>;
+        $("#price-slider").slider({
+            range: true,
+            min: mini,
+            //min: 0,
+            max: maxi,
+            values: [mini, maxi],
+            slide: function (event, ui) {
+                $("#price-start").val("Rs." + ui.values[0]);
+                $("#price-end").val("Rs." + ui.values[1]);
+
+                handlePriceChange(ui.values[0], ui.values[1]);
+            }
+        });
+
+        $("#price-start").val("Rs." + $("#price-slider").slider("values", 0));
+        $("#price-end").val("Rs." + $("#price-slider").slider("values", 1));
+
+        function handlePriceChange(lowPrice, highPrice) {
+            var form = $("#search_form");
+            $.ajax({
+                type: "POST",
+                url: base_url + "search_filter.php",
+                dataType: "JSON",
+                data: "action=filter_data&" + form.serialize() + "&glprice=" + lowPrice + "&ghprice=" + highPrice, // serializes the form's elements.
+                success: function (data) {
+                    var msg = eval(data);
+                    jQuery('div#productContainer').html(msg.result);
+                    jQuery('div#productpopup').html(msg.popup);
+                    jQuery('div#productscript').html(msg.popscript);
+                    $(document).find('.lazy').lazyload();
+                }
+            });
+        }
+    });
+</script>
+
+<script>
+    // let page = 1;
+    // let loading = false;
+
+    // function fetchMoreProducts() {
+    //     loading = true;
+    //     setTimeout(() => {
+    //         const productContainer = document.getElementById('productContainer');
+    //         for (let i = 0; i < 1; i++) {
+    //             const productCardHTML = `
+    //             <div class="col-xl-3 col-sm-6 col-6 product-card"> <!-- Add the "product-card" class here -->
+    //                 <div class="ltn__product-item ltn__product-item-3 text-center">
+    //                     <div class="product-img product_hove"
+    //                         data-href="http://localhost/sulavhealth/product/lab-service-1">
+    //                         <img src='https://s3-alpha-sig.figma.com/img/257b/d0dc/958bf10eef425a555b2f0d7bd61412a5?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SX-tfGnq-iiXkOiRm1JjU9ZNPdmO~rq3TPyOcCSAm8gRUmwQatRvE2EIoAITKDE0~g8vJIudrCtW-y~v1wVjm-99hHu68MVX5slLkDmAWJIRZhiJdBold~SrNDTa1y1C-i7CnKSHVJqeW~dsHj8DeB9FRcuU5CkVftebFg64C0EZkjI2ozWvTsy0DTnSICvFPQKanpszw8NELwFx3xMt~5~qMYe8g8bT0nxtclVwVsdEGc5Ok33D--Qb0aLG-vU0vKreFrAGZGzOCAYNDxeu78jbvQEH8ZdsTM~tXIINBOjuf9EOKd2MrDP02SsbqmlIbKG7BN4TFry0rCy~bGsieg__'
+    //                             alt="lab service 1">
+    //                     </div>
+    //                     <div class="product-info">
+    //                         <h4 class="product-title">Mamaearth</h4>
+    //                         <a href="http://localhost/sulavhealth/product/lab-service-1"
+    //                             class="product-link">Mamaearth
+    //                             Mineral Based Sunscreen 50ml</a>
+    //                         <div class="product-price">
+    //                             <span>NPR 250.00</span>
+    //                             <del>NPR 290.00</del>
+    //                         </div>
+    //                         <div class="product-action">
+    //                             <ul>
+    //                                 <li>
+    //                                     <a href="#" class="add-wishlist" title="Add to Wishlist"
+    //                                         data-cartid="lab-service-1">
+    //                                         <i class="far fa-heart"></i>
+    //                                     </a>
+    //                                 </li>
+    //                                 <li>
+    //                                     <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal"
+    //                                         data-target="#quick_view_modal_product_lab-service-1">
+    //                                         Add to Cart
+    //                                         <i class="fas fa-shopping-cart"></i>
+    //                                     </a>
+    //                                 </li>
+    //                             </ul>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //             `;
+    //             productContainer.innerHTML += productCardHTML;
+    //         }
+    //         setTimeout(() => {
+    //             const productCards = document.querySelectorAll('.product-card');
+    //             productCards.forEach(card => {
+    //                 card.style.opacity = 1;
+    //             });
+    //         }, 500);
+    //         page++;
+    //         loading = false;
+    //     }, 500);
+    // }
+
+    // function handleScroll() {
+    //     if (loading) return;
+    //     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    //     const halfwayPoint = scrollHeight / 2;
+    //     if (scrollTop + clientHeight >= halfwayPoint) {
+    //         fetchMoreProducts();
+    //     }
+    // }
+
+    // fetchMoreProducts();
+
+    // window.addEventListener('scroll', handleScroll);
+</script>
+
+
+<!-- All JS Plugins -->
+<script src="js/plugins.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/jquery.lazyload.min.js"></script>
+<!-- Main JS -->
+<script src="js/main.js"></script>
+
+<!-- Custom JS -->
+<script src="js/custom.js"></script>
+
+
+<script>
+
+    var base_url = $('base').attr('url');
+    // form filtering data
+    $('input[name="qcategory[]"]').on('change', function () {
+        var checkedValues = $("input[name='qcategory[]']:checked").map(function () {
+            return $(this).val();
+        }).get();
+
+        // checking if we're on Service page, gotten by clicking "Service" from header
+        const service_check = $('input[name="flag_service_check"]').val();
+
+        // checking if we're on Brand page, gotten by clicking "Brands" dropdown from header
+        const brand_check = $('input[name="flag_brand_check"]').val();
+
+        $('.subfilter').html('<option>Loading...</option>');
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: base_url + "quicksearch.php",
+            data: "action=filteractivity&selectedIds=" + checkedValues + "&service_check=" + service_check + "&brand_check=" + brand_check,
+            success: function (data) {
+                var msg = eval(data);
+                if (msg.action == 'success') {
+                    $('.subfilter').html(msg.result);
+                }
+            }
+        });
+        return !1
+    });
+
+    $('body').on('click', '.qtype, .qcategory, .qactivities, .qsubcategory, .qservice, .qbrand, .gprice', function () {
+        // checking if we're on Service page, gotten by clicking "Service" from header
+        const service_check = $('input[name="flag_service_check"]').val();
+
+        var form = $("#search_form");
+        $.ajax({
+            type: "POST",
+            url: base_url + "search_filter.php",
+            dataType: "JSON",
+            data: "action=filter_data&" + form.serialize(), // serializes the form's elements.
+            success: function (data) {
+                var msg = eval(data);
+                jQuery('div#productContainer').html(msg.result);
+                jQuery('div#productpopup').html(msg.popup);
+                jQuery('div#productscript').html(msg.popscript);
+                jQuery('div#totalitems').html(msg.itemlist);
+
+                // if we are in Service induced page, then dont change title
+                if (service_check === 'undefined') {
+                    jQuery('div#searchtitle').html(msg.serachtitle);
+                }
+
+                $(document).find('.lazy').lazyload();
+                // jQuery('label#totalitems').html('');
+                // jQuery('label#totalitems').html(msg.itemlist);
+                // jQuery('div#filter-nav').html(msg.nav);
+
+                // setTimeout(reinitialiseSlick, 5000)
+
+                //showing rating
+                // jQuery('input.rating').rating();
+                //adding functionality to navigation
+                // $('.gnav').on('click', function () {
+                //     $(this).navFunction();
+                // });
+                // $('html, body').animate({
+                //     scrollTop: eval($("#scrolll").offset().top - 70)
+                // }, 500);
+            }
+        });
+    });
+
+    // reinitialise Slick slider of product images in popup
+    function reinitialiseSlick(_parent) {
+        // Find the Slick slider element within the document
+        var sliderElement = $(_parent).find(".ltn__blog-slider-one-active1");
+        // Initialize Slick slider on the found element
+        sliderElement.slick({
+            autoplay: true,
+            autoplaySpeed: 1500,
+            arrows: false,
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left" alt="Arrow Icon"></i></a>',
+            nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right" alt="Arrow Icon"></i></a>',
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 580,
+                    settings: {
+                        arrows: false,
+                        dots: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+        // After initialization, set position of the slider
+        // sliderElement.slick("setPosition");
+    }
+
+    $(document).ready(function(){
+        $('.lazy').lazyload();
+    });
+</script>
+<div id="productscript"></div>
+<jcms:module:modal-popup-script/>
+
+</body>
+
+</html>

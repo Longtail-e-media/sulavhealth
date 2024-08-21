@@ -48,6 +48,12 @@ class Services extends DatabaseObject
         $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE slug='$slug' LIMIT 1");
         return $result_array;
     }
+    static function get_services_by_slug_and_type($slug = '')
+    {
+        global $db;
+        $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE slug='$slug' AND type=2 LIMIT 1");
+        return $result_array;
+    }
     
     public static function get_services_by_brand($brandId = '')
     {
