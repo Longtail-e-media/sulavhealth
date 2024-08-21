@@ -1426,7 +1426,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                             foreach ($additionaldatas as $key => $additionaldata) {
                                             // pr($additionaldata);
                                         $product_detail .= '
-                                         <tr>
+                                         <tr class="product-details-page">
                                             <td class="cart-product-info">
                                                 <input type="checkbox" id="additionalchk" class="additionalchk" name="additionalchkbox[]" currency="' . $prodRec->currency . '" value="'.$additionaldata['id'].'">
                                             </td>

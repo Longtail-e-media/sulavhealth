@@ -692,6 +692,14 @@ fieldset legend {
     justify-content: center;
 }
 
+.product-details-page .cart-product-info {
+    width: 4.5625rem;
+}
+
+.product-details-page .cart-product-price{
+  width: 140px;
+}
+
 @media (max-width: 61.9375rem) {
   .before-bg-right:before {
     width: 0;
