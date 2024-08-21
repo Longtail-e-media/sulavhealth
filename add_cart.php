@@ -189,6 +189,7 @@ switch ($_POST['action']) {
                         $price = 'product_price_' . $product_check[$i];
                         $quantity = 'product_qty_' . $product_check[$i];
                         $checkquantity = ($$quantity > 0) ? $$quantity : 1;
+                        $total = 'product_total_' . $product_check[$i];
                         if ((!empty($additionalchkbox) && is_array($additionalchkbox)) || !empty($additionalchkbox)) {
                             $lengthaddArr = sizeof($additionalchkbox);
                             foreach ($additionalchkbox as $additionalmain) {
@@ -236,7 +237,6 @@ switch ($_POST['action']) {
                                 'addtionaldetail' => $additionalDetails
                             );
                         }
-                        $total = 'product_total_' . $product_check[$i];
                         // $pDetails[$$label] = array('netqnt' => $$netqnt, 'price' => $$price, 'quantity' => $checkquantity, 'total' => $$total);
                     }
                     $_SESSION['cart_detail'][$pkgRow->id] =

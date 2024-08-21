@@ -249,7 +249,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                                value="<?php echo !empty($subproductInfo->title) ? $subproductInfo->title : ""; ?>">
                     </div>
                 </div>
-
+                <?php if($typeid==2){ ?>
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
@@ -297,7 +297,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         </a> 
                     
                 </div>
-
+                <?php }?>
                  <!-- Feature Listing -->
                  <?php $svfr = !empty($rowInfo->additional) ? $rowInfo->additional : '';
                 $saveRec = unserialize(base64_decode($svfr));

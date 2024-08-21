@@ -187,7 +187,7 @@ if (defined('HOME_PAGE')) {
                     <div class="product-action">
             ';
             if (!empty($giftSet->tag)) {
-                $home_gift_sets .= '<li class="sale-badge">' . $giftSet->tag . '</li>';
+                $home_gift_sets .= '<li class="sale-badge">' . substr($giftSet->tag,0,80) . '..</li>';
             }
             $home_gift_sets .= '
                                     <ul>
@@ -597,7 +597,7 @@ if (defined('HOME_PAGE')) {
                         <div class="product-action">
                 ';
                 if (!empty($serviceSet->tag)) {
-                    $services_gift_sets .= '<li class="sale-badge">' . $serviceSet->tag . '</li>';
+                    $services_gift_sets .= '<li class="sale-badge">' . substr($serviceSet->tag,0,80) . '..</li>';
                 }
                 $services_gift_sets .= '
                                         <ul>
@@ -1002,7 +1002,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                         <div class="product-action">
                 ';
                 if (!empty($prodrelated->tag)) {
-                    $product_realted .= '<li class="sale-badge">' . $prodrelated->tag . '</li>';
+                    $product_realted .= '<li class="sale-badge">' . substr($prodrelated->tag,0,80) . '..</li>';
                 }
                 $product_realted .= '
                                         <ul>
@@ -1737,7 +1737,7 @@ if (defined('SHOP_PAGE')) {
                                         <ul>
                     ';
                     if (!empty($product->tag)) {
-                        $shop_detail .= '<li class="sale-badge">' . $product->tag . '</li>';
+                        $shop_detail .= '<li class="sale-badge">' .substr($product->tag,0,80). '..</li>';
                     }
                     $shop_detail .= '
                                         </ul>
@@ -2058,7 +2058,7 @@ if (defined('SHOP_PAGE')) {
                                         <ul>
                     ';
                     if (!empty($product->tag)) {
-                        $shop_detail .= '<li class="sale-badge">' . $product->tag . '</li>';
+                        $shop_detail .= '<li class="sale-badge">' .substr($product->tag,0,80). '..</li>';
                     }
                     $shop_detail .= '
                                         </ul>

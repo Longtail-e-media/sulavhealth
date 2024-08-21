@@ -718,7 +718,7 @@ if (defined('SEARCH_PAGE')) {
                             <div class="product-action">
             ';
             if (!empty($rows['tag'])) {
-                $respkglist .= '<li class="sale-badge">' . $rows['tag'] . '</li>';
+                $respkglist .= '<li class="sale-badge">' . substr($rows['tag'],0,70) . '</li>';
             }
             $respkglist .= '
                                 <ul>

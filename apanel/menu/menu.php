@@ -242,10 +242,10 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                     </div>
                     <div class="col-md-12 articlemenu <?php echo $menuhide?>" id="oldmenu" style="padding-left:0px !important;">
                     <?php
-                            $submenu = Menu::countSubMenu($menu->id);
-                            if (empty($submenu)){
+                            //$submenu = Menu::countSubMenu($menu->id);
+                            //if (empty($submenu)){
                                 ?>
-                        <div class="form-row">
+                        <div class="form-row service-row" id="service-row">
                             <div class="form-label col-md-2">
                                 <label for="">
                                     Service :
@@ -260,9 +260,9 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                             </div>
                         </div>
                         <?php
-                               } ?>
+                              // } ?>
 
-                        <div class="form-row">
+                        <div class="form-row ">
                             <div class="form-label col-md-2">
                                 <label for="">
                                     Category :
@@ -297,10 +297,10 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
 
                         <input type="hidden" name="type" id="type" value="<?php echo $initialType; ?>" />
                         <?php
-                            $submenu = Menu::countSubMenu($menu->id);
-                            if (empty($submenu)){
+                           // $submenu = Menu::countSubMenu($menu->id);
+                           // if (empty($submenu)){
                                 ?>
-                        <div class="form-row">
+                        <div class="form-row sub-category-row">
                             <div class="form-label col-md-2">
                                 <label for="">
                                     Sub Category :
@@ -318,7 +318,7 @@ if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $
                             </div>
                         </div>
                         <?php
-                               } ?>
+                               //} ?>
 
                     </div>
                 </div>

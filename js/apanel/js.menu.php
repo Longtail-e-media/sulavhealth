@@ -90,10 +90,20 @@ $(document).ready(function(){
 	})
 
 	//Parent onchange Event
+	// $('#parentOf').on('change',function(){
+	// 	var selVal = $("select option:selected").val();
+	// 	(selVal==0)?$('.menu-position').slideDown():$('.menu-position').slideUp();
+	// })
+
 	$('#parentOf').on('change',function(){
 		var selVal = $("select option:selected").val();
 		(selVal==0)?$('.menu-position').slideDown():$('.menu-position').slideUp();
+		// console.log($('.service-row'));
+		(selVal==0)?$('#service-row').slideDown():$('#service-row').slideUp();
+		(selVal==0)?$('.sub-category-row').slideDown():$('.sub-category-row').slideUp();
 	})
+
+	
 
 
 	//auto select sub category
@@ -122,6 +132,14 @@ $(document).ready(function(){
 	});
 
 });
+$(document).ready(function() {
+          
+                var selectedValue = $('#parentOf').val();
+				(selectedValue==0)?$('#service-row').slideDown():$('#service-row').slideUp();
+				(selectedValue==0)?$('.sub-category-row').slideDown():$('.sub-category-row').slideUp();
+            
+
+        });
 
 /***************************************** AddEdit New Menu *******************************************/
 function AddNewMenu()

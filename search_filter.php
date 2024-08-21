@@ -221,7 +221,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                         <div class="product-price">' . $price_text . '</div>
                         <div class="product-action">';
             if (!empty($rows['tag'])) {
-                $result .= '<li class="sale-badge">' . $rows['tag'] . '</li>';
+                $result .= '<li class="sale-badge">' . substr($rows['tag'],0,70) . '</li>';
             }
             $result .= '    <ul>
                                 <li><a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="' . $rows['slug'] . '"><i class="far fa-heart"></i></a></li>

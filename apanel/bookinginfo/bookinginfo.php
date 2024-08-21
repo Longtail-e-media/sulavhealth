@@ -139,7 +139,6 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                                 <?php
                                 while ($row = $db->fetch_object($query)) {
                                     // pr($row->additionalprod);
-                                    $adddatas= unserialize($row->additionalprod);
                                     $pkgRec = SubProduct::find_by_id($row->product_id); ?>
                                     <tr>
                                         <td>
@@ -150,7 +149,11 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                                         <td><?php echo $row->product_total; ?></td>
                                     </tr>
                                     
-                                    <?php $addtotal='';
+                                    <?php 
+                                    if(isset($row->additionalprod)){
+                                    $adddatas= unserialize($row->additionalprod);
+                                    $addtotal='';
+                                    if(!empty($adddatas)){
                                     foreach($adddatas as $adddata){
                                         // pr($adddata);
                                         $addtotal=(float)$adddata['quantityadd'] * (float)$adddata['price'];
@@ -158,13 +161,13 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                                         
                                         <tr>
                                         <td>
-                                            <a href="<?php echo BASE_URL . 'product/' . $pkgRec->slug; ?>" target="_blank"><?php echo $adddata['addname']; ?></a>
+                                            <a href="<?php echo BASE_URL . 'product/' . $pkgRec->slug; ?>" target="_blank">+<?php echo $adddata['addname']; ?></a>
                                         </td>
                                         <td><?php echo $adddata['quantityadd']; ?></td>
                                         <td><?php echo $adddata['price']; ?></td>
                                         <td><?php echo $addtotal ?></td>
                                     </tr> 
-                                <?php }} ?>
+                                <?php }}}} ?>
                                 <tr>
                                     <td colspan="3" align="right">Sub Total</td>
                                     <td><?= $bookingRow->sub_total ?></td>
