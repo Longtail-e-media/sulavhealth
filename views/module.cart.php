@@ -370,13 +370,7 @@
                                                                 <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' .$additionaldata['addname']. '</a></h4>
                                                             </div>
                                                         </div>
-                                                        
-
-                                                        <div class="col-md-1">
-                                                            <div class="cart-product-label">
-                                                                ' . $additionaldata['quantityadd'] . '
-                                                            </div>
-                                                        </div>
+                                                    
                                                         
                                                         <div class="col-md-3">
                                                         <div class="cart-plus-minus">
@@ -392,7 +386,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-md-2">
+                                                        <div class="col-md-3">
                                                             <div class="cart-product-subtotal product-sub-total-add">' . $product->currency . ' ' . sprintf("%.2f", $adddetrow) . '</div>
                                                             
                                                         </div>
