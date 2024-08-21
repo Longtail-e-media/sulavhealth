@@ -108,7 +108,7 @@ if ($menuRec):
                     $result .= '<li>';
                     $result .= getMenuList($menusubRow->name, $menusubRow->linksrc, $menusubRow->linktype, '', $chkparent2);
                     $menusubsubRec = Menu::getMenuByParent($menusubRow->id, 1);
-                    $result .= '<ul>';
+                    $result .= '<ul class="megamenu1">';
                     $menusubsubRec = Category::get_subcategory_by_menu($menusubRow->category);
                         // pr($menusubRow);
                         // pr($menusubsubRec);

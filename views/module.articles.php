@@ -155,7 +155,7 @@ else{
                                     <div class="product-action">
                     ';
                     if (!empty($rows->tag)) {
-                        $resinndetail .= '<li class="sale-badge">' . $rows->tag. '</li>';
+                        $resinndetail .= '<li class="sale-badge">' .substr($rows->tag,0,70) . '</li>';
                     }
                     $resinndetail .= '
                                         <ul>

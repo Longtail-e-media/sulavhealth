@@ -5,8 +5,8 @@ $moduleId = 21;                // module id >>>>> tbl_modules
 $moduleFoldername = "";        // Image folder name
 
 if (isset($_GET['page']) && $_GET['page'] == "category" && isset($_GET['mode']) && $_GET['mode'] == "list"):
-    clearImages($moduleTablename, "category");
-    clearImages($moduleTablename, "category/thumbnails");
+    // clearImages($moduleTablename, "category");
+    // clearImages($moduleTablename, "category/thumbnails");
     $parentId = (isset($_REQUEST['id']) and !empty($_REQUEST['id'])) ? addslashes($_REQUEST['id']) : 0;
     ?>
     <h3>
