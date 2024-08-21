@@ -1418,9 +1418,10 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                             </td>
                                         </tr>
 
-                                        <h4>Additional Product</h4>';
+                                        ';
                                         $additionaldatas= unserialize(base64_decode($prodRec->additional));
                                         if(!empty($additionaldatas)){
+                                           $product_detail .= ' <h4>Additional Product</h4>';
                                             foreach ($additionaldatas as $key => $additionaldata) {
                                             // pr($additionaldata);
                                         $product_detail .= '
