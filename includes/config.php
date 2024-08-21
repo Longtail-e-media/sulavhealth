@@ -17,7 +17,7 @@ if ($online) { // ONLINE SETUP
     define('DB_SERVER', 'localhost');
     define('DB_USER',   'root');
     define('DB_PASS',   '');
-    define('DB_NAME',   'sulavhealth');
+    define('DB_NAME',   'sulavswasthya');
 
 }
 
