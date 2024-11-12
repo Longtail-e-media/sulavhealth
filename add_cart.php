@@ -81,8 +81,8 @@ switch ($_POST['action']) {
                                 $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['netqnt'] = $net_qnt;
                                 $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['price'] = $price_value;
                                 $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['quantity'] = $qnt;
-                                $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['addtionaldetail'] = $additionalDetails;
                                 $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['total'] = $newTotal;
+                                $_SESSION['cart_detail'][$pkgRow->id]['product_details'][$label_value]['addtionaldetail'] = $additionalDetails;
                             } else {
                                 $netqnt = 'product_net_qnt_' . $product_check[$i];
                                 $price = 'product_price_' . $product_check[$i];
@@ -114,8 +114,8 @@ switch ($_POST['action']) {
                             $price = 'product_price_' . $product_check[$i];
                             $quantity = 'product_qty_' . $product_check[$i];
                             $checkquantity = ($$quantity > 0) ? $$quantity : 1;
+                            $total = 'product_total_' . $product_check[$i];
                             $additionalDetails = array();
-
                             if ((!empty($additionalchkbox) && is_array($additionalchkbox)) || !empty($additionalchkbox)) {
                                 $lengthaddArr = sizeof($additionalchkbox);
                                 foreach ($additionalchkbox as $additionalmain) {
@@ -159,11 +159,11 @@ switch ($_POST['action']) {
                                     'netqnt' => $$netqnt,
                                     'price' => $$price,
                                     'quantity' => $checkquantity,
-                                    'total' => $total,
+                                    'total' => $$total,
                                     'addtionaldetail' => $additionalDetails
                                 );
                             } else {
-                                $total = 'product_total_' . $product_check[$i];
+                                
                                 $pDetails[$$label] = array('netqnt' => $$netqnt, 'price' => $$price, 'quantity' => $checkquantity, 'total' => $$total);
                             }
                             // pr($pDetails);
@@ -233,19 +233,21 @@ switch ($_POST['action']) {
                                 'netqnt' => $$netqnt,
                                 'price' => $$price,
                                 'quantity' => $checkquantity,
-                                'total' => $total,
+                                'total' => $$total,
                                 'addtionaldetail' => $additionalDetails
                             );
+                        }else{
+                    
+                        $pDetails[$$label] = array('netqnt' => $$netqnt, 'price' => $$price, 'quantity' => $checkquantity, 'total' => $$total);
                         }
-                        // $pDetails[$$label] = array('netqnt' => $$netqnt, 'price' => $$price, 'quantity' => $checkquantity, 'total' => $$total);
+                    }
                     }
                     $_SESSION['cart_detail'][$pkgRow->id] =
                         array(
                             'slug' => $pkgRow->slug,
-
                             'product_details' => $pDetails
                         );
-                }
+               
             }
             $message = $pkgRow->title . ' product added !';
             $total = count($_SESSION['cart_detail']);

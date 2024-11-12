@@ -135,14 +135,16 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
     $id = addslashes($_GET['id']);
     if (isset($_GET['subid']) and !empty($_GET['subid'])):
         $subproductId = addslashes($_REQUEST['subid']);
+        
         $subproductInfo = SubProduct::find_by_id($subproductId);
         $moduleTablename = "tbl_product";
         $homepage = ($subproductInfo->homepage == 1) ? "checked" : " ";
         $nothomepage = ($subproductInfo->homepage == 0) ? "checked" : " ";
         $status = ($subproductInfo->status == 1) ? "checked" : " ";
         $unstatus = ($subproductInfo->status == 0) ? "checked" : " ";
+        $initialType = (!empty($session->get('type_id_product'))) ? $session->get('type_id_product') : 1;
     endif;
-    $initialType = 1;
+        // pr($initialType);
     ?>
 
     <h3>
@@ -158,6 +160,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
     <div class="example-box">
         <div class="example-code">
             <form action="" class="col-md-12 center-margin" id="subproduct_frm">
+                <input type="hidden" name="type" id="type" value="<?php echo $initialType; ?>"/>
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
@@ -172,6 +175,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                     </div>
                 </div>
 
+                
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
@@ -199,7 +203,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                     </div>
                 </div>
 
-                <input type="hidden" name="type" id="type" value="<?php echo $initialType; ?>"/>
+                <!--<input type="hidden" name="type" id="type" value="<?php echo $initialType; ?>"/>-->
 
                 <div class="form-row">
                     <div class="form-label col-md-2">
@@ -279,12 +283,14 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         <?php
                                       } 
                         }else{?>
+                        <div>
                         <input placeholder="Product Name" class="col-md-5 validate[required,length[0,250]]" type="text" name="additional[1][name]"
                                value="">
                               <!-- <input placeholder="Title" class="col-md-3 validate[required,length[0,250]]" type="text" name="additional[1][qty]"
                                value="">-->
                                <input placeholder="Price" class="col-md-5 validate[required,length[0,250]]" type="text" name="additional[1][price]"
                                value="">
+                               </div>
                     
 
                         <?php }?>
@@ -338,7 +344,7 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                                     </div>
                                 </div>
                                 <div id="add_option_div<?php echo $recRow->id; ?>"></div>
-                                    <a href="javascript:void(0);" class="btn medium bg-blue tooltip-button" title="Add" onclick="addFeaturesRows('<?php echo $recRow->id; ?>');">
+                                    <a href="javascript:void(0);" class="btn medium bg-blue tooltip-button" style="position: absolute;right: 20%;top: 27.1%;" title="Add" onclick="addFeaturesRows('<?php echo $recRow->id; ?>');">
                                         <i class="glyph-icon icon-plus-square"></i>
                                     </a> 
                                 </div>

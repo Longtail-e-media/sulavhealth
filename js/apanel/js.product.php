@@ -10,6 +10,10 @@
     $(document).ready(function () {
         $('#example').dataTable({
             "bJQueryUI": true,
+             "lengthMenu": [
+            [10, 25, 50, -1], // Values that correspond to the length
+            [10, 25, 50, "Show All"] // Labels for the dropdown
+        ],
             "sPaginationType": "full_numbers"
         }).rowReordering({
             sURL: "<?php echo BASE_URL;?>includes/controllers/ajax.product.php?action=sort",
@@ -19,16 +23,17 @@
             }
         });
 
-        $('#subexample').dataTable({
-            "bJQueryUI": true,
-            "sPaginationType": "full_numbers"
-        }).rowReordering({
-            sURL: "<?php echo BASE_URL;?>includes/controllers/ajax.product.php?action=subSort",
-            fnSuccess: function (message) {
-                var msg = jQuery.parseJSON(message);
-                showMessage(msg.action, msg.message);
-            }
-        });
+    $('#subexample').DataTable({
+        "bJQueryUI": true,
+                "sPaginationType": "full_numbers",
+                "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+    }).rowReordering({
+        sURL: "<?php echo BASE_URL;?>includes/controllers/ajax.product.php?action=subSort",
+        fnSuccess: function (message) {
+            var msg = jQuery.parseJSON(message);
+            showMessage(msg.action, msg.message);
+        }
+    });
 
         $('.user-product-select').change(function () {
             let $this = $(this);
@@ -380,7 +385,7 @@
     function addFeaturesRows() {
         // console.log(feature_id);
         var rowNum = Math.floor((Math.random() * 999) + 1);
-        var newRow = '<div class="row"><div class="form-input"><div class=" form-input col-md-3"></div><input type="text" placeholder="Product Name" class="col-md-4 validate[length[0,30]]" name="additional[' + rowNum + '][name]">';
+        var newRow = '<div class="row"><div class="form-input" style="margin-left: 19%"><input type="text" placeholder="Product Name" class="col-md-4 validate[length[0,30]]" name="additional[' + rowNum + '][name]">';
         // newRow += '<input type="text" placeholder="qty" class="col-md-2 validate[length[0,30]]" name="additional[' + rowNum + '][qty]">';
         newRow += ' <input type="text" placeholder="Price" class="col-md-4 validate[length[0,100]]" name="additional[' + rowNum + '][price]"><span class="cp remove_feature_row"><i class="glyph-icon icon-minus-square"></i></span><br></div></div>';
 

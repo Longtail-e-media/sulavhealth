@@ -64,19 +64,18 @@ RewriteRule ^searchlist/page/([0-9]+)$          search.php?pageno=$1 [L]
 RewriteRule ^search/([a-zA-Z0-9-]+)$            search.php?brand_slug=$1 [L]
 RewriteRule ^product/([a-zA-Z0-9-]+)$           search.php?service_slug=$1 [L]
 RewriteRule ^category/([a-zA-Z0-9-]+)$           search.php?category_slug=$1 [L]
-RewriteRule ^subcategory/([a-zA-Z0-9-]+)$         search.php?subcategory_slug=$1 [L]
+RewriteRule ^subcategory/([a-zA-Z0-9-]+)$           search.php?subcategory_slug=$1 [L]
 RewriteRule ^searchlist/([a-zA-Z0-9-=]+)/?$     search.php?code=$1 [L]
-RewriteRule ^packages/?$                        search.php?type=2 [L]
-
+# RewriteRule ^packages/?$                        search.php?type=2 [L]
 
 #For package list page
 RewriteRule ^package/?$                      searchp.php [L]
 RewriteRule ^packagelist/?$                      searchp.php [L]
 RewriteRule ^packagelist/page/([0-9]+)$          searchp.php?pageno=$1 [L]
 RewriteRule ^package/([a-zA-Z0-9-]+)$            searchp.php?brand_slug=$1 [L]
-RewriteRule ^product/([a-zA-Z0-9-]+)$           searchp.php?service_slug=$1 [L]
-RewriteRule ^category/([a-zA-Z0-9-]+)$           searchp.php?category_slug=$1 [L]
-RewriteRule ^subcategory/([a-zA-Z0-9-]+)$         searchp.php?subcategory_slug=$1 [L]
+RewriteRule ^package-product/([a-zA-Z0-9-]+)$           searchp.php?service_slug=$1 [L]
+RewriteRule ^package-category/([a-zA-Z0-9-]+)$           searchp.php?category_slug=$1 [L]
+RewriteRule ^package-subcategory/([a-zA-Z0-9-]+)$         searchp.php?subcategory_slug=$1 [L]
 RewriteRule ^packagelist/([a-zA-Z0-9-=]+)/?$     searchp.php?code=$1 [L]
 
 #For user login and register pages.

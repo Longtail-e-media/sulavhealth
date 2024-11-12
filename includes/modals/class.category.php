@@ -60,6 +60,18 @@ class category extends DatabaseObject
         return self::find_by_sql($sql);
     }
 
+    public static function get_category_by_service_type($service_id = '',$type = '')
+    {
+        global $db;
+        $sql = "SELECT cat.id, cat.title FROM " . self::$table_name . " AS cat 
+                INNER JOIN tbl_product_sub as prod ON prod.Category = cat.id
+                INNER JOIN tbl_services as serv ON serv.id = prod.service_id
+                WHERE serv.id = {$service_id} AND serv.status=1 AND prod.status=1 AND prod.type=$type AND cat.parentId=0
+                GROUP BY cat.id 
+                ORDER BY cat.title ASC ";
+        return self::find_by_sql($sql);
+    }
+
     public static function get_category_by_brand($brand_id = '')
     {
         global $db;
@@ -67,6 +79,19 @@ class category extends DatabaseObject
                 INNER JOIN tbl_product_sub as prod ON prod.Category = cat.id
                 INNER JOIN tbl_brands as b ON b.id = prod.brand
                 WHERE b.id = {$brand_id} AND b.status=1 AND prod.status=1 AND cat.parentId=0
+                GROUP BY cat.id 
+                ORDER BY cat.title ASC ";
+        return self::find_by_sql($sql);
+    }
+
+
+    public static function get_category_by_brand_type($brand_id = '', $type='')
+    {
+        global $db;
+        $sql = "SELECT cat.id, cat.title FROM " . self::$table_name . " AS cat 
+                INNER JOIN tbl_product_sub as prod ON prod.Category = cat.id
+                INNER JOIN tbl_brands as b ON b.id = prod.brand
+                WHERE b.id = {$brand_id} AND b.status=1 AND prod.status=1 AND prod.type=$type AND cat.parentId=0
                 GROUP BY cat.id 
                 ORDER BY cat.title ASC ";
         return self::find_by_sql($sql);
@@ -103,6 +128,19 @@ class category extends DatabaseObject
         return self::find_by_sql($sql);
     }
 
+    //type
+    public static function get_subcategory_by_service_type($service_id = '', $type='')
+    {
+        global $db;
+        $sql = "SELECT cat.id, cat.title FROM " . self::$table_name . " AS cat 
+                INNER JOIN tbl_product_sub as prod ON prod.Subcategory = cat.id
+                INNER JOIN tbl_services as serv ON serv.id = prod.service_id
+                WHERE serv.id = {$service_id} AND serv.status=1 AND prod.status=1 AND prod.type=$type AND cat.parentId!=0
+                GROUP BY cat.id 
+                ORDER BY cat.title ASC ";
+        return self::find_by_sql($sql);
+    }
+
     public static function get_subcategory_by_brand($brand_id = '')
     {
         global $db;
@@ -110,6 +148,19 @@ class category extends DatabaseObject
                 INNER JOIN tbl_product_sub as prod ON prod.Subcategory = cat.id
                 INNER JOIN tbl_brands as b ON b.id = prod.brand
                 WHERE b.id = {$brand_id} AND b.status=1 AND prod.status=1 AND cat.parentId!=0
+                GROUP BY cat.id 
+                ORDER BY cat.title ASC ";
+        return self::find_by_sql($sql);
+    }
+
+    //type
+    public static function get_subcategory_by_brand_type($brand_id = '', $type='')
+    {
+        global $db;
+        $sql = "SELECT cat.id, cat.title FROM " . self::$table_name . " AS cat 
+                INNER JOIN tbl_product_sub as prod ON prod.Subcategory = cat.id
+                INNER JOIN tbl_brands as b ON b.id = prod.brand
+                WHERE b.id = {$brand_id} AND b.status=1 AND prod.status=1 AND prod.type=$type AND cat.parentId!=0
                 GROUP BY cat.id 
                 ORDER BY cat.title ASC ";
         return self::find_by_sql($sql);

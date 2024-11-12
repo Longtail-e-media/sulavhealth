@@ -102,7 +102,7 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
                 </div>
             </div>
 
-            <div class="form-row">
+            <!--<div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
                         Type :
@@ -162,10 +162,11 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
                 <?php endif; ?>
                 <div class="form-input col-md-10 uploader1 <?php echo !empty($locationRow->location_image) ? "hide" : ""; ?>">
                     <input type="file" name="location_image" id="location_image" class="transparent no-shadow">
-                </div>
-                <!-- Upload user image preview -->
-                <div id="preview_Image"></div>
+                </div>-->
+               <!--  Upload user image preview 
+              <!--  <div id="preview_Image"></div>
             </div>
+            -->
 
             <div class="form-row">
                 <div class="form-label col-md-12">

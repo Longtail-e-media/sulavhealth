@@ -106,13 +106,23 @@ else{
                         $price_text = '<span>' . $rows->currency . ' ' . $rows->price1 . '</span>';
                     }
                     if (!empty($rows->discount1)) {
-                        $discountamt= $rows->price1 - $rows->discount1;
-                        $price_text = '
-                        <span>' . $rows->currency . ' '.$rows->discount1.'</span>|<span>' . $rows->discountedp . '%off</span><br/>
-                                <del>' . $rows->currency . ' ' . $rows->price1 . '</del> <span class="font-14">Save ' . $rows->currency . ' ' . $discountamt. '</span> 
-                        
-                        ';
-                    }
+                if(empty($rows->discountedp)){
+                    $discountamt= $rows->price1 - $rows->discount1;
+                    $price_text = '
+                <span>' . $rows->currency . ' '.$rows->discount1.'</span><br/>
+                        <del>' . $rows->currency . ' ' . $rows->price1 . '</del> <span class="font-14">Save ' . $rows->currency . ' ' . $discountamt. '</span> 
+                
+                ';
+                }
+                else{
+                $discountamt= $rows->price1 - $prodrelated->discount1;
+                $price_text = '
+                <span>' . $rows->currency . ' '.$rows->discount1.'</span>|<span>' . $rows->discountedp . '%off</span><br/>
+                        <del>' . $rows->currency . ' ' . $rows->price1 . '</del> <span class="font-14">Save ' . $rows->currency . ' ' . $discountamt. '</span> 
+                
+                ';
+                }
+            }
                         $product = SubProduct::find_by_slug($rows->slug);
                     if (!empty($product)) {
                         $images = SubProductImage::getImagelist_by($product->id, 1, 0);
@@ -389,7 +399,7 @@ else{
                                                         <div class="ltn__product-details-menu-2">  
                                                             <ul>
                                                             <li style="padding-right: 16.28rem;">
-                                                            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $rows->slug . '">
+                                                            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $rows->slug . '">
                                                                 <i class="far fa-heart"></i>
                                                                <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
                                                             </a>
@@ -452,9 +462,6 @@ else{
 
 <div id="productpopup">
 </div>';
-// pr($row);
-
-
 }
 }
 

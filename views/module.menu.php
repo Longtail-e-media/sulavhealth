@@ -79,7 +79,7 @@ if ($menuRec):
     if(!empty($firstarticles)):
         $result .= '<li class="first-mega"><a href="#">'.$firstarticles->title.'</a>
                 <ul>
-                    <li>'.$firstarticles->content.'
+                    <li>'.substr($firstarticles->content,0,200).'...
                         <br/><br/><span class="pt-80" style="font-weight:600;"><a href="'. BASE_URL.$firstarticles->slug.'">Read More</a></span>
                     </li>
                 </ul>';
@@ -109,7 +109,8 @@ if ($menuRec):
                     $result .= getMenuList($menusubRow->name, $menusubRow->linksrc, $menusubRow->linktype, '', $chkparent2);
                     $menusubsubRec = Menu::getMenuByParent($menusubRow->id, 1);
                     $result .= '<ul class="megamenu1">';
-                    $menusubsubRec = Category::get_subcategory_by_menu($menusubRow->category);
+                        // $menusubsubRec = Category::get_menu_subcategory($menusubRow->category);
+                        $menusubsubRec = Category::get_subcategory_by_menu($menusubRow->category);
                         // pr($menusubRow);
                         // pr($menusubsubRec);
                         // $chkparent3 = (!empty($menusub3Rec)) ? 1 : 0;
@@ -148,7 +149,8 @@ if ($menuRec):
         // pr($resultarticle);
     }
     endforeach;
-    $result .= '<li class="menu-icon"><a href="#">SKIN CARE</a>
+    $result .= '
+    <!--<li class="menu-icon"><a href="#">SKIN CARE</a>
                     <ul class="mega-menu">
                         <li class="first-mega"><a href="#">Skin Care</a>
                             <ul>
@@ -173,12 +175,6 @@ if ($menuRec):
                                 <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
                                 <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
                                 <li><a href="#">Strallium Stretch Mark Cream</a></li>
-                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
-                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
-                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
-                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
-                                <li><a href="#">ACNEMOIST MOISTURIZING CREAM 60gm</a></li>
-                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Eye Products</a>
@@ -199,10 +195,21 @@ if ($menuRec):
                                 <li><a href="#">Strallium Stretch Mark Cream</a></li>
                                 <li><a href="#">Strallium Stretch Mark Cream</a></li>
                                 <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                
+                            </ul>
+                        </li>
+                         <li><a href="#">Hygiene Products</a>
+                            <ul>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
+                                <li><a href="#">Strallium Stretch Mark Cream</a></li>
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li>-->
                 </ul>';
 endif;
 

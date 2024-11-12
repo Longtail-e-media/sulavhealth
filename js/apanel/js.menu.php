@@ -103,7 +103,6 @@ $(document).ready(function(){
 		(selVal==0)?$('.sub-category-row').slideDown():$('.sub-category-row').slideUp();
 	})
 
-	
 
 
 	//auto select sub category
@@ -132,6 +131,7 @@ $(document).ready(function(){
 	});
 
 });
+
 $(document).ready(function() {
           
                 var selectedValue = $('#parentOf').val();

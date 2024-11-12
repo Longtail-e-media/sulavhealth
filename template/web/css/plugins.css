@@ -3635,6 +3635,7 @@ input[type=submit].btn-block {
     background-color: transparent;
     border: 0;
     padding: 10px 15px;
+    text-transform:capitalize;
 }
 
 .dropdown-item:focus,
@@ -11241,7 +11242,7 @@ a.text-dark:hover {
 
 .slick-slide img {
     display: block;
-    height: 470px;
+    height: 425px;
     width: 100%;
     object-fit: cover;
 }

@@ -60,7 +60,7 @@ $footer .= '
                         </div>
                     </div>
 
-                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
+                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
                         <div class="footer-widget footer-menu-widget clearfix">
                             <h4 class="footer-title">Products</h4>
                             <div class="footer-menu">
@@ -68,7 +68,7 @@ $footer .= '
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="col-xl-2 col-md-6 col-sm-6 col-12">
+                    <!-- <div class="col-xl-3 col-md-6 col-sm-6 col-12">
                         <div class="footer-widget footer-menu-widget clearfix">
                             <h4 class="footer-title">Follow Us</h4>
                             <div class="footer-menu">
@@ -76,11 +76,11 @@ $footer .= '
                             </div>
                         </div>
                     </div> -->
-                    <div class="footer-contact col-xl-3 col-md-6 col-sm-12 col-12 contact-us">
-                        <p style="font-weight: 700;">For any kinds of help you can call us at</p>
+                    <div class="footer-contact col-xl-3 col-md-6 col-sm-12 col-12 contact-us" style="margin-top:0px;">
+                        <p style="font-weight: 700;" class="footer-last-one">For any kinds of help you can call us at</p>
                         <ul>
-                            </li>
-                            <li>' . $mob . '
+                            
+                            <li>' . $mob . '</li>
                             
                         </ul>
                         <p style="font-weight: 700;">Or mail us at</p>

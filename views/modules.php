@@ -119,6 +119,7 @@ foreach($modulesList as $module):
 endforeach;
 
 // view modules
+require_once("views/module.searchp.php");
 require_once("views/module.home.php");
 require_once("views/module.user.php");
 require_once("views/module.cart.php");

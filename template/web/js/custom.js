@@ -105,12 +105,12 @@ $(function () {
     $(".additionalchk").on("change",function (){
         var $check = $(this);
         currency = $check.attr('currency'),
-        // console.log(currency);
         cartTotal = $check.parent().parent().find(".additional-sub-total");
+        cartval = $check.parent().parent().find(".qtyval");
         var amtper= $('input[name="product_total_1"]').val();
         // var defper= $('input[name="additional_total[]"]').val();
         var defper= $check.parent().parent().find(".additional_total");
-        
+        cartval.val('1');
         addcartTotal = $('input[name="additional_total[]"]').val();
         finaltotal = (parseFloat(amtper)+parseFloat(addcartTotal));
         cartTotal.html(currency + ' ' + defper.val());
@@ -146,7 +146,7 @@ $(function () {
         if ($button.text() == "+") {
             newVal = parseFloat(oldValue) + 1;
         } else {
-            if (oldValue > 1) {
+            if (oldValue > 0) {
                 newVal = parseFloat(oldValue) - 1;
             }
         }
@@ -182,7 +182,7 @@ $(function () {
         maincartTotal = $('input[name="product_total_1"]').val();
         totalPoints = (parseFloat(totalPoints)+parseFloat(maincartTotal));
         totalPoints = totalPoints.toFixed(2);
-        console.log($('.Grand-sub-total').html(currency + ' ' + totalPoints));
+        // console.log(totalPoints);
         $('.Grand-sub-total').html(currency + ' ' + totalPoints);
         // console.log(input[name="Grand_total"]);
         $('input[name=Grand_total_1]').val(currency + ' ' + totalPoints);
@@ -368,9 +368,8 @@ $(function () {
         cartRowTotal.html(currency + ' ' + priceTotal);
         $button.parent().find("input").val(newVal);
     });
-
-
-    $(".cqtybuttonadd").on("click", function () {
+    
+        $(".cqtybuttonadd").on("click", function () {
         var $button = $(this);
         var newVal = 0;
         var rate = 0;
@@ -417,6 +416,7 @@ $(function () {
         cartRowTotal.html(currency + ' ' + priceTotal);
         $button.parent().find("input").val(newVal);
     });
+
     function get_total(currency) {
         var totalPoints = 0; 
         $('input.cin-input').each(function () {

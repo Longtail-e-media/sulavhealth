@@ -145,7 +145,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                     </div>
                     <div class="form-input col-md-4">
                         <?php $selid = !empty($articlesInfo->service_id) ? $articlesInfo->service_id : 0; ?>
-                        <select data-placeholder="Choose" class="chosen-selec " id="service_id" name="service_id">
+                        <select data-placeholder="Choose" class="chosen-selec" id="service_id" name="service_id">
                             <?php echo Services::get_internal_link_product($selid); ?>
                         </select>
                     </div>
@@ -161,13 +161,11 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                         <?php $cid = !empty($articlesInfo->prodcategory) ? $articlesInfo->prodcategory : 0; ?>
                         <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] prodcategory" id="prodcategory" name="prodcategory"
                                 selcId="<?php echo $cid; ?>">
+                            <option value="0">Select Category</option>
                             <?php 
                             // $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 AND type={$typeid} ORDER BY sortorder ASC ");
                             $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 ORDER BY sortorder ASC ");
                             // pr($categories);
-                            ?>
-                            <option value="0">Select Service</option>
-                            <?php
                             if ($categories) {
                                 foreach ($categories as $k => $category) {
                                     if($k == 0){$initialType = $category->type;}
@@ -199,6 +197,26 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                         </select>
                     </div>
                 </div>
+
+                <!--<div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Brand :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-4">
+                        <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]]" id="brand" name="brand">
+                            <?php $categories = Brand::find_by_sql("SELECT * FROM tbl_brands ORDER BY sortorder DESC ");
+                            if ($categories) {
+                                foreach ($categories as $category) {
+                                    $cat = !empty($articlesInfo->brand) ? $articlesInfo->brand : '';
+                                    $sel = (!empty($cat) && $cat == $category->id) ? 'selected' : ''; ?>
+                                    <option value="<?= $category->id; ?>" <?= $sel; ?>><?= $category->title; ?></option>
+                                <?php }
+                            } ?>
+                        </select>
+                    </div>
+                </div>-->
 
                 <!--<div class="form-row">
                     <div class="form-label col-md-2">

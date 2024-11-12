@@ -10,7 +10,7 @@ $resisearch = $respkglist = $bread = $bread_title = $bread_text = $bread_text_ex
 $home_gift_sets_modal = $home_gift_sets_script = $listofitems = '';
 $serachtitle = 'List of Products';
 $minprice = $maxprice = '';
-if (defined('SEARCH_PAGE')) {
+if (defined('PACKAGE_SEARCH_PAGE')) {
     // pr($_POST);
     if (isset($hotelslug) and !empty($hotelslug)) {
         redirect_to(BASE_URL . 'product/product-detail/' . $hotelslug);
@@ -50,7 +50,7 @@ if (defined('SEARCH_PAGE')) {
     /* category filter start*/
     $service_filter = '';
     if (@$service_slug) {
-        $serviceRec = Services::get_services_by_slug($service_slug);
+        $serviceRec = Services::get_services_by_slug_and_type($service_slug);
     } elseif (!empty($brand_slug)) {
         $brandRec = Brand::find_by_slug($brand_slug);
         $serviceRec = Services::get_services_by_brand($brandRec->id);
@@ -69,9 +69,9 @@ if (defined('SEARCH_PAGE')) {
         $tot = 0;
         if (@$brand_slug) {
             $brandRec = Brand::find_by_slug($brand_slug);
-            $tot += SubProduct::get_total_service_brand_product($brandRec->id, $serviceRow->id);
+            $tot += SubProduct::get_total_service_brand_product_type($brandRec->id, $serviceRow->id,2);
         } else {
-            $tot += SubProduct::get_total_service_product($serviceRow->id);
+            $tot += SubProduct::get_total_service_product_type($serviceRow->id,2);
         }
         // if (@$category_slug) {
         //     $categoryRecord = category::find_by_slug($category_slug);
@@ -97,10 +97,10 @@ if (defined('SEARCH_PAGE')) {
     $category_filter = '';
     if (@$service_slug) {
         $serviceRecord = Services::find_by_slug($service_slug);
-        $categoryRec = category::get_category_by_service($serviceRecord->id);
+        $categoryRec = category::get_category_by_service_type($serviceRecord->id,2);
     } elseif (!empty($brand_slug)) {
         $brandRec = Brand::find_by_slug($brand_slug);
-        $categoryRec = category::get_category_by_brand($brandRec->id);
+        $categoryRec = category::get_category_by_brand_type($brandRec->id,2);
     } 
     elseif (!empty($category_slug)) {
         $catRec = category::find_by_slug($category_slug);
@@ -121,19 +121,19 @@ if (defined('SEARCH_PAGE')) {
         $tot = 0;
         if (@$brand_slug) {
             $brandRec = Brand::find_by_slug($brand_slug);
-            $tot += SubProduct::get_total_category_brand_product($brandRec->id, $serviceRow->id);
+            $tot += SubProduct::get_total_category_brand_product_type($brandRec->id, $serviceRow->id,2);
         } else {
-            $tot += SubProduct::get_total_category_product($categoryRow->id);
+            $tot += SubProduct::get_total_category_product_type($categoryRow->id,2);
         }
         $tot = 0;
         if (@$service_slug) {
             $serviceRecord = Services::find_by_slug($service_slug);
-            $tot += SubProduct::get_total_category_product_service($categoryRow->id, $serviceRecord->id);
+            $tot += SubProduct::get_total_category_product_service_type($categoryRow->id, $serviceRecord->id,2);
         } elseif (@$brand_slug) {
             $brandRec = Brand::find_by_slug($brand_slug);
-            $tot += SubProduct::get_total_category_brand_product($brandRec->id, $categoryRow->id);
+            $tot += SubProduct::get_total_category_brand_product_type($brandRec->id, $categoryRow->id,2);
         } else {
-            $tot += SubProduct::get_total_category_product($categoryRow->id);
+            $tot += SubProduct::get_total_category_product_type($categoryRow->id,2);
         }
         if ($tot > 0) {
             $category_filter .= '
@@ -150,10 +150,10 @@ if (defined('SEARCH_PAGE')) {
     $subcategory_filter = '';
     if (@$service_slug) {
         $serviceRecord = Services::find_by_slug($service_slug);
-        $subcategoryRec = category::get_subcategory_by_service($serviceRecord->id);
+        $subcategoryRec = category::get_subcategory_by_service_type($serviceRecord->id,2);
     } elseif (!empty($brand_slug)) {
         $brandRec = Brand::find_by_slug($brand_slug);
-        $subcategoryRec = category::get_subcategory_by_brand($brandRec->id);
+        $subcategoryRec = category::get_subcategory_by_brand_type($brandRec->id,2);
     } 
     elseif (!empty($subcategory_slug)) {
         $subcatRec = category::find_by_sub_slug($subcategory_slug);
@@ -171,12 +171,12 @@ if (defined('SEARCH_PAGE')) {
         $tot = 0;
         if (@$service_slug) {
             $serviceRecord = Services::find_by_slug($service_slug);
-            $tot += SubProduct::get_total_subcategory_product_service($subcategoryRow->id, $serviceRecord->id);
+            $tot += SubProduct::get_total_subcategory_product_service_type($subcategoryRow->id, $serviceRecord->id,2);
         } elseif (@$brand_slug) {
             $brandRec = Brand::find_by_slug($brand_slug);
-            $tot += SubProduct::get_total_subcategory_brand_product($brandRec->id, $subcategoryRow->id);
+            $tot += SubProduct::get_total_subcategory_brand_product_type($brandRec->id, $subcategoryRow->id,2);
         } else {
-            $tot += SubProduct::get_total_subcategory_product($subcategoryRow->id);
+            $tot += SubProduct::get_total_subcategory_product_type($subcategoryRow->id,2);
         }
         if ($tot > 0) {
             $subcategory_filter .= '
@@ -193,7 +193,7 @@ if (defined('SEARCH_PAGE')) {
     $brand_filter = '';
     if (@$service_slug) {
         $serviceRecord = Services::find_by_slug($service_slug);
-        $brandRec = Brand::get_brand_service($serviceRecord->id);
+        $brandRec = Brand::get_brand_service_type($serviceRecord->id,2);
     } elseif (!empty($brand_slug)) {
         $brandRec = Brand::get_brands_by_slug($brand_slug);
     } else {
@@ -211,9 +211,9 @@ if (defined('SEARCH_PAGE')) {
         $tot = 0;
         if (@$service_slug) {
             $serviceRecord = Services::find_by_slug($service_slug);
-            $tot += SubProduct::get_total_brand_product_service($brandRow->id, $serviceRecord->id);
+            $tot += SubProduct::get_total_brand_product_service_type($brandRow->id, $serviceRecord->id,2);
         } else {
-            $tot += SubProduct::get_total_brand_product($brandRow->id);
+            $tot += SubProduct::get_total_brand_product_type($brandRow->id,2);
         }
         if ($tot > 0) {
             $brand_filter .= '
@@ -329,17 +329,17 @@ if (defined('SEARCH_PAGE')) {
         $sql = "SELECT prod.*
             FROM tbl_product_sub as prod  
             INNER JOIN tbl_brands as br ON br.id = prod.brand
-            WHERE prod.status = 1 AND br.status = 1 AND
+            WHERE prod.status = 1  AND br.status = 1 AND
               ( prod.title LIKE '%" . $searchkey . "%' ) ";
     } 
     elseif(!empty($type)){
         $sql = "SELECT prod.*
             FROM tbl_product_sub as prod  
             INNER JOIN tbl_brands as br ON br.id = prod.brand
-            WHERE prod.status = 1 AND br.status = 1 AND prod.type = 2 ";
+            WHERE prod.status = 1  AND br.status = 1 AND prod.type = 2 ";
     } 
     else {
-        $sql = "SELECT prod.* FROM tbl_product_sub as prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status = 1";
+        $sql = "SELECT prod.* FROM tbl_product_sub as prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1  AND br.status = 1";
     }
 
     /*$sql = "SELECT pkg.id, pkg.title, pkg.slug, pkg.breif, pkg.days, pkg.image, pkg.price, pkg.difficulty, pkg.accomodation,
@@ -375,14 +375,14 @@ if (defined('SEARCH_PAGE')) {
         foreach ($qcategory as $qcat) {
             if (sizeof($qcategory) > 1) {
                 if (array_values($qcategory)[0] == $qcat) {
-                    $sql .= " AND ( prod.Category = $qcat ";
+                    $sql .= " AND ( prod.Category = $qcat  ";
                 } elseif (end($qcategory) == $qcat) {
-                    $sql .= " OR prod.Category = $qcat )";
+                    $sql .= " OR prod.Category = $qcat  )";
                 } else {
-                    $sql .= " OR prod.Category = $qcat ";
+                    $sql .= " OR prod.Category = $qcat  ";
                 }
             } else {
-                $sql .= " AND prod.Category = $qcat ";
+                $sql .= " AND prod.Category = $qcat  ";
             }
         }
     }
@@ -390,21 +390,21 @@ if (defined('SEARCH_PAGE')) {
         $cate = category::find_by_slug($category_slug);
         
         $serachtitle = $cate->title;
-        $sql .= " AND prod.Category = $cate->id ";
+        $sql .= " AND prod.Category = $cate->id  ";
     }
 
     if (@$qservice[0] != 'all' and !empty($qservice)) {
         foreach ($qservice as $qserv) {
             if (sizeof($qservice) > 1) {
                 if (array_values($qservice)[0] == $qserv) {
-                    $sql .= " AND ( prod.service_id = $qserv ";
+                    $sql .= " AND ( prod.service_id = $qserv  ";
                 } elseif (end($qservice) == $qcat) {
-                    $sql .= " OR prod.service_id = $serv )";
+                    $sql .= " OR prod.service_id = $serv  )";
                 } else {
-                    $sql .= " OR prod.service_id = $qserv ";
+                    $sql .= " OR prod.service_id = $qserv  ";
                 }
             } else {
-                $sql .= " AND prod.service_id = $qserv ";
+                $sql .= " AND prod.service_id = $qserv  ";
             }
         }
     }
@@ -419,14 +419,14 @@ if (defined('SEARCH_PAGE')) {
         foreach ($qsubcategory as $qsubcat) {
             if (sizeof($qsubcategory) > 1) {
                 if (array_values($qsubcategory)[0] == $qsubcat) {
-                    $sql .= " AND ( prod.Subcategory = $qsubcat ";
+                    $sql .= " AND ( prod.Subcategory = $qsubcat  ";
                 } elseif (end($qsubcategory) == $qsubcat) {
-                    $sql .= " OR prod.Subcategory = $qsubcat )";
+                    $sql .= " OR prod.Subcategory = $qsubcat ) ";
                 } else {
-                    $sql .= " OR prod.Subcategory = $qsubcat ";
+                    $sql .= " OR prod.Subcategory = $qsubcat  ";
                 }
             } else {
-                $sql .= " AND prod.Subcategory = $qsubcat ";
+                $sql .= " AND prod.Subcategory = $qsubcat  ";
             }
         }
     }
@@ -441,14 +441,14 @@ if (defined('SEARCH_PAGE')) {
         foreach ($qbrand as $qbra) {
             if (sizeof($qbrand) > 1) {
                 if (array_values($qbrand)[0] == $qbra) {
-                    $sql .= " AND ( prod.brand = '$qbra' ";
+                    $sql .= " AND ( prod.brand = '$qbra'   ";
                 } elseif (end($qbrand) == $qbra) {
-                    $sql .= " OR prod.brand = '$qbra' )";
+                    $sql .= " OR prod.brand = '$qbra' )   ";
                 } else {
-                    $sql .= " OR prod.brand = '$qbra' ";
+                    $sql .= " OR prod.brand = '$qbra'   ";
                 }
             } else {
-                $sql .= " AND prod.brand = '$qbra' ";
+                $sql .= " AND prod.brand = '$qbra'   ";
             }
         }
     }
@@ -456,7 +456,7 @@ if (defined('SEARCH_PAGE')) {
         $bran = Brand::find_by_slug($brand_slug);
         if (!empty($bran)) {
             $serachtitle = $bran->title;
-            $sql .= " AND prod.brand = $bran->id ";
+            $sql .= " AND prod.brand = $bran->id    ";
         }
     }
 
@@ -636,12 +636,13 @@ if (defined('SEARCH_PAGE')) {
     $startpoint = ($page * $limit) - $limit;
     $start = $startpoint + 1;
     $end = (($startpoint + $limit) > $total_num) ? $total_num : $startpoint + $limit;
-    $sql .= " ORDER BY prod.sortorder ASC";
+    $sql .= " AND prod.type= 2 ORDER BY prod.sortorder ASC";
     // $sql .= " ORDER BY prod.sortorder ASC";
     $sql .= " LIMIT " . $startpoint . "," . $limit;
     // pr($sql);
     $res = $db->query($sql);
     $total = $db->affected_rows($res);
+            // pr($res);
     $listofitems .= '
     
     <label id="totalitems">' . $total . '  items found in this category</label>';
@@ -660,41 +661,25 @@ if (defined('SEARCH_PAGE')) {
             if (!empty($rows['price1']) and (empty($rows['offer_price']))) {
                 $price_text = '<span>' . $rows['currency'] . ' ' . $rows['price1'] . '</span>';
             }
-            // if (!empty($giftSet->discount1)) {
-            //     if(!empty($giftSet->discountedp)){
-            //         $discountamt= $giftSet->price1 - $giftSet->discount1;
-            //         $price_text = '
-            //     <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span><br/>
-            //             <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
-                
-            //     ';
-            //     }
-            //     else{
-            //     $discountamt= $giftSet->price1 - $giftSet->discount1;
-            //     $price_text = '
-            //     <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
-            //             <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
-                
-            //     ';
-            //     }
-            // }
             if (!empty($rows['discount1'])) {
-                if(empty($rows['discountedp'])){
-                $discountamt= $rows['price1'] - $rows['discount1'];
-                $price_text = '
+                 if(!empty($rows['discountedp'])){
+                    $discountamt= $rows['price1'] - $rows['discount1'];
+                    $price_text = '
                 <span>' . $rows['currency'] . ' '.$rows['discount1'].'</span><br/>
-                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span> 
+                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
                 
                 ';
                 }
                 else{
-                  $discountamt= $rows['price1'] - $rows['discount1'];
+                $discountamt= $rows['price1'] - $rows['discount1'];
                 $price_text = '
                 <span>' . $rows['currency'] . ' '.$rows['discount1'].'</span>|<span>' . $rows['discountedp'] . '%off</span><br/>
                         <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span> 
                 
-                ';  
+                ';
                 }
+                
+              
             }
 
             $product = SubProduct::find_by_slug($rows['slug']);
@@ -739,7 +724,7 @@ if (defined('SEARCH_PAGE')) {
                         </div></a>
                         <div class="product-info">
                             <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $titlebrand . '</a></h4>
-                            <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $rows['title'] . '</a></h3>
+                            <a href="' . $slugs . '" class="product-link">' . $rows['title'] . '</a>
                             <div class="product-price">
                                 ' . $price_text . '
                             </div>
@@ -1100,18 +1085,18 @@ if (defined('SEARCH_PAGE')) {
     $minprice = min($combinedArray);
 }
 
-$jVars['module:search-searchform'] = $resisearch;
-$jVars['module:search-totalitems'] = $listofitems;
+$jVars['module:search-searchform-type'] = $resisearch;
+$jVars['module:search-totalitems-type'] = $listofitems;
 $jVars['module:search-maxprice'] = $maxprice;
 $jVars['module:search-minprice'] = $minprice;
-$jVars['module:modal-popup-search'] = $home_gift_sets_modal;
+$jVars['module:modal-popup-search-type'] = $home_gift_sets_modal;
 $jVars['module:modal-popup-script'] = $home_gift_sets_script;
 $jVars['module:package-search-breadcrumb'] = $bread;
 $jVars['module:package-search-breadcrumb-title'] = $bread_title;
 $jVars['module:package-search-breadcrumb-text'] = $bread_text;
 $jVars['module:package-search-breadcrumb-extra'] = $bread_text_extra;
-$jVars['module:package-searchlist'] = $respkglist;
-$jVars['module:package-searchtitle'] = $serachtitle;
+$jVars['module:package-searchlist-type'] = $respkglist;
+$jVars['module:package-searchtitle-type'] = $serachtitle;
 
 $jVars['module:package-navigation'] = $navigation;
 ?>

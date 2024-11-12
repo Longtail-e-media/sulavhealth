@@ -239,8 +239,8 @@ define("SHOP_SHARE", ($lang == "gr") ? 'Κοινοποίηση' : 'Share');
  *      Checkout
  */
 define("CHECKOUT_AGREE_TO_TERMS", ($lang == "gr")
-    ? 'Έχω διαβάσει και συμφωνώ με τους <a href="' . BASE_URL . 'terms-conditions" style="color: blue;">Όρους Χρήσης</a>'
-    : 'I have read and agree to the <a href="' . BASE_URL . 'terms-conditions" style="color: blue;">Terms & Conditions</a>');
+    ? 'Έχω διαβάσει και συμφωνώ με τους <a href="' . BASE_URL . 'policy" style="color: blue;">Όρους Χρήσης</a>'
+    : 'I have read and agree to the <a href="' . BASE_URL . 'policy" style="color: blue;">Terms & Conditions</a>');
 define("CHECKOUT_POST_CODE", ($lang == "gr") ? 'Ταχ. Κωδ.' : 'Post Code');
 define("CHECKOUT_REGION", ($lang == "gr") ? 'Περιοχή' : 'Region');
 define("CHECKOUT_CITY", ($lang == "gr") ? 'Πόλη' : 'City');

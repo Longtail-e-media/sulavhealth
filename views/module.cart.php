@@ -219,7 +219,8 @@
                             $addtotal =(float)$adddata['quantityadd'] * (float)$adddata['price'];
                             $cart_detail .= '
                                 <tr class="cart-remove">
-                                    <td class="cart-product-image">
+                                    <td class="cart-product-info">
+                                   <h4> +</h4>
                                     </td>
                                     <td class="cart-product-info">
                                         <h4><a href="' . BASE_URL . 'product/product-detail/' . $product->slug . '">' . ($adddata['addname']) . '</a></h4>

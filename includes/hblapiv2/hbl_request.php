@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' and
 
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL             => 'https://www.pgsulav.sooriyahealthcare.com/do_payment.php',
+        CURLOPT_URL             => 'https://www.pgsulav.3rdeye-investigators.com/do_payment.php',
         CURLOPT_RETURNTRANSFER  => true,
         CURLOPT_ENCODING        => '',
         CURLOPT_MAXREDIRS       => 10,

@@ -36,6 +36,20 @@ class Brand extends DatabaseObject
                 ORDER BY b.title ASC ";
         return self::find_by_sql($sql);
     }
+
+    //type
+    public static function get_brand_service_type($serviceId = '', $type='')
+    {
+        global $db;
+        $sql = "SELECT b.id, b.title, b.slug FROM " . self::$table_name . " AS b 
+                INNER JOIN tbl_product_sub as prod ON prod.brand = b.id
+                INNER JOIN tbl_services as serv ON serv.id = prod.service_id
+                WHERE serv.id = {$serviceId} AND serv.status=1 AND prod.status=1 AND prod.type=$type 
+                GROUP BY b.id 
+                ORDER BY b.title ASC ";
+        return self::find_by_sql($sql);
+    }
+
     public static function get_by_type($type = "1")
     {
         global $db;
@@ -125,6 +139,12 @@ class Brand extends DatabaseObject
     {
         global $db;
         $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE slug='$slug' AND status='1' LIMIT 1");
+        return !empty($result_array) ? array_shift($result_array) : false;
+    }
+    static function find_by_slug_type($slug = '',$type = '')
+    {
+        global $db;
+        $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE slug='$slug' AND type='$type' AND status='1' LIMIT 1");
         return !empty($result_array) ? array_shift($result_array) : false;
     }
     

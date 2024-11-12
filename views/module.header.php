@@ -131,17 +131,9 @@ $header .= '
                         </div>
                     </div>
 
-
-
-
-
-
                     <div class="ltn__header-options ltn__header-options-2">
-
-                        <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu" id="google_translate_element">
+                    <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu" id="google_translate_element">
                         </div>
-                        
-                                    
                         <div class="dropdown">
                             <button class="brands dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

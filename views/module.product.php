@@ -147,12 +147,22 @@ if (defined('HOME_PAGE')) {
                 $price_text = '<span>' . $giftSet->currency . ' ' . $giftSet->price1 . '</span>';
             }
             if (!empty($giftSet->discount1)) {
+                if(empty($giftSet->discountedp)){
+                    $discountamt= $giftSet->price1 - $giftSet->discount1;
+                    $price_text = '
+                <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span><br/>
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
+                
+                ';
+                }
+                else{
                 $discountamt= $giftSet->price1 - $giftSet->discount1;
                 $price_text = '
                 <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
                         <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
                 
                 ';
+                }
             }
             $prodbrand = Brand::find_by_id($giftSet->brand);
             $prodservice = Services::find_by_id($giftSet->service_id);
@@ -187,7 +197,7 @@ if (defined('HOME_PAGE')) {
                     <div class="product-action">
             ';
             if (!empty($giftSet->tag)) {
-                $home_gift_sets .= '<li class="sale-badge">' . substr($giftSet->tag,0,80) . '..</li>';
+                $home_gift_sets .= '<li class="sale-badge">' . substr($giftSet->tag,0,70) . '</li>';
             }
             $home_gift_sets .= '
                                     <ul>
@@ -422,7 +432,7 @@ if (defined('HOME_PAGE')) {
                                                         <div class="ltn__product-details-menu-2">  
                                                             <ul>
                                                             <li style="padding-right: 16.28rem;">
-                                                            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $giftSet->slug . '">
+                                                            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $giftSet->slug . '">
                                                                 <i class="far fa-heart"></i>
                                                                <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
                                                             </a>
@@ -436,7 +446,7 @@ if (defined('HOME_PAGE')) {
                                                                 </li>
                                                               
                                                                 
-                                                                <!--<li>
+                                                               <!-- <li>
                                                                 <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
                                                                 </li>-->
 
@@ -561,13 +571,23 @@ if (defined('HOME_PAGE')) {
                     $price_text = '<span>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</span>';
                 }
                 if (!empty($giftSet->discount1)) {
-                    $discountamt= $giftSet->price1 - $giftSet->discountedp;
+                if(empty($giftSet->discountedp)){
+                    $discountamt= $giftSet->price1 - $giftSet->discount1;
                     $price_text = '
-                    <span>' . $giftSet->currency . ' '.$giftSet->discountedp.'</span>|<span>' . $giftSet->discount1 . '%off</span><br/>
-                            <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
-                    
-                    ';
+                <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span><br/>
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
+                
+                ';
                 }
+                else{
+                $discountamt= $giftSet->price1 - $giftSet->discount1;
+                $price_text = '
+                <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
+                
+                ';
+                }
+            }
                 $prodbrand = Brand::find_by_id($serviceSet->brand);
                 $prodservice = Services::find_by_id($serviceSet->service_id);
                 if (!empty($prodbrand)) {
@@ -597,7 +617,7 @@ if (defined('HOME_PAGE')) {
                         <div class="product-action">
                 ';
                 if (!empty($serviceSet->tag)) {
-                    $services_gift_sets .= '<li class="sale-badge">' . substr($serviceSet->tag,0,80) . '..</li>';
+                    $services_gift_sets .= '<li class="sale-badge">' . substr($serviceSet->tag,0,70) . '</li>';
                 }
                 $services_gift_sets .= '
                                         <ul>
@@ -832,7 +852,7 @@ if (defined('HOME_PAGE')) {
                                                             <div class="ltn__product-details-menu-2">  
                                                                 <ul>
                                                                 <li style="padding-right: 16.28rem;">
-                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $serviceSet->slug . '">
+                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $serviceSet->slug . '">
                                                                     <i class="far fa-heart"></i>
                                                                    <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
                                                                 </a>
@@ -846,7 +866,7 @@ if (defined('HOME_PAGE')) {
                                                                     </li>
                                                                   
                                                                     
-                                                                   <!-- <li>
+                                                                    <!--<li>
                                                                     <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
                                                                     </li>-->
     
@@ -964,13 +984,23 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $price_text = '<span>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</span>';
                 }
                 if (!empty($prodrelated->discount1)) {
-                    $discountamt= $prodrelated->price1 - $prodrelated->discountedp;
+                if(empty($prodrelated->discountedp)){
+                    $discountamt= $prodrelated->price1 - $prodrelated->discount1;
                     $price_text = '
-                    <span>' . $prodrelated->currency . ' '.$prodrelated->discountedp.'</span>|<span>' . $prodrelated->discount1 . '%off</span><br/>
-                            <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt. '</span> 
-                    
-                    ';
+                <span>' . $prodrelated->currency . ' '.$prodrelated->discount1.'</span><br/>
+                        <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt. '</span> 
+                
+                ';
                 }
+                else{
+                $discountamt= $prodrelated->price1 - $prodrelated->discount1;
+                $price_text = '
+                <span>' . $prodrelated->currency . ' '.$prodrelated->discount1.'</span>|<span>' . $prodrelated->discountedp . '%off</span><br/>
+                        <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt. '</span> 
+                
+                ';
+                }
+            }
                 $prodbrand = Brand::find_by_id($prodrelated->brand);
                 $prodservice = Services::find_by_id($prodrelated->service_id);
                 if (!empty($prodbrand)) {
@@ -1002,7 +1032,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                         <div class="product-action">
                 ';
                 if (!empty($prodrelated->tag)) {
-                    $product_realted .= '<li class="sale-badge">' . substr($prodrelated->tag,0,80) . '..</li>';
+                    $product_realted .= '<li class="sale-badge">' . substr($prodrelated->tag,0,70) . '</li>';
                 }
                 $product_realted .= '
                                         <ul>
@@ -1235,7 +1265,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                             <div class="ltn__product-details-menu-2">  
                                                                 <ul>
                                                                 <li style="padding-right: 16.28rem;">
-                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2 add-cart" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $prodrelated->slug . '">
+                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $prodrelated->slug . '">
                                                                     <i class="far fa-heart"></i>
                                                                    <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
                                                                 </a>
@@ -1312,7 +1342,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $slides .= '
                         <div class="single-large-img">
                             <a href="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" data-rel="lightcase:myCollection">
-                                <img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '" style="max-height:500px">
+                                <img src="' . IMAGE_PATH . 'product/galleryimages/' . $sliderImage->image . '" alt="' . $sliderImage->title . '" >
                             </a>
                         </div>
                     ';
@@ -1421,8 +1451,8 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                         ';
                                         $additionaldatas= unserialize(base64_decode($prodRec->additional));
                                         if(!empty($additionaldatas)){
-                                           $product_detail .= ' <tr>
-                                            <td class="cart-product-info"><h4>Additional Product</h4></td></tr>';
+                                             $product_detail .= ' <tr>
+                                            <td class="cart-product-info productd"><h4>Additional Product</h4></td></tr>';
                                             foreach ($additionaldatas as $key => $additionaldata) {
                                             // pr($additionaldata);
                                         $product_detail .= '
@@ -1445,7 +1475,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                             <td class="cart-product-quantity">
                                                 <div class="cart-plus-minus">
                                                     <div class="dec qtybuttonadd">-</div>
-                                                    <input type="text" value="1" min="1" step="1" name="additionalchkqty_1['.$additionaldata['id'].']" class="cart-plus-minus-box qty" price="'.$additionaldata['price'].'" currency="NPR" readonly="">
+                                                    <input type="text" value="0" min="0" step="1" name="additionalchkqty_1['.$additionaldata['id'].']" class="cart-plus-minus-box qty qtyval" price="'.$additionaldata['price'].'" currency="NPR" readonly="">
                                                     <div class="inc qtybuttonadd">+</div>
                                                 </div>
                                             </td>
@@ -1737,7 +1767,7 @@ if (defined('SHOP_PAGE')) {
                                         <ul>
                     ';
                     if (!empty($product->tag)) {
-                        $shop_detail .= '<li class="sale-badge">' .substr($product->tag,0,80). '..</li>';
+                        $shop_detail .= '<li class="sale-badge">' .substr($product->tag,0,70). '</li>';
                     }
                     $shop_detail .= '
                                         </ul>
@@ -2058,7 +2088,7 @@ if (defined('SHOP_PAGE')) {
                                         <ul>
                     ';
                     if (!empty($product->tag)) {
-                        $shop_detail .= '<li class="sale-badge">' .substr($product->tag,0,80). '..</li>';
+                        $shop_detail .= '<li class="sale-badge">' .substr($product->tag,0,70). '</li>';
                     }
                     $shop_detail .= '
                                         </ul>

@@ -9,71 +9,76 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
             <url>
                 <loc>http://www.sulavhealth.com/</loc>
-                <lastmod>2024-08-01+054515:16:15+05:45</lastmod>
+                <lastmod>2024-11-07+054516:28:13+05:45</lastmod>
                 <priority>1</priority>
             </url><url>
                 <loc>http://www.sulavhealth.com/home</loc>
-                <lastmod>2024-08-01+054515:16:15+05:45</lastmod>
+                <lastmod>2024-11-07+054516:28:13+05:45</lastmod>
                 <priority>0.9</priority>
                </url>
                <url>
                 <loc>http://www.sulavhealth.com/contact-us</loc>
-                <lastmod>2024-08-01+054515:16:15+05:45</lastmod>
+                <lastmod>2024-11-07+054516:28:13+05:45</lastmod>
                 <priority>0.9</priority>
                </url>
                <url>
                 <loc>http://www.sulavhealth.com/faq</loc>
-                <lastmod>2024-08-01+054515:16:15+05:45</lastmod>
+                <lastmod>2024-11-07+054516:28:13+05:45</lastmod>
                 <priority>0.9</priority>
                </url>
                <url>
                 <loc>http://www.sulavhealth.com/blog</loc>
-                <lastmod>2024-08-01+054515:16:15+05:45</lastmod>
+                <lastmod>2024-11-07+054516:28:13+05:45</lastmod>
                 <priority>0.9</priority>
                </url>
                <url>
+                <loc>http://www.sulavhealth.com/test</loc>
+                <lastmod>2024-08-28+054515:36:23+05:45</lastmod>
+                <priority>0.75</priority>
+               </url>
+               <url>
                 <loc>http://www.sulavhealth.com/policy</loc>
-                <lastmod>2024-05-07+054511:31:31+05:45</lastmod>
+                <lastmod>2024-08-28+054515:40:11+05:45</lastmod>
                 <priority>0.75</priority>
                </url>
                <url>
                 <loc>http://www.sulavhealth.com/about-sulav-health</loc>
-                <lastmod>2024-04-26+054511:29:51+05:45</lastmod>
+                <lastmod>2024-08-28+054516:47:03+05:45</lastmod>
                 <priority>0.75</priority>
                </url>
                <url>
-                <loc>http://www.sulavhealth.com/benefits-of-regular-body-check-ups</loc>
-                <lastmod>2024-02-22+054518:09:01+05:45</lastmod>
+                <loc>http://www.sulavhealth.com/what-are-the-benefits-of-regular-body-check-ups</loc>
+                <lastmod>2024-08-28+054515:46:19+05:45</lastmod>
                 <priority>0.75</priority>
                </url>
                <url>
-                <loc>http://www.sulavhealth.com/blood-tests-are-important</loc>
-                <lastmod>2024-02-22+054516:35:17+05:45</lastmod>
+                <loc>http://www.sulavhealth.com/why-regular-blood-tests-are-important</loc>
+                <lastmod>2024-08-28+054515:50:14+05:45</lastmod>
                 <priority>0.75</priority>
                </url>
                <url>
                 <loc>http://www.sulavhealth.com/what-are-anti-oxidants</loc>
-                <lastmod>2024-02-22+054516:18:45+05:45</lastmod>
+                <lastmod>2024-08-28+054515:53:14+05:45</lastmod>
                 <priority>0.75</priority>
                </url>
                <url>
-                <loc>http://www.sulavhealth.com/immunity-boosters</loc>
-                <lastmod>2024-02-22+054500:26:12+05:45</lastmod>
+                <loc>http://www.sulavhealth.com/which-food-supplements-plays-vital-role-as-immunity-booster</loc>
+                <lastmod>2024-08-28+054515:56:40+05:45</lastmod>
                 <priority>0.75</priority>
                </url>
                <url>
                 <loc>http://www.sulavhealth.com/why-dietary-supplements-are-important-for-health</loc>
-                <lastmod>2024-02-22+054500:11:09+05:45</lastmod>
+                <lastmod>2024-08-28+054516:00:56+05:45</lastmod>
                 <priority>0.75</priority>
                </url>
                <url>
                 <loc>http://www.sulavhealth.com/are-food-supplements-same-as-medicines</loc>
-                <lastmod>2024-02-22+054500:08:48+05:45</lastmod>
+                <lastmod>2024-08-28+054516:33:22+05:45</lastmod>
                 <priority>0.75</priority>
                </url>
                <url>
                 <loc>http://www.sulavhealth.com/what-is-mental-health</loc>
-                <lastmod>2024-01-28+054512:42:04+05:45</lastmod>
+                <lastmod>2024-08-28+054516:38:58+05:45</lastmod>
                 <priority>0.75</priority>
                </url>
                <url>

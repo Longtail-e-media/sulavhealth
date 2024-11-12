@@ -99,16 +99,16 @@
 //			$record->opening_hour 	= $_REQUEST['opening_hour'];
 //			$record->opening_hour_greek = $_REQUEST['opening_hour_greek'];
 			$record->location_type 	= $_REQUEST['location_type'];					
-			$record->location_map 	= $_REQUEST['location_map'];
+// 			$record->location_map 	= $_REQUEST['location_map'];
 
-			if(!empty($_REQUEST['imageArrayname'])):
-				$record->location_image = $_REQUEST['imageArrayname'];
-			endif;
+// 			if(!empty($_REQUEST['imageArrayname'])):
+// 				$record->location_image = $_REQUEST['imageArrayname'];
+// 			endif;
 
-			if(empty($_REQUEST['imageArrayname']) and $_REQUEST['location_type']!=1):				
-				echo json_encode(array("action"=>"warning","message"=>"Required Upload Image !"));
-				exit;					
-			endif;
+// 			if(empty($_REQUEST['imageArrayname']) and $_REQUEST['location_type']!=1):				
+// 				echo json_encode(array("action"=>"warning","message"=>"Required Upload Image !"));
+// 				exit;					
+// 			endif;
 			
 			$db->begin();
 			if($record->save()):$db->commit();
