@@ -102,6 +102,19 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
                 </div>
             </div>
 
+            <div class="form-row">
+                <div class="form-label col-md-2">
+                    <label for="">
+                        Whatsapp :
+                    </label>
+                </div>
+                <div class="form-input col-md-20">
+                    <input placeholder="Whatsapp" class="col-md-6" type="text" name="whatsapp"
+                           id="whatsapp"
+                           value="<?php echo !empty($locationRow->whatsapp) ? $locationRow->whatsapp : ""; ?>">
+                </div>
+            </div>
+
             <!--<div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">

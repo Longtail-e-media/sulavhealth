@@ -368,11 +368,11 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Tag Line :
+                            Short Text Line :
                         </label>
                     </div>
                     <div class="form-input col-md-6">
-                        <input placeholder="Tag" class="col-md-6 validate[length[0,250]]" type="text" name="tag" id="tag" style="width:100%"
+                        <input placeholder="Short Text" class="col-md-6 validate[length[0,250]]" type="text" name="tag" id="tag" style="width:100%"
                                value="<?php echo !empty($subproductInfo->tag) ? $subproductInfo->tag : ""; ?>">
                     </div>
                 </div>

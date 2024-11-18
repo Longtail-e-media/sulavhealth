@@ -4,7 +4,12 @@ class Config extends DatabaseObject
 {
 
     protected static $table_name = "tbl_configs";
-    protected static $db_fields = array('id', 'sitetitle', 'icon_upload', 'logo_upload', 'fb_upload', 'twitter_upload', 'sitename', 'location_type', 'location_map', 'location_image', 'fiscal_address', 'fiscal_address_greek', 'mail_address', 'contact_info', 'fax', 'email_address', 'breif', 'copyright', 'meta_title', 'site_keywords', 'site_description', 'google_anlytics', 'fb_messenger', 'book_type', 'hotel_code', 'hotel_page', 'template', 'admin_template', 'headers', 'footer', 'search_box', 'robot_txt', 'search_result', 'action', 'linksrc', 'opening_hour', 'opening_hour_greek', 'brief_greek');
+    protected static $db_fields = array(
+        'id', 'sitetitle', 'icon_upload', 'logo_upload', 'fb_upload', 'twitter_upload', 'sitename', 'location_type', 'location_map', 'location_image', 'fiscal_address',
+        'fiscal_address_greek', 'mail_address', 'contact_info', 'fax', 'email_address', 'breif', 'copyright', 'meta_title', 'site_keywords', 'site_description',
+        'google_anlytics', 'fb_messenger', 'book_type', 'hotel_code', 'hotel_page', 'template', 'admin_template', 'headers', 'footer', 'search_box', 'robot_txt',
+        'search_result', 'action', 'linksrc', 'opening_hour', 'opening_hour_greek', 'brief_greek', 'whatsapp'
+    );
 
     public $id;
     public $sitetitle;
@@ -43,7 +48,7 @@ class Config extends DatabaseObject
     public $linksrc;
     public $opening_hour;
     public $opening_hour_greek;
-    public $brief_greek;
+    public $brief_greek, $whatsapp;
 
     //returns the current admin template
     public static function getCurrentTemplate($temp = "admin_template")

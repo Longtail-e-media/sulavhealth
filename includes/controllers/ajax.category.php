@@ -57,6 +57,7 @@
 			endif;
 
             $category->slug         = create_slug($_REQUEST['title']);
+            $category->parentId 	= $_REQUEST['parentId'];
             // $category->image		= !empty($_REQUEST['imageArrayname']) ? $_REQUEST['imageArrayname'] : '';
             $category->title        = $_REQUEST['title'];
             // $category->brief    = $_REQUEST['brief'];
