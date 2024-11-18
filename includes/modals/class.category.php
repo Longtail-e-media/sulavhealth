@@ -4,7 +4,7 @@ class category extends DatabaseObject
 {
 
     protected static $table_name = "tbl_category";
-    protected static $db_fields = array('id', 'title','slug', 'fa_icon', 'parentId', 'image', 'brief', 'type', 'status', 'sortorder', 'added_date');
+    protected static $db_fields = array('id', 'title','slug', 'fa_icon', 'parentId', 'image', 'brief', 'type', 'status', 'sortorder', 'added_date', 'discount');
 
     var $id;
     var $title;
@@ -16,7 +16,7 @@ class category extends DatabaseObject
     var $type;
     var $status;
     var $sortorder;
-    var $added_date;
+    var $added_date, $discount;
 
     //Find all by parent id the current database table.
     static function find_all_byparnt($parentId = 0, $notid = '')

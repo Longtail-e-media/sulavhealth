@@ -21,6 +21,7 @@
 			// $category->image		= !empty($_REQUEST['imageArrayname']) ? $_REQUEST['imageArrayname'] : '';
 			// $category->icon    	= !empty($_REQUEST['fa_icon'])?$_REQUEST['fa_icon']:''; 			
 			// $category->brief    	= $_REQUEST['brief'];	
+            $category->discount     = $_REQUEST['discount'];
 			$category->type		    = $_REQUEST['type'];
 			$category->status		= $_REQUEST['status'];
 			$category->sortorder	= category::find_maximum_byparent("sortorder",$_REQUEST['parentId']);
@@ -62,6 +63,7 @@
             $category->title        = $_REQUEST['title'];
             // $category->brief    = $_REQUEST['brief'];
             // $category->icon    	= !empty($_REQUEST['fa_icon'])?$_REQUEST['fa_icon']:'';
+            $category->discount     = $_REQUEST['discount'];
             $category->type         = $_REQUEST['type'];
             $category->status       = $_REQUEST['status'];
 
