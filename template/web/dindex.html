@@ -183,12 +183,14 @@
             </div>
         </div>
         <div class="col-xl-4 col-lg-6 col-md-12  offset-xl-1 mt-5 mt-lg-0">
-            <div class="offers-image ">
-              <figure class="position-relative">
-                <img src="img/offer.jpg"
-                alt="Product 1" class="w-100">
-              <button id="offers"><a href="" target="_blank">Reserve</a></button>
-              </figure>
+            <div class="owl-offer owl-carousel">
+                <div class="offers-image">
+                    <figure class="position-relative">
+                      <img src="img/offer.jpg"
+                      alt="Product 1" class="w-100">
+                    <button id="offers"><a href="" target="_blank">Reserve</a></button>
+                    </figure>
+                  </div>
             </div>
         </div>
     </div>
@@ -363,23 +365,28 @@
     $(document).ready(function () {
     $(".owl-carousel").owlCarousel({
         loop: true,
+        items:1,
         margin: 10,
         nav: true,
         autoplay: true,
         autoplayTimeout: 2000,
-        responsive: {
-            0: {
-                items: 2
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 6
-            }
-        }
+
     });
 });
+</script>
+<script>
+        $(document).ready(function () {
+    $(".owl-carousel.owl-offer").owlCarousel({
+        loop: true,
+        items:1,
+        margin: 10,
+        nav: false,
+        dots: false,
+        autoplay: true,
+        autoplayTimeout: 3000,
+    });
+});
+
 </script>
 
 <script>
