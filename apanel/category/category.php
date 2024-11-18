@@ -112,6 +112,8 @@ if (isset($_GET['page']) && $_GET['page'] == "category" && isset($_GET['mode']) 
         $categoryInfo = category::find_by_id($categoryId);
         $type_product = ($categoryInfo->type == 1) ? "checked" : " ";
         $type_package = ($categoryInfo->type == 2) ? "checked" : " ";
+        $discount_yes = ($categoryInfo->discount == 1) ? "checked" : " ";
+        $discount_no = ($categoryInfo->discount == 0) ? "checked" : " ";
         $type_hide = ($categoryInfo->parentId == 0) ? '' : 'hide';
         $status = ($categoryInfo->status == 1) ? "checked" : " ";
         $unstatus = ($categoryInfo->status == 0) ? "checked" : " ";
@@ -151,6 +153,22 @@ if (isset($_GET['page']) && $_GET['page'] == "category" && isset($_GET['mode']) 
                         <input placeholder="category Title" class="col-md-8 validate[required,length[0,50]]" type="text"
                                name="title" id="title"
                                value="<?php echo !empty($categoryInfo->title) ? htmlentities($categoryInfo->title) : ""; ?>">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Discount :
+                        </label>
+                    </div>
+                    <div class="form-checkbox-radio col-md-9">
+                        <input type="radio" class="custom-radio" name="discount" id="checkdis1"
+                               value="1" <?php echo !empty($discount_yes) ? $discount_yes : ""; ?>>
+                        <label for="">Yes</label>
+                        <input type="radio" class="custom-radio" name="discount" id="checkdis2"
+                               value="0" <?php echo !empty($discount_no) ? $discount_no : "checked"; ?>>
+                        <label for="">No</label>
                     </div>
                 </div>
 
