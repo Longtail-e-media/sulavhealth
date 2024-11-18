@@ -1548,12 +1548,22 @@ color: #000 !important;
 .slick-arrow-4 .slick-prev {
   left: -3.75rem;
 }
-
-@media (max-width: 767px) {
-  .slick-dots {
-    margin: 0 0 0.9375rem;
+.hygience_others .owl-offer .owl-dots{
+  display: none;
   }
-}
+  .hygience_others .owl-offer .owl-nav{
+/* display: flex; */
+justify-content: space-between;
+width: 96%;
+  }
+  .hygience_others .owl-offer .owl-nav span{
+    font-size: 44px;
+    position: absolute;
+    top: 50%;
+    color: #252525;
+  }
+
+
 
 /* ----------------------------------------------------
     Background Overlay
@@ -9153,6 +9163,7 @@ overflow: hidden;
 
 .product-image-link {
   padding: 0 !important;
+  display: block;
 }
 
 .brand-name a {
@@ -15704,7 +15715,6 @@ input.cart-plus-minus-box {
 div.hygience_others {
   margin: 6rem 0 3rem !important;
 }
-
 .branded_prdct .access-items {
   gap: 10px;
 }
