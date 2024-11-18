@@ -101,7 +101,7 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
     } elseif (!empty($brand_slug)) {
         $brandRec = Brand::find_by_slug($brand_slug);
         $categoryRec = category::get_category_by_brand_type($brandRec->id,2);
-    } 
+    }
     elseif (!empty($category_slug)) {
         $catRec = category::find_by_slug($category_slug);
         $categoryRec = category::get_category_by_slugcat($catRec->id);
@@ -154,7 +154,7 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
     } elseif (!empty($brand_slug)) {
         $brandRec = Brand::find_by_slug($brand_slug);
         $subcategoryRec = category::get_subcategory_by_brand_type($brandRec->id,2);
-    } 
+    }
     elseif (!empty($subcategory_slug)) {
         $subcatRec = category::find_by_sub_slug($subcategory_slug);
         // pr($subcatRec);
@@ -275,21 +275,21 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
             <div class="row">
                 <div class="product-filter-side col-md-2">
                     <h2>Filters</h2>
-                    
+
                     <form action="' . BASE_URL . 'searchlist" method="post" id="search_form">
                         <!-- <div class="form-group">
                             <label>Type:</label><br>
                             ' . $type_filter . '
-                        </div>  --> 
+                        </div>  -->
                         <div class="form-group">
                             <label>Services:</label><br>
                             ' . $service_filter . '
-                        </div>             
+                        </div>
                         <div class="form-group">
                             <label>Category:</label><br>
                             ' . $category_filter . '
                         </div>
-                        <div class="form-group"> 
+                        <div class="form-group">
                             <label>Sub-category:</label><br>
                             <div class="subfilter">
                                 ' . $subcategory_filter . '
@@ -319,37 +319,37 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
     // header search form
     if (!empty($searchkey)) {
         /*$sql = "SELECT prod.*
-            FROM tbl_product_sub as prod  
-            INNER JOIN tbl_services as serv ON prod.service_id = serv.id 
-            INNER JOIN tbl_category as cat ON prod.Category = cat.id 
-            WHERE prod.status=1 AND 
+            FROM tbl_product_sub as prod
+            INNER JOIN tbl_services as serv ON prod.service_id = serv.id
+            INNER JOIN tbl_category as cat ON prod.Category = cat.id
+            WHERE prod.status=1 AND
               ( prod.title LIKE '%" . $searchkey . "%' OR
                 serv.title LIKE '%" . $searchkey . "%' OR
                 cat.title LIKE '%" . $searchkey . "%' ) ";*/
         $sql = "SELECT prod.*
-            FROM tbl_product_sub as prod  
+            FROM tbl_product_sub as prod
             INNER JOIN tbl_brands as br ON br.id = prod.brand
             WHERE prod.status = 1  AND br.status = 1 AND
               ( prod.title LIKE '%" . $searchkey . "%' ) ";
-    } 
+    }
     elseif(!empty($type)){
         $sql = "SELECT prod.*
-            FROM tbl_product_sub as prod  
+            FROM tbl_product_sub as prod
             INNER JOIN tbl_brands as br ON br.id = prod.brand
             WHERE prod.status = 1  AND br.status = 1 AND prod.type = 2 ";
-    } 
+    }
     else {
         $sql = "SELECT prod.* FROM tbl_product_sub as prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1  AND br.status = 1";
     }
 
     /*$sql = "SELECT pkg.id, pkg.title, pkg.slug, pkg.breif, pkg.days, pkg.image, pkg.price, pkg.difficulty, pkg.accomodation,
-            act.title as activity, act.slug as activity_slug, 
+            act.title as activity, act.slug as activity_slug,
             dst.title as destination, dst.slug as destination_slug
-            FROM tbl_package  pkg 
-            INNER JOIN tbl_destination  dst 
-            ON pkg.destinationId = dst.id 
-            INNER JOIN tbl_activities act 
-            ON pkg.activityId = act.id 
+            FROM tbl_package  pkg
+            INNER JOIN tbl_destination  dst
+            ON pkg.destinationId = dst.id
+            INNER JOIN tbl_activities act
+            ON pkg.activityId = act.id
             WHERE pkg.status=1 ";*/
 
     if (@$qtype[0] != 'all' and !empty($qtype)) {
@@ -388,7 +388,7 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
     }
     if (@$category_slug) {
         $cate = category::find_by_slug($category_slug);
-        
+
         $serachtitle = $cate->title;
         $sql .= " AND prod.Category = $cate->id  ";
     }
@@ -644,7 +644,7 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
     $total = $db->affected_rows($res);
             // pr($res);
     $listofitems .= '
-    
+
     <label id="totalitems">' . $total . '  items found in this category</label>';
     if ($total > 0) {
         $i = 1;
@@ -666,20 +666,20 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
                     $discountamt= $rows['price1'] - $rows['discount1'];
                     $price_text = '
                 <span>' . $rows['currency'] . ' '.$rows['discount1'].'</span><br/>
-                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
-                
+                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span>
+
                 ';
                 }
                 else{
                 $discountamt= $rows['price1'] - $rows['discount1'];
                 $price_text = '
                 <span>' . $rows['currency'] . ' '.$rows['discount1'].'</span>|<span>' . $rows['discountedp'] . '%off</span><br/>
-                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span> 
-                
+                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span>
+
                 ';
                 }
-                
-              
+
+
             }
 
             $product = SubProduct::find_by_slug($rows['slug']);
@@ -758,7 +758,7 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
             ';
             // for bottom part (closing)
             if ($i % 3 == 0 or $i == $total) {
-                $respkglist .= ' 
+                $respkglist .= '
                     --></div>
                 ';
             }
@@ -822,12 +822,12 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
                                                             <span>' . SHOP_VIEW_MORE . '</span>
                                                         </a>
 
-                
+
                      <div class="shoping-cart-table table-responsive">
                     <form id="add-cart-product-' . $rows['slug'] . '">
                     <table class="table">
                         <tbody>
-                        
+
                             <tr>
                                 <td class="cart-product-info">
                                     <div class="form-check form-check-inline">
@@ -863,7 +863,7 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
                                     <h6 class="product-sub-total">' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                 </td>
                             </tr>
-                            
+
             ';
 
             if (!empty($rows['qnt2'])) {
@@ -960,12 +960,12 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
             }
 
             $home_gift_sets_modal .= '
-                            
+
             </tbody>
             </table>
             </form>
         </div>
-                                                <div class="ltn__product-details-menu-2">  
+                                                <div class="ltn__product-details-menu-2">
                                                     <ul>
                                                     <li style="padding-right: 16.28rem;">
                                                     <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $rows['slug'] . '">
@@ -973,21 +973,21 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
                                                        <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
                                                     </a>
                                                 </li>
-                                                    
+
                                                         <li>
                                                             <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $rows['slug'] . '" form-id="add-cart-product-' . $rows['slug'] . '">
                                                                 <i class="fas fa-shopping-cart"></i>
                                                                 <span>' . SHOP_ADD_TO_CART . '</span>
                                                             </a>
                                                         </li>
-                                                      
-                                                        
+
+
                                                         <!--<li>
                                                         <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
                                                         </li>-->
 
-                                                       
-                                                       
+
+
                                                     </ul>
                                                 </div>
                                                 <hr>

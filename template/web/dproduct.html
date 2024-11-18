@@ -23,7 +23,12 @@
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
 
-
+<style>
+html.overflow-hidden{
+    overflow: hidden;
+    width: 100%;
+}
+</style>
 </head>
 
 <body class="<jcms:site:language-class/>">
@@ -36,9 +41,11 @@
 <div class="ltn__utilize-overlay"></div>
 
 <div class="container mx-auto product-filter">
+
     <div class="row">
         <jcms:module:search-searchform/>
-        <div class="col-md-10 product-filter-right">
+        <div class="product-filter-right col-xl-9 col-md-12 col-sm-12">
+            <div class="filter_icon text-end position-absolute" id="filter_btn">Filter <i class="fas fa-filter"></i></div>
             <h2><div id="searchtitle"><jcms:module:package-searchtitle/></div></h2>
             <div id="totalitems">
 
@@ -412,8 +419,8 @@
     });
 </script>
 <div id="productscript"></div>
-<jcms:module:modal-popup-script/>
 
+<jcms:module:modal-popup-script/>
 </body>
 
 </html>

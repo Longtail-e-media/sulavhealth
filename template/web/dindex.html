@@ -29,7 +29,7 @@
     <style>
         @media (min-width: 1080px) {
             .product-list {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(2, 1fr);
 
             }
         }
@@ -93,6 +93,29 @@
         h4 {
             color: #0E75BA !important;
         }
+
+        /* offer */
+        .product-list.mt-0{
+            margin-top: 0 !important;
+        }
+        .hygience_others{
+            margin: 6.6rem 0 !important;
+        }
+   .hygience_others #offers {
+  position: absolute;
+  left: 50%;
+  top: 80%;
+  background-color: #9e1e63;
+  padding: 0.5rem 2rem;
+  border-radius: 1.25rem;
+  translate: -50% -50%;
+  color: #fff;
+}
+.hygience_others #offers a:hover {
+  color: #fff;
+}
+
+        /* offer end */
     </style>
 </head>
 
@@ -107,7 +130,7 @@
                                 }, 'google_translate_element');
                             }
 </script>
-<script src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit' type="text/javascript"></script> 
+<script src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit' type="text/javascript"></script>
 
 <jcms:module:product:cart-menu/>
 
@@ -115,47 +138,66 @@
 
 <div class="ltn__utilize-overlay"></div>
 
-<div class="container ltn__image-slider-mine mt-40">
+<div class="container ltn__image-slider-mine homepage_img_slide mt-40">
     <jcms:module:slideshow:images/>
 </div>
 
-<div class="container product-list mt-80">
-    <div class="product" style="background-color: #F2C8C8;">
-        <img src="img/111.png"
-             alt="Product 1">
-        <div class="product-title">
-            <a href="product/dietary-supplements">Dietary Supplements</a>
-            <!-- <p>Precision. Trust. Your lab partner.</p> -->
+<!-- hygience care -->
+ <div class="hygience_others">
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-xl-6 col-lg-6 col-md-12">
+            <div class="container product-list mt-0">
+                <div class="product" style="background-color: #F2C8C8;">
+                    <img src="img/111.png"
+                         alt="Product 1">
+                    <div class="product-title">
+                        <a href="product/dietary-supplements">Dietary Supplements</a>
+                        <!-- <p>Precision. Trust. Your lab partner.</p> -->
+                    </div>
+                </div>
+                <div class="product" style="background-color: #F1F2C8;">
+                    <img src="img/11.png"
+                         alt="Product 1">
+                    <div class="product-title">
+                        <a href="product/skin-care">Skin Care</a>
+                        <!-- <p>Unlock wellness with expert physiotherapy!</p> -->
+                    </div>
+                </div>
+                <div class="product" style="background-color: #C8F2D3;">
+                    <img src="img/hair.png"
+                         alt="Product 1">
+                    <div class="product-title">
+                        <a href="product/hygiene">Hygiene</a>
+                        <!-- <p>Revive with specialized neuropathy care!</p> -->
+                    </div>
+                </div>
+                <div class="product" style="background-color: #F2DCC8;">
+                    <img src="img/baby.png"
+                         alt="Product 1">
+                    <div class="product-title">
+                        <a href="product/baby-Care">Baby Care</a>
+                        <!-- <p>Take care of you skin with Derma.</p> -->
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="product" style="background-color: #F1F2C8;">
-        <img src="img/11.png"
-             alt="Product 1">
-        <div class="product-title">
-            <a href="product/skin-care">Skin Care</a>
-            <!-- <p>Unlock wellness with expert physiotherapy!</p> -->
-        </div>
-    </div>
-    <div class="product" style="background-color: #C8F2D3;">
-        <img src="img/hair.png"
-             alt="Product 1">
-        <div class="product-title">
-            <a href="product/hygiene">Hygiene</a>
-            <!-- <p>Revive with specialized neuropathy care!</p> -->
-        </div>
-    </div>
-    <div class="product" style="background-color: #F2DCC8;">
-        <img src="img/baby.png"
-             alt="Product 1">
-        <div class="product-title">
-            <a href="product/baby-Care">Baby Care</a>
-            <!-- <p>Take care of you skin with Derma.</p> -->
+        <div class="col-xl-4 col-lg-6 col-md-12  offset-xl-1 mt-5 mt-lg-0">
+            <div class="offers-image ">
+              <figure class="position-relative">
+                <img src="img/offer.jpg"
+                alt="Product 1" class="w-100">
+              <button id="offers"><a href="" target="_blank">Reserve</a></button>
+              </figure>
+            </div>
         </div>
     </div>
 </div>
+ </div>
+<!-- hygience care end -->
 
-<div class="container">
-    <div class="access flex-column flex-lg-row f mt-80">
+<div class="container branded_prdct">
+    <div class="access flex-column flex-lg-row f mt-80 align-items-md-start">
         <div class="access-items">
             <img src="img/brand.png"
                  alt="Product 1">
@@ -394,6 +436,7 @@
         });
     });
 </script>
+
 
 </body>
 

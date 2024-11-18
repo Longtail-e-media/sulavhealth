@@ -16,7 +16,7 @@ $header .= '
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div class="site-logo-wrap">
+                        <div class="site-logo-wrap justify-content-center justify-content-xl-start">
                             <div class="site-logo">
                                 <a href="' . BASE_URL . 'dhome">
                                     <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="' . $siteRegulars->sitetitle . '">
@@ -131,10 +131,10 @@ $header .= '
                         </div>
                     </div>
 
-                    <div class="ltn__header-options ltn__header-options-2">
-                    <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu" id="google_translate_element">
+                    <div class="ltn__header-options ltn__header-options-2 header-navbar-wrap">
+                    <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu d-none d-xl-block" id="google_translate_element">
                         </div>
-                        <div class="dropdown">
+                        <div class="dropdown dropdown_btn_position">
                             <button class="brands dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Brands &nbsp; &nbsp;
@@ -153,7 +153,7 @@ $header .= '
                             </form>
                         </div>
 
-                        <div style="display: flex; gap: 40px;">
+                        <div class="customer_login">
                         <!-- user-menu -->
                         <div class="ltn__drop-menu user-menu">
                             <ul>
@@ -204,7 +204,7 @@ $header .= '
                         <div class="ltn__main-menu"
                             style="display: flex; align-items: center; justify-content:flex-start;; gap: 16px;">
                             ' . $jVars['module:menu:main-menu'] . '
-                            
+
                         </div>
                     </div>
                 </div>

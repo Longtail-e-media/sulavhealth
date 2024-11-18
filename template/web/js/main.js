@@ -16,7 +16,7 @@
 12. Product Details Page
 13. Isotope Gallery Active  ( Gallery / Portfolio )
 14. LightCase jQuery Active
-15. Slider One Active 
+15. Slider One Active
 16. Product Slider One
 17. Tab Product Slider One
 18. Blog Slider One
@@ -24,10 +24,10 @@
 20. Testimonial Slider - 2
 21. Testimonial Slider - 3
 22. Category Slider
-23. Image Slide  - 1 (Screenshot) 
+23. Image Slide  - 1 (Screenshot)
 24. Image Slide - 2
 25. Image Slide - 3
-26. Image Slide - 4 
+26. Image Slide - 4
 27. Brand Logo
 28. Blog Gallery (Blog Page )
 29. Countdown
@@ -351,7 +351,7 @@
         });
 
         /* --------------------------------------------------------
-            15. Slider One Active 
+            15. Slider One Active
         --------------------------------------------------------- */
         $('.ltn__slide-one-active').slick({
             autoplay: false,
@@ -948,7 +948,7 @@
 
 
         /* --------------------------------------------------------
-            23. Image Slide  - 1 (Screenshot) 
+            23. Image Slide  - 1 (Screenshot)
         --------------------------------------------------------- */
         $('.ltn__image-slider-1-active').slick({
             arrows: true,
@@ -1087,7 +1087,7 @@
 
 
         /* --------------------------------------------------------
-            26. Image Slide - 4 
+            26. Image Slide - 4
         --------------------------------------------------------- */
         $('.ltn__image-slider-4-active').slick({
             rtl: false,
@@ -1327,11 +1327,11 @@
             var oldValue = $button.parent().find("input").val();
             if ($button.text() == "+") {
                 var newVal = parseFloat(oldValue) + 1;
-            } 
+            }
             else {
                 if (oldValue > 0) {
                     var newVal = parseFloat(oldValue) - 1;
-                } 
+                }
                 else {
                     newVal = 0;
                 }
@@ -1354,8 +1354,8 @@
         /* --------------------------------------------------------
             35. Parallax active ( About Section  )
         -------------------------------------------------------- */
-        /* 
-        > 1 page e 2 ta call korle 1 ta kaj kore 
+        /*
+        > 1 page e 2 ta call korle 1 ta kaj kore
         */
         if ($('.ltn__parallax-effect-active').length) {
             var scene = $('.ltn__parallax-effect-active').get(0);
@@ -1502,3 +1502,36 @@
 
 
 })(jQuery);
+
+$(document).ready(function() {
+    $("#filter_btn").click(function() {
+        $(".product_filter_popout").toggleClass("display_filter");
+
+        if ($(".product_filter_popout").hasClass("display_filter")) {
+            $("html").addClass("overflow-hidden");
+        } else {
+            $("html").removeClass("overflow-hidden");
+        }
+    });
+
+    $("#filter_close").click(function() {
+        $(".product_filter_popout").removeClass("display_filter");
+        $("html").removeClass("overflow-hidden");
+    });
+
+    $(".product_filter_popout").on("mouseleave", function() {
+        $(this).removeClass("display_filter");
+        $("html").removeClass("overflow-hidden");
+    });
+
+    $(document).click(function(event) {
+        if (!$(event.target).closest(".product_filter_popout, #filter_btn").length) {
+            $(".product_filter_popout").removeClass("display_filter");
+            $("html").removeClass("overflow-hidden");
+        }
+    });
+
+    $(".product_filter_popout").click(function(event) {
+        event.stopPropagation();
+    });
+});

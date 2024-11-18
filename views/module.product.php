@@ -104,7 +104,7 @@ if (defined('HOME_PAGE')) {
 
     if (!empty($giftSets)) {
         $home_gift_sets .= '
-        <div class="ltn__product-tab-area ltn__product-gutter pt-115">
+        <div class="ltn__product-tab-area new_prducts ltn__product-gutter pt-115">
         <div class="">
             <div class="row">
                 <div class="col-lg-12">
@@ -151,16 +151,16 @@ if (defined('HOME_PAGE')) {
                     $discountamt= $giftSet->price1 - $giftSet->discount1;
                     $price_text = '
                 <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
-                
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span>
+
                 ';
                 }
                 else{
                 $discountamt= $giftSet->price1 - $giftSet->discount1;
                 $price_text = '
                 <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
-                
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span>
+
                 ';
                 }
             }
@@ -179,7 +179,7 @@ if (defined('HOME_PAGE')) {
                 $slugs = '' . BASE_URL . 'product/product-detail/' . $giftSet->slug . '';;
             }
             $home_gift_sets .= '
-            <div class="col-xl-3 col-sm-6 col-6">
+            <div class="col-xl-3 col-sm-6 col-xs-12">
             <div class="ltn__product-item ltn__product-item-3 text-center">
                 <div class="product-img product_hove" data-href="' . $slugs . '">
                     <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $giftSet->title . '"></a>
@@ -189,7 +189,7 @@ if (defined('HOME_PAGE')) {
                     <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a></h3>
                     <!--<div class="product-price">
                         <span>NPR 530</span>|<span>13%off</span><br/>
-                        <del>NPR 558.4</del> <span class="font-14">Save NPR 400</span> 
+                        <del>NPR 558.4</del> <span class="font-14">Save NPR 400</span>
                     </div>-->
                     <div class="product-price">
                         ' . $price_text . '
@@ -267,7 +267,7 @@ if (defined('HOME_PAGE')) {
                     }
                 }
             }
-            
+
             $home_gift_sets_modal .= '
                                                         </div>
                                                     </div>
@@ -284,12 +284,12 @@ if (defined('HOME_PAGE')) {
                                                             <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
                                                                 <span>' . SHOP_VIEW_MORE . '</span>
                                                             </a>
-            
+
                 <div class="shoping-cart-table table-responsive">
                     <form id="add-cart-product-' . $giftSet->slug . '">
                     <table class="table">
                         <tbody>
-                        
+
                             <tr>
                                 <td class="cart-product-info">
                                     <div class="form-check form-check-inline">
@@ -306,10 +306,10 @@ if (defined('HOME_PAGE')) {
                                         <label class="form-check-label">' . $giftSet->netqnt1 . '</label>
                                     </div>
                                 </td>
-                               
+
                                 <td class="cart-product-price">
                                 <input type="hidden" name="product_price_1" value="' . $prodPrice . '">
-                                
+
                                 ' . $giftSet->currency . ' ' . sprintf("%.2f", $prodPrice) . '
                                 </td>
                                 <td class="cart-product-quantity">
@@ -327,7 +327,7 @@ if (defined('HOME_PAGE')) {
                                     <h6 class="product-sub-total">' . $giftSet->currency . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
                                 </td>
                             </tr>
-                            
+
             ';
 
             if (!empty($giftSet->qnt2)) {
@@ -424,12 +424,12 @@ if (defined('HOME_PAGE')) {
             }
 
             $home_gift_sets_modal .= '
-                            
+
                         </tbody>
                     </table>
                     </form>
                 </div>
-                                                        <div class="ltn__product-details-menu-2">  
+                                                        <div class="ltn__product-details-menu-2">
                                                             <ul>
                                                             <li style="padding-right: 16.28rem;">
                                                             <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $giftSet->slug . '">
@@ -437,21 +437,21 @@ if (defined('HOME_PAGE')) {
                                                                <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
                                                             </a>
                                                         </li>
-                                                            
+
                                                                 <li>
                                                                     <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $giftSet->slug . '" form-id="add-cart-product-' . $giftSet->slug . '">
                                                                         <i class="fas fa-shopping-cart"></i>
                                                                         <span>' . SHOP_ADD_TO_CART . '</span>
                                                                     </a>
                                                                 </li>
-                                                              
-                                                                
+
+
                                                                <!-- <li>
                                                                 <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
                                                                 </li>-->
 
-                                                               
-                                                               
+
+
                                                             </ul>
                                                         </div>
                                                         <hr>
@@ -530,14 +530,14 @@ if (defined('HOME_PAGE')) {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ltn__tab-menu ltn__tab-menu-2 ltn__tab-menu-top-right--">
-    
+
                             <div class="container">
-    
+
                                 <h3 class="new-products">'.$homeservice->title.'</h3>
-    
+
                                 <div class="">
                                     <div class="tab-content tab-list3">
-    
+
                                         <div class="tab-pane fade active show" id="product_lab-services">
                                             <div class="ltn__product-tab-content-inner ltn__product-grid-view">
                                                 <div class="row">
@@ -565,7 +565,7 @@ if (defined('HOME_PAGE')) {
                 } else {
                     $slugs = '' . BASE_URL . 'product/product-detail/' . $serviceSet->slug . '';;
                 }
-    
+
                 $price_text = '';
                 if (!empty($serviceSet->price1) and (empty($serviceSet->offer_price))) {
                     $price_text = '<span>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</span>';
@@ -575,16 +575,16 @@ if (defined('HOME_PAGE')) {
                     $discountamt= $giftSet->price1 - $giftSet->discount1;
                     $price_text = '
                 <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
-                
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span>
+
                 ';
                 }
                 else{
                 $discountamt= $giftSet->price1 - $giftSet->discount1;
                 $price_text = '
                 <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span> 
-                
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span>
+
                 ';
                 }
             }
@@ -642,7 +642,7 @@ if (defined('HOME_PAGE')) {
                 </div>
             </div>
                 ';
-    
+
                 $services_gift_sets_script .= '
                     <script>
                         $("#quick_view_modal_product_' . $serviceSet->slug . '").on("shown.bs.modal", function () {
@@ -650,7 +650,7 @@ if (defined('HOME_PAGE')) {
                         })
                     </script>
                 ';
-    
+
                 // Add to cart modal (Quick View Modal)
                 $services_gift_sets_modal .= '
                     <div class="ltn__modal-area ltn__quick-view-modal-area">
@@ -687,7 +687,7 @@ if (defined('HOME_PAGE')) {
                         }
                     }
                 }
-                
+
                 $services_gift_sets_modal .= '
                                                             </div>
                                                         </div>
@@ -697,19 +697,19 @@ if (defined('HOME_PAGE')) {
                                                         <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
                                                             <h3>' . (($lang == "gr") ? $serviceSet->title_greek : $serviceSet->title) . '</h3>
                                                             ' . (($lang == "gr") ? $serviceSet->brief_greek : $serviceSet->brief) . '
-    
+
                                                                 <br/>
                                                                 <br/>
-    
+
                                                                 <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
                                                                     <span>' . SHOP_VIEW_MORE . '</span>
                                                                 </a>
-                
+
                     <div class="shoping-cart-table table-responsive">
                         <form id="add-cart-product-' . $serviceSet->slug . '">
                         <table class="table">
                             <tbody>
-                            
+
                                 <tr>
                                     <td class="cart-product-info">
                                         <div class="form-check form-check-inline">
@@ -726,10 +726,10 @@ if (defined('HOME_PAGE')) {
                                             <label class="form-check-label">' . $serviceSet->netqnt1 . '</label>
                                         </div>
                                     </td>
-                                   
+
                                     <td class="cart-product-price">
                                     <input type="hidden" name="product_price_1" value="' . $prodPrice . '">
-                                    
+
                                     ' . $serviceSet->currency . ' ' . sprintf("%.2f", $prodPrice) . '
                                     </td>
                                     <td class="cart-product-quantity">
@@ -747,9 +747,9 @@ if (defined('HOME_PAGE')) {
                                         <h6 class="product-sub-total">' . $serviceSet->currency . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
                                     </td>
                                 </tr>
-                                
+
                 ';
-    
+
                 if (!empty($serviceSet->qnt2)) {
                     $prodPrice = (!empty($serviceSet->discount2) and $serviceSet->discount2 > 0) ? $serviceSet->discount2 : $serviceSet->price2;
                     $services_gift_sets_modal .= '
@@ -780,7 +780,7 @@ if (defined('HOME_PAGE')) {
                                 </tr>
                     ';
                 }
-    
+
                 if (!empty($serviceSet->qnt3)) {
                     $prodPrice = (!empty($serviceSet->discount3) and $serviceSet->discount3 > 0) ? $serviceSet->discount3 : $serviceSet->price3;
                     $services_gift_sets_modal .= '
@@ -811,7 +811,7 @@ if (defined('HOME_PAGE')) {
                                 </tr>
                     ';
                 }
-    
+
                 if (!empty($serviceSet->qnt4)) {
                     $prodPrice = (!empty($serviceSet->discount4) and $serviceSet->discount4 > 0) ? $serviceSet->discount4 : $serviceSet->price4;
                     $services_gift_sets_modal .= '
@@ -842,14 +842,14 @@ if (defined('HOME_PAGE')) {
                                 </tr>
                     ';
                 }
-    
+
                 $services_gift_sets_modal .= '
-                                
+
                             </tbody>
                         </table>
                         </form>
                     </div>
-                                                            <div class="ltn__product-details-menu-2">  
+                                                            <div class="ltn__product-details-menu-2">
                                                                 <ul>
                                                                 <li style="padding-right: 16.28rem;">
                                                                 <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $serviceSet->slug . '">
@@ -857,21 +857,21 @@ if (defined('HOME_PAGE')) {
                                                                    <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
                                                                 </a>
                                                             </li>
-                                                                
+
                                                                     <li>
                                                                         <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $serviceSet->slug . '" form-id="add-cart-product-' . $serviceSet->slug . '">
                                                                             <i class="fas fa-shopping-cart"></i>
                                                                             <span>' . SHOP_ADD_TO_CART . '</span>
                                                                         </a>
                                                                     </li>
-                                                                  
-                                                                    
+
+
                                                                     <!--<li>
                                                                     <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
                                                                     </li>-->
-    
-                                                                   
-                                                                   
+
+
+
                                                                 </ul>
                                                             </div>
                                                             <hr>
@@ -905,13 +905,13 @@ if (defined('HOME_PAGE')) {
             </div>
             </div>
         </div>
-    
-    
-    
+
+
+
     </div>
     </div>
     </div>
-    
+
     </div>
     </div>
     </div>
@@ -957,7 +957,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
         $prodrelateds= SubProduct::get_relatedprod($prodRec->service_id,$prodRec->id,4) ;
         // pr($prodrelated);
         if (!empty($prodrelateds)) {
-          
+
             foreach ($prodrelateds as $prodrelated) {
                 // getting only one image to display
                 $prodrelatedImages = SubProductImage::getImagelist_by($prodrelated->id, 1, 0);
@@ -978,7 +978,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                 } else {
                     $slugs = '' . BASE_URL . 'product/product-detail/' . $prodrelated->slug . '';;
                 }
-    
+
                 $price_text = '';
                 if (!empty($prodrelated->price1) and (empty($prodrelated->offer_price))) {
                     $price_text = '<span>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</span>';
@@ -988,16 +988,16 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $discountamt= $prodrelated->price1 - $prodrelated->discount1;
                     $price_text = '
                 <span>' . $prodrelated->currency . ' '.$prodrelated->discount1.'</span><br/>
-                        <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt. '</span> 
-                
+                        <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt. '</span>
+
                 ';
                 }
                 else{
                 $discountamt= $prodrelated->price1 - $prodrelated->discount1;
                 $price_text = '
                 <span>' . $prodrelated->currency . ' '.$prodrelated->discount1.'</span>|<span>' . $prodrelated->discountedp . '%off</span><br/>
-                        <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt. '</span> 
-                
+                        <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt. '</span>
+
                 ';
                 }
             }
@@ -1018,7 +1018,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                 $product_realted .= '
                 <div class="col-xl-3 col-sm-6 col-6">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
-                
+
                 <div class="product-img product_hove" data-href="' . $slugs . '">
                         <a class="product-image-link" href="' . $slugs . '">
                         <img src="' . $img . '" alt="' . $prodrelated->title . '"></a>
@@ -1057,7 +1057,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                 </div>
             </div>
                 ';
-    
+
                 $product_related_script .= '
                     <script>
                         $("#quick_view_modal_product_' . $prodrelated->slug . '").on("shown.bs.modal", function () {
@@ -1065,7 +1065,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                         })
                     </script>
                 ';
-    
+
                 // Add to cart modal (Quick View Modal)
                 $product_related_modal .= '
                     <div class="ltn__modal-area ltn__quick-view-modal-area">
@@ -1102,7 +1102,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                         }
                     }
                 }
-                
+
                 $product_related_modal .= '
                                                             </div>
                                                         </div>
@@ -1112,19 +1112,19 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                         <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
                                                             <h3>' . (($lang == "gr") ? $prodrelated->title_greek : $prodrelated->title) . '</h3>
                                                             ' . (($lang == "gr") ? $prodrelated->brief_greek : $prodrelated->brief) . '
-    
+
                                                             <br/>
                                                             <br/>
-    
+
                                                             <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
                                                                 <span>' . SHOP_VIEW_MORE . '</span>
                                                             </a>
-                
+
                     <div class="shoping-cart-table table-responsive">
                         <form id="add-cart-product-' . $prodrelated->slug . '">
                         <table class="table">
                             <tbody>
-                            
+
                                 <tr>
                                     <td class="cart-product-info">
                                         <div class="form-check form-check-inline">
@@ -1160,9 +1160,9 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                         <h6 class="product-sub-total">' . $prodrelated->currency . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
                                     </td>
                                 </tr>
-                                
+
                 ';
-    
+
                 if (!empty($prodrelated->qnt2)) {
                     $prodPrice = (!empty($prodrelated->discount2) and $prodrelated->discount2 > 0) ? $prodrelated->discount2 : $prodrelated->price2;
                     $home_gift_sets_modal .= '
@@ -1193,7 +1193,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                 </tr>
                     ';
                 }
-    
+
                 if (!empty($prodrelated->qnt3)) {
                     $prodPrice = (!empty($prodrelated->discount3) and $prodrelated->discount3 > 0) ? $prodrelated->discount3 : $prodrelated->price3;
                     $home_gift_sets_modal .= '
@@ -1224,7 +1224,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                 </tr>
                     ';
                 }
-    
+
                 if (!empty($prodrelated->qnt4)) {
                     $prodPrice = (!empty($prodrelated->discount4) and $prodrelated->discount4 > 0) ? $prodrelated->discount4 : $prodrelated->price4;
                     $home_gift_sets_modal .= '
@@ -1255,14 +1255,14 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                 </tr>
                     ';
                 }
-    
+
                 $product_related_modal .= '
-                                
+
                             </tbody>
                         </table>
                         </form>
                     </div>
-                                                            <div class="ltn__product-details-menu-2">  
+                                                            <div class="ltn__product-details-menu-2">
                                                                 <ul>
                                                                 <li style="padding-right: 16.28rem;">
                                                                 <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $prodrelated->slug . '">
@@ -1270,21 +1270,21 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                                    <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
                                                                 </a>
                                                             </li>
-                                                                
+
                                                                     <li>
                                                                         <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $prodrelated->slug . '" form-id="add-cart-product-' . $prodrelated->slug . '">
                                                                             <i class="fas fa-shopping-cart"></i>
                                                                             <span>' . SHOP_ADD_TO_CART . '</span>
                                                                         </a>
                                                                     </li>
-                                                                  
-                                                                    
+
+
                                                                     <!--<li>
                                                                     <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
                                                                     </li>-->
-    
-                                                                   
-                                                                   
+
+
+
                                                                 </ul>
                                                             </div>
                                                             <hr>
@@ -1314,7 +1314,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     </div>
                 ';
             }
-           
+
         }
         $product_bread .= '
             <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-image" data-bg="' . $banner . '">
@@ -1379,7 +1379,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                 if (!empty($prodbrand)) {
                     $title = $prodbrand->title;
                     $slug= $prodbrand->slug;
-                    
+
                 } else {
                     $title = '';
                     $slug='';
@@ -1468,7 +1468,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                     <label class="form-check-label">'.$additionaldata['name'].'</label>
                                                 </div>
                                             </td>
-                                            
+
                                             <td class="cart-product-quantity">
                                                 <span>QTY</span>
                                             </td>
@@ -1491,12 +1491,12 @@ $product_detail .= '
                                             </td>
                                             <td class="cart-product-info">
                                             </td>
-                                            
+
                                             <td class="cart-product-quantity">
                                             </td>
                                             <td class="cart-product-quantity">
                                                 <h4>Grand Total</h4>
-                                            
+
                                             </td>
                                             <td class="cart-product-subtotal product-sub-total">
                                                 <input type="hidden" name="Grand_total_1" class="Grand_total" value="">
@@ -1595,10 +1595,10 @@ $product_detail .= '
                                     <h6 class="product-sub-total">' . $prodRec->currency . ' 0.00</h6>
                                 </td>
                             </tr>
-                           
+
                 ';
         }
-        
+
         $product_detail .= '
                                         </tbody>
                                     </table>
@@ -1621,12 +1621,12 @@ $product_detail .= '
                                 </ul>
                             </div>
 
-                            
+
 
                             <form>
                                 <table class="table">
                                         <tbody>
-                                        
+
                                         </tbody>
                                     </table>
 
@@ -1731,7 +1731,7 @@ if (defined('SHOP_PAGE')) {
     }
     $shop_detail .= '</div>
             </div>
-        
+
         <div class="col-md-9">
         <div class="tab-content tab-list3">
     ';
@@ -1864,12 +1864,12 @@ if (defined('SHOP_PAGE')) {
                                                             <div class="modal-product-info">
                                                                 <h3>' . (($lang == "gr") ? $product->title_greek : $product->title) . '</h3>
                                                                 ' . (($lang == "gr") ? $product->brief_greek : $product->brief) . '
-                    
+
                         <div class="shoping-cart-table table-responsive">
                             <form id="add-cart-product-' . $product->slug . '">
                             <table class="table">
                                 <tbody>
-                                
+
                                     <tr>
                                         <td class="cart-product-info">
                                             <div class="form-check form-check-inline">
@@ -1902,7 +1902,7 @@ if (defined('SHOP_PAGE')) {
                                             <h6 class="product-sub-total">' . $product->currency . ' ' . $prodPrice . '</h6>
                                         </td>
                                     </tr>
-                                    
+
                     ';
 
                     if (!empty($product->qnt2)) {
@@ -1999,7 +1999,7 @@ if (defined('SHOP_PAGE')) {
                     }
 
                     $shop_add_to_cart_modal .= '
-                                    
+
                                 </tbody>
                             </table>
                             </form>
@@ -2184,12 +2184,12 @@ if (defined('SHOP_PAGE')) {
                                                             <div class="modal-product-info">
                                                                 <h3>' . (($lang == "gr") ? $product->title_greek : $product->title) . '</h3>
                                                                 ' . (($lang == "gr") ? $product->brief_greek : $product->brief) . '
-                    
+
                         <div class="shoping-cart-table table-responsive">
                             <form id="add-cart-product-' . $product->slug . '">
                             <table class="table">
                                 <tbody>
-                                
+
                                     <tr>
                                         <td class="cart-product-info">
                                             <div class="form-check form-check-inline">
@@ -2222,7 +2222,7 @@ if (defined('SHOP_PAGE')) {
                                             <h6 class="product-sub-total">' . $product->currency . ' ' . $prodPrice . '</h6>
                                         </td>
                                     </tr>
-                                    
+
                     ';
 
                     if (!empty($product->qnt2)) {
@@ -2310,7 +2310,7 @@ if (defined('SHOP_PAGE')) {
                                             <div class="cart-plus-minus">
                                                 <div class="dec qtybutton">-</div>
                                                 <input type="text" value="0" min="0" step="1" name="product_qty_4" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $product->currency . '" readonly>
-                                                <div class="inc qtybutton">+</div>    
+                                                <div class="inc qtybutton">+</div>
                                             </div>
                                         </td>
                                         <td class="cart-product-subtotal">
@@ -2322,7 +2322,7 @@ if (defined('SHOP_PAGE')) {
                     }
 
                     $shop_add_to_cart_modal .= '
-                                    
+
                                 </tbody>
                             </table>
                             </form>

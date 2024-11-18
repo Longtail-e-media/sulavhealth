@@ -96,7 +96,7 @@ if (defined('PACKAGE_LIST_PAGE')) {
                                     <a href="' . BASE_URL . 'treatment/' . $RecRow->slug . '" class="btn btn-1">' . VIEW_MORE . '</a>
                                 </div>
                             </div>
-                            
+
                         </li>';
             }
         }
@@ -174,7 +174,7 @@ if (defined('PACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                 $active = ($j == 0) ? 'active' : '';
                 $ariaSelect = ($j == 0) ? 'true' : 'false';
                 $packagedetail .= '
-                    <a class="nav-link ' . $active . '" id="v-pills-' . $sub->slug . '-tab" data-toggle="pill"  href="#v-pills-' . $sub->slug . '" 
+                    <a class="nav-link ' . $active . '" id="v-pills-' . $sub->slug . '-tab" data-toggle="pill"  href="#v-pills-' . $sub->slug . '"
                         role="tab" aria-controls="v-pills-' . $sub->slug . '" aria-selected="' . $ariaSelect . '">
                         ' . ($sub->title) . '
                         <span><i class="fas fa-long-arrow-alt-right"></i></span>
@@ -243,7 +243,7 @@ if (defined('SUBPACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                                 <h4><a href="' . BASE_URL . 'contact-us">' . FOOTER_RESERVE . '</a></h4>
                             </div>
                         </div>
-            
+
                         <ul class="breadcrumb-nav">
                             <!-- <li><a href="index.html">Home</a></li> -->
                             <li class="active">' . ($subpkgRec->title) . '</li>
@@ -270,7 +270,7 @@ if (defined('SUBPACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                                 </div>
                             </div>
                         </div>
-            
+
                         <div class="col-lg-8">
                             <div class="deatils-box">
                                 <div class="cancellation-box clearfix">
@@ -354,7 +354,7 @@ if (defined('PACKAGES_PAGE')) {
     }
     $package_detail .= '</div>
             </div>
-        
+
         <div class="col-md-9">
         <div class="tab-content tab-list3">
     ';
@@ -487,12 +487,12 @@ if (defined('PACKAGES_PAGE')) {
                                                             <div class="modal-product-info">
                                                                 <h3>' . ($product->title) . '</h3>
                                                                 ' . ($product->brief) . '
-                    
+
                         <div class="shoping-cart-table table-responsive">
                             <form id="add-cart-product-' . $product->slug . '">
                             <table class="table">
                                 <tbody>
-                                
+
                                     <tr>
                                         <td class="cart-product-info">
                                             <div class="form-check form-check-inline">
@@ -525,7 +525,7 @@ if (defined('PACKAGES_PAGE')) {
                                             <h6 class="product-sub-total">' . $product->currency . ' ' . $prodPrice . '</h6>
                                         </td>
                                     </tr>
-                                    
+
                     ';
 
                     if (!empty($product->qnt2)) {
@@ -622,7 +622,7 @@ if (defined('PACKAGES_PAGE')) {
                     }
 
                     $pkg_add_to_cart_modal .= '
-                                    
+
                                 </tbody>
                             </table>
                             </form>
@@ -807,12 +807,12 @@ if (defined('PACKAGES_PAGE')) {
                                                             <div class="modal-product-info">
                                                                 <h3>' . ($product->title) . '</h3>
                                                                 ' . ($product->brief) . '
-                    
+
                         <div class="shoping-cart-table table-responsive">
                             <form id="add-cart-product-' . $product->slug . '">
                             <table class="table">
                                 <tbody>
-                                
+
                                     <tr>
                                         <td class="cart-product-info">
                                             <div class="form-check form-check-inline">
@@ -845,7 +845,7 @@ if (defined('PACKAGES_PAGE')) {
                                             <h6 class="product-sub-total">' . $product->currency . ' ' . $prodPrice . '</h6>
                                         </td>
                                     </tr>
-                                    
+
                     ';
 
                     if (!empty($product->qnt2)) {
@@ -930,7 +930,7 @@ if (defined('PACKAGES_PAGE')) {
                                             <div class="cart-plus-minus">
                                                 <div class="dec qtybutton">-</div>
                                                 <input type="text" value="0" min="0" step="1" name="product_qty_4" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $product->currency . '" readonly>
-                                                <div class="inc qtybutton">+</div>    
+                                                <div class="inc qtybutton">+</div>
                                             </div>
                                         </td>
                                         <td class="cart-product-subtotal">
@@ -942,7 +942,7 @@ if (defined('PACKAGES_PAGE')) {
                     }
 
                     $pkg_add_to_cart_modal .= '
-                                    
+
                                 </tbody>
                             </table>
                             </form>
