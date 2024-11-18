@@ -179,15 +179,15 @@ switch ($action) {
         $additional = (isset($_REQUEST['additional']) and !empty($_REQUEST['additional']))?$_REQUEST['additional']:'';
         $newArr = array();
         // pr($additional);
-                if(!empty($additional)){		
-                    // pr($additional);		
-                    foreach($additional as $key=>$val){
-                        $final_title = !empty($additional[$key])?$val['name']:'';
-                        // $final_qty  = !empty($additional[$key])?$val['qty']:'';
-                        $final_price  = !empty($additional[$key])?$val['price']:'';
-                        $newArr[$key] = array('id'=>$key,'name'=>$final_title,'price'=>$final_price);
-                        }
+        if(!empty($additional)){
+            // pr($additional);
+            foreach($additional as $key=>$val){
+                $final_title = !empty($additional[$key])?$val['name']:'';
+                // $final_qty  = !empty($additional[$key])?$val['qty']:'';
+                $final_price  = !empty($additional[$key])?$val['price']:'';
+                $newArr[$key] = array('id'=>$key,'name'=>$final_title,'price'=>$final_price);
                 }
+        }
         $record->slug 			    = create_slug($_REQUEST['title']);
         $record->title 			    = $_REQUEST['title'];
         $record->service_id         = (!empty($_REQUEST['service_id'])) ? $_REQUEST['service_id'] : '0';
@@ -218,6 +218,7 @@ switch ($action) {
         $record->banner_image	    = !empty($_REQUEST['imageArrayname2'])?$_REQUEST['imageArrayname2']:'';
         $record->brief 		        = !empty($_REQUEST['brief'])?$_REQUEST['brief']:'';
         $record->brief_greek        = !empty($_REQUEST['brief_greek'])?$_REQUEST['brief_greek']:'';
+        $record->sizes 		        = !empty($_REQUEST['sizes'])?$_REQUEST['sizes']:'';
         $record->content 		    = $_REQUEST['content'];
         $record->additional				= base64_encode(serialize($newArr));
         // $record->content_greek 		= $_REQUEST['content_greek'];
@@ -303,6 +304,7 @@ case "editSubProduct":
         $record->price4 		    = !empty($_REQUEST['price4'])?$_REQUEST['price4']:'';
         $record->discount4 		    = !empty($_REQUEST['discount4'])?$_REQUEST['discount4']:'';
         $record->banner_image	    = !empty($_REQUEST['imageArrayname2'])?$_REQUEST['imageArrayname2']:'';
+        $record->sizes 		        = !empty($_REQUEST['sizes'])?$_REQUEST['sizes']:'';
         $record->brief 		        = !empty($_REQUEST['brief'])?$_REQUEST['brief']:'';
         $record->brief_greek        = !empty($_REQUEST['brief_greek'])?$_REQUEST['brief_greek']:'';
         $record->content 		    = $_REQUEST['content'];

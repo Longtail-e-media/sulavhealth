@@ -443,6 +443,20 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                     </div>
                 </div>
 
+                <?php if ($typeid == 1) { ?>
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Sizes :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-6">
+                            <input placeholder="Sizes" class="col-md-6 validate[length[0,250]]" type="text" name="sizes" id="sizes" style="width:100%"
+                                   value="<?php echo !empty($subproductInfo->sizes) ? $subproductInfo->sizes : ""; ?>">
+                        </div>
+                    </div>
+                <?php } ?>
+
                 <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">
