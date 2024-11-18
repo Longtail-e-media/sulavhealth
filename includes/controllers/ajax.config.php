@@ -95,10 +95,11 @@
 //			$record->fax 			= $_REQUEST['fax'];
 			$record->email_address 	= $_REQUEST['email_address'];
 			$record->breif 			= $_REQUEST['breif'];
+            $record->whatsapp		= $_REQUEST['whatsapp'];
 // 			$record->brief_greek 	= $_REQUEST['brief_greek'];
 //			$record->opening_hour 	= $_REQUEST['opening_hour'];
 //			$record->opening_hour_greek = $_REQUEST['opening_hour_greek'];
-			$record->location_type 	= $_REQUEST['location_type'];					
+//			$record->location_type 	= $_REQUEST['location_type'];
 // 			$record->location_map 	= $_REQUEST['location_map'];
 
 // 			if(!empty($_REQUEST['imageArrayname'])):
