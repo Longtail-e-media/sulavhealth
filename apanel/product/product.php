@@ -453,6 +453,8 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         <div class="form-input col-md-6">
                             <input placeholder="Sizes" class="col-md-6 validate[length[0,250]]" type="text" name="sizes" id="sizes" style="width:100%"
                                    value="<?php echo !empty($subproductInfo->sizes) ? $subproductInfo->sizes : ""; ?>">
+                            <br>
+                            <small>Use <strong>,</strong> to separate multiple sizes</small>
                         </div>
                     </div>
                 <?php } ?>
