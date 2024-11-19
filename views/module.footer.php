@@ -19,7 +19,7 @@ foreach ($nums as $num) {
 
 
 $footer .= '
-<footer class="ltn__footer-area ">
+    <footer class="ltn__footer-area ">
         <div class="footer-top-area  section-bg-1 plr--5">
             <div class="container">
                 <div class="row">
@@ -40,8 +40,6 @@ $footer .= '
                                             target="_blank">info&#64;sulavhealth&#46;com</a>
                                     </li> -->
                                 </ul>
-
-
                             </div>
                             <ul
                             style="list-style: none; margin-top: 20px; display: flex; align-items:start; justify-content: start; gap: 20px; font-size: 1.25rem; transform: translateX(-20px);">
@@ -112,12 +110,14 @@ $footer .= '
             </div>
         </div> -->
     </footer>
-<div class="whats_app">
-        <a href="https://wa.me/+9779851025305" target="_blank" class="whatsapp">
-            <i class="fab fa-whatsapp fa-2x"></i>
-            </a>
-     </div>
-
 ';
+
+if (!empty($siteRegulars->whatsapp)) {
+    $footer .= '
+        <div class="whats_app">
+            <a href="https://wa.me/+977' . $siteRegulars->whatsapp . '" target="_blank" class="whatsapp"><i class="fab fa-whatsapp fa-2x"></i></a>
+        </div>
+    ';
+}
 
 $jVars['module:footer'] = $footer;
