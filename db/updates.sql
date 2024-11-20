@@ -79,3 +79,5 @@ INSERT INTO `tbl_modules` (`id`, `parent_id`, `name`, `link`, `mode`, `icon_link
 VALUES (NULL, '0', 'Offers Mgmt', 'offers/list', 'offers', 'icon-tags', '1', '8', '2024-11-20', 'a:4:{s:9:\"bimgwidth\";s:2:\"22\";s:10:\"bimgheight\";s:2:\"22\";s:8:\"imgwidth\";s:3:\"200\";s:9:\"imgheight\";s:3:\"200\";}');
 
 ALTER TABLE `tbl_users` ADD `diseases` TEXT NOT NULL AFTER `permission`, ADD `medicines` TEXT NOT NULL AFTER `diseases`;
+
+ALTER TABLE `tbl_users` ADD `shipping_location_home` TEXT NOT NULL AFTER `medicines`, ADD `shipping_district_home` TEXT NOT NULL AFTER `shipping_location_home`, ADD `shipping_location_office` TEXT NOT NULL AFTER `shipping_district_home`, ADD `shipping_district_office` TEXT NOT NULL AFTER `shipping_location_office`;

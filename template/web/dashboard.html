@@ -388,6 +388,35 @@
             $('a[href="#liton_tab_1_3"]').tab('show');
         }
 
+        // shipping District
+        $('#shipping_location_home').on('change', function () {
+            var selectedOption = $("#shipping_location_home option:selected").val();
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: base_url + "add_coupon.php",
+                data: "action=ship_district_by_id&location=" + selectedOption,
+                success: function (data) {
+                    var msg = eval(data);
+                    $('#shipping_district_home').html(msg.message);
+                }
+            });
+        });
+
+        $('#shipping_location_office').on('change', function () {
+            var selectedOption = $("#shipping_location_office option:selected").val();
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: base_url + "add_coupon.php",
+                data: "action=ship_district_by_id&location=" + selectedOption,
+                success: function (data) {
+                    var msg = eval(data);
+                    $('#shipping_district_office').html(msg.message);
+                }
+            });
+        });
+
     });
 
 </script>

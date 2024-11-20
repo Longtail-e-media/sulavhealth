@@ -7,7 +7,8 @@ class User extends DatabaseObject
     protected static $db_fields = array(
         'id', 'first_name', 'middle_name', 'last_name', 'contact', 'email', 'Google_maps', 'blood_group', 'postal', 'city', 'district', 'height', 'weight', 'gender',
         'dob', 'marital_status', 'optional_email', 'username', 'password', 'accesskey', 'image', 'group_id', 'access_code', 'facebook_uid', 'facebook_accesstoken',
-        'facebook_tokenexpire', 'sortorder', 'status', 'added_date', 'permission', 'diseases', 'medicines'
+        'facebook_tokenexpire', 'sortorder', 'status', 'added_date', 'permission', 'diseases', 'medicines', 'shipping_location_home', 'shipping_district_home',
+        'shipping_location_office', 'shipping_district_office'
     );
 
     public $id;
@@ -41,7 +42,7 @@ class User extends DatabaseObject
     public $status;
     public $added_date;
     public $permission;
-    public $diseases, $medicines;
+    public $diseases, $medicines, $shipping_location_home, $shipping_district_home, $shipping_location_office, $shipping_district_office;
 
     // get user id by access token
     public static function get_uid_by_accessToken($accTok = '')

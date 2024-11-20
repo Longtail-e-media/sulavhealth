@@ -442,6 +442,78 @@ if (defined('DASHBOARD_PAGE')) {
                             <label>Medicines:</label>
                             <input type="text" name="medicines" value="' . ((!empty($userRec->medicines)) ? $userRec->medicines : '') . '">
                         </div>
+                        <div class="col-lg-6 col-md-6 mb-30">
+                            <label>Shipping Location (Home)</label>
+                            <div class="input-item">
+                                <select class="nice-selec col-12" name="shipping_location_home" id="shipping_location_home">
+                                    <option value="">Select Shipping Location</option>
+                ';
+        $parentLocations = locationn::get_all_byparnt();
+        foreach ($parentLocations as $country) {
+            $selected = '';
+            if (!empty($userRec->shipping_location_home)) {
+                $selected = ($country->id == $userRec->shipping_location_home) ? "selected" : "";
+            }
+            $user_profile .= '<option value="' . $country->id . '" ' . $selected . '>' . $country->title . '</option>';
+        }
+        $user_profile .= '
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 mb-30">
+                            <label>Shipping District (Home)</label>
+                            <div class="input-item">
+                                <select class="nice-selec col-12" name="shipping_district_home" id="shipping_district_home">
+                                    <option value="">Select Shipping District</option>
+                ';
+        $districts = Locationn::get_all_bychild();
+        foreach ($districts as $district) {
+            $selected = '';
+            if (!empty($userRec->shipping_district_home)) {
+                $selected = ($district->id == $userRec->shipping_district_home) ? "selected" : "";
+            }
+            $user_profile .= '<option value="' . $district->id . '" ' . $selected . '>' . $district->title . '</option>';
+        }
+        $user_profile .= '
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 mb-30">
+                            <label>Shipping Location (Office)</label>
+                            <div class="input-item">
+                                <select class="nice-selec col-12" name="shipping_location_office" id="shipping_location_office">
+                                    <option value="">Select Shipping Location</option>
+                ';
+        $parentLocations = locationn::get_all_byparnt();
+        foreach ($parentLocations as $country) {
+            $selected = '';
+            if (!empty($userRec->shipping_location_office)) {
+                $selected = ($country->id == $userRec->shipping_location_office) ? "selected" : "";
+            }
+            $user_profile .= '<option value="' . $country->id . '" ' . $selected . '>' . $country->title . '</option>';
+        }
+        $user_profile .= '
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 mb-30">
+                            <label>Shipping District (Office)</label>
+                            <div class="input-item">
+                                <select class="nice-selec col-12" name="shipping_district_office" id="shipping_district_office">
+                                    <option value="">Select Shipping District</option>
+                ';
+        $districts = Locationn::get_all_bychild();
+        foreach ($districts as $district) {
+            $selected = '';
+            if (!empty($userRec->shipping_district_office)) {
+                $selected = ($district->id == $userRec->shipping_district_office) ? "selected" : "";
+            }
+            $user_profile .= '<option value="' . $district->id . '" ' . $selected . '>' . $district->title . '</option>';
+        }
+        $user_profile .= '
+                                </select>
+                            </div>
+                        </div>
    <!--
     <div class="col-md-12">
     <h6>Google Maps</h6>
