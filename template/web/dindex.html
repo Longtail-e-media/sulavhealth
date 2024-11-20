@@ -13,7 +13,8 @@
 
     <!-- Owl Carousel CSS -->
     <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css'>
-    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css'>
+    <link rel="stylesheet"
+          href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css'>
 
 
     <!-- Font Icons css -->
@@ -46,6 +47,7 @@
                 grid-template-columns: repeat(1, 1fr);
             }
         }
+
         .sticky-about {
             position: sticky;
             top: 10rem;
@@ -95,25 +97,28 @@
         }
 
         /* offer */
-        .product-list.mt-0{
+        .product-list.mt-0 {
             margin-top: 0 !important;
         }
-        .hygience_others{
+
+        .hygience_others {
             margin: 6.6rem 0 !important;
         }
-   .hygience_others #offers {
-  position: absolute;
-  left: 50%;
-  top: 80%;
-  background-color: #9e1e63;
-  padding: 0.5rem 2rem;
-  border-radius: 1.25rem;
-  translate: -50% -50%;
-  color: #fff;
-}
-.hygience_others #offers a:hover {
-  color: #fff;
-}
+
+        .hygience_others #offers, .hygience_others .offers-btn {
+            position: absolute;
+            left: 50%;
+            top: 80%;
+            background-color: #9e1e63;
+            padding: 0.5rem 2rem;
+            border-radius: 1.25rem;
+            translate: -50% -50%;
+            color: #fff;
+        }
+
+        .hygience_others #offers a:hover, .hygience_others .offers-btn a:hover {
+            color: #fff;
+        }
 
         /* offer end */
     </style>
@@ -123,14 +128,15 @@
 
 <jcms:module:header/>
 <script type="text/javascript">
-        function googleTranslateElementInit() {
-                                new google.translate.TranslateElement({
-                                    pageLanguage:'en',
-                                    includedLanguages: 'en,ne',
-                                }, 'google_translate_element');
-                            }
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,ne',
+        }, 'google_translate_element');
+    }
 </script>
-<script src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit' type="text/javascript"></script>
+<script src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'
+        type="text/javascript"></script>
 
 <jcms:module:product:cart-menu/>
 
@@ -143,89 +149,81 @@
 </div>
 
 <!-- hygience care -->
- <div class="hygience_others">
-<div class="container">
-    <div class="row align-items-center">
-        <div class="col-xl-6 col-lg-6 col-md-12">
-            <div class="container product-list mt-0">
-                <div class="product" style="background-color: #F2C8C8;">
-                    <img src="img/111.png"
-                         alt="Product 1">
-                    <div class="product-title">
-                        <a href="product/dietary-supplements">Dietary Supplements</a>
-                        <!-- <p>Precision. Trust. Your lab partner.</p> -->
+<div class="hygience_others">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="container product-list mt-0">
+                    <div class="product" style="background-color: #F2C8C8;">
+                        <img src="img/111.png"
+                             alt="Product 1">
+                        <div class="product-title">
+                            <a href="product/dietary-supplements">Dietary Supplements</a>
+                            <!-- <p>Precision. Trust. Your lab partner.</p> -->
+                        </div>
                     </div>
-                </div>
-                <div class="product" style="background-color: #F1F2C8;">
-                    <img src="img/11.png"
-                         alt="Product 1">
-                    <div class="product-title">
-                        <a href="product/skin-care">Skin Care</a>
-                        <!-- <p>Unlock wellness with expert physiotherapy!</p> -->
+                    <div class="product" style="background-color: #F1F2C8;">
+                        <img src="img/11.png"
+                             alt="Product 1">
+                        <div class="product-title">
+                            <a href="product/skin-care">Skin Care</a>
+                            <!-- <p>Unlock wellness with expert physiotherapy!</p> -->
+                        </div>
                     </div>
-                </div>
-                <div class="product" style="background-color: #C8F2D3;">
-                    <img src="img/hair.png"
-                         alt="Product 1">
-                    <div class="product-title">
-                        <a href="product/hygiene">Hygiene</a>
-                        <!-- <p>Revive with specialized neuropathy care!</p> -->
+                    <div class="product" style="background-color: #C8F2D3;">
+                        <img src="img/hair.png"
+                             alt="Product 1">
+                        <div class="product-title">
+                            <a href="product/hygiene">Hygiene</a>
+                            <!-- <p>Revive with specialized neuropathy care!</p> -->
+                        </div>
                     </div>
-                </div>
-                <div class="product" style="background-color: #F2DCC8;">
-                    <img src="img/baby.png"
-                         alt="Product 1">
-                    <div class="product-title">
-                        <a href="product/baby-Care">Baby Care</a>
-                        <!-- <p>Take care of you skin with Derma.</p> -->
+                    <div class="product" style="background-color: #F2DCC8;">
+                        <img src="img/baby.png"
+                             alt="Product 1">
+                        <div class="product-title">
+                            <a href="product/baby-Care">Baby Care</a>
+                            <!-- <p>Take care of you skin with Derma.</p> -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-md-12  offset-xl-1 mt-5 mt-lg-0">
-            <div class="owl-offer owl-carousel">
-                <div class="offers-image">
-                    <figure class="position-relative">
-                      <img src="img/offer.jpg"
-                      alt="Product 1" class="w-100">
-                    <button id="offers"><a href="" target="_blank">Reserve</a></button>
-                    </figure>
-                  </div>
+            <div class="col-xl-4 col-lg-6 col-md-12  offset-xl-1 mt-5 mt-lg-0">
+                <div class="owl-offer owl-carousel">
+                    <jcms:module:offers-home-slider/>
+                </div>
             </div>
         </div>
     </div>
 </div>
- </div>
+
+<jcms:module:offers-home-slider-modal/>
+
 <!-- hygience care end -->
 
 <div class="container branded_prdct">
     <div class="access flex-column flex-lg-row f mt-80 align-items-md-start">
         <div class="access-items">
-            <img src="img/brand.png"
-                 alt="Product 1">
+            <img src="img/brand.png" alt="Product 1">
             <div class="access-title">
                 <a href="product/lab-services">Branded Products</a>
                 <p>Prescribed by professional doctors!</p>
             </div>
         </div>
         <div class="access-items">
-            <img src="img/get-service-at-home.png"
-                 alt="Product 1">
+            <img src="img/get-service-at-home.png" alt="Product 1">
             <div class="access-title">
                 <a href="#">Get Delivered at home within 2 days.</a>
                 <p>Unmatched convenience with doorstep service!</p>
             </div>
         </div>
         <div class="access-items">
-            <img src="img/doc-recommend.png"
-                 alt="Product 1">
+            <img src="img/doc-recommend.png" alt="Product 1">
             <div class="access-title">
                 <a href="#">Doctor Recommended Products</a>
                 <p>Health essentials, now at hand!</p>
             </div>
-
         </div>
-
     </div>
 </div>
 
@@ -240,17 +238,12 @@
 
 
 <div class="container mx-auto">
-
     <div class="popular-brands mb-80">
         <h3>Popular Brands</h3>
-        <div class="brand-images-wrapper owl-carousel owl-theme">
+        <div class="brand-images-wrapper owl-popular owl-carousel owl-theme">
             <jcms:module:product:home-brand/>
         </div>
-
     </div>
-
-
-</div>
 </div>
 
 <jcms:module:footer/>
@@ -275,7 +268,8 @@
                                     </div>
                                     <div class="modal-product-info">
                                         <h5><a href="#">Gift One</a></h5>
-                                        <p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to your Cart</p>
+                                        <p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to
+                                            your Cart</p>
                                         <div class="btn-wrapper">
                                             <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
                                             <a href="#" class="theme-btn-2 btn btn-effect-2">Checkout</a>
@@ -283,7 +277,8 @@
                                     </div>
                                     <!-- additional-info -->
                                     <div class="additional-info d-none">
-                                        <p>We want to give you <b>10% discount</b> for your first order, <br> Use discount code at checkout</p>
+                                        <p>We want to give you <b>10% discount</b> for your first order, <br> Use
+                                            discount code at checkout</p>
                                         <div class="payment-method">
                                             <img src="img/icons/payment.png" alt="#">
                                         </div>
@@ -319,14 +314,17 @@
                                     </div>
                                     <div class="modal-product-info">
                                         <h5><a href="product-details.html">Gift One</a></h5>
-                                        <p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to your Wishlist</p>
+                                        <p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to
+                                            your Wishlist</p>
                                         <div class="btn-wrapper">
-                                            <a href="wishlist.html" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
+                                            <a href="wishlist.html" class="theme-btn-1 btn btn-effect-1">View
+                                                Wishlist</a>
                                         </div>
                                     </div>
                                     <!-- additional-info -->
                                     <div class="additional-info d-none">
-                                        <p>We want to give you <b>10% discount</b> for your first order, <br> Use discount code at checkout</p>
+                                        <p>We want to give you <b>10% discount</b> for your first order, <br> Use
+                                            discount code at checkout</p>
                                         <div class="payment-method">
                                             <img src="img/icons/payment.png" alt="#">
                                         </div>
@@ -363,38 +361,35 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
 <script>
     $(document).ready(function () {
-    $(".owl-carousel").owlCarousel({
-        loop: true,
-        items:1,
-        margin: 10,
-        nav: true,
-        autoplay: true,
-        autoplayTimeout: 2000,
+        $(".owl-carousel.owl-popular").owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            autoplay: true,
+            autoplayTimeout: 2000,
+            responsive: {
+                0: {items: 2},
+                600: {items: 3},
+                1000: {items: 6}
+            }
+        });
 
+        $(".owl-carousel.owl-offer").owlCarousel({
+            loop: true,
+            items: 1,
+            margin: 10,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 3000,
+        });
     });
-});
-</script>
-<script>
-        $(document).ready(function () {
-    $(".owl-carousel.owl-offer").owlCarousel({
-        loop: true,
-        items:1,
-        margin: 10,
-        nav: false,
-        dots: false,
-        autoplay: true,
-        autoplayTimeout: 3000,
-    });
-});
-
 </script>
 
 <script>
     var base_url = $('base').attr('url');
-    //  console.log(base_url);
     // Might be needed to keep open tab open even when page has been reloaded
     $(document).ready(function () {
-
         $('.ltn__image-slider-mine').slick({
             rtl: false,
             arrows: true,
@@ -444,6 +439,7 @@
     });
 </script>
 
+<jcms:module:offers-home-slider-script/>
 
 </body>
 
