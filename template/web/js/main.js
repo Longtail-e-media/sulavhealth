@@ -1532,6 +1532,6 @@ $(document).ready(function() {
     });
 
     $(".product_filter_popout").click(function(event) {
-        event.stopPropagation();
+        // event.stopPropagation();
     });
 });
