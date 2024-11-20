@@ -77,3 +77,5 @@ ALTER TABLE `tbl_offers` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 INSERT INTO `tbl_modules` (`id`, `parent_id`, `name`, `link`, `mode`, `icon_link`, `status`, `sortorder`, `added_date`, `properties`)
 VALUES (NULL, '0', 'Offers Mgmt', 'offers/list', 'offers', 'icon-tags', '1', '8', '2024-11-20', 'a:4:{s:9:\"bimgwidth\";s:2:\"22\";s:10:\"bimgheight\";s:2:\"22\";s:8:\"imgwidth\";s:3:\"200\";s:9:\"imgheight\";s:3:\"200\";}');
+
+ALTER TABLE `tbl_users` ADD `diseases` TEXT NOT NULL AFTER `permission`, ADD `medicines` TEXT NOT NULL AFTER `diseases`;

@@ -364,107 +364,113 @@ if (defined('DASHBOARD_PAGE')) {
                 <form action="#" id="profileForm">
                     <input type="hidden" name="idValue" value="' . $userRec->id . '">
                     <div class="row mb-50">
-    <div class="col-md-6">
-        <label>' . ('First name') . ':</label>
-        <input type="text" name="fname" value="' . ((!empty($userRec->first_name)) ? $userRec->first_name : '') . '">
-    </div>
-    <div class="col-md-6">
-        <label>' . ('Last name') . ':</label>
-        <input type="text" name="lname" value="' . ((!empty($userRec->last_name)) ? $userRec->last_name : '') . '">
-    </div>
-    <div class="col-md-6">
-        <label>' . ('Email') . ':</label>
-        <input type="email" name="email" value="' . ((!empty($userRec->email)) ? $userRec->email : '') . '" readonly>
-    </div>
-    <div class="col-md-6">
-        <label>' . ('Address') . ':</label>
-        <input type="text" name="address" value="' . ((!empty($userRec->facebook_uid)) ? $userRec->facebook_uid : '') . '">
-    </div>
-    <div class="col-md-6">
-        <label>' . ('Phone Number') . ':</label>
-        <input type="text" name="phone" value="' . ((!empty($userRec->contact)) ? $userRec->contact : '') . '">
-    </div>
-    <div class="col-md-6">
-                                        <h6>Gender</h6>
-                                        <div class="input-item">
-                                            <select class="nice-selec col-12" name="gender" value="gender">
-                                            <option value="0">Male</option>
-                                            <option value="1">Female</option>
-                                            <option value="2">Other</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                        <div class="col-md-6">
+                            <label>First name:</label>
+                            <input type="text" name="fname" value="' . ((!empty($userRec->first_name)) ? $userRec->first_name : '') . '">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Last name:</label>
+                            <input type="text" name="lname" value="' . ((!empty($userRec->last_name)) ? $userRec->last_name : '') . '">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Email:</label>
+                            <input type="email" name="email" value="' . ((!empty($userRec->email)) ? $userRec->email : '') . '" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Address:</label>
+                            <input type="text" name="address" value="' . ((!empty($userRec->facebook_uid)) ? $userRec->facebook_uid : '') . '">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Phone Number:</label>
+                            <input type="text" name="phone" value="' . ((!empty($userRec->contact)) ? $userRec->contact : '') . '">
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Gender</h6>
+                            <div class="input-item">
+                                <select class="nice-selec col-12" name="gender" value="gender">
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                                <option value="2">Other</option>
+                                </select>
+                            </div>
+                        </div>
 
-                                    <div class="col-md-6">
-                                    <label>' . ('Date of Birth') . ':</label>
-                                    <input type="date" name="dob" value="' . ((!empty($userRec->dob)) ? $userRec->dob : '') . '">
-                                    </div>
+                        <div class="col-md-6">
+                            <label>Date of Birth:</label>
+                            <input type="date" name="dob" value="' . ((!empty($userRec->dob)) ? $userRec->dob : '') . '">
+                        </div>
 
-    <div class="col-md-6">
-    <h6>Marital Status</h6>
-    <div class="input-item">
-    <select class="nice-selec col-12" name="marital_status">
-    <option value="0">Single </option>
-    <option value="1">Married </option>
-</select>
-    </div>
-</div>
+                        <div class="col-md-6">
+                            <h6>Marital Status</h6>
+                            <div class="input-item">
+                                <select class="nice-selec col-12" name="marital_status">
+                                    <option value="0">Single </option>
+                                    <option value="1">Married </option>
+                                </select>
+                            </div>
+                        </div>
     
-    <div class="col-md-6">
-        <label>' . ('Weight') . ':</label>
-        <input type="text" name="weight" value="' . ((!empty($userRec->weight)) ? $userRec->weight : '') . '"> 
-    </div>
-    <div class="col-md-6">
-        <label>' . ('Height') . ':</label>
-        <input type="text" name="height" value="' . ((!empty($userRec->height)) ? $userRec->height : '') . '">
-    </div>
-    <div class="col-md-6">
-        <label>' . ('District') . ':</label>
-        <input type="text" name="district" value="' . ((!empty($userRec->district)) ? $userRec->district : '') . '">
-    </div>
-    <div class="col-md-6">
-        <label>' . ('City') . ':</label>
-        <input type="text" name="city" value="' . ((!empty($userRec->city)) ? $userRec->city : '') . '">
-    </div>
-    <div class="col-md-6">
-        <label>' . ('Postal Code') . ':</label>
-        <input type="text" name="postal_code" value="' . ((!empty($userRec->postal)) ? $userRec->postal : '') . '">
-    </div>
-    <div class="col-md-6">
-        <label>' . ('Blood Group') . ':</label>
-        <input type="text" name="blood_group" value="' . ((!empty($userRec->blood_group)) ? $userRec->blood_group : '') . '">
-    </div>
+                        <div class="col-md-6">
+                            <label>Weight:</label>
+                            <input type="text" name="weight" value="' . ((!empty($userRec->weight)) ? $userRec->weight : '') . '"> 
+                        </div>
+                        <div class="col-md-6">
+                            <label>Height:</label>
+                            <input type="text" name="height" value="' . ((!empty($userRec->height)) ? $userRec->height : '') . '">
+                        </div>
+                        <div class="col-md-6">
+                            <label>District:</label>
+                            <input type="text" name="district" value="' . ((!empty($userRec->district)) ? $userRec->district : '') . '">
+                        </div>
+                        <div class="col-md-6">
+                            <label>City:</label>
+                            <input type="text" name="city" value="' . ((!empty($userRec->city)) ? $userRec->city : '') . '">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Postal Code:</label>
+                            <input type="text" name="postal_code" value="' . ((!empty($userRec->postal)) ? $userRec->postal : '') . '">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Blood Group:</label>
+                            <input type="text" name="blood_group" value="' . ((!empty($userRec->blood_group)) ? $userRec->blood_group : '') . '">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Diseases:</label>
+                            <input type="text" name="diseases" value="' . ((!empty($userRec->diseases)) ? $userRec->diseases : '') . '">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Medicines:</label>
+                            <input type="text" name="medicines" value="' . ((!empty($userRec->medicines)) ? $userRec->medicines : '') . '">
+                        </div>
    <!--
     <div class="col-md-12">
     <h6>Google Maps</h6>
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.293320542693!2d85.31337347525263!3d27.67732777619979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb196760d68d39%3A0xcff5b96bdc5c0764!2sLongtail%20e-media!5e0!3m2!1sen!2snp!4v1714128864192!5m2!1sen!2snp" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     -->
-    <div class="col-md-12">
-    <label for="google-maps-link">Google Maps Link:</label>
-    <input type="text" id="google-maps-link" name="Google_maps" placeholder="Paste Google Maps link here" value="' . ((!empty($userRec->Google_maps)) ? $userRec->Google_maps : '') . '" oninput="updateMap()">
-    <div id="map-preview" style="display: none;">
-        <iframe id="google-maps-iframe" src="" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-    </div>
-</div>
-
-
-</div>
-
-
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>' . ('New password (leave blank to leave unchanged)') . ':</label>
-                                <input type="password" name="password" id="password">
-                                <br/>
-                                <br/>
-                                <label>' . ('Confirm new password') . ':</label>
-                                <input type="password" name="confirm_password">
+                        <div class="col-md-12">
+                            <label for="google-maps-link">Google Maps Link:</label>
+                            <input type="text" id="google-maps-link" name="Google_maps" placeholder="Paste Google Maps link here" value="' . ((!empty($userRec->Google_maps)) ? $userRec->Google_maps : '') . '" oninput="updateMap()">
+                            <div id="map-preview" style="display: none;">
+                                <iframe id="google-maps-iframe" src="" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                             </div>
                         </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>New password (leave blank to leave unchanged):</label>
+                            <input type="password" name="password" id="password">
+                            <br/>
+                            <br/>
+                            <label>Confirm new password:</label>
+                            <input type="password" name="confirm_password">
+                        </div>
+                    </div>
                     <div class="btn-wrapper">
-                        <button type="submit" id="submitProfile" class="btn theme-btn-1 btn-effect-1 text-uppercase">' . ('Save Changes') . '</button>
+                        <button type="submit" id="submitProfile" class="btn theme-btn-1 btn-effect-1 text-uppercase">Save Changes</button>
                     </div>
                     <p id="profileMsg" class="mt-20" style="display: none;"></p>
                 </form>

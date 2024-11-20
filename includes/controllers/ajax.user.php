@@ -275,6 +275,8 @@
             $record->city           = (!empty($_REQUEST['city'])) ? $_REQUEST['city'] : '';
             $record->postal         = (!empty($_REQUEST['postal_code'])) ? $_REQUEST['postal_code'] : '';
             $record->blood_group    = (!empty($_REQUEST['blood_group'])) ? $_REQUEST['blood_group'] : '';
+            $record->diseases       = (!empty($_REQUEST['diseases'])) ? $_REQUEST['diseases'] : '';
+            $record->medicines      = (!empty($_REQUEST['medicines'])) ? $_REQUEST['medicines'] : '';
             $record->Google_maps    = (!empty($_REQUEST['Google_maps'])) ? $_REQUEST['Google_maps'] : '';
             $record->facebook_uid   = $_REQUEST['address'];
             $record->contact        = $_REQUEST['phone'];
