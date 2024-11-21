@@ -13,21 +13,21 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     global $db;
     /*
     $sql = "SELECT pkg.id, pkg.title, pkg.slug, pkg.breif, pkg.days, pkg.image, pkg.price, pkg.difficulty,pkg.accomodation,
-            act.title as activity, act.slug as activity_slug, 
+            act.title as activity, act.slug as activity_slug,
             dst.title as destination, dst.slug as destination_slug
-            FROM tbl_package  pkg 
-            INNER JOIN tbl_destination  dst 
-            ON pkg.destinationId = dst.id 
-            INNER JOIN tbl_activities act 
-            ON pkg.activityId = act.id 
+            FROM tbl_package  pkg
+            INNER JOIN tbl_destination  dst
+            ON pkg.destinationId = dst.id
+            INNER JOIN tbl_activities act
+            ON pkg.activityId = act.id
             WHERE pkg.status=1 ";
     */
     $sql = "SELECT prod.* FROM tbl_product_sub as prod INNER JOIN tbl_brands as br ON br.id = prod.brand WHERE prod.status=1 AND br.status = 1";
     // $sql = "SELECT pkg.id, pkg.title, pkg.slug, pkg.breif, pkg.days, pkg.image, pkg.price, pkg.offer_price, pkg.difficulty, pkg.accomodation,
     //         dst.title as destination, dst.slug as destination_slug
-    //         FROM tbl_package  pkg 
-    //         INNER JOIN tbl_destination  dst 
-    //         ON pkg.destinationId = dst.id 
+    //         FROM tbl_package  pkg
+    //         INNER JOIN tbl_destination  dst
+    //         ON pkg.destinationId = dst.id
     //         WHERE pkg.status=1 ";
 
     if (@$qtype[0] != 'all' and !empty($qtype)) {
@@ -128,7 +128,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     if (!empty($glprice) and !empty($ghprice)) {
         $sql .= " AND ( (prod.discount1 >= $glprice AND prod.discount1 <= $ghprice) OR (prod.discount1 = 0 AND prod.price1 >= $glprice AND prod.price1 <= $ghprice) ) ";
     }
-    
+
     $page = 1;
     $limit = 150000000;
     $total_num = $db->num_rows($db->query($sql));
@@ -160,17 +160,17 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 $discountamt= $rows['price1'] - $rows['discount1'];
                 $price_text = '
                 <span>' . $rows['currency'] . ' '.$rows['discount1'].'</span><br/>
-                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span> 
-                
+                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span>
+
                 ';
                 }
                 else{
                   $discountamt= $rows['price1'] - $rows['discount1'];
                 $price_text = '
                 <span>' . $rows['currency'] . ' '.$rows['discount1'].'</span>|<span>' . $rows['discountedp'] . '%off</span><br/>
-                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span> 
-                
-                ';  
+                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span>
+
+                ';
                 }
             }
             $product = SubProduct::find_by_slug($rows['slug']);
@@ -220,7 +220,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                     <div class="lazy"><!--
                 ';
             }
-            $result .= '<div class="col-xl-3 col-sm-6 col-6">
+            $result .= '<div class="col-xl-4 col-md-6 col-sm-6 col-12">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
                   <a href="' . BASE_URL . 'product/productdetails/' . $rows['slug'] . '" class="product-link">  <div class="product-img product_hove" data-href="' . BASE_URL . 'product/' . $rows['slug'] . '">
                         <img src="' . $img . '" alt="' . $rows['title'] . '">
@@ -247,7 +247,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 </div>';
             // for bottom part (closing)
             if ($i % 3 == 0 or $i == $total) {
-                $result .= ' 
+                $result .= '
                     --></div>
                 ';
             }
@@ -336,7 +336,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                         <label class="form-check-label">' . $rows['netqnt1'] . '</label>
                                     </div>
                                 </td>
-                                
+
                                 <td class="cart-product-price"><input type="hidden" name="product_price_1" value="' . $prodPrice . '">' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '</td>
                                 <td class="cart-product-quantity">
                                 <span>QTY</span
@@ -352,33 +352,33 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                                     <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
                                     <h6 class="product-sub-total">' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                 </td>
-                            </tr>                            
+                            </tr>
                             </tbody>
                             </table>
                             </form>
                         </div>
-                                                                <div class="ltn__product-details-menu-2">  
+                                                                <div class="ltn__product-details-menu-2">
                                                                     <ul>
                                                                     <li style="padding-right: 16.28rem;">
                                                                     <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="" data-cartid="' . $rows['slug'] . '">
                                                                         <i class="far fa-heart"></i>
                                                                     </a>
                                                                 </li>
-                                                                    
+
                                                                         <li>
                                                                             <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="ADD TO CART" data-cartid="' . $rows['slug'] . '" form-id="add-cart-product-' . $rows['slug'] . '">
                                                                                 <i class="fas fa-shopping-cart"></i>
                                                                                 <span>ADD TO CART</span>
                                                                             </a>
                                                                         </li>
-                                                                      
-                                                                        
+
+
                                                                         <!--<li>
                                                                         <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> CHECKOUT</a>
                                                                         </li>-->
-                
-                                                                       
-                                                                       
+
+
+
                                                                     </ul>
                                                                 </div>
                                                                 <hr>
