@@ -603,7 +603,7 @@ if (defined('HOME_PAGE')) {
                     $slugs = '' . BASE_URL . 'product/product-detail/' . $serviceSet->slug . '';;
                 }
                 $services_gift_sets .= '
-                <div class="col-xl-3 col-sm-6 col-6">
+                <div class="col-xl-4 col-sm-6 col-6">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
                     <div class="product-img product_hove" data-href="' . $slugs . '">
                         <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $serviceSet->title . '"></a>
@@ -1016,7 +1016,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $slugs = '' . BASE_URL . 'product/product-detail/' . $prodrelated->slug . '';;
                 }
                 $product_realted .= '
-                <div class="col-xl-3 col-sm-6 col-6">
+                <div class="col-xl-4 col-sm-6 col-6">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
 
                 <div class="product-img product_hove" data-href="' . $slugs . '">
