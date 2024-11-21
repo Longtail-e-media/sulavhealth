@@ -4,8 +4,6 @@
  *      Cart Menu
  */
 
-use Aws\Api\Service;
-
 $cart_menu = '';
 
 $cart_menu .= '
@@ -104,23 +102,20 @@ if (defined('HOME_PAGE')) {
 
     if (!empty($giftSets)) {
         $home_gift_sets .= '
-        <div class="ltn__product-tab-area new_prducts ltn__product-gutter pt-115">
-        <div class="">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ltn__tab-menu ltn__tab-menu-2 ltn__tab-menu-top-right--">
-
-                        <div class="container">
-
-                            <h3 class="new-products">New Products</h3>
-
-                            <div class="">
-                                <div class="tab-content tab-list3">
-
-                                    <div class="tab-pane fade active show" id="product_lab-services">
-                                        <div class="ltn__product-tab-content-inner ltn__product-grid-view">
-                                            <div class="row">
+            <div class="ltn__product-tab-area new_prducts ltn__product-gutter pt-115">
+                <div class="">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ltn__tab-menu ltn__tab-menu-2 ltn__tab-menu-top-right--">
+                                <div class="container">
+                                    <h3 class="new-products">New Products</h3>
+                                    <div class="">
+                                        <div class="tab-content tab-list3">
+                                            <div class="tab-pane fade active show" id="product_lab-services">
+                                                <div class="ltn__product-tab-content-inner ltn__product-grid-view">
+                                                    <div class="row">
         ';
+
         foreach ($giftSets as $giftSet) {
             // getting only one image to display
             $giftSetImages = SubProductImage::getImagelist_by($giftSet->id, 1, 0);
@@ -133,94 +128,79 @@ if (defined('HOME_PAGE')) {
                     }
                 }
             }
-            $prodbrand = Brand::find_by_id($giftSet->brand);
-            $prodservice = Services::find_by_id($giftSet->service_id);
-            // pr($prodbrand);
-            if (!empty($prodservice)) {
-                $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $giftSet->slug . '';
-            } else {
-                $slugs = '' . BASE_URL . 'product/product-detail/' . $giftSet->slug . '';;
-            }
 
             $price_text = '';
             if (!empty($giftSet->price1) and (empty($giftSet->offer_price))) {
                 $price_text = '<span>' . $giftSet->currency . ' ' . $giftSet->price1 . '</span>';
             }
             if (!empty($giftSet->discount1)) {
-                if(empty($giftSet->discountedp)){
-                    $discountamt= $giftSet->price1 - $giftSet->discount1;
+                if (empty($giftSet->discountedp)) {
+                    $discountamt = $giftSet->price1 - $giftSet->discount1;
                     $price_text = '
-                <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span>
-
-                ';
-                }
-                else{
-                $discountamt= $giftSet->price1 - $giftSet->discount1;
-                $price_text = '
-                <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span>
-
-                ';
+                        <span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span><br/>
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>
+                    ';
+                } else {
+                    $discountamt = $giftSet->price1 - $giftSet->discount1;
+                    $price_text = '
+                        <span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>
+                    ';
                 }
             }
+
             $prodbrand = Brand::find_by_id($giftSet->brand);
             $prodservice = Services::find_by_id($giftSet->service_id);
             if (!empty($prodbrand)) {
                 $title = $prodbrand->title;
-                $slug= $prodbrand->slug;
+                $slug = $prodbrand->slug;
             } else {
                 $title = '';
-                $slug='';
+                $slug = '';
             }
             if (!empty($prodservice)) {
                 $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $giftSet->slug . '';
             } else {
                 $slugs = '' . BASE_URL . 'product/product-detail/' . $giftSet->slug . '';;
             }
+
             $home_gift_sets .= '
-            <div class="col-xl-3 col-sm-6 col-xs-12">
-            <div class="ltn__product-item ltn__product-item-3 text-center">
-                <div class="product-img product_hove" data-href="' . $slugs . '">
-                    <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $giftSet->title . '"></a>
-                </div>
-                <div class="product-info">
-                    <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
-                    <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a></h3>
-                    <!--<div class="product-price">
-                        <span>NPR 530</span>|<span>13%off</span><br/>
-                        <del>NPR 558.4</del> <span class="font-14">Save NPR 400</span>
-                    </div>-->
-                    <div class="product-price">
-                        ' . $price_text . '
-                    </div>
-                    <div class="product-action">
+                <div class="col-xl-3 col-sm-6 col-xs-12">
+                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                        <div class="product-img product_hove" data-href="' . $slugs . '">
+                            <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $giftSet->title . '"></a>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
+                            <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $giftSet->title . '</a></h3>
+                            <!--<div class="product-price">
+                                <span>NPR 530</span>|<span>13%off</span><br/>
+                                <del>NPR 558.4</del> <span class="font-14">Save NPR 400</span>
+                            </div>-->
+                            <div class="product-price">' . $price_text . '</div>
+                            <div class="product-action">
             ';
             if (!empty($giftSet->tag)) {
-                $home_gift_sets .= '<li class="sale-badge">' . substr($giftSet->tag,0,70) . '</li>';
+                $home_gift_sets .= '<li class="sale-badge">' . substr($giftSet->tag, 0, 70) . '</li>';
             }
             $home_gift_sets .= '
-                                    <ul>
+                                <ul>
                                     <li>
-                                        <a href="#" class="add-wishlist"
-                                            title="Add to Wishlist"
-                                            data-cartid="' . $giftSet->slug . '">
+                                        <a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="' . $giftSet->slug . '">
                                             <i class="far fa-heart"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" title="ADD TO CART"
-                                            class="add-to-cart" data-toggle="modal"
-                                            data-target="#quick_view_modal_product_' . $giftSet->slug . '">
+                                        <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_' . $giftSet->slug . '">
                                             Add to Cart
                                             <i class="fas fa-shopping-cart"></i>
                                         </a>
                                     </li>
                                 </ul>
-                                      </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
             ';
 
             $home_gift_sets_script .= '
@@ -250,6 +230,7 @@ if (defined('HOME_PAGE')) {
                                                     <div class="modal-product-img">
                                                         <div class="row  ltn__blog-slider-one-active1 slick-arrow-1 ltn__blog-item-3-normal">
             ';
+
             $sliderImages = SubProductImage::getImagelist_by($giftSet->id);
             if (!empty($sliderImages)) {
                 foreach ($sliderImages as $sliderImage) {
@@ -274,25 +255,49 @@ if (defined('HOME_PAGE')) {
                                                 </div>
                                                 <div class="col-lg-7 col-12">
                                                     <div class="modal-product-info">
-                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
+                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                                                         <h3>' . (($lang == "gr") ? $giftSet->title_greek : $giftSet->title) . '</h3>
                                                         ' . (($lang == "gr") ? $giftSet->brief_greek : $giftSet->brief) . '
-
-                                                            <br/>
-                                                            <br/>
-
-                                                            <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
-                                                                <span>' . SHOP_VIEW_MORE . '</span>
-                                                            </a>
+                                                        <br/><br/>
+                                                        <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
+                                                            <span>' . SHOP_VIEW_MORE . '</span>
+                                                        </a>
 
                 <div class="shoping-cart-table table-responsive">
                     <form id="add-cart-product-' . $giftSet->slug . '">
-                    <table class="table">
-                        <tbody>
+            ';
 
-                            <tr>
-                                <td class="cart-product-info">
-                                    <div class="form-check form-check-inline">
+            if (!empty($giftSet->sizes)) {
+                $home_gift_sets_modal .= '
+                        <div class="check_selection d-flex align-items-center mb-3">
+                            <div class="price_selection">
+                                <h5 class="mb-0">Size</h5>
+                            </div>
+                            <div class="price_tags">
+                    ';
+                $sizes = explode(',', $giftSet->sizes);
+                foreach ($sizes as $i => $size) {
+                    $active = ($i == 0) ? 'active' : '';
+                    $checked = ($i == 0) ? 'checked' : '';
+                    $home_gift_sets_modal .= '
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="size" id="psize-' . $giftSet->slug . '-' . ($i + 1) . '" value="' . $size . '" ' . $checked . '>
+                                    <label class="form-check-label ' . $active . '" for="psize-' . $giftSet->slug . '-' . ($i + 1) . '">' . $size . '</label>
+                                </div>
+                        ';
+                }
+                $home_gift_sets_modal .= '
+                            </div>
+                        </div>
+                    ';
+            }
+
+            $home_gift_sets_modal .= '
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="cart-product-info">
+                                        <div class="form-check form-check-inline">
             ';
             if (!empty($giftSet->qnt2)) {
                 $home_gift_sets_modal .= '<input class="form-check-input" type="checkbox" name="product_check[]" value="1">';
@@ -324,7 +329,7 @@ if (defined('HOME_PAGE')) {
                                 </td>
                                 <td class="cart-product-subtotal">
                                     <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
-                                    <h6 class="product-sub-total">' . $giftSet->currency . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
+                                    <h6 class="product-sub-total">' . $giftSet->currency . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                 </td>
                             </tr>
 
@@ -417,7 +422,7 @@ if (defined('HOME_PAGE')) {
                                 </td>
                                 <td class="cart-product-subtotal">
                                     <input type="hidden" name="product_total_4" class="product_total" value="0">
-                                    <h6 class="product-sub-total">' . sprintf("%.2f",$giftSet->currency) . ' 0.00</h6>
+                                    <h6 class="product-sub-total">' . sprintf("%.2f", $giftSet->currency) . ' 0.00</h6>
                                 </td>
                             </tr>
                 ';
@@ -481,22 +486,19 @@ if (defined('HOME_PAGE')) {
                 </div>
             ';
         }
+
         $home_gift_sets .= '
-        </div>
-        </div>
-    </div>
-
-
-
-</div>
-</div>
-</div>
-
-</div>
-</div>
-</div>
-</div>
-</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         ';
     }
     $branddatas = Brand::getHomepageBrands(10);
@@ -518,11 +520,11 @@ if (defined('HOME_PAGE')) {
     }
 
     $services_gift_sets = $services_gift_sets_modal = $services_gift_sets_script = '';
-    $homeservices= Services::get_services_home();
+    $homeservices = Services::get_services_home();
     // pr($homeservices);
 
-    foreach($homeservices as $homeservice){
-        $homeSets= SubProduct::get_home_brand_product_service($homeservice->id);
+    foreach ($homeservices as $homeservice) {
+        $homeSets = SubProduct::get_home_brand_product_service($homeservice->id);
         if (!empty($homeservices)) {
             $services_gift_sets .= '
             <div class="ltn__product-tab-area ltn__product-gutter">
@@ -533,7 +535,7 @@ if (defined('HOME_PAGE')) {
 
                             <div class="container">
 
-                                <h3 class="new-products">'.$homeservice->title.'</h3>
+                                <h3 class="new-products">' . $homeservice->title . '</h3>
 
                                 <div class="">
                                     <div class="tab-content tab-list3">
@@ -543,7 +545,7 @@ if (defined('HOME_PAGE')) {
                                                 <div class="row">
             ';
 
-            $serviceSets= SubProduct::get_home_brand_product_service($homeservice->id);
+            $serviceSets = SubProduct::get_home_brand_product_service($homeservice->id);
             // pr($serviceSets);
             foreach ($serviceSets as $serviceSet) {
                 // getting only one image to display
@@ -571,31 +573,30 @@ if (defined('HOME_PAGE')) {
                     $price_text = '<span>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</span>';
                 }
                 if (!empty($giftSet->discount1)) {
-                if(empty($giftSet->discountedp)){
-                    $discountamt= $giftSet->price1 - $giftSet->discount1;
-                    $price_text = '
-                <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span>
+                    if (empty($giftSet->discountedp)) {
+                        $discountamt = $giftSet->price1 - $giftSet->discount1;
+                        $price_text = '
+                <span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span><br/>
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>
 
                 ';
-                }
-                else{
-                $discountamt= $giftSet->price1 - $giftSet->discount1;
-                $price_text = '
-                <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span>
+                    } else {
+                        $discountamt = $giftSet->price1 - $giftSet->discount1;
+                        $price_text = '
+                <span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
+                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>
 
                 ';
+                    }
                 }
-            }
                 $prodbrand = Brand::find_by_id($serviceSet->brand);
                 $prodservice = Services::find_by_id($serviceSet->service_id);
                 if (!empty($prodbrand)) {
                     $title = $prodbrand->title;
-                    $slug= $prodbrand->slug;
+                    $slug = $prodbrand->slug;
                 } else {
                     $title = '';
-                    $slug='';
+                    $slug = '';
                 }
                 if (!empty($prodservice)) {
                     $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $serviceSet->slug . '';
@@ -617,7 +618,7 @@ if (defined('HOME_PAGE')) {
                         <div class="product-action">
                 ';
                 if (!empty($serviceSet->tag)) {
-                    $services_gift_sets .= '<li class="sale-badge">' . substr($serviceSet->tag,0,70) . '</li>';
+                    $services_gift_sets .= '<li class="sale-badge">' . substr($serviceSet->tag, 0, 70) . '</li>';
                 }
                 $services_gift_sets .= '
                                         <ul>
@@ -694,7 +695,7 @@ if (defined('HOME_PAGE')) {
                                                     </div>
                                                     <div class="col-lg-7 col-12">
                                                         <div class="modal-product-info">
-                                                        <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
+                                                        <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                                                             <h3>' . (($lang == "gr") ? $serviceSet->title_greek : $serviceSet->title) . '</h3>
                                                             ' . (($lang == "gr") ? $serviceSet->brief_greek : $serviceSet->brief) . '
 
@@ -744,7 +745,7 @@ if (defined('HOME_PAGE')) {
                                     </td>
                                     <td class="cart-product-subtotal">
                                         <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
-                                        <h6 class="product-sub-total">' . $serviceSet->currency . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
+                                        <h6 class="product-sub-total">' . $serviceSet->currency . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                     </td>
                                 </tr>
 
@@ -837,7 +838,7 @@ if (defined('HOME_PAGE')) {
                                     </td>
                                     <td class="cart-product-subtotal">
                                         <input type="hidden" name="product_total_4" class="product_total" value="0">
-                                        <h6 class="product-sub-total">' . sprintf("%.2f",$serviceSet->currency) . ' 0.00</h6>
+                                        <h6 class="product-sub-total">' . sprintf("%.2f", $serviceSet->currency) . ' 0.00</h6>
                                     </td>
                                 </tr>
                     ';
@@ -925,11 +926,11 @@ if (defined('HOME_PAGE')) {
     $jVars['module:product:home-services-sets'] = $services_gift_sets;
     $jVars['module:product:home-services-sets-modal'] = $services_gift_sets_modal;
     $jVars['module:product:home-services-sets-script'] = $services_gift_sets_script;
-$jVars['module:product:home-gift-sets'] = $home_gift_sets;
-$jVars['module:product:home-gift-sets-modal'] = $home_gift_sets_modal;
-$jVars['module:product:home-gift-sets-script'] = $home_gift_sets_script;
+    $jVars['module:product:home-gift-sets'] = $home_gift_sets;
+    $jVars['module:product:home-gift-sets-modal'] = $home_gift_sets_modal;
+    $jVars['module:product:home-gift-sets-script'] = $home_gift_sets_script;
 
-$jVars['module:product:home-brand'] = $brand;
+    $jVars['module:product:home-brand'] = $brand;
 }
 
 

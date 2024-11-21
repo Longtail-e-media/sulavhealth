@@ -570,4 +570,9 @@ $(function () {
             }
         });
     }
+
+    $(document).on("click", ".price_tags .form-check-label", function () {
+        $(this).parents('.price_tags').find(".form-check-label").removeClass("active");
+        $(this).addClass("active");
+    });
 });

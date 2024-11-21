@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&rodisplay=swap" rel="stylesheet">
 
 
-
     <!-- Font Icons css -->
     <link rel="stylesheet" href="css/font-icons.css">
 
@@ -23,12 +22,12 @@
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
 
-<style>
-html.overflow-hidden{
-    overflow: hidden;
-    width: 100%;
-}
-</style>
+    <style>
+        html.overflow-hidden {
+            overflow: hidden;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body class="<jcms:site:language-class/>">
@@ -46,9 +45,12 @@ html.overflow-hidden{
         <jcms:module:search-searchform/>
         <div class="product-filter-right col-xl-9 col-md-12 col-sm-12">
             <div class="filter_icon text-end position-absolute" id="filter_btn">Filter <i class="fas fa-filter"></i></div>
-            <h2><div id="searchtitle"><jcms:module:package-searchtitle/></div></h2>
+            <h2>
+                <div id="searchtitle">
+                    <jcms:module:package-searchtitle/>
+                </div>
+            </h2>
             <div id="totalitems">
-
                 <jcms:module:search-totalitems/>
             </div>
             <div id="productContainer" class="row">
@@ -85,7 +87,8 @@ html.overflow-hidden{
                                     </div>
                                     <div class="modal-product-info">
                                         <h5><a href="#">Gift One</a></h5>
-                                        <p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to your Cart</p>
+                                        <p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to
+                                            your Cart</p>
                                         <div class="btn-wrapper">
                                             <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
                                             <a href="#" class="theme-btn-2 btn btn-effect-2">Checkout</a>
@@ -93,7 +96,8 @@ html.overflow-hidden{
                                     </div>
                                     <!-- additional-info -->
                                     <div class="additional-info d-none">
-                                        <p>We want to give you <b>10% discount</b> for your first order, <br> Use discount code at checkout</p>
+                                        <p>We want to give you <b>10% discount</b> for your first order, <br> Use
+                                            discount code at checkout</p>
                                         <div class="payment-method">
                                             <img src="img/icons/payment.png" alt="#">
                                         </div>
@@ -129,14 +133,17 @@ html.overflow-hidden{
                                     </div>
                                     <div class="modal-product-info">
                                         <h5><a href="product-details.html">Gift One</a></h5>
-                                        <p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to your Wishlist</p>
+                                        <p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to
+                                            your Wishlist</p>
                                         <div class="btn-wrapper">
-                                            <a href="wishlist.html" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
+                                            <a href="wishlist.html" class="theme-btn-1 btn btn-effect-1">View
+                                                Wishlist</a>
                                         </div>
                                     </div>
                                     <!-- additional-info -->
                                     <div class="additional-info d-none">
-                                        <p>We want to give you <b>10% discount</b> for your first order, <br> Use discount code at checkout</p>
+                                        <p>We want to give you <b>10% discount</b> for your first order, <br> Use
+                                            discount code at checkout</p>
                                         <div class="payment-method">
                                             <img src="img/icons/payment.png" alt="#">
                                         </div>
@@ -157,8 +164,8 @@ html.overflow-hidden{
 
 <script>
     $(function () {
-        var mini=  <jcms:module:search-minprice/>;
-        var maxi=  <jcms:module:search-maxprice/>;
+        var mini = <jcms:module:search-minprice/>;
+        var maxi = <jcms:module:search-maxprice/>;
         $("#price-slider").slider({
             range: true,
             min: mini,
@@ -414,7 +421,7 @@ html.overflow-hidden{
         // sliderElement.slick("setPosition");
     }
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.lazy').lazyload();
     });
 </script>

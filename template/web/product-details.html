@@ -93,32 +93,6 @@
         h4 {
             color: #0E75BA !important;
         }
-
-        .check_selection {
-            gap: 2rem;
-        }
-
-        .check_selection .form-check-input {
-            display: none;
-        }
-
-        .check_selection .form-check-input + label {
-            border: 1px solid #746d6d;
-            padding: 0.5rem 0.8rem;
-            border-radius: 5px;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .check_selection .form-check-input + label:hover {
-            cursor: pointer;
-            border: 1px solid #1878df;
-            color: #1878df;
-        }
-
-        .check_selection .form-check-label.active {
-            border: 1px solid #1878df;
-            color: #1878df;
-        }
     </style>
 </head>
 
@@ -285,11 +259,6 @@
                 }
             }
         });
-    });
-
-    $(".price_tags .form-check-label").on("click", function () {
-        $(this).parents('.price_tags').find(".form-check-label").removeClass("active");
-        $(this).addClass("active");
     });
 </script>
 <jcms:module:product:product-related-script/>

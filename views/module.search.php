@@ -839,8 +839,36 @@ if (defined('SEARCH_PAGE')) {
                                                         </a>
 
 
-                     <div class="shoping-cart-table table-responsive">
+                 <div class="shoping-cart-table table-responsive">
                     <form id="add-cart-product-' . $rows['slug'] . '">
+            ';
+
+            if (!empty($rows['sizes'])) {
+                $home_gift_sets_modal .= '
+                        <div class="check_selection d-flex align-items-center mb-3">
+                            <div class="price_selection">
+                                <h5 class="mb-0">Size</h5>
+                            </div>
+                            <div class="price_tags">
+                    ';
+                $sizes = explode(',', $rows['sizes']);
+                foreach ($sizes as $i => $size) {
+                    $active = ($i == 0) ? 'active' : '';
+                    $checked = ($i == 0) ? 'checked' : '';
+                    $home_gift_sets_modal .= '
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="size" id="psize-' . $rows['slug'] . '-' . ($i + 1) . '" value="' . $size . '" ' . $checked . '>
+                                    <label class="form-check-label ' . $active . '" for="psize-' . $rows['slug'] . '-' . ($i + 1) . '">' . $size . '</label>
+                                </div>
+                        ';
+                }
+                $home_gift_sets_modal .= '
+                            </div>
+                        </div>
+                    ';
+            }
+
+            $home_gift_sets_modal .= '
                     <table class="table">
                         <tbody>
 
