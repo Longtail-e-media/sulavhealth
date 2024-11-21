@@ -603,7 +603,7 @@ if (defined('HOME_PAGE')) {
                     $slugs = '' . BASE_URL . 'product/product-detail/' . $serviceSet->slug . '';;
                 }
                 $services_gift_sets .= '
-                <div class="col-xl-3 col-sm-6 col-6">
+                <div class="col-xl-4 col-sm-6 col-6">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
                     <div class="product-img product_hove" data-href="' . $slugs . '">
                         <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $serviceSet->title . '"></a>
@@ -954,7 +954,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
 
         $parentProd = Product::find_by_id($prodRec->type);
 
-        $prodrelateds= SubProduct::get_relatedprod($prodRec->service_id,$prodRec->id,4) ;
+        $prodrelateds = SubProduct::get_relatedprod($prodRec->service_id, $prodRec->id, 4);
         // pr($prodrelated);
         if (!empty($prodrelateds)) {
 
@@ -970,45 +970,34 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                         }
                     }
                 }
-                $prodbrand = Brand::find_by_id($prodrelated->brand);
-                $prodservice = Services::find_by_id($prodrelated->service_id);
-                // pr($prodbrand);
-                if (!empty($prodservice)) {
-                    $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $prodrelated->slug . '';
-                } else {
-                    $slugs = '' . BASE_URL . 'product/product-detail/' . $prodrelated->slug . '';;
-                }
 
                 $price_text = '';
                 if (!empty($prodrelated->price1) and (empty($prodrelated->offer_price))) {
                     $price_text = '<span>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</span>';
                 }
                 if (!empty($prodrelated->discount1)) {
-                if(empty($prodrelated->discountedp)){
-                    $discountamt= $prodrelated->price1 - $prodrelated->discount1;
-                    $price_text = '
-                <span>' . $prodrelated->currency . ' '.$prodrelated->discount1.'</span><br/>
-                        <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt. '</span>
-
-                ';
+                    if (empty($prodrelated->discountedp)) {
+                        $discountamt = $prodrelated->price1 - $prodrelated->discount1;
+                        $price_text = '
+                            <span>' . $prodrelated->currency . ' ' . $prodrelated->discount1 . '</span><br/>
+                            <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt . '</span>
+                        ';
+                    } else {
+                        $discountamt = $prodrelated->price1 - $prodrelated->discount1;
+                        $price_text = '
+                            <span>' . $prodrelated->currency . ' ' . $prodrelated->discount1 . '</span>|<span>' . $prodrelated->discountedp . '%off</span><br/>
+                            <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt . '</span>
+                        ';
+                    }
                 }
-                else{
-                $discountamt= $prodrelated->price1 - $prodrelated->discount1;
-                $price_text = '
-                <span>' . $prodrelated->currency . ' '.$prodrelated->discount1.'</span>|<span>' . $prodrelated->discountedp . '%off</span><br/>
-                        <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt. '</span>
-
-                ';
-                }
-            }
                 $prodbrand = Brand::find_by_id($prodrelated->brand);
                 $prodservice = Services::find_by_id($prodrelated->service_id);
                 if (!empty($prodbrand)) {
                     $title = $prodbrand->title;
-                    $slug= $prodbrand->slug;
+                    $slug = $prodbrand->slug;
                 } else {
                     $title = '';
-                    $slug='';
+                    $slug = '';
                 }
                 if (!empty($prodservice)) {
                     $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $prodrelated->slug . '';
@@ -1016,46 +1005,43 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $slugs = '' . BASE_URL . 'product/product-detail/' . $prodrelated->slug . '';;
                 }
                 $product_realted .= '
-                <div class="col-xl-3 col-sm-6 col-6">
-                <div class="ltn__product-item ltn__product-item-3 text-center">
-
-                <div class="product-img product_hove" data-href="' . $slugs . '">
-                        <a class="product-image-link" href="' . $slugs . '">
-                        <img src="' . $img . '" alt="' . $prodrelated->title . '"></a>
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
-                        <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $prodrelated->title . '</a></h3>
-                        <div class="product-price">
-                            ' . $price_text . '
+                <div class="col-xl-4 col-sm-6 col-6">
+                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                        <div class="product-img product_hove" data-href="' . $slugs . '">
+                            <a class="product-image-link" href="' . $slugs . '">
+                            <img src="' . $img . '" alt="' . $prodrelated->title . '"></a>
                         </div>
-                        <div class="product-action">
+                        <div class="product-info">
+                            <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
+                            <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $prodrelated->title . '</a></h3>
+                            <div class="product-price">' . $price_text . '</div>
+                            <div class="product-action">
                 ';
                 if (!empty($prodrelated->tag)) {
-                    $product_realted .= '<li class="sale-badge">' . substr($prodrelated->tag,0,70) . '</li>';
+                    $product_realted .= '<li class="sale-badge">' . substr($prodrelated->tag, 0, 70) . '</li>';
                 }
                 $product_realted .= '
-                                        <ul>
-                                        <li>
-                                            <a href="#" class="add-wishlist"
-                                                title="Add to Wishlist"
-                                                data-cartid="' . $prodrelated->slug . '">
-                                                <i class="far fa-heart"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="ADD TO CART"
-                                                class="add-to-cart" data-toggle="modal"
-                                                data-target="#quick_view_modal_product_' . $prodrelated->slug . '">
-                                                Add to Cart
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                          </div>
+                                <ul>
+                                    <li>
+                                        <a href="#" class="add-wishlist"
+                                            title="Add to Wishlist"
+                                            data-cartid="' . $prodrelated->slug . '">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="ADD TO CART"
+                                            class="add-to-cart" data-toggle="modal"
+                                            data-target="#quick_view_modal_product_' . $prodrelated->slug . '">
+                                            Add to Cart
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
                 ';
 
                 $product_related_script .= '
@@ -1109,22 +1095,47 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                     </div>
                                                     <div class="col-lg-7 col-12">
                                                         <div class="modal-product-info">
-                                                        <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug. '" class="product-link">' . $title . '</a></h4>
+                                                        <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                                                             <h3>' . (($lang == "gr") ? $prodrelated->title_greek : $prodrelated->title) . '</h3>
                                                             ' . (($lang == "gr") ? $prodrelated->brief_greek : $prodrelated->brief) . '
-
                                                             <br/>
                                                             <br/>
-
                                                             <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
                                                                 <span>' . SHOP_VIEW_MORE . '</span>
                                                             </a>
-
                     <div class="shoping-cart-table table-responsive">
                         <form id="add-cart-product-' . $prodrelated->slug . '">
+                ';
+
+
+                if (!empty($prodrelated->sizes)) {
+                    $product_related_modal .= '
+                        <div class="check_selection d-flex align-items-center mb-3">
+                            <div class="price_selection">
+                                <h5 class="mb-0">Size</h5>
+                            </div>
+                            <div class="price_tags">
+                    ';
+                    $sizes = explode(',', $prodrelated->sizes);
+                    foreach ($sizes as $i => $size) {
+                        $active = ($i == 0) ? 'active' : '';
+                        $checked = ($i == 0) ? 'checked' : '';
+                        $product_related_modal .= '
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="size" id="psize-' . $prodrelated->slug . '-' . ($i + 1) . '" value="' . $size . '" ' . $checked . '>
+                                    <label class="form-check-label ' . $active . '" for="psize-' . $prodrelated->slug . '-' . ($i + 1) . '">' . $size . '</label>
+                                </div>
+                        ';
+                    }
+                    $product_related_modal .= '
+                            </div>
+                        </div>
+                    ';
+                }
+
+                $product_related_modal .= '
                         <table class="table">
                             <tbody>
-
                                 <tr>
                                     <td class="cart-product-info">
                                         <div class="form-check form-check-inline">
@@ -1146,8 +1157,8 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                         ' . $prodrelated->currency . ' ' . sprintf("%.2f", $prodPrice) . '
                                     </td>
                                     <td class="cart-product-quantity">
-                                <span>QTY</span
-                                </td>
+                                        <span>QTY</span>
+                                    </td>
                                     <td class="cart-product-quantity">
                                         <div class="cart-plus-minus">
                                             <div class="dec qtybutton">-</div>
@@ -1157,10 +1168,9 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                     </td>
                                     <td class="cart-product-subtotal">
                                         <input type="hidden" name="product_total_1" class="product_total" value="' . $prodPrice . '">
-                                        <h6 class="product-sub-total">' . $prodrelated->currency . ' ' . sprintf("%.2f",$prodPrice) . '</h6>
+                                        <h6 class="product-sub-total">' . $prodrelated->currency . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                     </td>
                                 </tr>
-
                 ';
 
                 if (!empty($prodrelated->qnt2)) {
@@ -1250,41 +1260,34 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                     </td>
                                     <td class="cart-product-subtotal">
                                         <input type="hidden" name="product_total_4" class="product_total" value="0">
-                                        <h6 class="product-sub-total">' . sprintf("%.2f",$prodrelated->currency) . ' 0.00</h6>
+                                        <h6 class="product-sub-total">' . sprintf("%.2f", $prodrelated->currency) . ' 0.00</h6>
                                     </td>
                                 </tr>
                     ';
                 }
 
                 $product_related_modal .= '
-
                             </tbody>
                         </table>
                         </form>
                     </div>
                                                             <div class="ltn__product-details-menu-2">
                                                                 <ul>
-                                                                <li style="padding-right: 16.28rem;">
-                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $prodrelated->slug . '">
-                                                                    <i class="far fa-heart"></i>
-                                                                   <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
-                                                                </a>
-                                                            </li>
-
+                                                                    <li style="padding-right: 16.28rem;">
+                                                                        <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $prodrelated->slug . '">
+                                                                            <i class="far fa-heart"></i>
+                                                                           <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
+                                                                        </a>
+                                                                    </li>
                                                                     <li>
                                                                         <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $prodrelated->slug . '" form-id="add-cart-product-' . $prodrelated->slug . '">
                                                                             <i class="fas fa-shopping-cart"></i>
                                                                             <span>' . SHOP_ADD_TO_CART . '</span>
                                                                         </a>
                                                                     </li>
-
-
                                                                     <!--<li>
                                                                     <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
                                                                     </li>-->
-
-
-
                                                                 </ul>
                                                             </div>
                                                             <hr>
@@ -1316,6 +1319,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
             }
 
         }
+
         $product_bread .= '
             <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-image" data-bg="' . $banner . '">
                 <div class="container">
@@ -1360,35 +1364,32 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
         $rescont = explode('<hr id="system_readmore' . $hrid . '" style="border-style: dashed; border-color: orange;" />', $cont);
         $content = (!empty($rescont[1])) ? $rescont[1] : $rescont[0];
         $prodbrand = Brand::find_by_id($prodRec->brand);
-                $prodservice = Services::find_by_id($prodRec->service_id);
-                $prodcategory = Category::find_by_id($prodRec->Category);
-                $prodsubcategory = Category::find_by_id($prodRec->Subcategory);
-                if(!empty($prodcategory)){
-                    $category= $prodcategory->title;
-                }
-                else{
-                    $category='';
-                    $subcategory='';
-                }
-                if(!empty($prodsubcategory)){
-                    $subcategory= '>&nbsp;&nbsp;'.$prodsubcategory->title.'';
-                }
-                else{
-                    $subcategory='';
-                }
-                if (!empty($prodbrand)) {
-                    $title = $prodbrand->title;
-                    $slug= $prodbrand->slug;
-
-                } else {
-                    $title = '';
-                    $slug='';
-                }
-                if (!empty($prodservice)) {
-                    $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $prodRec->slug . '';
-                } else {
-                    $slugs = '' . BASE_URL . 'product/product-detail/' . $prodRec->slug . '';;
-                }
+        $prodservice = Services::find_by_id($prodRec->service_id);
+        $prodcategory = Category::find_by_id($prodRec->Category);
+        $prodsubcategory = Category::find_by_id($prodRec->Subcategory);
+        if (!empty($prodcategory)) {
+            $category = $prodcategory->title;
+        } else {
+            $category = '';
+            $subcategory = '';
+        }
+        if (!empty($prodsubcategory)) {
+            $subcategory = '>&nbsp;&nbsp;' . $prodsubcategory->title . '';
+        } else {
+            $subcategory = '';
+        }
+        if (!empty($prodbrand)) {
+            $title = $prodbrand->title;
+            $slug = $prodbrand->slug;
+        } else {
+            $title = '';
+            $slug = '';
+        }
+        if (!empty($prodservice)) {
+            $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $prodRec->slug . '';
+        } else {
+            $slugs = '' . BASE_URL . 'product/product-detail/' . $prodRec->slug . '';;
+        }
         $product_detail .= '
             <div class="ltn__shop-details-inner">
                 <div class="row">
@@ -1404,12 +1405,40 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     </div>
                     <div class="col-md-6">
                         <div class="modal-product-info shop-details-info pl-0">
-                        <span>'.$category.'</span>&nbsp;&nbsp;<span>'.$subcategory.'</span>
+                        <span>' . $category . '</span>&nbsp;&nbsp;<span>' . $subcategory . '</span>
                             <h3>' . (($lang == 'gr') ? $prodRec->title_greek : $prodRec->title) . '</h3>
                             <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                             ' . (($lang == "gr") ? $prodRec->brief_greek : $prodRec->brief) . '
                             <div class="shoping-cart-table table-responsive">
                                 <form id="add-cart-product-' . $prodRec->slug . '">
+        ';
+
+        if (!empty($prodRec->sizes)) {
+            $product_detail .= '
+                                    <div class="check_selection d-flex align-items-center mb-3">
+                                        <div class="price_selection">
+                                            <h5 class="mb-0">Size</h5>
+                                        </div>
+                                        <div class="price_tags">
+            ';
+            $sizes = explode(',', $prodRec->sizes);
+            foreach ($sizes as $i => $size) {
+                $active = ($i == 0) ? 'active' : '';
+                $checked = ($i == 0) ? 'checked' : '';
+                $product_detail .= '
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="size" id="psize-' . $prodRec->slug . '-' . ($i + 1) . '" value="' . $size . '" ' . $checked . '>
+                                                <label class="form-check-label ' . $active . '" for="psize-' . $prodRec->slug . '-' . ($i + 1) . '">' . $size . '</label>
+                                            </div>
+                ';
+            }
+            $product_detail .= '
+                                        </div>
+                                    </div>
+            ';
+        }
+
+        $product_detail .= '
                                     <table class="table">
                                         <tbody>
                                         <tr>
@@ -1447,25 +1476,26 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                                 <h6 class="product-sub-total">' . $prodRec->currency . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                             </td>
                                         </tr>
+        ';
 
-                                        ';
-                                        $additionaldatas= unserialize(base64_decode($prodRec->additional));
-                                        if(!empty($additionaldatas)){
-                                             $product_detail .= ' <tr>
-                                            <td class="cart-product-info productd"><h4>Additional Product</h4></td></tr>';
-                                            foreach ($additionaldatas as $key => $additionaldata) {
-                                            // pr($additionaldata);
-                                        $product_detail .= '
-                                         <tr class="product-details-page">
+        $additionaldatas = unserialize(base64_decode($prodRec->additional));
+        if (!empty($additionaldatas)) {
+            $product_detail .= ' 
+                                        <tr><td class="cart-product-info productd"><h4>Additional Product</h4></td></tr>
+            ';
+            foreach ($additionaldatas as $key => $additionaldata) {
+                // pr($additionaldata);
+                $product_detail .= '
+                                        <tr class="product-details-page">
                                             <td class="cart-product-info">
-                                                <input type="checkbox" id="additionalchk" class="additionalchk" name="additionalchkbox[]" currency="' . $prodRec->currency . '" value="'.$additionaldata['id'].'">
+                                                <input type="checkbox" id="additionalchk" class="additionalchk" name="additionalchkbox[]" currency="' . $prodRec->currency . '" value="' . $additionaldata['id'] . '">
                                             </td>
                                             <td class="cart-product-price">
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="hidden" name="additionalchk[]" checked="" value="1">
-                                                    <input type="hidden" name="additionalname_1['.$additionaldata['id'].']" value="'.$additionaldata['name'].'">
+                                                    <input type="hidden" name="additionalname_1[' . $additionaldata['id'] . ']" value="' . $additionaldata['name'] . '">
                                                     <input type="hidden" name="additionalchk_net_qnt_1" value="250ml">
-                                                    <label class="form-check-label">'.$additionaldata['name'].'</label>
+                                                    <label class="form-check-label">' . $additionaldata['name'] . '</label>
                                                 </div>
                                             </td>
 
@@ -1475,36 +1505,30 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                                             <td class="cart-product-quantity">
                                                 <div class="cart-plus-minus">
                                                     <div class="dec qtybuttonadd">-</div>
-                                                    <input type="text" value="0" min="0" step="1" name="additionalchkqty_1['.$additionaldata['id'].']" class="cart-plus-minus-box qty qtyval" price="'.$additionaldata['price'].'" currency="NPR" readonly="">
+                                                    <input type="text" value="0" min="0" step="1" name="additionalchkqty_1[' . $additionaldata['id'] . ']" class="cart-plus-minus-box qty qtyval" price="' . $additionaldata['price'] . '" currency="NPR" readonly="">
                                                     <div class="inc qtybuttonadd">+</div>
                                                 </div>
                                             </td>
                                             <td class="cart-product-subtotal">
-                                                <input type="hidden" name="additional_total_1['.$additionaldata['id'].']" class="additional_total product_total_page" value="'.$additionaldata['price'].'">
+                                                <input type="hidden" name="additional_total_1[' . $additionaldata['id'] . ']" class="additional_total product_total_page" value="' . $additionaldata['price'] . '">
                                                 <h6 class="additional-sub-total product-sub-total">NPR 0.00</h6>
                                             </td>
                                         </tr>';
-                                        }
-$product_detail .= '
+            }
+            $product_detail .= '
                                         <tr>
-                                            <td class="cart-product-info">
-                                            </td>
-                                            <td class="cart-product-info">
-                                            </td>
-
-                                            <td class="cart-product-quantity">
-                                            </td>
-                                            <td class="cart-product-quantity">
-                                                <h4>Grand Total</h4>
-
-                                            </td>
+                                            <td class="cart-product-info"></td>
+                                            <td class="cart-product-info"></td>
+                                            <td class="cart-product-quantity"></td>
+                                            <td class="cart-product-quantity"><h4>Grand Total</h4></td>
                                             <td class="cart-product-subtotal product-sub-total">
                                                 <input type="hidden" name="Grand_total_1" class="Grand_total" value="">
                                                 <h6 class="Grand-sub-total">NPR 0.00</h6>
                                             </td>
                                         </tr>
         ';
-                                    }
+        }
+
         if (!empty($prodRec->qnt2)) {
             $prodPrice = (!empty($prodRec->discount2) and $prodRec->discount2 > 0) ? $prodRec->discount2 : $prodRec->price2;
             $product_detail .= '
@@ -1533,7 +1557,7 @@ $product_detail .= '
                                     <h6 class="product-sub-total">' . $prodRec->currency . ' 0.00</h6>
                                 </td>
                             </tr>
-                ';
+            ';
         }
 
         if (!empty($prodRec->qnt3)) {
@@ -1621,16 +1645,6 @@ $product_detail .= '
                                 </ul>
                             </div>
 
-
-
-                            <form>
-                                <table class="table">
-                                        <tbody>
-
-                                        </tbody>
-                                    </table>
-
-                            </form>
                             <hr>
                             <div class="ltn__social-media">
                                 <ul>
@@ -1668,14 +1682,13 @@ $product_detail .= '
             </div>
             <!-- Shop Tab End -->
 
-
             <div class="row">
                 <div class="col-md-12 product-filter-right mt-30">
                     <h5>Similar Products</h5>
                     <div id="productContainer" class="row">
-                       '.$product_realted.'
+                       ' . $product_realted . '
+                    </div>
                 </div>
-            </div>
             </div>
         ';
 
