@@ -4,11 +4,11 @@
 /_private
 /_pvt
 .DS_Store
-
+config.php
 
 includes/config.php
 includes/initialize.php
- 
+
 /images
 userfiles
 
