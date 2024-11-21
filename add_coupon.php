@@ -166,4 +166,18 @@ switch ($_POST['action']) {
         }
         echo json_encode(array('action' => 'success', 'message' => $result));
         break;
+
+    case 'ship_district_by_id':
+        $mainlocation = locationn::find_by_id($location);
+        if (!empty($location)) {
+            $locations = locationn::get_all_byparnt($mainlocation->id);
+        } else {
+            $locations = locationn::get_all_bychild();
+        }
+        $result = '<option value="">Select Shipping District</option>';
+        foreach ($locations as $location) {
+            $result .= '<option value="' . $location->id . '">' . $location->title . '</option>';
+        }
+        echo json_encode(array('action' => 'success', 'message' => $result));
+        break;
 }

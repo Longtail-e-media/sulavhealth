@@ -275,6 +275,14 @@
             $record->city           = (!empty($_REQUEST['city'])) ? $_REQUEST['city'] : '';
             $record->postal         = (!empty($_REQUEST['postal_code'])) ? $_REQUEST['postal_code'] : '';
             $record->blood_group    = (!empty($_REQUEST['blood_group'])) ? $_REQUEST['blood_group'] : '';
+            $record->diseases       = (!empty($_REQUEST['diseases'])) ? $_REQUEST['diseases'] : '';
+            $record->medicines      = (!empty($_REQUEST['medicines'])) ? $_REQUEST['medicines'] : '';
+
+            $record->shipping_location_home     = (!empty($_REQUEST['shipping_location_home'])) ? $_REQUEST['shipping_location_home'] : '';
+            $record->shipping_district_home     = (!empty($_REQUEST['shipping_district_home'])) ? $_REQUEST['shipping_district_home'] : '';
+            $record->shipping_location_office   = (!empty($_REQUEST['shipping_location_office'])) ? $_REQUEST['shipping_location_office'] : '';
+            $record->shipping_district_office   = (!empty($_REQUEST['shipping_district_office'])) ? $_REQUEST['shipping_district_office'] : '';
+
             $record->Google_maps    = (!empty($_REQUEST['Google_maps'])) ? $_REQUEST['Google_maps'] : '';
             $record->facebook_uid   = $_REQUEST['address'];
             $record->contact        = $_REQUEST['phone'];

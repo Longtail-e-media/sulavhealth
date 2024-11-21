@@ -1,19 +1,16 @@
 <?php
 require_once("includes/initialize.php");
 
-$lang = !empty($session->get('lang_type')) ? $session->get('lang_type') : 'gr';
+$lang       = !empty($session->get('lang_type')) ? $session->get('lang_type') : 'gr';
+
+$usermail   = User::get_UseremailAddress_byId(1);
+//$usermail   = 'swarna@longtail.info';
+$ccusermail = User::field_by_id(1, 'optional_email');
+$sitename   = Config::getField('sitename', true);
+
+foreach ($_POST as $key => $val) {$$key = $val;}
 
 if ($_POST['action'] == "forcomment"):
-
-    $usermail = User::get_UseremailAddress_byId(1);
-//    $usermail = "swarna@longtail.info";
-    $ccusermail = User::field_by_id(1, 'optional_email');
-    $sitename = Config::getField('sitename', true);
-
-    foreach ($_POST as $key => $val) {
-        $$key = $val;
-    }
-
     $body = '
 	<table width="100%" border="0" cellpadding="0" style="font:12px Arial, serif;color:#222;">
 	  <tr>
@@ -39,10 +36,6 @@ if ($_POST['action'] == "forcomment"):
 	</table>
 	';
 
-    /*
-    * mail info
-    */
-
     $mail = new PHPMailer(); // defaults to using php "mail()"
 
     $mail->CharSet = 'UTF-8';
@@ -50,7 +43,6 @@ if ($_POST['action'] == "forcomment"):
     $mail->AddReplyTo($email, $name);
 
     $mail->AddAddress($usermail, $sitename);
-    // if add extra email address on back end
     if (!empty($ccusermail)) {
         $rec = explode(';', $ccusermail);
         if ($rec) {
@@ -72,17 +64,7 @@ if ($_POST['action'] == "forcomment"):
     }
 endif;
 
-if ($_POST['action'] == "forinterest"):
-
-    $usermail = User::get_UseremailAddress_byId(1);
-//    $usermail = "swarna@longtail.info";
-    $ccusermail = User::field_by_id(1, 'optional_email');
-    $sitename = Config::getField('sitename', true);
-
-    foreach ($_POST as $key => $val) {
-        $$key = $val;
-    }
-
+if ($_POST['action'] == "foroffer"):
     $body = '
 	<table width="100%" border="0" cellpadding="0" style="font:12px Arial, serif;color:#222;">
 	  <tr>
@@ -90,10 +72,10 @@ if ($_POST['action'] == "forinterest"):
 		</td>
 	  </tr>
 	  <tr>
-		<td><p><span style="color:#0065B3; font-size:14px; font-weight:bold">Expression of Interest message</span><br />
+		<td><p><span style="color:#0065B3; font-size:14px; font-weight:bold">Offer enquiry message</span><br />
 		  The details provided are:</p>
-		  <p><strong>Fullname</strong> : ' . $name . '<br />
-		  <strong>Company Name</strong> : ' . $c_name . '<br />		
+		  <p><strong>Full Name</strong> : ' . $fullname . '<br />		
+		  <strong>Offer</strong>: ' . $offername . '<br />
 		  <strong>E-mail Address</strong>: ' . $email . '<br />
 		  <strong>Phone</strong>: ' . $phone . '<br />
 		  <strong>Message</strong>: ' . $message . '<br />
@@ -103,24 +85,19 @@ if ($_POST['action'] == "forinterest"):
 	  <tr>
 		<td><p>&nbsp;</p>
 		<p>Thank you,<br />
-		' . $name . '
+		' . $fullname . '
 		</p></td>
 	  </tr>
 	</table>
 	';
 
-    /*
-    * mail info
-    */
-
     $mail = new PHPMailer(); // defaults to using php "mail()"
 
     $mail->CharSet = 'UTF-8';
-    $mail->SetFrom($email, $name);
-    $mail->AddReplyTo($email, $name);
+    $mail->SetFrom($email, $fullname);
+    $mail->AddReplyTo($email, $fullname);
 
     $mail->AddAddress($usermail, $sitename);
-    // if add extra email address on back end
     if (!empty($ccusermail)) {
         $rec = explode(';', $ccusermail);
         if ($rec) {
@@ -130,7 +107,7 @@ if ($_POST['action'] == "forinterest"):
         }
     }
 
-    $mail->Subject = 'Expression of Interest mail from ' . $name;
+    $mail->Subject = 'Offer enquiry mail from ' . $fullname;
 
     $mail->MsgHTML($body);
 
