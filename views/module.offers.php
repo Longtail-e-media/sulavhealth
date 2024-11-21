@@ -32,36 +32,39 @@ if (defined('HOME_PAGE')) {
                                 <div class="modal-body">
                                     <div class="ltn__quick-view-modal-inner">
                                         <div class="modal-product-item">
-                                            <div class="row">
+                                            <div class="row justify-content-center">
+                                            <div class="col-lg-12 text-center my-4 border-bottom">
+                                            <h2>Best offer Price</h2>
+                                            </div>
                                                 <div class="col-lg-5">
-                                                    <div class="mt-4 pt-3"><img src="' . IMAGE_PATH . 'offers/listimage/' . $offerRow->list_image . '" alt="' . $offerRow->title . '" class=""></div>
+                                                    <div class="mt-4"><img src="' . IMAGE_PATH . 'offers/listimage/' . $offerRow->list_image . '" alt="' . $offerRow->title . '" class=""></div>
                                                     <div class="mt-4 pt-3"><p>' . $offerRow->brief . '</p></div>
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-6 px-5">
                                                     <form id="offerfrmmain-' . $offerRow->id . '" class="reserveForm">
                                                         <input type="hidden" name="offername" value="' . $offerRow->title . '"/>
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <label>Full Name*</label>
-                                                                <input type="text" name="fullname" value="">
+                                                                <input type="text" class="form-control" name="fullname" value="">
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <label>Contact Number*</label>
-                                                                <input type="text" name="phone" value="">
+                                                                <input type="text" class="form-control" name="phone" value="">
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <label>Email Address*</label>
-                                                                <input type="text" name="email" value="">
+                                                                <input type="text"  class="form-control" name="email" value="">
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <label>Message*</label>
-                                                                <input type="text" name="message" value="">
+                                                              <textarea class="form-control" name="message" value="" rows="6"></textarea>
                                                             </div>
                                                         </div>
                                                         <!--<div id="g-recaptcha-response" class="g-recaptcha" data-sitekey="6Lfeo1AqAAAAACkTWCuFvl3HspGKIU_ixrtFWPZy"></div>-->
                                                         <div id="result_msg"></div>
-                                                        <div class="d-flex justify-content-center pe-lg-5">
-                                                            <button type="submit" id="submit-o-' . $offerRow->id . '" class="btn theme-btn-1 btn-effect-1 text-uppercase">Book Now</button>
+                                                        <div class="d-flex pe-lg-5 mt-4">
+                                                            <button type="submit" id="submit-o-' . $offerRow->id . '" class="ml-2 btn theme-btn-1 btn-effect-1 text-uppercase">Book Now</button>
                                                         </div>
                                                     </form>
                                                 </div>
