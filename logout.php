@@ -23,32 +23,31 @@ if (!empty($sesRec)) {
 $sql = "SELECT * FROM tbl_wishlist WHERE user_id={$userId} LIMIT 1";
 $wishlist = WishList::find_by_sql($sql);
 if (!empty($wishlist)) {
-    $wishlistObj = $wishlist[0];
-    $oldList = unserialize($wishlistObj->data);
+
+    $wishlistObj    = $wishlist[0];
+    $oldList        = unserialize($wishlistObj->data);
 
     // Find unique values in $productsArr that are not in $oldList
-    $uniqueValues = array_diff($productsArr, $oldList);
+    $uniqueValues   = array_diff($productsArr, $oldList);
 
     // Merge these unique values into $oldList
-    $oldList = array_merge($oldList, $uniqueValues);
+    $oldList        = array_merge($oldList, $uniqueValues);
 
-    $wishlistObj->data = serialize($oldList);
+    $wishlistObj->data          = serialize($oldList);
     $wishlistObj->modified_date = registered();
+
     $db->begin();
-    if ($wishlistObj->save()) {
-        $db->commit();
-    }
-}
-else {
-    $record = new WishList();
-    $record->user_id = $payRecord->user_id;
-    $record->data = serialize($productsArr);
+    if ($wishlistObj->save()) {$db->commit();}
+
+} else {
+    $record             = new WishList();
+    $record->user_id    = $userId;
+    $record->data       = serialize($productsArr);
     $record->added_date = registered();
     $record->modified_date = registered();
+
     $db->begin();
-    if ($record->save()) {
-        $db->commit();
-    }
+    if ($record->save()) {$db->commit();}
 }
 
 $session->clear('cart_detail');
