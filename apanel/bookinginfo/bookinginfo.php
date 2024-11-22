@@ -139,10 +139,11 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                                 <?php
                                 while ($row = $db->fetch_object($query)) {
                                     // pr($row->additionalprod);
-                                    $pkgRec = SubProduct::find_by_id($row->product_id); ?>
+                                    $pkgRec = SubProduct::find_by_id($row->product_id);
+                                    $size = (!empty($row->product_size)) ? ' (' . $row->product_size . ')' : ''; ?>
                                     <tr>
                                         <td>
-                                            <a href="<?php echo BASE_URL . 'product/' . $pkgRec->slug; ?>" target="_blank"><?php echo $pkgRec->title; ?></a>
+                                            <a href="<?php echo BASE_URL . 'product/product-detail/' . $pkgRec->slug; ?>" target="_blank"><?php echo $pkgRec->title . $size; ?></a>
                                         </td>
                                         <td><?php echo $row->product_quantity; ?></td>
                                         <td><?php echo $row->product_price; ?></td>

@@ -182,33 +182,34 @@ if (!empty($bookingRec)) {
             $pkgRec = SubProduct::find_by_id($row->product_id);
             if (!empty($pkgRec)) {
                 $styl = ($sn == 1) ? 'padding: 10px 0 0 0; border-top: 1px dashed #aaaaaa; text-align:center;' : 'text-align:center;';
+                $size = (!empty($row->product_size)) ? ' (' . $row->product_size . ')' : '';
                 $html .= '
                     <tr style="' . $styl . '">
                         <td>' . $sn . '</td>
-                        <td>' . $pkgRec->title . ' - ' . $row->product_netqnt . '</td>
+                        <td>' . $pkgRec->title . $size . ' - ' . $row->product_netqnt . '</td>
                         <td>' . $row->product_quantity . '</td>
                         <td>' . $row->product_price . '</td>
                         <td>' . $row->product_total . '</td>
                     </tr>
                 ';
-                if(!empty($row->additionalprod)){
-                    $additionaldata= unserialize($row->additionalprod);
+                if (!empty($row->additionalprod)) {
+                    $additionaldata = unserialize($row->additionalprod);
                     // pr($additionaldata);
-                    $addtotal='';
-                    foreach($additionaldata as $addddata){
-                        $addtotal= (float)$addddata['quantityadd'] * (float)$addddata['price'];
-                    $html .= '
-                    <tr style="' . $styl . '">
-                        <td>+</td>
-                        <td>' . $addddata['addname'] . ' - ' . $addddata['quantityadd'] . '</td>
-                        <td>' . $addddata['quantityadd'] . '</td>
-                        <td>' . $addddata['price'] . '</td>
-                        <td>' . $addtotal . '</td>
-                    </tr>
-                '; 
+                    $addtotal = '';
+                    foreach ($additionaldata as $addddata) {
+                        $addtotal = (float)$addddata['quantityadd'] * (float)$addddata['price'];
+                        $html .= '
+                            <tr style="' . $styl . '">
+                                <td>+</td>
+                                <td>' . $addddata['addname'] . ' - ' . $addddata['quantityadd'] . '</td>
+                                <td>' . $addddata['quantityadd'] . '</td>
+                                <td>' . $addddata['price'] . '</td>
+                                <td>' . $addtotal . '</td>
+                            </tr>
+                        ';
+                    }
+                    $sn++;
                 }
-                $sn++;
-            }
             }
         }
     }

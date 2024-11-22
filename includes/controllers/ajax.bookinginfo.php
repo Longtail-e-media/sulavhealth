@@ -96,21 +96,19 @@
 
         case "request_inquiry":
 
-            foreach ($_POST as $key => $val) {
-                $$key = $val;
-            }
+            foreach ($_POST as $key => $val) {$$key = $val;}
 
-            if($order_key){
-                $ordercheck= Bookinginfo::find_by_tranid($order_key);
-            if(!empty($ordercheck)){
-                $message = "Order already placed!";
-                echo json_encode(array("action" => "unsuccessorder", "message" => $message));
-                exit; 
-            }
+            if ($order_key) {
+                $ordercheck     = Bookinginfo::find_by_tranid($order_key);
+                if (!empty($ordercheck)) {
+                    $message    = "Order already placed!";
+                    echo json_encode(array("action" => "unsuccessorder", "message" => $message));
+                    exit;
+                }
             }
 
             if (empty($currency)) {
-                $message = ($lang == "gr") ? "No Items in Cart. Please add Items!!" : "No Items in Cart. Please add Items!";
+                $message = "No Items in Cart. Please add Items!";
                 echo json_encode(array("action" => "unsuccess", "message" => $message));
                 exit;
             }
@@ -168,18 +166,19 @@
                         if (!empty($product)) {
                             $product_details = $sesRow['product_details'];
                             foreach ($product_details as $label => $detail) {
-// pr($detail['addtionaldetail']);
-$addobj= serialize($detail['addtionaldetail']);
+                                // pr($detail['addtionaldetail']);
+                                $addobj = serialize($detail['addtionaldetail']);
                                 $csql = "INSERT INTO tbl_booking_product SET 
-                                  booking_id = '" . $booking_id . "', 
-                                  product_id = '" . $product->id . "', 
-                                  product_currency = '".$product->currency."',
-                                  product_label = '" . $label . "',
-                                  additionalprod = '" . $addobj . "',
-                                  product_netqnt = '" . $detail['netqnt'] . "',
-                                  product_quantity = '".$detail['quantity']."',
-                                  product_price = '".$detail['price']."',
-                                  product_total = '".$detail['total']."' ";
+                                    booking_id      = '" . $booking_id . "', 
+                                    product_id      = '" . $product->id . "', 
+                                    product_currency = '" . $product->currency . "',
+                                    product_label   = '" . $label . "',
+                                    additionalprod  = '" . $addobj . "',
+                                    product_netqnt  = '" . $detail['netqnt'] . "',
+                                    product_quantity = '" . $detail['quantity'] . "',
+                                    product_price   = '" . $detail['price'] . "',
+                                    product_total   = '" . $detail['total'] . "',
+                                    product_size    = '" . $detail['size'] . "'";
                                 $db->query($csql);
                             }
                         }
@@ -222,7 +221,7 @@ $addobj= serialize($detail['addtionaldetail']);
                 }
 
                 // send email
-                 include(SITE_ROOT . 'book_mail.php');
+                include(SITE_ROOT . 'book_mail.php');
 
                 // clear shopping cart
                 unset($_SESSION['cart_detail']);
