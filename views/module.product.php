@@ -133,19 +133,32 @@ if (defined('HOME_PAGE')) {
             if (!empty($giftSet->price1) and (empty($giftSet->offer_price))) {
                 $price_text = '<span>' . $giftSet->currency . ' ' . $giftSet->price1 . '</span>';
             }
+
             if (!empty($giftSet->discount1)) {
-                if (empty($giftSet->discountedp)) {
+                // Check if discount flag is On in Category
+                $categoryRec = Category::find_by_id($giftSet->Category);
+
+                if (!empty($categoryRec) && $categoryRec->discount == 1) {
+                    // Check if a Subcategory is chosen
+                    $subcategoryRec = Category::find_by_id($giftSet->Subcategory);
+                    $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
+
+                    // Determine the discount amount
                     $discountamt = $giftSet->price1 - $giftSet->discount1;
-                    $price_text = '
-                        <span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>
-                    ';
-                } else {
-                    $discountamt = $giftSet->price1 - $giftSet->discount1;
-                    $price_text = '
-                        <span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>
-                    ';
+
+                    // Build the discount information
+                    $discountInfo = '<span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span>';
+                    if (!empty($giftSet->discountedp)) {
+                        $discountInfo .= '|<span>' . $giftSet->discountedp . '% off</span>';
+                    }
+
+                    // Render the price text if either category or subcategory discount is active
+                    if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
+                        $price_text = $discountInfo . '<br/>
+                            <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> 
+                            <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>
+                        ';
+                    }
                 }
             }
 
@@ -304,7 +317,24 @@ if (defined('HOME_PAGE')) {
             } else {
                 $home_gift_sets_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
             }
-            $prodPrice = (!empty($giftSet->discount1) and $giftSet->discount1 > 0) ? $giftSet->discount1 : $giftSet->price1;
+
+            $prodPrice = $giftSet->price1; // Default to the original price
+            if (!empty($giftSet->discount1) && $giftSet->discount1 > 0) {
+                // Check if discount flag is On in Category
+                $categoryRec = Category::find_by_id($giftSet->Category);
+
+                if (!empty($categoryRec) && $categoryRec->discount == 1) {
+                    // Check if a Subcategory is chosen
+                    $subcategoryRec = Category::find_by_id($giftSet->Subcategory);
+                    $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
+
+                    // Apply the discount if the subcategory discount is active or no subcategory exists
+                    if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
+                        $prodPrice = $giftSet->discount1;
+                    }
+                }
+            }
+
             $home_gift_sets_modal .= '
                                         <input type="hidden" name="product_qnt_1" value="' . $giftSet->slug . '">
                                         <input type="hidden" name="product_net_qnt_1" value="' . $giftSet->netqnt1 . '">
@@ -528,21 +558,17 @@ if (defined('HOME_PAGE')) {
         if (!empty($homeservices)) {
             $services_gift_sets .= '
             <div class="ltn__product-tab-area ltn__product-gutter">
-            <div class="">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="ltn__tab-menu ltn__tab-menu-2 ltn__tab-menu-top-right--">
-
-                            <div class="container">
-
-                                <h3 class="new-products">' . $homeservice->title . '</h3>
-
-                                <div class="">
-                                    <div class="tab-content tab-list3">
-
-                                        <div class="tab-pane fade active show" id="product_lab-services">
-                                            <div class="ltn__product-tab-content-inner ltn__product-grid-view">
-                                                <div class="row">
+                <div class="">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ltn__tab-menu ltn__tab-menu-2 ltn__tab-menu-top-right--">
+                                <div class="container">
+                                    <h3 class="new-products">' . $homeservice->title . '</h3>
+                                    <div class="">
+                                        <div class="tab-content tab-list3">
+                                            <div class="tab-pane fade active show" id="product_lab-services">
+                                                <div class="ltn__product-tab-content-inner ltn__product-grid-view">
+                                                    <div class="row">
             ';
 
             $serviceSets = SubProduct::get_home_brand_product_service($homeservice->id);
@@ -559,36 +585,38 @@ if (defined('HOME_PAGE')) {
                         }
                     }
                 }
-                $prodbrand = Brand::find_by_id($serviceSet->brand);
-                $prodservice = Services::find_by_id($serviceSet->service_id);
-                // pr($prodbrand);
-                if (!empty($prodservice)) {
-                    $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $serviceSet->slug . '';
-                } else {
-                    $slugs = '' . BASE_URL . 'product/product-detail/' . $serviceSet->slug . '';;
-                }
 
                 $price_text = '';
                 if (!empty($serviceSet->price1) and (empty($serviceSet->offer_price))) {
                     $price_text = '<span>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</span>';
                 }
                 if (!empty($giftSet->discount1)) {
-                    if (empty($giftSet->discountedp)) {
-                        $discountamt = $giftSet->price1 - $giftSet->discount1;
-                        $price_text = '
-                <span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>
+                    // Check if discount flag is On in Category
+                    $categoryRec = Category::find_by_id($giftSet->Category);
 
-                ';
-                    } else {
-                        $discountamt = $giftSet->price1 - $giftSet->discount1;
-                        $price_text = '
-                <span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
-                        <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>
+                    if (!empty($categoryRec) && $categoryRec->discount == 1) {
+                        // Check if a Subcategory is chosen
+                        $subcategoryRec = Category::find_by_id($giftSet->Subcategory);
+                        $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
 
-                ';
+                        // Determine the discount amount
+                        $discountamt = $giftSet->price1 - $giftSet->discount1;
+
+                        // Build the discount information
+                        $discountInfo = '<span>' . $giftSet->currency . ' ' . $giftSet->discount1 . '</span>';
+                        if (!empty($giftSet->discountedp)) {
+                            $discountInfo .= '|<span>' . $giftSet->discountedp . '% off</span>';
+                        }
+
+                        // Render the price text if either category or subcategory discount is active
+                        if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
+                            $price_text = $discountInfo . '<br/>
+                                <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> 
+                                <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>';
+                        }
                     }
                 }
+
                 $prodbrand = Brand::find_by_id($serviceSet->brand);
                 $prodservice = Services::find_by_id($serviceSet->service_id);
                 if (!empty($prodbrand)) {
@@ -604,44 +632,38 @@ if (defined('HOME_PAGE')) {
                     $slugs = '' . BASE_URL . 'product/product-detail/' . $serviceSet->slug . '';;
                 }
                 $services_gift_sets .= '
-                <div class="col-xl-4 col-sm-6 col-6">
-                <div class="ltn__product-item ltn__product-item-3 text-center">
-                    <div class="product-img product_hove" data-href="' . $slugs . '">
-                        <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $serviceSet->title . '"></a>
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
-                        <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $serviceSet->title . '</a></h3>
-                        <div class="product-price">
-                            ' . $price_text . '
+                <div class="col-xl-3 col-sm-6 col-xs-12">
+                    <div class="ltn__product-item ltn__product-item-3 text-center">
+                        <div class="product-img product_hove" data-href="' . $slugs . '">
+                            <a class="product-image-link" href="' . $slugs . '"><img src="' . $img . '" alt="' . $serviceSet->title . '"></a>
                         </div>
-                        <div class="product-action">
+                        <div class="product-info">
+                            <h4 class="product-title brand-name"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
+                            <h3 class="product-link-title"><a href="' . $slugs . '" class="product-link">' . $serviceSet->title . '</a></h3>
+                            <div class="product-price">' . $price_text . '</div>
+                            <div class="product-action">
                 ';
                 if (!empty($serviceSet->tag)) {
                     $services_gift_sets .= '<li class="sale-badge">' . substr($serviceSet->tag, 0, 70) . '</li>';
                 }
                 $services_gift_sets .= '
-                                        <ul>
-                                        <li>
-                                            <a href="#" class="add-wishlist"
-                                                title="Add to Wishlist"
-                                                data-cartid="' . $serviceSet->slug . '">
-                                                <i class="far fa-heart"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="ADD TO CART"
-                                                class="add-to-cart" data-toggle="modal"
-                                                data-target="#quick_view_modal_product_' . $serviceSet->slug . '">
-                                                Add to Cart
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                          </div>
+                                <ul>
+                                    <li>
+                                        <a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="' . $serviceSet->slug . '">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_' . $serviceSet->slug . '">
+                                            Add to Cart
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
                 ';
 
                 $services_gift_sets_script .= '
@@ -671,6 +693,7 @@ if (defined('HOME_PAGE')) {
                                                         <div class="modal-product-img">
                                                             <div class="row  ltn__blog-slider-one-active1 slick-arrow-1 ltn__blog-item-3-normal">
                 ';
+
                 $sliderImages = SubProductImage::getImagelist_by($serviceSet->id);
                 if (!empty($sliderImages)) {
                     foreach ($sliderImages as $sliderImage) {
@@ -698,19 +721,43 @@ if (defined('HOME_PAGE')) {
                                                         <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $title . '</a></h4>
                                                             <h3>' . (($lang == "gr") ? $serviceSet->title_greek : $serviceSet->title) . '</h3>
                                                             ' . (($lang == "gr") ? $serviceSet->brief_greek : $serviceSet->brief) . '
+                                                            <br/><br/>
+                                                            <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
+                                                                <span>' . SHOP_VIEW_MORE . '</span>
+                                                            </a>
 
-                                                                <br/>
-                                                                <br/>
+                <div class="shoping-cart-table table-responsive">
+                    <form id="add-cart-product-' . $serviceSet->slug . '">
+                ';
 
-                                                                <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
-                                                                    <span>' . SHOP_VIEW_MORE . '</span>
-                                                                </a>
+                if (!empty($serviceSet->sizes)) {
+                    $services_gift_sets_modal .= '
+                        <div class="check_selection d-flex align-items-center mb-3">
+                            <div class="price_selection">
+                                <h5 class="mb-0">Size</h5>
+                            </div>
+                            <div class="price_tags">
+                    ';
+                    $sizes = explode(',', $serviceSet->sizes);
+                    foreach ($sizes as $i => $size) {
+                        $active = ($i == 0) ? 'active' : '';
+                        $checked = ($i == 0) ? 'checked' : '';
+                        $services_gift_sets_modal .= '
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="size" id="psize-' . $serviceSet->slug . '-' . ($i + 1) . '" value="' . $size . '" ' . $checked . '>
+                                    <label class="form-check-label ' . $active . '" for="psize-' . $serviceSet->slug . '-' . ($i + 1) . '">' . $size . '</label>
+                                </div>
+                        ';
+                    }
+                    $services_gift_sets_modal .= '
+                            </div>
+                        </div>
+                    ';
+                }
 
-                    <div class="shoping-cart-table table-responsive">
-                        <form id="add-cart-product-' . $serviceSet->slug . '">
+                $services_gift_sets_modal .= '
                         <table class="table">
                             <tbody>
-
                                 <tr>
                                     <td class="cart-product-info">
                                         <div class="form-check form-check-inline">
@@ -720,22 +767,35 @@ if (defined('HOME_PAGE')) {
                 } else {
                     $services_gift_sets_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
                 }
-                $prodPrice = (!empty($serviceSet->discount1) and $serviceSet->discount1 > 0) ? $serviceSet->discount1 : $serviceSet->price1;
+
+                $prodPrice = $serviceSet->price1; // Default to the original price
+                if (!empty($serviceSet->discount1) && $serviceSet->discount1 > 0) {
+                    // Check if discount flag is On in Category
+                    $categoryRec = Category::find_by_id($serviceSet->Category);
+
+                    if (!empty($categoryRec) && $categoryRec->discount == 1) {
+                        // Check if a Subcategory is chosen
+                        $subcategoryRec = Category::find_by_id($serviceSet->Subcategory);
+                        $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
+
+                        // Apply the discount if the subcategory discount is active or no subcategory exists
+                        if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
+                            $prodPrice = $serviceSet->discount1;
+                        }
+                    }
+                }
+
                 $services_gift_sets_modal .= '
                                             <input type="hidden" name="product_qnt_1" value="' . $serviceSet->slug . '">
                                             <input type="hidden" name="product_net_qnt_1" value="' . $serviceSet->netqnt1 . '">
                                             <label class="form-check-label">' . $serviceSet->netqnt1 . '</label>
                                         </div>
                                     </td>
-
                                     <td class="cart-product-price">
-                                    <input type="hidden" name="product_price_1" value="' . $prodPrice . '">
-
-                                    ' . $serviceSet->currency . ' ' . sprintf("%.2f", $prodPrice) . '
+                                        <input type="hidden" name="product_price_1" value="' . $prodPrice . '">
+                                        ' . $serviceSet->currency . ' ' . sprintf("%.2f", $prodPrice) . '
                                     </td>
-                                    <td class="cart-product-quantity">
-                                    <span>QTY</span
-                                    </td>
+                                    <td class="cart-product-quantity"><span>QTY</span</td>
                                     <td class="cart-product-quantity">
                                         <div class="cart-plus-minus">
                                             <div class="dec qtybutton">-</div>
@@ -748,7 +808,6 @@ if (defined('HOME_PAGE')) {
                                         <h6 class="product-sub-total">' . $serviceSet->currency . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                     </td>
                                 </tr>
-
                 ';
 
                 if (!empty($serviceSet->qnt2)) {
@@ -845,34 +904,27 @@ if (defined('HOME_PAGE')) {
                 }
 
                 $services_gift_sets_modal .= '
-
                             </tbody>
                         </table>
-                        </form>
-                    </div>
+                    </form>
+                </div>
                                                             <div class="ltn__product-details-menu-2">
                                                                 <ul>
-                                                                <li style="padding-right: 16.28rem;">
-                                                                <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $serviceSet->slug . '">
-                                                                    <i class="far fa-heart"></i>
-                                                                   <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
-                                                                </a>
-                                                            </li>
-
+                                                                    <li style="padding-right: 16.28rem;">
+                                                                        <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $serviceSet->slug . '">
+                                                                            <i class="far fa-heart"></i>
+                                                                           <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
+                                                                        </a>
+                                                                    </li>
                                                                     <li>
                                                                         <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $serviceSet->slug . '" form-id="add-cart-product-' . $serviceSet->slug . '">
                                                                             <i class="fas fa-shopping-cart"></i>
                                                                             <span>' . SHOP_ADD_TO_CART . '</span>
                                                                         </a>
                                                                     </li>
-
-
                                                                     <!--<li>
                                                                     <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
                                                                     </li>-->
-
-
-
                                                                 </ul>
                                                             </div>
                                                             <hr>
@@ -903,21 +955,17 @@ if (defined('HOME_PAGE')) {
                 ';
             }
             $services_gift_sets .= '
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
-
-
-
-    </div>
-    </div>
-    </div>
-
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
             ';
         }
     }
@@ -977,18 +1025,29 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $price_text = '<span>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</span>';
                 }
                 if (!empty($prodrelated->discount1)) {
-                    if (empty($prodrelated->discountedp)) {
+                    // Check if discount flag is On in Category
+                    $categoryRec = Category::find_by_id($prodrelated->Category);
+
+                    if (!empty($categoryRec) && $categoryRec->discount == 1) {
+                        // Check if a Subcategory is chosen
+                        $subcategoryRec = Category::find_by_id($prodrelated->Subcategory);
+                        $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
+
+                        // Determine the discount amount
                         $discountamt = $prodrelated->price1 - $prodrelated->discount1;
-                        $price_text = '
-                            <span>' . $prodrelated->currency . ' ' . $prodrelated->discount1 . '</span><br/>
-                            <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt . '</span>
-                        ';
-                    } else {
-                        $discountamt = $prodrelated->price1 - $prodrelated->discount1;
-                        $price_text = '
-                            <span>' . $prodrelated->currency . ' ' . $prodrelated->discount1 . '</span>|<span>' . $prodrelated->discountedp . '%off</span><br/>
-                            <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt . '</span>
-                        ';
+
+                        // Build the discount information
+                        $discountInfo = '<span>' . $prodrelated->currency . ' ' . $prodrelated->discount1 . '</span>';
+                        if (!empty($prodrelated->discountedp)) {
+                            $discountInfo .= '|<span>' . $prodrelated->discountedp . '% off</span>';
+                        }
+
+                        // Render the price text if either category or subcategory discount is active
+                        if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
+                            $price_text = $discountInfo . '<br/>
+                            <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> 
+                            <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt . '</span>';
+                        }
                     }
                 }
                 $prodbrand = Brand::find_by_id($prodrelated->brand);
@@ -1146,7 +1205,24 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                 } else {
                     $product_related_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
                 }
-                $prodPrice = (!empty($prodrelated->discount1) and $prodrelated->discount1 > 0) ? $prodrelated->discount1 : $prodrelated->price1;
+
+                $prodPrice = $prodrelated->price1; // Default to the original price
+                if (!empty($prodrelated->discount1) && $prodrelated->discount1 > 0) {
+                    // Check if discount flag is On in Category
+                    $categoryRec = Category::find_by_id($prodrelated->Category);
+
+                    if (!empty($categoryRec) && $categoryRec->discount == 1) {
+                        // Check if a Subcategory is chosen
+                        $subcategoryRec = Category::find_by_id($prodrelated->Subcategory);
+                        $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
+
+                        // Apply the discount if the subcategory discount is active or no subcategory exists
+                        if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
+                            $prodPrice = $prodrelated->discount1;
+                        }
+                    }
+                }
+
                 $product_related_modal .= '
                                             <input type="hidden" name="product_qnt_1" value="' . $prodrelated->slug . '">
                                             <input type="hidden" name="product_net_qnt_1" value="' . $prodrelated->netqnt1 . '">
@@ -1451,7 +1527,24 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
         } else {
             $product_detail .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
         }
-        $prodPrice = (!empty($prodRec->discount1) and $prodRec->discount1 > 0) ? $prodRec->discount1 : $prodRec->price1;
+
+        $prodPrice = $prodRec->price1; // Default to the original price
+        if (!empty($prodRec->discount1) && $prodRec->discount1 > 0) {
+            // Check if discount flag is On in Category
+            $categoryRec = Category::find_by_id($prodRec->Category);
+
+            if (!empty($categoryRec) && $categoryRec->discount == 1) {
+                // Check if a Subcategory is chosen
+                $subcategoryRec = Category::find_by_id($prodRec->Subcategory);
+                $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
+
+                // Apply the discount if the subcategory discount is active or no subcategory exists
+                if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
+                    $prodPrice = $prodRec->discount1;
+                }
+            }
+        }
+
         $product_detail .= '
                                                     <input type="hidden" name="product_qnt_1" value="' . $prodRec->slug . '">
                                                     <input type="hidden" name="product_net_qnt_1" value="' . $prodRec->netqnt1 . '">
@@ -2072,7 +2165,8 @@ if (defined('SHOP_PAGE')) {
                     </div>
                 </div>
             ';
-        } else {
+        }
+        else {
             $shop_detail .= '
                 <div class="tab-pane fade ' . $activeShow . '" id="product_' . $mainProduct->slug . '">
                     <div class="ltn__product-tab-content-inner ltn__product-grid-view">

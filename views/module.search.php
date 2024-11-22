@@ -643,9 +643,9 @@ if (defined('SEARCH_PAGE')) {
     // pr($sql);
     $res = $db->query($sql);
     $total = $db->affected_rows($res);
-    $listofitems .= '
 
-    <label id="totalitems">' . $total . '  items found in this category</label>';
+    $listofitems .= '<label id="totalitems">' . $total . '  items found in this category</label>';
+
     if ($total > 0) {
         $i = 1;
         while ($rows = $db->fetch_array($res)) {
@@ -661,40 +661,30 @@ if (defined('SEARCH_PAGE')) {
             if (!empty($rows['price1']) and (empty($rows['offer_price']))) {
                 $price_text = '<span>' . $rows['currency'] . ' ' . $rows['price1'] . '</span>';
             }
-            // if (!empty($giftSet->discount1)) {
-            //     if(!empty($giftSet->discountedp)){
-            //         $discountamt= $giftSet->price1 - $giftSet->discount1;
-            //         $price_text = '
-            //     <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span><br/>
-            //             <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span>
-
-            //     ';
-            //     }
-            //     else{
-            //     $discountamt= $giftSet->price1 - $giftSet->discount1;
-            //     $price_text = '
-            //     <span>' . $giftSet->currency . ' '.$giftSet->discount1.'</span>|<span>' . $giftSet->discountedp . '%off</span><br/>
-            //             <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt. '</span>
-
-            //     ';
-            //     }
-            // }
             if (!empty($rows['discount1'])) {
-                if(empty($rows['discountedp'])){
-                $discountamt= $rows['price1'] - $rows['discount1'];
-                $price_text = '
-                <span>' . $rows['currency'] . ' '.$rows['discount1'].'</span><br/>
-                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span>
+                // Check if discount flag is On in Category
+                $categoryRec = Category::find_by_id($rows['Category']);
 
-                ';
-                }
-                else{
-                  $discountamt= $rows['price1'] - $rows['discount1'];
-                $price_text = '
-                <span>' . $rows['currency'] . ' '.$rows['discount1'].'</span>|<span>' . $rows['discountedp'] . '%off</span><br/>
-                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span>
+                if (!empty($categoryRec) && $categoryRec->discount == 1) {
+                    // Check if a Subcategory is chosen
+                    $subcategoryRec = Category::find_by_id($rows['Subcategory']);
+                    $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
 
-                ';
+                    // Determine the discount amount
+                    $discountamt = $rows['price1'] - $rows['discount1'];
+
+                    // Build the discount information
+                    $discountInfo = '<span>' . $rows['currency'] . ' ' . $rows['discount1'] . '</span>';
+                    if (!empty($rows['discountedp'])) {
+                        $discountInfo .= '|<span>' . $rows['discountedp'] . '% off</span>';
+                    }
+
+                    // Render the price text if either category or subcategory discount is active
+                    if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
+                        $price_text = $discountInfo . '<br/>
+                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> 
+                        <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt . '</span>';
+                    }
                 }
             }
 
@@ -779,6 +769,7 @@ if (defined('SEARCH_PAGE')) {
                 ';
             }
             $i++;
+
             $home_gift_sets_script .= '
                 <script class="productscrip">
                     $("#quick_view_modal_product_' . $rows['slug'] . '").on("shown.bs.modal", function () {
@@ -786,6 +777,7 @@ if (defined('SEARCH_PAGE')) {
                     })
                 </script>
             ';
+
             $home_gift_sets_modal .= '
                 <div class="ltn__modal-area ltn__quick-view-modal-area " id="productpopup">
                     <div class="modal fade" id="quick_view_modal_product_' . $rows['slug'] . '" tabindex="-1">
@@ -828,60 +820,72 @@ if (defined('SEARCH_PAGE')) {
                                                 </div>
                                                 <div class="col-lg-7 col-12">
                                                     <div class="modal-product-info">
-                                                    <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $titlebrand . '</a></h4>
-                                                    <h3>' . (($lang == "gr") ? $rows['title_greek'] : $rows['title']) . '</h3>
-                                                        ' . (($lang == "gr") ? $rows['brief_greek'] : $rows['brief']) . '
-                                                        <br/>
-                                                        <br/>
-
+                                                        <h4 class="product-title"><a href="' . BASE_URL . 'search/' . $slug . '" class="product-link">' . $titlebrand . '</a></h4>
+                                                        <h3>' . (($lang == "gr") ? $rows['title_greek'] : $rows['title']) . '</h3>
+                                                            ' . (($lang == "gr") ? $rows['brief_greek'] : $rows['brief']) . '
+                                                        <br/><br/>
                                                         <a href="' . $slugs . '" class="" style="font-size: 0.85em; text-decoration: underline; text-transform: capitalize; color: #0E75BA ;">
                                                             <span>' . SHOP_VIEW_MORE . '</span>
                                                         </a>
-
-
-                 <div class="shoping-cart-table table-responsive">
-                    <form id="add-cart-product-' . $rows['slug'] . '">
+             <div class="shoping-cart-table table-responsive">
+                <form id="add-cart-product-' . $rows['slug'] . '">
             ';
 
             if (!empty($rows['sizes'])) {
                 $home_gift_sets_modal .= '
-                        <div class="check_selection d-flex align-items-center mb-3">
-                            <div class="price_selection">
-                                <h5 class="mb-0">Size</h5>
-                            </div>
-                            <div class="price_tags">
-                    ';
+                    <div class="check_selection d-flex align-items-center mb-3">
+                        <div class="price_selection">
+                            <h5 class="mb-0">Size</h5>
+                        </div>
+                        <div class="price_tags">
+                ';
                 $sizes = explode(',', $rows['sizes']);
                 foreach ($sizes as $i => $size) {
                     $active = ($i == 0) ? 'active' : '';
                     $checked = ($i == 0) ? 'checked' : '';
                     $home_gift_sets_modal .= '
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="size" id="psize-' . $rows['slug'] . '-' . ($i + 1) . '" value="' . $size . '" ' . $checked . '>
-                                    <label class="form-check-label ' . $active . '" for="psize-' . $rows['slug'] . '-' . ($i + 1) . '">' . $size . '</label>
-                                </div>
-                        ';
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="size" id="psize-' . $rows['slug'] . '-' . ($i + 1) . '" value="' . $size . '" ' . $checked . '>
+                                <label class="form-check-label ' . $active . '" for="psize-' . $rows['slug'] . '-' . ($i + 1) . '">' . $size . '</label>
+                            </div>
+                    ';
                 }
                 $home_gift_sets_modal .= '
-                            </div>
                         </div>
-                    ';
+                    </div>
+                ';
             }
 
             $home_gift_sets_modal .= '
                     <table class="table">
                         <tbody>
-
                             <tr>
                                 <td class="cart-product-info">
                                     <div class="form-check form-check-inline">
             ';
-            if (!empty($giftSet->qnt1)) {
+            if (!empty($rows['qnt2'])) {
                 $home_gift_sets_modal .= '<input class="form-check-input" type="checkbox" name="product_check[]" value="1">';
             } else {
                 $home_gift_sets_modal .= '<input class="form-check-input" type="hidden" name="product_check[]" checked value="1">';
             }
-            $prodPrice = (!empty($rows['discount1']) and $rows['discount1'] > 0) ? $rows['discount1'] : $rows['price1'];
+            // $prodPrice = (!empty($rows['discount1']) and $rows['discount1'] > 0) ? $rows['discount1'] : $rows['price1'];
+            $prodPrice = $rows['price1']; // Default to the original price
+            if (!empty($rows['discount1']) && $rows['discount1'] > 0) {
+                // Check if discount flag is On in Category
+                $categoryRec = Category::find_by_id($rows['Category']);
+
+                if (!empty($categoryRec) && $categoryRec->discount == 1) {
+                    // Check if a Subcategory is chosen
+                    $subcategoryRec = Category::find_by_id($rows['Subcategory']);
+                    $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
+
+                    // Apply the discount if the subcategory discount is active or no subcategory exists
+                    if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
+                        $prodPrice = $rows['discount1'];
+                    }
+                }
+            }
+
             $home_gift_sets_modal .= '
                                         <input type="hidden" name="product_qnt_1" value="' . $rows['slug'] . '">
                                         <input type="hidden" name="product_net_qnt_1" value="' . $rows['netqnt1'] . '">
@@ -892,9 +896,7 @@ if (defined('SEARCH_PAGE')) {
                                     <input type="hidden" name="product_price_1" value="' . $prodPrice . '">
                                     ' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '
                                 </td>
-                                <td class="cart-product-quantity">
-                                <span>QTY</span
-                                </td>
+                                <td class="cart-product-quantity"><span>QTY</span</td>
                                 <td class="cart-product-quantity">
                                     <div class="cart-plus-minus">
                                         <div class="dec qtybutton">-</div>
@@ -907,7 +909,6 @@ if (defined('SEARCH_PAGE')) {
                                     <h6 class="product-sub-total">' . $rows['currency'] . ' ' . sprintf("%.2f", $prodPrice) . '</h6>
                                 </td>
                             </tr>
-
             ';
 
             if (!empty($rows['qnt2'])) {
@@ -929,7 +930,7 @@ if (defined('SEARCH_PAGE')) {
                                 <td class="cart-product-quantity">
                                     <div class="cart-plus-minus">
                                         <div class="dec qtybutton">-</div>
-                                        <input type="text" value="0" min="0" step="1" name="product_qty_2" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
+                                        <input type="text" value="0" min="0" step="1" name="product_qty_2" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $rows['currency'] . '" readonly>
                                         <div class="inc qtybutton">+</div>
                                     </div>
                                 </td>
@@ -960,7 +961,7 @@ if (defined('SEARCH_PAGE')) {
                                 <td class="cart-product-quantity">
                                     <div class="cart-plus-minus">
                                         <div class="dec qtybutton">-</div>
-                                        <input type="text" value="0" min="0" step="1" name="product_qty_3" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
+                                        <input type="text" value="0" min="0" step="1" name="product_qty_3" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $rows['currency'] . '" readonly>
                                         <div class="inc qtybutton">+</div>
                                     </div>
                                 </td>
@@ -972,7 +973,7 @@ if (defined('SEARCH_PAGE')) {
                 ';
             }
 
-            if (!empty($giftSet->qnt4)) {
+            if (!empty($rows['qnt4'])) {
                 $prodPrice = (!empty($rows['discount4']) and $rows['discount4'] > 0) ? $rows['discount4'] : $rows['price4'];
                 $home_gift_sets_modal .= '
                             <tr>
@@ -991,7 +992,7 @@ if (defined('SEARCH_PAGE')) {
                                 <td class="cart-product-quantity">
                                     <div class="cart-plus-minus">
                                         <div class="dec qtybutton">-</div>
-                                        <input type="text" value="0" min="0" step="1" name="product_qty_4" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $giftSet->currency . '" readonly>
+                                        <input type="text" value="0" min="0" step="1" name="product_qty_4" class="cart-plus-minus-box qty" price="' . $prodPrice . '" currency="' . $rows['currency'] . '" readonly>
                                         <div class="inc qtybutton">+</div>
                                     </div>
                                 </td>
@@ -1005,33 +1006,27 @@ if (defined('SEARCH_PAGE')) {
 
             $home_gift_sets_modal .= '
 
-            </tbody>
-            </table>
-            </form>
-        </div>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
                                                 <div class="ltn__product-details-menu-2">
                                                     <ul>
-                                                    <li style="padding-right: 16.28rem;">
-                                                    <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $rows['slug'] . '">
-                                                        <i class="far fa-heart"></i>
-                                                       <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
-                                                    </a>
-                                                </li>
-
+                                                        <li style="padding-right: 16.28rem;">
+                                                            <a href="#" class="add-wishlist theme-btn-2 btn btn-effect-2" title="' . SHOP_ADD_TO_WISHLIST . '" data-cartid="' . $rows['slug'] . '">
+                                                                <i class="far fa-heart"></i>
+                                                               <!-- <span>' . SHOP_ADD_TO_WISHLIST . '</span> -->
+                                                            </a>
+                                                        </li>
                                                         <li>
                                                             <a href="#" class="theme-btn-1 btn btn-effect-1 add-cart" title="' . SHOP_ADD_TO_CART . '" data-cartid="' . $rows['slug'] . '" form-id="add-cart-product-' . $rows['slug'] . '">
                                                                 <i class="fas fa-shopping-cart"></i>
                                                                 <span>' . SHOP_ADD_TO_CART . '</span>
                                                             </a>
                                                         </li>
-
-
                                                         <!--<li>
                                                         <a href="' . BASE_URL . 'checkout" class="theme-btn-1 btn btn-effect-1"> <i class="fas fa-sign-out-alt"></i> ' . HOME_CHECKOUT . '</a>
                                                         </li>-->
-
-
-
                                                     </ul>
                                                 </div>
                                                 <hr>
@@ -1059,7 +1054,7 @@ if (defined('SEARCH_PAGE')) {
                 </div>
             </div>
         </div>
-            ';
+        ';
 
             // }
         }

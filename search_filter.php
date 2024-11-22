@@ -155,24 +155,33 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             if (!empty($rows['price1']) and (empty($rows['offer_price']))) {
                 $price_text = '<span>' . $rows['currency'] . ' ' . $rows['price1'] . '</span>';
             }
-           if (!empty($rows['discount1'])) {
-                if(empty($rows['discountedp'])){
-                $discountamt= $rows['price1'] - $rows['discount1'];
-                $price_text = '
-                <span>' . $rows['currency'] . ' '.$rows['discount1'].'</span><br/>
-                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span>
+            if (!empty($rows['discount1'])) {
+                // Check if discount flag is On in Category
+                $categoryRec = Category::find_by_id($rows['Category']);
 
-                ';
-                }
-                else{
-                  $discountamt= $rows['price1'] - $rows['discount1'];
-                $price_text = '
-                <span>' . $rows['currency'] . ' '.$rows['discount1'].'</span>|<span>' . $rows['discountedp'] . '%off</span><br/>
-                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt. '</span>
+                if (!empty($categoryRec) && $categoryRec->discount == 1) {
+                    // Check if a Subcategory is chosen
+                    $subcategoryRec = Category::find_by_id($rows['Subcategory']);
+                    $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
 
-                ';
+                    // Determine the discount amount
+                    $discountamt = $rows['price1'] - $rows['discount1'];
+
+                    // Build the discount information
+                    $discountInfo = '<span>' . $rows['currency'] . ' ' . $rows['discount1'] . '</span>';
+                    if (!empty($rows['discountedp'])) {
+                        $discountInfo .= '|<span>' . $rows['discountedp'] . '% off</span>';
+                    }
+
+                    // Render the price text if either category or subcategory discount is active
+                    if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
+                        $price_text = $discountInfo . '<br/>
+                        <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> 
+                        <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt . '</span>';
+                    }
                 }
             }
+
             $product = SubProduct::find_by_slug($rows['slug']);
             if (!empty($product)) {
                 $images = SubProductImage::getImagelist_by($product->id, 1, 0);
@@ -187,18 +196,6 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 }
             }
             // pr($rows);
-            $prodbrand = Brand::find_by_id($rows['brand']);
-            $prodservice = Services::find_by_id($rows['service_id']);
-            if (!empty($prodbrand)) {
-                $title = $prodbrand->title;
-            } else {
-                $title = '';
-            }
-            if (!empty($prodservice)) {
-                $slugs = '' . BASE_URL . 'product/' . $prodservice->slug . '/' . $rows['slug'] . '';
-            } else {
-                $slugs = '' . BASE_URL . 'product/product-detail/' . $rows['slug'] . '';;
-            }
             $prodbrand = Brand::find_by_id($rows['brand']);
             $prodservice = Services::find_by_id($rows['service_id']);
             if (!empty($prodbrand)) {
