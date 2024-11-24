@@ -636,8 +636,34 @@ if (defined('CHECKOUT_PAGE')) {
                                     </div>
                                 </div>
                                 
+                                <div class="row d-none" id="door_delivery_row">
+    ';
+    if (!empty($checkLogin)) {
+        $checkout_form .= '
+                                    <div class="col-md-4 mb-30">
+                                        <div class="input-item">
+                                            <input type="radio" name="door_delivery_type" value="1" id="door_delivery_type_1">
+                                            <label for="door_delivery_type_1">Home Address</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-30">
+                                        <div class="input-item">
+                                            <input type="radio" name="door_delivery_type" value="2" id="door_delivery_type_2">
+                                            <label for="door_delivery_type_2">Office Address</label>
+                                        </div>
+                                    </div>
+        ';
+    }
+    $checkout_form .= '
+                                    <div class="col-md-4 mb-30">
+                                        <div class="input-item">
+                                            <input type="radio" name="door_delivery_type" value="3" id="door_delivery_type_3">
+                                            <label for="door_delivery_type_3">Other</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 
-                                <div class="row d-none" id="door_delivery_other_row">
+                                <div class="row d-none" id="door_delivery_sub_row">
                                     <div class="col-lg-12 col-md-12 mb-30">
                                         <div class="row">
                                             <!--<div class="col-lg-6 col-md-6 mb-30">

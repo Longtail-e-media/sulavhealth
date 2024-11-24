@@ -466,6 +466,9 @@
 
                     // reset Nearest Site logic sections
                     resetNearestSite();
+
+                    // reset Door Deliver logic sections
+                    resetDoorDelivery();
                     break;
                 case "2":
                     // reset company code logic sections
@@ -474,6 +477,8 @@
                     // Nearest Site section
                     $('#nearest_site_row').removeClass('d-none');
 
+                    // reset Door Deliver logic sections
+                    resetDoorDelivery();
                     break;
                 case "3":
                     // reset company code logic sections
@@ -482,6 +487,8 @@
                     // reset Nearest Site logic sections
                     resetNearestSite();
 
+                    // Door Delivery Section
+                    $('#door_delivery_row').removeClass('d-none');
                     break;
             }
         })
@@ -573,8 +580,6 @@
             $('input[name="shipping_latitude"]').val(latitude);
             $('input[name="shipping_longitude"]').val(longitude);
         });
-
-        // shipping District
         $('#shipping_location_site').on('change', function () {
             var selectedOption = $("#shipping_location_site option:selected").val();
             $.ajax({
@@ -588,6 +593,29 @@
                 }
             });
         });
+
+        // Door Delivery Section
+        // Delivery Type Section
+        $('input[name="door_delivery_type"]').on('click', function () {
+            var delivery_type = $(this).val();
+            switch (delivery_type){
+                case "1":
+                    // Home Address
+                    $('#door_delivery_sub_row').removeClass('d-none');
+                    getHomeAddress();
+                    break;
+                case "2":
+                    // Office Address
+                    $('#door_delivery_sub_row').removeClass('d-none');
+                    getOfficeAddress();
+                    break;
+                case "3":
+                    // Other Address
+                    $('#door_delivery_sub_row').removeClass('d-none');
+                    getOtherAddress();
+                    break;
+            }
+        })
 
         $('#checkoutForm').validate({
             errorElement: 'span',
@@ -605,6 +633,7 @@
                 post_code: {required: !0},
                 delivery_type: {required: !0},
                 company_code: {required: !0},
+                door_delivery_type: {required: !0},
                 shipping_country: {required: !0},
                 shipping_district: {required: !0},
                 shipping_city: {required: !0},
@@ -634,6 +663,7 @@
                 post_code: {required: "<jcms:module:common_language:CHECKOUT_FORM_POST_CODE_ERROR/>"},
                 delivery_type: {required: "Choose your Delivery Type"},
                 company_code: {required: "Enter your Company Code"},
+                door_delivery_type: {required: "Choose your Shipping Address"},
                 shipping_country: {required: "Choose your Shipping Country"},
                 shipping_district: {required: "Choose your Shipping District"},
                 shipping_city: {required: "Enter your Shipping city"},
@@ -748,7 +778,6 @@
 
     // reset Company code logic sections
     function resetCompanyCode() {
-        // Collect from the nearest site section
         $('#company_code_row').addClass('d-none');
 
         // reset company code logic sections
@@ -765,6 +794,139 @@
         $('#shipping_district_site').val($('#shipping_district_site option:first').val());
         $('input[name="shipping_latitude"]').val('27.6772614');
         $('input[name="shipping_longitude"]').val('85.3161699');
+
+        // reset delivery charge
+        var shippingAmt     = parseFloat($('input[name="shipping_amt"]').val());
+        var grandTotal      = parseFloat($('input[name="grand_total"]').val());
+        var delivery_charge = parseFloat('0').toFixed(2);
+        var NewTotal        = parseFloat(grandTotal) - parseFloat(shippingAmt);
+        NewTotal            = NewTotal.toFixed(2);
+
+        $('#shipping-amount').html('NPR ' + delivery_charge);
+        $('input[name="shipping_amt"]').val(delivery_charge);
+        $('#grand-total').html('NPR ' + NewTotal);
+        $('input[name="grand_total"]').val(NewTotal);
+    }
+
+    // reset Door Delivery logic sections
+    function resetDoorDelivery() {
+        $('#door_delivery_row').addClass('d-none');
+        $('#door_delivery_sub_row').addClass('d-none');
+
+        // reset company code logic sections
+        $('#company_code').val('');
+        $('input[name="shipping_address"]').val('');
+        $('input[name="shipping_latitude"]').val('27.6772614');
+        $('input[name="shipping_longitude"]').val('85.3161699');
+
+        // reset delivery charge
+        var shippingAmt     = parseFloat($('input[name="shipping_amt"]').val());
+        var grandTotal      = parseFloat($('input[name="grand_total"]').val());
+        var delivery_charge = parseFloat('0').toFixed(2);
+        var NewTotal        = parseFloat(grandTotal) - parseFloat(shippingAmt);
+        NewTotal            = NewTotal.toFixed(2);
+
+        $('#shipping-amount').html('NPR ' + delivery_charge);
+        $('input[name="shipping_amt"]').val(delivery_charge);
+        $('#grand-total').html('NPR ' + NewTotal);
+        $('input[name="grand_total"]').val(NewTotal);
+    }
+
+    // get Home Address
+    function getHomeAddress() {
+        var user_id = $('input[name="user_id"]').val();
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: base_url + "add_coupon.php",
+            data: "action=get_home_address&user_id=" + user_id,
+            success: function (data) {
+                var msg = eval(data);
+                if (msg.action == 'success') {
+                    if ($.trim(msg.shipping_location) !== '') {
+                        $('#shipping_location').val(msg.shipping_location);
+                    }
+                    if ($.trim(msg.shipping_district) !== '') {
+                        $('#shipping_district').val(msg.shipping_district);
+                    }
+                    if ($.trim(msg.longitude) !== '' && $.trim(msg.latitude) !== '') {
+                        // updating shipping address and map
+                        $('input[name="shipping_latitude"]').val(msg.latitude);
+                        $('input[name="shipping_longitude"]').val(msg.longitude);
+                        updateMap(msg.latitude, msg.longitude);
+                    }
+                    if ($.trim(msg.delivery_charge) !== '') {
+                        // getting shipping amount
+                        var shippingAmt = parseFloat($('input[name="shipping_amt"]').val());
+                        var grandTotal = parseFloat($('input[name="grand_total"]').val());
+                        var delivery_charge = parseFloat(msg.delivery_charge).toFixed(2);
+
+                        $('#shipping-amount').html('NPR ' + delivery_charge);
+                        $('input[name="shipping_amt"]').val(delivery_charge);
+
+                        // totaling all costs
+                        var NewTotal = parseFloat(grandTotal) + parseFloat(delivery_charge) - parseFloat(shippingAmt);
+                        NewTotal = NewTotal.toFixed(2);
+
+                        $('#grand-total').html('NPR ' + NewTotal);
+                        $('input[name="grand_total"]').val(NewTotal);
+                    }
+                }
+            }
+        });
+    }
+
+    // get Office Address
+    function getOfficeAddress() {
+        var user_id = $('input[name="user_id"]').val();
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: base_url + "add_coupon.php",
+            data: "action=get_office_address&user_id=" + user_id,
+            success: function (data) {
+                var msg = eval(data);
+                if (msg.action == 'success') {
+                    if ($.trim(msg.shipping_location) !== '') {
+                        $('#shipping_location').val(msg.shipping_location);
+                    }
+                    if ($.trim(msg.shipping_district) !== '') {
+                        $('#shipping_district').val(msg.shipping_district);
+                    }
+                    if ($.trim(msg.longitude) !== '' && $.trim(msg.latitude) !== '') {
+                        // updating shipping address and map
+                        $('input[name="shipping_latitude"]').val(msg.latitude);
+                        $('input[name="shipping_longitude"]').val(msg.longitude);
+                        updateMap(msg.latitude, msg.longitude);
+                    }
+                    if ($.trim(msg.delivery_charge) !== '') {
+                        // getting shipping amount
+                        var shippingAmt = parseFloat($('input[name="shipping_amt"]').val());
+                        var grandTotal = parseFloat($('input[name="grand_total"]').val());
+                        var delivery_charge = parseFloat(msg.delivery_charge).toFixed(2);
+
+                        $('#shipping-amount').html('NPR ' + delivery_charge);
+                        $('input[name="shipping_amt"]').val(delivery_charge);
+
+                        // totaling all costs
+                        var NewTotal = parseFloat(grandTotal) + parseFloat(delivery_charge) - parseFloat(shippingAmt);
+                        NewTotal = NewTotal.toFixed(2);
+
+                        $('#grand-total').html('NPR ' + NewTotal);
+                        $('input[name="grand_total"]').val(NewTotal);
+                    }
+                }
+            }
+        });
+    }
+
+    // get Office Address
+    function getOtherAddress() {
+        $('#shipping_location').val($('#shipping_location_site option:first').val());
+        $('#shipping_district').val($('#shipping_district_site option:first').val());
+        $('input[name="shipping_latitude"]').val('27.6772614');
+        $('input[name="shipping_longitude"]').val('85.3161699');
+        updateMap('27.6772614', '85.3161699');
 
         // reset delivery charge
         var shippingAmt     = parseFloat($('input[name="shipping_amt"]').val());

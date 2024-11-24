@@ -214,4 +214,74 @@ switch ($_POST['action']) {
         }
         echo json_encode(array('action' => 'success', 'message' => $result));
         break;
+
+    case "get_home_address":
+        $userRec = User::find_by_id($user_id);
+        if (!empty($userRec)) {
+            $shipping_location  = $shipping_district = '';
+            $shipping_longitude = 85.3161699;
+            $shipping_latitude  = 27.6772614;
+            $delivery_charge = '';
+
+            if (!empty($userRec->shipping_location_home)) {
+                $locRec             = locationn::find_by_id($userRec->shipping_location_home);
+                $shipping_location  = $locRec->title;
+            }
+            if (!empty($userRec->shipping_district_home)) {
+                $locRec             = locationn::find_by_id($userRec->shipping_district_home);
+                $shipping_district  = $locRec->title;
+                $shipping_longitude = $locRec->longitude;
+                $shipping_latitude  = $locRec->latitude;
+                $delivery_charge    = $locRec->delivery_charge;
+            }
+
+            echo json_encode(
+                array(
+                    'action'            => 'success',
+                    'shipping_location' => $shipping_location,
+                    'shipping_district' => $shipping_district,
+                    'longitude'         => $shipping_longitude,
+                    'latitude'          => $shipping_latitude,
+                    'delivery_charge'   => $delivery_charge,
+                )
+            );
+        } else {
+            echo json_encode(array('action' => 'unsuccess'));
+        }
+        break;
+
+        case "get_office_address":
+        $userRec = User::find_by_id($user_id);
+        if (!empty($userRec)) {
+            $shipping_location  = $shipping_district = '';
+            $shipping_longitude = 85.3161699;
+            $shipping_latitude  = 27.6772614;
+            $delivery_charge = '';
+
+            if (!empty($userRec->shipping_location_office)) {
+                $locRec             = locationn::find_by_id($userRec->shipping_location_office);
+                $shipping_location  = $locRec->title;
+            }
+            if (!empty($userRec->shipping_district_office)) {
+                $locRec             = locationn::find_by_id($userRec->shipping_district_office);
+                $shipping_district  = $locRec->title;
+                $shipping_longitude = $locRec->longitude;
+                $shipping_latitude  = $locRec->latitude;
+                $delivery_charge    = $locRec->delivery_charge;
+            }
+
+            echo json_encode(
+                array(
+                    'action'            => 'success',
+                    'shipping_location' => $shipping_location,
+                    'shipping_district' => $shipping_district,
+                    'longitude'         => $shipping_longitude,
+                    'latitude'          => $shipping_latitude,
+                    'delivery_charge'   => $delivery_charge,
+                )
+            );
+        } else {
+            echo json_encode(array('action' => 'unsuccess'));
+        }
+        break;
 }
