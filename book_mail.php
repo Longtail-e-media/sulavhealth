@@ -1,6 +1,6 @@
 <?php
 
-$lang = !empty($session->get('lang_type')) ? $session->get('lang_type') : 'gr';
+$lang = !empty($session->get('lang_type')) ? $session->get('lang_type') : 'en';
 $siteRegulars = Config::find_by_id(1);
 $bookingRec = BookingInfo::find_by_id($booking_id);
 
@@ -275,6 +275,42 @@ if (!empty($bookingRec)) {
                         <td>' . $bookingRec->shipping_type . '</td>
                     </tr>
         ';
+    }
+    switch ($bookingRec->delivery_type) {
+        case "1":
+            $html .= '
+                    <tr>
+                        <td>Delivery Type</td>
+                        <td>Company Code</td>
+                    </tr>
+                    <tr>
+                        <td>Company Code</td>
+                        <td>' . $bookingRec->company_code . '</td>
+                    </tr>
+            ';
+            break;
+
+        case "2":
+            $html .= '
+                    <tr>
+                        <td>Delivery Type</td>
+                        <td>Collect from Nearest Site</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping District</td>
+                        <td>' . $bookingRec->shipping_district_site . '</td>
+                    </tr>
+            ';
+            break;
+
+        case "3":
+            $html .= '
+                    <tr>
+                        <td>Delivery Type</td>
+                        <td>Door Delivery</td>
+                    </tr>
+            ';
+            break;
     }
     if(!empty($bookingRec->shipping_latitude) and !empty($bookingRec->shipping_longitude)){
         $html.= '

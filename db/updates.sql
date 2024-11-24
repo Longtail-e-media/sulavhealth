@@ -84,3 +84,11 @@ ALTER TABLE `tbl_users` ADD `shipping_location_home` TEXT NOT NULL AFTER `medici
 
 -- 2024-11-21
 ALTER TABLE `tbl_booking_product` ADD `product_size` VARCHAR(50) NOT NULL AFTER `product_total`;
+
+-- 2024-11-24
+ALTER TABLE `tbl_booking_info` ADD `delivery_type` INT NOT NULL AFTER `additionalprod`,
+    ADD `company_code` TEXT NOT NULL AFTER `delivery_type`,
+    ADD `shipping_location` TEXT NOT NULL AFTER `company_code`,
+    ADD `shipping_location_site` TEXT NOT NULL AFTER `shipping_location`,
+    ADD `shipping_district_site` TEXT NOT NULL AFTER `shipping_location_site`,
+    ADD `door_delivery_type` INT NOT NULL AFTER `shipping_district_site`;

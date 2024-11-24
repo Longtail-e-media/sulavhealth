@@ -36,6 +36,14 @@ class Offers extends DatabaseObject
         return self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE status=1  ORDER BY sortorder ASC $cond");
     }
 
+    public static function get_offer_by_deadline($limit = '')
+    {
+        global $db;
+        $cond = !empty($limit) ? ' LIMIT ' . $limit : '';
+        $today = date('Y-m-d');
+        return self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE status=1 AND offer_date>'" . $today . "' AND start_date<='" . $today . "' ORDER BY sortorder ASC $cond");
+    }
+
     public static function get_internal_link($Lsel = '', $LType = 0)
     {
         global $db;

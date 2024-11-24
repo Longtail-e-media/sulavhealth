@@ -131,15 +131,22 @@
             $bookRec->person_city           = (!empty($city)) ? $city : '';
             $bookRec->person_post_code      = (!empty($post_code)) ? $post_code : '';
             $bookRec->person_address        = $address;
-            $bookRec->person_shipping_address = $shipping_address;
+            $bookRec->person_shipping_address = (!empty($shipping_address)) ? $shipping_address : '';
             $bookRec->person_phone          = $phone;
             $bookRec->person_comment        = (!empty($message)) ? $message : '';
 
+            $bookRec->delivery_type         = $delivery_type;
+            $bookRec->door_delivery_type    = (!empty($door_delivery_type)) ? $door_delivery_type : '';
+            $bookRec->company_code          = (!empty($company_code)) ? $company_code : '';
+
             $bookRec->shipping_country      = $shipping_country;
-            $bookRec->shipping_district     = $shipping_district;
             $bookRec->shipping_city         = (!empty($shipping_city)) ? $shipping_city : '';
             $bookRec->shipping_post_code    = (!empty($shipping_post_code)) ? $shipping_post_code : '';
 
+            $bookRec->shipping_location     = (!empty($shipping_location)) ? $shipping_location : '';
+            $bookRec->shipping_district     = (!empty($shipping_district)) ? $shipping_district : '';
+            $bookRec->shipping_location_site = (!empty($shipping_location_site)) ? $shipping_location_site : '';
+            $bookRec->shipping_district_site = (!empty($shipping_district_site)) ? $shipping_district_site : '';
             $bookRec->shipping_latitude     = (!empty($shipping_latitude)) ? $shipping_latitude : '';
             $bookRec->shipping_longitude    = (!empty($shipping_longitude)) ? $shipping_longitude : '';
 

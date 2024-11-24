@@ -5,7 +5,7 @@
 
 $home_slider = $home_offer_modal = $home_offer_script = '';
 if (defined('HOME_PAGE')) {
-    $offrRec = Offers::get_offer_by();
+    $offrRec = Offers::get_offer_by_deadline();
 
     if (!empty($offrRec)) {
         foreach ($offrRec as $offerRow) {
