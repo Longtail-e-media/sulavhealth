@@ -180,4 +180,24 @@ switch ($_POST['action']) {
         }
         echo json_encode(array('action' => 'success', 'message' => $result));
         break;
+
+    case 'add_company_code':
+        $companyRec = CompanyCode::find_by_code($code);
+        if (!empty($companyRec)) {
+            $message    = "Company code has been applied!";
+            echo json_encode(
+                array(
+                    'action'    => 'success',
+                    'message'   => $message,
+                    'code'      => $companyRec->code,
+                    'address'   => $companyRec->address,
+                    'latitude'  => $companyRec->latitude,
+                    'longitude' => $companyRec->longitude
+                )
+            );
+        } else {
+            $message = "Company code not applied!";
+            echo json_encode(array('action' => 'unsuccess', 'message' => $message));
+        }
+        break;
 }

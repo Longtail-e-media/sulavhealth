@@ -139,6 +139,13 @@ class CompanyCode extends DatabaseObject
         return self::find_by_sql("SELECT * FROM " . self::$table_name . " ORDER BY sortorder ASC");
     }
 
+    static function find_by_code($code = '')
+    {
+        global $db;
+        $result_array = self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE code='$code' AND status='1' LIMIT 1");
+        return !empty($result_array) ? array_shift($result_array) : false;
+    }
+
     //Find all the rows in the current database table.
     public static function find_all_active()
     {

@@ -456,6 +456,87 @@
             }
         })
 
+        // Delivery Type Section
+        $('input[name="delivery_type"]').on('click', function () {
+            var delivery_type = $(this).val();
+            switch (delivery_type){
+                case "1":
+                    // Company Code section
+                    $('#company_code_row').removeClass('d-none');
+                    break;
+                case "2":
+                    // reset company code logic sections
+                    resetCompanyCode();
+
+                    break;
+                case "3":
+                    // reset company code logic sections
+                    resetCompanyCode();
+
+                    break;
+            }
+        })
+
+        // Company Code Section
+        $(document).on('blur', '#company_code', function () {
+            var code = $(this).val();
+            if (code.length === 0) {
+                $('p#companyCodeMsg')
+                    .removeClass("alert alert-success")
+                    .addClass("alert alert-danger")
+                    .html("Enter Your Company Code")
+                    .css('display', 'block')
+                    .fadeOut(5000);
+            } else {
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: base_url + "add_coupon.php",
+                    data: "action=add_company_code&code=" + code,
+                    success: function (data) {
+                        var msg = eval(data);
+                        if (msg.action == 'success') {
+                            $('#companyCodeMsg')
+                                .removeClass("alert alert-danger")
+                                .addClass("alert alert-success")
+                                .html(msg.message)
+                                .css('display', 'block')
+                                .fadeOut(8000);
+
+                            // getting shipping amount
+                            var shippingAmt = parseFloat($('input[name="shipping_amt"]').val());
+                            var grandTotal = parseFloat($('input[name="grand_total"]').val());
+                            var delivery_charge = parseFloat('0').toFixed(2);
+
+                            $('#shipping-amount').html('NPR ' + delivery_charge);
+                            $('input[name="shipping_amt"]').val(delivery_charge);
+
+                            // totaling all costs
+                            var NewTotal = parseFloat(grandTotal) - parseFloat(shippingAmt);
+                            NewTotal = NewTotal.toFixed(2);
+
+                            $('#grand-total').html('NPR ' + NewTotal);
+                            $('input[name="grand_total"]').val(NewTotal);
+
+                            // updating shipping address and map
+                            $('input[name="shipping_address"]').val(msg.address);
+                            $('input[name="shipping_latitude"]').val(msg.latitude);
+                            $('input[name="shipping_longitude"]').val(msg.longitude);
+                        }
+                        if (msg.action == 'unsuccess') {
+                            $('#company_code').val('');
+                            $('#companyCodeMsg')
+                                .removeClass("alert-success")
+                                .addClass("alert alert-danger")
+                                .html(msg.message)
+                                .css('display', 'block')
+                                .fadeOut(8000);
+                        }
+                    }
+                });
+            }
+        })
+
         $('#checkoutForm').validate({
             errorElement: 'span',
             errorClass: 'validate-has-error text-danger',
@@ -470,6 +551,8 @@
                 address: {required: !0},
                 city: {required: !0},
                 post_code: {required: !0},
+                delivery_type: {required: !0},
+                company_code: {required: !0},
                 shipping_country: {required: !0},
                 shipping_district: {required: !0},
                 shipping_city: {required: !0},
@@ -497,6 +580,8 @@
                 address: {required: "<jcms:module:common_language:REGISTER_FORM_ADDRESS_ERROR/>"},
                 city: {required: "<jcms:module:common_language:CHECKOUT_FORM_CITY_ERROR/>"},
                 post_code: {required: "<jcms:module:common_language:CHECKOUT_FORM_POST_CODE_ERROR/>"},
+                delivery_type: {required: "Choose your Delivery Type"},
+                company_code: {required: "Enter your Company Code"},
                 shipping_country: {required: "Choose your Shipping Country"},
                 shipping_district: {required: "Choose your Shipping District"},
                 shipping_city: {required: "Enter your Shipping city"},
@@ -555,7 +640,7 @@
                             $('.probdetail').html(msg.prodval);
                             $('#grand-total').html(msg.shippingval);
                             $("form#checkoutForm")[0].reset();
-                            
+
                             $('#checkout_alert').modal('show');
                             setTimeout(function () {
                                 window.location.href = "dhome";
@@ -608,7 +693,19 @@
         $('input[name="shipping_latitude"]').val(lat);
         $('input[name="shipping_longitude"]').val(long);
     }
-    
+
+    // reset Company code logic sections
+    function resetCompanyCode(){
+        // Collect from the nearest site section
+        $('#company_code_row').addClass('d-none');
+
+        // reset company code logic sections
+        $('#company_code').val('');
+        $('input[name="shipping_address"]').val('');
+        $('input[name="shipping_latitude"]').val('27.6772614');
+        $('input[name="shipping_longitude"]').val('85.3161699');
+    }
+
     //  document.addEventListener('keydown', function(e) {
     //         if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.shiftKey && e.key === 'C')) {
     //             e.preventDefault();

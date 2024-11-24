@@ -568,13 +568,47 @@ if (defined('CHECKOUT_PAGE')) {
     }
     $checkout_form .= '
                                 <div class="row">
+                                    <div class="col-md-12 mb-30 d-none">
+                                        <div class="input-item">
+                                            <input type="text" name="create_password" id="create_password" placeholder="Password">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4 mb-30">
+                                        <div class="input-item">
+                                            <input type="radio" name="delivery_type" value="1" id="delivery_type_1">
+                                            <label for="delivery_type_1">Company Code</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-30">
+                                        <div class="input-item">
+                                            <input type="radio" name="delivery_type" value="2" id="delivery_type_2">
+                                            <label for="delivery_type_2">Collect from nearest site</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-30">
+                                        <div class="input-item">
+                                            <input type="radio" name="delivery_type" value="3" id="delivery_type_3">
+                                            <label for="delivery_type_3">Door delivery</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row d-none" id="company_code_row">
+                                    <div class="col-md-12 mb-30">
+                                        <div class="input-item">
+                                            <input type="text" name="company_code" id="company_code" placeholder="Company Code">
+                                            <p class="" id="companyCodeMsg"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="row d-none" id="door_delivery_other_row">
                                     <div class="col-lg-12 col-md-12 mb-30">
                                         <div class="row">
-                                            <div class="col-md-12 mb-30 d-none">
-                                                <div class="input-item">
-                                                    <input type="text" name="create_password" id="create_password" placeholder="Password">
-                                                </div>
-                                            </div>
                                             <!--<div class="col-lg-6 col-md-6 mb-30">
                                                 <h6>' . "Shipping Country" . '</h6>
                                                 <div class="input-item">
@@ -621,18 +655,21 @@ if (defined('CHECKOUT_PAGE')) {
                                             </div>
                                             <div class="col-md-12 mb-30">
                                                 <div class="input-item">
-                                                    <input type="text" name="shipping_address" placeholder="Shipping Address">
+                                                    <input type="text" name="shipping_address" placeholder="Shipping Address" value="here">
                                                 </div>
                                             </div>
                                             <div class="col-md-12"><h6>Shipping Location (Choose on Map)</h6><div id="map"></div></div>
                                             <input type="hidden" name="shipping_latitude" value="27.6772614">
                                             <input type="hidden" name="shipping_longitude" value="85.3161699">
-                                            <div class="col-md-12 mt-3">
-                                                <h6>Order Notes (optional)</h6>
-                                                <div class="input-item input-item-textarea ltn__custom-icon">
-                                                    <textarea name="message" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                                </div>
-                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-12 mt-3">
+                                        <h6>Order Notes (optional)</h6>
+                                        <div class="input-item input-item-textarea ltn__custom-icon">
+                                            <textarea name="message" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                         </div>
                                     </div>
                                 </div>

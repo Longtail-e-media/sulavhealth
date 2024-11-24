@@ -123,7 +123,7 @@ if (isset($_GET['page']) && $_GET['page'] == "companycode" && isset($_GET['mode'
                     </div>
                     <div class="form-input col-md-6">
                         <input placeholder="Code" class="col-md-4 validate[required,length[0,200]]" type="text" name="code" id="code"
-                               value="<?php echo !empty($couponInfo->code) ? $couponInfo->code : ""; ?>">
+                               value="<?php echo !empty($rowInfo->code) ? $rowInfo->code : ""; ?>">
                         <a class="btn medium bg-orange mrg5T" title="Read More" id="generateCode" href="javascript:void(0);">
                             <span class="button-content">Generate</span>
                         </a>
@@ -153,7 +153,7 @@ if (isset($_GET['page']) && $_GET['page'] == "companycode" && isset($_GET['mode'
                     <div class="form-input col-md-10">
                         <input placeholder="Latitude" class="col-md-6 validate[required,length[0,200]]" type="text"
                                name="latitude" id="latitude"
-                               value="<?php echo !empty($locationnInfo->latitude) ? $locationnInfo->latitude : ""; ?>">
+                               value="<?php echo !empty($rowInfo->latitude) ? $rowInfo->latitude : ""; ?>">
                     </div>
                 </div>
 
@@ -166,7 +166,7 @@ if (isset($_GET['page']) && $_GET['page'] == "companycode" && isset($_GET['mode'
                     <div class="form-input col-md-10">
                         <input placeholder="Longitude" class="col-md-6 validate[required,length[0,200]]" type="text"
                                name="longitude" id="longitude"
-                               value="<?php echo !empty($locationnInfo->longitude) ? $locationnInfo->longitude : ""; ?>">
+                               value="<?php echo !empty($rowInfo->longitude) ? $rowInfo->longitude : ""; ?>">
                         <br><small><a href="https://www.latlong.net/" target="_blank">Get geolocation here</a></small>
                     </div>
                 </div>
