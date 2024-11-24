@@ -605,6 +605,37 @@ if (defined('CHECKOUT_PAGE')) {
                                     </div>
                                 </div>
                                 
+                                <div class="row d-none" id="nearest_site_row">
+                                    <div class="col-lg-6 col-md-6 mb-30">
+                                        <h6>Shipping Location</h6>
+                                        <div class="input-item">
+                                            <select class="nice-selec col-12" name="shipping_location_site" id="shipping_location_site">
+                                                <option value="">Select Shipping Location</option>
+            ';
+    $parentSites = Site::get_all_byparnt();
+    foreach ($parentSites as $site) {
+        $checkout_form .= '<option value="' . $site->title . '">' . $site->title . '</option>';
+    }
+    $checkout_form .= '
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 mb-30">
+                                        <h6>Shipping District</h6>
+                                        <div class="input-item">
+                                            <select class="nice-selec col-12" name="shipping_district_site" id="shipping_district_site">
+                                                <option value="" data-dc="0" data-lat="27.6772614" data-long="85.3161699">Select Shipping District</option>
+            ';
+    $districts = Site::get_all_bychild();
+    foreach ($districts as $district) {
+        $checkout_form .= '<option value="' . $district->title . '">' . $district->title . '</option>';
+    }
+    $checkout_form .= '
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 
                                 <div class="row d-none" id="door_delivery_other_row">
                                     <div class="col-lg-12 col-md-12 mb-30">

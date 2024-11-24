@@ -463,15 +463,24 @@
                 case "1":
                     // Company Code section
                     $('#company_code_row').removeClass('d-none');
+
+                    // reset Nearest Site logic sections
+                    resetNearestSite();
                     break;
                 case "2":
                     // reset company code logic sections
                     resetCompanyCode();
 
+                    // Nearest Site section
+                    $('#nearest_site_row').removeClass('d-none');
+
                     break;
                 case "3":
                     // reset company code logic sections
                     resetCompanyCode();
+
+                    // reset Nearest Site logic sections
+                    resetNearestSite();
 
                     break;
             }
@@ -536,6 +545,49 @@
                 });
             }
         })
+
+        // Nearest Site Section
+        $('#shipping_district_site').on('change', function () {
+            var selectedOption = $("#shipping_district_site option:selected");
+            var delivery_charge = parseFloat(selectedOption.data("dc")).toFixed(2);
+
+            // sub total of all products
+            var sub_total = $('input[name="sub_total"]').val();
+
+            // discount amount
+            var discount_amt = $('input[name="discount_amt"]').val();
+
+            $('#shipping-amount').html('NPR ' + delivery_charge);
+            $('input[name="shipping_amt"]').val(delivery_charge);
+
+            // totaling all costs
+            var NewTotal = parseFloat(delivery_charge) + parseFloat(sub_total) - parseFloat(discount_amt);
+            NewTotal = NewTotal.toFixed(2);
+
+            $('#grand-total').html('NPR ' + NewTotal);
+            $('input[name="grand_total"]').val(NewTotal);
+
+            // changing map
+            const latitude = selectedOption.data("lat");
+            const longitude = selectedOption.data("long");
+            $('input[name="shipping_latitude"]').val(latitude);
+            $('input[name="shipping_longitude"]').val(longitude);
+        });
+
+        // shipping District
+        $('#shipping_location_site').on('change', function () {
+            var selectedOption = $("#shipping_location_site option:selected").val();
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: base_url + "add_coupon.php",
+                data: "action=site_district&location=" + selectedOption,
+                success: function (data) {
+                    var msg = eval(data);
+                    $('#shipping_district_site').html(msg.message);
+                }
+            });
+        });
 
         $('#checkoutForm').validate({
             errorElement: 'span',
@@ -695,7 +747,7 @@
     }
 
     // reset Company code logic sections
-    function resetCompanyCode(){
+    function resetCompanyCode() {
         // Collect from the nearest site section
         $('#company_code_row').addClass('d-none');
 
@@ -704,6 +756,27 @@
         $('input[name="shipping_address"]').val('');
         $('input[name="shipping_latitude"]').val('27.6772614');
         $('input[name="shipping_longitude"]').val('85.3161699');
+    }
+
+    // reset Nearest site logic sections
+    function resetNearestSite() {
+        $('#nearest_site_row').addClass('d-none');
+        $('#shipping_location_site').val($('#shipping_location_site option:first').val());
+        $('#shipping_district_site').val($('#shipping_district_site option:first').val());
+        $('input[name="shipping_latitude"]').val('27.6772614');
+        $('input[name="shipping_longitude"]').val('85.3161699');
+
+        // reset delivery charge
+        var shippingAmt     = parseFloat($('input[name="shipping_amt"]').val());
+        var grandTotal      = parseFloat($('input[name="grand_total"]').val());
+        var delivery_charge = parseFloat('0').toFixed(2);
+        var NewTotal        = parseFloat(grandTotal) - parseFloat(shippingAmt);
+        NewTotal            = NewTotal.toFixed(2);
+
+        $('#shipping-amount').html('NPR ' + delivery_charge);
+        $('input[name="shipping_amt"]').val(delivery_charge);
+        $('#grand-total').html('NPR ' + NewTotal);
+        $('input[name="grand_total"]').val(NewTotal);
     }
 
     //  document.addEventListener('keydown', function(e) {
