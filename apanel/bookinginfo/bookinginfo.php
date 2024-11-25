@@ -2,6 +2,7 @@
 $moduleTablename = "tbl_booking_info"; // Database table name
 $moduleId = 37;                // module id >>>>> tbl_modules
 $moduleFoldername = "";        // Image folder name
+$delivery_type_arr = ['0' => 'N/A', '1' => 'Company code', '2' => 'Collect from nearest site', '3' => 'Door delivery'];
 
 if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode']) && $_GET['mode'] == "list"):
     ?>
@@ -90,11 +91,13 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                     <li><strong>City : </strong><?php echo set_na($bookingRow->person_city); ?></li>
                     <li><strong>Region : </strong><?php echo set_na($bookingRow->person_mname); ?></li>
                     <li><strong>Shipping Country: </strong><?php echo $bookingRow->shipping_country; ?></li>
+                    <li><strong>Delivery Type: </strong><?php echo $delivery_type_arr[$bookingRow->delivery_type]; ?></li>
                     <?php if (!empty($bookingRow->coupon_code)) { ?>
                         <li><strong>Coupon Code : </strong><?php echo $bookingRow->coupon_code; ?></li>
                     <?php } ?>
-                    <?php if (!empty($bookingRec->shipping_latitude) and !empty($bookingRec->shipping_longitude)) { ?>
-                        <li><strong>Shipping Geolocation : </strong>(<?php echo $bookingRow->shipping_latitude; ?>, <?php echo $bookingRow->shipping_latitude; ?>)</li>
+                    <?php if (!empty($bookingRow->shipping_latitude) and !empty($bookingRow->shipping_longitude)) { ?>
+                        <!---<li><strong>Shipping Geolocation : </strong>(<?php echo $bookingRow->shipping_latitude; ?>, <?php echo $bookingRow->shipping_longitude; ?>)</li>-->
+                        <li><strong>Shipping Geolocation : </strong><a href="http://maps.google.com/maps?q=loc:<?= $bookingRow->shipping_latitude ?>+<?= $bookingRow->shipping_longitude ?>" target="_blank">Map</a></li>
                     <?php } ?>
                 </ul>
             </div>
@@ -111,7 +114,12 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                     <li><strong>Address : </strong><?php echo set_na($bookingRow->person_address); ?></li>
                     <li><strong>District : </strong><?php echo $bookingRow->person_mname; ?></li>
                     <li><strong>Shipping Address: </strong><?php echo $bookingRow->person_shipping_address; ?></li>
-                    <li><strong>Shipping District: </strong><?php echo $bookingRow->shipping_district; ?></li>
+                    <li><strong>Shipping District: </strong>
+                        <?php
+                            if($bookingRow->delivery_type == 2){echo $bookingRow->shipping_district_site;}
+                            else {echo $bookingRow->shipping_district;}
+                         ?>
+                    </li>
                     <?php if (!empty($bookingRow->shipping_type)) { ?>
                         <li><strong>Shipping Type : </strong><?php echo $bookingRow->shipping_type; ?></li>
                     <?php } ?>
