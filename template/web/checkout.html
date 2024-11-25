@@ -834,6 +834,9 @@
 
     // get Home Address
     function getHomeAddress() {
+        // fix map resize issue
+        map.invalidateSize();
+        
         var user_id = $('input[name="user_id"]').val();
         $.ajax({
             type: "POST",
@@ -878,6 +881,9 @@
 
     // get Office Address
     function getOfficeAddress() {
+        // fix map resize issue
+        map.invalidateSize();
+
         var user_id = $('input[name="user_id"]').val();
         $.ajax({
             type: "POST",
@@ -922,6 +928,9 @@
 
     // get Office Address
     function getOtherAddress() {
+        // fix map resize issue
+        map.invalidateSize();
+
         $('#shipping_location').val($('#shipping_location_site option:first').val());
         $('#shipping_district').val($('#shipping_district_site option:first').val());
         $('input[name="shipping_latitude"]').val('27.6772614');
