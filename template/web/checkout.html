@@ -41,6 +41,12 @@
         #country_type-error {
             margin-left: 130px;
         }
+
+        .readonly-select {
+            pointer-events: none; /* Prevent interaction */
+            background-color: #e9ecef; /* Optional: Make it look like a disabled field */
+            color: #6c757d; /* Optional: Adjust text color for disabled appearance */
+        }
     </style>
 </head>
 
@@ -836,7 +842,10 @@
     function getHomeAddress() {
         // fix map resize issue
         map.invalidateSize();
-        
+
+        $('#shipping_location').addClass('readonly-select');
+        $('#shipping_district').addClass('readonly-select');
+
         var user_id = $('input[name="user_id"]').val();
         $.ajax({
             type: "POST",
@@ -884,6 +893,9 @@
         // fix map resize issue
         map.invalidateSize();
 
+        $('#shipping_location').addClass('readonly-select');
+        $('#shipping_district').addClass('readonly-select');
+
         var user_id = $('input[name="user_id"]').val();
         $.ajax({
             type: "POST",
@@ -930,6 +942,9 @@
     function getOtherAddress() {
         // fix map resize issue
         map.invalidateSize();
+
+        $('#shipping_location').removeClass('readonly-select');
+        $('#shipping_district').removeClass('readonly-select');
 
         $('#shipping_location').val($('#shipping_location_site option:first').val());
         $('#shipping_district').val($('#shipping_district_site option:first').val());

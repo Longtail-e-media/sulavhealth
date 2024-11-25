@@ -34,7 +34,7 @@ if (defined('HOME_PAGE')) {
                                         <div class="modal-product-item">
                                             <div class="row justify-content-center">
                                             <div class="col-lg-12 text-center my-4 border-bottom">
-                                            <h2>Best offer Price</h2>
+                                            <h2>' . $offerRow->title . '</h2>
                                             </div>
                                                 <div class="col-lg-5">
                                                     <div class="mt-4"><img src="' . IMAGE_PATH . 'offers/listimage/' . $offerRow->list_image . '" alt="' . $offerRow->title . '" class=""></div>
