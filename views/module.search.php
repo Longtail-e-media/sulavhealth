@@ -735,11 +735,13 @@ if (defined('SEARCH_PAGE')) {
                                 ' . $price_text . '
                             </div>
                             <div class="product-action">
+                                <li class="sale-badge">
             ';
             if (!empty($rows['tag'])) {
-                $respkglist .= '<li class="sale-badge">' . substr($rows['tag'],0,70) . '</li>';
+                $respkglist .= substr($rows['tag'],0,70);
             }
             $respkglist .= '
+                                </li>
                                 <ul>
                                     <li>
                                         <a href="#" class="add-wishlist"

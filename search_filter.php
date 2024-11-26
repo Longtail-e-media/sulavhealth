@@ -226,11 +226,13 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                         <h4 class="product-title"><a href="' . BASE_URL . 'search/' . @$prodbrand->slug . '" class="product-link">' . $title . '</a></h4>
                         <a href="' . $slugs . '" class="product-link">' . $rows['title'] . '</a>
                         <div class="product-price">' . $price_text . '</div>
-                        <div class="product-action">';
+                        <div class="product-action">
+                            <li class="sale-badge">';
             if (!empty($rows['tag'])) {
-                $result .= '<li class="sale-badge">' . substr($rows['tag'],0,70) . '</li>';
+                $result .= substr($rows['tag'],0,70);
             }
-            $result .= '    <ul>
+            $result .= '    </li>
+                            <ul>
                                 <li><a href="#" class="add-wishlist" title="Add to Wishlist" data-cartid="' . $rows['slug'] . '"><i class="far fa-heart"></i></a></li>
                                 <li>
                                     <a href="#" title="ADD TO CART" class="add-to-cart" data-toggle="modal" data-target="#quick_view_modal_product_' . $rows['slug'] . '">
