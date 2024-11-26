@@ -9,7 +9,7 @@ if (isset($_REQUEST)) {
 $resisearch = $respkglist = $bread = $bread_title = $bread_text = $bread_text_extra = $navigation = '';
 $home_gift_sets_modal = $home_gift_sets_script = $listofitems = '';
 $serachtitle = 'List of Products';
-$minprice = $maxprice = '';
+$minpricep = $maxpricep = '';
 if (defined('PACKAGE_SEARCH_PAGE')) {
     // pr($_POST);
     if (isset($hotelslug) and !empty($hotelslug)) {
@@ -717,7 +717,7 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
                 ';
             }
             $respkglist .= '
-                <div class="col-xl-3 col-sm-6 col-6">
+                <div class="col-xl-4 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <a href="' . $slugs . '"><div class="product-img product_hove" data-href="' . $slugs . '">
                             <img src="' . $img . '" alt="' . $rows['title'] . '">
@@ -1054,7 +1054,7 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
     }
     $pa = $da = [];
     foreach ($maxs as $max) {
-        $maxprice = $max->discount1;
+        $maxpricep = $max->discount1;
         if ($max->discount1 == 0) {
             $pa[] = $max->price1;
         } else {
@@ -1062,7 +1062,7 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
         }
     }
     $combinedArray = array_merge($pa, $da);
-    $maxprice = max($combinedArray);
+    $maxpricep = max($combinedArray);
 
     if (!empty($service_slug)) {
         $serviceRecord = Services::find_by_slug($service_slug);
@@ -1082,13 +1082,13 @@ if (defined('PACKAGE_SEARCH_PAGE')) {
         }
     }
     $combinedArray = array_merge($pa, $da);
-    $minprice = min($combinedArray);
+    $minpricep = min($combinedArray);
 }
 
 $jVars['module:search-searchform-type'] = $resisearch;
 $jVars['module:search-totalitems-type'] = $listofitems;
-$jVars['module:search-maxprice'] = $maxprice;
-$jVars['module:search-minprice'] = $minprice;
+$jVars['module:search-maxprice-pkg'] = $maxpricep;
+$jVars['module:search-minprice-pkg'] = $minpricep;
 $jVars['module:modal-popup-search-type'] = $home_gift_sets_modal;
 $jVars['module:modal-popup-script'] = $home_gift_sets_script;
 $jVars['module:package-search-breadcrumb'] = $bread;
