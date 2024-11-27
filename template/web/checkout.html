@@ -858,9 +858,13 @@
                 if (msg.action == 'success') {
                     if ($.trim(msg.shipping_location) !== '') {
                         $('#shipping_location').val(msg.shipping_location);
+                    } else {
+                        alert('Home Shipping Location not selected in Profile');
                     }
                     if ($.trim(msg.shipping_district) !== '') {
                         $('#shipping_district').val(msg.shipping_district);
+                    } else {
+                        alert('Home Shipping District not selected in Profile');
                     }
                     if ($.trim(msg.longitude) !== '' && $.trim(msg.latitude) !== '') {
                         // updating shipping address and map
@@ -885,6 +889,9 @@
                         $('input[name="grand_total"]').val(NewTotal);
                     }
                 }
+                if (msg.action == 'unsuccess') {
+                    alert("Please login and select Home Address");
+                }
             }
         });
     }
@@ -908,9 +915,13 @@
                 if (msg.action == 'success') {
                     if ($.trim(msg.shipping_location) !== '') {
                         $('#shipping_location').val(msg.shipping_location);
+                    } else {
+                        alert('Office Shipping District not selected in Profile');
                     }
                     if ($.trim(msg.shipping_district) !== '') {
                         $('#shipping_district').val(msg.shipping_district);
+                    } else {
+                        alert('Office Shipping District not selected in Profile');
                     }
                     if ($.trim(msg.longitude) !== '' && $.trim(msg.latitude) !== '') {
                         // updating shipping address and map
@@ -934,6 +945,9 @@
                         $('#grand-total').html('NPR ' + NewTotal);
                         $('input[name="grand_total"]').val(NewTotal);
                     }
+                }
+                if (msg.action == 'unsuccess') {
+                    alert("Please login and select Office Address");
                 }
             }
         });

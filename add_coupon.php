@@ -216,7 +216,8 @@ switch ($_POST['action']) {
         break;
 
     case "get_home_address":
-        $userRec = User::find_by_id($user_id);
+        $userId = !empty($user_id) && $user_id != 'undefined' ? $user_id : 0;
+        $userRec = User::find_by_id($userId);
         if (!empty($userRec)) {
             $shipping_location  = $shipping_district = '';
             $shipping_longitude = 85.3161699;
@@ -250,8 +251,9 @@ switch ($_POST['action']) {
         }
         break;
 
-        case "get_office_address":
-        $userRec = User::find_by_id($user_id);
+    case "get_office_address":
+        $userId = !empty($user_id) && $user_id != 'undefined' ? $user_id : 0;
+        $userRec = User::find_by_id($userId);
         if (!empty($userRec)) {
             $shipping_location  = $shipping_district = '';
             $shipping_longitude = 85.3161699;

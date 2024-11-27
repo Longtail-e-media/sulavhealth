@@ -589,7 +589,7 @@ if (defined('CHECKOUT_PAGE')) {
                                         </div>
                                     </div>
     ';
-    if (!empty($checkLogin)) {
+    // if (!empty($checkLogin)) {
         $checkout_form .= '
                                     <div class="col-md-4 mb-30">
                                         <div class="input-item">
@@ -598,7 +598,7 @@ if (defined('CHECKOUT_PAGE')) {
                                         </div>
                                     </div>
         ';
-    }
+    // }
     $checkout_form .= '
                                 </div>
                                 
