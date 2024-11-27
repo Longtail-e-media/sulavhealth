@@ -168,5 +168,15 @@
         });
     }
 
+    // change default delivery charge to 70 for "Inside Valley"
+    $(document).on('change', '#parentId', function () {
+        var val = $(this).val();
+        if(val == 1){
+            $('#delivery_charge').val('70');
+        } else {
+            $('#delivery_charge').val('0');
+        }
+    })
+
 
 </script>

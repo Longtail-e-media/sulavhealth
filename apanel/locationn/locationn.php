@@ -7,6 +7,7 @@ $moduleFoldername = "locationn";        // Image folder name
 if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode']) && $_GET['mode'] == "list"):
     $parentId = (isset($_REQUEST['id']) and !empty($_REQUEST['id'])) ? addslashes($_REQUEST['id']) : 0;
     ?>
+    <div class="my-msg"></div>
     <h3>
         List locations
         <?php if (!empty($_REQUEST['id'])) { ?>
@@ -16,13 +17,14 @@ if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode'])
                 <span class="button-content"> Back </span>
             </a>
         <?php } ?>
+        <?php if ($parentId != 0) { ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="addNewlocationn();">
             <span class="glyph-icon icon-separator"><i class="glyph-icon icon-plus-square"></i></span>
             <span class="button-content"> Add New </span>
         </a>
+        <?php } ?>
     </h3>
-    <div class="my-msg"></div>
     <div class="example-box">
         <div class="example-code">
             <table cellpadding="0" cellspacing="0" border="0" class="table" id="example">
@@ -93,10 +95,12 @@ if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode'])
                                data-placement="top" title="Edit" onclick="editRecord(<?php echo $record->id; ?>);">
                                 <i class="glyph-icon icon-edit"></i>
                             </a>
+                            <?php if ($parentId != 0) { ?>
                             <a href="javascript:void(0);" class="btn small bg-red tooltip-button" data-placement="top"
                                title="Remove" onclick="recordDelete(<?php echo $record->id; ?>);">
                                 <i class="glyph-icon icon-remove"></i>
                             </a>
+                            <?php } ?>
                             <input name="sortId" type="hidden" value="<?php echo $record->id; ?>">
                         </td>
                     </tr>
@@ -107,7 +111,9 @@ if (isset($_GET['page']) && $_GET['page'] == "locationn" && isset($_GET['mode'])
         <div class="pad0L col-md-2">
             <select name="dropdown" id="groupTaskField" class="custom-select">
                 <option value="0"><?php echo $GLOBALS['basic']['choseAction']; ?></option>
+                <?php if ($parentId != 0) { ?>
                 <option value="delete"><?php echo $GLOBALS['basic']['delete']; ?></option>
+                <?php } ?>
                 <option value="toggleStatus"><?php echo $GLOBALS['basic']['toggleStatus']; ?></option>
             </select>
         </div>
