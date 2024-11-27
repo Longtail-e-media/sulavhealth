@@ -357,6 +357,10 @@ if (defined('DASHBOARD_PAGE')) {
             </div>
         ';
 
+        $female_select = $userRec->gender == '1' ? 'selected' : '';
+        $other_select = $userRec->gender == '2' ? 'selected' : '';
+        $married_select = $userRec->marital_status == '1' ? 'selected' : '';
+
         $user_profile .= '
         <h3 class="mb-50">Account Details</h3>
             <p>' . ('The following details will be used on the checkout page by default.') . '</p>
@@ -389,8 +393,8 @@ if (defined('DASHBOARD_PAGE')) {
                             <div class="input-item">
                                 <select class="nice-selec col-12" name="gender" value="gender">
                                 <option value="0">Male</option>
-                                <option value="1">Female</option>
-                                <option value="2">Other</option>
+                                <option value="1" ' . $female_select . '>Female</option>
+                                <option value="2" ' . $other_select . '>Other</option>
                                 </select>
                             </div>
                         </div>
@@ -405,7 +409,7 @@ if (defined('DASHBOARD_PAGE')) {
                             <div class="input-item">
                                 <select class="nice-selec col-12" name="marital_status">
                                     <option value="0">Single </option>
-                                    <option value="1">Married </option>
+                                    <option value="1" ' . $married_select . '>Married </option>
                                 </select>
                             </div>
                         </div>

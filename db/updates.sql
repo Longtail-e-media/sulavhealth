@@ -92,3 +92,8 @@ ALTER TABLE `tbl_booking_info` ADD `delivery_type` INT NOT NULL AFTER `additiona
     ADD `shipping_location_site` TEXT NOT NULL AFTER `shipping_location`,
     ADD `shipping_district_site` TEXT NOT NULL AFTER `shipping_location_site`,
     ADD `door_delivery_type` INT NOT NULL AFTER `shipping_district_site`;
+
+-- 2024-11-27
+INSERT INTO `tbl_modules` (`id`, `parent_id`, `name`, `link`, `mode`, `icon_link`, `status`, `sortorder`, `added_date`, `properties`) VALUES (NULL, '0', 'Admin User', 'user/list', 'user', 'icon-user', '1', '1', '2024-11-27', ''), (NULL, '0', 'Front User', 'frontuser/list', 'frontuser', 'icon-user', '1', '2', '2024-11-27', '');
+UPDATE `tbl_modules` SET `parent_id` = '1' WHERE `tbl_modules`.`id` = 32;
+UPDATE `tbl_modules` SET `parent_id` = '1' WHERE `tbl_modules`.`id` = 33;

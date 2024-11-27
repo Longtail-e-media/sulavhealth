@@ -1,13 +1,12 @@
 <?php
-$moduleTablename = "tbl_users"; // Database table name
-$moduleId = 1;                // module id >>>>> tbl_modules
-$moduleFoldername = "";        // Image folder name
+$moduleTablename = "tbl_users";     // Database table name
 
-if (isset($_GET['page']) && $_GET['page'] == "user" && isset($_GET['mode']) && $_GET['mode'] == "list"):
+if (isset($_GET['page']) && $_GET['page'] == "frontuser" && isset($_GET['mode']) && $_GET['mode'] == "list"):
     ?>
     <h3>
-        List Admin Users
-        <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);" onClick="AddNewUsers();">
+        List Front Users
+        <a class="loadingbar-demo btn medium bg-blue-alt float-right hide" href="javascript:void(0);"
+           onClick="AddNewUsers();">
             <span class="glyph-icon icon-separator"><i class="glyph-icon icon-plus-square"></i></span>
             <span class="button-content"> Add User </span>
         </a>
@@ -20,15 +19,13 @@ if (isset($_GET['page']) && $_GET['page'] == "user" && isset($_GET['mode']) && $
                 <tr>
                     <th class="text-center">S.No.</th>
                     <th>Full Name</th>
-                    <th class="text-center">Username</th>
-                    <th class="text-center">Access Type</th>
                     <th class="text-center">Email</th>
                     <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <?php $records = User::find_by_sql("SELECT * FROM " . $moduleTablename . " WHERE group_id!=2 ORDER BY sortorder ASC ");
+                <?php $records = User::find_by_sql("SELECT * FROM " . $moduleTablename . " WHERE group_id=2 ORDER BY sortorder ASC ");
                 foreach ($records as $record): ?>
                     <tr id="<?php echo $record->id; ?>">
                         <td class="text-center"><?php echo $record->sortorder; ?></td>
@@ -38,10 +35,6 @@ if (isset($_GET['page']) && $_GET['page'] == "user" && isset($_GET['mode']) && $
                                    class="loadingbar-demo"
                                    title="<?php echo $record->first_name . ' ' . $record->middle_name . ' ' . $record->last_name; ?>"><?php echo $record->first_name . ' ' . $record->middle_name . ' ' . $record->last_name; ?></a>
                             </div>
-                        </td>
-                        <td><?php echo $record->username; ?></td>
-                        <td>
-                            <?php echo Usergrouptype::get_GroupTypeName_byGpId($record->group_id); ?>
                         </td>
                         <td><?php echo !empty($record->email) ? $record->email : ''; ?></td>
                         <td class="text-center">
@@ -59,14 +52,14 @@ if (isset($_GET['page']) && $_GET['page'] == "user" && isset($_GET['mode']) && $
                                 </a>
                             <?php endif; ?>
                             <a href="javascript:void(0);" class="loadingbar-demo btn small bg-green tooltip-button"
-                               data-placement="top" title="Permissioin"
-                               onclick="permission(<?php echo $record->id; ?>);">
-                                <i class="glyph-icon icon-gear"></i>
+                               data-placement="top" title="View Details"
+                               onclick="detail(<?php echo $record->id; ?>);">
+                                <i class="glyph-icon icon-eye"></i>
                             </a>
-                            <a href="javascript:void(0);" class="loadingbar-demo btn small bg-blue-alt tooltip-button"
+                            <!--<a href="javascript:void(0);" class="loadingbar-demo btn small bg-blue-alt tooltip-button"
                                data-placement="top" title="Edit" onclick="editRecord(<?php echo $record->id; ?>);">
                                 <i class="glyph-icon icon-edit"></i>
-                            </a>
+                            </a>-->
                             <?php if ($record->group_id != 1): ?>
                                 <a href="javascript:void(0);" class="btn small bg-red tooltip-button"
                                    data-placement="top" title="Remove"
@@ -273,9 +266,15 @@ if (isset($_GET['page']) && $_GET['page'] == "user" && isset($_GET['mode']) && $
                                     class="chosen-selec validate[required,length[0,500]] col-md-4" id="gender"
                                     name="gender">
                                 <option value="">Choose</option>
-                                <option value="0" <?php echo (!empty($usersInfo->gender) && $usersInfo->gender == 0) ? 'selected' : '';?> >Male</option>
-                                <option value="1" <?php echo (!empty($usersInfo->gender) && $usersInfo->gender == 1) ? 'selected' : '';?> >Female</option>
-                                <option value="2" <?php echo (!empty($usersInfo->gender) && $usersInfo->gender == 2) ? 'selected' : '';?> >Other</option>
+                                <option value="0" <?php echo (!empty($usersInfo->gender) && $usersInfo->gender == 0) ? 'selected' : ''; ?> >
+                                    Male
+                                </option>
+                                <option value="1" <?php echo (!empty($usersInfo->gender) && $usersInfo->gender == 1) ? 'selected' : ''; ?> >
+                                    Female
+                                </option>
+                                <option value="2" <?php echo (!empty($usersInfo->gender) && $usersInfo->gender == 2) ? 'selected' : ''; ?> >
+                                    Other
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -304,8 +303,12 @@ if (isset($_GET['page']) && $_GET['page'] == "user" && isset($_GET['mode']) && $
                                     class="chosen-selec validate[required,length[0,500]] col-md-4" id="marital_status"
                                     name="marital_status">
                                 <option value="">Choose</option>
-                                <option value="0" <?php echo (!empty($usersInfo->marital_status) && $usersInfo->marital_status == 0) ? 'selected' : '';?> >Single</option>
-                                <option value="1" <?php echo (!empty($usersInfo->marital_status) && $usersInfo->marital_status == 1) ? 'selected' : '';?> >Married</option>
+                                <option value="0" <?php echo (!empty($usersInfo->marital_status) && $usersInfo->marital_status == 0) ? 'selected' : ''; ?> >
+                                    Single
+                                </option>
+                                <option value="1" <?php echo (!empty($usersInfo->marital_status) && $usersInfo->marital_status == 1) ? 'selected' : ''; ?> >
+                                    Married
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -427,61 +430,84 @@ if (isset($_GET['page']) && $_GET['page'] == "user" && isset($_GET['mode']) && $
         </div>
     </div>
 
-<?php elseif (isset($_GET['mode']) && $_GET['mode'] == "permission"):
+<?php elseif (isset($_GET['mode']) && $_GET['mode'] == "detail"):
+    $genderArr = ['0' => 'Male', '1' => 'Female', '2' => 'Other'];
+    $maritalArr = ['0' => 'Single', '1' => 'Married'];
     if (isset($_GET['id']) && !empty($_GET['id'])):
         $userId = addslashes($_REQUEST['id']);
         $usersInfo = User::find_by_id($userId);
+
     endif; ?>
     <h3>
-        Permission Settings
+        Details of [<?= $usersInfo->first_name ?> <?= $usersInfo->last_name ?>]
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="viewuserslist();">
-    <span class="glyph-icon icon-separator">
-    	<i class="glyph-icon icon-arrow-circle-left"></i>
-    </span>
+            <span class="glyph-icon icon-separator"><i class="glyph-icon icon-arrow-circle-left"></i></span>
             <span class="button-content"> Back </span>
         </a>
     </h3>
     <div class="my-msg"></div>
     <div class="example-box">
         <div class="example-code">
-            <a href="javascript:;" class="check-all">Check All</a> | <a href="javascript:;" class="uncheck-all">Un-check
-                All</a>
-            <form action="" method="post" class="col-md-12 center-margin" id="permission_frm">
+
+            <div class="col-sm-12 hide"><h3>Personal Information</h3></div>
+
+            <div class="col-sm-4">
                 <ul>
-                    <?php $res = '';
-                    $parentmenu = Module::find_all_parent();
-                    foreach ($parentmenu as $key => $val) {
-                        $childmenu = Module::find_child_by($val->id);
-                        $res .= '<li>
-                        <div class="form-checkbox-radio">
-                            <input type="checkbox" class="mcheck parent" name="module_id[]" value="' . $val->id . '"/> ' . $val->name . '
-                        </div>';
-                        if (!empty($childmenu)) {
-                            $res .= '<ul style="margin-left:40px;">';
-                            foreach ($childmenu as $k => $v) {
-                                $res .= '<li>
-                                    <div class="form-checkbox-radio">
-                                        <input type="checkbox" class="mcheck child-' . $v->parent_id . '" data-parent="' . $v->parent_id . '" name="module_id[]" value="' . $v->id . '"/> ' . $v->name . '
-                                    </div>
-                                </li>';
-                            }
-                            $res .= '</ul>';
-                        }
-                        $res .= '</li>';
-                    }
-                    echo $res; ?>
+                    <li><strong>Full Name : </strong><?php echo $usersInfo->first_name . ' ' . $usersInfo->last_name; ?></li>
+                    <li><strong>Phone Number : </strong><?php echo $usersInfo->contact; ?></li>
+                    <li><strong>Marital Status : </strong><?php echo $maritalArr[$usersInfo->marital_status]; ?></li>
+                    <li><strong>District : </strong><?php echo $usersInfo->district; ?></li>
+                    <li><strong>Blood Group : </strong><?php echo $usersInfo->blood_group; ?></li>
+                    <li><strong>Shipping Location (Home) : </strong>
+                        <?php if (!empty($usersInfo->shipping_location_home)) {
+                            $locationRec = locationn::find_by_id($usersInfo->shipping_location_home);
+                            echo $locationRec->title;
+                        } ?>
+                    </li>
+                    <li><strong>Shipping District (Office) : </strong>
+                        <?php if (!empty($usersInfo->shipping_district_office)) {
+                            $locationRec = locationn::find_by_id($usersInfo->shipping_district_office);
+                            echo $locationRec->title;
+                        } ?>
+                    </li>
+                    <li><strong>Google Maps Link : </strong><?php echo $usersInfo->Google_maps; ?></li>
                 </ul>
-                <br/>
-                <button type="submit" name="submit"
-                        class="btn large primary-bg text-transform-upr font-bold font-size-11 radius-all-4"
-                        id="btn-submit" title="Save">
-                <span class="button-content">
-                    Save
-                </span>
-                </button>
-                <input type="hidden" name="idValue" id="idValue" value="<?php echo !empty($userId) ? $userId : 0; ?>"/>
-            </form>
+            </div>
+
+            <div class="col-sm-4">
+                <ul>
+                    <li><strong>Email Address : </strong><?php echo $usersInfo->email; ?></li>
+                    <li><strong>Gender : </strong><?php echo $genderArr[$usersInfo->gender]; ?></li>
+                    <li><strong>Weight : </strong><?php echo $usersInfo->weight; ?></li>
+                    <li><strong>City : </strong><?php echo $usersInfo->city; ?></li>
+                    <li><strong>Diseases : </strong><?php echo $usersInfo->diseases; ?></li>
+                    <li><strong>Shipping District (Home) : </strong>
+                        <?php if (!empty($usersInfo->shipping_district_home)) {
+                            $locationRec = locationn::find_by_id($usersInfo->shipping_district_home);
+                            echo $locationRec->title;
+                        } ?>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-4">
+                <ul>
+                    <li><strong>Address : </strong><?php echo $usersInfo->facebook_uid; ?></li>
+                    <li><strong>Date of Birth : </strong><?php echo $usersInfo->dob; ?></li>
+                    <li><strong>Height : </strong><?php echo $usersInfo->height; ?></li>
+                    <li><strong>Postal Code : </strong><?php echo $usersInfo->postal; ?></li>
+                    <li><strong>Medicines : </strong><?php echo $usersInfo->medicines; ?></li>
+                    <li><strong>Shipping Location (Office) : </strong>
+                        <?php if (!empty($usersInfo->shipping_location_office)) {
+                            $locationRec = locationn::find_by_id($usersInfo->shipping_location_office);
+                            echo $locationRec->title;
+                        } ?>
+                    </li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+
         </div>
     </div>
 <?php endif; ?>
