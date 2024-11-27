@@ -588,12 +588,18 @@ if (defined('CHECKOUT_PAGE')) {
                                             <label for="delivery_type_2">Collect from nearest site</label>
                                         </div>
                                     </div>
+    ';
+    if (!empty($checkLogin)) {
+        $checkout_form .= '
                                     <div class="col-md-4 mb-30">
                                         <div class="input-item">
                                             <input type="radio" name="delivery_type" value="3" id="delivery_type_3">
                                             <label for="delivery_type_3">Door delivery</label>
                                         </div>
                                     </div>
+        ';
+    }
+    $checkout_form .= '
                                 </div>
                                 
                                 <div class="row d-none" id="company_code_row">
@@ -601,6 +607,7 @@ if (defined('CHECKOUT_PAGE')) {
                                         <div class="input-item">
                                             <input type="text" name="company_code" id="company_code" placeholder="Company Code">
                                             <p class="" id="companyCodeMsg"></p>
+                                            <input type="text" class="d-none" id="company_code_address" placeholder="Company Address" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -637,9 +644,6 @@ if (defined('CHECKOUT_PAGE')) {
                                 </div>
                                 
                                 <div class="row d-none" id="door_delivery_row">
-    ';
-    if (!empty($checkLogin)) {
-        $checkout_form .= '
                                     <div class="col-md-4 mb-30">
                                         <div class="input-item">
                                             <input type="radio" name="door_delivery_type" value="1" id="door_delivery_type_1">
@@ -652,9 +656,6 @@ if (defined('CHECKOUT_PAGE')) {
                                             <label for="door_delivery_type_2">Office Address</label>
                                         </div>
                                     </div>
-        ';
-    }
-    $checkout_form .= '
                                     <div class="col-md-4 mb-30">
                                         <div class="input-item">
                                             <input type="radio" name="door_delivery_type" value="3" id="door_delivery_type_3">
@@ -712,7 +713,7 @@ if (defined('CHECKOUT_PAGE')) {
                                             </div>
                                             <div class="col-md-12 mb-30">
                                                 <div class="input-item">
-                                                    <input type="text" name="shipping_address" placeholder="Shipping Address" value="here">
+                                                    <input type="text" name="shipping_address" placeholder="Shipping Address" value="">
                                                 </div>
                                             </div>
                                             <div class="col-md-12"><h6>Shipping Location (Choose on Map)</h6><div id="map"></div></div>

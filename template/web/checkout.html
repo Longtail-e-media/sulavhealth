@@ -524,6 +524,7 @@
                                 .html(msg.message)
                                 .css('display', 'block')
                                 .fadeOut(8000);
+                            $('#company_code_address').removeClass('d-none').val(msg.address);
 
                             // getting shipping amount
                             var shippingAmt = parseFloat($('input[name="shipping_amt"]').val());
