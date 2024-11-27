@@ -590,7 +590,7 @@ if (defined('HOME_PAGE')) {
                 if (!empty($serviceSet->price1) and (empty($serviceSet->offer_price))) {
                     $price_text = '<span>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</span>';
                 }
-                if (!empty($giftSet->discount1)) {
+                /*if (!empty($giftSet->discount1)) {
                     // Check if discount flag is On in Category
                     $categoryRec = Category::find_by_id($giftSet->Category);
 
@@ -613,6 +613,23 @@ if (defined('HOME_PAGE')) {
                             $price_text = $discountInfo . '<br/>
                                 <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> 
                                 <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>';
+                        }
+                    }
+                }*/
+
+                $prodPrice = $giftSet->price1; // Default to the original price
+                if (!empty($giftSet->discount1) && $giftSet->discount1 > 0) {
+                    // Check if discount flag is On in Category
+                    $categoryRec = Category::find_by_id($giftSet->Category);
+
+                    if (!empty($categoryRec) && $categoryRec->discount == 1) {
+                        // Check if a Subcategory is chosen
+                        $subcategoryRec = Category::find_by_id($giftSet->Subcategory);
+                        $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
+
+                        // Apply the discount if the subcategory discount is active or no subcategory exists
+                        if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
+                            $prodPrice = $giftSet->discount1;
                         }
                     }
                 }
