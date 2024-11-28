@@ -47,6 +47,28 @@
             background-color: #e9ecef; /* Optional: Make it look like a disabled field */
             color: #6c757d; /* Optional: Adjust text color for disabled appearance */
         }
+
+        .ltn__payment-note {
+            position: relative;
+        }
+
+        #agree-error {
+            display: block;
+            position: absolute;
+            bottom: 80px;
+            top: 100%;
+            width: 100%;
+            right: 0;
+        }
+
+        #delivery_type-error {
+            display: block;
+            position: absolute;
+            bottom: 80px;
+            top: 100%;
+            width: 100%;
+            right: 0;
+        }
     </style>
 </head>
 
@@ -115,6 +137,10 @@
                                                 <div class="btn-wrapper mt-0"><button class="theme-btn-1 btn btn-block" type="submit" id="submitLogin">Log In</button></div>
                                                 <p id="loginMsg" class="mt-20" style="display: none;"></p>
                                             </form>
+                                            <h5>DON'T HAVE AN ACCOUNT?</h5>
+                                            <div class="btn-wrapper">
+                                                <a href="./register" class="theme-btn-1 btn black-btn">CREATE ACCOUNT</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -670,7 +696,7 @@
                 address: {required: "<jcms:module:common_language:REGISTER_FORM_ADDRESS_ERROR/>"},
                 city: {required: "<jcms:module:common_language:CHECKOUT_FORM_CITY_ERROR/>"},
                 post_code: {required: "<jcms:module:common_language:CHECKOUT_FORM_POST_CODE_ERROR/>"},
-                delivery_type: {required: "Choose your Delivery Type"},
+                delivery_type: {required: "Choose any one"},
                 company_code: {required: "Enter your Company Code"},
                 door_delivery_type: {required: "Choose your Shipping Address"},
                 shipping_country: {required: "Choose your Shipping Country"},
