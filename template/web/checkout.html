@@ -645,6 +645,8 @@
                 shipping_district: {required: !0},
                 shipping_city: {required: !0},
                 shipping_address: {required: !0},
+                shipping_location_site: {required: !0},
+                shipping_district_site: {required: !0},
                 shipping_post_code: {required: !0},
                 shipping_location: {required: !0},
                 create_password: {required: !0},
@@ -673,6 +675,8 @@
                 door_delivery_type: {required: "Choose your Shipping Address"},
                 shipping_country: {required: "Choose your Shipping Country"},
                 shipping_district: {required: "Choose your Shipping District"},
+                shipping_location_site: {required: "Choose your Shipping Location"},
+                shipping_district_site: {required: "Choose your Shipping District"},
                 shipping_city: {required: "Enter your Shipping city"},
                 shipping_address: {required: "Enter your Shipping Address"},
                 shipping_post_code: {required: "Enter your Shipping Post Code"},
@@ -869,6 +873,7 @@
                     }
                     if (errors.length > 0) {
                         alert(errors.join("\n"));
+                        window.location.href = base_url + "dashboard#profile";
                     }
                     if ($.trim(msg.longitude) !== '' && $.trim(msg.latitude) !== '') {
                         // updating shipping address and map
@@ -895,6 +900,7 @@
                 }
                 if (msg.action == 'unsuccess') {
                     alert("Please login and select Home Address");
+                    $('#quick_view_login_form').modal('show');
                 }
             }
         });
@@ -930,6 +936,7 @@
                     }
                     if (errors.length > 0) {
                         alert(errors.join("\n"));
+                        window.location.href = base_url + "dashboard#profile";
                     }
                     if ($.trim(msg.longitude) !== '' && $.trim(msg.latitude) !== '') {
                         // updating shipping address and map
@@ -956,6 +963,7 @@
                 }
                 if (msg.action == 'unsuccess') {
                     alert("Please login and select Office Address");
+                    $('#quick_view_login_form').modal('show');
                 }
             }
         });

@@ -312,14 +312,6 @@ if (!empty($bookingRec)) {
             ';
             break;
     }
-    if(!empty($bookingRec->shipping_latitude) and !empty($bookingRec->shipping_longitude)){
-        $html.= '
-                    <tr>
-                        <td>Shipping Geolocation</td>
-                        <td>(' . $bookingRec->shipping_latitude . ', ' . $bookingRec->shipping_longitude . ')</td>
-                    </tr>
-        ';
-    }
     $html .= '
                     <tr>
                         <td>' . ('District') . '</td>
@@ -341,6 +333,16 @@ if (!empty($bookingRec)) {
                         <td>' . ('Shipping District') . '</td>
                         <td>' . $bookingRec->shipping_district . '</td>
                     </tr>
+    ';
+    if(!empty($bookingRec->shipping_latitude) and !empty($bookingRec->shipping_longitude)){
+        $html.= '
+                    <tr>
+                        <td>Shipping Geolocation</td>
+                        <td><a href="http://maps.google.com/maps?q=loc:' . $bookingRec->shipping_latitude . '+' . $bookingRec->shipping_longitude . '" target="_blank">Map</a></td>
+                    </tr>
+        ';
+    }
+    $html .= '
 	            </table>
 
 	            <!--[if (gte mso 9)|(IE)]>

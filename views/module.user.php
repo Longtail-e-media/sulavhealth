@@ -147,7 +147,7 @@ if (defined('DASHBOARD_PAGE')) {
                 <a class="active show" data-toggle="tab" href="#liton_tab_1_1"> <i class="fas fa-home"></i> ' . ('Dashboard') . '</a>
                 <a data-toggle="tab" href="#liton_tab_1_2"> <i class="fas fa-file-alt"></i> ' . ('Orders') . ' </a>
                 <a data-toggle="tab" id="wishlist" href="#liton_tab_1_3"> <i class="fas fa-list"></i> ' . ('Wishlist') . ' </a>
-                <a data-toggle="tab" href="#liton_tab_1_4"><i class="fas fa-user"></i> ' . ('Account Details') . ' </a>
+                <a data-toggle="tab" id="profile" href="#liton_tab_1_4"><i class="fas fa-user"></i> ' . ('Account Details') . ' </a>
                 <a href="' . BASE_URL . 'logout"> <i class="fas fa-sign-out-alt"></i> ' . ('Logout') . ' </a>
             </div>
         ';

@@ -88,7 +88,7 @@ class Site extends DatabaseObject
     {
         global $db;
         $cond1 = !empty($room) ? ' AND id<>' . $room : '';
-        $sql = "SELECT * FROM " . self::$table_name . " WHERE parentId<>$parentId  AND status=1 $cond1 ORDER BY sortorder DESC";
+        $sql = "SELECT * FROM " . self::$table_name . " WHERE parentId<>$parentId  AND status=1 $cond1 ORDER BY title ASC";
         return self::find_by_sql($sql);
     }
 
