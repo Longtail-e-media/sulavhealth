@@ -872,7 +872,9 @@
                         errors.push('Home Shipping District not selected in Profile');
                     }
                     if (errors.length > 0) {
-                        alert(errors.join("\n"));
+                        if(errors.length === 1){alert(errors);}
+                        else{alert('Home Shipping Location and District not selected in Profile');}
+                        // alert(errors.join("\n"));
                         window.location.href = base_url + "dashboard#profile";
                     }
                     if ($.trim(msg.longitude) !== '' && $.trim(msg.latitude) !== '') {
@@ -935,7 +937,9 @@
                         errors.push('Office Shipping District not selected in Profile');
                     }
                     if (errors.length > 0) {
-                        alert(errors.join("\n"));
+                        if(errors.length === 1){alert(errors);}
+                        else{alert('Office Shipping Location and District not selected in Profile');}
+                        // alert(errors.join("\n"));
                         window.location.href = base_url + "dashboard#profile";
                     }
                     if ($.trim(msg.longitude) !== '' && $.trim(msg.latitude) !== '') {
