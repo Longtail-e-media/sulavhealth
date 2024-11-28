@@ -723,7 +723,7 @@ if (defined('SEARCH_PAGE')) {
                 ';
             }
             $respkglist .= '
-                <div class="col-xl-3 col-sm-6 col-xs-12">
+                <div class="col-xl-4 col-sm-6 col-xs-12">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <a href="' . $slugs . '"><div class="product-img product_hove" data-href="' . $slugs . '">
                             <img src="' . $img . '" alt="' . $rows['title'] . '">

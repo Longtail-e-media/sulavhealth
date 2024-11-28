@@ -217,7 +217,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                     <div class="lazy"><!--
                 ';
             }
-            $result .= '<div class="col-xl-3 col-md-6 col-sm-6 col-12">
+            $result .= '<div class="col-xl-4 col-md-6 col-sm-6 col-12">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
                   <a href="' . BASE_URL . 'product/productdetails/' . $rows['slug'] . '" class="product-link">  <div class="product-img product_hove" data-href="' . BASE_URL . 'product/' . $rows['slug'] . '">
                         <img src="' . $img . '" alt="' . $rows['title'] . '">
