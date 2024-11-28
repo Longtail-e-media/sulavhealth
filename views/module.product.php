@@ -617,22 +617,36 @@ if (defined('HOME_PAGE')) {
                     }
                 }*/
 
-                $prodPrice = $giftSet->price1; // Default to the original price
-                if (!empty($giftSet->discount1) && $giftSet->discount1 > 0) {
+                // $prodPrice = $serviceSet->price1; // Default to the original price
+                if (!empty($serviceSet->discount1)) {
                     // Check if discount flag is On in Category
-                    $categoryRec = Category::find_by_id($giftSet->Category);
+                    $categoryRec = Category::find_by_id($serviceSet->Category);
+                    pr($categoryRec,1);
 
                     if (!empty($categoryRec) && $categoryRec->discount == 1) {
                         // Check if a Subcategory is chosen
-                        $subcategoryRec = Category::find_by_id($giftSet->Subcategory);
+                        $subcategoryRec = Category::find_by_id($serviceSet->Subcategory);
                         $isSubcategoryDiscounted = !empty($subcategoryRec) && $subcategoryRec->discount == 1;
 
-                        // Apply the discount if the subcategory discount is active or no subcategory exists
+                        // Determine the discount amount
+                        $discountamt = $serviceSet->price1 - $serviceSet->discount1;
+
+                        // Build the discount information
+                        $discountInfo = '<span>' . $serviceSet->currency . ' ' . $serviceSet->discount1 . '</span>';
+                        if (!empty($serviceSet->discountedp)) {
+                            $discountInfo .= '|<span>' . $serviceSet->discountedp . '% off</span>';
+                        }
+
+                        // Render the price text if either category or subcategory discount is active
                         if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
-                            $prodPrice = $giftSet->discount1;
+                            $price_text = $discountInfo . '<br/>
+                            <del>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</del> 
+                            <span class="font-14">Save ' . $serviceSet->currency . ' ' . $discountamt . '</span>
+                        ';
                         }
                     }
                 }
+
 
                 $prodbrand = Brand::find_by_id($serviceSet->brand);
                 $prodservice = Services::find_by_id($serviceSet->service_id);
@@ -648,6 +662,7 @@ if (defined('HOME_PAGE')) {
                 } else {
                     $slugs = '' . BASE_URL . 'product/product-detail/' . $serviceSet->slug . '';;
                 }
+
                 $services_gift_sets .= '
                 <div class="col-xl-3 col-sm-6 col-xs-12">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
