@@ -143,7 +143,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
 
     $listofitem .= '(' . $total . ' items found)';
     if ($total > 0) {
-        $i = 1;
+        $count = 1;
         while ($rows = $db->fetch_array($res)) {
             // pr($rows);
 
@@ -212,7 +212,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
             }
 
             // for top part (opening)
-            if ($i % 3 == 1) {
+            if ($count % 3 == 1) {
                 $result .= '
                     <div class="lazy"><!--
                 ';
@@ -245,12 +245,12 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                 </div>
                 </div>';
             // for bottom part (closing)
-            if ($i % 3 == 0 or $i == $total) {
+            if ($count % 3 == 0 or $count == $total) {
                 $result .= '
                     --></div>
                 ';
             }
-            $i++;
+            $count++;
 
 
             // }
