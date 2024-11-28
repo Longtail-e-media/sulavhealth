@@ -621,7 +621,6 @@ if (defined('HOME_PAGE')) {
                 if (!empty($serviceSet->discount1)) {
                     // Check if discount flag is On in Category
                     $categoryRec = Category::find_by_id($serviceSet->Category);
-                    pr($categoryRec,1);
 
                     if (!empty($categoryRec) && $categoryRec->discount == 1) {
                         // Check if a Subcategory is chosen
