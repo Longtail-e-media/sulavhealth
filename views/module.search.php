@@ -647,7 +647,7 @@ if (defined('SEARCH_PAGE')) {
     $listofitems .= '<label id="totalitems">' . $total . '  items found in this category</label>';
 
     if ($total > 0) {
-        $i = 1;
+        $count = 1;
         while ($rows = $db->fetch_array($res)) {
             // if (file_exists(SITE_ROOT . 'images/package/' . $rows['image'])) {
             // $sql = "SELECT AVG(rating) 'rating' FROM tbl_review WHERE package_id=" . $rows['id'];
@@ -717,7 +717,7 @@ if (defined('SEARCH_PAGE')) {
             }
             // pr($prodbrand);
             // for top part (opening)
-            if ($i % 3 == 1) {
+            if ($count % 3 == 1) {
                 $respkglist .= '
                     <div class="lazy"><!--
                 ';
@@ -765,12 +765,12 @@ if (defined('SEARCH_PAGE')) {
                 </div>
             ';
             // for bottom part (closing)
-            if ($i % 3 == 0 or $i == $total) {
+            if ($count % 3 == 0 or $count == $total) {
                 $respkglist .= '
                     --></div>
                 ';
             }
-            $i++;
+            $count++;
 
             $home_gift_sets_script .= '
                 <script class="productscrip">
