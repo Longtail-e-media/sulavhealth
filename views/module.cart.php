@@ -641,11 +641,6 @@ if (defined('CHECKOUT_PAGE')) {
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-30">
-                                        <div class="input-item">
-                                            <input type="text" name="shipping_address_site" placeholder="Shipping Address" value="">
-                                        </div>
-                                    </div>
                                 </div>
                                 
                                 <div class="row d-none" id="door_delivery_row">
