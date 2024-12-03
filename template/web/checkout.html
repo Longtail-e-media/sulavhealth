@@ -626,6 +626,10 @@
                 }
             });
         });
+        $(document).on('change', 'input[name="shipping_address_site"]', function () {
+            var value = $(this).val();
+            $('input[name="shipping_address"]').val(value);
+        })
 
         // Door Delivery Section
         // Delivery Type Section
@@ -671,6 +675,7 @@
                 shipping_district: {required: !0},
                 shipping_city: {required: !0},
                 shipping_address: {required: !0},
+                shipping_address_site: {required: !0},
                 shipping_location_site: {required: !0},
                 shipping_district_site: {required: !0},
                 shipping_post_code: {required: !0},
@@ -705,6 +710,7 @@
                 shipping_district_site: {required: "Choose your Shipping District"},
                 shipping_city: {required: "Enter your Shipping city"},
                 shipping_address: {required: "Enter your Shipping Address"},
+                shipping_address_site: {required: "Enter your Shipping Address"},
                 shipping_post_code: {required: "Enter your Shipping Post Code"},
                 shipping_location: {required: "Choose your Shipping Location"},
                 create_password: {required: "Enter your Password"},
