@@ -121,7 +121,7 @@ if (defined('SEARCH_PAGE')) {
         $tot = 0;
         if (@$brand_slug) {
             $brandRec = Brand::find_by_slug($brand_slug);
-            $tot += SubProduct::get_total_category_brand_product($brandRec->id, $serviceRow->id);
+            $tot += SubProduct::get_total_category_brand_product($brandRec->id, $categoryRow->id);
         } else {
             $tot += SubProduct::get_total_category_product($categoryRow->id);
         }
