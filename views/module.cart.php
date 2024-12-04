@@ -3,6 +3,7 @@
  *      Cart Page
  */
 
+$delivery_type_arr = ['0' => 'N/A', '1' => 'Company code', '2' => 'Collect from nearest site', '3' => 'Door delivery'];
 $cart_bread = $cart_detail = '';
 
 if (defined('CART_PAGE')) {
@@ -54,7 +55,12 @@ if (defined('CART_PAGE')) {
                                             <p class="cart-details-text1">' . $order->currency . ' ' . $order->pay_amt . ' </p>
                                         </div>
                                     </div>
-                                    <div class="col-md-3"></div>
+                                    <div class="col-md-3">
+                                        <div class="cart-details1">
+                                            <label>Order Date</label>
+                                            <p class="cart-details-text1">' . date('F d, Y', strtotime($order->added_date)) . ' </p>
+                                        </div>
+                                    </div>
                                     <div class="col-md-3"></div>
                                 </div>
                                 
@@ -103,37 +109,84 @@ if (defined('CART_PAGE')) {
                                     
                                     <div class="col-md-3">
                                         <div class="cart-details1">
+                                            <label>Delivery Type</label>
+                                            <p class="cart-details-text1">' . $delivery_type_arr[$order->delivery_type] . ' </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                    
+                ';
+                if($order->delivery_type == 1){
+                    $cart_detail .= '
+                                    <div class="col-md-3">
+                                        <div class="cart-details1">
+                                            <label>Company Code</label>
+                                            <p class="cart-details-text1">' . $order->company_code . ' </p>
+                                        </div>
+                                    </div>
+                    ';
+                }
+                if($order->delivery_type == 2){
+                    $cart_detail .= '
+                                    <div class="col-md-3">
+                                        <div class="cart-details1">
+                                            <label>Shipping Branch</label>
+                                            <p class="cart-details-text1">' . $order->shipping_district_site . ' </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="cart-details1">
+                                            <label>Branch Contact Number</label>
+                                            <p class="cart-details-text1">' . $order->nearest_site_contact_no . ' </p>
+                                        </div>
+                                    </div>
+                    ';
+                }
+                $cart_detail .= '
+                                    
+                                    <div class="col-md-3">
+                                        <div class="cart-details1">
                                             <label>Shipping Country</label>
                                             <p class="cart-details-text1">' . $order->shipping_country . ' </p>
                                         </div>
                                     </div>
-                                    
+                ';
+                if(!empty($order->shipping_district)){
+                    $cart_detail .= '
                                     <div class="col-md-3">
                                         <div class="cart-details1">
                                             <label>Shipping District</label>
                                             <p class="cart-details-text1">' . $order->shipping_district . ' </p>
                                         </div>
                                     </div>
-                                    
+                    ';
+                }
+                if(!empty($order->person_shipping_address)){
+                    $cart_detail .= '
                                     <div class="col-md-3">
                                         <div class="cart-details1">
                                             <label>Shipping Address</label>
                                             <p class="cart-details-text1">' . $order->person_shipping_address . ' </p>
                                         </div>
                                     </div>
-                                    
+                    ';
+                }
+                if(!empty($order->shipping_latitude) and !empty($order->shipping_longitude)){
+                    $cart_detail .= '
                                     <div class="col-md-3">
                                         <div class="cart-details1">
-                                            <label>Order Date</label>
-                                            <p class="cart-details-text1">' . date('F d, Y', strtotime($order->added_date)) . ' </p>
+                                            <label>Shipping Geolocation</label>
+                                            <p class="cart-details-text1"><a href="http://maps.google.com/maps?q=loc:' . $order->shipping_latitude . '+' . $order->shipping_longitude . '" target="_blank">View Map</a></p>
                                         </div>
                                     </div>
-                                    
+                    ';
+                }
+                $cart_detail .= '
                                     <div class="col-md-12">
                                         <div class="cart-details1">
                                             <label>Order Notes</label>
                                             <!--<p class="cart-details-text1">' . $order->person_comment . ' </p>-->
-                                            <textarea>' . $order->person_comment . '</textarea>
+                                            <textarea readonly>' . $order->person_comment . '</textarea>
                                         </div>
                                     </div>
                                 </div>

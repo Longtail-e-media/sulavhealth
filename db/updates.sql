@@ -100,3 +100,4 @@ UPDATE `tbl_modules` SET `parent_id` = '1' WHERE `tbl_modules`.`id` = 33;
 
 -- 2024-12-04
 ALTER TABLE `tbl_sites` ADD `contact_no` VARCHAR(255) NOT NULL AFTER `parentId`;
+ALTER TABLE `tbl_booking_info` ADD `nearest_site_contact_no` VARCHAR(255) NOT NULL AFTER `door_delivery_type`;

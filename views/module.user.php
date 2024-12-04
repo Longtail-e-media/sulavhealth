@@ -277,8 +277,8 @@ if (defined('DASHBOARD_PAGE')) {
         } else {
             $user_orders .= '
             <h3 class="mb-50">Orders</h3>
-            <p>You have no order images. Would you like to try from homepage?</p>
-            <a href="dhome" class="theme-btn-2 btn btn-effect-2" title="Homepage"> 
+            <p>You have no orders. Would you like to try from homepage?</p>
+            <a href="home" class="theme-btn-2 btn btn-effect-2" title="Homepage"> 
             &#8592;  &nbsp; Go Home
             </a>
             ';
