@@ -175,7 +175,8 @@
             slide: function (event, ui) {
                 $("#price-start").val("Rs." + ui.values[0]);
                 $("#price-end").val("Rs." + ui.values[1]);
-
+            },
+            stop: function( event, ui ) { 
                 handlePriceChange(ui.values[0], ui.values[1]);
             }
         });
