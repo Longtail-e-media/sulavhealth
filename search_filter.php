@@ -443,7 +443,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
 
     $result = preg_replace('/\s+/', ' ', $result);
     $result = str_replace(array("\r", "\n"), '', $result);
-    $result = compressHTMLTags($result);
+//    $result = compressHTMLTags($result);
 
     $home_gift_sets_modal = preg_replace('/\s+/', ' ', $home_gift_sets_modal);
     $home_gift_sets_modal = str_replace(array("\r", "\n"), '', $home_gift_sets_modal);
