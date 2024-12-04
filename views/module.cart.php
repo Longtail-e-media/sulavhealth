@@ -628,17 +628,23 @@ if (defined('CHECKOUT_PAGE')) {
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 mb-30">
-                                        <h6>Shipping District</h6>
+                                        <h6>Shipping Branch</h6>
                                         <div class="input-item">
                                             <select class="nice-selec col-12" name="shipping_district_site" id="shipping_district_site">
-                                                <option value="" data-dc="0" data-lat="27.6772614" data-long="85.3161699">Select Shipping District</option>
+                                                <option value="" data-dc="0" data-lat="27.6772614" data-long="85.3161699">Select Shipping Branch</option>
             ';
     $districts = Site::get_all_bychild();
     foreach ($districts as $district) {
-        $checkout_form .= '<option value="' . $district->title . '">' . $district->title . '</option>';
+        $checkout_form .= '<option value="' . $district->title . '" data-dc="' . $district->delivery_charge . '" data-contact="' . $district->contact_no . '">' . $district->title . '</option>';
     }
     $checkout_form .= '
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-30">
+                                        <h6>Contact Number</h6>
+                                        <div class="input-item">
+                                            <input type="text" name="nearest_site_contact_no" placeholder="Nearest Site Contact Number" id="nearest_site_contact_no" readonly>
                                         </div>
                                     </div>
                                 </div>

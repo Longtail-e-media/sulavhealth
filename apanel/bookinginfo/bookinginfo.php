@@ -114,12 +114,15 @@ if (isset($_GET['page']) && $_GET['page'] == "bookinginfo" && isset($_GET['mode'
                     <li><strong>Address : </strong><?php echo set_na($bookingRow->person_address); ?></li>
                     <li><strong>District : </strong><?php echo $bookingRow->person_mname; ?></li>
                     <li><strong>Shipping Address: </strong><?php echo $bookingRow->person_shipping_address; ?></li>
-                    <li><strong>Shipping District: </strong>
+                    <li><strong>Shipping District(Branch): </strong>
                         <?php
                             if($bookingRow->delivery_type == 2){echo $bookingRow->shipping_district_site;}
                             else {echo $bookingRow->shipping_district;}
                          ?>
                     </li>
+                    <?php if (!empty($bookingRow->nearest_site_contact_no)) { ?>
+                        <li><strong>Branch Contact Number : </strong><?php echo $bookingRow->nearest_site_contact_no; ?></li>
+                    <?php } ?>
                     <?php if (!empty($bookingRow->shipping_type)) { ?>
                         <li><strong>Shipping Type : </strong><?php echo $bookingRow->shipping_type; ?></li>
                     <?php } ?>

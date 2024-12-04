@@ -591,6 +591,10 @@
             var selectedOption = $("#shipping_district_site option:selected");
             var delivery_charge = parseFloat(selectedOption.data("dc")).toFixed(2);
 
+            // showing contact number
+            var contact_no = selectedOption.data("contact");
+            $('input[name="nearest_site_contact_no"]').val(contact_no);
+
             // sub total of all products
             var sub_total = $('input[name="sub_total"]').val();
 
@@ -614,6 +618,7 @@
             $('input[name="shipping_longitude"]').val(longitude);
         });
         $('#shipping_location_site').on('change', function () {
+            $('input[name="nearest_site_contact_no"]').val('');
             var selectedOption = $("#shipping_location_site option:selected").val();
             $.ajax({
                 type: "POST",

@@ -297,8 +297,12 @@ if (!empty($bookingRec)) {
                         <td>Collect from Nearest Site</td>
                     </tr>
                     <tr>
-                        <td>Shipping District</td>
+                        <td>Shipping Branch</td>
                         <td>' . $bookingRec->shipping_district_site . '</td>
+                    </tr>
+                    <tr>
+                        <td>Branch Contact Number</td>
+                        <td>' . $bookingRec->nearest_site_contact_no . '</td>
                     </tr>
             ';
             break;

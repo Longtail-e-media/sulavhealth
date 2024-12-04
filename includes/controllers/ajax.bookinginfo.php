@@ -147,6 +147,7 @@
             $bookRec->shipping_district     = (!empty($shipping_district)) ? $shipping_district : '';
             $bookRec->shipping_location_site = (!empty($shipping_location_site)) ? $shipping_location_site : '';
             $bookRec->shipping_district_site = (!empty($shipping_district_site)) ? $shipping_district_site : '';
+            $bookRec->nearest_site_contact_no = (!empty($nearest_site_contact_no)) ? $nearest_site_contact_no : '';
             $bookRec->shipping_latitude     = (!empty($shipping_latitude)) ? $shipping_latitude : '';
             $bookRec->shipping_longitude    = (!empty($shipping_longitude)) ? $shipping_longitude : '';
 
