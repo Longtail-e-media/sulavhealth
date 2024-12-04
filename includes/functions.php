@@ -1117,4 +1117,12 @@ function createColumnsArray($end_column, $first_letters = '')
 
     return $columns;
 }
+
+function compressHTMLTags($html)
+{
+    $html = preg_replace('/<!--(?!\s*(?:\[if [^\]]+]|<!|>))(?:(?!-->).)*-->/s', '', $html);
+    $html = preg_replace('/\s+/', ' ', $html);
+    $html = preg_replace('/\>\s+\</', '><', $html);
+    return $html;
+}
 ?>

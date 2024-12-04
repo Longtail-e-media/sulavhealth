@@ -440,14 +440,18 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
     } else {
         $result .= '<figure class="tour-long-item-01"><h3>No Result Found</h3></figure>';
     }
+
     $result = preg_replace('/\s+/', ' ', $result);
     $result = str_replace(array("\r", "\n"), '', $result);
+    $result = compressHTMLTags($result);
 
     $home_gift_sets_modal = preg_replace('/\s+/', ' ', $home_gift_sets_modal);
     $home_gift_sets_modal = str_replace(array("\r", "\n"), '', $home_gift_sets_modal);
+    $home_gift_sets_modal = compressHTMLTags($home_gift_sets_modal);
 
     $home_gift_sets_script = preg_replace('/\s+/', ' ', $home_gift_sets_script);
     $home_gift_sets_script = str_replace(array("\r", "\n"), '', $home_gift_sets_script);
+    $home_gift_sets_script = compressHTMLTags($home_gift_sets_script);
 
 
     echo json_encode(array("action" => "success", "result" => $result, "popup" => $home_gift_sets_modal, "popscript" => $home_gift_sets_script, "itemlist" => $listofitem, "serachtitle" => $serachtitle, "nav" => $navigation));
