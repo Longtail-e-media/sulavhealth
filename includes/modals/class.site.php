@@ -5,10 +5,10 @@ class Site extends DatabaseObject
 
     protected static $table_name = "tbl_sites";
     protected static $db_fields = array(
-        'id', 'slug', 'title', 'parentId', 'delivery_charge', 'latitude', 'longitude', 'image', 'status', 'sortorder', 'added_date', 'modified_date', 'homepage'
+        'id', 'slug', 'title', 'parentId', 'delivery_charge', 'latitude', 'longitude', 'image', 'status', 'sortorder', 'added_date', 'modified_date', 'homepage', 'contact_no'
     );
 
-    public $id, $slug, $title, $parentId, $delivery_charge, $latitude, $longitude, $image, $status, $sortorder, $added_date, $modified_date, $homepage;
+    public $id, $slug, $title, $parentId, $delivery_charge, $latitude, $longitude, $image, $status, $sortorder, $added_date, $modified_date, $homepage, $contact_no;
 
     public static function checkDupliName($title = '')
     {

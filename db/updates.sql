@@ -97,3 +97,6 @@ ALTER TABLE `tbl_booking_info` ADD `delivery_type` INT NOT NULL AFTER `additiona
 INSERT INTO `tbl_modules` (`id`, `parent_id`, `name`, `link`, `mode`, `icon_link`, `status`, `sortorder`, `added_date`, `properties`) VALUES (NULL, '0', 'Admin User', 'user/list', 'user', 'icon-user', '1', '1', '2024-11-27', ''), (NULL, '0', 'Front User', 'frontuser/list', 'frontuser', 'icon-user', '1', '2', '2024-11-27', '');
 UPDATE `tbl_modules` SET `parent_id` = '1' WHERE `tbl_modules`.`id` = 32;
 UPDATE `tbl_modules` SET `parent_id` = '1' WHERE `tbl_modules`.`id` = 33;
+
+-- 2024-12-04
+ALTER TABLE `tbl_sites` ADD `contact_no` VARCHAR(255) NOT NULL AFTER `parentId`;

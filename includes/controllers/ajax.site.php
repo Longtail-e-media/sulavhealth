@@ -22,6 +22,7 @@ switch($action)
         $record->delivery_charge        = $_REQUEST['delivery_charge'];
         $record->latitude               = $_REQUEST['latitude'];
         $record->longitude              = $_REQUEST['longitude'];
+        $record->contact_no             = $_REQUEST['contact_no'];
 //			$record->sub_title 		        = $_REQUEST['sub_title'];
         // $record->image		            = serialize(array_values(array_filter($_REQUEST['imageArrayname'])));
         $record->status		            = $_REQUEST['status'];
@@ -62,6 +63,7 @@ switch($action)
         $record->delivery_charge        = $_REQUEST['delivery_charge'];
         $record->latitude               = $_REQUEST['latitude'];
         $record->longitude              = $_REQUEST['longitude'];
+        $record->contact_no             = $_REQUEST['contact_no'];
         // $record->image		            = serialize(array_values(array_filter($_REQUEST['imageArrayname'])));
         $record->status		            = $_REQUEST['status'];
         // $record->homepage	            = $_REQUEST['homepage'];

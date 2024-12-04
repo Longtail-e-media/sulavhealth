@@ -208,6 +208,19 @@ if (isset($_GET['page']) && $_GET['page'] == "site" && isset($_GET['mode']) && $
                     </div>
                 </div>
 
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Contact Number :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-10">
+                        <input placeholder="Contact Number" class="col-md-6 validate[required,length[0,200]]" type="text"
+                               name="contact_no" id="contact_no"
+                               value="<?php echo !empty($siteInfo->contact_no) ? $siteInfo->contact_no : ""; ?>">
+                    </div>
+                </div>
+
 
                 <div class="form-row">
                     <div class="form-checkbox-radio col-md-9">
