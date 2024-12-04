@@ -131,7 +131,7 @@ if (defined('HOME_PAGE')) {
 
             $price_text = '';
             if (!empty($giftSet->price1) and (empty($giftSet->offer_price))) {
-                $price_text = '<span>' . $giftSet->currency . ' ' . $giftSet->price1 . '</span>';
+                $price_text = '<span>' . $giftSet->currency . ' ' . $giftSet->price1 . '</span><br/><del></del>';
             }
 
             if (!empty($giftSet->discount1)) {
@@ -158,6 +158,8 @@ if (defined('HOME_PAGE')) {
                             <del>' . $giftSet->currency . ' ' . $giftSet->price1 . '</del> 
                             <span class="font-14">Save ' . $giftSet->currency . ' ' . $discountamt . '</span>
                         ';
+                    } else {
+                        $price_text = $discountInfo . '<br/><del></del>';
                     }
                 }
             }
@@ -588,7 +590,7 @@ if (defined('HOME_PAGE')) {
 
                 $price_text = '';
                 if (!empty($serviceSet->price1) and (empty($serviceSet->offer_price))) {
-                    $price_text = '<span>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</span>';
+                    $price_text = '<span>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</span><br/><del></del>';
                 }
                 /*if (!empty($giftSet->discount1)) {
                     // Check if discount flag is On in Category
@@ -639,9 +641,11 @@ if (defined('HOME_PAGE')) {
                         // Render the price text if either category or subcategory discount is active
                         if ($isSubcategoryDiscounted || empty($subcategoryRec)) {
                             $price_text = $discountInfo . '<br/>
-                            <del>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</del> 
-                            <span class="font-14">Save ' . $serviceSet->currency . ' ' . $discountamt . '</span>
-                        ';
+                                <del>' . $serviceSet->currency . ' ' . $serviceSet->price1 . '</del> 
+                                <span class="font-14">Save ' . $serviceSet->currency . ' ' . $discountamt . '</span>
+                            ';
+                        } else {
+                            $price_text = $discountInfo . '<br/><del></del>';
                         }
                     }
                 }
@@ -1053,7 +1057,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
 
                 $price_text = '';
                 if (!empty($prodrelated->price1) and (empty($prodrelated->offer_price))) {
-                    $price_text = '<span>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</span>';
+                    $price_text = '<span>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</span><br/><del></del>';
                 }
                 if (!empty($prodrelated->discount1)) {
                     // Check if discount flag is On in Category
@@ -1078,6 +1082,8 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                             $price_text = $discountInfo . '<br/>
                             <del>' . $prodrelated->currency . ' ' . $prodrelated->price1 . '</del> 
                             <span class="font-14">Save ' . $prodrelated->currency . ' ' . $discountamt . '</span>';
+                        } else {
+                            $price_text = $discountInfo . '<br/><del></del>';
                         }
                     }
                 }
@@ -1096,7 +1102,7 @@ if (defined('PRODUCT_PAGE') and isset($_REQUEST['slug'])) {
                     $slugs = '' . BASE_URL . 'product/product-detail/' . $prodrelated->slug . '';;
                 }
                 $product_realted .= '
-                <div class="col-xl-4 col-sm-6 col-6">
+                <div class="col-xl-3 col-sm-6 col-6">
                     <div class="ltn__product-item ltn__product-item-3 text-center">
                         <div class="product-img product_hove" data-href="' . $slugs . '">
                             <a class="product-image-link" href="' . $slugs . '">

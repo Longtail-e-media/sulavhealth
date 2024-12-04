@@ -153,7 +153,7 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
 
             $price_text = '';
             if (!empty($rows['price1']) and (empty($rows['offer_price']))) {
-                $price_text = '<span>' . $rows['currency'] . ' ' . $rows['price1'] . '</span>';
+                $price_text = '<span>' . $rows['currency'] . ' ' . $rows['price1'] . '</span><br/><del></del>';
             }
             if (!empty($rows['discount1'])) {
                 // Check if discount flag is On in Category
@@ -178,6 +178,8 @@ if (isset($_POST['action']) and ($_POST['action'] == 'filter_data')) {
                         $price_text = $discountInfo . '<br/>
                         <del>' . $rows['currency'] . ' ' . $rows['price1'] . '</del> 
                         <span class="font-14">Save ' . $rows['currency'] . ' ' . $discountamt . '</span>';
+                    } else {
+                        $price_text = $discountInfo . '<br/><del></del>';
                     }
                 }
             }
