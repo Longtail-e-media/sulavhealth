@@ -80,7 +80,7 @@ class locationn extends DatabaseObject
     {
         global $db;
         $cond1 = !empty($notparentId) ? ' AND id<>' . $notparentId : '';
-        $sql = "SELECT * FROM " . self::$table_name . " WHERE parentId=$parentId  AND status=1 $cond1 ORDER BY sortorder DESC";
+        $sql = "SELECT * FROM " . self::$table_name . " WHERE parentId=$parentId  AND status=1 $cond1 ORDER BY title ASC";
         return self::find_by_sql($sql);
     }
 
