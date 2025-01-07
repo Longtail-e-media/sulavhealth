@@ -787,6 +787,23 @@
                 return false;
             }
         });
+        
+        // clear delivery type on back function from browser
+        function clearRadioButtons() {
+            $('input[name="delivery_type"]').prop('checked', false);
+            $('input[name="door_delivery_type"]').prop('checked', false);
+        }
+    
+        $(window).on('pageshow', function (event) {
+            if (event.originalEvent.persisted) {
+                clearRadioButtons();
+            }
+        });
+    
+        // Fallback for browsers that don't trigger `pageshow` with persisted pages
+        $(window).on('load', function () {
+            clearRadioButtons();
+        });
     });
 
     // Initialize Leaflet map
@@ -1036,6 +1053,8 @@
     //             e.preventDefault();
     //         }
     //     });
+    
+
 
 </script>
 
