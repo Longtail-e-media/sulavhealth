@@ -521,6 +521,8 @@
 
                     // Door Delivery Section
                     $('#door_delivery_row').removeClass('d-none');
+                    $('input[name="door_delivery_type"]').eq(2).prop('checked', true).trigger('change');
+                    $('#door_delivery_sub_row').removeClass('d-none');
                     break;
             }
         })
@@ -871,6 +873,7 @@
     function resetDoorDelivery() {
         $('#door_delivery_row').addClass('d-none');
         $('#door_delivery_sub_row').addClass('d-none');
+        $('input[name="door_delivery_type"]').prop("checked", false);
 
         // reset company code logic sections
         $('#company_code').val('');
