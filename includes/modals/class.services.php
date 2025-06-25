@@ -122,7 +122,7 @@ class Services extends DatabaseObject
     public static function get_internal_link_product($selid = '')
     {
         global $db;
-        $sql = "SELECT id,title,slug FROM " . self::$table_name . " WHERE status='1' ORDER BY sortorder DESC";
+        $sql = "SELECT id,title,slug FROM " . self::$table_name . " WHERE status='1' ORDER BY title ASC";
         $record = self::find_by_sql($sql);
         $result = '';
         if ($record) {

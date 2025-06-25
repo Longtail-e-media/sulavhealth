@@ -285,7 +285,7 @@ class category extends DatabaseObject
     public static function get_all_selcate($actid = 0, $selid = '')
     {
         global $db;
-        $sql = "SELECT id,title FROM " . self::$table_name . " WHERE parentId ='$actid' ORDER BY sortorder DESC";
+        $sql = "SELECT id,title FROM " . self::$table_name . " WHERE parentId ='$actid' ORDER BY title ASC";
         $record = self::find_by_sql($sql);
         $result = '';
         if ($record) {

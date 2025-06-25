@@ -186,9 +186,10 @@ if (isset($_GET['page']) && $_GET['page'] == "product" && isset($_GET['mode']) &
                         <?php $cid = !empty($subproductInfo->Category) ? $subproductInfo->Category : 0; ?>
                         <select data-placeholder="Choose Field Type" class="chosen-selec validate[required,length[0,500]] Category" id="Category" name="Category"
                                 selcId="<?php echo $cid; ?>">
+                            <option value="">None</option>
                             <?php 
                             // $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 AND type={$typeid} ORDER BY sortorder ASC ");
-                            $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 ORDER BY sortorder ASC ");
+                            $categories = Category::find_by_sql("SELECT * FROM tbl_category WHERE parentId=0 ORDER BY title ASC ");
                             // pr($categories);
                             if ($categories) {
                                 foreach ($categories as $k => $category) {
